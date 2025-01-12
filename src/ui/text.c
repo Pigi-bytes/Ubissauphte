@@ -1,4 +1,4 @@
-#include "texte.h"
+#include "text.h"
 
 TTF_Font* loadFont(char* filename, int size) {
     TTF_Font* font = TTF_OpenFont(filename, size);
