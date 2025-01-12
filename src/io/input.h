@@ -1,20 +1,22 @@
+#ifndef INPUT_H
+#define INPUT_H
+
 #include <SDL2/SDL.h>
 
-#define RESET 0
-#define RELACH 2
-#define PRESS 1
-
 typedef struct {
-    int key[SDL_NUM_SCANCODES+1]; 
-    SDL_bool quit;                 
-    int x, y;                       
-    int buffer;
-    int xrel, yrel;                  
-    int xwheel, ywheel;              
-    SDL_bool mouse[6];               
-    int windowWidth;                
-    int windowHeight;                
+    int key[SDL_NUM_SCANCODES];
+    SDL_bool quit;
+    int mouseX, mouseY;
+    int mouseXRel, mouseYRel;
+    int mouseXWheel, mouseYWheel;
+    SDL_bool mouseButtons[6];
+    int windowWidth;
+    int windowHeight;
 } t_input;
 
-void updateEvent(t_input* input);
-void initInput(t_input* input, int width, int height);
+void updateInput(t_input* input);
+void initInput(t_input* input, int windowWidth, int windowHeight);
+
+SDL_bool keyPressOnce(t_input* input, SDL_Scancode scancode);
+
+#endif  // INPUT_H
