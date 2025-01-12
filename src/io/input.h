@@ -1,14 +1,19 @@
 #include <SDL2/SDL.h>
 
+#define RESET 0
+#define RELACH 2
+#define PRESS 1
+
 typedef struct {
-    SDL_bool key[SDL_NUM_SCANCODES];
-    SDL_bool quit;
-    int x, y;
-    int xrel, yrel;
-    int xwheel, ywheel;
-    SDL_bool mouse[6];
-    int windowWidth;
-    int windowHeight;
+    int key[SDL_NUM_SCANCODES+1]; 
+    SDL_bool quit;                 
+    int x, y;                       
+    int buffer;
+    int xrel, yrel;                  
+    int xwheel, ywheel;              
+    SDL_bool mouse[6];               
+    int windowWidth;                
+    int windowHeight;                
 } t_input;
 
 void updateEvent(t_input* input);
