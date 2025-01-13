@@ -7,7 +7,7 @@
 
 #define window_width 1280
 #define window_height 960
-#define NUM_OBSTACLES 1
+#define NUM_OBSTACLES 5
 
 typedef struct {
     SDL_Scancode up;
@@ -117,7 +117,7 @@ void freePlayer(t_joueur* player) {
 int main(int argc, char* argv[]) {
     SDL_Init(SDL_INIT_VIDEO);
 
-    SDL_Window* window = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 400, 800, SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 960, SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     SDL_Texture* texture_background = loadImage("../../Ubissauphte/assets/imgs/donjon_sdl.bmp", renderer);
 
@@ -129,19 +129,20 @@ int main(int argc, char* argv[]) {
     t_joueur* player2 = createplayer(&j2, loadImage("../../Ubissauphte/assets/imgs/squid-game_sdl.bmp", renderer), (SDL_Rect){400, 400, 100, 150});
     t_joueur* player3 = createplayer(&j3, loadImage("../../Ubissauphte/assets/imgs/streetfighter_sdl.bmp", renderer), (SDL_Rect){400, 500, 150, 150});
 
-    Obstacle obstacles = {
-        .rect = {600, 600, 100, 100},
-        .color = {255, 255, 255, 255}};
-
+    Obstacle obstacles[NUM_OBSTACLES];
+    for (int i = 0; i < NUM_OBSTACLES; i++) {
+        obstacles[i].rect = (SDL_Rect){rand() % (window_width - 100), rand() % (window_height - 100), 50 + rand() % 50, 50 + rand() % 50};
+        obstacles[i].color = (SDL_Color){rand() % 256, rand() % 256, rand() % 256, 255};
+    }
     t_input input;
     initInput(&input, window_width, window_height);
 
     while (!input.quit) {
         updateInput(&input);
 
-        handle_input(player1, &obstacles, NUM_OBSTACLES, &input);
-        handle_input(player2, &obstacles, NUM_OBSTACLES, &input);
-        handle_input(player3, &obstacles, NUM_OBSTACLES, &input);
+        handle_input(player1, obstacles, NUM_OBSTACLES, &input);
+        handle_input(player2, obstacles, NUM_OBSTACLES, &input);
+        handle_input(player3, obstacles, NUM_OBSTACLES, &input);
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
@@ -151,7 +152,10 @@ int main(int argc, char* argv[]) {
         drawObject(renderer, player2);
         drawObject(renderer, player3);
 
-        render_rect(renderer, &obstacles.rect, obstacles.color);
+        for (int i = 0; i < NUM_OBSTACLES; i++) {
+            render_rect(renderer, &obstacles[i].rect, obstacles[i].color);
+        }
+
         SDL_RenderPresent(renderer);
     }
 
