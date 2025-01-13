@@ -2,6 +2,7 @@
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "./io/input.h"
 
@@ -117,6 +118,7 @@ void freePlayer(t_joueur* player) {
 int main(int argc, char* argv[]) {
     SDL_Init(SDL_INIT_VIDEO);
 
+    srand(time(NULL));
     SDL_Window* window = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 960, SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     SDL_Texture* texture_background = loadImage("../../Ubissauphte/assets/imgs/donjon_sdl.bmp", renderer);
