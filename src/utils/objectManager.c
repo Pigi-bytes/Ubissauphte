@@ -42,8 +42,11 @@ void freeObjectManager(t_objectManager* manager) {
         DEBUG_PRINT("[FREE] Libération des ressources de l'objet à l'adresse : %p\n", manager->items[i]);
         manager->freeFunc(manager->items[i]->data);
         free(manager->items[i]);
+        manager->items[i] = NULL;
     }
     free(manager->items);
+    manager->items = NULL;
     free(manager);
+    manager = NULL;
     DEBUG_PRINT("Gestionnaire d'objets libéré avec succès.\n");
 }
