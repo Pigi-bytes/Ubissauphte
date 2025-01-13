@@ -1,7 +1,9 @@
-#include "objectManager.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-#define TAILLE 3
+#include "./objectManager.h"
+
 typedef struct {
-    int taille = TAILLE;
-    t_objectManager* scene[TAILLE];
+    int taille;
+    t_objectManager** contenue;
 } t_scene;
