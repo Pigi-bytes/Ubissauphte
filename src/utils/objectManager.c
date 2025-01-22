@@ -2,18 +2,18 @@
 
 t_objectManager* initObjectManager(t_objectType type, void (*freeFunc)(void*)) {
     DEBUG_PRINT("Création d'un gestionnaire d'objets de type %d\n", type);
-    t_objectManager* manager = malloc(sizeof(t_objectManager));
+    t_objectManager* manager = (t_objectManager*)malloc(sizeof(t_objectManager));
     manager->freeFunc = freeFunc;
     manager->count = 0;
     manager->capacity = INITIAL_CAPACITY;
-    manager->items = malloc(manager->capacity * sizeof(t_typedObject*));
+    manager->items = (t_typedObject**)malloc(manager->capacity * sizeof(t_typedObject*));
     manager->type = type;
     DEBUG_PRINT("[MALLOC] Gestionnaire d'objets créé avec succès à l'adresse : %p\n", manager);
     return manager;
 }
 
 t_typedObject* createTypedObject(t_objectType type, void* data) {
-    t_typedObject* obj = malloc(sizeof(t_typedObject));
+    t_typedObject* obj = (t_typedObject*)malloc(sizeof(t_typedObject));
     obj->type = type;
     obj->data = data;
     DEBUG_PRINT("[MALLOC] Objet de type %d créé avec succès à l'adresse : %p\n", type, obj);
@@ -29,7 +29,7 @@ void addObject(t_objectManager* manager, t_typedObject* object) {
     if (manager->count >= manager->capacity) {
         DEBUG_PRINT("Capacité du gestionnaire atteinte. Redimensionnement à %d...\n", manager->capacity * 2);
         manager->capacity *= 2;
-        manager->items = realloc(manager->items, manager->capacity * sizeof(t_typedObject*));
+        manager->items = (t_typedObject**)realloc(manager->items, manager->capacity * sizeof(t_typedObject*));
     }
     manager->items[manager->count] = object;
     manager->count++;
