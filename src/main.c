@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <time.h>
+
 #include "genmap.h"
 
 void main() {
-    int niveau = 1;
+    int niveau = 100;
     clock_t start = clock();
     genMap(niveau);
     clock_t end = clock();

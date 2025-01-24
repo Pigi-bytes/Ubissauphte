@@ -6,5 +6,7 @@ typedef struct t_salle {
     struct t_salle *bas;     // Porte bas
 } t_salle;
 
-t_salle *initRoom(); // Fonction pour initialiser une salle
-int genMap(int stage); // Fonction pour générer la carte (les salles) d'un étage (stage)
+t_salle *initRoom();
+int isRoomAllConnected(t_salle *room);
+void connectRoomRandom(t_salle *origineRoom, t_salle *destinationRoom);
+int genMap(int numberRoom);
