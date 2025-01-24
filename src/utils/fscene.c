@@ -85,26 +85,26 @@ void ajoutObjectManager(t_scene *scene, t_typedObject *object) {
 }
 
 // fonction qui free une scène
-void freeScene(t_scene *scene) {
-    for (int i = 0; i < scene->nbindex; i++) {
-        DEBUG_PRINT("valeur en entrée : %p \n", scene->contenue[scene->index[i]]);
-        if (!(scene->contenue[scene->index[i]])) {
+void freeScene(t_scene **scene) {
+    for (int i = 0; i < (*scene)->nbindex; i++) {
+        DEBUG_PRINT("valeur en entrée : %p \n", (*scene)->contenue[(*scene)->index[i]]);
+        if (!((*scene)->contenue[(*scene)->index[i]])) {
             DEBUG_PRINT("pointeur Null : \n");
         } else {
-            DEBUG_PRINT("[Pres-Free]scene : %p\n", scene->contenue[scene->index[i]]);
-            freeObjectManager(scene->contenue[scene->index[i]]);
-            DEBUG_PRINT("[Post-Free]scene : %p\n", scene->contenue[scene->index[i]]);
-            scene->contenue[scene->index[i]] = NULL;
-            DEBUG_PRINT("[FREE]scene : %p\n", scene->contenue[scene->index[i]]);
+            DEBUG_PRINT("[Pres-Free]scene : %p\n", (*scene)->contenue[(*scene)->index[i]]);
+            freeObjectManager((*scene)->contenue[(*scene)->index[i]]);
+            DEBUG_PRINT("[Post-Free]scene : %p\n", (*scene)->contenue[(*scene)->index[i]]);
+            (*scene)->contenue[(*scene)->index[i]] = NULL;
+            DEBUG_PRINT("[FREE]scene : %p\n", (*scene)->contenue[(*scene)->index[i]]);
         }
     }
-    free(scene->contenue);
-    scene->contenue = NULL;
-    free(scene->index);
-    scene->index = NULL;
-    scene->nbindex = 0;
-    free(scene);
-    scene = NULL;
+    free((*scene)->contenue);
+    (*scene)->contenue = NULL;
+    free((*scene)->index);
+    (*scene)->index = NULL;
+    (*scene)->nbindex = 0;
+    free(*scene);
+    (*scene) = NULL;
     DEBUG_PRINT("[FREE] Scène libérée avec succès.\n");
 }
 
@@ -129,5 +129,5 @@ int main() {
     afficherAdresse(test);
     afficherInt(test);
     afficherPoint(test);
-    freeScene(test);
+    freeScene(&test);
 }
