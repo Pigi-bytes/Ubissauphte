@@ -62,7 +62,7 @@
 #else
 #define DEBUG_PRINT(fmt, ...)
 #define malloc(size) malloc(size)
-#define realloc(ptr, size) realloc(ptr)
+#define realloc(ptr, size) realloc(ptr, size)
 #define free(ptr) free(ptr)
 #endif
 
