@@ -13,8 +13,6 @@ typedef struct {
     float y;
 } t_point;
 
-t_fonctFree *fonction[] = {freeInt, freePoint};  // tableau des fonction de free des types
-
 // fonction qui friee un object de type entier
 void freeInt(void *object) {
     int *nb = (int *)object;
@@ -33,7 +31,7 @@ void afficherInt(t_scene *scene) {
     for (int i = 0; i < scene->contenue[0]->count; i++) {
         printf("|nb %d : %d--------------------|\n", i, *(int *)((scene->contenue[0])->items[i]->data));
     }
-    printf("|----------------------------|\n");
+    printf("|----------------------------|\n\n");
 }
 
 // fonction qui affiche les object de type POINT_TYPE d'une scène
@@ -43,7 +41,7 @@ void afficherPoint(t_scene *scene) {
         t_point *valeur = (t_point *)((scene->contenue[1])->items[i]->data);
         printf("|nb %d x :%.2f y:%.2f--------|\n", i, valeur->x, valeur->y);
     }
-    printf("|---------------------------|\n");
+    printf("|---------------------------|\n\n");
 }
 
 // fonction qui initialise une scène en mettant tout les pointeurs sur objectManageur à NULL
@@ -56,6 +54,13 @@ t_scene *initScene(int taille) {
         free(scene);
         exit(EXIT_FAILURE);
     }
+    scene->index = malloc(sizeof(int));
+    if (!scene->index) {
+        fprintf(stderr, "Erreur d'allocation mémoire pour scene->index\n");
+        free(scene);
+        exit(EXIT_FAILURE);
+    }
+    scene->nbindex = 0;
     DEBUG_PRINT("[MALLOC] Creation a l'adresse %p\n", scene->contenue);
     for (int i = 0; i < taille; i++) {
         scene->contenue[i] = NULL;
@@ -68,7 +73,12 @@ t_scene *initScene(int taille) {
 // fonction qui ajoute un objet dans la scéne en le triant par type
 void ajoutObjectManager(t_scene *scene, t_typedObject *object) {
     if (!(scene->contenue[object->type])) {
-        scene->contenue[object->type] = initObjectManager(object->type, fonction[object->type]);
+        scene->contenue[object->type] = initObjectManager(object->type, freeInt);
+        if (scene->nbindex) {
+            scene->index = realloc(scene->index, sizeof(scene->index) + 1);
+        }
+        scene->index[scene->nbindex] = object->type;
+        scene->nbindex++;
     }
     addObject(scene->contenue[object->type], object);
     DEBUG_PRINT("object ajouter à l'adresse %p\n", scene->contenue[object->type]);
@@ -76,20 +86,23 @@ void ajoutObjectManager(t_scene *scene, t_typedObject *object) {
 
 // fonction qui free une scène
 void freeScene(t_scene *scene) {
-    for (int i = 0; i < scene->taille; i++) {
-        DEBUG_PRINT("valeur en entrée : %p \n", scene->contenue[i]);
-        if (!(scene->contenue[i])) {
+    for (int i = 0; i < scene->nbindex; i++) {
+        DEBUG_PRINT("valeur en entrée : %p \n", scene->contenue[scene->index[i]]);
+        if (!(scene->contenue[scene->index[i]])) {
             DEBUG_PRINT("pointeur Null : \n");
         } else {
-            DEBUG_PRINT("[Pres-Free]scene : %p\n", scene->contenue[i]);
-            freeObjectManager(scene->contenue[i]);
-            DEBUG_PRINT("[Post-Free]scene : %p\n", scene->contenue[i]);
-            scene->contenue[i] = NULL;
-            DEBUG_PRINT("[Free]scene : %p\n", scene->contenue[i]);
+            DEBUG_PRINT("[Pres-Free]scene : %p\n", scene->contenue[scene->index[i]]);
+            freeObjectManager(scene->contenue[scene->index[i]]);
+            DEBUG_PRINT("[Post-Free]scene : %p\n", scene->contenue[scene->index[i]]);
+            scene->contenue[scene->index[i]] = NULL;
+            DEBUG_PRINT("[FREE]scene : %p\n", scene->contenue[scene->index[i]]);
         }
     }
     free(scene->contenue);
     scene->contenue = NULL;
+    free(scene->index);
+    scene->index = NULL;
+    scene->nbindex = 0;
     free(scene);
     scene = NULL;
     DEBUG_PRINT("[FREE] Scène libérée avec succès.\n");
