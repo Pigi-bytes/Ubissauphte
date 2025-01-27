@@ -38,7 +38,14 @@ void freeObjectManager(t_objectManager* manager) {
     for (int i = 0; i < manager->count; ++i) {
         manager->freeFunc(manager->items[i]->data);
         free(manager->items[i]);
+        manager->items[i] = NULL;
     }
     free(manager->items);
+    manager->items = NULL;
     free(manager);
+<<<<<<< HEAD
+=======
+    manager = NULL;
+    DEBUG_PRINT("Gestionnaire d'objets libéré avec succès.\n");
+>>>>>>> scene
 }
