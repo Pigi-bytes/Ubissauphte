@@ -27,7 +27,7 @@
 #endif
 
 #if DEBUG_MODE
-#define DEBUG_PRINT(fmt, ...) printf("[DEBUG] : " fmt "", ##__VA_ARGS__)
+#define DEBUG_PRINT(fmt, ...) printf("[DEBUG] %s : " fmt, __func__, ##__VA_ARGS__)
 
 #define DEBUG_MALLOC(size)                                           \
     ({                                                               \
@@ -36,11 +36,11 @@
         ptr;                                                         \
     })
 
-#define DEBUG_REALLOC(ptr, size)                                                  \
-    ({                                                                            \
-        void *new_ptr = realloc(ptr, size);                                       \
-        DEBUG_PRINT("[REALLOC] Réalloué %zu octets à %p \n", size, ptr, new_ptr); \
-        new_ptr;                                                                  \
+#define DEBUG_REALLOC(ptr, size)                                         \
+    ({                                                                   \
+        void *new_ptr = realloc(ptr, size);                              \
+        DEBUG_PRINT("[REALLOC] Réalloué %zu octets à %p \n", size, ptr); \
+        new_ptr;                                                         \
     })
 
 #define DEBUG_FREE(ptr)                                    \
