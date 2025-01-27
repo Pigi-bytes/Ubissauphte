@@ -67,6 +67,7 @@ t_scene *initScene(int taille) {
         DEBUG_PRINT("valeur mis à null pour l'adresse %p\n", scene->contenue[i]);
     }
     scene->taille = taille;
+    scene->fonction = initFonction();
     return scene;
 }
 
@@ -103,6 +104,7 @@ void freeScene(t_scene **scene) {
     free((*scene)->index);
     (*scene)->index = NULL;
     (*scene)->nbindex = 0;
+    freeFonction(&((*scene)->fonction));
     free(*scene);
     (*scene) = NULL;
     DEBUG_PRINT("[FREE] Scène libérée avec succès.\n");
