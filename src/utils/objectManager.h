@@ -27,7 +27,7 @@ typedef struct {
     void (*freeFunc)(void*);
 } t_objectManager;
 
-t_objectManager* initObjectManager(t_objectType type, void (*freeFunc)(void*));
+t_objectManager* initObjectManager(t_objectType type, void (*freeFunc)(void*), int capacity);
 t_typedObject* createTypedObject(t_objectType type, void* data);
 void addObject(t_objectManager* manager, t_typedObject* object);
 void freeObjectManager(t_objectManager* manager);
