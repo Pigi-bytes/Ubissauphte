@@ -10,9 +10,8 @@
 #define ADD_TYPED_OBJECT(manager, type, value_ptr) addObject(manager, createTypedObject(type, value_ptr))
 
 typedef enum {
-    INT_TYPE,
-    POINT_TYPE,
     BUTTON_TYPE,
+    SDL_TEXTURE_TYPE,
 } t_objectType;
 
 typedef struct {
