@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 #define DEBUG_MODE 1
-
+#define DEBUG_MEMORY_MODE 1
 #define RECTANGLE_COLOR \
     (SDL_Color) { 41, 182, 246, 255 }
 
@@ -29,13 +29,14 @@
 #if DEBUG_MODE
 #define DEBUG_PRINT(fmt, ...) printf("[DEBUG] %s : " fmt, __func__, ##__VA_ARGS__)
 
+#if DEBUG_MEMORY_MODE
 #define DEBUG_MALLOC(size)                                           \
     ({                                                               \
         void *ptr = malloc(size);                                    \
         DEBUG_PRINT("[MALLOC] Alloué %zu octets à %p\n", size, ptr); \
         ptr;                                                         \
     })
-// Peut y'avoir des fuites de memoires ici parce que changement du pointeur pas register sous free
+
 #define DEBUG_REALLOC(ptr, size)                                         \
     ({                                                                   \
         void *new_ptr = realloc(ptr, size);                              \
@@ -80,6 +81,16 @@
         }                                                                         \
         texture;                                                                  \
     })
+
+#else
+#define DEBUG_MALLOC(size) malloc(size)
+#define DEBUG_REALLOC(ptr, size) realloc(ptr, size)
+#define DEBUG_FREE(ptr) free(ptr)
+#define DEBUG_FREE_SURFACE(surface) SDL_FreeSurface(surface)
+#define DEBUG_SDL_CREATE_TEXTURE_FROM_SURFACE(renderer, surface) SDL_CreateTextureFromSurface(renderer, surface)
+#define DEBUG_SDL_DESTROY_TEXTURE(texture) SDL_DestroyTexture(texture)
+#define DEBUG_SDL_CREATE_TEXTURE(renderer, format, access, w, h) SDL_CreateTexture(renderer, format, access, w, h)
+#endif
 
 #define malloc(size) DEBUG_MALLOC(size)
 #define realloc(ptr, size) DEBUG_REALLOC(ptr, size)
