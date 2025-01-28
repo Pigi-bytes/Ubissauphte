@@ -35,7 +35,7 @@
         DEBUG_PRINT("[MALLOC] Alloué %zu octets à %p\n", size, ptr); \
         ptr;                                                         \
     })
-
+// Peut y'avoir des fuites de memoires ici parce que changement du pointeur pas register sous free
 #define DEBUG_REALLOC(ptr, size)                                         \
     ({                                                                   \
         void *new_ptr = realloc(ptr, size);                              \
@@ -55,15 +55,41 @@
         SDL_FreeSurface(surface);                              \
     } while (0)
 
+#define DEBUG_SDL_CREATE_TEXTURE_FROM_SURFACE(renderer, surface)                \
+    ({                                                                          \
+        SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface); \
+        if (texture) {                                                          \
+            DEBUG_PRINT("[MALLOC] Texture créée à %p\n", texture);              \
+        }                                                                       \
+        texture;                                                                \
+    })
+
+#define DEBUG_SDL_DESTROY_TEXTURE(texture)                          \
+    do {                                                            \
+        if (texture) {                                              \
+            DEBUG_PRINT("[FREE] Texture détruite à %p\n", texture); \
+            SDL_DestroyTexture(texture);                            \
+        }                                                           \
+    } while (0)
+
+#define DEBUG_SDL_CREATE_TEXTURE(renderer, format, access, w, h)                  \
+    ({                                                                            \
+        SDL_Texture *texture = SDL_CreateTexture(renderer, format, access, w, h); \
+        if (texture) {                                                            \
+            DEBUG_PRINT("[MALLOC] Texture créée à %p\n", texture);                \
+        }                                                                         \
+        texture;                                                                  \
+    })
+
 #define malloc(size) DEBUG_MALLOC(size)
 #define realloc(ptr, size) DEBUG_REALLOC(ptr, size)
 #define free(ptr) DEBUG_FREE(ptr)
+#define SDL_CreateTexture(renderer, format, access, w, h) DEBUG_SDL_CREATE_TEXTURE(renderer, format, access, w, h)
+#define SDL_CreateTextureFromSurface(renderer, surface) DEBUG_SDL_CREATE_TEXTURE_FROM_SURFACE(renderer, surface)
+#define SDL_DestroyTexture(texture) DEBUG_SDL_DESTROY_TEXTURE(texture)
 
 #else
 #define DEBUG_PRINT(fmt, ...)
-#define malloc(size) malloc(size)
-#define realloc(ptr, size) realloc(ptr, size)
-#define free(ptr) free(ptr)
 #endif
 
 #endif  // DEBUG_H
