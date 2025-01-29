@@ -3,7 +3,7 @@
 t_objectManager* initObjectManager(t_objectType type, void (*freeFunc)(void*), int capacity) {
     t_objectManager* manager = (t_objectManager*)malloc(sizeof(t_objectManager));
     if (!manager) {
-        DEBUG_PRINT("Erreur d'allocation de mémoire pour le gestionnaire d'objets.\n");
+        fprintf(stderr, "Erreur d'allocation de mémoire pour le gestionnaire d'objets.\n");
         exit(EXIT_FAILURE);
     }
 
@@ -13,7 +13,7 @@ t_objectManager* initObjectManager(t_objectType type, void (*freeFunc)(void*), i
     manager->type = type;
     manager->items = (t_typedObject**)malloc(manager->capacity * sizeof(t_typedObject*));
     if (!manager->items) {
-        DEBUG_PRINT("Erreur d'allocation de mémoire pour les items.\n");
+        fprintf(stderr, "Erreur d'allocation de mémoire pour les items.\n");
         exit(EXIT_FAILURE);
     }
 
@@ -24,7 +24,7 @@ t_objectManager* initObjectManager(t_objectType type, void (*freeFunc)(void*), i
 t_typedObject* createTypedObject(t_objectType type, void* data) {
     t_typedObject* obj = (t_typedObject*)malloc(sizeof(t_typedObject));
     if (!obj) {
-        DEBUG_PRINT("Erreur d'allocation de mémoire pour l'objet.\n");
+        fprintf(stderr, "Erreur d'allocation de mémoire pour l'objet.\n");
         exit(EXIT_FAILURE);
     }
 
@@ -38,7 +38,7 @@ void addObject(t_objectManager* manager, t_typedObject* object) {
     DEBUG_PRINT("Ajout de l'objet d'adresse %p au gestionnaire d'objets à l'adresse %p\n", object, manager);
 
     if (manager->type != object->type) {
-        DEBUG_PRINT("Erreur : tentative d'ajout d'un objet de type %d incorrect dans un gestionnaire de type %d\n", object->type, manager->type);
+        fprintf(stderr, "Erreur : tentative d'ajout d'un objet de type %d incorrect dans un gestionnaire de type %d\n", object->type, manager->type);
         exit(EXIT_FAILURE);
     }
 
@@ -46,7 +46,7 @@ void addObject(t_objectManager* manager, t_typedObject* object) {
         manager->capacity *= 2;
         manager->items = (t_typedObject**)realloc(manager->items, manager->capacity * sizeof(t_typedObject*));
         if (!manager->items) {
-            DEBUG_PRINT("Erreur lors du redimensionnement de la mémoire pour les items.\n");
+            fprintf(stderr, "Erreur lors du redimensionnement de la mémoire pour les items.\n");
             exit(EXIT_FAILURE);
         }
         DEBUG_PRINT("Capacité du gestionnaire atteinte. Redimensionnement de la capacité de %d à %d \n", manager->capacity, manager->capacity);
