@@ -1,3 +1,6 @@
+#ifndef MAP_H
+#define MAP_H
+
 typedef struct t_salle {
     int ID;                  // ID/Numéro de la salle
     struct t_salle *droite;  // Porte droite
@@ -9,4 +12,6 @@ typedef struct t_salle {
 t_salle *initRoom();
 int isRoomAllConnected(t_salle *room);
 void connectRoomRandom(t_salle *origineRoom, t_salle *destinationRoom);
-int genMap(int numberRoom);
+t_salle **genMap(int numberRoom, int *tabCoordX, int *tabCoordY);
+
+#endif
