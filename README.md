@@ -1,15 +1,18 @@
 # Ubissauphte
 Ubissauphte
 
-Bienvenue sur le projet Ubissauphte, un projet visant à crée un jeu vidéo de type Roguelike
+Bienvenue sur le projet Ubissauphte, un projet de fin d'année 2024-2025 pour la L2 informatique.
 
-Contibueurs:
-- Souleymane Barry
-- Barthelemy Derouault
-- Victor Fombertasse
-- Baptiste Carfantan
+Contributeurs:
+- Souleymane Barry (souley-b)
+- Barthelemy Derouault (Pigi-bytes)
+- Victor Fombertasse (Michele530)
+- Baptiste Carfantan (Baptcarf)
 
 Principe du jeu:
+Notre jeu est un jeu de type rogue-like ou le joueur devra se préparer pour résister le plus longtemps dans le donjon rempli de dangers et de monstres
+
+Fonctionnalités du jeu:
 - Création d'une carte procéduralement où le joueur devra évoluer pour trouver des équipements (armes, armures, collectibles...).
 - Quand le joueur se sent prêt, il ira combattre le boss du niveau pour pouvoir continuer, deux options s'offrent alors au joueur:
     - Si le joueur meurt suite au combat contre le boss, ou en se préparant à le combattre, le jeu prend fin.
