@@ -1,5 +1,7 @@
 #include "button.h"
 
+#include <stdarg.h>
+
 const float scaleFactor = 1.1f;
 
 t_button* createButton(t_text text, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, void (*onClick)()) {
@@ -77,7 +79,7 @@ void handleButtonClick(t_input* input, t_button* button) {
 
 void freeButton(void* object) {
     t_button* button = (t_button*)object;
-    freeText(&button->label);
+    freeText(&(button->label));
     free(button);
 }
 
@@ -93,4 +95,17 @@ void handleAllButtonInput(t_objectManager* manager, t_input* input) {
         t_button* button = (t_button*)manager->items[i]->data;
         handleButtonClick(input, button);
     }
+}
+
+// fonction qui lie la fonction présent dans le fonction manager à la fonction initial
+void handleAllButtonInputCall(t_fonctionParam* fonction) {
+    t_objectManager* manager = (t_objectManager*)fonction->param[0];
+    t_input* input = (t_input*)fonction->param[1];
+    handleAllButtonInput(manager, input);
+}
+
+void renderAllButtonCall(t_fonctionParam* fonction) {
+    t_objectManager* manager = (t_objectManager*)fonction->param[0];
+    SDL_Renderer* render = (SDL_Renderer*)fonction->param[1];
+    renderAllButton(manager, render);
 }
