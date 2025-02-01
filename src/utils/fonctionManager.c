@@ -1,12 +1,5 @@
 #include "fonctionManager.h"
 
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-// #include "../debug.h"
-#include "objectManager.h"
 int countfonct = 0;
 
 // fonction qui initialise un fonction manager
