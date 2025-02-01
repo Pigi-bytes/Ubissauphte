@@ -1,10 +1,35 @@
 #include <stdarg.h>
 
-typedef struct {
-    void (**fonction)(int nbParam, ...);
-    int nbFonct;
-} t_fonct;
+#include "objectManager.h"
+#ifndef HEADER_H
+#define HEADER_H
+#define MAX_LENGTH 100
 
-t_fonct *initFonction(void);
-void freeFonction(t_fonct **fonct);
-void addFunction(t_fonct *fonct, void (*f)(int, ...));
+#define HANDLEBUTTONCALL "handleAllButtonInputCall"
+#define RENDERBUTTONCALL "renderAllButtonCall"
+#define DRAWTALLEXTCALL "drawAllTextCall"
+
+extern int countfonct;
+
+typedef struct fonction {
+    void (*fonction)(struct fonction*);
+    char nom[MAX_LENGTH];
+    void** param;
+    int nb_param;
+} t_fonctionParam;
+
+typedef struct {
+    t_fonctionParam** tab_fonct;
+    int nbFonct;
+} t_tabFonct;
+
+typedef struct {
+    t_objectManager* manage;
+    t_tabFonct* fonction;
+} t_fonctionManager;
+
+t_tabFonct* initFonction(void);
+void freeFonction(t_tabFonct** fonct);
+void addFunction(t_tabFonct* fonct, char* name, void (*f)(t_fonctionParam*), ...);
+void call(t_fonctionManager* contenue, const char* nomFonction);
+#endif
