@@ -27,4 +27,3 @@ void afficherAdresse(t_scene *scene);
 void afficherInt(t_scene *scene);
 void freeInt(void *);
 void freePoint(void *);
-void call(t_fonctionManager *contenue, const char *nomFonction);

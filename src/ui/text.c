@@ -142,7 +142,8 @@ void drawallTextcall(t_fonctionParam* fonction) {
     drawAllText(manager, renderer);
 }
 
-void freeText(t_text* text) {
+void freeText(void* objet) {
+    t_text* text = (t_text*)objet;
     if (text->text != NULL) {
         free(text->text);
     }

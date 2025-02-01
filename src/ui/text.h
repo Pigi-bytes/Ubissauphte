@@ -24,6 +24,6 @@ t_text createText(SDL_Renderer* renderer, char* text, TTF_Font* font, SDL_Color 
 void drawText(SDL_Renderer* renderer, t_text* text);
 void drawallTextcall(t_fonctionParam* fonction);
 void drawAllText(t_objectManager* manager, SDL_Renderer* renderer);
-void freeText(t_text* text);
+void freeText(void* objet);
 
 #endif
