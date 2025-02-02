@@ -58,6 +58,15 @@ void addObject(t_objectManager* manager, t_typedObject* object) {
     DEBUG_PRINT("Objet ajouté. Nombre d'objets dans le gestionnaire : %d, capacité : %d\n", manager->count, manager->capacity);
 }
 
+void* getObject(t_objectManager* manager, size_t index) {
+    if (manager == NULL || index >= manager->count) {
+        return NULL;
+    }
+
+    t_typedObject* obj = manager->items[index];
+    return obj->data;
+}
+
 void freeObjectManager(t_objectManager* manager) {
     DEBUG_PRINT("Libération du gestionnaire d'objets à l'adresse %p. Nombre d'objets à libérer : %d\n", manager, manager->count);
 

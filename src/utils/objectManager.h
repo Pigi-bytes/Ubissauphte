@@ -30,6 +30,7 @@ typedef struct {
 t_objectManager* initObjectManager(t_objectType type, void (*freeFunc)(void*), int capacity);
 t_typedObject* createTypedObject(t_objectType type, void* data);
 void addObject(t_objectManager* manager, t_typedObject* object);
+void* getObject(t_objectManager* manager, size_t index);
 void freeObjectManager(t_objectManager* manager);
 
 #endif  // OBJECT_MANAGER_H
