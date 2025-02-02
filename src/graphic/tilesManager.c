@@ -36,7 +36,6 @@ t_tileset* initTileset(SDL_Renderer* renderer, int width, int height, int tileSi
 
             SDL_SetTextureBlendMode(tile, SDL_BLENDMODE_BLEND);
             SDL_SetRenderTarget(renderer, tile);
-
             SDL_RenderCopy(renderer, tilesetTexture, &srcRect, NULL);
             SDL_SetRenderTarget(renderer, NULL);
 
@@ -45,7 +44,6 @@ t_tileset* initTileset(SDL_Renderer* renderer, int width, int height, int tileSi
     }
 
     SDL_DestroyTexture(tilesetTexture);
-
     return tileset;
 }
 
@@ -60,18 +58,18 @@ t_grid* createGrid(int width, int height, int depth) {
     grid->height = height;
     grid->depth = depth;
 
-    grid->tiles = (t_tile****)malloc(width * sizeof(t_tile***));
-    for (int x = 0; x < width; x++) {
-        grid->tiles[x] = (t_tile***)malloc(height * sizeof(t_tile**));
+    // Allocation en [depth][height][width]
+    grid->tiles = (t_tile***)malloc(depth * sizeof(t_tile**));
+    for (int z = 0; z < depth; z++) {
+        grid->tiles[z] = (t_tile**)malloc(height * sizeof(t_tile*));
         for (int y = 0; y < height; y++) {
-            grid->tiles[x][y] = (t_tile**)malloc(depth * sizeof(t_tile*));
-            for (int z = 0; z < depth; z++) {
-                grid->tiles[x][y][z] = (t_tile*)malloc(sizeof(t_tile));
-                grid->tiles[x][y][z]->x = x;
-                grid->tiles[x][y][z]->y = y;
-                grid->tiles[x][y][z]->z = z;
-                grid->tiles[x][y][z]->flip = SDL_FLIP_NONE;  // Aucun retournement par défaut
-                grid->tiles[x][y][z]->texture = NULL;
+            grid->tiles[z][y] = (t_tile*)calloc(width, sizeof(t_tile));
+            for (int x = 0; x < width; x++) {
+                grid->tiles[z][y][x].x = x;
+                grid->tiles[z][y][x].y = y;
+                grid->tiles[z][y][x].z = z;
+                grid->tiles[z][y][x].flip = SDL_FLIP_NONE;
+                grid->tiles[z][y][x].texture = NULL;
             }
         }
     }
@@ -82,15 +80,14 @@ t_grid* createGrid(int width, int height, int depth) {
 void freeGridTiles(t_grid* grid) {
     if (!grid) return;
 
-    for (int x = 0; x < grid->width; x++) {
+    for (int z = 0; z < grid->depth; z++) {
         for (int y = 0; y < grid->height; y++) {
-            for (int z = 0; z < grid->depth; z++) {
-                if (grid->tiles[x][y][z]) {
-                    free(grid->tiles[x][y][z]);
-                }
-            }
+            free(grid->tiles[z][y]);
         }
+        free(grid->tiles[z]);
     }
+    free(grid->tiles);
+    free(grid);
 }
 
 void dessinerGrille(SDL_Renderer* renderer, t_grid* grid, int windowWidth, int windowHeight) {
@@ -100,10 +97,9 @@ void dessinerGrille(SDL_Renderer* renderer, t_grid* grid, int windowWidth, int w
     for (int z = 0; z < grid->depth; z++) {
         for (int y = 0; y < grid->height; y++) {
             for (int x = 0; x < grid->width; x++) {
-                t_tile* tile = grid->tiles[x][y][z];
+                t_tile* tile = &grid->tiles[z][y][x];
 
-                // Dessiner uniquement si la tuile existe et possède une texture
-                if (tile && tile->texture) {
+                if (tile->texture) {
                     SDL_Rect dst = {x * newTileSizeX, y * newTileSizeY, newTileSizeX, newTileSizeY};
                     SDL_RenderCopyEx(renderer, tile->texture, NULL, &dst, 0, NULL, tile->flip);
                 }
@@ -113,10 +109,12 @@ void dessinerGrille(SDL_Renderer* renderer, t_grid* grid, int windowWidth, int w
 }
 
 t_tile* getTile(t_grid* grid, int x, int y, int z) {
-    if (x < 0 || x >= grid->width || y < 0 || y >= grid->height || z < 0 || z >= grid->depth) {
-        return NULL;  // Les coordonnées sont hors limites
+    if (x < 0 || x >= grid->width ||
+        y < 0 || y >= grid->height ||
+        z < 0 || z >= grid->depth) {
+        return NULL;
     }
-    return grid->tiles[x][y][z];
+    return &grid->tiles[z][y][x];
 }
 
 void SDL_DestroyTextureWrapper(void* object) {
@@ -134,7 +132,7 @@ void appliquerTextureNiveau(t_grid* grid, int z, void* textureV) {
 
     for (int y = 0; y < grid->height; y++) {
         for (int x = 0; x < grid->width; x++) {
-            grid->tiles[x][y][z]->texture = texture;
+            grid->tiles[z][y][x].texture = texture;
         }
     }
 }
