@@ -1,80 +1,72 @@
 #include "mapview.h"
+
 #include <SDL2/SDL.h>
+#include <stdio.h>
 
-void printMap(int *tabCoordsX, int *tabCoordsY, t_salle **listeRoom, int numberRoom, SDL_Renderer *pRendu){
+#define SCALE 50
+#define OFFSET_X 700
+#define OFFSET_Y 700
+#define SPACING 25
+#define DOOR_LENGTH 15
 
+void generateMap(SDL_Rect *roomCoords, t_salle **listeRoom, int numberRoom, t_mapAffichage *map) {
+    map->numRooms = numberRoom;
 
-    SDL_Rect rectRoom; /////// A MODIFIER TOUT
-
-    //printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
-    for (int i = 0; i < numberRoom; i++){
-        //printf("%d\n", i);
-        int taille = 50;
-        int espace = 5;
-        int coordX = tabCoordsX[i]*taille+500;
-        int coordY = tabCoordsY[i]*taille+500;
-        rectRoom.x = coordX;
-        rectRoom.y = coordY;
-        rectRoom.h = taille-espace;
-        rectRoom.w = taille-espace;
-        SDL_SetRenderDrawColor(pRendu,255,0,0,255);
-        SDL_RenderDrawRect(pRendu, &rectRoom);
-
-        if (listeRoom[i]->droite != NULL){
-            SDL_SetRenderDrawColor(pRendu, 255, 255, 0, 255);
-            SDL_RenderDrawLine(pRendu, coordX+taille/2, coordY+taille/2, coordX+taille/2+(taille/2+espace), coordY+taille/2);
-        }if (listeRoom[i]->gauche != NULL){
-            SDL_SetRenderDrawColor(pRendu, 0, 255, 0, 255);
-            SDL_RenderDrawLine(pRendu, coordX+taille/2, coordY+taille/2, coordX+taille/2-(taille/2+espace), coordY+taille/2);
-        }if (listeRoom[i]->haut != NULL){
-            SDL_SetRenderDrawColor(pRendu, 0, 255, 255, 255);
-            SDL_RenderDrawLine(pRendu, coordX+taille/2, coordY+taille/2, coordX+taille/2, coordY+taille/2+(taille/2+espace));
-        }if (listeRoom[i]->bas != NULL){
-            SDL_SetRenderDrawColor(pRendu, 0, 0, 255, 255);
-            SDL_RenderDrawLine(pRendu, coordX+taille/2, coordY+taille/2, coordX+taille/2, coordY+taille/2-(taille/2+espace));
-        }
-        printf("tabCoordX [%d] : %d X et %d Y\n", i, tabCoordsX[i], tabCoordsY[i]);
+    for (int i = 0; i < numberRoom; i++) {
+        roomCoords[i].x = roomCoords[i].x * SCALE + OFFSET_X;
+        roomCoords[i].y = roomCoords[i].y * SCALE + OFFSET_Y;
+        roomCoords[i].w = SCALE - SPACING;
+        roomCoords[i].h = SCALE - SPACING;
     }
-}
 
-/*
-int *genMapCoords(t_salle **tabRoom, int numberRoom, SDL_Renderer *pRendu){
-    
-    for (int i = 1; i < numberRoom; i++){ // pour chaque struct de la liste elm
-        
-        for (int j = 0; j < i; j++){ // pour tt les tabCoords qui ont plus d'ancienneté que l'actuel
-            if ((tabCoordsX[j] == tabCoordsX[i]) && (tabCoordsY[j] == tabCoordsY[i])){ // Si les coords du nouvelle elm == une coord présente
-                printf("i = %d, tabCoordsX[i] = %d, tabCoordsY[i] = %d\n", i, tabCoordsX[i], tabCoordsY[i]);
-                printf("j = %d, tabCoordsX[j] = %d, tabCoordsY[j] = %d\n", j, tabCoordsX[j], tabCoordsY[j]);
-                for (int h = 0; h < i; h++){ // pour tt les tabCoords qui ont plus d'ancienneté que l'actuel ET qui sont à décaler
-                    if (direction == 1 && (tabCoordsY[i] >= tabCoordsY[h])){
-                        tabCoordsY[h] -= 1;
-                    }else if (direction == 2 && (tabCoordsX[i] >= tabCoordsX[h])){
-                        tabCoordsX[h] -= 1;
-                    }else if (direction == 3 && (tabCoordsY[i] >= tabCoordsY[h])){
-                        tabCoordsY[h] += 1;
-                    }else if (direction == 4 && (tabCoordsX[i] >= tabCoordsX[h])){
-                        tabCoordsX[h] += 1;
-                    }
-                }
-                printf("i = %d, tabCoordsX[i] = %d, tabCoordsY[i] = %d\n", i, tabCoordsX[i], tabCoordsY[i]);
-                printf("j = %d, tabCoordsX[j] = %d, tabCoordsY[j] = %d\n", j, tabCoordsX[j], tabCoordsY[j]);
+    map->rooms = roomCoords;
+    map->numLines = 0;
+    map->lines = malloc(numberRoom * 4 * sizeof(Line));  // 4 porte par salle max
+
+    for (int i = 0; i < numberRoom; i++) {
+        t_salle *neighbors[4] = {listeRoom[i]->droite, listeRoom[i]->gauche, listeRoom[i]->haut, listeRoom[i]->bas};
+
+        // Tableau des points de depart des lignes pour chaque direction
+        // Ces points sont calcules en fonction de la position et de la taille de la salle actuelle
+        int directions[4][2] = {
+            {roomCoords[i].x + roomCoords[i].w, roomCoords[i].y + roomCoords[i].h / 2},  // Droite : milieu du cote droit
+            {roomCoords[i].x, roomCoords[i].y + roomCoords[i].h / 2},                    // Gauche : milieu du cote gauche
+            {roomCoords[i].x + roomCoords[i].w / 2, roomCoords[i].y},                    // Haut : milieu du cote haut
+            {roomCoords[i].x + roomCoords[i].w / 2, roomCoords[i].y + roomCoords[i].h}   // Bas : milieu du cote bas
+        };
+
+        // Tableau des offsets pour dessiner les lignes dans chaque direction
+        // Les offsets definissent la longueur et la direction de la ligne a partir du point de depart
+        int offsets[4][2] = {
+            {DOOR_LENGTH, 0},   // Droite : ligne horizontale vers la droite (X + DOOR_LENGTH, Y + 0)
+            {-DOOR_LENGTH, 0},  // Gauche : ligne horizontale vers la gauche (X - DOOR_LENGTH, Y + 0)
+            {0, -DOOR_LENGTH},  // Haut : ligne verticale vers le haut (X + 0, Y - DOOR_LENGTH)
+            {0, DOOR_LENGTH}    // Bas : ligne verticale vers le bas (X + 0, Y + DOOR_LENGTH)
+        };
+
+        for (int j = 0; j < 4; j++) {
+            if (neighbors[j]) {
+                // Définit les coordonnees de la ligne dans la structure map
+                // - (x1, y1) : point de depart de la ligne (milieu du cote de la salle)
+                // - (x2, y2) : point d arrivee de la ligne (point de depart + offset)
+                map->lines[map->numLines].x1 = directions[j][0];                  // Depart x
+                map->lines[map->numLines].y1 = directions[j][1];                  // Depart y
+                map->lines[map->numLines].x2 = directions[j][0] + offsets[j][0];  // Arrive x
+                map->lines[map->numLines].y2 = directions[j][1] + offsets[j][1];  // Arrive y
+                map->numLines++;
             }
         }
     }
+}
 
-    /*for (int i = 0; i < numberRoom; i ++){
-        printf("Element i = %d :\n", i/2);
-        printf("X = %d et Y = %d\n\n", tabCoordsX[i],tabCoordsY[i]);
+void affichage(SDL_Renderer *renderer, t_mapAffichage *map) {
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    for (int i = 0; i < map->numRooms; i++) {
+        SDL_RenderDrawRect(renderer, &map->rooms[i]);
     }
 
-
-
-    int *tabCoords = malloc(sizeof(int)*numberRoom*2);
-    for (int i = 0; i < numberRoom*2; i += 2){
-        tabCoords[i] = tabCoordsX[i];
-        tabCoords[i] = tabCoordsY[i+1];
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    for (int i = 0; i < map->numLines; i++) {
+        SDL_RenderDrawLine(renderer, map->lines[i].x1, map->lines[i].y1, map->lines[i].x2, map->lines[i].y2);
     }
-
-    return tabCoords;
-}*/
+}
