@@ -1,5 +1,7 @@
 #include "tilesManager.h"
 
+#define MAX_LINE_LENGTH 1024
+
 t_tileset* initTileset(SDL_Renderer* renderer, int width, int height, int tileSize, char* filename) {
     t_tileset* tileset = (t_tileset*)malloc(sizeof(t_tileset));
     if (!tileset) {
@@ -135,4 +137,76 @@ void appliquerTextureNiveau(t_grid* grid, int z, void* textureV) {
             grid->tiles[z][y][x].texture = texture;
         }
     }
+}
+
+t_grid* loadMap(const char* filename, t_tileset* tileset) {
+    DEBUG_PRINT("Début du chargement de la carte depuis %s\n", filename);
+
+    FILE* file = fopen(filename, "r");
+    if (!file) {
+        fprintf(stderr, "Erreur : impossible d'ouvrir le fichier %s\n", filename);
+        return NULL;
+    }
+
+    char line[MAX_LINE_LENGTH];
+    fgets(line, MAX_LINE_LENGTH, file);
+
+    int width, height, depth;
+    if (sscanf(line, "%dx%dx%d", &width, &height, &depth) != 3) {
+        fclose(file);
+        fprintf(stderr, "Erreur : format de dimensions invalide dans %s\n", filename);
+        return NULL;
+    }
+    DEBUG_PRINT("Dimensions lues : %dx%dx%d\n", width, height, depth);
+
+    t_grid* grid = createGrid(width, height, depth);
+    int coucheActuelle = 0;
+    int y = 0;
+
+    while (fgets(line, MAX_LINE_LENGTH, file) && coucheActuelle < depth) {
+        // Nettoyer la ligne
+        line[strcspn(line, "\n")] = '\0';
+
+        // Si la ligne est vide, passer à la couche suivante
+        if (strlen(line) == 0) {
+            coucheActuelle++;
+            y = 0;
+            continue;
+        }
+
+        DEBUG_PRINT("Lecture de la ligne %d de la couche %d : %s\n", y, coucheActuelle, line);
+
+        char* token = strtok(line, " ");
+        for (int x = 0; x < width; x++) {
+            if (!token) {
+                fprintf(stderr, "Erreur : ligne incomplète dans la couche %d, ligne %d\n", coucheActuelle, y);
+                break;
+            }
+
+            // Lire l'index et l'orientation
+            int index, orientation;
+            if (sscanf(token, "%d:%d", &index, &orientation) != 2) {
+                fprintf(stderr, "Erreur : format de tuile invalide : %s (couche %d, ligne %d, colonne %d)\n", token, coucheActuelle, y, x);
+                token = strtok(NULL, " ");
+                continue;
+            }
+
+            SDL_Texture* texture = NULL;
+            texture = (SDL_Texture*)getObject(tileset->textureTiles, index);
+
+            t_tile* tile = getTile(grid, x, y, coucheActuelle);
+            if (tile) {
+                tile->texture = texture;
+                tile->flip = (SDL_RendererFlip)orientation;
+            } else {
+                fprintf(stderr, "Erreur : impossible d'accéder à la tuile [%d][%d][%d]\n", coucheActuelle, y, x);
+            }
+
+            token = strtok(NULL, " ");
+        }
+        y++;
+    }
+    fclose(file);
+    DEBUG_PRINT("Chargement de la carte terminé\n");
+    return grid;
 }

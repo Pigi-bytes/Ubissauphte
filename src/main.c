@@ -8,15 +8,6 @@
 #define LARGEUR 1260
 #define HAUTEUR 620
 
-void* GET_TYPED_OBJECT(t_objectManager* manager, size_t index) {
-    if (manager == NULL || index >= manager->count) {
-        return NULL;
-    }
-
-    t_typedObject* obj = manager->items[index];
-    return obj->data;
-}
-
 int main(int argc, char* argv[]) {
     SDL_Init(SDL_INIT_VIDEO);
 
@@ -24,10 +15,10 @@ int main(int argc, char* argv[]) {
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     t_tileset* tileset = initTileset(renderer, 192, 176, 16, "../assets/imgs/tileMapDungeon.bmp");
-    t_grid* level = createGrid(12, 11, 2);
+    t_grid* level = loadMap("../assets/map/map01.txt", tileset);
 
-    appliquerTextureNiveau(level, 0, GET_TYPED_OBJECT(tileset->textureTiles, 1));
-    appliquerTextureNiveau(level, 1, GET_TYPED_OBJECT(tileset->textureTiles, 98));
+    // appliquerTextureNiveau(level, 0, getObject(tileset->textureTiles, 1));
+    // appliquerTextureNiveau(level, 1, getObject(tileset->textureTiles, 98));
 
     t_input input;
     initInput(&input, LARGEUR, HAUTEUR);

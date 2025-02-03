@@ -38,4 +38,6 @@ t_tile* getTile(t_grid* grid, int x, int y, int z);
 void SDL_DestroyTextureWrapper(void* object);
 void appliquerTextureNiveau(t_grid* grid, int z, void* textureV);
 
+t_grid* loadMap(const char* filename, t_tileset* tileset);
+
 #endif
