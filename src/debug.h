@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 #define DEBUG_MODE 1
-
+#define DEBUG_MEMORY_MODE 1
 #define RECTANGLE_COLOR \
     (SDL_Color) { 41, 182, 246, 255 }
 
@@ -27,8 +27,9 @@
 #endif
 
 #if DEBUG_MODE
-#define DEBUG_PRINT(fmt, ...) printf("[DEBUG] : " fmt "", ##__VA_ARGS__)
+#define DEBUG_PRINT(fmt, ...) printf("[DEBUG] %s : " fmt, __func__, ##__VA_ARGS__)
 
+#if DEBUG_MEMORY_MODE
 #define DEBUG_MALLOC(size)                                           \
     ({                                                               \
         void *ptr = malloc(size);                                    \
@@ -36,11 +37,11 @@
         ptr;                                                         \
     })
 
-#define DEBUG_REALLOC(ptr, size)                                                  \
-    ({                                                                            \
-        void *new_ptr = realloc(ptr, size);                                       \
-        DEBUG_PRINT("[REALLOC] Réalloué %zu octets à %p \n", size, ptr, new_ptr); \
-        new_ptr;                                                                  \
+#define DEBUG_REALLOC(ptr, size)                                         \
+    ({                                                                   \
+        void *new_ptr = realloc(ptr, size);                              \
+        DEBUG_PRINT("[REALLOC] Réalloué %zu octets à %p \n", size, ptr); \
+        new_ptr;                                                         \
     })
 
 #define DEBUG_FREE(ptr)                                    \
@@ -55,15 +56,51 @@
         SDL_FreeSurface(surface);                              \
     } while (0)
 
+#define DEBUG_SDL_CREATE_TEXTURE_FROM_SURFACE(renderer, surface)                \
+    ({                                                                          \
+        SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface); \
+        if (texture) {                                                          \
+            DEBUG_PRINT("[MALLOC] Texture créée à %p\n", texture);              \
+        }                                                                       \
+        texture;                                                                \
+    })
+
+#define DEBUG_SDL_DESTROY_TEXTURE(texture)                          \
+    do {                                                            \
+        if (texture) {                                              \
+            DEBUG_PRINT("[FREE] Texture détruite à %p\n", texture); \
+            SDL_DestroyTexture(texture);                            \
+        }                                                           \
+    } while (0)
+
+#define DEBUG_SDL_CREATE_TEXTURE(renderer, format, access, w, h)                  \
+    ({                                                                            \
+        SDL_Texture *texture = SDL_CreateTexture(renderer, format, access, w, h); \
+        if (texture) {                                                            \
+            DEBUG_PRINT("[MALLOC] Texture créée à %p\n", texture);                \
+        }                                                                         \
+        texture;                                                                  \
+    })
+
+#else
+#define DEBUG_MALLOC(size) malloc(size)
+#define DEBUG_REALLOC(ptr, size) realloc(ptr, size)
+#define DEBUG_FREE(ptr) free(ptr)
+#define DEBUG_FREE_SURFACE(surface) SDL_FreeSurface(surface)
+#define DEBUG_SDL_CREATE_TEXTURE_FROM_SURFACE(renderer, surface) SDL_CreateTextureFromSurface(renderer, surface)
+#define DEBUG_SDL_DESTROY_TEXTURE(texture) SDL_DestroyTexture(texture)
+#define DEBUG_SDL_CREATE_TEXTURE(renderer, format, access, w, h) SDL_CreateTexture(renderer, format, access, w, h)
+#endif
+
 #define malloc(size) DEBUG_MALLOC(size)
 #define realloc(ptr, size) DEBUG_REALLOC(ptr, size)
 #define free(ptr) DEBUG_FREE(ptr)
+#define SDL_CreateTexture(renderer, format, access, w, h) DEBUG_SDL_CREATE_TEXTURE(renderer, format, access, w, h)
+#define SDL_CreateTextureFromSurface(renderer, surface) DEBUG_SDL_CREATE_TEXTURE_FROM_SURFACE(renderer, surface)
+#define SDL_DestroyTexture(texture) DEBUG_SDL_DESTROY_TEXTURE(texture)
 
 #else
 #define DEBUG_PRINT(fmt, ...)
-#define malloc(size) malloc(size)
-#define realloc(ptr, size) realloc(ptr, size)
-#define free(ptr) free(ptr)
 #endif
 
 #endif  // DEBUG_H

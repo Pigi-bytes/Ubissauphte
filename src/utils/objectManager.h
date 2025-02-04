@@ -10,9 +10,8 @@
 #define ADD_TYPED_OBJECT(manager, type, value_ptr) addObject(manager, createTypedObject(type, value_ptr))
 
 typedef enum {
-    INT_TYPE,
-    POINT_TYPE,
     BUTTON_TYPE,
+    SDL_TEXTURE_TYPE,
 } t_objectType;
 
 typedef struct {
@@ -28,9 +27,10 @@ typedef struct {
     void (*freeFunc)(void*);
 } t_objectManager;
 
-t_objectManager* initObjectManager(t_objectType type, void (*freeFunc)(void*));
+t_objectManager* initObjectManager(t_objectType type, void (*freeFunc)(void*), int capacity);
 t_typedObject* createTypedObject(t_objectType type, void* data);
 void addObject(t_objectManager* manager, t_typedObject* object);
+void* getObject(t_objectManager* manager, size_t index);
 void freeObjectManager(t_objectManager* manager);
 
 #endif  // OBJECT_MANAGER_H
