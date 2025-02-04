@@ -78,7 +78,7 @@ t_scene *initScene(int taille) {
 // fonction qui ajoute un objet dans la scéne en le triant par type
 void ajoutObjectManager(t_scene *scene, t_typedObject *object) {
     if (!(scene->contenue[object->type]->manage)) {
-        scene->contenue[object->type]->manage = initObjectManager(object->type, tableFonctfree[object->type]);
+        scene->contenue[object->type]->manage = initObjectManager(object->type, tableFonctfree[object->type], INITIAL_CAPACITY);
         scene->contenue[object->type]->fonction = initFonction();
         if (scene->nbindex) {
             scene->index = realloc(scene->index, (scene->nbindex + 1) * sizeof(int));
@@ -97,7 +97,7 @@ void freeScene(t_scene **scene) {
     for (int i = 0; i < (*scene)->taille; i++) {
         // DEBUG_FREE((*scene)->contenue[(*scene)->index[i]]->manage);
         if ((*scene)->contenue[i] && (*scene)->contenue[i]->manage) {
-            freeObjectManager(&(*scene)->contenue[i]->manage);
+            freeObjectManager((*scene)->contenue[i]->manage);
             count--;
             (*scene)->contenue[i]->manage = NULL;
         }
