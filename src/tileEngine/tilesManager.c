@@ -139,7 +139,7 @@ void appliquerTextureNiveau(t_grid* grid, int z, void* textureV) {
     }
 }
 
-t_grid* loadMap(const char* filename, t_tileset* tileset) {
+t_grid* loadMap(char* filename, t_tileset* tileset) {
     DEBUG_PRINT("Début du chargement de la carte depuis %s\n", filename);
 
     FILE* file = fopen(filename, "r");
@@ -183,7 +183,6 @@ t_grid* loadMap(const char* filename, t_tileset* tileset) {
                 break;
             }
 
-            // Lire l'index et l'orientation
             int index, orientation;
             if (sscanf(token, "%d:%d", &index, &orientation) != 2) {
                 fprintf(stderr, "Erreur : format de tuile invalide : %s (couche %d, ligne %d, colonne %d)\n", token, coucheActuelle, y, x);
