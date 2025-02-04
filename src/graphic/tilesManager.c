@@ -79,7 +79,7 @@ t_grid* createGrid(int width, int height, int depth) {
     return grid;
 }
 
-void freeGridTiles(t_grid* grid) {
+void freeGrid(t_grid* grid) {
     if (!grid) return;
 
     for (int z = 0; z < grid->depth; z++) {
@@ -92,7 +92,7 @@ void freeGridTiles(t_grid* grid) {
     free(grid);
 }
 
-void dessinerGrille(SDL_Renderer* renderer, t_grid* grid, int windowWidth, int windowHeight) {
+void renderGrid(SDL_Renderer* renderer, t_grid* grid, int windowWidth, int windowHeight) {
     int newTileSizeX = windowWidth / grid->width;
     int newTileSizeY = windowHeight / grid->height;
 
