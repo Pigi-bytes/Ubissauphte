@@ -27,15 +27,25 @@ int main(int argc, char* argv[]) {
         obstacles[i].rect = (SDL_Rect){rand() % (window_width - 100), rand() % (window_height - 100), 50 + rand() % 50, 50 + rand() % 50};
         obstacles[i].color = (SDL_Color){rand() % 256, rand() % 256, rand() % 256, 255};
     }
+    t_joueur* player1 = createplayer(&fleche, (SDL_Rect){400, 300, 100, 100});
+
+    SDL_Color color_j1 = {0, 0, 255, 255};
+
+    Obstacle obstacles[NUM_OBSTACLES];
+    for (int i = 0; i < NUM_OBSTACLES; i++) {
+        obstacles[i].rect = (SDL_Rect){rand() % (WORLD_WIDTH - 100), rand() % (WORLD_HEIGHT - 100), 50 + rand() % 50, 50 + rand() % 50};
+        obstacles[i].color = (SDL_Color){rand() % 256, rand() % 256, rand() % 256, 255};
+    }
+
+    t_camera camera = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
+
     t_input input;
     initInput(&input, window_width, window_height);
 
     while (!input.quit) {
         updateInput(&input);
 
-        handle_input(player1, obstacles, NUM_OBSTACLES, &input);
-        handle_input(player2, obstacles, NUM_OBSTACLES, &input);
-        handle_input(player3, obstacles, NUM_OBSTACLES, &input);
+        handle_input(player1, &obstacles, NUM_OBSTACLES, &camera, &input);
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
