@@ -5,6 +5,7 @@
 
 #include "../io/imageLoader.h"
 #include "../utils/objectManager.h"
+#include "camera.h"
 
 typedef struct {
     int width;
@@ -20,6 +21,7 @@ typedef struct {
     int z;
     SDL_Texture* texture;
     SDL_RendererFlip flip;
+    SDL_bool solide;
 } t_tile;
 
 typedef struct {
@@ -35,7 +37,7 @@ t_tile* getTile(t_grid* grid, int x, int y, int z);
 
 t_grid* createGrid(int width, int height, int depth);
 t_grid* loadMap(char* filename, t_tileset* tileset);
-void renderGrid(SDL_Renderer* renderer, t_grid* grid, int windowWidth, int windowHeight);
+void renderGrid(SDL_Renderer* renderer, t_grid* grid, t_camera* camera, t_tileset* tileset);
 void freeGrid(t_grid* grid);
 
 void SDL_DestroyTextureWrapper(void* object);
