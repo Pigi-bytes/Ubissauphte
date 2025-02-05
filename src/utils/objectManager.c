@@ -67,18 +67,17 @@ void* getObject(t_objectManager* manager, size_t index) {
     return obj->data;
 }
 
-void freeObjectManager(t_objectManager* manager) {
-    DEBUG_PRINT("Libération du gestionnaire d'objets à l'adresse %p. Nombre d'objets à libérer : %d\n", manager, manager->count);
+void freeObjectManager(t_objectManager** manager) {
+    DEBUG_PRINT("Libération du gestionnaire d'objets à l'adresse %p. Nombre d'objets à libérer : %d\n", (*manager), (*manager)->count);
 
-    for (int i = 0; i < manager->count; ++i) {
-        DEBUG_PRINT("Libération de l'objet à l'adresse %p\n", manager->items[i]);
-        manager->freeFunc(manager->items[i]->data);
-        free(manager->items[i]);
-        manager->items[i] = NULL;
+    if (!(manager) || !(*manager)) return;
+    for (int i = 0; i < (*manager)->count; ++i) {
+        (*manager)->freeFunc((*manager)->items[i]->data);
+        free((*manager)->items[i]);
+        (*manager)->items[i] = NULL;
     }
-
-    free(manager->items);
-    manager->items = NULL;
-    free(manager);
-    DEBUG_PRINT("Gestionnaire d'objets à l'adresse %p libéré.\n", manager);
+    free((*manager)->items);
+    (*manager)->items = NULL;
+    free((*manager));
+    (*manager) = NULL;
 }
