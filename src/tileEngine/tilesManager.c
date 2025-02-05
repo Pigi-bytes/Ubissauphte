@@ -50,7 +50,7 @@ t_tileset* initTileset(SDL_Renderer* renderer, int width, int height, int tileSi
 }
 
 void freeTileset(t_tileset* tileset) {
-    freeObjectManager(tileset->textureTiles);
+    freeObjectManager(&tileset->textureTiles);
     free(tileset);
 }
 
