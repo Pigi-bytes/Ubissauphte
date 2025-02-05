@@ -18,11 +18,11 @@ typedef struct {
     SDL_Color colorOnClick;
     SDL_Color colorDefault;
     t_text label;
-    void (*onClick)();
+    t_fonctionParam* OnClick;
     SDL_bool isClicked;
 } t_button;
 
-t_button* createButton(t_text text, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, void (*onClick)());
+t_button* createButton(t_text text, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, t_fonctionParam* OnClick);
 
 void renderButton(SDL_Renderer* renderer, t_button* button);
 void renderAllButtonCall(t_fonctionParam* fonction);

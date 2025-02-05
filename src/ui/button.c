@@ -4,7 +4,7 @@
 
 const float scaleFactor = 1.1f;
 
-t_button* createButton(t_text text, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, void (*onClick)()) {
+t_button* createButton(t_text text, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, t_fonctionParam* OnClick) {
     t_button* button = malloc(sizeof(t_button));
 
     if (!button) {
@@ -17,7 +17,7 @@ t_button* createButton(t_text text, SDL_Color color, SDL_Color colorOnClick, SDL
     button->colorDefault = color;
     button->colorOnClick = colorOnClick;
     button->isClicked = SDL_FALSE;
-    button->onClick = onClick;
+    button->OnClick = OnClick;
     button->label = text;
 
     button->label.rect.x = button->rect.x + (button->rect.w - button->label.rect.w) / 2;
@@ -60,8 +60,8 @@ void handleButtonClick(t_input* input, t_button* button) {
             if (!button->isClicked) {
                 button->isClicked = SDL_TRUE;
                 button->color = button->colorOnClick;
-                if (button->onClick) {
-                    button->onClick();
+                if (button->OnClick) {
+                    callSolo(button->OnClick);
                 }
             }
         } else if (button->isClicked) {
@@ -81,6 +81,7 @@ void freeButton(void* object) {
     t_button* button = (t_button*)object;
     freeText(&(button->label));
     free(button);
+    freeFonctionParam(&(button->OnClick));
 }
 
 void renderAllButton(t_objectManager* manager, SDL_Renderer* renderer) {
