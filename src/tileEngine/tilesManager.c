@@ -1,6 +1,6 @@
 #include "tilesManager.h"
 
-#define MAX_LINE_LENGTH 1024
+#define MAX_LINE_LENGTH 2048
 
 t_tileset* initTileset(SDL_Renderer* renderer, int width, int height, int tileSize, char* filename) {
     t_tileset* tileset = (t_tileset*)malloc(sizeof(t_tileset));
@@ -92,18 +92,22 @@ void freeGrid(t_grid* grid) {
     free(grid);
 }
 
-void renderGrid(SDL_Renderer* renderer, t_grid* grid, int windowWidth, int windowHeight) {
-    int newTileSizeX = windowWidth / grid->width;
-    int newTileSizeY = windowHeight / grid->height;
+void renderGrid(SDL_Renderer* renderer, t_grid* grid, t_camera* camera, t_tileset* tileset) {
+    int newTileSizeX = camera->worldWidth / grid->width;
+    int newTileSizeY = camera->worldHeight / grid->height;
 
     for (int z = 0; z < grid->depth; z++) {
         for (int y = 0; y < grid->height; y++) {
             for (int x = 0; x < grid->width; x++) {
                 t_tile* tile = &grid->tiles[z][y][x];
 
-                if (tile->texture) {
-                    SDL_Rect dst = {x * newTileSizeX, y * newTileSizeY, newTileSizeX, newTileSizeY};
-                    SDL_RenderCopyEx(renderer, tile->texture, NULL, &dst, 0, NULL, tile->flip);
+                SDL_Rect dst = {x * newTileSizeX, y * newTileSizeY, newTileSizeX, newTileSizeY};
+
+                // Vérifier si la tile est dans la caméra avant de l'afficher
+                if (entityOnCamera(camera, &dst)) {
+                    // Transformer en coordonnées écran
+                    SDL_Rect screenRect = cameraTransformWorld2Camera(camera, &dst);
+                    SDL_RenderCopyEx(renderer, tile->texture, NULL, &screenRect, 0, NULL, tile->flip);
                 }
             }
         }
