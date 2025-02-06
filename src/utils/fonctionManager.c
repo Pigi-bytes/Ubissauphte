@@ -56,7 +56,6 @@ t_fonctionParam* addFonctionParam(char* name, void (*f)(t_fonctionParam*), va_li
 
 void addFunction(t_tabFonct* fonct, char* name, void (*f)(t_fonctionParam*), ...) {
     va_list list_param;
-    void* arg;
     va_start(list_param, f);
 
     t_fonctionParam* funct = addFonctionParam(name, f, list_param);
