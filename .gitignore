@@ -2,4 +2,4 @@
 *.out
 
 .vscode
-build/
+bin/
