@@ -6,7 +6,6 @@
 
 #include "../io/imageLoader.h"
 #include "../io/input.h"
-#include "camera.h"
 #include "tilesManager.h"
 
 typedef struct {
@@ -27,7 +26,7 @@ typedef struct {
 
 SDL_bool checkCollision(SDL_Rect* rect1, SDL_Rect* rect2);
 void movePlayer(t_joueur* player, int dx, int dy, t_grid* grid);
-void handleInputPlayer(t_joueur* player, t_grid* grid, t_camera* camera, t_input* input);
+void handleInputPlayer(t_joueur* player, t_grid* grid, t_input* input);
 t_joueur* createplayer(t_control* control, SDL_Texture* texture, SDL_Rect rect);
 void freePlayer(t_joueur* player);
 

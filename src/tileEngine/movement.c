@@ -33,7 +33,7 @@ void movePlayer(t_joueur* player, int dx, int dy, t_grid* grid) {
     player->entity.rect.y = temp.y;
 }
 
-void handleInputPlayer(t_joueur* player, t_grid* grid, t_camera* camera, t_input* input) {
+void handleInputPlayer(t_joueur* player, t_grid* grid, t_input* input) {
     float speed = 5;
     float dx = 0;
     float dy = 0;
