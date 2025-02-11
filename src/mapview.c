@@ -4,9 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define OFFSET_X 700
-#define OFFSET_Y 700
-
 void XYMinMax(int *zoneAff, SDL_Rect *roomCoords, int numberRoom){
     zoneAff[0] = roomCoords[0].x;
     zoneAff[1] = roomCoords[0].x;
