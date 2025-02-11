@@ -11,7 +11,7 @@
 #define WINDOW_HEIGHT 960
 
 int main() {
-    int nbRoom = 15;  // Nombre de salles
+    int nbRoom = 20;  // Nombre de salles
 
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window* window = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
@@ -21,7 +21,7 @@ int main() {
     SDL_Rect* roomCoords = malloc(sizeof(SDL_Rect) * nbRoom);
     clock_t start = clock();
     t_salle** listRoom = genMap(nbRoom, roomCoords);
-    generateMap(roomCoords, listRoom, nbRoom, &map);
+    generateMap(roomCoords, listRoom, nbRoom, &map, WINDOW_WIDTH, WINDOW_HEIGHT);
     clock_t end = clock();
 
     double duration = (double)(end - start) / CLOCKS_PER_SEC * 1000;

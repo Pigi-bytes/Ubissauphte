@@ -2,21 +2,57 @@
 
 #include <SDL2/SDL.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-#define SCALE 50
 #define OFFSET_X 700
 #define OFFSET_Y 700
-#define SPACING 25
-#define DOOR_LENGTH 15
 
-void generateMap(SDL_Rect *roomCoords, t_salle **listeRoom, int numberRoom, t_mapAffichage *map) {
+void XYMinMax(int *zoneAff, int WW, int WH, SDL_Rect *roomCoords, int numberRoom){
+    zoneAff[0] = roomCoords[0].x;
+    zoneAff[1] = roomCoords[0].x;
+    zoneAff[2] = roomCoords[0].y;
+    zoneAff[3] = roomCoords[0].y;
+
+    for (int i = 1; i < numberRoom; i++) {
+        if (roomCoords[i].x > zoneAff[1]){
+            zoneAff[1] = roomCoords[i].x;
+        }else if(roomCoords[i].x < zoneAff[0]){
+            zoneAff[0] = roomCoords[i].x;
+        }if (roomCoords[i].y > zoneAff[3]){
+            zoneAff[3] = roomCoords[i].y;
+        }else if(roomCoords[i].y < zoneAff[2]){
+            zoneAff[2] = roomCoords[i].y;
+        }
+    }
+
+    
+    printf("Min X : %d, Max X : %d, Min Y : %d, Max Y : %d\n", zoneAff[0], zoneAff[1], zoneAff[2], zoneAff[3]);
+    return;
+}
+
+void generateMap(SDL_Rect *roomCoords, t_salle **listeRoom, int numberRoom, t_mapAffichage *map, int WW, int WH) {
     map->numRooms = numberRoom;
+    int zoneAff[4];
+    XYMinMax(zoneAff, WW, WH, roomCoords, numberRoom);
+
+    int nbX = abs(zoneAff[0])+zoneAff[1]+1;
+    int nbY = abs(zoneAff[2])+zoneAff[3]+1;
+    printf("Nb X : %d et nb Y : %d\n", nbX, nbY);
+    
+    
+    int scale = ((WH/10)*8/(nbY))*0.75;
+    int spacing = ((WH/10)*8/(nbY))*0.25;
+
+    printf("Scale : %d\n", scale);
+
+    zoneAff[0] = (abs(zoneAff[0]))*(scale + spacing) + WW/10;
+    zoneAff[2] = (abs(zoneAff[2]))*(scale + spacing) + WH/10;
 
     for (int i = 0; i < numberRoom; i++) {
-        roomCoords[i].x = roomCoords[i].x * SCALE + OFFSET_X;
-        roomCoords[i].y = roomCoords[i].y * SCALE + OFFSET_Y;
-        roomCoords[i].w = SCALE - SPACING;
-        roomCoords[i].h = SCALE - SPACING;
+        roomCoords[i].x = roomCoords[i].x * scale + zoneAff[0] + spacing*roomCoords[i].x;
+        roomCoords[i].y = roomCoords[i].y * scale + zoneAff[2] + spacing*roomCoords[i].y;
+        roomCoords[i].w = scale;
+        roomCoords[i].h = scale;
     }
 
     map->rooms = roomCoords;
@@ -38,10 +74,10 @@ void generateMap(SDL_Rect *roomCoords, t_salle **listeRoom, int numberRoom, t_ma
         // Tableau des offsets pour dessiner les lignes dans chaque direction
         // Les offsets definissent la longueur et la direction de la ligne a partir du point de depart
         int offsets[4][2] = {
-            {DOOR_LENGTH, 0},   // Droite : ligne horizontale vers la droite (X + DOOR_LENGTH, Y + 0)
-            {-DOOR_LENGTH, 0},  // Gauche : ligne horizontale vers la gauche (X - DOOR_LENGTH, Y + 0)
-            {0, -DOOR_LENGTH},  // Haut : ligne verticale vers le haut (X + 0, Y - DOOR_LENGTH)
-            {0, DOOR_LENGTH}    // Bas : ligne verticale vers le bas (X + 0, Y + DOOR_LENGTH)
+            {spacing, 0},   // Droite : ligne horizontale vers la droite (X + spacing, Y + 0)
+            {-spacing, 0},  // Gauche : ligne horizontale vers la gauche (X - spacing, Y + 0)
+            {0, -spacing},  // Haut : ligne verticale vers le haut (X + 0, Y - spacing)
+            {0, spacing}    // Bas : ligne verticale vers le bas (X + 0, Y + spacing)
         };
 
         for (int j = 0; j < 4; j++) {
