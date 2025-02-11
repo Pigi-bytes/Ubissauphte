@@ -7,7 +7,7 @@
 #define OFFSET_X 700
 #define OFFSET_Y 700
 
-void XYMinMax(int *zoneAff, int WW, int WH, SDL_Rect *roomCoords, int numberRoom){
+void XYMinMax(int *zoneAff, SDL_Rect *roomCoords, int numberRoom){
     zoneAff[0] = roomCoords[0].x;
     zoneAff[1] = roomCoords[0].x;
     zoneAff[2] = roomCoords[0].y;
@@ -25,28 +25,31 @@ void XYMinMax(int *zoneAff, int WW, int WH, SDL_Rect *roomCoords, int numberRoom
         }
     }
 
-    
-    printf("Min X : %d, Max X : %d, Min Y : %d, Max Y : %d\n", zoneAff[0], zoneAff[1], zoneAff[2], zoneAff[3]);
     return;
 }
 
-void generateMap(SDL_Rect *roomCoords, t_salle **listeRoom, int numberRoom, t_mapAffichage *map, int WW, int WH) {
+void generateMap(SDL_Rect *roomCoords, t_salle **listeRoom, int numberRoom, t_mapAffichage *map, int windowWidth, int windowHeight) {
     map->numRooms = numberRoom;
+
+    // zoneAff prend les min et max de X et Y avec la fonction
     int zoneAff[4];
-    XYMinMax(zoneAff, WW, WH, roomCoords, numberRoom);
+    XYMinMax(zoneAff, roomCoords, numberRoom);
 
-    int nbX = abs(zoneAff[0])+zoneAff[1]+1;
-    int nbY = abs(zoneAff[2])+zoneAff[3]+1;
-    printf("Nb X : %d et nb Y : %d\n", nbX, nbY);
+    // calcul la taille des salles X et Y (le X n'est pas utilisé ensuite car on se base sur le plus petit, donc Y)
+    int distX = abs(zoneAff[0])+zoneAff[1]+1;
+    int distY = abs(zoneAff[2])+zoneAff[3]+1;
     
-    
-    int scale = ((WH/10)*8/(nbY))*0.75;
-    int spacing = ((WH/10)*8/(nbY))*0.25;
+    // Scale (affichage d'UNE salle en carré)
+    // Le calcul : 80% de Windows Height, divisé par la taille des salles Y, 0.75 représente la taille de la salle
+    // le 0.25 c'est le reste pour l'espacement, ça donne un ration de 75% de taille et 25% d'espace entre les salles
+    int scale = ((windowHeight/10)*8/(distY))*0.75;
+    int spacing = ((windowHeight/10)*8/(distY))*0.25;
 
-    printf("Scale : %d\n", scale);
-
-    zoneAff[0] = (abs(zoneAff[0]))*(scale + spacing) + WW/10;
-    zoneAff[2] = (abs(zoneAff[2]))*(scale + spacing) + WH/10;
+    // Sert à faire une marge pour ne pas que ça soit collé au haut et à gauche
+    // le calcul, ça prend la coord de la plus petite salle, et sa pousse tout pour ne pas que ça rentre dans le mur
+    // et on ajoute 10%, pour avoir un truc propre
+    zoneAff[0] = (abs(zoneAff[0]))*(scale + spacing) + windowWidth/10;
+    zoneAff[2] = (abs(zoneAff[2]))*(scale + spacing) + windowHeight/10;
 
     for (int i = 0; i < numberRoom; i++) {
         roomCoords[i].x = roomCoords[i].x * scale + zoneAff[0] + spacing*roomCoords[i].x;
