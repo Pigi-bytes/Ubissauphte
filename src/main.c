@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
     initInput(&input, window_width, window_height);
     while (!input.quit) {
         updateInput(&input);
-        handleInputPlayer(player1, level, &camera, &input);
+        handleInputPlayer(player1, level, &input);
 
         cameraHandleResize(&camera, input.windowWidth, input.windowHeight);
         cameraCenterOnRect(&camera, &player1->entity.rect);
