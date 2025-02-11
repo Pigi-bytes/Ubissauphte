@@ -4,21 +4,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void XYMinMax(int *zoneAff, SDL_Rect *roomCoords, int numberRoom){
-    zoneAff[0] = roomCoords[0].x;
-    zoneAff[1] = roomCoords[0].x;
-    zoneAff[2] = roomCoords[0].y;
-    zoneAff[3] = roomCoords[0].y;
+void XYMinMax(int *zoneAffichage, SDL_Rect *roomCoords, int numberRoom){
+    zoneAffichage[0] = roomCoords[0].x;
+    zoneAffichage[1] = roomCoords[0].x;
+    zoneAffichage[2] = roomCoords[0].y;
+    zoneAffichage[3] = roomCoords[0].y;
 
     for (int i = 1; i < numberRoom; i++) {
-        if (roomCoords[i].x > zoneAff[1]){
-            zoneAff[1] = roomCoords[i].x;
-        }else if(roomCoords[i].x < zoneAff[0]){
-            zoneAff[0] = roomCoords[i].x;
-        }if (roomCoords[i].y > zoneAff[3]){
-            zoneAff[3] = roomCoords[i].y;
-        }else if(roomCoords[i].y < zoneAff[2]){
-            zoneAff[2] = roomCoords[i].y;
+        if (roomCoords[i].x > zoneAffichage[1]){
+            zoneAffichage[1] = roomCoords[i].x;
+        }else if(roomCoords[i].x < zoneAffichage[0]){
+            zoneAffichage[0] = roomCoords[i].x;
+        }if (roomCoords[i].y > zoneAffichage[3]){
+            zoneAffichage[3] = roomCoords[i].y;
+        }else if(roomCoords[i].y < zoneAffichage[2]){
+            zoneAffichage[2] = roomCoords[i].y;
         }
     }
 
@@ -28,13 +28,13 @@ void XYMinMax(int *zoneAff, SDL_Rect *roomCoords, int numberRoom){
 void generateMap(SDL_Rect *roomCoords, t_salle **listeRoom, int numberRoom, t_mapAffichage *map, int windowWidth, int windowHeight) {
     map->numRooms = numberRoom;
 
-    // zoneAff prend les min et max de X et Y avec la fonction
-    int zoneAff[4];
-    XYMinMax(zoneAff, roomCoords, numberRoom);
+    // zoneAffichage prend les min et max de X et Y avec la fonction
+    int zoneAffichage[4];
+    XYMinMax(zoneAffichage, roomCoords, numberRoom);
 
     // calcul la taille des salles X et Y (le X n'est pas utilisé ensuite car on se base sur le plus petit, donc Y)
-    int distX = abs(zoneAff[0])+zoneAff[1]+1;
-    int distY = abs(zoneAff[2])+zoneAff[3]+1;
+    int distX = abs(zoneAffichage[0])+zoneAffichage[1]+1;
+    int distY = abs(zoneAffichage[2])+zoneAffichage[3]+1;
     
     // Scale (affichage d'UNE salle en carré)
     // Le calcul : 80% de Windows Height, divisé par la taille des salles Y, 0.75 représente la taille de la salle
@@ -45,12 +45,12 @@ void generateMap(SDL_Rect *roomCoords, t_salle **listeRoom, int numberRoom, t_ma
     // Sert à faire une marge pour ne pas que ça soit collé au haut et à gauche
     // le calcul, ça prend la coord de la plus petite salle, et sa pousse tout pour ne pas que ça rentre dans le mur
     // et on ajoute 10%, pour avoir un truc propre
-    zoneAff[0] = (abs(zoneAff[0]))*(scale + spacing) + windowWidth/10;
-    zoneAff[2] = (abs(zoneAff[2]))*(scale + spacing) + windowHeight/10;
+    zoneAffichage[0] = (abs(zoneAffichage[0]))*(scale + spacing) + windowWidth/10;
+    zoneAffichage[2] = (abs(zoneAffichage[2]))*(scale + spacing) + windowHeight/10;
 
     for (int i = 0; i < numberRoom; i++) {
-        roomCoords[i].x = roomCoords[i].x * scale + zoneAff[0] + spacing*roomCoords[i].x;
-        roomCoords[i].y = roomCoords[i].y * scale + zoneAff[2] + spacing*roomCoords[i].y;
+        roomCoords[i].x = roomCoords[i].x * scale + zoneAffichage[0] + spacing*roomCoords[i].x;
+        roomCoords[i].y = roomCoords[i].y * scale + zoneAffichage[2] + spacing*roomCoords[i].y;
         roomCoords[i].w = scale;
         roomCoords[i].h = scale;
     }
