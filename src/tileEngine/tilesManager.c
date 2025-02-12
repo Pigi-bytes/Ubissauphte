@@ -92,23 +92,13 @@ void freeGrid(t_grid* grid) {
     free(grid);
 }
 
-void renderGrid(SDL_Renderer* renderer, t_grid* grid, t_camera* camera, t_tileset* tileset) {
-    int newTileSizeX = camera->worldWidth / grid->width;
-    int newTileSizeY = camera->worldHeight / grid->height;
-
+void renderGrid(SDL_Renderer* renderer, t_grid* grid) {
     for (int z = 0; z < grid->depth; z++) {
         for (int y = 0; y < grid->height; y++) {
             for (int x = 0; x < grid->width; x++) {
                 t_tile* tile = &grid->tiles[z][y][x];
-
-                SDL_Rect dst = {x * newTileSizeX, y * newTileSizeY, newTileSizeX, newTileSizeY};
-
-                // Vérifier si la tile est dans la caméra avant de l'afficher
-                if (entityOnCamera(camera, &dst)) {
-                    // Transformer en coordonnées écran
-                    SDL_Rect screenRect = cameraTransformWorld2Camera(camera, &dst);
-                    SDL_RenderCopyEx(renderer, tile->texture, NULL, &screenRect, 0, NULL, tile->flip);
-                }
+                SDL_Rect dst_rect = {x * 16, y * 16, 16, 16};
+                SDL_RenderCopy(renderer, tile->texture, NULL, &dst_rect);
             }
         }
     }

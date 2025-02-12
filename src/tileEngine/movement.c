@@ -34,7 +34,7 @@ void movePlayer(t_joueur* player, int dx, int dy, t_grid* grid) {
 }
 
 void handleInputPlayer(t_joueur* player, t_grid* grid, t_input* input) {
-    float speed = 5;
+    float speed = 2;
     float dx = 0;
     float dy = 0;
 
@@ -64,22 +64,4 @@ t_joueur* createplayer(t_control* control, SDL_Texture* texture, SDL_Rect rect) 
 void freePlayer(t_joueur* player) {
     SDL_DestroyTexture(player->entity.texture);
     free(player);
-}
-
-SDL_Texture* creerTextureDepuisRect(SDL_Renderer* renderer, SDL_Color couleur, SDL_Rect rect) {
-    SDL_Texture* texture = SDL_CreateTexture(renderer,
-                                             SDL_PIXELFORMAT_RGBA8888,
-                                             SDL_TEXTUREACCESS_TARGET,
-                                             rect.w, rect.h);
-
-    SDL_Texture* ancienCible = SDL_GetRenderTarget(renderer);
-    SDL_SetRenderTarget(renderer, texture);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-    SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, couleur.r, couleur.g, couleur.b, couleur.a);
-    SDL_RenderFillRect(renderer, &(SDL_Rect){0, 0, rect.w, rect.h});
-
-    SDL_SetRenderTarget(renderer, ancienCible);
-
-    return texture;
 }
