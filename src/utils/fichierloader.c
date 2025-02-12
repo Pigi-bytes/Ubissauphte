@@ -53,7 +53,7 @@ void chargerFichier(t_fichier *fichier, char *filename) {
     // Lecture ligne par ligne et gestion des données
     while (fgets(line, sizeof(line), file)) {
         // Gestion des blocks séparés par des lignes vides
-        if (line[0] == '\n' || line[0] == '\r') {
+        if (line[0] == '\n') {
             if (currentBlock->nbElement > 0) {
                 // Si un block a des éléments, on crée un nouveau block
                 currentBlock = malloc(sizeof(t_block));
@@ -69,23 +69,24 @@ void chargerFichier(t_fichier *fichier, char *filename) {
                 }
                 fichier->listBlock[fichier->nbBlocks++] = currentBlock;
             }
-            continue;
-        }
-        // Traitement des lignes contenant des paires clé/valeur
-        char *colonPos = strchr(line, ':');
-        if (colonPos) {
-            t_pairData *pair = malloc(sizeof(t_pairData));
-            if (!pair) {
-                perror("Erreur d'allocation mémoire pour t_pairData");
-                exit(EXIT_FAILURE);
+
+        } else {
+            // Traitement des lignes contenant des paires clé/valeur
+            char *colonPos = strchr(line, ':');
+            if (colonPos) {
+                t_pairData *pair = malloc(sizeof(t_pairData));
+                if (!pair) {
+                    perror("Erreur d'allocation mémoire pour t_pairData");
+                    exit(EXIT_FAILURE);
+                }
+                pair->key = strndup(line, colonPos - line);                     // Clé
+                pair->value = strndup(colonPos + 2, strlen(colonPos + 2) - 1);  // Valeur
+                if (!pair->key || !pair->value) {
+                    perror("Erreur d'allocation mémoire pour key ou value");
+                    exit(EXIT_FAILURE);
+                }
+                currentBlock->data[currentBlock->nbElement++] = pair;
             }
-            pair->key = strndup(line, colonPos - line); // Clé
-            pair->value = strndup(colonPos + 2, strlen(colonPos + 2) - 1); // Valeur
-            if (!pair->key || !pair->value) {
-                perror("Erreur d'allocation mémoire pour key ou value");
-                exit(EXIT_FAILURE);
-            }
-            currentBlock->data[currentBlock->nbElement++] = pair;
         }
     }
     fclose(file);
@@ -117,20 +118,12 @@ t_pairData *getValue(t_block *block, char *name, void *result, char *type) {
 void freeFichier(t_fichier *fichier) {
     // Libère la mémoire pour chaque block et ses données
     for (int i = 0; i < fichier->nbBlocks; i++) {
-        t_block *block = fichier->listBlock[i];
-        for (int j = 0; j < block->nbElement; j++) {
-            // Libérer chaque t_pairData (key et value)
-            free(block->data[j]->key);
-            free(block->data[j]->value);
-            free(block->data[j]);
+        for (int j = 0; j < fichier->listBlock[i]->nbElement; j++) {
+            free(fichier->listBlock[i]->data[j]);
         }
-        // Libérer le tableau de données (data) du block
-        free(block->data);
-        
-        // Libérer le t_block lui-même
-        block=NULL;
+        free(fichier->listBlock[i]->data);
+        free(fichier->listBlock[i]);
     }
-    // Libérer la liste des blocks (fichier->listBlock)
     free(fichier->listBlock);
 }
 
