@@ -1,8 +1,6 @@
 /**
  * @file camera.h
  * @brief Gestion de la caméra et du viewport
- * @author Pigi-bytes
- * @date 12/02/2025
  */
 
 #ifndef CAMERA_H
