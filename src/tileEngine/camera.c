@@ -79,7 +79,7 @@ void setRenderTarget(SDL_Renderer* renderer, t_viewPort* vp) {
     SDL_SetRenderTarget(renderer, vp->renderTarget);
 }
 
-void updateViewport(t_viewPort* vp, int windowW, int windowH) {
+void resizeViewport(t_viewPort* vp, int windowW, int windowH) {
     vp->screenRect.w = windowW;
     vp->screenRect.h = windowH;
 }

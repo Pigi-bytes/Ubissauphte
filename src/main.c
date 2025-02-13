@@ -35,12 +35,16 @@ int main(int argc, char* argv[]) {
         updateInput(&input);
         handleInputPlayer(player1, level, &input);
 
+        if (input.resized) {
+            resizeViewport(viewport, input.windowWidth, input.windowHeight);
+            resizeMinimap(renderer, minimap, input.windowWidth, input.windowHeight);
+        }
+
         if (input.mouseYWheel != 0) {
             cameraHandleZoom(viewport, input.mouseYWheel);
             input.mouseYWheel = 0;
         }
 
-        updateViewport(viewport, input.windowWidth, input.windowHeight);
         updateMinimap(renderer, minimap, camera, 196);
 
         centerCameraOn(camera, player1->entity.rect.x, player1->entity.rect.y);

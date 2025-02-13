@@ -120,7 +120,7 @@ void renderViewport(SDL_Renderer* renderer, t_viewPort* vp);
  *
  * @note Doit être appelee a chaque fois que l'on redimensionne la fenetre
  */
-void updateViewport(t_viewPort* vp, int windowW, int windowH);
+void resizeViewport(t_viewPort* vp, int windowW, int windowH);
 
 /**
  * @brief Libere la mémoire allouée pour le viewport
