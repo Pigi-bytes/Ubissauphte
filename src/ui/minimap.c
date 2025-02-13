@@ -30,6 +30,15 @@ t_minimap* createMinimap(SDL_Renderer* renderer, int windowW, int windowH) {
     return minimap;
 }
 
+void resizeMinimap(SDL_Renderer* renderer, t_minimap* minimap, int windowW, int windowH) {
+    minimap->area = (SDL_Rect){
+        windowW - minimap->size - minimap->margin,  // X
+        windowH - minimap->size - minimap->margin,  // Y
+        minimap->size,                              // Largeur
+        minimap->size                               // Hauteur
+    };
+}
+
 void updateMinimap(SDL_Renderer* renderer, t_minimap* minimap, t_camera* camera, int transparency) {
     // Changer la cible de rendu vers la texture de la minimap
     SDL_SetRenderTarget(renderer, minimap->texture);

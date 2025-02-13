@@ -1,8 +1,6 @@
 /**
  * @file minimap.h
  * @brief Gestion de la minimap (affichage et mise a jour)
- * @author Pigi-bytes
- * @date 12/02/2025
  */
 
 #ifndef MINIMAP_H
@@ -67,5 +65,14 @@ void renderMinimap(SDL_Renderer* renderer, t_minimap* minimap);
  * @param minimap Pointeur sur la minimap à détruire
  */
 void freeMinimap(t_minimap* minimap);
+
+/**
+ * @brief Change la position de la minimap selon la taille de l'eccran
+ * @param renderer Renderer SDL pour la création de textures
+ * @param minimap Pointeur sur la minimap à mettre à jour
+ * @param windowW Largeur de la fenêtre
+ * @param windowH Hauteur de la fenêtre
+ */
+void resizeMinimap(SDL_Renderer* renderer, t_minimap* minimap, int windowW, int windowH);
 
 #endif
