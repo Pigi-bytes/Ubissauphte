@@ -6,8 +6,8 @@
 typedef struct {
     int key[SDL_NUM_SCANCODES];
     SDL_bool quit;
+    SDL_bool resized;
     int mouseX, mouseY;
-    int mouseXRel, mouseYRel;
     int mouseXWheel, mouseYWheel;
     SDL_bool mouseButtons[6];
     int windowWidth;

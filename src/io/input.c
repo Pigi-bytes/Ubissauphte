@@ -2,6 +2,7 @@
 
 void updateInput(t_input* input) {
     SDL_Event event;
+    input->resized = SDL_FALSE;  // Réinitialiser à chaque frame
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT)
             input->quit = SDL_TRUE;
@@ -12,8 +13,6 @@ void updateInput(t_input* input) {
         } else if (event.type == SDL_MOUSEMOTION) {
             input->mouseX = event.motion.x;
             input->mouseY = event.motion.y;
-            input->mouseXRel = event.motion.xrel;
-            input->mouseYRel = event.motion.yrel;
         } else if (event.type == SDL_MOUSEWHEEL) {
             input->mouseXWheel = event.wheel.x;
             input->mouseYWheel = event.wheel.y;
@@ -25,6 +24,7 @@ void updateInput(t_input* input) {
             if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
                 input->windowWidth = event.window.data1;   // Mise à jour de la largeur
                 input->windowHeight = event.window.data2;  // Mise à jour de la hauteur
+                input->resized = SDL_TRUE;                 // Mise à jour du flag
             }
         }
     }
@@ -35,8 +35,6 @@ void initInput(t_input* input, int windowWidth, int windowHeight) {
     input->quit = SDL_FALSE;
     input->mouseX = 0;
     input->mouseY = 0;
-    input->mouseXRel = 0;
-    input->mouseYRel = 0;
     input->mouseXWheel = 0;
     input->mouseYWheel = 0;
     memset(input->mouseButtons, SDL_FALSE, sizeof(input->mouseButtons));
