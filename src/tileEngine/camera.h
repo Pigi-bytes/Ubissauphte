@@ -131,4 +131,13 @@ void freeViewport(t_viewPort* vp);
  * @param cam Pointeur sur la camera à détruire
  */
 void freeCamera(t_camera* cam);
+
+/**
+ * @brief Vérifie si un rectangle est visible dans la caméra
+ * @param rect Rectangle à vérifier (coordonnées niveau en pixels)
+ * @param camera Caméra de référence
+ * @return SDL_TRUE si au moins 1 pixel est visible, false sinon
+ */
+SDL_bool isRectOnCamera(SDL_Rect* rect, t_camera* camera);
+
 #endif

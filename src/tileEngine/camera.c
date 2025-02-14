@@ -96,3 +96,10 @@ void freeCamera(t_camera* cam) {
         free(cam);
     }
 }
+
+SDL_bool isRectOnCamera(SDL_Rect* rect, t_camera* camera) {
+    return !((rect->x + rect->w <= camera->x) ||    // Trop a gauche
+             (rect->x >= camera->x + camera->w) ||  // Trop a droite
+             (rect->y + rect->h <= camera->y) ||    // Trop en haut
+             (rect->y >= camera->y + camera->h));   // Trop en bas
+}

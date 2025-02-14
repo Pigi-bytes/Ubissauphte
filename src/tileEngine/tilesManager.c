@@ -92,13 +92,16 @@ void freeGrid(t_grid* grid) {
     free(grid);
 }
 
-void renderGrid(SDL_Renderer* renderer, t_grid* grid) {
+void renderGrid(SDL_Renderer* renderer, t_grid* grid, t_camera* camera) {
     for (int z = 0; z < grid->depth; z++) {
         for (int y = 0; y < grid->height; y++) {
             for (int x = 0; x < grid->width; x++) {
                 t_tile* tile = &grid->tiles[z][y][x];
+                // Calcul de la position relative à la caméra
                 SDL_Rect dst_rect = {x * 16, y * 16, 16, 16};
-                SDL_RenderCopy(renderer, tile->texture, NULL, &dst_rect);
+                if (isRectOnCamera(&dst_rect, camera)) {
+                    SDL_RenderCopy(renderer, tile->texture, NULL, &dst_rect);
+                }
             }
         }
     }
