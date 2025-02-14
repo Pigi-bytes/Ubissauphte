@@ -1,27 +1,82 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "fichierLoader.h"
 
-#include "../debug.h"
+// #include "../debug.h"
 
 #define MAX_LINE_LENGTH 100
 
-typedef struct {
-    char *key;
-    char *value;
-} t_pairData;
+/*Type: 0
+Nom: Épée de feu
+Niveau: 10
+Quantite: -1
+PV Max Modifier: 1.10
+Mana Max Modifier: 1.05
+Speed Modifier: 1.15
+Attack Modifier: 1.25
+Defense Modifier: 1.10
+PV Max: 50
+Mana Max: 20
+Speed: 5
+Attack: 15
+Defense: 2*/
 
-typedef struct {
-    int nbElement;
-    t_pairData **data;
-} t_block;
+// Chargement des donnees dans un fichier text
+void enregistrerDonnees(char *filename, int nbBlock) {
+    FILE *file = fopen(filename, "w");
+    if (!file) {
+        perror("Erreur lors de l'ouverture de fichier");
+        exit(EXIT_FAILURE);
+    }
 
-typedef struct {
-    t_block **listBlock;
-    int nbBlocks;
-} t_fichier;
+    char key[20];
+    char value[20];
+
+    // écriture des données bloque par bloque
+    printf("rentrez 0 pour chaque fin de bloque\n");
+    for (int i = 0; i < nbBlock; i++) {
+        do {
+            printf("rentrez la cle : ");
+            scanf("%[^\n]", key);
+            getchar();
+            printf("rentrez la value : ");
+            scanf("%[^\n]", value);
+            getchar();
+            // Marque la fin d'un bloque
+            if (key[0] == '0')
+                fprintf(file, "\n");
+            else
+                fprintf(file, "%s: %s\n", key, value);
+
+        } while (key[0] != '0');
+    }
+
+    fclose(file);
+}
+
+void compterLigne(char *filename, int *countLine, int *countBlock) {
+    (*countLine) = 0;
+    (*countBlock) = 0;
+
+    FILE *file = fopen(filename, "r");
+    if (!file) {
+        perror("Erreur d'ouverture du fichier");
+        exit(EXIT_FAILURE);
+    }
+    char line[MAX_LINE_LENGTH];
+    while (fgets(line, MAX_LINE_LENGTH, file)) {
+        if (line[0] == '\n')
+            (*countBlock)++;
+        if (*countBlock == 0)
+            (*countLine)++;
+    }
+    (*countLine)++;
+    fclose(file);
+}
 
 void chargerFichier(t_fichier *fichier, char *filename) {
+    int nbLine, nbBlock;
+    compterLigne(filename, &nbLine, &nbBlock);
+    printf("%d\n", nbBlock);
+
     FILE *file = fopen(filename, "r");
     if (!file) {
         perror("Erreur d'ouverture du fichier");
@@ -29,7 +84,7 @@ void chargerFichier(t_fichier *fichier, char *filename) {
     }
 
     fichier->nbBlocks = 0;
-    fichier->listBlock = malloc(25 * sizeof(t_block *));
+    fichier->listBlock = malloc(nbLine * sizeof(t_block *));
     if (!fichier->listBlock) {
         perror("Erreur d'allocation mémoire pour listBlock");
         exit(EXIT_FAILURE);
@@ -43,7 +98,7 @@ void chargerFichier(t_fichier *fichier, char *filename) {
         exit(EXIT_FAILURE);
     }
     currentBlock->nbElement = 0;
-    currentBlock->data = malloc(20 * sizeof(t_pairData *));
+    currentBlock->data = malloc(nbLine * sizeof(t_pairData *));
     if (!currentBlock->data) {
         perror("Erreur d'allocation mémoire pour les données du block");
         exit(EXIT_FAILURE);
@@ -55,14 +110,14 @@ void chargerFichier(t_fichier *fichier, char *filename) {
         // Gestion des blocks séparés par des lignes vides
         if (line[0] == '\n') {
             if (currentBlock->nbElement > 0) {
-                // Si un block a des éléments, on crée un nouveau block
+                // Si le block courent a des éléments, on crée un nouveau block
                 currentBlock = malloc(sizeof(t_block));
                 if (!currentBlock) {
                     perror("Erreur d'allocation mémoire pour un nouveau t_block");
                     exit(EXIT_FAILURE);
                 }
                 currentBlock->nbElement = 0;
-                currentBlock->data = malloc(20 * sizeof(t_pairData *));
+                currentBlock->data = malloc(nbLine * nbBlock * sizeof(t_pairData *));
                 if (!currentBlock->data) {
                     perror("Erreur d'allocation mémoire pour les données du nouveau block");
                     exit(EXIT_FAILURE);
@@ -79,8 +134,8 @@ void chargerFichier(t_fichier *fichier, char *filename) {
                     perror("Erreur d'allocation mémoire pour t_pairData");
                     exit(EXIT_FAILURE);
                 }
-                pair->key = strndup(line, colonPos - line);                     // Clé
-                pair->value = strndup(colonPos + 2, strlen(colonPos + 2) - 1);  // Valeur
+                pair->key = strndup(line, colonPos - line);
+                pair->value = strndup(colonPos + 2, strlen(colonPos + 1));
                 if (!pair->key || !pair->value) {
                     perror("Erreur d'allocation mémoire pour key ou value");
                     exit(EXIT_FAILURE);
@@ -116,28 +171,14 @@ t_pairData *getValue(t_block *block, char *name, void *result, char *type) {
 }
 
 void freeFichier(t_fichier *fichier) {
-    // Libère la mémoire pour chaque block et ses données
     for (int i = 0; i < fichier->nbBlocks; i++) {
         for (int j = 0; j < fichier->listBlock[i]->nbElement; j++) {
+            free(fichier->listBlock[i]->data[j]->key);
+            free(fichier->listBlock[i]->data[j]->value);
             free(fichier->listBlock[i]->data[j]);
         }
         free(fichier->listBlock[i]->data);
         free(fichier->listBlock[i]);
     }
     free(fichier->listBlock);
-}
-
-int main() {
-    t_fichier fichier;
-    chargerFichier(&fichier, "test.txt");
-
-    int niveau;
-    for (int i = 0; i < fichier.nbBlocks; i++) {
-        if (getValue(fichier.listBlock[i], "Niveau", &niveau, "int")) {
-            printf("Bloc %d - Niveau: %d\n", i, niveau);
-        }
-    }
-
-    freeFichier(&fichier);
-    return 0;
 }
