@@ -8,7 +8,11 @@
 
 typedef void (*freeFunc)(void*);
 
-// Itérateurs Spécialisés par Type (O(1))
+// Iterateur specialisé par type pour un accés O(1) au lieu de O(n)
+// Ressource utilisé:
+// - https://peerdh.com/blogs/programming-insights/memory-pool-management-techniques-in-c
+// - https://en.wikipedia.org/wiki/Memory_pool
+// - https://8dcc.github.io/programming/pool-allocator.html <- Version super basique
 
 #define POOL_SIZE 64  // Taille d'un bloc mémoire
 #define MAX_UINT8_T 256
