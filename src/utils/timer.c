@@ -65,3 +65,10 @@ void freeTimer(t_timer *timer) {
         free(timer);
     }
 }
+
+void resetTimer(t_timer *timer) {
+    if (timer->isStarted) {
+        timer->startTicks = SDL_GetTicks();
+        timer->pausedTicks = 0;
+    }
+}

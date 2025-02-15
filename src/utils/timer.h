@@ -18,5 +18,5 @@ void pauseTimer(t_timer *timer);
 void unpauseTimer(t_timer *timer);
 Uint32 getTicks(t_timer *timer);
 void freeTimer(t_timer *timer);
-
+void resetTimer(t_timer *timer);
 #endif
