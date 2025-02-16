@@ -3,6 +3,7 @@
 #include "io/imageLoader.h"
 #include "io/input.h"
 #include "tileEngine/camera.h"
+#include "tileEngine/genRomm.h"
 #include "tileEngine/movement.h"
 #include "tileEngine/tilesManager.h"
 #include "utils/objectManager.h"
@@ -18,7 +19,7 @@ int main(int argc, char* argv[]) {
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     t_tileset* tileset = initTileset(renderer, 192, 176, 16, "assets/imgs/tileMapDungeon.bmp");
-    t_grid* level = loadMap("assets/map/map01.txt", tileset);
+    t_grid* level = loadMap("assets/map/testmap4.txt", tileset);
 
     t_control fleche = {SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT};
     t_joueur* player1 = createplayer(&fleche, (SDL_Texture*)getObject(tileset->textureTiles, 97), (SDL_Rect){400, 300, 64, 64});
