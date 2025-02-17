@@ -6,9 +6,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define SCALE_FACTOR 1.1f;
+
 #include "../io/input.h"
 #include "../utils/fonctionManager.h"
-#include "../utils/objectManager.h"
 #include "text.h"
 
 typedef struct {
@@ -23,16 +24,9 @@ typedef struct {
 } t_button;
 
 t_button* createButton(t_text text, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, t_fonctionParam* OnClick);
-
 void renderButton(SDL_Renderer* renderer, t_button* button);
-void renderAllButtonCall(t_fonctionParam* fonction);
-
 void handleButtonClick(t_input* input, t_button* button);
 SDL_bool isMouseInsideRect(int mouseX, int mouseY, SDL_Rect* rect);
 void freeButton(void* object);
-
-void renderAllButton(t_objectManager* manager, SDL_Renderer* renderer);
-void handleAllButtonInput(t_objectManager* manager, t_input* input);
-void handleAllButtonInputCall(t_fonctionParam* fonction);
 
 #endif  // BUTTON_H

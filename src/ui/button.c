@@ -1,9 +1,5 @@
 #include "button.h"
 
-#include <stdarg.h>
-
-const float scaleFactor = 1.1f;
-
 t_button* createButton(t_text text, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, t_fonctionParam* OnClick) {
     t_button* button = malloc(sizeof(t_button));
 
@@ -45,8 +41,8 @@ SDL_bool isMouseInsideRect(int mouseX, int mouseY, SDL_Rect* rect) {
 }
 
 void handleButtonClick(t_input* input, t_button* button) {
-    int newWidth = button->rectDefault.w * scaleFactor;
-    int newHeight = button->rectDefault.h * scaleFactor;
+    int newWidth = button->rectDefault.w * SCALE_FACTOR;
+    int newHeight = button->rectDefault.h * SCALE_FACTOR;
     int deltaX = (newWidth - button->rectDefault.w) / 2;
     int deltaY = (newHeight - button->rectDefault.h) / 2;
 
@@ -82,31 +78,4 @@ void freeButton(void* object) {
     freeText(&(button->label));
     free(button);
     freeFonctionParam(&(button->OnClick));
-}
-
-void renderAllButton(t_objectManager* manager, SDL_Renderer* renderer) {
-    for (int i = 0; i < manager->count; ++i) {
-        t_button* button = (t_button*)manager->items[i]->data;
-        renderButton(renderer, button);
-    }
-}
-
-void handleAllButtonInput(t_objectManager* manager, t_input* input) {
-    for (int i = 0; i < manager->count; ++i) {
-        t_button* button = (t_button*)manager->items[i]->data;
-        handleButtonClick(input, button);
-    }
-}
-
-// fonction qui lie la fonction présent dans le fonction manager à la fonction initial
-void handleAllButtonInputCall(t_fonctionParam* fonction) {
-    t_objectManager* manager = (t_objectManager*)fonction->param[0];
-    t_input* input = (t_input*)fonction->param[1];
-    handleAllButtonInput(manager, input);
-}
-
-void renderAllButtonCall(t_fonctionParam* fonction) {
-    t_objectManager* manager = (t_objectManager*)fonction->param[0];
-    SDL_Renderer* render = (SDL_Renderer*)fonction->param[1];
-    renderAllButton(manager, render);
 }

@@ -161,19 +161,6 @@ void drawText(SDL_Renderer* renderer, t_text* text) {
     DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, text->rect, 3);
 }
 
-void drawAllText(t_objectManager* manager, SDL_Renderer* renderer) {
-    for (int i = 0; i < manager->count; ++i) {
-        t_text* text = (t_text*)manager->items[i]->data;
-        drawText(renderer, text);
-    }
-}
-
-void drawallTextcall(t_fonctionParam* fonction) {
-    t_objectManager* manager = (t_objectManager*)fonction->param[0];
-    SDL_Renderer* renderer = (SDL_Renderer*)fonction->param[1];
-    drawAllText(manager, renderer);
-}
-
 void freeText(void* objet) {
     t_text* text = (t_text*)objet;
     if (text->text != NULL) {

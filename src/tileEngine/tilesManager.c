@@ -13,7 +13,10 @@ t_tileset* initTileset(SDL_Renderer* renderer, int width, int height, int tileSi
     tileset->height = height;
     tileset->tileSize = tileSize;
 
-    tileset->textureTiles = initObjectManager(SDL_TEXTURE_TYPE, SDL_DestroyTextureWrapper, 140);
+    t_typeRegistry registre;
+    initTypeRegistry(&registre);
+    const uint8_t TEXTURE_TYPE = registerType(&registre, SDL_DestroyTextureWrapper, "texture");
+
     if (!tileset->textureTiles) {
         fprintf(stderr, "Erreur d'initialisation du gestionnaire d'objets\n");
         free(tileset);
@@ -21,8 +24,7 @@ t_tileset* initTileset(SDL_Renderer* renderer, int width, int height, int tileSi
     }
 
     SDL_Texture* tilesetTexture = loadImage(filename, renderer);
-
-    ADD_TYPED_OBJECT(tileset->textureTiles, SDL_TEXTURE_TYPE, NULL);  // NULL texture en 0
+    addObject(tileset->textureTiles, NULL, TEXTURE_TYPE);
 
     int tilesX = tileset->width / tileset->tileSize;
     int tilesY = tileset->height / tileset->tileSize;
@@ -41,7 +43,7 @@ t_tileset* initTileset(SDL_Renderer* renderer, int width, int height, int tileSi
             SDL_RenderCopy(renderer, tilesetTexture, &srcRect, NULL);
             SDL_SetRenderTarget(renderer, NULL);
 
-            ADD_TYPED_OBJECT(tileset->textureTiles, SDL_TEXTURE_TYPE, tile);
+            addObject(tileset->textureTiles, tile, TEXTURE_TYPE);
         }
     }
 
@@ -50,7 +52,7 @@ t_tileset* initTileset(SDL_Renderer* renderer, int width, int height, int tileSi
 }
 
 void freeTileset(t_tileset* tileset) {
-    freeObjectManager(&tileset->textureTiles);
+    freeObjectManager(tileset->textureTiles);
     free(tileset);
 }
 

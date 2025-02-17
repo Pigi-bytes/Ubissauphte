@@ -46,6 +46,24 @@ void addObject(t_objectManager* manager, void* data, uint8_t typeId) {
     manager->count++;
 }
 
+void* getObject(t_objectManager* manager, int index) {
+    if (index >= manager->count) {
+        return NULL;  // Index hors limites
+    }
+
+    // Calcule le pool et l'index local dans le pool
+    int poolIndex = index / POOL_SIZE;   // Division pour trouver le pool
+    int localIndex = index % POOL_SIZE;  // Modulo pour trouver l'index dans le pool
+
+    // Parcourt les pools jusqu'à atteindre le bon
+    t_objectMemoryPool* pool = manager->firstPool;
+    for (int i = 0; i < poolIndex; i++) {
+        pool = pool->next;
+    }
+
+    return pool->items[localIndex].data;
+}
+
 void freeObjectManager(t_objectManager* manager) {
     t_objectMemoryPool* pool = manager->firstPool;
 
@@ -54,7 +72,7 @@ void freeObjectManager(t_objectManager* manager) {
         // Détermine combien d'objets sont utilisés dans ce bloc
         int items2Free = POOL_SIZE;          // Bloc plein par default
         if (pool == manager->currentPool) {  // Si le bloc est pas plein on regarde combien d'element sont stocké
-            manager->nbItemsInPool;
+            items2Free = manager->nbItemsInPool;
         }
 
         // Libération de chaque objet dans le bloc
