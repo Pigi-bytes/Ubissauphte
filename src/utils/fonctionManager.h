@@ -2,45 +2,75 @@
 #define HEADER_H
 
 #include <stdarg.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "../debug.h"
-#include "objectManager.h"
 
+/**
+ * @def MAX_LENGTH
+ * @brief Taille maximal pour le nom d'une fonction
+ */
 #define MAX_LENGTH 100
 
-#define RENDERALL "randerAll"
-#define ADD_FUNCTION(fonct, name, f, ...) addFunction(fonct, name, f, __VA_ARGS__, NULL);
-#define ADD_FUNCTION_PARAM(name, f, ...) addFonctionSolo(name, f, __VA_ARGS__, NULL);
+/**
+ * @def CREER_FONCTION
+ * @brief Macro utilitaire pour crée une fonction sans precisé la sentinelle NULL
+ * @param name Nom de la fonction
+ * @param f Pointeur sur fonction de type t_fonctionParam qui renvoie void
+ * @param ... Argument de f
+ */
+#define CREER_FONCTION(name, f, ...) creerFonction(name, f, __VA_ARGS__, NULL)
 
+/**
+ * @def GET_VALUE
+ * @brief Macro utilitaire pour recupéré des parametres en valeur
+ * @param f pointeur vers la fonction
+ * @param index position des arguments dans le tableau
+ * @param type Type de la valeur à récupérer
+ */
+#define GET_VALUE(f, index, type) (*(type*)(f)->param[index])
+
+/**
+ * @def GET_PTR
+ * @brief Macro utilitaire pour recupéré des parametres en valeur
+ * @param f pointeur vers la fonction
+ * @param index position des arguments dans le tableau
+ * @param type Type du pointeur à récupérer
+ */
+#define GET_PTR(f, index, type) ((type)(f)->param[index])
+
+/**
+ * @struct t_fonctionParam
+ * @brief Structure contenant les informations d'une fonction
+ */
 typedef struct fonction {
-    void (*fonction)(struct fonction*);
-    char nom[MAX_LENGTH];
-    void** param;
-    int nb_param;
+    void (*fonction)(struct fonction*);  ///< Pointeur sur la fonction de callback qui prend un t_fonctionParam et renvoie un void
+    char nom[MAX_LENGTH];                ///< Nom de la fonction permettant de l'identifier
+    void** param;                        ///< Tableau de pointeurs vers les parametres
+    int nb_param;                        ///< Nombre de parametres
 } t_fonctionParam;
 
-typedef struct {
-    t_fonctionParam** tab_fonct;
-    int nbFonct;
-} t_tabFonct;
+/**
+ * @brief Crée un t_fonctionParam
+ * @param name Nom de la fonction
+ * @param f Pointeur sur fonction de type t_fonctionParam qui renvoie void
+ * @param ... Argument de f
+ * @return Pointeur vers la fonctionParam
+ * @warning ... (Doit se terminer par une sentinelle NULL)
+ */
+t_fonctionParam* creerFonction(char* name, void (*f)(t_fonctionParam*), ...);
 
-typedef struct {
-    t_objectManager* manage;
-    t_tabFonct* fonction;
-} t_fonctionManager;
+/**
+ * @brief Execute la fonctionParam
+ * @param func Pointeur vers le fonctionParam à exécuter
+ */
+void callFonction(t_fonctionParam* funct);
 
-t_tabFonct* initFonction(void);
+/**
+ * @brief Libere la mémoire d'une fonctionParametrable
+ * @param fonctParam Double pointeur vers la fonction a liberer
+ */
+void freeFonction(t_fonctionParam** fonctParam);
 
-void addFunction(t_tabFonct* fonct, char* name, void (*f)(t_fonctionParam*), ...);
-t_fonctionParam* addFonctionParam(char* name, void (*f)(t_fonctionParam*), va_list list_param);
-t_fonctionParam* addFonctionSolo(char* name, void (*f)(t_fonctionParam*), ...);
-
-void call(t_fonctionManager* contenue, const char* nomFonction);
-void callSolo(t_fonctionParam* funct);
-
-void freeFonction(t_tabFonct** fonct);
-void freeFonctionParam(t_fonctionParam** fonctParam);
 #endif

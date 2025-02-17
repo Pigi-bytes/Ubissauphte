@@ -57,7 +57,7 @@ void handleButtonClick(t_input* input, t_button* button) {
                 button->isClicked = SDL_TRUE;
                 button->color = button->colorOnClick;
                 if (button->OnClick) {
-                    callSolo(button->OnClick);
+                    callFonction(button->OnClick);
                 }
             }
         } else if (button->isClicked) {
@@ -77,5 +77,5 @@ void freeButton(void* object) {
     t_button* button = (t_button*)object;
     freeText(&(button->label));
     free(button);
-    freeFonctionParam(&(button->OnClick));
+    freeFonction(&(button->OnClick));
 }
