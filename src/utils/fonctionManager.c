@@ -1,16 +1,17 @@
 #include "fonctionManager.h"
 
 t_fonctionParam* creerFonction(char* name, void (*f)(t_fonctionParam*), ...) {
-    va_list args;
+    va_list args;  // structure qui contiendra tout les paramètres
     void* arg;
+
     t_fonctionParam* funct = malloc(sizeof(t_fonctionParam));
     funct->param = malloc(sizeof(void*));
     funct->fonction = f;
     funct->nb_param = 0;
-    strncpy(funct->nom, name, MAX_LENGTH - 1);
-    va_start(args, f);
+    strncpy(funct->nom, name, MAX_LENGTH - 1);  // copier sécuriser de name dans funct->name (taille max : MAX_LENGTH - 1 (\0 pas compris) )
 
-    while ((arg = va_arg(args, void*)) != NULL) {
+    va_start(args, f);
+    while ((arg = va_arg(args, void*)) != NULL) {  // parcourir tout les paramètres jusqu'à atteindre la sentinelle (NULL)
         funct->param[funct->nb_param++] = arg;
         funct->param = realloc(funct->param, (funct->nb_param + 1) * sizeof(void*));
     }
@@ -23,6 +24,7 @@ void callFonction(t_fonctionParam* funct) {
 }
 
 void freeFonction(t_fonctionParam** fonctParam) {
+    // utilisation d'un t_fonctionParam** pour sécuriser les free
     free((*fonctParam)->param);
     (*fonctParam)->param = NULL;
     free((*fonctParam));

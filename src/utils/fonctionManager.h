@@ -1,3 +1,7 @@
+/**
+ * @file fonctionManager.h
+ * @brief Gestion de fonction à paramètres variables
+ */
 #ifndef HEADER_H
 #define HEADER_H
 
