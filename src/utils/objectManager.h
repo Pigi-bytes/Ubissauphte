@@ -47,8 +47,8 @@ typedef struct {
  * Maintient une collection de tous les types enregistrés avec leurs métadonnées. Limité à MAX_UINT8_T types.
  */
 typedef struct {
-    t_typeMetadata types[256];  ///< Tableau des Metadonneée par ID de type
-    uint8_t nextTypeId;         ///< Prochain ID disponible pour l'enregistrement
+    t_typeMetadata types[MAX_UINT8_T];  ///< Tableau des Metadonneée par ID de type
+    uint8_t nextTypeId;                 ///< Prochain ID disponible pour l'enregistrement
 } t_typeRegistry;
 
 /**

@@ -2,8 +2,8 @@
  * @file fonctionManager.h
  * @brief Gestion de fonction à paramètres variables
  */
-#ifndef HEADER_H
-#define HEADER_H
+#ifndef FONCTION_MANAGER_H
+#define FONCTION_MANAGER_H
 
 #include <stdarg.h>
 #include <stdlib.h>
@@ -12,19 +12,12 @@
 #include "../debug.h"
 
 /**
- * @def MAX_LENGTH
- * @brief Taille maximal pour le nom d'une fonction
- */
-#define MAX_LENGTH 100
-
-/**
  * @def CREER_FONCTION
  * @brief Macro utilitaire pour crée une fonction sans precisé la sentinelle NULL
- * @param name Nom de la fonction
  * @param f Pointeur sur fonction de type t_fonctionParam qui renvoie void
  * @param ... Argument de f
  */
-#define CREER_FONCTION(name, f, ...) creerFonction(name, f, __VA_ARGS__, NULL)
+#define CREER_FONCTION(f, ...) creerFonction(f, __VA_ARGS__, NULL)
 
 /**
  * @def GET_VALUE
@@ -50,20 +43,18 @@
  */
 typedef struct fonction {
     void (*fonction)(struct fonction*);  ///< Pointeur sur la fonction de callback qui prend un t_fonctionParam et renvoie un void
-    char nom[MAX_LENGTH];                ///< Nom de la fonction permettant de l'identifier
     void** param;                        ///< Tableau de pointeurs vers les parametres
     int nb_param;                        ///< Nombre de parametres
 } t_fonctionParam;
 
 /**
  * @brief Crée un t_fonctionParam
- * @param name Nom de la fonction
  * @param f Pointeur sur fonction de type t_fonctionParam qui renvoie void
  * @param ... Argument de f
  * @return Pointeur vers la fonctionParam
  * @warning ... (Doit se terminer par une sentinelle NULL)
  */
-t_fonctionParam* creerFonction(char* name, void (*f)(t_fonctionParam*), ...);
+t_fonctionParam* creerFonction(void (*f)(t_fonctionParam*), ...);
 
 /**
  * @brief Execute la fonctionParam
