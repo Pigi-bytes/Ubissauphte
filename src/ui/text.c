@@ -156,7 +156,7 @@ void updateText(t_text* text, SDL_Renderer* renderer, char* newText, SDL_Color c
     SDL_FreeSurface(surface);
 }
 
-void drawText(SDL_Renderer* renderer, t_text* text) {
+void renderText(SDL_Renderer* renderer, t_text* text) {
     SDL_RenderCopy(renderer, text->texture, NULL, &text->rect);
     DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, text->rect, 3);
 }

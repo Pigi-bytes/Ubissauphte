@@ -31,11 +31,11 @@ void updateInput(t_input* input);
 
 /**
  * @brief Initialise la structure d'entrées avec des valeurs par défaut
- * @param input Pointeur vers la structure à initialiser
  * @param windowWidth Largeur initiale de la fenêtre
  * @param windowHeight Hauteur initiale de la fenêtre
+ * @return input Pointeur vers la structure initialiser
  */
-void initInput(t_input* input, int windowWidth, int windowHeight);
+t_input* initInput(int windowWidth, int windowHeight);
 
 /**
  * @brief Détecte un appui unique sur une touche malgrés les frames

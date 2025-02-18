@@ -22,7 +22,7 @@ t_text createTextOutline(SDL_Renderer* renderer, char* text, TTF_Font* font, SDL
 t_text createText(SDL_Renderer* renderer, char* text, TTF_Font* font, SDL_Color color);
 void updateText(t_text* text, SDL_Renderer* renderer, char* newText, SDL_Color color);
 
-void drawText(SDL_Renderer* renderer, t_text* text);
+void renderText(SDL_Renderer* renderer, t_text* text);
 void freeText(void* objet);
 
 #endif

@@ -25,7 +25,7 @@ t_button* createButton(t_text text, SDL_Color color, SDL_Color colorOnClick, SDL
 void renderButton(SDL_Renderer* renderer, t_button* button) {
     SDL_SetRenderDrawColor(renderer, button->color.r, button->color.g, button->color.b, button->color.a);
     SDL_RenderFillRect(renderer, &button->rect);
-    drawText(renderer, &button->label);
+    renderText(renderer, &button->label);
 
     DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, button->rect, 3);
 

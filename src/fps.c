@@ -80,7 +80,7 @@ void updateFPS(t_frameData* frame, SDL_Renderer* renderer) {
 
 void renderFPS(t_frameData* frame, SDL_Renderer* renderer) {
     if (frame->showFPS) {
-        drawText(renderer, &frame->fpsText);
+        renderText(renderer, &frame->fpsText);
     }
 }
 
