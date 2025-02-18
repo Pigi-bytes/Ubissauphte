@@ -53,9 +53,9 @@ typedef struct {
 
 /**
  * @brief Initialise un registre de types
- * @param registre Pointeur vers le registre à initialiser
+ * @return registre Pointeur vers le registre à crée
  */
-void initTypeRegistry(t_typeRegistry* registre);
+t_typeRegistry* createTypeRegistry();
 
 /**
  * @brief Enregistre un nouveau type dans le registre

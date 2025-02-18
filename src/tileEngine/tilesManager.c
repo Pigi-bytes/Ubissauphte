@@ -13,9 +13,9 @@ t_tileset* initTileset(SDL_Renderer* renderer, int width, int height, int tileSi
     tileset->height = height;
     tileset->tileSize = tileSize;
 
-    t_typeRegistry registre;
-    initTypeRegistry(&registre);
-    const uint8_t TEXTURE_TYPE = registerType(&registre, SDL_DestroyTextureWrapper, "texture");
+    t_typeRegistry* registre = createTypeRegistry();
+    const uint8_t TEXTURE_TYPE = registerType(registre, SDL_DestroyTextureWrapper, "texture");
+    tileset->textureTiles = initObjectManager(registre);
 
     if (!tileset->textureTiles) {
         fprintf(stderr, "Erreur d'initialisation du gestionnaire d'objets\n");

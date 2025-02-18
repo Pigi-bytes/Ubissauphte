@@ -1,9 +1,11 @@
 #include "objectManager.h"
 
-void initTypeRegistry(t_typeRegistry* registre) {
+t_typeRegistry* createTypeRegistry() {
+    t_typeRegistry* registre = (t_typeRegistry*)malloc(sizeof(t_typeRegistry));
     // Initialisation memoire via memset pour garantir l'absence de valeurs dans la memoire
     memset(registre, 0, sizeof(t_typeRegistry));
     registre->nextTypeId = 0;
+    return registre;
 }
 
 uint8_t registerType(t_typeRegistry* registre, freeFunc freeFunc, char* name) {
@@ -80,13 +82,18 @@ void freeObjectManager(t_objectManager* manager) {
             t_typedObject entry = pool->items[i];
             // Récupère les metadonnées du type
             t_typeMetadata* metaData = &manager->registry->types[entry.typeId];
-            metaData->freeFunc(entry.data);
+            if (entry.data != NULL) {
+                metaData->freeFunc(entry.data);
+            }
         }
 
         // Passage au bloc suivant et libération du bloc actuel
         t_objectMemoryPool* next = pool->next;
         free(pool);
         pool = next;
+    }
+    if (manager->registry != NULL) {
+        free(manager->registry);
     }
     free(manager);
 }
