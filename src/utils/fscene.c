@@ -1,74 +1,109 @@
-#include "./fscene.h"
+#include "fscene.h"
 
-void (*tableFonctfree[3])(void *) = {freeButton, SDL_DestroyTextureWrapper, freeText};
+#include <stdlib.h>
 
-t_scene *initScene(int taille) {
-    t_scene *scene = (t_scene *)malloc(sizeof(t_scene));
-    scene->contenue = (t_fonctionManager **)malloc(sizeof(t_fonctionManager *) * taille);
-    if (!scene->contenue) {
-        fprintf(stderr, "Erreur d'allocation mémoire pour scene->scene\n");
-        free(scene);
-        exit(EXIT_FAILURE);
+t_scene* createScene(t_objectManager* manager, char* name) {
+    t_scene* scene = (t_scene*)malloc(sizeof(t_scene));
+    scene->objectManager = manager;
+    scene->updateParams = NULL;
+    scene->renderParams = NULL;
+    scene->objectCount = 0;
+    scene->loaded = false;
+
+    scene->name = name;
+
+    for (int i = 0; i < 256; i++) {
+        scene->updateFunctions[i] = NULL;
+        scene->renderFunctions[i] = NULL;
     }
-    scene->index = (int *)malloc(sizeof(int));
-    if (!scene->index) {
-        fprintf(stderr, "Erreur d'allocation mémoire pour scene->index\n");
-        free(scene);
-        exit(EXIT_FAILURE);
-    }
-    scene->nbindex = 0;
-    for (int i = 0; i < taille; i++) {
-        scene->contenue[i] = (t_fonctionManager *)malloc(sizeof(t_fonctionManager));
-        scene->contenue[i]->manage = NULL;
-        scene->contenue[i]->fonction = NULL;
-    }
-    scene->taille = taille;
     return scene;
 }
 
-void ajoutObjectManager(t_scene *scene, t_typedObject *object) {
-    if (!(scene->contenue[object->type]->manage)) {
-        scene->contenue[object->type]->manage = initObjectManager(object->type, tableFonctfree[object->type], INITIAL_CAPACITY);
-        scene->contenue[object->type]->fonction = initFonction();
-        if (scene->nbindex) {
-            scene->index = realloc(scene->index, (scene->nbindex + 1) * sizeof(int));
-        }
-        scene->index[scene->nbindex] = object->type;
-        scene->nbindex++;
-    }
-    addObject(scene->contenue[object->type]->manage, object);
+void sceneRegisterUpdateFunction(t_scene* scene, uint8_t typeId, void (*updateFunc)(t_fonctionParam*)) {
+    if (typeId < 256) scene->updateFunctions[typeId] = updateFunc;
 }
 
-void freeScene(t_scene **scene) {
-    if (!scene || !(*scene)) return;
-
-    for (int i = 0; i < (*scene)->taille; i++) {
-        if ((*scene)->contenue[i] && (*scene)->contenue[i]->manage) {
-            freeObjectManager(&(*scene)->contenue[i]->manage);
-            (*scene)->contenue[i]->manage = NULL;
-        }
-        if ((*scene)->contenue[i] && (*scene)->contenue[i]->fonction) {
-            freeFonction(&(*scene)->contenue[i]->fonction);
-            (*scene)->contenue[i]->fonction = NULL;
-        }
-        free((*scene)->contenue[i]);
-        (*scene)->contenue[i] = NULL;
-    }
-    free((*scene)->contenue);
-    (*scene)->contenue = NULL;
-    if ((*scene)->index) {
-        free((*scene)->index);
-        (*scene)->index = NULL;
-    }
-    (*scene)->nbindex = 0;
-    free(*scene);
-    (*scene) = NULL;
+void sceneRegisterRenderFunction(t_scene* scene, uint8_t typeId, void (*renderFunc)(t_fonctionParam*)) {
+    if (typeId < 256) scene->renderFunctions[typeId] = renderFunc;
 }
 
-void callRender(t_scene *scene) {
-    for (int i = 0; i < scene->taille; i++) {
-        if (scene->contenue[i] && scene->contenue[i]->fonction) {
-            call(scene->contenue[i], RENDERALL);
+void preloadScene(t_scene* scene, t_input* input, SDL_Renderer* renderer) {
+    if (scene->loaded) return;
+
+    t_objectManager* manager = scene->objectManager;
+    scene->objectCount = manager->count;
+    scene->updateParams = malloc(scene->objectCount * sizeof(t_fonctionParam*));
+    scene->renderParams = malloc(scene->objectCount * sizeof(t_fonctionParam*));
+
+    int index = 0;
+    t_objectMemoryPool* pool = manager->firstPool;
+    while (pool && index < scene->objectCount) {
+        int itemsInPool = (pool == manager->currentPool) ? manager->nbItemsInPool : POOL_SIZE;
+        for (int i = 0; i < itemsInPool && index < scene->objectCount; i++, index++) {
+            t_typedObject* obj = &pool->items[i];
+            uint8_t typeId = obj->typeId;
+
+            if (scene->updateFunctions[typeId]) {
+                scene->updateParams[index] = creerFonction(scene->updateFunctions[typeId], input, obj->data, NULL);
+            } else {
+                scene->updateParams[index] = NULL;
+            }
+
+            if (scene->renderFunctions[typeId]) {
+                scene->renderParams[index] = creerFonction(scene->renderFunctions[typeId], obj->data, renderer, NULL);
+            } else {
+                scene->renderParams[index] = NULL;
+            }
         }
+        pool = pool->next;
+    }
+    scene->loaded = true;
+}
+
+void sceneUpdate(t_scene* scene) {
+    if (!scene->loaded) return;
+
+    for (int i = 0; i < scene->objectCount; i++) {
+        if (scene->updateParams[i]) {
+            callFonction(scene->updateParams[i]);
+        }
+    }
+}
+
+void sceneRender(t_scene* scene) {
+    if (!scene->loaded) return;
+
+    for (int i = 0; i < scene->objectCount; i++) {
+        if (scene->renderParams[i]) {
+            callFonction(scene->renderParams[i]);
+        }
+    }
+}
+
+void freeScene(t_scene* scene) {
+    if (scene->loaded) {
+        for (int i = 0; i < scene->objectCount; i++) {
+            if (scene->updateParams[i]) freeFonction(&scene->updateParams[i]);
+            if (scene->renderParams[i]) freeFonction(&scene->renderParams[i]);
+        }
+        free(scene->updateParams);
+        free(scene->renderParams);
+    }
+    free(scene);
+}
+
+t_sceneManager* createSceneManager(t_scene* s1, t_scene* s2) {
+    t_sceneManager* sm = (t_sceneManager*)malloc(sizeof(t_sceneManager));
+    sm->scene1 = s1;
+    sm->scene2 = s2;
+    sm->currentScene = s1;  // Démarre avec la première scène
+    return sm;
+}
+
+void switchScene(t_sceneManager* manager) {
+    if (manager->currentScene == manager->scene1) {
+        manager->currentScene = manager->scene2;
+    } else {
+        manager->currentScene = manager->scene1;
     }
 }
