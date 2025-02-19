@@ -15,6 +15,16 @@ uint8_t registerType(t_typeRegistry* registre, freeFunc freeFunc, char* name) {
     return id;
 }
 
+uint8_t getTypeIdByName(t_typeRegistry* registry, char* name) {
+    for (uint8_t i = 0; i < registry->nextTypeId; i++) {
+        if (strcmp(registry->types[i].name, name) == 0) {
+            return i;
+        }
+    }
+
+    return -1;  // Retourne une valeur invalide si non trouvé
+}
+
 t_objectManager* initObjectManager(t_typeRegistry* registre) {
     // Allocation du gestionnaire principal
     t_objectManager* manager = (t_objectManager*)malloc(sizeof(t_objectManager));

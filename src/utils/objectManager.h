@@ -37,7 +37,7 @@ typedef void (*freeFunc)(void*);
  */
 typedef struct {
     freeFunc freeFunc;  ///< Fonction de libération spécifique au type
-    char* name;         ///< Nom du type (aucune utilité juste pour debug)
+    char* name;         ///< Nom du type
 } t_typeMetadata;
 
 /**
@@ -65,6 +65,14 @@ t_typeRegistry* createTypeRegistry();
  * @return uint8_t ID assigné au type
  */
 uint8_t registerType(t_typeRegistry* registre, freeFunc freeFunc, char* name);
+
+/**
+ * @brief Recure un id avec son nom depuis un registre
+ * @param registre Registre cible
+ * @param name Nom descriptif du type
+ * @return uint8_t ID assigné au type
+ */
+uint8_t getTypeIdByName(t_typeRegistry* registry, char* name);
 
 /**
  * @struct t_typedObject
