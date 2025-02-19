@@ -28,6 +28,7 @@ typedef struct {
  * @brief Structure contenant des t_pairData sous la forme d'un block
  */
 typedef struct {
+    t_typeRegistry *registre;      ///< Contiens des type
     t_objectManager *pairManager;  ///< Tableau de t_pairData géré par un t_objetManager
 } t_block;
 
@@ -36,6 +37,7 @@ typedef struct {
  * @brief Structure contenant des t_block dans un tableau
  */
 typedef struct {
+    t_typeRegistry *registre;       ///< Contiens des type
     t_objectManager *blockManager;  ///<  Tableau de t_block géré par un t_objetManager
 } t_fichier;
 
@@ -77,15 +79,17 @@ void saveFichier(t_fichier *fichier, char *filename);
  * @brief Ajoute un block dans un t_fichier
  * @param fichier Fichier dans lequel on ajoute le block
  * @param Block Block ajouté
+ * @param idBlock indice du type
  */
-void addBlock(t_fichier *fichier, t_block *Block);
+void addBlock(t_fichier *fichier, t_block *Block, uint8_t idBLock);
 
 /**
  * @brief Ajoute une Pair de data dans un block d'un t_fichier
  * @param block Block dans lequel on ajoute la data
  * @param pair data ajouté
+ * @param idPair indice du type
  */
-void addPairData(t_block *block, t_pairData *pair);
+void addPairData(t_block *block, t_pairData *pair, uint8_t idPair);
 
 /**
  * @brief Libère la mémoire allouée pour un block

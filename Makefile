@@ -3,7 +3,7 @@ TARGET   = Ubissauphte
 
 CC       = gcc
 # compiling flags here
-CFLAGS   = -Wall -lSDL2 -lSDL2_ttf
+CFLAGS   = -Wall -g
 
 LINKER   = gcc
 # linking flags here

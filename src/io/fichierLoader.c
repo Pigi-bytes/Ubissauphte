@@ -15,17 +15,18 @@ void saveFichier(t_fichier *fichier, char *filename) {
             data = (t_pairData *)getObject(Block->pairManager, j);
             fprintf(file, "%s: %s\n", data->key, data->value);
         }
-        fprintf(file, "\n");
+        if (i != fichier->blockManager->count - 1)
+            fprintf(file, "\n");
     }
     fclose(file);
 }
 
-void addBlock(t_fichier *fichier, t_block *Block) {
-    ADD_TYPED_OBJECT(fichier->blockManager, BLOCK_TYPE, Block);
+void addBlock(t_fichier *fichier, t_block *Block, uint8_t idBlock) {
+    addObject(fichier->blockManager, Block, idBlock);
 }
 
-void addPairData(t_block *block, t_pairData *pair) {
-    ADD_TYPED_OBJECT(block->pairManager, TYPE_PAIR, pair);
+void addPairData(t_block *block, t_pairData *pair, uint8_t idPair) {
+    addObject(block->pairManager, pair, idPair);
 }
 
 t_fichier *chargerFichier(char *filename) {
@@ -36,9 +37,12 @@ t_fichier *chargerFichier(char *filename) {
     }
     t_fichier *fichier = malloc(sizeof(t_fichier));
     // Initialisation d'une zone de stockage pour le premier block
-    fichier->blockManager = initObjectManager(BLOCK_TYPE, blockFreeFunc);
+    fichier->registre = createTypeRegistry();
+    uint8_t idBlockType = registerType(fichier->registre, blockFreeFunc, "BLOCK_TYPE");
+    fichier->blockManager = initObjectManager(fichier->registre);
 
     t_block *currentBlock = NULL;
+    int8_t idPairType;
     char line[MAX_LINE_LENGTH];
 
     // Lecture du fichier
@@ -47,13 +51,15 @@ t_fichier *chargerFichier(char *filename) {
         // Fin du block en cas de ligne vide puis stockage dans la zone prévu pour
         if (strlen(line) == 0) {
             if (currentBlock) {
-                ADD_TYPED_OBJECT(fichier->blockManager, BLOCK_TYPE, currentBlock);
+                addObject(fichier->blockManager, currentBlock, idBlockType);
                 currentBlock = NULL;
             }
         } else {  // Allocation de mémoire pour chaque case du tableau t_block
             if (!currentBlock) {
                 currentBlock = malloc(sizeof(t_block));
-                currentBlock->pairManager = initObjectManager(TYPE_PAIR, pairFreeFunc);
+                currentBlock->registre = createTypeRegistry();
+                idPairType = registerType(currentBlock->registre, pairFreeFunc, "TYPE_PAIR");
+                currentBlock->pairManager = initObjectManager(currentBlock->registre);
             }
 
             // Séparation de la cle et de la valeur grace au ':'
@@ -69,12 +75,12 @@ t_fichier *chargerFichier(char *filename) {
                 // S'il y a un espace présent entre le ':' et la valeur on le supprime
                 pair->value = strdup(value + (value[0] == ' ' ? 1 : 0));
 
-                ADD_TYPED_OBJECT(currentBlock->pairManager, TYPE_PAIR, pair);
+                addObject(currentBlock->pairManager, pair, idPairType);
             }
         }
     }
     if (currentBlock) {
-        ADD_TYPED_OBJECT(fichier->blockManager, BLOCK_TYPE, currentBlock);
+        addObject(fichier->blockManager, currentBlock, idBlockType);
     }
 
     fclose(file);
