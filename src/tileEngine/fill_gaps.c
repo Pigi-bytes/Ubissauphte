@@ -14,78 +14,53 @@ void float_to_int(float mat[HEIGHT][WIDTH], int entier[HEIGHT][WIDTH]) {
 void afficheMat(int mat[HEIGHT][WIDTH]) {
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
-            printf("%d ", mat[i][j]);
+            printf("%2d ", mat[i][j]);
         }
         printf("\n");
     }
     printf("\n");
 }
+
+int sans_0(int mat[HEIGHT][WIDTH]) {
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            if (mat[i][j] == 0) return FALSE;
+        }
+    }
+    return TRUE;
+}
+
 int inMat(int x, int y) {
     return x >= 0 && x < HEIGHT && y >= 0 && y < WIDTH;
 }
 
-int min(int mat[HEIGHT][WIDTH]) {
-    int min = 100;
+int nbElemBlock(int mat[HEIGHT][WIDTH], int num_Block) {
+    int count = 0;
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
-            if (mat[i][j] < min && mat[i][j] != -1) min = mat[i][j];
+            if (mat[i][j] == num_Block) count++;
         }
     }
-    return min;
+    return count;
 }
 
-int max(int mat[HEIGHT][WIDTH]) {
-    int max = 1;
+void comblet(int mat[HEIGHT][WIDTH], int copie[HEIGHT][WIDTH], int num_Block) {
+    int nbElemMax = 0;
+    int num_BlockMax = 1;
+    for (int block = 1; block < num_Block; block++) {
+        int nbElem = nbElemBlock(copie, block);
+        if (nbElem > nbElemMax) {
+            nbElemMax = nbElem;
+            num_BlockMax = block;
+        }
+    }
+
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
-            if (mat[i][j] > max) max = mat[i][j];
-        }
-    }
-    return max;
-}
-
-int count(int mat[HEIGHT][WIDTH], int nb) {
-    int cmpt = 0;
-    for (int i = 0; i < HEIGHT; i++) {
-        for (int j = 0; j < WIDTH; j++) {
-            if (mat[i][j] == nb) cmpt++;
-        }
-    }
-    return cmpt;
-}
-
-void applatir(int mat[HEIGHT][WIDTH]) {
-    if (max(mat) != min(mat)) {
-        int mini = min(mat);
-        int maxi = max(mat);
-        int Countmini = count(mat, min(mat));
-        int Countmax = count(mat, max(mat));
-        for (int i = 0; i < HEIGHT; i++) {
-            for (int j = 0; j < WIDTH; j++) {
-                if (Countmini > Countmax) {
-                    if (mat[i][j] == maxi) mat[i][j] = -1;
-                } else {
-                    if (mat[i][j] == mini)
-                        mat[i][j] = -1;
-                }
-            }
-        }
-    }
-}
-
-void propagadtion(int mat[HEIGHT][WIDTH]) {
-    int maxi = max(mat);
-    for (int i = 0; i < HEIGHT; i++) {
-        for (int j = 0; j < WIDTH; j++) {
-            if (mat[i][j] > 0) mat[i][j] = maxi;
-        }
-    }
-}
-
-void miseA0(int mat[HEIGHT][WIDTH]) {
-    for (int i = 0; i < HEIGHT; i++) {
-        for (int j = 0; j < WIDTH; j++) {
-            if (mat[i][j] != -1) mat[i][j] = 0;
+            if (copie[i][j] != num_BlockMax)
+                mat[i][j] = 1;
+            else
+                mat[i][j] = 0;
         }
     }
 }
@@ -93,17 +68,14 @@ void miseA0(int mat[HEIGHT][WIDTH]) {
 void fillGaps(int mat[HEIGHT][WIDTH]) {
     initPile();
     int copie[HEIGHT][WIDTH];
-
-    // Initialisation de copie avec -1 pour les murs et 0 pour le reste
+    int numBlock = 1;
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             copie[i][j] = (mat[i][j] == 1) ? -1 : 0;
         }
     }
-    // Trouver un point de départ (premier 0 trouvé)
 
-    while (min(copie) != max(copie)) {
-        miseA0(copie);
+    while (!sans_0(copie)) {
         int x = -1, y = -1;
         for (int i = 0; i < HEIGHT && x == -1; i++) {
             for (int j = 0; j < WIDTH && y == -1; j++) {
@@ -114,29 +86,21 @@ void fillGaps(int mat[HEIGHT][WIDTH]) {
             }
         }
 
-        // Si aucun 0 n'est trouvé, on arrête
-        if (x == -1) return;
-
-        // Démarrage du flood fill
         SDL_Point *start = malloc(sizeof(SDL_Point));
         start->x = x;
         start->y = y;
         empiler(start);
-
-        int nb = 1;
-        int not_enfermer = 0;
 
         while (!PileVide()) {
             SDL_Point *elt = depiler();
             if (!elt) continue;
 
             int px = elt->x, py = elt->y;
-            free(elt);  // Libérer la mémoire de l'élément dépilé
+            free(elt);
 
-            if (copie[px][py] != 0) continue;  // Déjà visité ou obstacle
-            copie[px][py] = nb++;
+            if (copie[px][py] != 0) continue;
+            copie[px][py] = numBlock;
 
-            // Ajouter les voisins valides à la pile
             int dx[] = {1, -1, 0, 0};
             int dy[] = {0, 0, 1, -1};
             for (int i = 0; i < 4; i++) {
@@ -146,26 +110,10 @@ void fillGaps(int mat[HEIGHT][WIDTH]) {
                     np->x = nx;
                     np->y = ny;
                     empiler(np);
-                    not_enfermer = 1;
                 }
             }
-            if (!(not_enfermer)) copie[px][py] = -1;
         }
-        if (not_enfermer) {
-            propagadtion(copie);
-            applatir(copie);
-        }
+        numBlock++;
     }
-
-    // Copier les valeurs dans mat (remplace les 0 inaccessibles par 1)
-    for (int i = 0; i < HEIGHT; i++) {
-        for (int j = 0; j < WIDTH; j++) {
-            if (copie[i][j] == 0)
-                mat[i][j] = 1;  // Zone inaccessible
-            else if (copie[i][j] == -1)
-                mat[i][j] = 1;
-            else
-                mat[i][j] = copie[i][j];  // Conserve le remplissage
-        }
-    }
+    comblet(mat, copie, numBlock);
 }

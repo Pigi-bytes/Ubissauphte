@@ -227,7 +227,7 @@ int main() {
     int entier[HEIGHT][WIDTH];
     float_to_int(values, entier);
     afficheMat(entier);
-    // fillGaps(entier);
+    fillGaps(entier);
 
     load(entier);
     SDL_Quit();
