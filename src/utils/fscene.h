@@ -10,32 +10,24 @@
 #include "fonctionManager.h"
 #include "objectManager.h"
 
+typedef enum {
+    ON_LOAD = 0,
+    RENDER = 1,
+    UPDATE = 2,
+    ON_EXIT = 3,
+    NUM_FONCTION = 4
+} FONCTION_TYPE;
+
 typedef struct t_scene {
     t_objectManager* objectManager;
-    void (*updateFunctions[256])(t_fonctionParam*);
-    void (*renderFunctions[256])(t_fonctionParam*);
-    t_fonctionParam** updateParams;
-    t_fonctionParam** renderParams;
-    int objectCount;
+    t_fonctionParam*** fonctions;  // Pointeur sur fonction dans un tableau [NUM_FONCTION][on sais pas]
+    int** nbFonctions;             // Nb de fonction le tableau [NUM_FONCTION][on sais pas]
     bool loaded;
     char* name;  // Debug
 } t_scene;
 
-typedef struct {
-    t_scene* scene1;
-    t_scene* scene2;
-    t_scene* currentScene;
-} t_sceneManager;
+void sceneRegisterFunction(t_scene* scene, uint8_t typeObject, int typeFunction, void (*fonct)(t_fonctionParam*), int indexObj, ...);
 
-t_scene* createScene(t_objectManager* manager, char* name);
-t_sceneManager* createSceneManager(t_scene* s1, t_scene* s2);
-void switchScene(t_sceneManager* manager);
-
-void sceneRegisterUpdateFunction(t_scene* scene, uint8_t typeId, void (*updateFunc)(t_fonctionParam*));
-void sceneRegisterRenderFunction(t_scene* scene, uint8_t typeId, void (*renderFunc)(t_fonctionParam*));
-void preloadScene(t_scene* scene, t_input* input, SDL_Renderer* renderer);
-void sceneUpdate(t_scene* scene);
-void sceneRender(t_scene* scene);
-void freeScene(t_scene* scene);
+t_scene* createScene(char* name, t_objectManager* objectManager);
 
 #endif

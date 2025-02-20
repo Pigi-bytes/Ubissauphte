@@ -2,108 +2,81 @@
 
 #include <stdlib.h>
 
-t_scene* createScene(t_objectManager* manager, char* name) {
-    t_scene* scene = (t_scene*)malloc(sizeof(t_scene));
-    scene->objectManager = manager;
-    scene->updateParams = NULL;
-    scene->renderParams = NULL;
-    scene->objectCount = 0;
-    scene->loaded = false;
-
-    scene->name = name;
-
-    for (int i = 0; i < 256; i++) {
-        scene->updateFunctions[i] = NULL;
-        scene->renderFunctions[i] = NULL;
+uint8_t getObjectTypeId(t_objectManager* manager, int index) {
+    if (index >= manager->count) {
+        return -1;  // Index hors limites
     }
-    return scene;
-}
 
-void sceneRegisterUpdateFunction(t_scene* scene, uint8_t typeId, void (*updateFunc)(t_fonctionParam*)) {
-    if (typeId < 256) scene->updateFunctions[typeId] = updateFunc;
-}
+    int poolIndex = index / POOL_SIZE;
+    int localIndex = index % POOL_SIZE;
 
-void sceneRegisterRenderFunction(t_scene* scene, uint8_t typeId, void (*renderFunc)(t_fonctionParam*)) {
-    if (typeId < 256) scene->renderFunctions[typeId] = renderFunc;
-}
-
-void preloadScene(t_scene* scene, t_input* input, SDL_Renderer* renderer) {
-    if (scene->loaded) return;
-
-    t_objectManager* manager = scene->objectManager;
-    scene->objectCount = manager->count;
-    scene->updateParams = malloc(scene->objectCount * sizeof(t_fonctionParam*));
-    scene->renderParams = malloc(scene->objectCount * sizeof(t_fonctionParam*));
-
-    int index = 0;
     t_objectMemoryPool* pool = manager->firstPool;
-    while (pool && index < scene->objectCount) {
-        int itemsInPool = (pool == manager->currentPool) ? manager->nbItemsInPool : POOL_SIZE;
-        for (int i = 0; i < itemsInPool && index < scene->objectCount; i++, index++) {
-            t_typedObject* obj = &pool->items[i];
-            uint8_t typeId = obj->typeId;
-
-            if (scene->updateFunctions[typeId]) {
-                scene->updateParams[index] = creerFonction(scene->updateFunctions[typeId], input, obj->data, NULL);
-            } else {
-                scene->updateParams[index] = NULL;
-            }
-
-            if (scene->renderFunctions[typeId]) {
-                scene->renderParams[index] = creerFonction(scene->renderFunctions[typeId], obj->data, renderer, NULL);
-            } else {
-                scene->renderParams[index] = NULL;
-            }
-        }
+    for (int i = 0; i < poolIndex; i++) {
         pool = pool->next;
     }
-    scene->loaded = true;
+
+    return pool->items[localIndex].typeId;
 }
 
-void sceneUpdate(t_scene* scene) {
-    if (!scene->loaded) return;
+void sceneRegisterFunction(t_scene* scene, uint8_t typeObject, int typeFunction, void (*fonct)(t_fonctionParam*), int indexObj, ...) {
+    va_list args, args_copy;
+    va_start(args, indexObj);
+    va_copy(args_copy, args);  // Pour relire les arguments plus tard
 
-    for (int i = 0; i < scene->objectCount; i++) {
-        if (scene->updateParams[i]) {
-            callFonction(scene->updateParams[i]);
+    int paramCount = 0;
+    void* arg;
+    while ((arg = va_arg(args, void*)) != NULL) {
+        paramCount++;
+    }
+    va_end(args);
+
+    for (int i = 0; i < scene->objectManager->count; i++) {
+        int id = getObjectTypeId(scene->objectManager, i);
+        if (id == typeObject) {
+            void** newParams = malloc(sizeof(void*) * (paramCount + 2));
+
+            for (int j = 0; j < paramCount; j++) {
+                newParams[j] = va_arg(args_copy, void*);
+            }
+            va_end(args_copy);
+
+            for (int j = paramCount; j > indexObj; j--) {
+                newParams[j] = newParams[j - 1];
+            }
+            newParams[indexObj] = getObject(scene->objectManager, i);
+            newParams[paramCount + 1] = NULL;                        
+
+            t_fonctionParam* funct = malloc(sizeof(t_fonctionParam));
+            funct->param = newParams;
+            funct->fonction = fonct;
+            funct->nb_param = paramCount + 1;
+
+            int currentCount = *(scene->nbFonctions[typeFunction]);
+            scene->fonctions[typeFunction] = realloc(scene->fonctions[typeFunction], (currentCount + 1) * sizeof(t_fonctionParam*));
+            scene->fonctions[typeFunction][currentCount] = funct;
+            *(scene->nbFonctions[typeFunction]) += 1;
+
+            printf("ajout objet de type %d dans la fonction %d \n", typeObject, typeFunction);
         }
     }
 }
 
-void sceneRender(t_scene* scene) {
-    if (!scene->loaded) return;
-
-    for (int i = 0; i < scene->objectCount; i++) {
-        if (scene->renderParams[i]) {
-            callFonction(scene->renderParams[i]);
-        }
+t_scene* createScene(char* name, t_objectManager* objectManager) {
+    t_scene* scene = malloc(sizeof(t_scene));
+    scene->objectManager = objectManager;
+    scene->fonctions = malloc(NUM_FONCTION * sizeof(t_fonctionParam**));
+    for (int i = 0; i < NUM_FONCTION; i++) {
+        scene->fonctions[i] = NULL;
     }
-}
 
-void freeScene(t_scene* scene) {
-    if (scene->loaded) {
-        for (int i = 0; i < scene->objectCount; i++) {
-            if (scene->updateParams[i]) freeFonction(&scene->updateParams[i]);
-            if (scene->renderParams[i]) freeFonction(&scene->renderParams[i]);
-        }
-        free(scene->updateParams);
-        free(scene->renderParams);
+    scene->nbFonctions = malloc(NUM_FONCTION * sizeof(int*));
+    for (int i = 0; i < NUM_FONCTION; i++) {
+        scene->nbFonctions[i] = malloc(sizeof(int));
+        *(scene->nbFonctions[i]) = 0;
     }
-    free(scene);
-}
 
-t_sceneManager* createSceneManager(t_scene* s1, t_scene* s2) {
-    t_sceneManager* sm = (t_sceneManager*)malloc(sizeof(t_sceneManager));
-    sm->scene1 = s1;
-    sm->scene2 = s2;
-    sm->currentScene = s1;  // Démarre avec la première scène
-    return sm;
-}
+    scene->loaded = false;
+    scene->name = name;
 
-void switchScene(t_sceneManager* manager) {
-    if (manager->currentScene == manager->scene1) {
-        manager->currentScene = manager->scene2;
-    } else {
-        manager->currentScene = manager->scene1;
-    }
+    return scene;
 }

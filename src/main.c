@@ -1,83 +1,97 @@
-#include <time.h>
-
 #include "fps.h"
 #include "io/imageLoader.h"
 #include "io/input.h"
 #include "tileEngine/camera.h"
 #include "tileEngine/movement.h"
 #include "tileEngine/tilesManager.h"
+#include "ui/button.h"
 #include "ui/minimap.h"
 #include "ui/text.h"
+#include "utils/fonctionManager.h"
+#include "utils/fscene.h"
 #include "utils/objectManager.h"
 
-#define window_width 1280
-#define window_height 960
+#define WINDOW_WIDTH 1280
+#define WINDOW_HEIGHT 960
+
+const SDL_Color WHITE = {255, 255, 255}, BLACK = {0, 0, 0}, MAGENTA = {255, 0, 255}, BLUE = {0, 0, 255};
+
+SDL_Rect creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio) {
+    return (SDL_Rect){WINDOW_WIDTH * x_ratio, WINDOW_HEIGHT * y_ratio, WINDOW_WIDTH * w_ratio, WINDOW_HEIGHT * h_ratio};
+}
+
+// void bouttonClick(t_fonctionParam* fonction) {
+//     t_sceneManager* sm = GET_PTR(fonction, 0, t_sceneManager*);
+//     switchScene(sm);
+// }
+
+void bouttonClickQuit(t_fonctionParam* fonction) {
+    t_input* input = GET_PTR(fonction, 0, t_input*);
+    input->quit = SDL_TRUE;
+}
+
+void renderTextWrapper(t_fonctionParam* f) {
+    renderText(GET_PTR(f, 1, SDL_Renderer*), GET_PTR(f, 0, t_text*));
+}
+
+void renderButtonWrapper(t_fonctionParam* f) {
+    t_button* btn = GET_PTR(f, 0, t_button*);
+    printf("Rendering button: %s\n", btn->label.text);  // Vérifie le texte du bouton
+    renderButton(GET_PTR(f, 1, SDL_Renderer*), btn);
+}
+
+void handleButtonClickWrapper(t_fonctionParam* f) {
+    handleButtonClick(GET_PTR(f, 0, t_input*), GET_PTR(f, 1, t_button*));
+}
 
 int main(int argc, char* argv[]) {
     SDL_Init(SDL_INIT_VIDEO);
-    srand(time(NULL));
     initTextEngine();
-
-    SDL_Window* window = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("animation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
+    t_input* input = initInput(WINDOW_WIDTH, WINDOW_HEIGHT);
+    TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 16);
 
-    t_tileset* tileset = initTileset(renderer, 192, 176, 16, "assets/imgs/tileMapDungeon.bmp");
-    t_grid* level = loadMap("assets/map/map01.txt", tileset);
-    int levelWidth = level->width * tileset->tileSize;
-    int levelHeight = level->height * tileset->tileSize;
+    t_typeRegistry* registre = createTypeRegistry();
+    const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
+    const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
 
-    t_joueur* player1 = createplayer(&(t_control){SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT}, (SDL_Texture*)getObject(tileset->textureTiles, 97), (SDL_Rect){0, 0, 16, 16});
-    t_camera* camera = createCamera(levelWidth, levelHeight, levelWidth / 2, levelHeight / 2);
-    t_viewPort* viewport = createViewport(renderer, camera, window_width, window_height);
-    t_minimap* minimap = createMinimap(renderer, window_width, window_height);
-    t_frameData* frameData = initFrameData(renderer, font, 0);
+    t_objectManager* manager1 = initObjectManager(registre);
+    t_scene* scene1 = createScene("scene1", manager1);
 
-    t_input input;
-    initInput(&input, window_width, window_height);
-    while (!input.quit) {
-        startFrame(frameData);
+    // Scene du debut
+    t_text text = createText(renderer, "Ubissauphte1", font, WHITE);
+    text.rect = creerRect((1 - 0.8f) / 2, 0.1f, 0.8f, 0.2f);
+    addObject(manager1, &text, TEXTE_TYPE);
 
-        updateInput(&input);
-        handleInputPlayer(player1, level, &input);
+    sceneRegisterFunction(scene1, TEXTE_TYPE, RENDER, renderTextWrapper, 0, renderer, NULL);
 
-        if (input.resized) {
-            resizeViewport(viewport, input.windowWidth, input.windowHeight);
-            resizeMinimap(renderer, minimap, input.windowWidth, input.windowHeight);
-        }
+    float btnW = 0.3f, btnH = 0.1f, btnX = (1 - btnW) / 2, spacing = 0.05f;
+    float btnY1 = 0.1f + 0.2f + spacing;
+    float btnY2 = btnY1 + btnH + spacing;
+    float btnY3 = btnY2 + btnH + spacing;
 
-        if (input.mouseYWheel != 0) {
-            cameraHandleZoom(viewport, input.mouseYWheel);
-            input.mouseYWheel = 0;
-        }
+    t_button *btn, *btn2, *btn3;
+    btn = createButton(createTextOutline(renderer, "Jouer", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(btnX, btnY1, btnW, btnH), CREER_FONCTION(bouttonClickQuit, input));
+    addObject(manager1, btn, BUTTON_TYPE);
+    btn2 = createButton(createTextOutline(renderer, "Option", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(btnX, btnY2, btnW, btnH), CREER_FONCTION(bouttonClickQuit, input));
+    addObject(manager1, btn2, BUTTON_TYPE);
+    btn3 = createButton(createTextOutline(renderer, "Quitter", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(btnX, btnY3, btnW, btnH), CREER_FONCTION(bouttonClickQuit, input));
+    addObject(manager1, btn3, BUTTON_TYPE);
 
-        updateMinimap(renderer, minimap, camera, 196);
-        updateFPS(frameData, renderer);
+    sceneRegisterFunction(scene1, BUTTON_TYPE, RENDER, renderButtonWrapper, 0, renderer, NULL);
+    // sceneRegisterFunction(scene1, BUTTON_TYPE, UPDATE, handleButtonClickWrapper, 0, input, NULL);
 
-        centerCameraOn(camera, player1->entity.rect.x, player1->entity.rect.y);
+    while (!input->quit) {
+        updateInput(input);
+        SDL_RenderClear(renderer);
 
-        setRenderTarget(renderer, viewport);
-        renderGrid(renderer, level, camera);
-        SDL_RenderCopy(renderer, player1->entity.texture, NULL, &player1->entity.rect);
-        renderViewport(renderer, viewport);
+        callFonction(scene1->fonctions[RENDER][0]);
+        callFonction(scene1->fonctions[RENDER][1]);
+        callFonction(scene1->fonctions[RENDER][2]);
+        callFonction(scene1->fonctions[RENDER][3]);
 
-        renderMinimap(renderer, minimap);
-
-        renderFPS(frameData, renderer);
         SDL_RenderPresent(renderer);
-        capFrameRate(frameData);
     }
-
-    SDL_DestroyWindow(window);
-    SDL_DestroyRenderer(renderer);
-    freeTileset(tileset);
-    freeGrid(level);
-    freePlayer(player1);
-    freeCamera(camera);
-    freeViewport(viewport);
-    freeMinimap(minimap);
-    freeFrameData(frameData);
-
-    SDL_Quit();
     return EXIT_SUCCESS;
 }
