@@ -10,24 +10,26 @@
 #include "fonctionManager.h"
 #include "objectManager.h"
 
+#define ADD_OBJECT_TO_SCENE(scene, obj, type) addObject(scene->objectManager, obj, type)
+
 typedef enum {
-    ON_LOAD = 0,
-    RENDER = 1,
-    UPDATE = 2,
-    ON_EXIT = 3,
-    NUM_FONCTION = 4
-} FONCTION_TYPE;
+    ON_LOAD,
+    RENDER,
+    UPDATE,
+    ON_EXIT,
+    NUM_FONCTION
+} t_fonctionType;
 
 typedef struct t_scene {
+    char* name;
     t_objectManager* objectManager;
-    t_fonctionParam*** fonctions;  // Pointeur sur fonction dans un tableau [NUM_FONCTION][on sais pas]
-    int** nbFonctions;             // Nb de fonction le tableau [NUM_FONCTION][on sais pas]
-    bool loaded;
-    char* name;  // Debug
+    t_fonctionParam** fonctions[NUM_FONCTION];
+    int nbFonctions[NUM_FONCTION];
 } t_scene;
 
-void sceneRegisterFunction(t_scene* scene, uint8_t typeObject, int typeFunction, void (*fonct)(t_fonctionParam*), int indexObj, ...);
-
-t_scene* createScene(char* name, t_objectManager* objectManager);
+t_scene* createScene(t_objectManager* objectManager, char* name);
+void sceneRegisterFunction(t_scene* scene, uint8_t typeObject, t_fonctionType typeFunction, void (*fonct)(t_fonctionParam*), int indexObj, ...);
+void executeSceneFunctions(t_scene* scene, t_fonctionType ftype);
+void freeScene(t_scene* scene);
 
 #endif

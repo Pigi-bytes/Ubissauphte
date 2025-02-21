@@ -2,6 +2,18 @@
 
 #include <stdlib.h>
 
+t_scene* createScene(t_objectManager* manager, char* name) {
+    t_scene* scene = malloc(sizeof(t_scene));
+    scene->name = strdup(name);
+    scene->objectManager = manager;
+
+    for (int i = 0; i < NUM_FONCTION; i++) {
+        scene->fonctions[i] = NULL;
+        scene->nbFonctions[i] = 0;
+    }
+    return scene;
+}
+
 uint8_t getObjectTypeId(t_objectManager* manager, int index) {
     if (index >= manager->count) {
         return -1;  // Index hors limites
@@ -18,65 +30,69 @@ uint8_t getObjectTypeId(t_objectManager* manager, int index) {
     return pool->items[localIndex].typeId;
 }
 
-void sceneRegisterFunction(t_scene* scene, uint8_t typeObject, int typeFunction, void (*fonct)(t_fonctionParam*), int indexObj, ...) {
-    va_list args, args_copy;
+void sceneRegisterFunction(t_scene* scene, uint8_t typeObject, t_fonctionType typeFunction, void (*fonct)(t_fonctionParam*), int indexObj, ...) {
+    va_list args;
     va_start(args, indexObj);
-    va_copy(args_copy, args);  // Pour relire les arguments plus tard
 
-    int paramCount = 0;
-    void* arg;
-    while ((arg = va_arg(args, void*)) != NULL) {
-        paramCount++;
+    /* Étape 1 : Compter le nombre de paramètres */
+    va_list count_args;
+    va_copy(count_args, args);
+    int param_count = 0;
+    while (va_arg(count_args, void*) != NULL) param_count++;
+    va_end(count_args);
+
+    /* Étape 2 : Allouer le tableau dynamiquement */
+    void** params = malloc(param_count * sizeof(void*));
+
+    /* Étape 3 : Remplir le tableau */
+    for (int i = 0; i < param_count; i++) {
+        params[i] = va_arg(args, void*);
     }
     va_end(args);
 
+    /* Traitement des objets */
     for (int i = 0; i < scene->objectManager->count; i++) {
-        int id = getObjectTypeId(scene->objectManager, i);
-        if (id == typeObject) {
-            void** newParams = malloc(sizeof(void*) * (paramCount + 2));
+        if (getObjectTypeId(scene->objectManager, i) == typeObject) {
+            /* Création d'une copie des paramètres */
+            void** final_params = malloc((param_count + 1) * sizeof(void*));
 
-            for (int j = 0; j < paramCount; j++) {
-                newParams[j] = va_arg(args_copy, void*);
-            }
-            va_end(args_copy);
+            /* Insertion de l'objet */
+            memcpy(final_params, params, indexObj * sizeof(void*));
+            final_params[indexObj] = getObject(scene->objectManager, i);
+            memcpy(final_params + indexObj + 1,
+                   params + indexObj,
+                   (param_count - indexObj) * sizeof(void*));
 
-            for (int j = paramCount; j > indexObj; j--) {
-                newParams[j] = newParams[j - 1];
-            }
-            newParams[indexObj] = getObject(scene->objectManager, i);
-            newParams[paramCount + 1] = NULL;                        
+            /* Création de la fonction */
+            t_fonctionParam* sf = malloc(sizeof(t_fonctionParam));
+            sf->fonction = fonct;
+            sf->param = final_params;
+            sf->nb_param = param_count + 1;
 
-            t_fonctionParam* funct = malloc(sizeof(t_fonctionParam));
-            funct->param = newParams;
-            funct->fonction = fonct;
-            funct->nb_param = paramCount + 1;
-
-            int currentCount = *(scene->nbFonctions[typeFunction]);
-            scene->fonctions[typeFunction] = realloc(scene->fonctions[typeFunction], (currentCount + 1) * sizeof(t_fonctionParam*));
-            scene->fonctions[typeFunction][currentCount] = funct;
-            *(scene->nbFonctions[typeFunction]) += 1;
-
-            printf("ajout objet de type %d dans la fonction %d \n", typeObject, typeFunction);
+            /* Ajout à la scène */
+            scene->fonctions[typeFunction] = realloc(scene->fonctions[typeFunction],
+                                                     (scene->nbFonctions[typeFunction] + 1) * sizeof(t_fonctionParam*));
+            scene->fonctions[typeFunction][scene->nbFonctions[typeFunction]++] = sf;
         }
+    }
+
+    free(params);
+}
+
+void executeSceneFunctions(t_scene* scene, t_fonctionType ftype) {
+    for (int i = 0; i < scene->nbFonctions[ftype]; i++) {
+        callFonction(scene->fonctions[ftype][i]);
     }
 }
 
-t_scene* createScene(char* name, t_objectManager* objectManager) {
-    t_scene* scene = malloc(sizeof(t_scene));
-    scene->objectManager = objectManager;
-    scene->fonctions = malloc(NUM_FONCTION * sizeof(t_fonctionParam**));
+void freeScene(t_scene* scene) {
+    freeObjectManager(scene->objectManager);
     for (int i = 0; i < NUM_FONCTION; i++) {
-        scene->fonctions[i] = NULL;
+        for (int j = 0; j < scene->nbFonctions[i]; j++) {
+            freeFonction(&(scene->fonctions[i][j]));
+        }
+        free(scene->fonctions[i]);
     }
-
-    scene->nbFonctions = malloc(NUM_FONCTION * sizeof(int*));
-    for (int i = 0; i < NUM_FONCTION; i++) {
-        scene->nbFonctions[i] = malloc(sizeof(int));
-        *(scene->nbFonctions[i]) = 0;
-    }
-
-    scene->loaded = false;
-    scene->name = name;
-
-    return scene;
+    free(scene->name);
+    free(scene);
 }

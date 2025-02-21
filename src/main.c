@@ -1,3 +1,4 @@
+#include "debug.h"
 #include "fps.h"
 #include "io/imageLoader.h"
 #include "io/input.h"
@@ -35,9 +36,7 @@ void renderTextWrapper(t_fonctionParam* f) {
 }
 
 void renderButtonWrapper(t_fonctionParam* f) {
-    t_button* btn = GET_PTR(f, 0, t_button*);
-    printf("Rendering button: %s\n", btn->label.text);  // Vérifie le texte du bouton
-    renderButton(GET_PTR(f, 1, SDL_Renderer*), btn);
+    renderButton(GET_PTR(f, 1, SDL_Renderer*), GET_PTR(f, 0, t_button*));
 }
 
 void handleButtonClickWrapper(t_fonctionParam* f) {
@@ -56,42 +55,33 @@ int main(int argc, char* argv[]) {
     const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
     const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
 
-    t_objectManager* manager1 = initObjectManager(registre);
-    t_scene* scene1 = createScene("scene1", manager1);
+    t_scene* scene1 = createScene(initObjectManager(registre), "scene1");
 
     // Scene du debut
     t_text text = createText(renderer, "Ubissauphte1", font, WHITE);
     text.rect = creerRect((1 - 0.8f) / 2, 0.1f, 0.8f, 0.2f);
-    addObject(manager1, &text, TEXTE_TYPE);
+    ADD_OBJECT_TO_SCENE(scene1, &text, TEXTE_TYPE);
 
-    sceneRegisterFunction(scene1, TEXTE_TYPE, RENDER, renderTextWrapper, 0, renderer, NULL);
+    ADD_OBJECT_TO_SCENE(scene1, createButton(createTextOutline(renderer, "Jouer", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.35f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene1, createButton(createTextOutline(renderer, "Option", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.5f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene1, createButton(createTextOutline(renderer, "Quitter", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.65f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
 
-    float btnW = 0.3f, btnH = 0.1f, btnX = (1 - btnW) / 2, spacing = 0.05f;
-    float btnY1 = 0.1f + 0.2f + spacing;
-    float btnY2 = btnY1 + btnH + spacing;
-    float btnY3 = btnY2 + btnH + spacing;
-
-    t_button *btn, *btn2, *btn3;
-    btn = createButton(createTextOutline(renderer, "Jouer", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(btnX, btnY1, btnW, btnH), CREER_FONCTION(bouttonClickQuit, input));
-    addObject(manager1, btn, BUTTON_TYPE);
-    btn2 = createButton(createTextOutline(renderer, "Option", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(btnX, btnY2, btnW, btnH), CREER_FONCTION(bouttonClickQuit, input));
-    addObject(manager1, btn2, BUTTON_TYPE);
-    btn3 = createButton(createTextOutline(renderer, "Quitter", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(btnX, btnY3, btnW, btnH), CREER_FONCTION(bouttonClickQuit, input));
-    addObject(manager1, btn3, BUTTON_TYPE);
-
-    sceneRegisterFunction(scene1, BUTTON_TYPE, RENDER, renderButtonWrapper, 0, renderer, NULL);
-    // sceneRegisterFunction(scene1, BUTTON_TYPE, UPDATE, handleButtonClickWrapper, 0, input, NULL);
+    sceneRegisterFunction(scene1, BUTTON_TYPE, RENDER, renderButtonWrapper, 0, FONCTION_PARAMS(renderer));
+    sceneRegisterFunction(scene1, BUTTON_TYPE, UPDATE, handleButtonClickWrapper, 1, FONCTION_PARAMS(input));
+    sceneRegisterFunction(scene1, TEXTE_TYPE, RENDER, renderTextWrapper, 0, FONCTION_PARAMS(renderer));
 
     while (!input->quit) {
         updateInput(input);
         SDL_RenderClear(renderer);
-
-        callFonction(scene1->fonctions[RENDER][0]);
-        callFonction(scene1->fonctions[RENDER][1]);
-        callFonction(scene1->fonctions[RENDER][2]);
-        callFonction(scene1->fonctions[RENDER][3]);
-
+        executeSceneFunctions(scene1, UPDATE);
+        executeSceneFunctions(scene1, RENDER);
         SDL_RenderPresent(renderer);
     }
+
+    freeScene(scene1);
+    TTF_CloseFont(font);
+    freeInput(input);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
     return EXIT_SUCCESS;
 }
