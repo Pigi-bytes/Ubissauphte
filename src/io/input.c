@@ -56,3 +56,9 @@ SDL_bool keyPressOnce(t_input* input, SDL_Scancode scancode) {
     }
     return SDL_FALSE;
 }
+
+void freeInput(t_input* input) {
+    if (input != NULL) {
+        free(input);
+    }
+}
