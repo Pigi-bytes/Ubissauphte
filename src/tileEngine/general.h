@@ -1,5 +1,5 @@
-#ifndef HEADER_H
-#define HEADER_H
+#ifndef GENERAL_H
+#define GENERAL_H
 
 #include <SDL2/SDL.h>
 #include <math.h>
@@ -33,5 +33,7 @@ typedef struct s_caseMatrice {
     int x, y;
     struct s_caseMatrice* voisins[8];
 } t_caseMatrice;
+
+int inMat(int x, int y);
 
 #endif

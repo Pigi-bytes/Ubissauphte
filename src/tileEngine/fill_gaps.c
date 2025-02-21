@@ -30,10 +30,6 @@ int sans_0(int mat[HEIGHT][WIDTH]) {
     return TRUE;
 }
 
-int inMat(int x, int y) {
-    return x >= 0 && x < HEIGHT && y >= 0 && y < WIDTH;
-}
-
 int nbElemBlock(int mat[HEIGHT][WIDTH], int num_Block) {
     int count = 0;
     for (int i = 0; i < HEIGHT; i++) {
