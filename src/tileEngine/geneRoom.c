@@ -1,7 +1,9 @@
 
+#include "../debug.h"
 #include "../io/input.h"
 #include "fill_gaps.h"
 #include "general.h"
+#include "lissage.h"
 #include "perlinNoise.h"
 
 void plafond(FILE *fichier) {
@@ -81,10 +83,10 @@ int mur_avant(int i, int j, int mat[HEIGHT][WIDTH]) {
     return (i + 1 < HEIGHT) && (!mat[i + 1][j]);
 }
 int angle_droit(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i - 1 >= 0) && (j + 1 < WIDTH) && (mat[i][j]) && (!mat[i - 1][j]) && (!mat[i][j + 1]);
+    return (i - 1 >= 0) && (i + 1 < HEIGHT) && (j + 1 < WIDTH) && (!mat[i - 1][j]) && ((!mat[i][j + 1]) || ((mat[i][j + 1]) && (!(mat[i + 1][j + 1]))));
 }
 int angle_gauche(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i - 1 >= 0) && (j - 1 >= 0) && (mat[i][j]) && (!mat[i - 1][j]) && (!mat[i][j - 1]);
+    return (i - 1 >= 0) && (i + 1 < HEIGHT) && (j - 1 >= 0) && (!mat[i - 1][j]) && ((!mat[i][j - 1]) || ((mat[i][j - 1]) && (!(mat[i + 1][j - 1]))));
 }
 
 int arrondi_inf_droit(int i, int j, int mat[HEIGHT][WIDTH]) {
@@ -108,11 +110,11 @@ int mur_arriere(int i, int j, int mat[HEIGHT][WIDTH]) {
 }
 
 int angle_continue_gauche(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i + 2 < HEIGHT) && (j - 1 >= 0) && ((mat[i + 1][j])) && (!mat[i + 2][j]) && (!mat[i + 1][j - 1]);
+    return (i + 2 < HEIGHT) && (j - 1 >= 0) && ((mat[i + 1][j])) && (!mat[i + 2][j]) && ((!mat[i + 1][j - 1]) || (!mat[i][j - 1]));
 }
 
 int angle_continue_droit(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i + 2 < HEIGHT) && (j + 1 < WIDTH) && ((mat[i + 1][j])) && (!mat[i + 2][j]) && (!mat[i + 1][j + 1]);
+    return (i + 2 < HEIGHT) && (j + 1 < WIDTH) && ((mat[i + 1][j])) && (!mat[i + 2][j]) && ((!mat[i + 1][j + 1]) || (!mat[i][j + 1]));
 }
 
 int bordure_mur_avant(int i, int j, int mat[HEIGHT][WIDTH]) {
@@ -203,7 +205,7 @@ int main() {
 
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
-            SDL_FPoint st = {(float)i / 8, (float)j / 8};  // plus le dénominateur est petit plus il y à de murs
+            SDL_FPoint st = {(float)i / 5, (float)j / 5};  // plus le dénominateur est petit plus il y à de murs
             SDL_FPoint st2 = {(float)i / 10, (float)j / 10};
             SDL_FPoint st3 = {(float)i / 15, (float)j / 15};
             values[i][j] = noise(st);
@@ -228,8 +230,10 @@ int main() {
     float_to_int(values, entier);
     afficheMat(entier);
     fillGaps(entier);
+    lissage(entier);
 
     load(entier);
+    printf("1\n");
     SDL_Quit();
     return EXIT_SUCCESS;
 }
