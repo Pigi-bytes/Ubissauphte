@@ -13,9 +13,8 @@ t_tileset* initTileset(SDL_Renderer* renderer, int width, int height, int tileSi
     tileset->height = height;
     tileset->tileSize = tileSize;
 
-    t_typeRegistry* registre = createTypeRegistry();
-    const uint8_t TEXTURE_TYPE = registerType(registre, SDL_DestroyTextureWrapper, "texture");
-    tileset->textureTiles = initObjectManager(registre);
+    tileset->textureTiles = initObjectManager(createTypeRegistry());
+    const uint8_t TEXTURE_TYPE = registerType(tileset->textureTiles->registry, SDL_DestroyTextureWrapper, "texture");
 
     if (!tileset->textureTiles) {
         fprintf(stderr, "Erreur d'initialisation du gestionnaire d'objets\n");
@@ -81,7 +80,9 @@ t_grid* createGrid(int width, int height, int depth) {
     return grid;
 }
 
-void freeGrid(t_grid* grid) {
+void freeGrid(void* object) {
+    t_grid* grid = (t_grid*)object;
+
     if (!grid) return;
 
     for (int z = 0; z < grid->depth; z++) {
