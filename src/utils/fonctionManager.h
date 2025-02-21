@@ -12,12 +12,19 @@
 #include "../debug.h"
 
 /**
- * @def CREER_FONCTION
- * @brief Macro utilitaire pour crée une fonction sans precisé la sentinelle NULL
- * @param f Pointeur sur fonction de type t_fonctionParam qui renvoie void
- * @param ... Argument de f
+ * @brief Ajoute automatiquement un NULL à la fin d'une liste d'arguments.
+ * @param ... Liste d'arguments variadiques à passer à la fonction.
+ * @return La liste des arguments fournie suivie de NULL.
+ *
+ * @note Évite d'ajouter manuellement NULL lors des appels de fonctions.
+ *
+ * // Appel sans la macro
+ * exempleFonction("un", "deux", "trois", NULL);
+ *
+ * // Appel avec la macro
+ * exempleFonction(FONCTION_PARAMS("un", "deux", "trois"));
  */
-#define CREER_FONCTION(f, ...) creerFonction(f, __VA_ARGS__, NULL)
+#define FONCTION_PARAMS(...) __VA_ARGS__, NULL
 
 /**
  * @def GET_VALUE
