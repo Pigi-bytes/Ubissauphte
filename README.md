@@ -10,7 +10,7 @@ Contributeurs:
 - Baptiste Carfantan (Baptcarf)
 
 Principe du jeu:
-Notre jeu est un jeu de type rogue-like ou le joueur devra se préparer pour résister le plus longtemps dans le donjon rempli de dangers et de monstres
+Notre jeu est un jeu de type rogue-like où le joueur devra se préparer pour résister le plus longtemps dans le donjon rempli de dangers et de monstres
 
 Fonctionnalités du jeu:
 - Création d'une carte procéduralement où le joueur devra évoluer pour trouver des équipements (armes, armures, collectibles...).
