@@ -8,7 +8,7 @@
 
 #include <SDL2/SDL.h>
 
-#include "../tileEngine/camera.h"
+#include "../engine/core/camera.h"
 
 /**
  * @def MINIMAP_SIZE

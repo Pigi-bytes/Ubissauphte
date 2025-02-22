@@ -1,4 +1,4 @@
-#include "movement.h"
+#include "movementPlayer.h"
 
 SDL_bool checkCollision(SDL_Rect* rect1, SDL_Rect* rect2) {
     return (SDL_bool)((rect1->x < rect2->x + rect2->w &&
@@ -49,24 +49,4 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid) {
     }
 
     movePlayer(player, dx, dy, grid);
-}
-
-t_joueur* createplayer(t_control* control, SDL_Texture* texture, SDL_Rect rect) {
-    t_joueur* joueur = (t_joueur*)malloc(sizeof(t_joueur));
-
-    joueur->control = control;
-    joueur->entity.texture = texture;
-    joueur->entity.rect = rect;
-
-    return joueur;
-}
-
-void renderPlayer(SDL_Renderer* renderer, t_joueur* player) {
-    SDL_RenderCopy(renderer, player->entity.texture, NULL, &player->entity.rect);
-}
-
-void freePlayer(void* object) {
-    t_joueur* player = (t_joueur*)object;
-    SDL_DestroyTexture(player->entity.texture);
-    free(player);
 }

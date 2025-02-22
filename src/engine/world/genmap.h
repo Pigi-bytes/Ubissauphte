@@ -6,7 +6,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "debug.h"
+#include "../../debug.h"
+
 typedef struct t_salle {
     int ID;                  // ID/Numéro de la salle
     struct t_salle *droite;  // Porte droite

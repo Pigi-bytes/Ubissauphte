@@ -1,4 +1,4 @@
-#include "fps.h"
+#include "frame.h"
 
 t_frameData* initFrameData(int targetFps) {
     t_frameData* frame = malloc(sizeof(t_frameData));

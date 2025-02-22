@@ -1,8 +1,8 @@
 #ifndef FPS_H
 #define FPS_H
 
-#include "ui/text.h"
-#include "utils/timer.h"
+#include "../../debug.h"
+#include "../../utils/timer.h"
 
 #define TARGET_FPS 60
 #define SECONDE_EN_MS 1000

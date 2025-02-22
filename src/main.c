@@ -1,10 +1,11 @@
 #include "debug.h"
-#include "fps.h"
+#include "engine/core/camera.h"
+#include "engine/core/frame.h"
+#include "engine/entities/player.h"
+#include "engine/gameplay/movementPlayer.h"
+#include "engine/world/tilesManager.h"
 #include "io/imageLoader.h"
 #include "io/input.h"
-#include "tileEngine/camera.h"
-#include "tileEngine/movement.h"
-#include "tileEngine/tilesManager.h"
 #include "ui/button.h"
 #include "ui/fpsDisplay.h"
 #include "ui/minimap.h"
@@ -33,7 +34,7 @@ GENERATE_WRAPPER_2(renderFPSDisplay, SDL_Renderer*, t_fpsDisplay*)
 GENERATE_WRAPPER_3(renderGrid, SDL_Renderer*, t_grid*, t_camera*)
 GENERATE_WRAPPER_2(renderMinimap, SDL_Renderer*, t_minimap*)
 GENERATE_WRAPPER_2(renderViewport, SDL_Renderer*, t_viewPort*)
-GENERATE_WRAPPER_2(renderPlayer, SDL_Renderer*, t_joueur*)
+GENERATE_WRAPPER_3(renderPlayer, SDL_Renderer*, t_joueur*, t_camera*)
 
 GENERATE_WRAPPER_3(updateFPSDisplay, t_fpsDisplay*, t_frameData*, SDL_Renderer*)
 GENERATE_WRAPPER_3(updateMinimap, t_minimap*, t_camera*, SDL_Renderer*)
@@ -94,7 +95,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     contr->down = SDL_SCANCODE_DOWN;
     contr->left = SDL_SCANCODE_LEFT;
     contr->right = SDL_SCANCODE_RIGHT;
-    t_joueur* joueur = createplayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 97), (SDL_Rect){0, 0, 16, 16});
+    t_joueur* joueur = createPlayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 97), (SDL_Rect){0, 0, 16, 16});
 
     t_camera* camera = createCamera(levelWidth, levelHeight, levelWidth / 2, levelHeight / 2);
 
@@ -117,7 +118,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     sceneRegisterFunction(scene, VIEWPORT_TYPE, SET_BUFFER, setRenderTargetWrapper, 1, FONCTION_PARAMS(renderer));
 
     sceneRegisterFunction(scene, GRID_TYPE, RENDER_GAME, renderGridWrapper, 1, FONCTION_PARAMS(renderer, camera));
-    sceneRegisterFunction(scene, PLAYER_TYPE, RENDER_GAME, renderPlayerWrapper, 1, FONCTION_PARAMS(renderer));
+    sceneRegisterFunction(scene, PLAYER_TYPE, RENDER_GAME, renderPlayerWrapper, 1, FONCTION_PARAMS(renderer, camera));
 
     sceneRegisterFunction(scene, VIEWPORT_TYPE, RENDER_BUFFER, renderViewportWrapper, 1, FONCTION_PARAMS(renderer));
 
@@ -136,9 +137,9 @@ int main(int argc, char* argv[]) {
     TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     t_frameData* frameData = initFrameData(0);
 
-    t_scene* scene1 = createMainMenu(renderer, input, font, frameData);
-    t_scene* scene2 = createMainWord(renderer, input, font, frameData);
-    t_scene* scene = scene2;
+    // t_scene* scene1 = createMainMenu(renderer, input, font, frameData);
+    t_scene* scene = createMainWord(renderer, input, font, frameData);
+    // t_scene* scene = scene2;
 
     while (!input->quit) {
         startFrame(frameData);
@@ -162,6 +163,8 @@ int main(int argc, char* argv[]) {
 
     freeFrameData(frameData);
     freeScene(scene);
+    // freeScene(scene2);
+
     TTF_CloseFont(font);
     freeInput(input);
     SDL_DestroyRenderer(renderer);

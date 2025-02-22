@@ -8,7 +8,7 @@
 #define DEBUG_MODE 1
 #define DEBUG_MEMORY_MODE 1
 #define RECTANGLE_COLOR \
-    (SDL_Color) { 41, 182, 246, 255 }
+    (SDL_Color){41, 182, 246, 255}
 
 #if DEBUG_MODE
 #define DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, rect, largeur)                                                      \

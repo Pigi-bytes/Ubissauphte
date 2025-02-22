@@ -3,10 +3,11 @@
 
 #include <SDL2/SDL.h>
 
-#include "../debug.h"
-#include "../io/imageLoader.h"
-#include "../utils/objectManager.h"
-#include "camera.h"
+#include "../../debug.h"
+#include "../../io/imageLoader.h"
+#include "../../utils/objectManager.h"
+#include "../core/camera.h"
+
 typedef struct {
     int width;
     int height;

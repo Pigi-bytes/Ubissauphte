@@ -4,7 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "../fps.h"
+#include "../engine/core/frame.h"
 #include "text.h"
 
 typedef struct fpsDisplay {

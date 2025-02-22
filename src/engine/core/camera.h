@@ -9,7 +9,7 @@
 #include <SDL2/SDL.h>
 #include <stdlib.h>
 
-#include "../debug.h"
+#include "../../debug.h"
 
 /**
  * @struct t_camera
