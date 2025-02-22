@@ -113,6 +113,8 @@ t_objectManager* initObjectManager(t_typeRegistry* registre);
  */
 void addObject(t_objectManager* manager, void* data, uint8_t typeId);
 
+uint8_t getObjectTypeId(t_objectManager* manager, int index);
+
 /**
  * @brief Récupère un objet à partir de son index dans le gestionnaire d'objets.
  *
