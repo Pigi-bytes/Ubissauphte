@@ -40,6 +40,22 @@ t_objectManager* initObjectManager(t_typeRegistry* registre) {
     return manager;
 }
 
+uint8_t getObjectTypeId(t_objectManager* manager, int index) {
+    if (index >= manager->count) {
+        return -1;  // Index hors limites
+    }
+
+    int poolIndex = index / POOL_SIZE;
+    int localIndex = index % POOL_SIZE;
+
+    t_objectMemoryPool* pool = manager->firstPool;
+    for (int i = 0; i < poolIndex; i++) {
+        pool = pool->next;
+    }
+
+    return pool->items[localIndex].typeId;
+}
+
 void addObject(t_objectManager* manager, void* data, uint8_t typeId) {
     // Vérifie si le pool actif est plein
     if (manager->nbItemsInPool >= POOL_SIZE) {

@@ -39,7 +39,8 @@ void resizeMinimap(SDL_Renderer* renderer, t_minimap* minimap, int windowW, int 
     };
 }
 
-void updateMinimap(SDL_Renderer* renderer, t_minimap* minimap, t_camera* camera, int transparency) {
+void updateMinimap(t_minimap* minimap, t_camera* camera, SDL_Renderer* renderer) {
+    int transparency = 196;
     // Changer la cible de rendu vers la texture de la minimap
     SDL_SetRenderTarget(renderer, minimap->texture);
 

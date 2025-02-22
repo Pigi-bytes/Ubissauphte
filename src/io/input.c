@@ -30,7 +30,8 @@ void updateInput(t_input* input) {
     }
 }
 
-void initInput(t_input* input, int windowWidth, int windowHeight) {
+t_input* initInput(int windowWidth, int windowHeight) {
+    t_input* input = malloc(sizeof(t_input));
     memset(input->key, SDL_FALSE, sizeof(input->key));
     input->quit = SDL_FALSE;
     input->mouseX = 0;
@@ -40,6 +41,7 @@ void initInput(t_input* input, int windowWidth, int windowHeight) {
     memset(input->mouseButtons, SDL_FALSE, sizeof(input->mouseButtons));
     input->windowWidth = windowWidth;
     input->windowHeight = windowHeight;
+    return input;
 }
 
 SDL_bool keyPressOnce(t_input* input, SDL_Scancode scancode) {
@@ -53,4 +55,10 @@ SDL_bool keyPressOnce(t_input* input, SDL_Scancode scancode) {
         keyProcessed[scancode] = SDL_FALSE;
     }
     return SDL_FALSE;
+}
+
+void freeInput(t_input* input) {
+    if (input != NULL) {
+        free(input);
+    }
 }

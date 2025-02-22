@@ -1,24 +1,37 @@
+// scene.h
+#ifndef SCENE_H
+#define SCENE_H
+
 #include <SDL2/SDL.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <stdbool.h>
 
 #include "../debug.h"
-#include "../tileEngine/tilesManager.h"
-#include "../ui/button.h"
-#include "../ui/text.h"
-#include "./fonctionManager.h"
-#include "./objectManager.h"
+#include "../io/input.h"
+#include "fonctionManager.h"
+#include "objectManager.h"
 
-#define ADD_OBJECT_TO_SCENE(scene, type, value_ptr) ajoutObjectManager(scene, createTypedObject(type, value_ptr));
+#define ADD_OBJECT_TO_SCENE(scene, obj, type) addObject(scene->objectManager, obj, type)
 
-typedef struct {
-    int taille;
-    t_fonctionManager **contenue;
-    int *index;
-    int nbindex;
+typedef enum {
+    RENDER_GAME,
+    RENDER_UI,
+    HANDLE_INPUT,
+    UPDATE,
+    SET_BUFFER,
+    RENDER_BUFFER,
+    NUM_FONCTION
+} t_fonctionType;
+
+typedef struct t_scene {
+    char* name;
+    t_objectManager* objectManager;
+    t_fonctionParam** fonctions[NUM_FONCTION];
+    int nbFonctions[NUM_FONCTION];
 } t_scene;
 
-t_scene *initScene(int taille);
-void ajoutObjectManager(t_scene *scene, t_typedObject *type);
-void freeScene(t_scene **scene);
-void callRender(t_scene *scene);
+t_scene* createScene(t_objectManager* objectManager, char* name);
+void sceneRegisterFunction(t_scene* scene, uint8_t typeObject, t_fonctionType typeFunction, void (*fonct)(t_fonctionParam*), int indexObj, ...);
+void executeSceneFunctions(t_scene* scene, t_fonctionType ftype);
+void freeScene(t_scene* scene);
+
+#endif
