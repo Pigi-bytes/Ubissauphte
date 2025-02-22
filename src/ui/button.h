@@ -25,7 +25,7 @@ typedef struct {
 
 t_button* createButton(t_text* text, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, t_fonctionParam* OnClick);
 void renderButton(SDL_Renderer* renderer, t_button* button);
-void handleButtonClick(t_input* input, t_button* button);
+void handleInputButton(t_input* input, t_button* button);
 SDL_bool isMouseInsideRect(int mouseX, int mouseY, SDL_Rect* rect);
 void freeButton(void* object);
 

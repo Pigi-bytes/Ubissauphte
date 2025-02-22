@@ -50,7 +50,7 @@ t_minimap* createMinimap(SDL_Renderer* renderer, int windowW, int windowH);
  * @param camera Pointeur vers la caméra
  * @note Doit être appelee a chaque changement de la caméra
  */
-void updateMinimap(SDL_Renderer* renderer, t_minimap* minimap, t_camera* camera);
+void updateMinimap(t_minimap* minimap, t_camera* camera, SDL_Renderer* renderer);
 
 /**
  * @brief Dessine la minimap a l'écran

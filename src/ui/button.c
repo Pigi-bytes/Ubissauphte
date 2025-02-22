@@ -40,7 +40,7 @@ SDL_bool isMouseInsideRect(int mouseX, int mouseY, SDL_Rect* rect) {
     return SDL_FALSE;
 }
 
-void handleButtonClick(t_input* input, t_button* button) {
+void handleInputButton(t_input* input, t_button* button) {
     int newWidth = button->rectDefault.w * SCALE_FACTOR;
     int newHeight = button->rectDefault.h * SCALE_FACTOR;
     int deltaX = (newWidth - button->rectDefault.w) / 2;

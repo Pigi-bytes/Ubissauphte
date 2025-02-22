@@ -25,7 +25,7 @@ void updateFPSDisplay(t_fpsDisplay* display, t_frameData* frame, SDL_Renderer* r
     }
 }
 
-void renderFPSDisplay(t_fpsDisplay* display, SDL_Renderer* renderer) {
+void renderFPSDisplay(SDL_Renderer* renderer, t_fpsDisplay* display) {
     if (display->showFPS) {
         renderText(renderer, display->fpsText);
     }

@@ -15,7 +15,7 @@ typedef struct fpsDisplay {
 
 t_fpsDisplay* initFPSDisplay(SDL_Renderer* renderer, TTF_Font* font);
 void updateFPSDisplay(t_fpsDisplay* display, t_frameData* frame, SDL_Renderer* renderer);
-void renderFPSDisplay(t_fpsDisplay* display, SDL_Renderer* renderer);
+void renderFPSDisplay(SDL_Renderer* renderer, t_fpsDisplay* display);
 void freeFPSDisplay(void* object);
 
 #endif

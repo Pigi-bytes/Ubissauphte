@@ -13,10 +13,12 @@
 #define ADD_OBJECT_TO_SCENE(scene, obj, type) addObject(scene->objectManager, obj, type)
 
 typedef enum {
-    ON_LOAD,
-    RENDER,
+    RENDER_GAME,
+    RENDER_UI,
+    HANDLE_INPUT,
     UPDATE,
-    ON_EXIT,
+    SET_BUFFER,
+    RENDER_BUFFER,
     NUM_FONCTION
 } t_fonctionType;
 

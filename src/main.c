@@ -6,6 +6,7 @@
 #include "tileEngine/movement.h"
 #include "tileEngine/tilesManager.h"
 #include "ui/button.h"
+#include "ui/fpsDisplay.h"
 #include "ui/minimap.h"
 #include "ui/text.h"
 #include "utils/fonctionManager.h"
@@ -21,26 +22,123 @@ SDL_Rect creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio) {
     return (SDL_Rect){WINDOW_WIDTH * x_ratio, WINDOW_HEIGHT * y_ratio, WINDOW_WIDTH * w_ratio, WINDOW_HEIGHT * h_ratio};
 }
 
-// void bouttonClick(t_fonctionParam* fonction) {
-//     t_sceneManager* sm = GET_PTR(fonction, 0, t_sceneManager*);
-//     switchScene(sm);
-// }
-
 void bouttonClickQuit(t_fonctionParam* fonction) {
     t_input* input = GET_PTR(fonction, 0, t_input*);
     input->quit = SDL_TRUE;
 }
 
-void renderTextWrapper(t_fonctionParam* f) {
-    renderText(GET_PTR(f, 1, SDL_Renderer*), GET_PTR(f, 0, t_text*));
+GENERATE_WRAPPER_2(renderText, SDL_Renderer*, t_text*)
+GENERATE_WRAPPER_2(renderButton, SDL_Renderer*, t_button*)
+GENERATE_WRAPPER_2(renderFPSDisplay, SDL_Renderer*, t_fpsDisplay*)
+GENERATE_WRAPPER_3(renderGrid, SDL_Renderer*, t_grid*, t_camera*)
+GENERATE_WRAPPER_2(renderMinimap, SDL_Renderer*, t_minimap*)
+GENERATE_WRAPPER_2(renderViewport, SDL_Renderer*, t_viewPort*)
+
+GENERATE_WRAPPER_3(updateFPSDisplay, t_fpsDisplay*, t_frameData*, SDL_Renderer*)
+GENERATE_WRAPPER_3(updateMinimap, t_minimap*, t_camera*, SDL_Renderer*)
+
+GENERATE_WRAPPER_2(handleInputButton, t_input*, t_button*)
+GENERATE_WRAPPER_3(handleInputPlayer, t_input*, t_joueur*, t_grid*)
+
+GENERATE_WRAPPER_2(setRenderTarget, SDL_Renderer*, t_viewPort*)
+
+void centerCameraOnWrapper(t_fonctionParam* f) {
+    centerCameraOn(GET_PTR(f, 0, t_camera*), *GET_PTR(f, 1, int*), *GET_PTR(f, 2, int*));
 }
 
-void renderButtonWrapper(t_fonctionParam* f) {
-    renderButton(GET_PTR(f, 1, SDL_Renderer*), GET_PTR(f, 0, t_button*));
+void renderJoueurWrapper(t_fonctionParam* f) {
+    t_joueur* player = GET_PTR(f, 1, t_joueur*);
+    SDL_RenderCopy(GET_PTR(f, 0, SDL_Renderer*), player->entity.texture, NULL, &player->entity.rect);
 }
 
-void handleButtonClickWrapper(t_fonctionParam* f) {
-    handleButtonClick(GET_PTR(f, 0, t_input*), GET_PTR(f, 1, t_button*));
+// RENDER_GAME,
+// RENDER_UI,
+// HANDLE_INPUT,
+// UPDATE,
+// SET_BUFFER,
+// RENDER_BUFFER,
+
+t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData) {
+    t_typeRegistry* registre = createTypeRegistry();
+    const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
+    const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
+    const uint8_t FRAME_DISPLAY_TYPE = registerType(registre, freeFPSDisplay, "frameData");
+
+    t_scene* scene = createScene(initObjectManager(registre), "scene1");
+
+    t_text* text = createText(renderer, "Ubissauphte1", font, WHITE);
+    text->rect = creerRect((1 - 0.8f) / 2, 0.1f, 0.8f, 0.2f);
+
+    ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Jouer", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.35f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Option", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.5f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Quitter", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.65f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, initFPSDisplay(renderer, font), FRAME_DISPLAY_TYPE);
+
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, 0, FONCTION_PARAMS(frameData, renderer));
+
+    sceneRegisterFunction(scene, BUTTON_TYPE, HANDLE_INPUT, handleInputButtonWrapper, 1, FONCTION_PARAMS(input));
+
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, 1, FONCTION_PARAMS(renderer));
+    sceneRegisterFunction(scene, BUTTON_TYPE, RENDER_UI, renderButtonWrapper, 1, FONCTION_PARAMS(renderer));
+    sceneRegisterFunction(scene, TEXTE_TYPE, RENDER_UI, renderTextWrapper, 1, FONCTION_PARAMS(renderer));
+
+    return scene;
+}
+
+t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData) {
+    t_typeRegistry* registre = createTypeRegistry();
+    const uint8_t GRID_TYPE = registerType(registre, freeGrid, "Grid");
+    const uint8_t PLAYER_TYPE = registerType(registre, NULL, "player");
+    const uint8_t FRAME_DISPLAY_TYPE = registerType(registre, freeFPSDisplay, "frameData");
+    const uint8_t CAMERA_TYPE = registerType(registre, NULL, "camera");
+    const uint8_t VIEWPORT_TYPE = registerType(registre, NULL, "viewport");
+    const uint8_t MINIMAP_TYPE = registerType(registre, NULL, "minimap");
+
+    t_scene* scene = createScene(initObjectManager(registre), "scene1");
+
+    t_tileset* tileset = initTileset(renderer, 192, 176, 16, "assets/imgs/tileMapDungeon.bmp");
+    t_grid* level = loadMap("assets/map/map02.txt", tileset);
+
+    int levelWidth = level->width * tileset->tileSize;
+    int levelHeight = level->height * tileset->tileSize;
+
+    t_control* contr = malloc(sizeof(t_control));
+    contr->up = SDL_SCANCODE_UP;
+    contr->down = SDL_SCANCODE_DOWN;
+    contr->left = SDL_SCANCODE_LEFT;
+    contr->right = SDL_SCANCODE_RIGHT;
+    t_joueur* joueur = createplayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 97), (SDL_Rect){0, 0, 16, 16});
+
+    t_camera* camera = createCamera(levelWidth, levelHeight, levelWidth / 2, levelHeight / 2);
+
+    t_viewPort* viewport = createViewport(renderer, camera, WINDOW_WIDTH, WINDOW_HEIGHT);
+    t_minimap* minimap = createMinimap(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+    ADD_OBJECT_TO_SCENE(scene, initFPSDisplay(renderer, font), FRAME_DISPLAY_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, joueur, PLAYER_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, level, GRID_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, camera, CAMERA_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, viewport, VIEWPORT_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
+
+    sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level));
+
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, 0, FONCTION_PARAMS(frameData, renderer));
+    sceneRegisterFunction(scene, MINIMAP_TYPE, UPDATE, updateMinimapWrapper, 0, FONCTION_PARAMS(camera, renderer));
+    sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&joueur->entity.rect.x, &joueur->entity.rect.y));
+
+    sceneRegisterFunction(scene, VIEWPORT_TYPE, SET_BUFFER, setRenderTargetWrapper, 1, FONCTION_PARAMS(renderer));
+
+    sceneRegisterFunction(scene, GRID_TYPE, RENDER_GAME, renderGridWrapper, 1, FONCTION_PARAMS(renderer, camera));
+    sceneRegisterFunction(scene, PLAYER_TYPE, RENDER_GAME, renderJoueurWrapper, 1, FONCTION_PARAMS(renderer));
+
+    sceneRegisterFunction(scene, VIEWPORT_TYPE, RENDER_BUFFER, renderViewportWrapper, 1, FONCTION_PARAMS(renderer));
+
+    sceneRegisterFunction(scene, MINIMAP_TYPE, RENDER_UI, renderMinimapWrapper, 1, FONCTION_PARAMS(renderer));
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, 1, FONCTION_PARAMS(renderer));
+
+    return scene;
 }
 
 int main(int argc, char* argv[]) {
@@ -49,35 +147,33 @@ int main(int argc, char* argv[]) {
     SDL_Window* window = SDL_CreateWindow("animation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     t_input* input = initInput(WINDOW_WIDTH, WINDOW_HEIGHT);
-    TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 16);
+    TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
+    t_frameData* frameData = initFrameData(0);
 
-    t_typeRegistry* registre = createTypeRegistry();
-    const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
-    const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
-
-    t_scene* scene1 = createScene(initObjectManager(registre), "scene1");
-
-    // Scene du debut
-    t_text text = createText(renderer, "Ubissauphte1", font, WHITE);
-    text.rect = creerRect((1 - 0.8f) / 2, 0.1f, 0.8f, 0.2f);
-    ADD_OBJECT_TO_SCENE(scene1, &text, TEXTE_TYPE);
-
-    ADD_OBJECT_TO_SCENE(scene1, createButton(createTextOutline(renderer, "Jouer", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.35f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
-    ADD_OBJECT_TO_SCENE(scene1, createButton(createTextOutline(renderer, "Option", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.5f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
-    ADD_OBJECT_TO_SCENE(scene1, createButton(createTextOutline(renderer, "Quitter", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.65f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
-
-    sceneRegisterFunction(scene1, BUTTON_TYPE, RENDER, renderButtonWrapper, 0, FONCTION_PARAMS(renderer));
-    sceneRegisterFunction(scene1, BUTTON_TYPE, UPDATE, handleButtonClickWrapper, 1, FONCTION_PARAMS(input));
-    sceneRegisterFunction(scene1, TEXTE_TYPE, RENDER, renderTextWrapper, 0, FONCTION_PARAMS(renderer));
+    t_scene* scene1 = createMainMenu(renderer, input, font, frameData);
+    t_scene* scene2 = createMainWord(renderer, input, font, frameData);
 
     while (!input->quit) {
+        startFrame(frameData);
+
         updateInput(input);
-        SDL_RenderClear(renderer);
+        executeSceneFunctions(scene1, HANDLE_INPUT);
+
+        updateFPS(frameData);
         executeSceneFunctions(scene1, UPDATE);
-        executeSceneFunctions(scene1, RENDER);
+
+        SDL_RenderClear(renderer);
+        executeSceneFunctions(scene1, SET_BUFFER);
+        executeSceneFunctions(scene1, RENDER_GAME);
+        executeSceneFunctions(scene1, RENDER_BUFFER);
+        executeSceneFunctions(scene1, RENDER_UI);
+
         SDL_RenderPresent(renderer);
+
+        capFrameRate(frameData);
     }
 
+    freeFrameData(frameData);
     freeScene(scene1);
     TTF_CloseFont(font);
     freeInput(input);
