@@ -48,10 +48,9 @@ t_minimap* createMinimap(SDL_Renderer* renderer, int windowW, int windowH);
  * @param renderer Renderer SDL pour le rendu intermédiaire
  * @param minimap Pointeur sur la minimap à mettre à jour
  * @param camera Pointeur vers la caméra
- * @param transparency Transparence (0 = transparent, 255 = opaque)
  * @note Doit être appelee a chaque changement de la caméra
  */
-void updateMinimap(SDL_Renderer* renderer, t_minimap* minimap, t_camera* camera, int transparency);
+void updateMinimap(SDL_Renderer* renderer, t_minimap* minimap, t_camera* camera);
 
 /**
  * @brief Dessine la minimap a l'écran
