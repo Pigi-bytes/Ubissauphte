@@ -58,7 +58,7 @@ t_camera* createCamera(int levelW, int levelH, int camW, int camH);
  * @details
  * @note Les coordonnées (x,y) sont relatives au niveau, pas à l'écran
  */
-void centerCameraOn(t_camera* cam, int x, int y);
+void centerCameraOn(t_camera* cam, int* x, int* y);
 
 /**
  * @brief Applique un zoom relatif à la caméra via le viewport
@@ -124,13 +124,13 @@ void resizeViewport(t_viewPort* vp, int windowW, int windowH);
  * @brief Libere la mémoire allouée pour le viewport
  * @param vp Pointeur sur le viewport à détruire
  */
-void freeViewport(t_viewPort* vp);
+void freeViewport(void* object);
 
 /**
  * @brief Libere la mémoire allouée pour la camera
  * @param cam Pointeur sur la camera à détruire
  */
-void freeCamera(t_camera* cam);
+void freeCamera(void* object);
 
 /**
  * @brief Vérifie si un rectangle est visible dans la caméra

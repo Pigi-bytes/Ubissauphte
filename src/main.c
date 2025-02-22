@@ -33,6 +33,7 @@ GENERATE_WRAPPER_2(renderFPSDisplay, SDL_Renderer*, t_fpsDisplay*)
 GENERATE_WRAPPER_3(renderGrid, SDL_Renderer*, t_grid*, t_camera*)
 GENERATE_WRAPPER_2(renderMinimap, SDL_Renderer*, t_minimap*)
 GENERATE_WRAPPER_2(renderViewport, SDL_Renderer*, t_viewPort*)
+GENERATE_WRAPPER_2(renderPlayer, SDL_Renderer*, t_joueur*)
 
 GENERATE_WRAPPER_3(updateFPSDisplay, t_fpsDisplay*, t_frameData*, SDL_Renderer*)
 GENERATE_WRAPPER_3(updateMinimap, t_minimap*, t_camera*, SDL_Renderer*)
@@ -41,22 +42,7 @@ GENERATE_WRAPPER_2(handleInputButton, t_input*, t_button*)
 GENERATE_WRAPPER_3(handleInputPlayer, t_input*, t_joueur*, t_grid*)
 
 GENERATE_WRAPPER_2(setRenderTarget, SDL_Renderer*, t_viewPort*)
-
-void centerCameraOnWrapper(t_fonctionParam* f) {
-    centerCameraOn(GET_PTR(f, 0, t_camera*), *GET_PTR(f, 1, int*), *GET_PTR(f, 2, int*));
-}
-
-void renderJoueurWrapper(t_fonctionParam* f) {
-    t_joueur* player = GET_PTR(f, 1, t_joueur*);
-    SDL_RenderCopy(GET_PTR(f, 0, SDL_Renderer*), player->entity.texture, NULL, &player->entity.rect);
-}
-
-// RENDER_GAME,
-// RENDER_UI,
-// HANDLE_INPUT,
-// UPDATE,
-// SET_BUFFER,
-// RENDER_BUFFER,
+GENERATE_WRAPPER_3(centerCameraOn, t_camera*, int*, int*)
 
 t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData) {
     t_typeRegistry* registre = createTypeRegistry();
@@ -89,11 +75,11 @@ t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
 t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData) {
     t_typeRegistry* registre = createTypeRegistry();
     const uint8_t GRID_TYPE = registerType(registre, freeGrid, "Grid");
-    const uint8_t PLAYER_TYPE = registerType(registre, NULL, "player");
+    const uint8_t PLAYER_TYPE = registerType(registre, freePlayer, "player");
     const uint8_t FRAME_DISPLAY_TYPE = registerType(registre, freeFPSDisplay, "frameData");
-    const uint8_t CAMERA_TYPE = registerType(registre, NULL, "camera");
-    const uint8_t VIEWPORT_TYPE = registerType(registre, NULL, "viewport");
-    const uint8_t MINIMAP_TYPE = registerType(registre, NULL, "minimap");
+    const uint8_t CAMERA_TYPE = registerType(registre, freeCamera, "camera");
+    const uint8_t VIEWPORT_TYPE = registerType(registre, freeViewport, "viewport");
+    const uint8_t MINIMAP_TYPE = registerType(registre, freeMinimap, "minimap");
 
     t_scene* scene = createScene(initObjectManager(registre), "scene1");
 
@@ -131,7 +117,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     sceneRegisterFunction(scene, VIEWPORT_TYPE, SET_BUFFER, setRenderTargetWrapper, 1, FONCTION_PARAMS(renderer));
 
     sceneRegisterFunction(scene, GRID_TYPE, RENDER_GAME, renderGridWrapper, 1, FONCTION_PARAMS(renderer, camera));
-    sceneRegisterFunction(scene, PLAYER_TYPE, RENDER_GAME, renderJoueurWrapper, 1, FONCTION_PARAMS(renderer));
+    sceneRegisterFunction(scene, PLAYER_TYPE, RENDER_GAME, renderPlayerWrapper, 1, FONCTION_PARAMS(renderer));
 
     sceneRegisterFunction(scene, VIEWPORT_TYPE, RENDER_BUFFER, renderViewportWrapper, 1, FONCTION_PARAMS(renderer));
 
@@ -152,21 +138,22 @@ int main(int argc, char* argv[]) {
 
     t_scene* scene1 = createMainMenu(renderer, input, font, frameData);
     t_scene* scene2 = createMainWord(renderer, input, font, frameData);
+    t_scene* scene = scene2;
 
     while (!input->quit) {
         startFrame(frameData);
 
         updateInput(input);
-        executeSceneFunctions(scene1, HANDLE_INPUT);
+        executeSceneFunctions(scene, HANDLE_INPUT);
 
         updateFPS(frameData);
-        executeSceneFunctions(scene1, UPDATE);
+        executeSceneFunctions(scene, UPDATE);
 
         SDL_RenderClear(renderer);
-        executeSceneFunctions(scene1, SET_BUFFER);
-        executeSceneFunctions(scene1, RENDER_GAME);
-        executeSceneFunctions(scene1, RENDER_BUFFER);
-        executeSceneFunctions(scene1, RENDER_UI);
+        executeSceneFunctions(scene, SET_BUFFER);
+        executeSceneFunctions(scene, RENDER_GAME);
+        executeSceneFunctions(scene, RENDER_BUFFER);
+        executeSceneFunctions(scene, RENDER_UI);
 
         SDL_RenderPresent(renderer);
 
@@ -174,7 +161,7 @@ int main(int argc, char* argv[]) {
     }
 
     freeFrameData(frameData);
-    freeScene(scene1);
+    freeScene(scene);
     TTF_CloseFont(font);
     freeInput(input);
     SDL_DestroyRenderer(renderer);

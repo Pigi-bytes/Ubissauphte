@@ -32,6 +32,7 @@ SDL_bool checkCollision(SDL_Rect* rect1, SDL_Rect* rect2);
 void movePlayer(t_joueur* player, int dx, int dy, t_grid* grid);
 void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid);
 t_joueur* createplayer(t_control* control, SDL_Texture* texture, SDL_Rect rect);
-void freePlayer(t_joueur* player);
+void renderPlayer(SDL_Renderer* renderer, t_joueur* player);
+void freePlayer(void* object);
 
 #endif

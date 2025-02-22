@@ -61,7 +61,12 @@ t_joueur* createplayer(t_control* control, SDL_Texture* texture, SDL_Rect rect) 
     return joueur;
 }
 
-void freePlayer(t_joueur* player) {
+void renderPlayer(SDL_Renderer* renderer, t_joueur* player) {
+    SDL_RenderCopy(renderer, player->entity.texture, NULL, &player->entity.rect);
+}
+
+void freePlayer(void* object) {
+    t_joueur* player = (t_joueur*)object;
     SDL_DestroyTexture(player->entity.texture);
     free(player);
 }

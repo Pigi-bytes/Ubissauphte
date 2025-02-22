@@ -79,7 +79,8 @@ void renderMinimap(SDL_Renderer* renderer, t_minimap* minimap) {
     SDL_RenderCopy(renderer, minimap->texture, NULL, &minimap->area);
 }
 
-void freeMinimap(t_minimap* minimap) {
+void freeMinimap(void* object) {
+    t_minimap* minimap = (t_minimap*)object;
     if (minimap) {
         if (minimap->texture) {
             SDL_DestroyTexture(minimap->texture);

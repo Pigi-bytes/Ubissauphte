@@ -63,7 +63,7 @@ void renderMinimap(SDL_Renderer* renderer, t_minimap* minimap);
  * @brief Libere la mémoire allouée pour la minimap
  * @param minimap Pointeur sur la minimap à détruire
  */
-void freeMinimap(t_minimap* minimap);
+void freeMinimap(void* object);
 
 /**
  * @brief Change la position de la minimap selon la taille de l'eccran
