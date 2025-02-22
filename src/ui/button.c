@@ -1,6 +1,6 @@
 #include "button.h"
 
-t_button* createButton(t_text text, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, t_fonctionParam* OnClick) {
+t_button* createButton(t_text* text, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, t_fonctionParam* OnClick) {
     t_button* button = malloc(sizeof(t_button));
 
     if (!button) {
@@ -16,8 +16,8 @@ t_button* createButton(t_text text, SDL_Color color, SDL_Color colorOnClick, SDL
     button->OnClick = OnClick;
     button->label = text;
 
-    button->label.rect.x = button->rect.x + (button->rect.w - button->label.rect.w) / 2;
-    button->label.rect.y = button->rect.y + (button->rect.h - button->label.rect.h) / 2;
+    text->rect.x = button->rect.x + (button->rect.w - text->rect.w) / 2;
+    text->rect.y = button->rect.y + (button->rect.h - text->rect.h) / 2;
 
     return button;
 }
@@ -25,7 +25,7 @@ t_button* createButton(t_text text, SDL_Color color, SDL_Color colorOnClick, SDL
 void renderButton(SDL_Renderer* renderer, t_button* button) {
     SDL_SetRenderDrawColor(renderer, button->color.r, button->color.g, button->color.b, button->color.a);
     SDL_RenderFillRect(renderer, &button->rect);
-    renderText(renderer, &button->label);
+    renderText(renderer, button->label);
 
     DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, button->rect, 3);
 

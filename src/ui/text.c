@@ -19,25 +19,25 @@ SDL_bool initTextEngine() {
     return SDL_TRUE;
 }
 
-t_text createTextOutline(SDL_Renderer* renderer, char* text, TTF_Font* font, SDL_Color color, SDL_Color colorOutline, int outlineSize) {
-    t_text label;
+t_text* createTextOutline(SDL_Renderer* renderer, char* text, TTF_Font* font, SDL_Color color, SDL_Color colorOutline, int outlineSize) {
+    t_text* label = malloc(sizeof(t_text));
 
-    label.text = malloc(strlen(text) + 1);
-    if (label.text == NULL) {
+    label->text = malloc(strlen(text) + 1);
+    if (label->text == NULL) {
         fprintf(stderr, "Erreur d'allocation de mémoire pour le texte.\n");
-        label.texture = NULL;
+        label->texture = NULL;
         return label;
     }
 
-    strcpy(label.text, text);
-    label.font = font;
+    strcpy(label->text, text);
+    label->font = font;
 
     TTF_SetFontOutline(font, outlineSize);
     SDL_Surface* surfaceOutline = TTF_RenderUTF8_Blended(font, text, colorOutline);
     if (!surfaceOutline) {
         fprintf(stderr, "Erreur de création de surface pour le contour : %s\n", TTF_GetError());
-        free(label.text);
-        label.texture = NULL;
+        free(label->text);
+        label->texture = NULL;
         return label;
     }
 
@@ -46,8 +46,8 @@ t_text createTextOutline(SDL_Renderer* renderer, char* text, TTF_Font* font, SDL
     if (!surfaceText) {
         fprintf(stderr, "Erreur de création de surface pour le texte principal : %s\n", TTF_GetError());
         SDL_FreeSurface(surfaceOutline);
-        free(label.text);
-        label.texture = NULL;
+        free(label->text);
+        label->texture = NULL;
         return label;
     }
 
@@ -56,8 +56,8 @@ t_text createTextOutline(SDL_Renderer* renderer, char* text, TTF_Font* font, SDL
         fprintf(stderr, "Erreur de création de surface combinée : %s\n", SDL_GetError());
         SDL_FreeSurface(surfaceOutline);
         SDL_FreeSurface(surfaceText);
-        free(label.text);
-        label.texture = NULL;
+        free(label->text);
+        label->texture = NULL;
         return label;
     }
 
@@ -65,21 +65,21 @@ t_text createTextOutline(SDL_Renderer* renderer, char* text, TTF_Font* font, SDL
     SDL_Rect textPosition = {outlineSize, outlineSize, surfaceText->w, surfaceText->h};
     SDL_BlitSurface(surfaceText, NULL, combinedSurface, &textPosition);
 
-    label.texture = SDL_CreateTextureFromSurface(renderer, combinedSurface);
-    if (!label.texture) {
+    label->texture = SDL_CreateTextureFromSurface(renderer, combinedSurface);
+    if (!label->texture) {
         fprintf(stderr, "Erreur de création de texture combinée : %s\n", SDL_GetError());
         SDL_FreeSurface(surfaceOutline);
         SDL_FreeSurface(surfaceText);
         SDL_FreeSurface(combinedSurface);
-        free(label.text);
-        label.texture = NULL;
+        free(label->text);
+        label->texture = NULL;
         return label;
     }
 
-    label.rect.w = combinedSurface->w;
-    label.rect.h = combinedSurface->h;
-    label.rect.x = 0;
-    label.rect.y = 0;
+    label->rect.w = combinedSurface->w;
+    label->rect.h = combinedSurface->h;
+    label->rect.x = 0;
+    label->rect.y = 0;
 
     SDL_FreeSurface(surfaceOutline);
     SDL_FreeSurface(surfaceText);
@@ -88,34 +88,34 @@ t_text createTextOutline(SDL_Renderer* renderer, char* text, TTF_Font* font, SDL
     return label;
 }
 
-t_text createText(SDL_Renderer* renderer, char* text, TTF_Font* font, SDL_Color color) {
-    t_text label;
+t_text* createText(SDL_Renderer* renderer, char* text, TTF_Font* font, SDL_Color color) {
+    t_text* label = malloc(sizeof(t_text));
 
-    label.text = malloc(strlen(text) + 1);
-    if (label.text == NULL) {
+    label->text = malloc(strlen(text) + 1);
+    if (label->text == NULL) {
         fprintf(stderr, "Erreur d'allocation de mémoire pour le texte.\n");
-        label.texture = NULL;
+        label->texture = NULL;
         return label;
     }
 
-    strcpy(label.text, text);
-    label.font = font;
+    strcpy(label->text, text);
+    label->font = font;
 
     SDL_Surface* surface = TTF_RenderUTF8_Solid(font, text, color);
     if (!surface) {
         fprintf(stderr, "Erreur de création de surface du texte \"%s\" : %s\n", text, TTF_GetError());
-        free(label.text);
-        label.texture = NULL;
+        free(label->text);
+        label->texture = NULL;
         return label;
     }
 
-    label.rect = (SDL_Rect){0, 0, surface->w, surface->h};
-    label.texture = SDL_CreateTextureFromSurface(renderer, surface);
-    if (!label.texture) {
+    label->rect = (SDL_Rect){0, 0, surface->w, surface->h};
+    label->texture = SDL_CreateTextureFromSurface(renderer, surface);
+    if (!label->texture) {
         fprintf(stderr, "Erreur de création de texture: %s\n", SDL_GetError());
         SDL_FreeSurface(surface);
-        free(label.text);
-        label.texture = NULL;
+        free(label->text);
+        label->texture = NULL;
         return label;
     }
 
