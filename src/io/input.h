@@ -7,7 +7,9 @@
 #define INPUT_H
 
 #include <SDL2/SDL.h>
+#include <stdlib.h>
 
+#include "../debug.h"
 /**
  * @struct t_input
  * @brief Contient l'état actuel du clavier, de la souris et de la fenêtre
@@ -31,11 +33,11 @@ void updateInput(t_input* input);
 
 /**
  * @brief Initialise la structure d'entrées avec des valeurs par défaut
- * @param input Pointeur vers la structure à initialiser
  * @param windowWidth Largeur initiale de la fenêtre
  * @param windowHeight Hauteur initiale de la fenêtre
+ * @return input Pointeur vers la structure initialiser
  */
-void initInput(t_input* input, int windowWidth, int windowHeight);
+t_input* initInput(int windowWidth, int windowHeight);
 
 /**
  * @brief Détecte un appui unique sur une touche malgrés les frames
@@ -46,5 +48,11 @@ void initInput(t_input* input, int windowWidth, int windowHeight);
  * @note Utilise un tableau static pour suivre l'état des touches entre les appels
  */
 SDL_bool keyPressOnce(t_input* input, SDL_Scancode scancode);
+
+/**
+ * @brief Libere la mémoire allouée pour l'input
+ * @param input Pointeur sur l'input à détruire
+ */
+void freeInput(t_input* input);
 
 #endif  // INPUT_H

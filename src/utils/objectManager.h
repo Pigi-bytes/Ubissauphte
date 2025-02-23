@@ -37,7 +37,7 @@ typedef void (*freeFunc)(void*);
  */
 typedef struct {
     freeFunc freeFunc;  ///< Fonction de libération spécifique au type
-    char* name;         ///< Nom du type (aucune utilité juste pour debug)
+    char* name;         ///< Nom du type
 } t_typeMetadata;
 
 /**
@@ -47,8 +47,8 @@ typedef struct {
  * Maintient une collection de tous les types enregistrés avec leurs métadonnées. Limité à MAX_UINT8_T types.
  */
 typedef struct {
-    t_typeMetadata types[256];  ///< Tableau des Metadonneée par ID de type
-    uint8_t nextTypeId;         ///< Prochain ID disponible pour l'enregistrement
+    t_typeMetadata types[MAX_UINT8_T];  ///< Tableau des Metadonneée par ID de type
+    uint8_t nextTypeId;                 ///< Prochain ID disponible pour l'enregistrement
 } t_typeRegistry;
 
 /**
@@ -65,6 +65,14 @@ t_typeRegistry* createTypeRegistry();
  * @return uint8_t ID assigné au type
  */
 uint8_t registerType(t_typeRegistry* registre, freeFunc freeFunc, char* name);
+
+/**
+ * @brief Recure un id avec son nom depuis un registre
+ * @param registre Registre cible
+ * @param name Nom descriptif du type
+ * @return uint8_t ID assigné au type
+ */
+uint8_t getTypeIdByName(t_typeRegistry* registry, char* name);
 
 /**
  * @struct t_typedObject
@@ -112,6 +120,8 @@ t_objectManager* initObjectManager(t_typeRegistry* registre);
  * @param typeId ID du type enregistré pour cet objet
  */
 void addObject(t_objectManager* manager, void* data, uint8_t typeId);
+
+uint8_t getObjectTypeId(t_objectManager* manager, int index);
 
 /**
  * @brief Récupère un objet à partir de son index dans le gestionnaire d'objets.

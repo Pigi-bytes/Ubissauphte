@@ -15,11 +15,11 @@ t_camera* createCamera(int levelW, int levelH, int camW, int camH) {
     return cam;
 }
 
-void centerCameraOn(t_camera* cam, int x, int y) {
+void centerCameraOn(t_camera* cam, int* x, int* y) {
     // X = position cible - demi-largeur de la vue camera
     // Y = position cible - demi-hauteur de la vue camera
-    int newX = x - (cam->w / 2);
-    int newY = y - (cam->h / 2);
+    int newX = *x - (cam->w / 2);
+    int newY = *y - (cam->h / 2);
 
     // Calcul des limites maximales autorisées
     // Max X = taille niveau - largeur camera (pour éviter sortie droite/bas)
@@ -84,14 +84,16 @@ void resizeViewport(t_viewPort* vp, int windowW, int windowH) {
     vp->screenRect.h = windowH;
 }
 
-void freeViewport(t_viewPort* vp) {
+void freeViewport(void* object) {
+    t_viewPort* vp = (t_viewPort*)object;
     if (vp) {
         SDL_DestroyTexture(vp->renderTarget);
         free(vp);
     }
 }
 
-void freeCamera(t_camera* cam) {
+void freeCamera(void* object) {
+    t_camera* cam = (t_camera*)object;
     if (cam) {
         free(cam);
     }

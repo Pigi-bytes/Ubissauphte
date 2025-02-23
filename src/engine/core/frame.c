@@ -1,6 +1,6 @@
-#include "fps.h"
+#include "frame.h"
 
-t_frameData* initFrameData(SDL_Renderer* renderer, TTF_Font* font, int targetFps) {
+t_frameData* initFrameData(int targetFps) {
     t_frameData* frame = malloc(sizeof(t_frameData));
 
     frame->frameTimer = initTimer();
@@ -11,14 +11,8 @@ t_frameData* initFrameData(SDL_Renderer* renderer, TTF_Font* font, int targetFps
     frame->deltaTime = 0.0f;
     frame->lastFrameTime = 0;
 
-    frame->showFPS = SDL_TRUE;
     frame->targetFPS = targetFps;
     frame->fpsUpdateInterval = SECONDE_EN_MS;
-
-    SDL_Color white = {255, 255, 255, 255};
-    frame->fpsText = createText(renderer, "FPS: %00 | Delta: %00.00fms", font, white);
-    frame->fpsText.rect.x = 10;
-    frame->fpsText.rect.y = 10;
 
     startTimer(frame->fpsTimer);
     startTimer(frame->frameTimer);
@@ -54,7 +48,7 @@ void capFrameRate(t_frameData* frame) {
     }
 }
 
-void updateFPS(t_frameData* frame, SDL_Renderer* renderer) {
+void updateFPS(t_frameData* frame) {
     frame->frameCount++;
 
     // Vérifie si l'intervalle de mise à jour du FPS est atteint
@@ -69,18 +63,6 @@ void updateFPS(t_frameData* frame, SDL_Renderer* renderer) {
         frame->fps = (Uint32)(frame->frameCount / elapsed);                // Arrondi a l'entier
         frame->frameCount = 0;
         resetTimer(frame->fpsTimer);
-
-        if (frame->showFPS) {
-            char fpsStr[50];
-            sprintf(fpsStr, "FPS: %d | Delta: %2.2fms", frame->fps, frame->deltaTime * SECONDE_EN_MS);
-            updateText(&frame->fpsText, renderer, fpsStr, (SDL_Color){255, 255, 255, 255});
-        }
-    }
-}
-
-void renderFPS(t_frameData* frame, SDL_Renderer* renderer) {
-    if (frame->showFPS) {
-        drawText(renderer, &frame->fpsText);
     }
 }
 
@@ -88,7 +70,6 @@ void freeFrameData(t_frameData* frame) {
     if (frame) {
         freeTimer(frame->frameTimer);
         freeTimer(frame->fpsTimer);
-        freeText(&frame->fpsText);
         free(frame);
     }
 }

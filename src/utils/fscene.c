@@ -1,74 +1,75 @@
-#include "./fscene.h"
+#include "fscene.h"
 
-void (*tableFonctfree[3])(void *) = {freeButton, SDL_DestroyTextureWrapper, freeText};
+#include <stdlib.h>
 
-t_scene *initScene(int taille) {
-    t_scene *scene = (t_scene *)malloc(sizeof(t_scene));
-    scene->contenue = (t_fonctionManager **)malloc(sizeof(t_fonctionManager *) * taille);
-    if (!scene->contenue) {
-        fprintf(stderr, "Erreur d'allocation mémoire pour scene->scene\n");
-        free(scene);
-        exit(EXIT_FAILURE);
+t_scene* createScene(t_objectManager* manager, char* name) {
+    t_scene* scene = malloc(sizeof(t_scene));
+    scene->name = strdup(name);
+    scene->objectManager = manager;
+
+    for (int i = 0; i < NUM_FONCTION; i++) {
+        scene->fonctions[i] = NULL;
+        scene->nbFonctions[i] = 0;
     }
-    scene->index = (int *)malloc(sizeof(int));
-    if (!scene->index) {
-        fprintf(stderr, "Erreur d'allocation mémoire pour scene->index\n");
-        free(scene);
-        exit(EXIT_FAILURE);
-    }
-    scene->nbindex = 0;
-    for (int i = 0; i < taille; i++) {
-        scene->contenue[i] = (t_fonctionManager *)malloc(sizeof(t_fonctionManager));
-        scene->contenue[i]->manage = NULL;
-        scene->contenue[i]->fonction = NULL;
-    }
-    scene->taille = taille;
     return scene;
 }
 
-void ajoutObjectManager(t_scene *scene, t_typedObject *object) {
-    if (!(scene->contenue[object->type]->manage)) {
-        scene->contenue[object->type]->manage = initObjectManager(object->type, tableFonctfree[object->type], INITIAL_CAPACITY);
-        scene->contenue[object->type]->fonction = initFonction();
-        if (scene->nbindex) {
-            scene->index = realloc(scene->index, (scene->nbindex + 1) * sizeof(int));
-        }
-        scene->index[scene->nbindex] = object->type;
-        scene->nbindex++;
+void sceneRegisterFunction(t_scene* scene, uint8_t typeObject, t_fonctionType typeFunction, void (*fonct)(t_fonctionParam*), int indexObj, ...) {
+    va_list args;
+    va_start(args, indexObj);
+
+    va_list count_args;
+    va_copy(count_args, args);
+    int param_count = 0;
+    while (va_arg(count_args, void*) != NULL) param_count++;
+    va_end(count_args);
+
+    void** params = malloc(param_count * sizeof(void*));
+
+    for (int i = 0; i < param_count; i++) {
+        params[i] = va_arg(args, void*);
     }
-    addObject(scene->contenue[object->type]->manage, object);
+    va_end(args);
+
+    for (int i = 0; i < scene->objectManager->count; i++) {
+        if (getObjectTypeId(scene->objectManager, i) == typeObject) {
+            void** final_params = malloc((param_count + 1) * sizeof(void*));
+
+            for (int j = 0; j < indexObj; j++) {
+                final_params[j] = params[j];
+            }
+            final_params[indexObj] = getObject(scene->objectManager, i);
+            for (int j = indexObj; j < param_count; j++) {
+                final_params[j + 1] = params[j];
+            }
+
+            t_fonctionParam* sf = malloc(sizeof(t_fonctionParam));
+            sf->fonction = fonct;
+            sf->param = final_params;
+            sf->nb_param = param_count + 1;
+
+            scene->fonctions[typeFunction] = realloc(scene->fonctions[typeFunction], (scene->nbFonctions[typeFunction] + 1) * sizeof(t_fonctionParam*));
+            scene->fonctions[typeFunction][scene->nbFonctions[typeFunction]++] = sf;
+        }
+    }
+
+    free(params);
 }
 
-void freeScene(t_scene **scene) {
-    if (!scene || !(*scene)) return;
-
-    for (int i = 0; i < (*scene)->taille; i++) {
-        if ((*scene)->contenue[i] && (*scene)->contenue[i]->manage) {
-            freeObjectManager(&(*scene)->contenue[i]->manage);
-            (*scene)->contenue[i]->manage = NULL;
-        }
-        if ((*scene)->contenue[i] && (*scene)->contenue[i]->fonction) {
-            freeFonction(&(*scene)->contenue[i]->fonction);
-            (*scene)->contenue[i]->fonction = NULL;
-        }
-        free((*scene)->contenue[i]);
-        (*scene)->contenue[i] = NULL;
+void executeSceneFunctions(t_scene* scene, t_fonctionType ftype) {
+    for (int i = 0; i < scene->nbFonctions[ftype]; i++) {
+        callFonction(scene->fonctions[ftype][i]);
     }
-    free((*scene)->contenue);
-    (*scene)->contenue = NULL;
-    if ((*scene)->index) {
-        free((*scene)->index);
-        (*scene)->index = NULL;
-    }
-    (*scene)->nbindex = 0;
-    free(*scene);
-    (*scene) = NULL;
 }
 
-void callRender(t_scene *scene) {
-    for (int i = 0; i < scene->taille; i++) {
-        if (scene->contenue[i] && scene->contenue[i]->fonction) {
-            call(scene->contenue[i], RENDERALL);
+void freeScene(t_scene* scene) {
+    freeObjectManager(scene->objectManager);
+    for (int i = 0; i < NUM_FONCTION; i++) {
+        for (int j = 0; j < scene->nbFonctions[i]; j++) {
+            freeFonction(&(scene->fonctions[i][j]));
         }
+        free(scene->fonctions[i]);
     }
+    free(scene->name);
+    free(scene);
 }

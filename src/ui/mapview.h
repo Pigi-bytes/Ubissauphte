@@ -3,8 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-#include "debug.h"
-#include "genmap.h"
+#include "../engine/world/genmap.h"
 
 typedef struct {
     int x1, y1, x2, y2;
