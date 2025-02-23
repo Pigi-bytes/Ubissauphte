@@ -1,3 +1,4 @@
+
 /**
  * @file fichierLoader.h
  * @brief Lecture et chargement de donnees dans un fichier texte
@@ -32,7 +33,6 @@ typedef struct {
  * @brief Structure contenant des t_pairData sous la forme d'un block
  */
 typedef struct {
-    t_typeRegistry *registre;      ///< Contiens des type
     t_objectManager *pairManager;  ///< Tableau de t_pairData géré par un t_objetManager
 } t_block;
 
@@ -41,7 +41,6 @@ typedef struct {
  * @brief Structure contenant des t_block dans un tableau
  */
 typedef struct {
-    t_typeRegistry *registre;       ///< Contiens des type
     t_objectManager *blockManager;  ///<  Tableau de t_block géré par un t_objetManager
 } t_fichier;
 
@@ -80,20 +79,30 @@ bool getValue(t_block *block, char *name, void *result, t_valueType type);
 void saveFichier(t_fichier *fichier, char *filename);
 
 /**
+ * @brief Crée un nouveau t_block
+ */
+t_block *createNewBlock();
+
+/**
+ * @brief Création d'un t_pairData
+ * @param key cle de la pair
+ * @param value valeu de la pair
+ */
+t_pairData *createPairData(char *key, char *value);
+
+/**
  * @brief Ajoute un block dans un t_fichier
  * @param fichier Fichier dans lequel on ajoute le block
  * @param Block Block ajouté
- * @param idBlock indice du type
  */
-void addBlock(t_fichier *fichier, t_block *Block, uint8_t idBLock);
+void addBlock(t_fichier *fichier, t_block *Block);
 
 /**
  * @brief Ajoute une Pair de data dans un block d'un t_fichier
  * @param block Block dans lequel on ajoute la data
  * @param pair data ajouté
- * @param idPair indice du type
  */
-void addPairData(t_block *block, t_pairData *pair, uint8_t idPair);
+void addPairData(t_block *block, t_pairData *pair);
 
 /**
  * @brief Libère la mémoire allouée pour un block

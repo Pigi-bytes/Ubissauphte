@@ -1,5 +1,6 @@
 
 #include "fichierLoader.h"
+
 void saveFichier(t_fichier *fichier, char *filename) {
     FILE *file = fopen(filename, "w");
     if (!file) {
@@ -21,12 +22,12 @@ void saveFichier(t_fichier *fichier, char *filename) {
     fclose(file);
 }
 
-void addBlock(t_fichier *fichier, t_block *Block, uint8_t idBlock) {
-    addObject(fichier->blockManager, Block, idBlock);
+void addBlock(t_fichier *fichier, t_block *Block) {
+    addObject(fichier->blockManager, Block, getTypeIdByName(fichier->blockManager->registry, "BLOCK_TYPE"));
 }
 
-void addPairData(t_block *block, t_pairData *pair, uint8_t idPair) {
-    addObject(block->pairManager, pair, idPair);
+void addPairData(t_block *block, t_pairData *pair) {
+    addObject(block->pairManager, pair, getTypeIdByName(block->pairManager->registry, "PAIR_TYPE"));
 }
 
 t_fichier *chargerFichier(char *filename) {
@@ -35,14 +36,17 @@ t_fichier *chargerFichier(char *filename) {
         perror("Erreur d'ouverture du fichier");
         exit(EXIT_FAILURE);
     }
+
     t_fichier *fichier = malloc(sizeof(t_fichier));
     // Initialisation d'une zone de stockage pour le premier block
-    fichier->registre = createTypeRegistry();
-    uint8_t idBlockType = registerType(fichier->registre, blockFreeFunc, "BLOCK_TYPE");
-    fichier->blockManager = initObjectManager(fichier->registre);
+
+    t_typeRegistry *registre = createTypeRegistry();
+    registerType(registre, blockFreeFunc, "BLOCK_TYPE");
+    registerType(registre, pairFreeFunc, "PAIR_TYPE");
+
+    fichier->blockManager = initObjectManager(registre);
 
     t_block *currentBlock = NULL;
-    int8_t idPairType;
     char line[MAX_LINE_LENGTH];
 
     // Lecture du fichier
@@ -51,15 +55,12 @@ t_fichier *chargerFichier(char *filename) {
         // Fin du block en cas de ligne vide puis stockage dans la zone prévu pour
         if (strlen(line) == 0) {
             if (currentBlock) {
-                addObject(fichier->blockManager, currentBlock, idBlockType);
+                addBlock(fichier, currentBlock);
                 currentBlock = NULL;
             }
         } else {  // Allocation de mémoire pour chaque case du tableau t_block
             if (!currentBlock) {
-                currentBlock = malloc(sizeof(t_block));
-                currentBlock->registre = createTypeRegistry();
-                idPairType = registerType(currentBlock->registre, pairFreeFunc, "TYPE_PAIR");
-                currentBlock->pairManager = initObjectManager(currentBlock->registre);
+                currentBlock = createNewBlock();
             }
 
             // Séparation de la cle et de la valeur grace au ':'
@@ -69,18 +70,15 @@ t_fichier *chargerFichier(char *filename) {
                 char *key = line;             // Partie cle a gauche du ': '
                 char *value = separator + 1;  // Partie valeur à droite du ': '
 
-                // Allocation de mémoire pour chaque t_pairData
-                t_pairData *pair = malloc(sizeof(t_pairData));
-                pair->key = strdup(key);
-                // S'il y a un espace présent entre le ':' et la valeur on le supprime
-                pair->value = strdup(value + (value[0] == ' ' ? 1 : 0));
+                key = key;
+                value = value + (value[0] == ' ' ? 1 : 0);
 
-                addObject(currentBlock->pairManager, pair, idPairType);
+                addPairData(currentBlock, createPairData(line, value));
             }
         }
     }
     if (currentBlock) {
-        addObject(fichier->blockManager, currentBlock, idBlockType);
+        addBlock(fichier, currentBlock);
     }
 
     fclose(file);
@@ -94,23 +92,41 @@ bool getValue(t_block *block, char *name, void *result, t_valueType type) {
             switch (type) {
                 case INT:
                     *(int *)result = atoi(pair->value);
-                    return true;
+                    break;
                 case FLOAT:
-                    *(float *)result = (float)atof(pair->value);
-                    return true;
+                    *(float *)result = atof(pair->value);
+                    break;
                 case DOUBLE:
                     *(double *)result = atof(pair->value);
-                    return true;
+                    break;
                 case STRING:
                     strcpy((char *)result, pair->value);
-                    return true;
+                    break;
                 default:
-                    printf("erreur sur le type");
                     return false;
             }
+            return true;
         }
     }
     return false;
+}
+
+t_block *createNewBlock() {
+    t_block *block = malloc(sizeof(t_block));
+
+    t_typeRegistry *registre = createTypeRegistry();
+    registerType(registre, pairFreeFunc, "PAIR_TYPE");
+    block->pairManager = initObjectManager(registre);
+    return block;
+}
+
+t_pairData *createPairData(char *key, char *value) {
+    t_pairData *pair = malloc(sizeof(t_pairData));
+
+    pair->key = strdup(key);
+    pair->value = strdup(value);
+    
+    return pair;
 }
 
 void blockFreeFunc(void *data) {
