@@ -193,7 +193,6 @@ void load(int mat[HEIGHT][WIDTH]) {
     fprintf(fichier, "\n");
     fclose(fichier);
 }
-
 int main() {
     SDL_Init(SDL_INIT_VIDEO);
 
@@ -205,7 +204,7 @@ int main() {
 
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
-            SDL_FPoint st = {(float)i / 5, (float)j / 5};  // plus le dénominateur est petit plus il y à de murs
+            SDL_FPoint st = {(float)i / 10, (float)j / 10};  // plus le dénominateur est petit plus il y à de murs
             SDL_FPoint st2 = {(float)i / 10, (float)j / 10};
             SDL_FPoint st3 = {(float)i / 15, (float)j / 15};
             values[i][j] = noise(st);
@@ -229,8 +228,8 @@ int main() {
     int entier[HEIGHT][WIDTH];
     float_to_int(values, entier);
     afficheMat(entier);
-    fillGaps(entier);
-    lissage(entier);
+    // fill_gaps(entier);
+    // lissage(entier);
 
     load(entier);
     printf("1\n");

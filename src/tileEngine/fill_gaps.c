@@ -6,7 +6,7 @@ void float_to_int(float mat[HEIGHT][WIDTH], int entier[HEIGHT][WIDTH]) {
             if (i == 0 || j == 0 || i == HEIGHT - 1 || j == WIDTH - 1) {
                 entier[i][j] = 1;
             } else
-                entier[i][j] = mat[i][j] > 0.3 ? 0 : 1;
+                entier[i][j] = mat[i][j] > 0.6 ? 0 : 1;
         }
     }
 }
@@ -30,7 +30,7 @@ int sans_0(int mat[HEIGHT][WIDTH]) {
     return TRUE;
 }
 
-int nbElemBlock(int mat[HEIGHT][WIDTH], int num_Block) {
+int nb_elem_block(int mat[HEIGHT][WIDTH], int num_Block) {
     int count = 0;
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
@@ -44,7 +44,7 @@ void comblet(int mat[HEIGHT][WIDTH], int copie[HEIGHT][WIDTH], int num_Block) {
     int nbElemMax = 0;
     int num_BlockMax = 1;
     for (int block = 1; block < num_Block; block++) {
-        int nbElem = nbElemBlock(copie, block);
+        int nbElem = nb_elem_block(copie, block);
         if (nbElem > nbElemMax) {
             nbElemMax = nbElem;
             num_BlockMax = block;
@@ -61,7 +61,7 @@ void comblet(int mat[HEIGHT][WIDTH], int copie[HEIGHT][WIDTH], int num_Block) {
     }
 }
 
-void fillGaps(int mat[HEIGHT][WIDTH]) {
+void fill_gaps(int mat[HEIGHT][WIDTH]) {
     initPile();
     int copie[HEIGHT][WIDTH];
     int numBlock = 1;

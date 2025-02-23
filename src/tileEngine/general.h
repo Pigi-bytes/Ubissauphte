@@ -7,8 +7,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define HEIGHT 50
-#define WIDTH 40
+#define HEIGHT 100
+#define WIDTH 100
 
 #define window_width 1280
 #define window_height 960
