@@ -72,6 +72,6 @@ void freeMinimap(void* object);
  * @param windowW Largeur de la fenêtre
  * @param windowH Hauteur de la fenêtre
  */
-void resizeMinimap(SDL_Renderer* renderer, t_minimap* minimap, int windowW, int windowH);
+void resizeMinimap(SDL_Renderer* renderer, t_minimap* minimap, int *windowW, int *windowH);
 
 #endif

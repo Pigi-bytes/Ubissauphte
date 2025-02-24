@@ -16,6 +16,7 @@ typedef enum {
     RENDER_GAME,
     RENDER_UI,
     HANDLE_INPUT,
+    HANDLE_RESIZE,
     UPDATE,
     SET_BUFFER,
     RENDER_BUFFER,

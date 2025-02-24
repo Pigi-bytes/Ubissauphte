@@ -38,12 +38,16 @@ GENERATE_WRAPPER_3(renderPlayer, SDL_Renderer*, t_joueur*, t_camera*)
 
 GENERATE_WRAPPER_3(updateFPSDisplay, t_fpsDisplay*, t_frameData*, SDL_Renderer*)
 GENERATE_WRAPPER_3(updateMinimap, t_minimap*, t_camera*, SDL_Renderer*)
+GENERATE_WRAPPER_2(cameraHandleZoom, t_viewPort*, int*)
 
 GENERATE_WRAPPER_2(handleInputButton, t_input*, t_button*)
 GENERATE_WRAPPER_3(handleInputPlayer, t_input*, t_joueur*, t_grid*)
 
 GENERATE_WRAPPER_2(setRenderTarget, SDL_Renderer*, t_viewPort*)
 GENERATE_WRAPPER_3(centerCameraOn, t_camera*, int*, int*)
+
+GENERATE_WRAPPER_3(resizeViewport, t_viewPort*, int*, int*)
+GENERATE_WRAPPER_4(resizeMinimap, SDL_Renderer*, t_minimap*, int*, int*)
 
 t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData) {
     t_typeRegistry* registre = createTypeRegistry();
@@ -62,9 +66,9 @@ t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Quitter", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.65f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, initFPSDisplay(renderer, font), FRAME_DISPLAY_TYPE);
 
-    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, 0, FONCTION_PARAMS(frameData, renderer));
-
     sceneRegisterFunction(scene, BUTTON_TYPE, HANDLE_INPUT, handleInputButtonWrapper, 1, FONCTION_PARAMS(input));
+
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, 0, FONCTION_PARAMS(frameData, renderer));
 
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, 1, FONCTION_PARAMS(renderer));
     sceneRegisterFunction(scene, BUTTON_TYPE, RENDER_UI, renderButtonWrapper, 1, FONCTION_PARAMS(renderer));
@@ -110,10 +114,14 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
 
     sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level));
+    sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&input->mouseYWheel));
 
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, 0, FONCTION_PARAMS(frameData, renderer));
     sceneRegisterFunction(scene, MINIMAP_TYPE, UPDATE, updateMinimapWrapper, 0, FONCTION_PARAMS(camera, renderer));
     sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&joueur->entity.rect.x, &joueur->entity.rect.y));
+
+    sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_RESIZE, resizeViewportWrapper, 0, FONCTION_PARAMS(&input->windowWidth, &input->windowHeight));
+    sceneRegisterFunction(scene, MINIMAP_TYPE, HANDLE_RESIZE, resizeMinimapWrapper, 1, FONCTION_PARAMS(renderer, &input->windowWidth, &input->windowHeight));
 
     sceneRegisterFunction(scene, VIEWPORT_TYPE, SET_BUFFER, setRenderTargetWrapper, 1, FONCTION_PARAMS(renderer));
 
@@ -137,9 +145,8 @@ int main(int argc, char* argv[]) {
     TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     t_frameData* frameData = initFrameData(0);
 
-    // t_scene* scene1 = createMainMenu(renderer, input, font, frameData);
+    // t_scene* scene = createMainMenu(renderer, input, font, frameData);
     t_scene* scene = createMainWord(renderer, input, font, frameData);
-    // t_scene* scene = scene2;
 
     while (!input->quit) {
         startFrame(frameData);
@@ -149,6 +156,10 @@ int main(int argc, char* argv[]) {
 
         updateFPS(frameData);
         executeSceneFunctions(scene, UPDATE);
+
+        if (input->resized) {
+            executeSceneFunctions(scene, HANDLE_RESIZE);
+        }
 
         SDL_RenderClear(renderer);
         executeSceneFunctions(scene, SET_BUFFER);
@@ -163,7 +174,6 @@ int main(int argc, char* argv[]) {
 
     freeFrameData(frameData);
     freeScene(scene);
-    // freeScene(scene2);
 
     TTF_CloseFont(font);
     freeInput(input);

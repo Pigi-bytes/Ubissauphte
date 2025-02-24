@@ -72,7 +72,7 @@ void centerCameraOn(t_camera* cam, int* x, int* y);
  *   - Zoom max arrière : taille totale du niveau
  * - Met à jour w/h de la caméra
  */
-void cameraHandleZoom(t_viewPort* vp, float deltaZoom);
+void cameraHandleZoom(t_viewPort* vp, int* deltaZoom);
 
 /**
  * @brief Crée un viewport lié à une caméra
@@ -118,7 +118,7 @@ void renderViewport(SDL_Renderer* renderer, t_viewPort* vp);
  *
  * @note Doit être appelee a chaque fois que l'on redimensionne la fenetre
  */
-void resizeViewport(t_viewPort* vp, int windowW, int windowH);
+void resizeViewport(t_viewPort* vp, int* windowW, int* windowH);
 
 /**
  * @brief Libere la mémoire allouée pour le viewport

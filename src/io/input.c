@@ -3,6 +3,8 @@
 void updateInput(t_input* input) {
     SDL_Event event;
     input->resized = SDL_FALSE;  // Réinitialiser à chaque frame
+    input->mouseXWheel = 0;
+    input->mouseYWheel = 0;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT)
             input->quit = SDL_TRUE;

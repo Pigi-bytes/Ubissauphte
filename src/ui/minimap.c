@@ -30,10 +30,10 @@ t_minimap* createMinimap(SDL_Renderer* renderer, int windowW, int windowH) {
     return minimap;
 }
 
-void resizeMinimap(SDL_Renderer* renderer, t_minimap* minimap, int windowW, int windowH) {
+void resizeMinimap(SDL_Renderer* renderer, t_minimap* minimap, int *windowW, int *windowH) {
     minimap->area = (SDL_Rect){
-        windowW - minimap->size - minimap->margin,  // X
-        windowH - minimap->size - minimap->margin,  // Y
+        *windowW - minimap->size - minimap->margin,  // X
+        *windowH - minimap->size - minimap->margin,  // Y
         minimap->size,                              // Largeur
         minimap->size                               // Hauteur
     };

@@ -33,13 +33,13 @@ void centerCameraOn(t_camera* cam, int* x, int* y) {
     cam->y = newY;
 }
 
-void cameraHandleZoom(t_viewPort* vp, float deltaZoom) {
+void cameraHandleZoom(t_viewPort* vp, int* deltaZoom) {
     const float zoomSpeed = 0.05f;
     // Calcul du facteur de zoom multiplicatif
     // deltaZoom = (-1, +1), permet de savoir si on zoom avant ou arriere
     // 1.0f = permet de gardé la valeur de base quand on multiplie
 
-    float zoom = 1.0f + deltaZoom * zoomSpeed;
+    float zoom = 1.0f + *deltaZoom * zoomSpeed;
 
     // Multiplication par le nouveau facteur (avec 1.0 on s'assure de modifier l'ancienne valeur)
     vp->camera->w *= zoom;
@@ -79,9 +79,9 @@ void setRenderTarget(SDL_Renderer* renderer, t_viewPort* vp) {
     SDL_SetRenderTarget(renderer, vp->renderTarget);
 }
 
-void resizeViewport(t_viewPort* vp, int windowW, int windowH) {
-    vp->screenRect.w = windowW;
-    vp->screenRect.h = windowH;
+void resizeViewport(t_viewPort* vp, int* windowW, int* windowH) {
+    vp->screenRect.w = *windowW;
+    vp->screenRect.h = *windowH;
 }
 
 void freeViewport(void* object) {
