@@ -1,10 +1,5 @@
 
-#include "../debug.h"
-#include "../io/input.h"
-#include "fill_gaps.h"
-#include "general.h"
-#include "lissage.h"
-#include "perlinNoise.h"
+#include "geneRoom.h"
 
 void plafond(FILE *fichier) {
     int alea = rand() % 4;
@@ -199,6 +194,7 @@ int main() {
     SDL_Window *window = SDL_CreateWindow("Bruit de Perlin", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_SHOWN);
 
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    t_listeBlock **lab = createListAllBlock();
 
     float values[HEIGHT][WIDTH];
 
@@ -228,8 +224,8 @@ int main() {
     int entier[HEIGHT][WIDTH];
     float_to_int(values, entier);
     afficheMat(entier);
-    // fill_gaps(entier);
-    // lissage(entier);
+    fill_gaps(entier);
+    issage(entier);
 
     load(entier);
     printf("1\n");
