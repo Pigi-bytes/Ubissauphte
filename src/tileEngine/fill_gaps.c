@@ -10,7 +10,7 @@ int **float_to_int(float mat[HEIGHT][WIDTH]) {
             if (i == 0 || j == 0 || i == HEIGHT - 1 || j == WIDTH - 1) {
                 entier[i][j] = 1;
             } else
-                entier[i][j] = mat[i][j] > 0.6 ? 0 : 1;
+                entier[i][j] = mat[i][j] > 0.3 ? 0 : 1;
         }
     }
     return entier;

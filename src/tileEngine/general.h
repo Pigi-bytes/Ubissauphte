@@ -8,6 +8,7 @@
 #include <time.h>
 
 #include "liste_block.h"
+#include "../debug.h"
 
 #define HEIGHT 100
 #define WIDTH 100

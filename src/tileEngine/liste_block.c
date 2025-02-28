@@ -81,7 +81,6 @@ void afficher(t_listeBlock** lab) {
 
 t_block* randomBlocByType(t_listeBlock* lb) {
     double nb = (rand() + 0.5) / ((double)RAND_MAX + 1);
-    printf("%lf", nb);
     double somme = 0;
     int i;
     for (i = 0; somme < nb && i < lb->nbElem; i++) {
@@ -114,21 +113,21 @@ t_listeBlock** createListAllBlock() {
     ajouterBlock(lab, SOL_TYPE, SOL_FRACTURE, "43", "0", (0.33));
     ajouterBlock(lab, SOL_TYPE, SOL_POINT, "50", "0", 0.33);
 
-    ajouterBlock(lab, FRONTAL_TYPE, FRONTALE_BRIQUE_SIMPLE, "41", "0", (((double)2) / ((double)8)));
-    ajouterBlock(lab, FRONTAL_TYPE, FRONTALE_BRIQUE_FENETRE, "29", "0", (((double)2) / ((double)8)));
-    ajouterBlock(lab, FRONTAL_TYPE, FRONTALE_DRAPEAU, "30", "0", (((double)2) / ((double)8)));
-    ajouterBlock(lab, FRONTAL_TYPE, FRONTALE_FONTAINE_EAUX, "21", "0", (((double)1) / ((double)8)));
-    ajouterBlock(lab, FRONTAL_TYPE, FRONTALE_FONTAINE_PAS_EAUX, "20", "0", (((double)1) / ((double)8)));
+    ajouterBlock(lab, FRONTAL_TYPE, FRONTALE_BRIQUE_SIMPLE, "41", "0", (0.3));
+    ajouterBlock(lab, FRONTAL_TYPE, FRONTALE_BRIQUE_FENETRE, "29", "0", (0.3));
+    ajouterBlock(lab, FRONTAL_TYPE, FRONTALE_DRAPEAU, "30", "0", (0.3));
+    ajouterBlock(lab, FRONTAL_TYPE, FRONTALE_FONTAINE_EAUX, "21", "0", (0.05));
+    ajouterBlock(lab, FRONTAL_TYPE, FRONTALE_FONTAINE_PAS_EAUX, "20", "0", (0.05));
 
     ajouterBlock(lab, PLAFOND_TYPE, PLAFOND_SIMPLE, "1", "0", (((double)2) / ((double)4)));
     ajouterBlock(lab, PLAFOND_TYPE, PLAFOND_FRACTURE, "13", "0", (((double)2) / ((double)4)));
     ajouterBlock(lab, PLAFOND_TYPE, PLAFOND_POINT, "25", "0", (((double)2) / ((double)4)));
 
-    ajouterBlock(lab, DECO_TYPE, DECO_HAUT_BOITE, "69", "0", (((double)1) / ((double)5)));
+    ajouterBlock(lab, DECO_TYPE, DECO_HAUT_BOITE, "64", "0", (((double)1) / ((double)5)));
     ajouterBlock(lab, DECO_TYPE, DECO_CROIX_TOMBE, "65", "0", (((double)1) / ((double)5)));
     ajouterBlock(lab, DECO_TYPE, DECO_PIERRE_TOMBALE, "66", "0", (((double)1) / ((double)5)));
     ajouterBlock(lab, DECO_TYPE, DECO_TABLE, "73", "0", (((double)1) / ((double)5)));
-    ajouterBlock(lab, DECO_TYPE, DECO_ENCLUME, "66", "0", (((double)0.25f) / ((double)5)));
+    ajouterBlock(lab, DECO_TYPE, DECO_ENCLUME, "66", "0", (((double)1) / ((double)5)));
 
     ajouterBlock(lab, COMPDECO_TYPE, COMPDECO_BAS_BOITE, "76", "0", 1);
     ajouterBlock(lab, COMPDECO_TYPE, COMPDECO_CHAISE, "65", "0", 1);
