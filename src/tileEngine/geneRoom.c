@@ -21,9 +21,9 @@ t_block * frontale(t_listeBlock **lab) {
     return randomBlocByType(lb);
 }
 
-int blocSeul(int i, int j, t_case *c) {
+int blocSeul(t_case *c) {
     return (
-        existeVoisin(c->tabVoisin[VOISIN_HAUT], c->tabVoisin[VOISIN_BAS], c->tabVoisin[VOISIN_GAUCHE], c->tabVoisin[VOISIN_DROIT]) 
+        existVois(c->tabVoisin[VOISIN_HAUT], c->tabVoisin[VOISIN_BAS], c->tabVoisin[VOISIN_GAUCHE], c->tabVoisin[VOISIN_DROIT]) 
         && (!(c->tabVoisin[VOISIN_HAUT]->val))
         && (!(c->tabVoisin[VOISIN_BAS]->val))
         && (!(c->tabVoisin[VOISIN_GAUCHE]->val))
@@ -31,69 +31,70 @@ int blocSeul(int i, int j, t_case *c) {
     );
 }
 
-int mur_avant(int i, int j, t_case *c) {
-    return existeVoisin(c->tabVoisin[VOISIN_BAS]) && (!(c->tabVoisin[VOISIN_BAS]->val));
+int mur_avant(t_case *c) {
+    return existVois(c->tabVoisin[VOISIN_BAS]) && (!(c->tabVoisin[VOISIN_BAS]->val));
 }
-int angle_droit(int i, int j, t_case *c) {
+int angle_droit(t_case *c) {
     return (
-        existeVoisin(c->tabVoisin[VOISIN_HAUT], c->tabVoisin[VOISIN_DROIT])
+        existVois(c->tabVoisin[VOISIN_HAUT], c->tabVoisin[VOISIN_DROIT])
         && (!(c->tabVoisin[VOISIN_HAUT]->val)) 
         && (
             (!c->tabVoisin[VOISIN_DROIT]->val) 
             || (
                 (c->tabVoisin[VOISIN_DROIT]->val) 
-                && existeVoisin(c->tabVoisin[VOISIN_DIAG_DROIT_BAS])
+                && existVois(c->tabVoisin[VOISIN_DIAG_DROIT_BAS])
                 &&(!(c->tabVoisin[VOISIN_DIAG_DROIT_BAS]->val))
             )
         )
     );
 }
-int angle_gauche(int i, int j, t_case * c) {
+int angle_gauche(t_case * c) {
     return (
-        existeVoisin(c->tabVoisin[VOISIN_HAUT],c->tabVoisin[VOISIN_GAUCHE])         
-        && (c->tabVoisin[VOISIN_HAUT]->val)                                         
+        existVois(c->tabVoisin[VOISIN_HAUT],c->tabVoisin[VOISIN_GAUCHE])         
+        && (!(c->tabVoisin[VOISIN_HAUT]->val))                                         
         && (
             (!(c->tabVoisin[VOISIN_GAUCHE]->val)) 
             || (
                 (c->tabVoisin[VOISIN_GAUCHE]->val)
-                && existeVoisin(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS])
+                && existVois(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS])
                 && (!(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val))
             )
         )
     );
 }
 
-int arrondi_inf_droit(int i, int j, t_case * c) {
+int arrondi_inf_droit(t_case * c) {
     return (
-        existeVoisin(c->tabVoisin[VOISIN_HAUT],c->tabVoisin[VOISIN_DIAG_DROIT_HAUT],c->tabVoisin[VOISIN_DROIT])
+        existVois(c->tabVoisin[VOISIN_HAUT],c->tabVoisin[VOISIN_DIAG_DROIT_HAUT],c->tabVoisin[VOISIN_DROIT])
         && (c->tabVoisin[VOISIN_HAUT]->val) 
         && (c->tabVoisin[VOISIN_DROIT]->val) 
         && (!(c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]->val))
     );
 }
 
-int arrondi_inf_gauche(int i, int j, t_case * c) {
+int arrondi_inf_gauche(t_case * c) {
     return (
-        existeVoisin(c->tabVoisin[VOISIN_HAUT],c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT],c->tabVoisin[VOISIN_GAUCHE]) 
+        existVois(c->tabVoisin[VOISIN_HAUT],c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT],c->tabVoisin[VOISIN_GAUCHE]) 
         && (c->tabVoisin[VOISIN_HAUT]->val) 
         && (c->tabVoisin[VOISIN_GAUCHE]->val) 
         && (!(c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT]->val))
     );
 }
 
-int arrondi_sup_droit(int i, int j, t_case *c) {
+int arrondi_sup_droit(t_case *c) {
     return (
-        existeVoisin(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_DIAG_DROIT_BAS],c->tabVoisin[VOISIN_BAS2],c->tabVoisin[VOISIN_BAS2],c->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]) 
+        existVois(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_DIAG_DROIT_BAS],c->tabVoisin[VOISIN_BAS2],c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT],c->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]) 
         && (c->tabVoisin[VOISIN_DIAG_DROIT_BAS]->val) 
+        && (c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT])
         && (c->tabVoisin[VOISIN_BAS]->val) 
         && (c->tabVoisin[VOISIN_BAS2]->val) 
         && (!(c->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]->val))
     );
 }
 
-int arrondi_sup_gauche(int i, int j, t_case *c) {
+int arrondi_sup_gauche(t_case *c) {
     return(
-        existeVoisin(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS],c->tabVoisin[VOISIN_DIAG_DROIT_HAUT],c->tabVoisin[VOISIN_BAS2],c->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE])
+        existVois(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS],c->tabVoisin[VOISIN_DIAG_DROIT_HAUT],c->tabVoisin[VOISIN_BAS2],c->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE])
         && (c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val) 
         && (c->tabVoisin[VOISIN_BAS]->val) 
         && (c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]->val)
@@ -102,13 +103,13 @@ int arrondi_sup_gauche(int i, int j, t_case *c) {
     );
 }
 
-int mur_arriere(int i, int j, t_case *c) {
-    return existeVoisin(c->tabVoisin[VOISIN_HAUT]) && (!(c->tabVoisin[VOISIN_HAUT]->val));
+int mur_arriere(t_case *c) {
+    return existVois(c->tabVoisin[VOISIN_HAUT]) && (!(c->tabVoisin[VOISIN_HAUT]->val));
 }
 
-int angle_continue_gauche(int i, int j, t_case *c) {
+int angle_continue_gauche(t_case *c) {
     return (
-        existeVoisin(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_BAS2]) 
+        existVois(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_BAS2]) 
         && ((c->tabVoisin[VOISIN_BAS]->val)) 
         && (!(c->tabVoisin[VOISIN_BAS2]->val)) 
         && (
@@ -118,9 +119,9 @@ int angle_continue_gauche(int i, int j, t_case *c) {
     );
 }
 
-int angle_continue_droit(int i, int j, t_case *c) {
+int angle_continue_droit(t_case *c) {
     return( 
-        existeVoisin(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_BAS2])  
+        existVois(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_BAS2])  
         && ((c->tabVoisin[VOISIN_BAS]->val)) 
         && (!(c->tabVoisin[VOISIN_BAS2]->val)) 
         && (
@@ -130,26 +131,26 @@ int angle_continue_droit(int i, int j, t_case *c) {
     );
 }
 
-int bordure_mur_avant(int i, int j, t_case *c) {
-    return existeVoisin(c->tabVoisin[VOISIN_BAS2]) && (!(c->tabVoisin[VOISIN_BAS2]->val));
+int bordure_mur_avant(t_case *c) {
+    return existVois(c->tabVoisin[VOISIN_BAS2]) && (!(c->tabVoisin[VOISIN_BAS2]->val));
 }
 
-int bordure_mur_gauche(int i, int j, t_case *c) {
+int bordure_mur_gauche(t_case *c) {
     return (
-        existeVoisin(c->tabVoisin[VOISIN_DROIT])
+        existVois(c->tabVoisin[VOISIN_DROIT])
         &&(
             ((!(c->tabVoisin[VOISIN_DROIT]->val))) 
-            ||((existeVoisin(c->tabVoisin[VOISIN_DIAG_DROIT_BAS])) &&((c->tabVoisin[VOISIN_DROIT]->val) && (!(c->tabVoisin[VOISIN_DIAG_DROIT_BAS]->val))))
+            ||((existVois(c->tabVoisin[VOISIN_DIAG_DROIT_BAS])) &&((c->tabVoisin[VOISIN_DROIT]->val) && (!(c->tabVoisin[VOISIN_DIAG_DROIT_BAS]->val))))
         )
     );
 }
 
-int bordure_mur_droit(int i, int j, t_case *c) {
+int bordure_mur_droit(t_case *c) {
     return (
-        existeVoisin(c->tabVoisin[VOISIN_GAUCHE])
+        existVois(c->tabVoisin[VOISIN_GAUCHE])
         &&( 
             ((!(c->tabVoisin[VOISIN_GAUCHE]->val))) 
-            ||((existeVoisin(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS])) &&((c->tabVoisin[VOISIN_GAUCHE]->val) && (!(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val))))
+            ||((existVois(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS])) &&((c->tabVoisin[VOISIN_GAUCHE]->val) && (!(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val))))
         )
     );
 }
@@ -160,33 +161,33 @@ void choixTiles(t_listeBlock **lab, t_grille *g) {
         for (int j = 0; j < g->nbColonne; j++) {
             if ((!g->grille[i][j]->val)) {
                 g->grille[i][j]->tiles = sol(lab);
-            } else if (blocSeul(i, j, g->grille[i][j])) {
+            } else if (blocSeul(g->grille[i][j])) {
                 g->grille[i][j]->tiles = deco(lab);
-            } else if (mur_avant(i, j, g->grille[i][j])) {
+            } else if (mur_avant(g->grille[i][j])) {
                 g->grille[i][j]->tiles = frontale(lab);
-            } else if (angle_droit(i, j, g->grille[i][j])) {
+            } else if (angle_droit(g->grille[i][j])) {
                 g->grille[i][j]->tiles = blockByName(lb,MUR_ANGLE_DROIT);
-            } else if (angle_gauche(i, j, g->grille[i][j])) {
+            } else if (angle_gauche(g->grille[i][j])) {
                 g->grille[i][j]->tiles = blockByName(lb,MUR_ANGLE_GAUCHE);
-            } else if (arrondi_inf_droit(i, j, g->grille[i][j])) {
+            } else if (arrondi_inf_droit(g->grille[i][j])) {
                 g->grille[i][j]->tiles = blockByName(lb,MUR_ARRONDI_INF_DROIT);
-            } else if (arrondi_inf_gauche(i, j, g->grille[i][j])) {
+            } else if (arrondi_inf_gauche(g->grille[i][j])) {
                 g->grille[i][j]->tiles = blockByName(lb,MUR_ARRONDI_INF_GAUCHE);
-            } else if (arrondi_sup_droit(i, j,  g->grille[i][j])) {
+            } else if (arrondi_sup_droit(g->grille[i][j])) {
                 g->grille[i][j]->tiles = blockByName(lb,MUR_ARRONDI_SUP_DROIT);
-            } else if (arrondi_sup_gauche(i, j, g->grille[i][j])) {
+            } else if (arrondi_sup_gauche(g->grille[i][j])) {
                 g->grille[i][j]->tiles = blockByName(lb,MUR_ARRONDI_SUP_GAUCHE);
-            } else if (mur_arriere(i, j, g->grille[i][j])) {
+            } else if (mur_arriere(g->grille[i][j])) {
                 g->grille[i][j]->tiles = blockByName(lb,MUR_BORDURE_MUR_ARRIERE);
-            } else if (angle_continue_gauche(i, j,g->grille[i][j])) {
+            } else if (angle_continue_gauche(g->grille[i][j])) {
                 g->grille[i][j]->tiles = blockByName(lb,MUR_ANGLE_CONTINUE_GAUCHE);
-            } else if (angle_continue_droit(i, j, g->grille[i][j])) {
+            } else if (angle_continue_droit(g->grille[i][j])) {
                 g->grille[i][j]->tiles = blockByName(lb,MUR_ANGLE_CONTINUE_DROIT);
-            } else if (bordure_mur_avant(i, j, g->grille[i][j])) {
+            } else if (bordure_mur_avant(g->grille[i][j])) {
                 g->grille[i][j]->tiles = blockByName(lb,MUR_BORDURE_MUR_AVANT);
-            } else if (bordure_mur_gauche(i, j, g->grille[i][j])) {
+            } else if (bordure_mur_gauche(g->grille[i][j])) {
                 g->grille[i][j]->tiles = blockByName(lb,MUR_BORDURE_MUR_GAUCHE);
-            } else if (bordure_mur_droit(i, j, g->grille[i][j])) {
+            } else if (bordure_mur_droit(g->grille[i][j])) {
                 g->grille[i][j]->tiles = blockByName(lb,MUR_BORDURE_MUR_DROIT);
             } else
             g->grille[i][j]->tiles  = plafond(lab);
@@ -229,6 +230,7 @@ void load(t_grille * g) {
 }
 int main() {
     SDL_Init(SDL_INIT_VIDEO);
+    srand(time(NULL));
 
     SDL_Window *window = SDL_CreateWindow("Bruit de Perlin", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_SHOWN);
 
@@ -267,9 +269,10 @@ int main() {
 
     t_grille *grille = intToGrilleNiveau(entier, HEIGHT, WIDTH);
 
-    choixTiles(lab,grille);
+    //printf("%d", existVois(grille->grille[50][50]->tabVoisin[VOISIN_BAS2]));
+    choixTiles(lab, grille);
     load(grille);
-
+   
     freeMatInt(entier, HEIGHT, WIDTH);
     freeGrille(grille);
     freeListeBlock(lab);
