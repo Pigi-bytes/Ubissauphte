@@ -1,130 +1,200 @@
 
 #include "geneRoom.h"
 
-void plafond(FILE *fichier) {
-    int alea = rand() % 4;
-    switch (alea) {
-        case 0:
-            fprintf(fichier, "25:0 ");
-            break;
-        case 1:
-            fprintf(fichier, "13:0 ");
-            break;
-        default:
-            fprintf(fichier, "1:0 ");
-            break;
+t_block * plafond(t_listeBlock **lab) {
+    t_listeBlock *lb = listeByType(lab, PLAFOND_TYPE);
+    return randomBlocByType(lb);
+}
+
+t_block *sol(t_listeBlock **lab) {
+    t_listeBlock *lb = listeByType(lab, SOL_TYPE);
+    return randomBlocByType(lb);
+}
+
+t_block * deco(t_listeBlock **lab) {
+    t_listeBlock *lb = listeByType(lab, DECO_TYPE);
+    return randomBlocByType(lb);
+}
+
+t_block * frontale(t_listeBlock **lab) {
+    t_listeBlock *lb = listeByType(lab, FRONTAL_TYPE);
+    return randomBlocByType(lb);
+}
+
+int blocSeul(int i, int j, t_case *c) {
+    return (
+        existeVoisin(c->tabVoisin[VOISIN_HAUT], c->tabVoisin[VOISIN_BAS], c->tabVoisin[VOISIN_GAUCHE], c->tabVoisin[VOISIN_DROIT]) 
+        && (!(c->tabVoisin[VOISIN_HAUT]->val))
+        && (!(c->tabVoisin[VOISIN_BAS]->val))
+        && (!(c->tabVoisin[VOISIN_GAUCHE]->val))
+        && (!(c->tabVoisin[VOISIN_DROIT])->val)
+    );
+}
+
+int mur_avant(int i, int j, t_case *c) {
+    return existeVoisin(c->tabVoisin[VOISIN_BAS]) && (!(c->tabVoisin[VOISIN_BAS]->val));
+}
+int angle_droit(int i, int j, t_case *c) {
+    return (
+        existeVoisin(c->tabVoisin[VOISIN_HAUT], c->tabVoisin[VOISIN_DROIT])
+        && (!(c->tabVoisin[VOISIN_HAUT]->val)) 
+        && (
+            (!c->tabVoisin[VOISIN_DROIT]->val) 
+            || (
+                (c->tabVoisin[VOISIN_DROIT]->val) 
+                && existeVoisin(c->tabVoisin[VOISIN_DIAG_DROIT_BAS])
+                &&(!(c->tabVoisin[VOISIN_DIAG_DROIT_BAS]->val))
+            )
+        )
+    );
+}
+int angle_gauche(int i, int j, t_case * c) {
+    return (
+        existeVoisin(c->tabVoisin[VOISIN_HAUT],c->tabVoisin[VOISIN_GAUCHE])         
+        && (c->tabVoisin[VOISIN_HAUT]->val)                                         
+        && (
+            (!(c->tabVoisin[VOISIN_GAUCHE]->val)) 
+            || (
+                (c->tabVoisin[VOISIN_GAUCHE]->val)
+                && existeVoisin(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS])
+                && (!(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val))
+            )
+        )
+    );
+}
+
+int arrondi_inf_droit(int i, int j, t_case * c) {
+    return (
+        existeVoisin(c->tabVoisin[VOISIN_HAUT],c->tabVoisin[VOISIN_DIAG_DROIT_HAUT],c->tabVoisin[VOISIN_DROIT])
+        && (c->tabVoisin[VOISIN_HAUT]->val) 
+        && (c->tabVoisin[VOISIN_DROIT]->val) 
+        && (!(c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]->val))
+    );
+}
+
+int arrondi_inf_gauche(int i, int j, t_case * c) {
+    return (
+        existeVoisin(c->tabVoisin[VOISIN_HAUT],c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT],c->tabVoisin[VOISIN_GAUCHE]) 
+        && (c->tabVoisin[VOISIN_HAUT]->val) 
+        && (c->tabVoisin[VOISIN_GAUCHE]->val) 
+        && (!(c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT]->val))
+    );
+}
+
+int arrondi_sup_droit(int i, int j, t_case *c) {
+    return (
+        existeVoisin(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_DIAG_DROIT_BAS],c->tabVoisin[VOISIN_BAS2],c->tabVoisin[VOISIN_BAS2],c->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]) 
+        && (c->tabVoisin[VOISIN_DIAG_DROIT_BAS]->val) 
+        && (c->tabVoisin[VOISIN_BAS]->val) 
+        && (c->tabVoisin[VOISIN_BAS2]->val) 
+        && (!(c->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]->val))
+    );
+}
+
+int arrondi_sup_gauche(int i, int j, t_case *c) {
+    return(
+        existeVoisin(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS],c->tabVoisin[VOISIN_DIAG_DROIT_HAUT],c->tabVoisin[VOISIN_BAS2],c->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE])
+        && (c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val) 
+        && (c->tabVoisin[VOISIN_BAS]->val) 
+        && (c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]->val)
+        && (c->tabVoisin[VOISIN_BAS2]->val) 
+        && (!(c->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]->val))
+    );
+}
+
+int mur_arriere(int i, int j, t_case *c) {
+    return existeVoisin(c->tabVoisin[VOISIN_HAUT]) && (!(c->tabVoisin[VOISIN_HAUT]->val));
+}
+
+int angle_continue_gauche(int i, int j, t_case *c) {
+    return (
+        existeVoisin(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_BAS2]) 
+        && ((c->tabVoisin[VOISIN_BAS]->val)) 
+        && (!(c->tabVoisin[VOISIN_BAS2]->val)) 
+        && (
+            (existe(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS])&&(!(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val))) 
+            ||(existe(c->tabVoisin[VOISIN_GAUCHE])&& (!(c->tabVoisin[VOISIN_GAUCHE]->val)))
+        )
+    );
+}
+
+int angle_continue_droit(int i, int j, t_case *c) {
+    return( 
+        existeVoisin(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_BAS2])  
+        && ((c->tabVoisin[VOISIN_BAS]->val)) 
+        && (!(c->tabVoisin[VOISIN_BAS2]->val)) 
+        && (
+            (existe(c->tabVoisin[VOISIN_DIAG_DROIT_BAS])&&(!(c->tabVoisin[VOISIN_DIAG_DROIT_BAS]->val))) 
+            ||(existe(c->tabVoisin[VOISIN_DROIT])&& (!(c->tabVoisin[VOISIN_DROIT]->val)))
+        )
+    );
+}
+
+int bordure_mur_avant(int i, int j, t_case *c) {
+    return existeVoisin(c->tabVoisin[VOISIN_BAS2]) && (!(c->tabVoisin[VOISIN_BAS2]->val));
+}
+
+int bordure_mur_gauche(int i, int j, t_case *c) {
+    return (
+        existeVoisin(c->tabVoisin[VOISIN_DROIT])
+        &&(
+            ((!(c->tabVoisin[VOISIN_DROIT]->val))) 
+            ||((existeVoisin(c->tabVoisin[VOISIN_DIAG_DROIT_BAS])) &&((c->tabVoisin[VOISIN_DROIT]->val) && (!(c->tabVoisin[VOISIN_DIAG_DROIT_BAS]->val))))
+        )
+    );
+}
+
+int bordure_mur_droit(int i, int j, t_case *c) {
+    return (
+        existeVoisin(c->tabVoisin[VOISIN_GAUCHE])
+        &&( 
+            ((!(c->tabVoisin[VOISIN_GAUCHE]->val))) 
+            ||((existeVoisin(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS])) &&((c->tabVoisin[VOISIN_GAUCHE]->val) && (!(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val))))
+        )
+    );
+}
+
+void choixTiles(t_listeBlock **lab, t_grille *g) {
+    t_listeBlock *lb=listeByType(lab,MUR_TYPE);
+    for (int i = 0; i < g->nbLigne; i++) {
+        for (int j = 0; j < g->nbColonne; j++) {
+            if ((!g->grille[i][j]->val)) {
+                g->grille[i][j]->tiles = sol(lab);
+            } else if (blocSeul(i, j, g->grille[i][j])) {
+                g->grille[i][j]->tiles = deco(lab);
+            } else if (mur_avant(i, j, g->grille[i][j])) {
+                g->grille[i][j]->tiles = frontale(lab);
+            } else if (angle_droit(i, j, g->grille[i][j])) {
+                g->grille[i][j]->tiles = blockByName(lb,MUR_ANGLE_DROIT);
+            } else if (angle_gauche(i, j, g->grille[i][j])) {
+                g->grille[i][j]->tiles = blockByName(lb,MUR_ANGLE_GAUCHE);
+            } else if (arrondi_inf_droit(i, j, g->grille[i][j])) {
+                g->grille[i][j]->tiles = blockByName(lb,MUR_ARRONDI_INF_DROIT);
+            } else if (arrondi_inf_gauche(i, j, g->grille[i][j])) {
+                g->grille[i][j]->tiles = blockByName(lb,MUR_ARRONDI_INF_GAUCHE);
+            } else if (arrondi_sup_droit(i, j,  g->grille[i][j])) {
+                g->grille[i][j]->tiles = blockByName(lb,MUR_ARRONDI_SUP_DROIT);
+            } else if (arrondi_sup_gauche(i, j, g->grille[i][j])) {
+                g->grille[i][j]->tiles = blockByName(lb,MUR_ARRONDI_SUP_GAUCHE);
+            } else if (mur_arriere(i, j, g->grille[i][j])) {
+                g->grille[i][j]->tiles = blockByName(lb,MUR_BORDURE_MUR_ARRIERE);
+            } else if (angle_continue_gauche(i, j,g->grille[i][j])) {
+                g->grille[i][j]->tiles = blockByName(lb,MUR_ANGLE_CONTINUE_GAUCHE);
+            } else if (angle_continue_droit(i, j, g->grille[i][j])) {
+                g->grille[i][j]->tiles = blockByName(lb,MUR_ANGLE_CONTINUE_DROIT);
+            } else if (bordure_mur_avant(i, j, g->grille[i][j])) {
+                g->grille[i][j]->tiles = blockByName(lb,MUR_BORDURE_MUR_AVANT);
+            } else if (bordure_mur_gauche(i, j, g->grille[i][j])) {
+                g->grille[i][j]->tiles = blockByName(lb,MUR_BORDURE_MUR_GAUCHE);
+            } else if (bordure_mur_droit(i, j, g->grille[i][j])) {
+                g->grille[i][j]->tiles = blockByName(lb,MUR_BORDURE_MUR_DROIT);
+            } else
+            g->grille[i][j]->tiles  = plafond(lab);
+        }
     }
 }
 
-void sol(FILE *fichier) {
-    int alea = rand() % 3;
-    switch (alea) {
-        case 0:
-            fprintf(fichier, "49:0 ");
-            break;
-        case 1:
-            fprintf(fichier, "50:0 ");
-            break;
-        case 2:
-            fprintf(fichier, "43:0 ");
-            break;
-    }
-}
-
-void deco(FILE *fichier) {
-    int alea = rand() % 6;
-    switch (alea) {
-        case 0:
-            fprintf(fichier, "64:49 ");
-            break;
-        case 1:
-            fprintf(fichier, "65:49 ");
-            break;
-        case 2:
-            fprintf(fichier, "66:49 ");
-            break;
-        case 3:
-            fprintf(fichier, "73:49 ");
-            break;
-        case 4:
-            fprintf(fichier, "75:49 ");
-            break;
-        case 5:
-            fprintf(fichier, "76:49 ");
-            break;
-    }
-}
-
-void frontale(FILE *fichier) {
-    int alea = rand() % 3;
-    switch (alea) {
-        case 0:
-            fprintf(fichier, "41:0 ");
-            break;
-        case 1:
-            fprintf(fichier, "29:0 ");
-            break;
-        case 2:
-            fprintf(fichier, "30:0 ");
-            break;
-    }
-}
-
-int blocSeul(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return ((i + 1) < HEIGHT) && ((i - 1) >= 0) && ((j + 1) < WIDTH) && ((j - 1) >= 0) && (!(mat[i - 1][j])) && (!(mat[i + 1][j])) && (!(mat[i][j + 1])) && (!(mat[i][j - 1]));
-}
-
-int mur_avant(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i + 1 < HEIGHT) && (!mat[i + 1][j]);
-}
-int angle_droit(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i - 1 >= 0) && (i + 1 < HEIGHT) && (j + 1 < WIDTH) && (!mat[i - 1][j]) && ((!mat[i][j + 1]) || ((mat[i][j + 1]) && (!(mat[i + 1][j + 1]))));
-}
-int angle_gauche(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i - 1 >= 0) && (i + 1 < HEIGHT) && (j - 1 >= 0) && (!mat[i - 1][j]) && ((!mat[i][j - 1]) || ((mat[i][j - 1]) && (!(mat[i + 1][j - 1]))));
-}
-
-int arrondi_inf_droit(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i - 1 >= 0) && (j + 1 >= 0) && (mat[i - 1][j]) && (mat[i][j + 1]) && (!mat[i - 1][j + 1]);
-}
-
-int arrondi_inf_gauche(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i - 1 >= 0) && (j - 1 >= 0) && (mat[i - 1][j]) && (mat[i][j - 1]) && (!mat[i - 1][j - 1]);
-}
-
-int arrondi_sup_droit(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i + 2 < HEIGHT) && (j + 1 >= 0) && (mat[i + 1][j + 1]) && (mat[i + 1][j]) && (mat[i + 1][j + 1]) && (mat[i + 2][j]) && (!mat[i + 2][j + 1]);
-}
-
-int arrondi_sup_gauche(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i + 2 < HEIGHT) && (j - 1 >= 0) && (mat[i + 1][j - 1]) && (mat[i + 1][j]) && (mat[i - 1][j + 1]) && (mat[i + 2][j]) && (!mat[i + 2][j - 1]);
-}
-
-int mur_arriere(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i - 1 >= 0) && (!mat[i - 1][j]);
-}
-
-int angle_continue_gauche(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i + 2 < HEIGHT) && (j - 1 >= 0) && ((mat[i + 1][j])) && (!mat[i + 2][j]) && ((!mat[i + 1][j - 1]) || (!mat[i][j - 1]));
-}
-
-int angle_continue_droit(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i + 2 < HEIGHT) && (j + 1 < WIDTH) && ((mat[i + 1][j])) && (!mat[i + 2][j]) && ((!mat[i + 1][j + 1]) || (!mat[i][j + 1]));
-}
-
-int bordure_mur_avant(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return (i + 2 < HEIGHT) && (!mat[i + 2][j]);
-}
-
-int bordure_mur_gauche(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return j + 1 < WIDTH && i + 1 < HEIGHT && ((!mat[i][j + 1]) || ((mat[i][j + 1]) && (!mat[i + 1][j + 1])));
-}
-
-int bordure_mur_droit(int i, int j, int mat[HEIGHT][WIDTH]) {
-    return j - 1 >= 0 && i + 1 < HEIGHT && (((!mat[i][j - 1]) || ((mat[i][j - 1]) && (!mat[i + 1][j - 1]))));
-}
-
-void load(int mat[HEIGHT][WIDTH]) {
+void load(t_grille * g) {
     system("find ~ -name 'testmap*.txt'|wc -l > nb.txt");
     FILE *nbFichier = fopen("nb.txt", "r");
     if (!nbFichier) {
@@ -147,41 +217,10 @@ void load(int mat[HEIGHT][WIDTH]) {
         perror("problème d'ouverture du fichier\n");
         exit(EXIT_FAILURE);
     }
-    fprintf(fichier, "%dx%dx1\n", WIDTH, HEIGHT);
-    for (int i = 0; i < HEIGHT; i++) {
-        for (int j = 0; j < WIDTH; j++) {
-            if ((!mat[i][j])) {
-                sol(fichier);
-            } else if (blocSeul(i, j, mat)) {
-                deco(fichier);
-            } else if (mur_avant(i, j, mat)) {
-                frontale(fichier);
-            } else if (angle_droit(i, j, mat)) {
-                fprintf(fichier, "6:0 ");
-            } else if (angle_gauche(i, j, mat)) {
-                fprintf(fichier, "5:0 ");
-            } else if (arrondi_inf_droit(i, j, mat)) {
-                fprintf(fichier, "26:0 ");
-            } else if (arrondi_inf_gauche(i, j, mat)) {
-                fprintf(fichier, "28:0 ");
-            } else if (arrondi_sup_droit(i, j, mat)) {
-                fprintf(fichier, "2:0 ");
-            } else if (arrondi_sup_gauche(i, j, mat)) {
-                fprintf(fichier, "4:0 ");
-            } else if (mur_arriere(i, j, mat)) {
-                fprintf(fichier, "27:0 ");
-            } else if (angle_continue_gauche(i, j, mat)) {
-                fprintf(fichier, "17:0 ");
-            } else if (angle_continue_droit(i, j, mat)) {
-                fprintf(fichier, "18:0 ");
-            } else if (bordure_mur_avant(i, j, mat)) {
-                fprintf(fichier, "3:0 ");
-            } else if (bordure_mur_gauche(i, j, mat)) {
-                fprintf(fichier, "14:0 ");
-            } else if (bordure_mur_droit(i, j, mat)) {
-                fprintf(fichier, "16:0 ");
-            } else
-                plafond(fichier);
+    fprintf(fichier, "%dx%dx1\n", g->nbLigne, g->nbColonne);
+    for (int i = 0; i < g->nbLigne; i++) {
+        for (int j = 0; j < g->nbColonne; j++) {
+            fprintf(fichier,"%s:%s ",g->grille[i][j]->tiles->tiles,g->grille[i][j]->tiles->rotation);
         }
         fprintf(fichier, "\n");
     }
@@ -221,14 +260,20 @@ int main() {
 
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
-    int entier[HEIGHT][WIDTH];
-    float_to_int(values, entier);
-    afficheMat(entier);
-    fill_gaps(entier);
-    issage(entier);
+    int **entier = float_to_int(values);
+    //afficheMat(entier);
+    fill_gaps(entier,HEIGHT,WIDTH);
+    lissage(entier,HEIGHT,WIDTH);
 
-    load(entier);
-    printf("1\n");
+    t_grille *grille = intToGrilleNiveau(entier, HEIGHT, WIDTH);
+
+    choixTiles(lab,grille);
+    load(grille);
+
+    freeMatInt(entier, HEIGHT, WIDTH);
+    freeGrille(grille);
+    freeListeBlock(lab);
+
     SDL_Quit();
     return EXIT_SUCCESS;
 }
