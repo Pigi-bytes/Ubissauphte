@@ -56,7 +56,26 @@ void freeGrille(t_grille* g) {
     free(g);
 }
 
-t_grille* intToGrille(int** entier, int nbLigne, int nbColonne) {
+void stockerEtatVoisin(t_grille* g, int i, int j, int nbLigne, int nbColonne) {
+    g->grille[i][j]->tabVoisin[VOISIN_HAUT] = (inMat2(i - 1, j, nbLigne, nbColonne)) ? g->grille[i - 1][j] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_HAUT2] = (inMat2(i - 2, j, nbLigne, nbColonne)) ? g->grille[i - 2][j] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_BAS] = (inMat2(i + 1, j, nbLigne, nbColonne)) ? g->grille[i + 1][j] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_BAS2] = (inMat2(i + 2, j, nbLigne, nbColonne)) ? g->grille[i + 2][j] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_GAUCHE] = (inMat2(i, j - 1, nbLigne, nbColonne)) ? g->grille[i][j - 1] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_GAUCHE2] = (inMat2(i, j - 2, nbLigne, nbColonne)) ? g->grille[i][j - 2] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DROIT] = (inMat2(i, j + 1, nbLigne, nbColonne)) ? g->grille[i][j + 1] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DROIT2] = (inMat2(i, j + 2, nbLigne, nbColonne)) ? g->grille[i][j + 2] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_BAS] = (inMat2(i + 1, j + 1, nbLigne, nbColonne)) ? g->grille[i + 1][j + 1] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_BAS2] = (inMat2(i + 2, j + 2, nbLigne, nbColonne)) ? g->grille[i + 2][j + 2] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_HAUT] = (inMat2(i - 1, j + 1, nbLigne, nbColonne)) ? g->grille[i - 1][j + 1] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_HAUT2] = (inMat2(i - 2, j + 2, nbLigne, nbColonne)) ? g->grille[i - 2][j + 2] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_BAS] = (inMat2(i + 1, j - 1, nbLigne, nbColonne)) ? g->grille[i + 1][j - 1] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_BAS2] = (inMat2(i + 2, j - 2, nbLigne, nbColonne)) ? g->grille[i + 2][j - 2] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT] = (inMat2(i - 1, j - 1, nbLigne, nbColonne)) ? g->grille[i - 1][j - 1] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT2] = (inMat2(i - 2, j - 2, nbLigne, nbColonne)) ? g->grille[i - 2][j - 2] : NULL;
+}
+
+t_grille* intToGrilleNiveau(int** entier, int nbLigne, int nbColonne) {
     t_grille* g = initGrille(nbLigne, nbColonne);
     for (int i = 0; i < nbLigne; i++) {
         for (int j = 0; j < nbColonne; j++) {
@@ -66,54 +85,12 @@ t_grille* intToGrille(int** entier, int nbLigne, int nbColonne) {
 
     for (int i = 0; i < nbLigne; i++) {
         for (int j = 0; j < nbColonne; j++) {
-            if (inMat2(i - 1, j, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_HAUT] = g->grille[i - 1][j];
-            if (inMat2(i - 2, j, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_HAUT2] = g->grille[i - 2][j];
-            if (inMat2(i + 1, j, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_BAS] = g->grille[i + 1][j];
-            if (inMat2(i + 2, j, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_BAS2] = g->grille[i + 2][j];
-            if (inMat2(i, j - 1, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_GAUCHE] = g->grille[i][j - 1];
-            if (inMat2(i, j - 2, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_GAUCHE2] = g->grille[i][j - 2];
-            if (inMat2(i, j + 1, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_DROIT] = g->grille[i][j + 1];
-            if (inMat2(i, j + 2, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_DROIT2] = g->grille[i][j + 2];
-            if (inMat2(i + 1, j + 1, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_BAS] = g->grille[i + 1][j + 1];
-            if (inMat2(i + 2, j + 2, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_BAS2] = g->grille[i + 2][j + 2];
-            if (inMat2(i - 1, j + 1, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_HAUT] = g->grille[i - 1][j + 1];
-            if (inMat2(i - 2, j + 2, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_HAUT2] = g->grille[i - 2][j + 2];
-            if (inMat2(i + 1, j - 1, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_BAS] = g->grille[i + 1][j - 1];
-            if (inMat2(i + 2, j - 2, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_BAS2] = g->grille[i + 2][j + 2];
-            if (inMat2(i - 1, j - 1, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT] = g->grille[i - 1][j + 1];
-            if (inMat2(i - 2, j - 2, nbLigne, nbColonne))
-                g->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT2] = g->grille[i - 2][j + 2];
+            stockerEtatVoisin(g, i, j, nbLigne, nbColonne);
         }
     }
     return g;
 }
 
-int main() {
-    int** mat = (int**)malloc(sizeof(int*) * 16);
-    for (int i = 0; i < 16; i++) {
-        mat[i] = (int*)malloc(sizeof(int) * 16);
-    }
-
-    for (int i = 0; i < 16; i++)
-        for (int j = 0; j < 16; j++) {
-            mat[i][j] = 0;
-        }
-
-    t_grille* g = intToGrille(mat, 16, 16);
-    free(g);
+int existe(t_case* c) {
+    return (c != NULL);
 }

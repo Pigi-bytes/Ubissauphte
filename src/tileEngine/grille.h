@@ -1,5 +1,6 @@
 #include "general.h"
 #include "liste_block.h"
+
 #define VOISIN_GAUCHE 0
 #define VOISIN_DROIT 1
 #define VOISIN_BAS 2
@@ -35,3 +36,6 @@ t_case* initCase(int i, int j, int val);
 t_grille* initGrille(int nbLigne, int nbColonne);
 void ajouterCase(t_grille* g, int i, int j, int val);
 void freeGrille(t_grille* g);
+void stockerEtatVoisin(t_grille* g, int i, int j, int nbLigne, int nbColonne);
+t_grille* intToGrilleNiveau(int** entier, int nbLigne, int nbColonne);
+int existe(t_case* c);
