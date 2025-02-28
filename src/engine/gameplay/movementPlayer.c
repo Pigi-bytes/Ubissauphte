@@ -33,20 +33,25 @@ void movePlayer(t_joueur* player, int dx, int dy, t_grid* grid) {
     player->entity.rect.y = temp.y;
 }
 
-void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid) {
-    float speed = 2;
-    float dx = 0;
-    float dy = 0;
+void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float* deltaTime) {
+    float speed = 20.0f;
+    float dx = 0.0f;
+    float dy = 0.0f;
 
-    if (input->key[player->control->left]) dx = -speed;
-    if (input->key[player->control->right]) dx = speed;
-    if (input->key[player->control->up]) dy = -speed;
-    if (input->key[player->control->down]) dy = speed;
+    if (input->key[player->control->left]) dx -= 1.0f;
+    if (input->key[player->control->right]) dx += 1.0f;
+    if (input->key[player->control->up]) dy -= 1.0f;
+    if (input->key[player->control->down]) dy += 1.0f;
 
     if (dx && dy) {
-        dx *= (1.0 / sqrt(2));
-        dy *= (1.0 / sqrt(2));
+        dx *= 0.77f;
+        dy *= 0.77f;
     }
 
-    movePlayer(player, dx, dy, grid);
+    dx *= speed * (*deltaTime * 10);
+    dy *= speed * (*deltaTime * 10);
+
+    if (dx != 0.0f || dy != 0.0f) {
+        movePlayer(player, dx, dy, grid);
+    }
 }

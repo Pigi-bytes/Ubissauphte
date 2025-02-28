@@ -41,7 +41,7 @@ GENERATE_WRAPPER_3(updateMinimap, t_minimap*, t_camera*, SDL_Renderer*)
 GENERATE_WRAPPER_2(cameraHandleZoom, t_viewPort*, int*)
 
 GENERATE_WRAPPER_2(handleInputButton, t_input*, t_button*)
-GENERATE_WRAPPER_3(handleInputPlayer, t_input*, t_joueur*, t_grid*)
+GENERATE_WRAPPER_4(handleInputPlayer, t_input*, t_joueur*, t_grid*, float*)
 
 GENERATE_WRAPPER_2(setRenderTarget, SDL_Renderer*, t_viewPort*)
 GENERATE_WRAPPER_3(centerCameraOn, t_camera*, int*, int*)
@@ -89,6 +89,8 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     t_scene* scene = createScene(initObjectManager(registre), "scene1");
 
     t_tileset* tileset = initTileset(renderer, 192, 176, 16, "assets/imgs/tileMapDungeon.bmp");
+    t_tileset* playerIdle = initTileset(renderer, 16, 80, 16, "assets/imgs/chevalierAnimation2.bmp");
+
     t_grid* level = loadMap("assets/map/map02.txt", tileset);
 
     int levelWidth = level->width * tileset->tileSize;
@@ -99,9 +101,10 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     contr->down = SDL_SCANCODE_DOWN;
     contr->left = SDL_SCANCODE_LEFT;
     contr->right = SDL_SCANCODE_RIGHT;
-    t_joueur* joueur = createPlayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 97), (SDL_Rect){0, 0, 16, 16});
 
-    t_camera* camera = createCamera(levelWidth, levelHeight, levelWidth / 2, levelHeight / 2);
+    t_joueur* joueur = createPlayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){0, 0, 16, 16}, playerIdle);
+
+    t_camera* camera = createCamera(levelWidth, levelHeight, 300, 300);
 
     t_viewPort* viewport = createViewport(renderer, camera, WINDOW_WIDTH, WINDOW_HEIGHT);
     t_minimap* minimap = createMinimap(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -113,7 +116,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     ADD_OBJECT_TO_SCENE(scene, viewport, VIEWPORT_TYPE);
     ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
 
-    sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level));
+    sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level, &frameData->deltaTime));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&input->mouseYWheel));
 
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, 0, FONCTION_PARAMS(frameData, renderer));
@@ -143,7 +146,7 @@ int main(int argc, char* argv[]) {
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     t_input* input = initInput(WINDOW_WIDTH, WINDOW_HEIGHT);
     TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
-    t_frameData* frameData = initFrameData(0);
+    t_frameData* frameData = initFrameData(60);
 
     // t_scene* scene = createMainMenu(renderer, input, font, frameData);
     t_scene* scene = createMainWord(renderer, input, font, frameData);
