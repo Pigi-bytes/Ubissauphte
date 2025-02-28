@@ -1,6 +1,10 @@
 #include "fill_gaps.h"
 
-void float_to_int(float mat[HEIGHT][WIDTH], int entier[HEIGHT][WIDTH]) {
+int **float_to_int(float mat[HEIGHT][WIDTH]) {
+    int **entier = (int **)malloc(sizeof(int *)*HEIGHT);
+    for (int i = 0; i < HEIGHT; i++) {
+        entier[i] = malloc(sizeof(int) * WIDTH);
+    }
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             if (i == 0 || j == 0 || i == HEIGHT - 1 || j == WIDTH - 1) {
@@ -9,9 +13,17 @@ void float_to_int(float mat[HEIGHT][WIDTH], int entier[HEIGHT][WIDTH]) {
                 entier[i][j] = mat[i][j] > 0.6 ? 0 : 1;
         }
     }
+    return entier;
 }
 
-void afficheMat(int mat[HEIGHT][WIDTH]) {
+void freeMatInt(int **mat, int nbLigne, int nbColonne) {
+    for (int i = 0; i < nbLigne; i++) {
+        free(mat[i]);
+    }
+    free(mat);
+}
+
+void afficheMat(int ** mat ,int nbLigne, int nbColonne) {
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             printf("%2d ", mat[i][j]);
@@ -21,7 +33,7 @@ void afficheMat(int mat[HEIGHT][WIDTH]) {
     printf("\n");
 }
 
-int sans_0(int mat[HEIGHT][WIDTH]) {
+int sans_0(int ** mat ,int nbLigne, int nbColonne) {
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             if (mat[i][j] == 0) return FALSE;
@@ -30,7 +42,7 @@ int sans_0(int mat[HEIGHT][WIDTH]) {
     return TRUE;
 }
 
-int nb_elem_block(int mat[HEIGHT][WIDTH], int num_Block) {
+int nb_elem_block(int ** mat ,int nbLigne, int nbColonne, int num_Block) {
     int count = 0;
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
@@ -40,19 +52,19 @@ int nb_elem_block(int mat[HEIGHT][WIDTH], int num_Block) {
     return count;
 }
 
-void comblet(int mat[HEIGHT][WIDTH], int copie[HEIGHT][WIDTH], int num_Block) {
+void comblet(int ** mat ,int nbLigne, int nbColonne, int ** copie, int num_Block) {
     int nbElemMax = 0;
     int num_BlockMax = 1;
     for (int block = 1; block < num_Block; block++) {
-        int nbElem = nb_elem_block(copie, block);
+        int nbElem = nb_elem_block(copie,nbLigne,nbColonne, block);
         if (nbElem > nbElemMax) {
             nbElemMax = nbElem;
             num_BlockMax = block;
         }
     }
 
-    for (int i = 0; i < HEIGHT; i++) {
-        for (int j = 0; j < WIDTH; j++) {
+    for (int i = 0; i < nbLigne; i++) {
+        for (int j = 0; j < nbColonne; j++) {
             if (copie[i][j] != num_BlockMax)
                 mat[i][j] = 1;
             else
@@ -61,20 +73,24 @@ void comblet(int mat[HEIGHT][WIDTH], int copie[HEIGHT][WIDTH], int num_Block) {
     }
 }
 
-void fill_gaps(int mat[HEIGHT][WIDTH]) {
+void fill_gaps(int ** mat ,int nbLigne, int nbColonne) {
     initPile();
-    int copie[HEIGHT][WIDTH];
+
+    int **copie = (int **)malloc(sizeof(int *)*nbLigne);
+    for (int i = 0; i < nbLigne; i++) {
+        copie[i] = malloc(sizeof(int) * nbColonne);
+    }
     int numBlock = 1;
-    for (int i = 0; i < HEIGHT; i++) {
-        for (int j = 0; j < WIDTH; j++) {
+    for (int i = 0; i < nbLigne; i++) {
+        for (int j = 0; j < nbColonne; j++) {
             copie[i][j] = (mat[i][j] == 1) ? -1 : 0;
         }
     }
 
-    while (!sans_0(copie)) {
+    while (!sans_0(copie,nbLigne,nbColonne)) {
         int x = -1, y = -1;
-        for (int i = 0; i < HEIGHT && x == -1; i++) {
-            for (int j = 0; j < WIDTH && y == -1; j++) {
+        for (int i = 0; i < nbLigne && x == -1; i++) {
+            for (int j = 0; j < nbColonne && y == -1; j++) {
                 if (copie[i][j] == 0) {
                     x = i;
                     y = j;
@@ -111,5 +127,6 @@ void fill_gaps(int mat[HEIGHT][WIDTH]) {
         }
         numBlock++;
     }
-    comblet(mat, copie, numBlock);
+    comblet(mat,nbLigne,nbColonne, copie, numBlock);
+    freeMatInt(copie,nbLigne,nbColonne);
 }

@@ -67,6 +67,8 @@ void stockerEtatVoisin(t_grille* g, int i, int j, int nbLigne, int nbColonne) {
     g->grille[i][j]->tabVoisin[VOISIN_DROIT2] = (inMat2(i, j + 2, nbLigne, nbColonne)) ? g->grille[i][j + 2] : NULL;
     g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_BAS] = (inMat2(i + 1, j + 1, nbLigne, nbColonne)) ? g->grille[i + 1][j + 1] : NULL;
     g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_BAS2] = (inMat2(i + 2, j + 2, nbLigne, nbColonne)) ? g->grille[i + 2][j + 2] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_DROIT] = (inMat2(i + 2, j+1, nbLigne, nbColonne)) ? g->grille[i + 2][j+1] : NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE] = (inMat2(i + 2, j-1, nbLigne, nbColonne)) ? g->grille[i + 2][j-1] : NULL;
     g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_HAUT] = (inMat2(i - 1, j + 1, nbLigne, nbColonne)) ? g->grille[i - 1][j + 1] : NULL;
     g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_HAUT2] = (inMat2(i - 2, j + 2, nbLigne, nbColonne)) ? g->grille[i - 2][j + 2] : NULL;
     g->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_BAS] = (inMat2(i + 1, j - 1, nbLigne, nbColonne)) ? g->grille[i + 1][j - 1] : NULL;
@@ -93,4 +95,20 @@ t_grille* intToGrilleNiveau(int** entier, int nbLigne, int nbColonne) {
 
 int existe(t_case* c) {
     return (c != NULL);
+}
+
+int existeVoisin(t_case* c, ...) {
+    va_list l;
+    va_start(l, c);
+    t_case* arg;
+    int retour;
+    while ((arg = va_arg(l, t_case*))) {
+        retour = existe(arg);
+        if (!retour) {
+            va_end(l);
+            return 0;
+        }
+    }
+    va_end(l);
+    return 1;
 }
