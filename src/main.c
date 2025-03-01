@@ -103,7 +103,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     contr->left = SDL_SCANCODE_LEFT;
     contr->right = SDL_SCANCODE_RIGHT;
 
-    t_joueur* joueur = createPlayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){0, 0, 16, 16}, playerIdle);
+    t_joueur* joueur = createPlayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){0, 0, 16, 16}, playerIdle, playerCours);
 
     t_camera* camera = createCamera(levelWidth, levelHeight, 300, 300);
 

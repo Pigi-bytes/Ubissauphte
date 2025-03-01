@@ -18,7 +18,7 @@ typedef struct {
     t_control* control;
 } t_joueur;
 
-t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset);
+t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, t_tileset* tileset2);
 void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera);
 void freePlayer(void* object);
 

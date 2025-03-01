@@ -49,9 +49,10 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float* de
     if (input->key[player->control->up]) dy -= 1.0f;
     if (input->key[player->control->down]) dy += 1.0f;
 
-    if (dx && dy) {
-        dx *= 0.77f;
-        dy *= 0.77f;
+    if (dx != 0.0f || dy != 0.0f) {
+        setAnimation(player->entity.animationController, "walk");
+    } else {
+        setAnimation(player->entity.animationController, "idle");
     }
 
     dx *= speed * (*deltaTime * 10);

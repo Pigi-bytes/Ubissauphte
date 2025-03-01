@@ -10,7 +10,7 @@
 typedef struct {
     SDL_Rect rect;  // Position et taille dans le monde
     SDL_Texture* texture;
-    t_animation* animation;
+    t_animationController* animationController;
     SDL_RendererFlip flip;
 } t_entity;
 
