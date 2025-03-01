@@ -89,7 +89,8 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     t_scene* scene = createScene(initObjectManager(registre), "scene1");
 
     t_tileset* tileset = initTileset(renderer, 192, 176, 16, "assets/imgs/tileMapDungeon.bmp");
-    t_tileset* playerIdle = initTileset(renderer, 16, 80, 16, "assets/imgs/chevalierAnimation2.bmp");
+    t_tileset* playerIdle = initTileset(renderer, 16, 80, 16, "assets/imgs/chevalierAnimation.bmp");
+    t_tileset* playerCours = initTileset(renderer, 16, 32, 16, "assets/imgs/cours.bmp");
 
     t_grid* level = loadMap("assets/map/map02.txt", tileset);
 

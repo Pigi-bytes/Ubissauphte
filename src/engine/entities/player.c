@@ -6,26 +6,13 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->control = control;
     joueur->entity.texture = texture;
     joueur->entity.rect = rect;
+    joueur->entity.flip = SDL_FLIP_NONE;
 
-    t_animation* animation = malloc(sizeof(t_animation));
-    SDL_Texture** anim = malloc(5 * sizeof(SDL_Texture*));
-
-    for (int i = 1; i < 6; i++) {
-        anim[i - 1] = (SDL_Texture*)getObject(tileset->textureTiles, i);
-    }
-
-    animation->numFrames = 5;
-    animation->currentFrame = 0;
-    animation->animationSpeed = 240;
-    animation->isLooping = true;
-    animation->isActive = false;
-    animation->frameTimer = initTimer();
-    animation->frames = anim;
-
+    t_animation* animation = createAnimation(tileset, (int[]){1, 2, 3, 4, 5}, 5, 240, true);
     startAnimation(animation);
 
     joueur->entity.animation = animation;
-    //animation = NULL;
+    // animation = NULL;
 
     return joueur;
 }

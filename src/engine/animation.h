@@ -17,14 +17,9 @@ typedef struct {
     SDL_bool isActive;     // État de l'animation
 } t_animation;
 
-// Initialise une animation à partir d'un tileset
-void initAnimation(t_animation* animation, t_tileset* tileset, int* frameIndices, int numFrames, int speed, SDL_bool looping);
-
-// Démarre/arrête l'animation
+t_animation* createAnimation(t_tileset* tileset, int* frameIndices, int numFrames, int speed, SDL_bool looping);
 void startAnimation(t_animation* animation);
 void stopAnimation(t_animation* animation);
-
-// Met à jour la frame actuelle
 void updateAnimation(t_animation* animation);
 
 #endif

@@ -38,8 +38,14 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float* de
     float dx = 0.0f;
     float dy = 0.0f;
 
-    if (input->key[player->control->left]) dx -= 1.0f;
-    if (input->key[player->control->right]) dx += 1.0f;
+    if (input->key[player->control->left]) {
+        dx -= 1.0f;
+        player->entity.flip = SDL_FLIP_HORIZONTAL;
+    }
+    if (input->key[player->control->right]) {
+        dx += 1.0f;
+        player->entity.flip = SDL_FLIP_NONE;
+    }
     if (input->key[player->control->up]) dy -= 1.0f;
     if (input->key[player->control->down]) dy += 1.0f;
 

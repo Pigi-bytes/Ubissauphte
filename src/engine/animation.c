@@ -1,7 +1,9 @@
 // animation.c
 #include "animation.h"
 
-void initAnimation(t_animation* animation, t_tileset* tileset, int* frameIndices, int numFrames, int speed, SDL_bool looping) {
+t_animation* createAnimation(t_tileset* tileset, int* frameIndices, int numFrames, int speed, SDL_bool looping) {
+    t_animation* animation = malloc(sizeof(t_animation));
+
     animation->frames = malloc(numFrames * sizeof(SDL_Texture*));
     animation->numFrames = numFrames;
     animation->currentFrame = 0;
@@ -13,6 +15,8 @@ void initAnimation(t_animation* animation, t_tileset* tileset, int* frameIndices
     for (int i = 0; i < numFrames; i++) {
         animation->frames[i] = getObject(tileset->textureTiles, frameIndices[i]);
     }
+
+    return animation;
 }
 
 void updateAnimation(t_animation* animation) {
