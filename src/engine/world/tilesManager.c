@@ -103,7 +103,7 @@ void renderGrid(SDL_Renderer* renderer, t_grid* grid, t_camera* camera) {
                 // Calcul de la position relative à la caméra
                 SDL_Rect dst_rect = {x * 16, y * 16, 16, 16};
                 if (isRectOnCamera(&dst_rect, camera)) {
-                    SDL_RenderCopy(renderer, tile->texture, NULL, &dst_rect);
+                    SDL_RenderCopyEx(renderer, tile->texture, NULL, &dst_rect, 0, NULL, tile->flip);
                 }
             }
         }
