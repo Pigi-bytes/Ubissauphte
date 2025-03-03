@@ -1,5 +1,8 @@
-#include "general.h"
+#ifndef GRILLE_H
+#define GRILLE_H
+
 #include "liste_block.h"
+#include <stdarg.h>
 
 #define VOISIN_GAUCHE 0
 #define VOISIN_DROIT 1
@@ -29,15 +32,21 @@ typedef struct s_case {
     struct s_case* tabVoisin[18];
 } t_case;
 
+
+
 typedef struct s_grille {
     int nbLigne;
     int nbColonne;
-    t_case * valeurNull;
     t_case*** grille;
+    int numeroNiveau;
 } t_grille;
 
-#define existVois(c, ...) existeVoisin(c, ##__VA_ARGS__, NULL)
+t_case case_null = {-1, -1, NULL, -1, {NULL}};
+#define CASE_NULL (&case_null)
 
+#define EXISTE_VOISIN(c, ...) existeVoisin(c, ##__VA_ARGS__, NULL)
+
+int inMatrice(int x, int y, int maxx, int maxy);
 t_case* initCase(int i, int j, int val);
 t_grille* initGrille(int nbLigne, int nbColonne);
 void ajouterCase(t_grille* g, int i, int j, int val);
@@ -46,3 +55,5 @@ void stockerEtatVoisin(t_grille* g, int i, int j, int nbLigne, int nbColonne);
 t_grille* intToGrilleNiveau(int** entier, int nbLigne, int nbColonne);
 int existe(const t_case* c);
 int existeVoisin(t_case* c, ...);
+
+#endif

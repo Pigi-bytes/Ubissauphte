@@ -1,48 +1,48 @@
 #include "lissage.h"
 
-int case_solo(int i, int j, int ** mat ,int nbLigne, int nbColonne) {
-    return verif_voisin_sol(i + 1, j, mat,nbLigne,nbColonne) && verif_voisin_sol(i - 1, j, mat,nbLigne,nbColonne) && verif_voisin_sol(i, j + 1, mat,nbLigne,nbColonne) && verif_voisin_sol(i, j - 1, mat,nbLigne,nbColonne);
+SDL_bool caseSansVoisins(int i, int j, int** mat, int nbLigne, int nbColonne) {
+    return caseIsSol(i + 1, j, mat,nbLigne,nbColonne) && caseIsSol(i - 1, j, mat,nbLigne,nbColonne) && caseIsSol(i, j + 1, mat,nbLigne,nbColonne) && caseIsSol(i, j - 1, mat,nbLigne,nbColonne);
 }
 
-int verif_voisin_sol(int i, int j, int ** mat ,int nbLigne, int nbColonne) {
-    return inMat(i, j,nbLigne,nbColonne) && !mat[i][j];
+SDL_bool caseIsSol(int i, int j, int** mat, int nbLigne, int nbColonne) {
+    return inMatrice(i, j,nbLigne,nbColonne) && !mat[i][j];
 }
-int verif_voisin_plafond(int i, int j, int ** mat ,int nbLigne, int nbColonne) {
-    return inMat(i, j,nbLigne,nbColonne) && mat[i][j];
+SDL_bool caseIsPlafond(int i, int j, int** mat, int nbLigne, int nbColonne) {
+    return inMatrice(i, j,nbLigne,nbColonne) && mat[i][j];
 }
-int ajout_arriere(int i, int j, int ** mat ,int nbLigne, int nbColonne) {
-    return verif_voisin_plafond(i + 1, j, mat,nbLigne,nbColonne) && verif_voisin_sol(i + 2, j, mat,nbLigne,nbColonne) && verif_voisin_sol(i - 1, j, mat, nbLigne,nbColonne);
-}
-
-int probleme_diag_bas_vers_haut(int i, int j, int ** mat ,int nbLigne, int nbColonne) {
-    return verif_voisin_sol(i + 1, j - 1, mat,nbLigne,nbColonne) && verif_voisin_sol(i - 1, j + 1, mat,nbLigne,nbColonne) && (verif_voisin_plafond(i, j + 1, mat,nbLigne,nbColonne) || verif_voisin_plafond(i, j - 1, mat,nbLigne,nbColonne));
+SDL_bool ajoutArriere(int i, int j, int** mat, int nbLigne, int nbColonne) {
+    return caseIsPlafond(i + 1, j, mat,nbLigne,nbColonne) && caseIsSol(i + 2, j, mat,nbLigne,nbColonne) && caseIsSol(i - 1, j, mat, nbLigne,nbColonne);
 }
 
-int probleme_diag_coin(int i, int j, int ** mat ,int nbLigne, int nbColonne) {
-    return verif_voisin_sol(i - 1, j + 1, mat,nbLigne,nbColonne) && verif_voisin_sol(i + 2, j - 1, mat,nbLigne,nbColonne) && (verif_voisin_plafond(i, j + 1, mat,nbLigne,nbColonne) || verif_voisin_plafond(i, j - 1, mat,nbLigne,nbColonne));
+SDL_bool blockDiagHaut(int i, int j, int** mat, int nbLigne, int nbColonne) {
+    return caseIsSol(i + 1, j - 1, mat,nbLigne,nbColonne) && caseIsSol(i - 1, j + 1, mat,nbLigne,nbColonne) && (caseIsPlafond(i, j + 1, mat,nbLigne,nbColonne) || caseIsPlafond(i, j - 1, mat,nbLigne,nbColonne));
 }
 
-int probleme_diag_haut_vers_bas(int i, int j, int ** mat ,int nbLigne, int nbColonne) {
-    return verif_voisin_sol(i - 1, j - 1, mat,nbLigne,nbColonne) && verif_voisin_sol(i + 2, j + 1, mat,nbLigne,nbColonne) && (verif_voisin_plafond(i, j + 1, mat,nbLigne,nbColonne) && verif_voisin_plafond(i, j - 1, mat,nbLigne,nbColonne));
+SDL_bool blockDiagCoin(int i, int j, int** mat, int nbLigne, int nbColonne) {
+    return caseIsSol(i - 1, j + 1, mat,nbLigne,nbColonne) && caseIsSol(i + 2, j - 1, mat,nbLigne,nbColonne) && (caseIsPlafond(i, j + 1, mat,nbLigne,nbColonne) || caseIsPlafond(i, j - 1, mat,nbLigne,nbColonne));
+}
+
+SDL_bool blockDiagBas(int i, int j, int** mat, int nbLigne, int nbColonne) {
+    return caseIsSol(i - 1, j - 1, mat,nbLigne,nbColonne) && caseIsSol(i + 2, j + 1, mat,nbLigne,nbColonne) && (caseIsPlafond(i, j + 1, mat,nbLigne,nbColonne) && caseIsPlafond(i, j - 1, mat,nbLigne,nbColonne));
 }
 
 void lissage(int ** mat ,int nbLigne, int nbColonne) {
     for (int i = 0; i < nbLigne; i++) {
         for (int j = 0; j < nbColonne; j++) {
-            if (mat[i][j] == 1 && !(case_solo(i, j, mat,nbLigne,nbColonne))) {
-                if (((verif_voisin_sol(i + 1, j, mat,nbLigne,nbColonne) && verif_voisin_sol(i - 1, j, mat,nbLigne,nbColonne)) || (verif_voisin_sol(i, j + 1, mat,nbLigne,nbColonne) && verif_voisin_sol(i, j - 1, mat,nbLigne,nbColonne)))) {
+            if (mat[i][j] == 1 && !(caseSansVoisins(i, j, mat,nbLigne,nbColonne))) {
+                if (((caseIsSol(i + 1, j, mat,nbLigne,nbColonne) && caseIsSol(i - 1, j, mat,nbLigne,nbColonne)) || (caseIsSol(i, j + 1, mat,nbLigne,nbColonne) && caseIsSol(i, j - 1, mat,nbLigne,nbColonne)))) {
                     mat[i][j] = 0;
-                } else if (ajout_arriere(i, j, mat,nbLigne,nbColonne)) {
+                } else if (ajoutArriere(i, j, mat,nbLigne,nbColonne)) {
                     mat[i][j] = 0;
                     mat[i + 1][j] = 0;
-                } else if (probleme_diag_bas_vers_haut(i, j, mat,nbLigne,nbColonne)) {
+                } else if (blockDiagHaut(i, j, mat,nbLigne,nbColonne)) {
                     mat[i + 1][j - 1] = 1;
-                    if (inMat(i + 2, j - 1,nbLigne,nbColonne)) mat[i + 2][j - 1] = 1;
-                } else if (probleme_diag_coin(i, j, mat,nbLigne,nbColonne)) {
+                    if (inMatrice(i + 2, j - 1,nbLigne,nbColonne)) mat[i + 2][j - 1] = 1;
+                } else if (blockDiagCoin(i, j, mat,nbLigne,nbColonne)) {
                     mat[i + 1][j - 1] = 1;
-                    if (inMat(i + 2, j - 1,nbLigne,nbColonne)) mat[i + 2][j - 1] = 1;
-                } else if (probleme_diag_haut_vers_bas(i, j, mat,nbLigne,nbColonne)) {
-                    if (inMat(i + 2, j +1,nbLigne,nbColonne)) mat[i + 2][j + 1] = 1;
+                    if (inMatrice(i + 2, j - 1,nbLigne,nbColonne)) mat[i + 2][j - 1] = 1;
+                } else if (blockDiagBas(i, j, mat,nbLigne,nbColonne)) {
+                    if (inMatrice(i + 2, j +1,nbLigne,nbColonne)) mat[i + 2][j + 1] = 1;
                 }
             }
         }

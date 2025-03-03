@@ -1,5 +1,38 @@
-#include "fill_gaps.h"
-float ** matFloat(int nbLigne,int nbColonne){
+#include "fillGaps.h"
+
+void initPile() {
+    Tete = NULL;
+}
+
+int PileVide() {
+    return Tete == NULL;
+}
+
+void empiler(SDL_Point *p) {
+    t_element *elt = malloc(sizeof(t_element));
+    elt->precedent = Tete;
+    elt->point = p;
+    Tete = elt;
+}
+
+SDL_Point *depiler() {
+    if (PileVide()) {
+        return NULL;
+    }
+    t_element *sauv = Tete;
+    SDL_Point *p = Tete->point;
+    Tete = Tete->precedent;
+    free(sauv);
+    return p;
+}
+
+void viderPile() {
+    while ((!PileVide())) {
+        depiler();
+    }
+}
+
+float ** createMatriceFloat(int nbLigne,int nbColonne){
     float **mat = (float **)malloc(sizeof(float *) * nbLigne);
     for (int i = 0; i < nbLigne; i++) {
         mat[i] = malloc(sizeof(float) * nbColonne);
@@ -7,7 +40,7 @@ float ** matFloat(int nbLigne,int nbColonne){
     return mat;
 }
 
-int **float_to_int(float **mat, int nbLigne,int nbColonne) {
+int **matriceFloat2Int(float **mat, int nbLigne,int nbColonne) {
     int **entier = (int **)malloc(sizeof(int *) * nbLigne);
     for (int i = 0; i < nbLigne; i++) {
         entier[i] = malloc(sizeof(int) * nbColonne);
@@ -23,40 +56,31 @@ int **float_to_int(float **mat, int nbLigne,int nbColonne) {
     return entier;
 }
 
-void freeMatFloat(float **mat, int nbLigne, int nbColonne) {
+void freeMatriceFloat(float **mat, int nbLigne, int nbColonne) {
     for (int i = 0; i < nbLigne; i++) {
         free(mat[i]);
     }
     free(mat);
 }
 
-void freeMatInt(int **mat, int nbLigne, int nbColonne) {
+void freeMatriceInt(int **mat, int nbLigne, int nbColonne) {
     for (int i = 0; i < nbLigne; i++) {
         free(mat[i]);
     }
     free(mat);
 }
 
-void afficheMat(int ** mat ,int nbLigne, int nbColonne) {
+
+SDL_bool matriceSans0(int ** mat ,int nbLigne, int nbColonne) {
     for (int i = 0; i < nbLigne; i++) {
         for (int j = 0; j < nbColonne; j++) {
-            printf("%2d ", mat[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-}
-
-int sans_0(int ** mat ,int nbLigne, int nbColonne) {
-    for (int i = 0; i < nbLigne; i++) {
-        for (int j = 0; j < nbColonne; j++) {
-            if (mat[i][j] == 0) return FALSE;
+            if (mat[i][j] == 0) return SDL_FALSE;
         }
     }
-    return TRUE;
+    return SDL_TRUE;
 }
 
-int nb_elem_block(int ** mat ,int nbLigne, int nbColonne, int num_Block) {
+int nombreElementsInBlock(int ** mat ,int nbLigne, int nbColonne, int num_Block) {
     int count = 0;
     for (int i = 0; i < nbLigne; i++) {
         for (int j = 0; j < nbColonne; j++) {
@@ -66,11 +90,11 @@ int nb_elem_block(int ** mat ,int nbLigne, int nbColonne, int num_Block) {
     return count;
 }
 
-void comblet(int ** mat ,int nbLigne, int nbColonne, int ** copie, int num_Block) {
+void comblerTrou(int ** mat ,int nbLigne, int nbColonne, int ** copie, int num_Block) {
     int nbElemMax = 0;
     int num_BlockMax = 1;
     for (int block = 1; block < num_Block; block++) {
-        int nbElem = nb_elem_block(copie,nbLigne,nbColonne, block);
+        int nbElem = nombreElementsInBlock(copie,nbLigne,nbColonne, block);
         if (nbElem > nbElemMax) {
             nbElemMax = nbElem;
             num_BlockMax = block;
@@ -87,7 +111,7 @@ void comblet(int ** mat ,int nbLigne, int nbColonne, int ** copie, int num_Block
     }
 }
 
-void fill_gaps(int ** mat ,int nbLigne, int nbColonne) {
+void rendreMatriceContinue(int ** mat ,int nbLigne, int nbColonne) {
     initPile();
 
     int **copie = (int **)malloc(sizeof(int *)*nbLigne);
@@ -101,7 +125,7 @@ void fill_gaps(int ** mat ,int nbLigne, int nbColonne) {
         }
     }
 
-    while (!sans_0(copie,nbLigne,nbColonne)) {
+    while (!matriceSans0(copie,nbLigne,nbColonne)) {
         int x = -1, y = -1;
         for (int i = 0; i < nbLigne && x == -1; i++) {
             for (int j = 0; j < nbColonne && y == -1; j++) {
@@ -131,7 +155,7 @@ void fill_gaps(int ** mat ,int nbLigne, int nbColonne) {
             int dy[] = {0, 0, 1, -1};
             for (int i = 0; i < 4; i++) {
                 int nx = px + dx[i], ny = py + dy[i];
-                if (inMat2(nx, ny,nbLigne,nbColonne) && mat[nx][ny] == 0 && copie[nx][ny] == 0) {
+                if (inMatrice(nx, ny,nbLigne,nbColonne) && mat[nx][ny] == 0 && copie[nx][ny] == 0) {
                     SDL_Point *np = malloc(sizeof(SDL_Point));
                     np->x = nx;
                     np->y = ny;
@@ -141,6 +165,6 @@ void fill_gaps(int ** mat ,int nbLigne, int nbColonne) {
         }
         numBlock++;
     }
-    comblet(mat,nbLigne,nbColonne, copie, numBlock);
-    freeMatInt(copie, nbLigne, nbColonne);
+    comblerTrou(mat,nbLigne,nbColonne, copie, numBlock);
+    freeMatriceInt(copie, nbLigne, nbColonne);
 }

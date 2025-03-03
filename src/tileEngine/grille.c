@@ -1,5 +1,9 @@
 #include "grille.h"
 
+int inMatrice(int x, int y, int maxx, int maxy) {
+    return (x >= 0 && x < maxx && y >= 0 && y < maxy);
+}
+
 t_case* initCase(int i, int j, int val) {
     t_case* c = malloc(sizeof(t_case));
     c->i = i;
@@ -36,7 +40,6 @@ t_grille* initGrille(int nbLigne, int nbColonne) {
     }
     g->nbLigne = nbLigne;
     g->nbColonne = nbColonne;
-    g->valeurNull = initCase(-1,-1,-1);
     return g;
 }
 
@@ -54,29 +57,28 @@ void freeGrille(t_grille* g) {
         free(g->grille[i]);
     }
     free(g->grille);
-    free(g->valeurNull);
     free(g);
 }
 
 void stockerEtatVoisin(t_grille* g, int i, int j, int nbLigne, int nbColonne) {
-    g->grille[i][j]->tabVoisin[VOISIN_HAUT] = (inMat(i - 1, j, nbLigne, nbColonne)) ? g->grille[i - 1][j] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_HAUT2] = (inMat(i - 2, j, nbLigne, nbColonne)) ? g->grille[i - 2][j] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_BAS] = (inMat(i + 1, j, nbLigne, nbColonne)) ? g->grille[i + 1][j] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_BAS2] = (inMat(i + 2, j, nbLigne, nbColonne)) ? g->grille[i + 2][j] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_GAUCHE] = (inMat(i, j - 1, nbLigne, nbColonne)) ? g->grille[i][j - 1] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_GAUCHE2] = (inMat(i, j - 2, nbLigne, nbColonne)) ? g->grille[i][j - 2] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_DROIT] = (inMat(i, j + 1, nbLigne, nbColonne)) ? g->grille[i][j + 1] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_DROIT2] = (inMat(i, j + 2, nbLigne, nbColonne)) ? g->grille[i][j + 2] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_BAS] = (inMat(i + 1, j + 1, nbLigne, nbColonne)) ? g->grille[i + 1][j + 1] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_BAS2] = (inMat(i + 2, j + 2, nbLigne, nbColonne)) ? g->grille[i + 2][j + 2] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_DROIT] = (inMat(i + 2, j + 1, nbLigne, nbColonne)) ? g->grille[i + 2][j + 1] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE] = (inMat(i + 2, j - 1, nbLigne, nbColonne)) ? g->grille[i + 2][j - 1] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_HAUT] = (inMat(i - 1, j + 1, nbLigne, nbColonne)) ? g->grille[i - 1][j + 1] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_HAUT2] = (inMat(i - 2, j + 2, nbLigne, nbColonne)) ? g->grille[i - 2][j + 2] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_BAS] = (inMat(i + 1, j - 1, nbLigne, nbColonne)) ? g->grille[i + 1][j - 1] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_BAS2] = (inMat(i + 2, j - 2, nbLigne, nbColonne)) ? g->grille[i + 2][j - 2] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT] = (inMat(i - 1, j - 1, nbLigne, nbColonne)) ? g->grille[i - 1][j - 1] : g->valeurNull;
-    g->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT2] = (inMat(i - 2, j - 2, nbLigne, nbColonne)) ? g->grille[i - 2][j - 2] : g->valeurNull;
+    g->grille[i][j]->tabVoisin[VOISIN_HAUT] = (inMatrice(i - 1, j, nbLigne, nbColonne)) ? g->grille[i - 1][j] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_HAUT2] = (inMatrice(i - 2, j, nbLigne, nbColonne)) ? g->grille[i - 2][j] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_BAS] = (inMatrice(i + 1, j, nbLigne, nbColonne)) ? g->grille[i + 1][j] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_BAS2] = (inMatrice(i + 2, j, nbLigne, nbColonne)) ? g->grille[i + 2][j] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_GAUCHE] = (inMatrice(i, j - 1, nbLigne, nbColonne)) ? g->grille[i][j - 1] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_GAUCHE2] = (inMatrice(i, j - 2, nbLigne, nbColonne)) ? g->grille[i][j - 2] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DROIT] = (inMatrice(i, j + 1, nbLigne, nbColonne)) ? g->grille[i][j + 1] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DROIT2] = (inMatrice(i, j + 2, nbLigne, nbColonne)) ? g->grille[i][j + 2] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_BAS] = (inMatrice(i + 1, j + 1, nbLigne, nbColonne)) ? g->grille[i + 1][j + 1] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_BAS2] = (inMatrice(i + 2, j + 2, nbLigne, nbColonne)) ? g->grille[i + 2][j + 2] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_DROIT] = (inMatrice(i + 2, j + 1, nbLigne, nbColonne)) ? g->grille[i + 2][j + 1] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE] = (inMatrice(i + 2, j - 1, nbLigne, nbColonne)) ? g->grille[i + 2][j - 1] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_HAUT] = (inMatrice(i - 1, j + 1, nbLigne, nbColonne)) ? g->grille[i - 1][j + 1] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_HAUT2] = (inMatrice(i - 2, j + 2, nbLigne, nbColonne)) ? g->grille[i - 2][j + 2] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_BAS] = (inMatrice(i + 1, j - 1, nbLigne, nbColonne)) ? g->grille[i + 1][j - 1] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_DROIT_BAS2] = (inMatrice(i + 2, j - 2, nbLigne, nbColonne)) ? g->grille[i + 2][j - 2] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT] = (inMatrice(i - 1, j - 1, nbLigne, nbColonne)) ? g->grille[i - 1][j - 1] : CASE_NULL;
+    g->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT2] = (inMatrice(i - 2, j - 2, nbLigne, nbColonne)) ? g->grille[i - 2][j - 2] : CASE_NULL;
 }
 
 t_grille* intToGrilleNiveau(int** entier, int nbLigne, int nbColonne) {

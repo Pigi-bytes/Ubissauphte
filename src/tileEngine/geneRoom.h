@@ -1,32 +1,36 @@
 //#include "../debug.h"
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
 #include "../io/input.h"
-#include "fill_gaps.h"
-#include "general.h"
+#include "fillGaps.h"
 #include "grille.h"
 #include "lissage.h"
 #include "liste_block.h"
 #include "perlinNoise.h"
 
-t_block *plafond(t_listeBlock **lab);
-t_block *sol(t_listeBlock **lab);
-t_block *deco(t_listeBlock **lab);
-t_block *frontale(t_listeBlock **lab);
+t_block *getPlafond(t_listeBlock **listAllBlock);
+t_block *getSol(t_listeBlock **listAllBlock);
+t_block *getDeco(t_listeBlock **listAllBlock);
+t_block *getFrontale(t_listeBlock **listAllBlock);
 
 //regles pour le choix du tiles trié par priorité
-int mur_avant(t_case *c);
-int angle_droit(t_case *c);
-int angle_gauche(t_case *c);
-int arrondi_inf_droit(t_case *c);
-int arrondi_inf_gauche(t_case *c);
-int arrondi_sup_droit(t_case *c);
-int arrondi_sup_gauche(t_case *c);
-int mur_arriere(t_case *c);
-int angle_continue_gauche(t_case *c);
-int angle_continue_droit(t_case *c);
-int bordure_mur_avant(t_case *c);
-int bordure_mur_gauche(t_case *c);
-int bordure_mur_droit(t_case *c);
+SDL_bool murAvant(t_case *c);
+SDL_bool angleDroit(t_case *c);
+SDL_bool angleGauche(t_case *c);
+SDL_bool arrondiInferieurDroit(t_case *c);
+SDL_bool arrondiInferieurGauche(t_case *c);
+SDL_bool arrondiSuperieurDroit(t_case *c);
+SDL_bool arrondiSuperieurGauche(t_case *c);
+SDL_bool murArriere(t_case *c);
+SDL_bool angleContinueGauche(t_case *c);
+SDL_bool angleContinueDroit(t_case *c);
+SDL_bool bordureMurAvant(t_case *c);
+SDL_bool bordureMurGauche(t_case *c);
+SDL_bool bordureMurDroit(t_case *c);
 
 //fonctions de genération de la map
-void choixTiles(t_listeBlock **lab, t_grille *g);
-void load(t_grille *g);
+void choixTiles(t_listeBlock **listAllBlock, t_grille *g);
+void saveMap(t_grille *g);

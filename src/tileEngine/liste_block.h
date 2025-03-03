@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "general.h"
 
 #define NBTYPE 6
 
@@ -72,12 +71,11 @@ typedef struct {
 } t_listeBlock;
 
 t_listeBlock** InitAllBlock();
-void freeListeBlock(t_listeBlock** lab);
-void ajouterBlock(t_listeBlock** lab, t_blocktype type, nom_block name, char* tailes, char* rotation, double proba);
-t_listeBlock* listeByType(t_listeBlock** lab, t_blocktype type);
-t_block* blockByName(t_listeBlock* lb, nom_block name);
-void afficher(t_listeBlock** lab);
-t_block* randomBlocByType(t_listeBlock* lb);
+void freeListeBlock(t_listeBlock** listAllBlock);
+void ajouterBlock(t_listeBlock** listAllBlock, t_blocktype type, nom_block name, char* tailes, char* rotation, double proba);
+t_listeBlock* listeByType(t_listeBlock** listAllBlock, t_blocktype type);
+t_block* blockByName(t_listeBlock* listBlock, nom_block name);
+t_block* randomBlocByType(t_listeBlock* listBlock);
 t_listeBlock** createListAllBlock();
 
 #endif
