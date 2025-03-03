@@ -1,3 +1,6 @@
+#ifndef LISSAGE_H
+#define LISSAGE_H
+
 #include "grille.h"
 #include <SDL2/SDL.h>
 
@@ -9,3 +12,5 @@ SDL_bool blockDiagHaut(int i, int j, int** mat, int nbLigne, int nbColonne);
 SDL_bool blockDiagCoin(int i, int j, int** mat, int nbLigne, int nbColonne);
 SDL_bool blockDiagBas(int i, int j, int** mat, int nbLigne, int nbColonne);
 void lissage(int ** mat ,int nbLigne, int nbColonne);
+
+#endif

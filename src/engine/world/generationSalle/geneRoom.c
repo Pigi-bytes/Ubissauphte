@@ -285,9 +285,3 @@ t_grille * geneRoom(){
 
     return grille;
 }
-
-
-int main(){
-    t_grille * g = geneRoom();
-    freeGrille(g);
-}

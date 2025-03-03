@@ -1,3 +1,6 @@
+#ifndef PERLIN_H
+#define PERLIN_H
+
 #include <SDL2/SDL.h>
 
 SDL_FPoint pointSin(SDL_FPoint a);
@@ -9,3 +12,5 @@ SDL_FPoint pointFract(SDL_FPoint st);
 SDL_FPoint smoothStep(SDL_FPoint st);
 float interpo(float a, float b, SDL_FPoint u);
 float noise(SDL_FPoint st,SDL_FPoint seed);
+
+#endif

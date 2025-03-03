@@ -1,7 +1,7 @@
 #ifndef GRILLE_H
 #define GRILLE_H
 
-#include "liste_block.h"
+#include "listeBlock.h"
 #include <stdarg.h>
 
 #define VOISIN_GAUCHE 0
@@ -41,7 +41,7 @@ typedef struct s_grille {
     int numeroNiveau;
 } t_grille;
 
-t_case case_null = {-1, -1, NULL, -1, {NULL}};
+t_case* case_null = {-1, -1, NULL, -1, {NULL}};
 #define CASE_NULL (&case_null)
 
 #define EXISTE_VOISIN(c, ...) existeVoisin(c, ##__VA_ARGS__, NULL)

@@ -1,14 +1,16 @@
+#ifndef GENEROOM_H
+#define GENEROOM_H
+
 //#include "../debug.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-#include "../io/input.h"
 #include "fillGaps.h"
 #include "grille.h"
 #include "lissage.h"
-#include "liste_block.h"
+#include "listeBlock.h"
 #include "perlinNoise.h"
 
 t_block *getPlafond(t_listeBlock **listAllBlock);
@@ -34,3 +36,5 @@ SDL_bool bordureMurDroit(t_case *c);
 //fonctions de genération de la map
 void choixTiles(t_listeBlock **listAllBlock, t_grille *g);
 void saveMap(t_grille *g);
+
+#endif

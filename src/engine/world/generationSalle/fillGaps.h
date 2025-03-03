@@ -1,3 +1,6 @@
+#ifndef FILLGAPS_H
+#define FILLGAPS_H
+
 #include <SDL2/SDL.h>
 #include "grille.h"
 
@@ -24,3 +27,5 @@ SDL_bool matriceSans0(int **mat, int nbLigne, int nbColonne);
 int nombreElementsInBlock(int ** mat ,int nbLigne, int nbColonne, int num_Block);
 void rendreMatriceContinue(int ** mat ,int nbLigne, int nbColonne);
 void comblerTrou(int ** mat ,int nbLigne, int nbColonne, int ** copie, int num_Block);
+
+#endif
