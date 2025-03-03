@@ -83,23 +83,37 @@ int arrondi_inf_gauche(t_case * c) {
 
 int arrondi_sup_droit(t_case *c) {
     return (
-        existVois(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_DIAG_DROIT_BAS],c->tabVoisin[VOISIN_BAS2],c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT],c->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]) 
-        && (c->tabVoisin[VOISIN_DIAG_DROIT_BAS]->val) 
-        && (c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT])
-        && (c->tabVoisin[VOISIN_BAS]->val) 
-        && (c->tabVoisin[VOISIN_BAS2]->val) 
-        && (!(c->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]->val))
+        (existVois(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_DIAG_DROIT_BAS],c->tabVoisin[VOISIN_BAS2],c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT],c->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]) 
+            && (c->tabVoisin[VOISIN_DIAG_DROIT_BAS]->val) 
+            && (c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT]->val)
+            && (c->tabVoisin[VOISIN_BAS]->val) 
+            && (c->tabVoisin[VOISIN_BAS2]->val) 
+            && (!(c->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]->val))
+        )||(existVois(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_DIAG_DROIT_BAS],c->tabVoisin[VOISIN_BAS2],c->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]) 
+            && (c->tabVoisin[VOISIN_DIAG_DROIT_BAS]->val) 
+            && (!existe(c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT]))
+            && (c->tabVoisin[VOISIN_BAS]->val) 
+            && (c->tabVoisin[VOISIN_BAS2]->val) 
+            && (!(c->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]->val))
+        )
     );
 }
 
 int arrondi_sup_gauche(t_case *c) {
     return(
-        existVois(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS],c->tabVoisin[VOISIN_DIAG_DROIT_HAUT],c->tabVoisin[VOISIN_BAS2],c->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE])
-        && (c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val) 
-        && (c->tabVoisin[VOISIN_BAS]->val) 
-        && (c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]->val)
-        && (c->tabVoisin[VOISIN_BAS2]->val) 
-        && (!(c->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]->val))
+        (existVois(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS],c->tabVoisin[VOISIN_DIAG_DROIT_HAUT],c->tabVoisin[VOISIN_BAS2],c->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE])
+            && (c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val) 
+            && (c->tabVoisin[VOISIN_BAS]->val) 
+            && (c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]->val)
+            && (c->tabVoisin[VOISIN_BAS2]->val) 
+            && (!(c->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]->val))
+        )||(existVois(c->tabVoisin[VOISIN_BAS],c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS],c->tabVoisin[VOISIN_BAS2],c->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]) 
+            && (c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val) 
+            && (!existe(c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]))
+            && (c->tabVoisin[VOISIN_BAS]->val) 
+            && (c->tabVoisin[VOISIN_BAS2]->val) 
+            && (!(c->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]->val))
+        )
     );
 }
 
@@ -218,7 +232,7 @@ void load(t_grille * g) {
         perror("problème d'ouverture du fichier\n");
         exit(EXIT_FAILURE);
     }
-    fprintf(fichier, "%dx%dx1\n", g->nbLigne, g->nbColonne);
+    fprintf(fichier, "%dx%dx1\n", g->nbColonne, g->nbLigne);
     for (int i = 0; i < g->nbLigne; i++) {
         for (int j = 0; j < g->nbColonne; j++) {
             fprintf(fichier,"%s:%s ",g->grille[i][j]->tiles->tiles,g->grille[i][j]->tiles->rotation);
@@ -228,55 +242,77 @@ void load(t_grille * g) {
     fprintf(fichier, "\n");
     fclose(fichier);
 }
-int main() {
-    SDL_Init(SDL_INIT_VIDEO);
+
+t_grille * geneRomm(){
     srand(time(NULL));
+
+    /*
+    SDL_Init(SDL_INIT_VIDEO);
 
     SDL_Window *window = SDL_CreateWindow("Bruit de Perlin", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_SHOWN);
 
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    */
+    int nbLigne = (rand() % 60 + 20) & ~1;
+    int nbColonne = (rand() % 2) == 0 ? (nbLigne + rand() % 11) & ~1 : (nbLigne - rand() % 11) & ~1;
+
+    SDL_FPoint seed;
+    seed.x = ((rand()) % 90 + 10) + (((float)(rand() + 1)) / RAND_MAX);
+    seed.y = ((rand()) % 90 + 10) + (((float)(rand() + 1)) / RAND_MAX);
+
+    printf("%f %f\n",seed.x,seed.y);
+
+
     t_listeBlock **lab = createListAllBlock();
 
-    float values[HEIGHT][WIDTH];
+    float** values = matFloat(nbLigne,nbColonne);
 
-    for (int i = 0; i < HEIGHT; i++) {
-        for (int j = 0; j < WIDTH; j++) {
+    for (int i = 0; i < nbLigne; i++) {
+        for (int j = 0; j < nbColonne; j++) {
             SDL_FPoint st = {(float)i / 10, (float)j / 10};  // plus le dénominateur est petit plus il y à de murs
             SDL_FPoint st2 = {(float)i / 10, (float)j / 10};
             SDL_FPoint st3 = {(float)i / 15, (float)j / 15};
-            values[i][j] = noise(st);
+            values[i][j] = noise(st,seed);
             // values[i][j] = (values[i][j] + noise(st2)) / 2.0f;
             // values[i][j] = (values[i][j] + noise(st3)) / 2.0f;
         }
     }
 
+    /*
     t_input input;
     initInput(&input, window_width, window_height);
     while (!input.quit) {
         updateInput(&input);
 
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-        render_noise(renderer, values);
+        render_noise(renderer, values,nbLigne,nbColonne);
         SDL_RenderPresent(renderer);
     }
 
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
-    int **entier = float_to_int(values);
-    //afficheMat(entier);
-    fill_gaps(entier,HEIGHT,WIDTH);
-    lissage(entier,HEIGHT,WIDTH);
+    */
+    int **entier = float_to_int(values,nbLigne,nbColonne);
+    // afficheMat(entier);
+    fill_gaps(entier, nbLigne, nbColonne);
+    lissage(entier, nbLigne, nbColonne);
 
-    t_grille *grille = intToGrilleNiveau(entier, HEIGHT, WIDTH);
+    t_grille *grille = intToGrilleNiveau(entier, nbLigne, nbColonne);
 
-    //printf("%d", existVois(grille->grille[50][50]->tabVoisin[VOISIN_BAS2]));
+    // printf("%d", existVois(grille->grille[50][50]->tabVoisin[VOISIN_BAS2]));
     choixTiles(lab, grille);
     load(grille);
-   
-    freeMatInt(entier, HEIGHT, WIDTH);
-    freeGrille(grille);
+
+    freeMatInt(entier, nbLigne, nbColonne);
+    freeMatFloat(values, nbLigne, nbColonne);
     freeListeBlock(lab);
 
-    SDL_Quit();
-    return EXIT_SUCCESS;
+    //SDL_Quit();
+    return grille;
+}
+
+
+int main(){
+    t_grille * g = geneRomm();
+    freeGrille(g);
 }

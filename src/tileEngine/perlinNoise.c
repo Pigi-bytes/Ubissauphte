@@ -14,9 +14,9 @@ float float_fract(float val) {
     return val - floor(val);
 }
 
-float random_float(SDL_FPoint st) {
-    SDL_FPoint point = {12.9898, 78.233};
-    return float_fract(sin(dot(st, point)) * 43758.5453123);
+float random_float(SDL_FPoint st,SDL_FPoint seed) {
+    // SDL_FPoint point = {12.9898, 78.233};
+    return float_fract(sin(dot(st, seed)) * 43758.5453123);
 }
 
 SDL_FPoint point_floor(SDL_FPoint st) {
@@ -41,7 +41,7 @@ float interpo(float a, float b, SDL_FPoint u) {
     return (a * (1 - u.x) + b * u.x);
 }
 
-float noise(SDL_FPoint st) {
+float noise(SDL_FPoint st,SDL_FPoint seed) {
     SDL_FPoint i = point_floor(st);
     SDL_FPoint f = point_fract(st);
 
@@ -49,22 +49,22 @@ float noise(SDL_FPoint st) {
     SDL_FPoint h = {i.x, i.y + 1.0};
     SDL_FPoint l = {i.x + 1, i.y + 1.0};
 
-    float a = random_float(i);
-    float b = random_float(g);
-    float c = random_float(h);
-    float d = random_float(l);
+    float a = random_float(i, seed);
+    float b = random_float(g, seed);
+    float c = random_float(h, seed);
+    float d = random_float(l, seed);
 
     SDL_FPoint u = smooth_step(f);
 
     return (interpo(a, b, u) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y);
 }
 
-void render_noise(SDL_Renderer *renderer, float values[HEIGHT][WIDTH]) {
-    float cell_width = (float)window_width / WIDTH;
-    float cell_height = (float)window_height / HEIGHT;
+void render_noise(SDL_Renderer *renderer, float  ** values,int nbLigne,int nbColonne) {
+    float cell_width = (float)window_width / nbLigne;
+    float cell_height = (float)window_height / nbColonne;
 
-    for (int y = 0; y < HEIGHT; ++y) {
-        for (int x = 0; x < WIDTH; ++x) {
+    for (int y = 0; y < nbLigne; ++y) {
+        for (int x = 0; x < nbColonne; ++x) {
             float n = values[y][x];
             int color = (n * 255.0);  // si n est supérieur à 0.3 la couleur est noir sinon blanche plus c'est petit moins il y à de noir
 
