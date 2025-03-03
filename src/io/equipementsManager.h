@@ -94,8 +94,9 @@ void equipementRecalculerStats(t_character* c);
 void inventory_print(t_inventaire* inv);
 void equipment_print(t_character* c);
 
-void item_save(t_item** item, t_fichier* fichier);
+t_fichier* item_save(t_item** item, int count);
 t_item** item_load(t_fichier* fichier);
+void free_item(t_item** items, int count);
 
 bool inventory_save(t_inventaire* inv, char* filename);
 bool inventory_load(t_inventaire* inv, char* filename);
