@@ -12,6 +12,7 @@ typedef struct {
     SDL_Texture* texture;
     t_animationController* animationController;
     SDL_RendererFlip flip;
+    SDL_bool debug;
 } t_entity;
 
 void renderEntity(SDL_Renderer* renderer, t_entity* entity, t_camera* camera);

@@ -8,18 +8,18 @@ t_grid* createGrid(int width, int height, int depth) {
     grid->height = height;
     grid->depth = depth;
 
-    // Allocation en [depth][height][width]
     grid->tiles = (t_tile***)malloc(depth * sizeof(t_tile**));
     for (int z = 0; z < depth; z++) {
         grid->tiles[z] = (t_tile**)malloc(height * sizeof(t_tile*));
         for (int y = 0; y < height; y++) {
             grid->tiles[z][y] = (t_tile*)calloc(width, sizeof(t_tile));
             for (int x = 0; x < width; x++) {
-                grid->tiles[z][y][x].x = x;
-                grid->tiles[z][y][x].y = y;
-                grid->tiles[z][y][x].z = z;
-                grid->tiles[z][y][x].flip = SDL_FLIP_NONE;
-                grid->tiles[z][y][x].texture = NULL;
+                t_tile* tile = &grid->tiles[z][y][x];
+                tile->solide = SDL_FALSE;
+
+                tile->entity.rect = (SDL_Rect){x * 16, y * 16, 16, 16};
+                tile->entity.texture = NULL;
+                tile->entity.flip = SDL_FLIP_NONE;
             }
         }
     }
@@ -46,11 +46,9 @@ void renderGrid(SDL_Renderer* renderer, t_grid* grid, t_camera* camera) {
     for (int z = 0; z < grid->depth; z++) {
         for (int y = 0; y < grid->height; y++) {
             for (int x = 0; x < grid->width; x++) {
-                t_tile* tile = &grid->tiles[z][y][x];
-                // Calcul de la position relative à la caméra
-                SDL_Rect dst_rect = {x * 16, y * 16, 16, 16};
-                if (isRectOnCamera(&dst_rect, camera)) {
-                    SDL_RenderCopyEx(renderer, tile->texture, NULL, &dst_rect, 0, NULL, tile->flip);
+                t_tile* tile = getTile(grid, x, y, z);
+                if (tile->entity.texture) {
+                    renderEntity(renderer, &tile->entity, camera);
                 }
             }
         }
@@ -64,21 +62,6 @@ t_tile* getTile(t_grid* grid, int x, int y, int z) {
         return NULL;
     }
     return &grid->tiles[z][y][x];
-}
-
-void appliquerTextureNiveau(t_grid* grid, int z, void* textureV) {
-    SDL_Texture* texture = (SDL_Texture*)textureV;
-
-    if (z < 0 || z >= grid->depth) {
-        fprintf(stderr, "Niveau z invalide : %d\n", z);
-        return;
-    }
-
-    for (int y = 0; y < grid->height; y++) {
-        for (int x = 0; x < grid->width; x++) {
-            grid->tiles[z][y][x].texture = texture;
-        }
-    }
 }
 
 t_grid* loadMap(char* filename, t_tileset* tileset) {
@@ -132,13 +115,13 @@ t_grid* loadMap(char* filename, t_tileset* tileset) {
                 continue;
             }
 
-            SDL_Texture* texture = NULL;
-            texture = (SDL_Texture*)getObject(tileset->textureTiles, index);
-
             t_tile* tile = getTile(grid, x, y, coucheActuelle);
             if (tile) {
-                tile->texture = texture;
-                tile->flip = (SDL_RendererFlip)orientation;
+                tile->entity.texture = (SDL_Texture*)getObject(tileset->textureTiles, index);
+                tile->entity.flip = (SDL_RendererFlip)orientation;
+                tile->entity.animationController = initAnimationController();
+                tile->entity.animationController->haveAnimation = SDL_FALSE;
+                tile->entity.debug = SDL_FALSE;
             } else {
                 fprintf(stderr, "Erreur : impossible d'accéder à la tuile [%d][%d][%d]\n", coucheActuelle, y, x);
             }

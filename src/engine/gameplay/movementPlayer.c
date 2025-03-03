@@ -22,6 +22,7 @@ void movePlayer(t_joueur* player, int dx, int dy, t_grid* grid) {
         for (int y = startY; y <= endY; y++) {
             for (int x = startX; x <= endX; x++) {
                 t_tile* tile = getTile(grid, x, y, z);
+                // tile->entity.debug = SDL_TRUE;
                 if (tile && tile->solide) {
                     return;
                 }

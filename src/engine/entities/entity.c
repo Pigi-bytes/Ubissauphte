@@ -8,6 +8,8 @@ void renderEntity(SDL_Renderer* renderer, t_entity* entity, t_camera* camera) {
             entity->texture = anim->frames[anim->currentFrame];
         }
         SDL_RenderCopyEx(renderer, entity->texture, NULL, &entity->rect, 0, NULL, entity->flip);
-        DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, entity->rect, 1);
+        if (entity->debug == SDL_TRUE) {
+            DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, entity->rect, 1);
+        }
     }
 }

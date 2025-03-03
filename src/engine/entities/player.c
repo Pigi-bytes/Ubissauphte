@@ -8,6 +8,7 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->entity.rect = rect;
     joueur->entity.flip = SDL_FLIP_NONE;
     joueur->entity.animationController = initAnimationController();
+    joueur->entity.debug = SDL_TRUE;
 
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 4, 5}, 5, 240, true, "idle"));
     addAnimation(joueur->entity.animationController, createAnimation(tileset2, (int[]){1, 2}, 2, 240, true, "walk"));
