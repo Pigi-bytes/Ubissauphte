@@ -1,4 +1,3 @@
-// animation.c
 #include "animation.h"
 
 t_animation* createAnimation(t_tileset* tileset, int* frameIndices, int numFrames, int speed, SDL_bool looping, char* name) {

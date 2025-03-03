@@ -6,7 +6,7 @@
 #include "../utils/objectManager.h"
 #include "../utils/timer.h"
 #include "string.h"
-#include "world/tilesManager.h"
+#include "tileset.h"
 
 typedef struct {
     char* name;            // Nom de l'animation

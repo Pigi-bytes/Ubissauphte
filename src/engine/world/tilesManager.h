@@ -4,16 +4,9 @@
 #include <SDL2/SDL.h>
 
 #include "../../debug.h"
-#include "../../io/imageLoader.h"
-#include "../../utils/objectManager.h"
+#include "../animation.h"
 #include "../core/camera.h"
-
-typedef struct {
-    int width;
-    int height;
-    int tileSize;
-    t_objectManager* textureTiles;
-} t_tileset;
+#include "../tileset.h"
 
 typedef struct {
     // X, Y et Z relative a la premiere tuile
@@ -32,8 +25,6 @@ typedef struct {
     t_tile*** tiles;  // [depth][height][width]
 } t_grid;
 
-t_tileset* initTileset(SDL_Renderer* renderer, int width, int height, int tileSize, char* filename);
-void freeTileset(t_tileset* tileset);
 t_tile* getTile(t_grid* grid, int x, int y, int z);
 
 t_grid* createGrid(int width, int height, int depth);
