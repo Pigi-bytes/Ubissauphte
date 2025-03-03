@@ -10,12 +10,8 @@
 #include "liste_block.h"
 #include "../debug.h"
 
-#define HEIGHT 100
-#define WIDTH 100
-
 #define window_width 1280
 #define window_height 960
 
-int inMat(int x, int y);
-int inMat2(int x, int y, int maxx, int maxy);
+int inMat(int x, int y, int maxx, int maxy);
 #endif

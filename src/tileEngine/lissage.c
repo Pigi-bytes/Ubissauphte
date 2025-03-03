@@ -5,10 +5,10 @@ int case_solo(int i, int j, int ** mat ,int nbLigne, int nbColonne) {
 }
 
 int verif_voisin_sol(int i, int j, int ** mat ,int nbLigne, int nbColonne) {
-    return inMat2(i, j,nbLigne,nbColonne) && !mat[i][j];
+    return inMat(i, j,nbLigne,nbColonne) && !mat[i][j];
 }
 int verif_voisin_plafond(int i, int j, int ** mat ,int nbLigne, int nbColonne) {
-    return inMat2(i, j,nbLigne,nbColonne) && mat[i][j];
+    return inMat(i, j,nbLigne,nbColonne) && mat[i][j];
 }
 int ajout_arriere(int i, int j, int ** mat ,int nbLigne, int nbColonne) {
     return verif_voisin_plafond(i + 1, j, mat,nbLigne,nbColonne) && verif_voisin_sol(i + 2, j, mat,nbLigne,nbColonne) && verif_voisin_sol(i - 1, j, mat, nbLigne,nbColonne);
@@ -37,12 +37,12 @@ void lissage(int ** mat ,int nbLigne, int nbColonne) {
                     mat[i + 1][j] = 0;
                 } else if (probleme_diag_bas_vers_haut(i, j, mat,nbLigne,nbColonne)) {
                     mat[i + 1][j - 1] = 1;
-                    if (inMat2(i + 2, j - 1,nbLigne,nbColonne)) mat[i + 2][j - 1] = 1;
+                    if (inMat(i + 2, j - 1,nbLigne,nbColonne)) mat[i + 2][j - 1] = 1;
                 } else if (probleme_diag_coin(i, j, mat,nbLigne,nbColonne)) {
                     mat[i + 1][j - 1] = 1;
-                    if (inMat2(i + 2, j - 1,nbLigne,nbColonne)) mat[i + 2][j - 1] = 1;
+                    if (inMat(i + 2, j - 1,nbLigne,nbColonne)) mat[i + 2][j - 1] = 1;
                 } else if (probleme_diag_haut_vers_bas(i, j, mat,nbLigne,nbColonne)) {
-                    if (inMat2(i + 2, j +1,nbLigne,nbColonne)) mat[i + 2][j + 1] = 1;
+                    if (inMat(i + 2, j +1,nbLigne,nbColonne)) mat[i + 2][j + 1] = 1;
                 }
             }
         }
