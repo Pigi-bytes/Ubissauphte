@@ -5,7 +5,9 @@
 #define TRUE 1
 #define FALSE 0
 
-int **float_to_int(float mat[HEIGHT][WIDTH]) ;
+float **matFloat(int nbLigne, int nbColonne);
+int **float_to_int(float** mat,int nbLigne,int nbColonne);
+void freeMatFloat(float **mat, int nbLigne, int nbColonne);
 void freeMatInt(int **mat, int nbLigne, int nbColonne);
 void afficheMat(int ** mat ,int nbLigne, int nbColonne);
 int sans_0(int ** mat ,int nbLigne, int nbColonne);
