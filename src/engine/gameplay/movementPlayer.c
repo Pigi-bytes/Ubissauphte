@@ -7,31 +7,24 @@ SDL_bool checkCollision(SDL_Rect* rect1, SDL_Rect* rect2) {
                        rect1->y + rect1->h > rect2->y));
 }
 
-void movePlayer(t_joueur* player, int dx, int dy, t_grid* grid) {
-    SDL_Rect temp = player->entity.rect;
-    temp.x += dx;
-    temp.y += dy;
-
+SDL_bool checkGridCollision(t_grid* grid, SDL_Rect* rect) {
     int tileSize = 16;
-    int startX = temp.x / tileSize;
-    int startY = temp.y / tileSize;
-    int endX = (temp.x + temp.w) / tileSize;
-    int endY = (temp.y + temp.h) / tileSize;
+    int startX = rect->x / tileSize;
+    int startY = rect->y / tileSize;
+    int endX = (rect->x + rect->w) / tileSize;
+    int endY = (rect->y + rect->h) / tileSize;
 
     for (int z = 0; z < grid->depth; z++) {
         for (int y = startY; y <= endY; y++) {
             for (int x = startX; x <= endX; x++) {
                 t_tile* tile = getTile(grid, x, y, z);
-                // tile->entity.debug = SDL_TRUE;
-                if (tile && tile->solide) {
-                    return;
+                if (tile->solide && checkCollision(rect, &tile->entity.rect)) {
+                    return SDL_TRUE;
                 }
             }
         }
     }
-
-    player->entity.rect.x = temp.x;
-    player->entity.rect.y = temp.y;
+    return SDL_FALSE;
 }
 
 void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float* deltaTime) {
@@ -59,7 +52,19 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float* de
     dx *= speed * (*deltaTime * 10);
     dy *= speed * (*deltaTime * 10);
 
-    if (dx != 0.0f || dy != 0.0f) {
-        movePlayer(player, dx, dy, grid);
+    if (dx != 0) {
+        SDL_Rect tempX = player->entity.rect;
+        tempX.x += dx;
+        if (!checkGridCollision(grid, &tempX)) {
+            player->entity.rect.x = tempX.x;
+        }
+    }
+
+    if (dy != 0) {
+        SDL_Rect tempY = player->entity.rect;
+        tempY.y += dy;
+        if (!checkGridCollision(grid, &tempY)) {
+            player->entity.rect.y = tempY.y;
+        }
     }
 }
