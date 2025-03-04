@@ -3,6 +3,7 @@
 #include "engine/core/frame.h"
 #include "engine/entities/player.h"
 #include "engine/gameplay/movementPlayer.h"
+#include "engine/world/generationSalle/geneRoom.h"
 #include "engine/world/tilesManager.h"
 #include "io/imageLoader.h"
 #include "io/input.h"
@@ -13,7 +14,6 @@
 #include "utils/fonctionManager.h"
 #include "utils/fscene.h"
 #include "utils/objectManager.h"
-#include "engine/world/generationSalle/geneRoom.h"
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 960
@@ -107,6 +107,8 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     contr->right = SDL_SCANCODE_RIGHT;
 
     t_joueur* joueur = createPlayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){0, 0, 16, 16}, playerIdle, playerCours);
+    joueur->entity.rect.x = 60;
+    joueur->entity.rect.y = 60;
 
     t_camera* camera = createCamera(levelWidth, levelHeight, 300, 300);
 
@@ -150,7 +152,7 @@ int main(int argc, char* argv[]) {
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     t_input* input = initInput(WINDOW_WIDTH, WINDOW_HEIGHT);
     TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
-    t_frameData* frameData = initFrameData(60);
+    t_frameData* frameData = initFrameData(0);
 
     // t_scene* scene = createMainMenu(renderer, input, font, frameData);
     t_scene* scene = createMainWord(renderer, input, font, frameData);

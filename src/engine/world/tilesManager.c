@@ -108,8 +108,8 @@ t_grid* loadMap(char* filename, t_tileset* tileset) {
                 break;
             }
 
-            int index, orientation;
-            if (sscanf(token, "%d:%d", &index, &orientation) != 2) {
+            int index, orientation, collisions;
+            if (sscanf(token, "%d:%d:%d", &index, &orientation, &collisions) != 3) {
                 fprintf(stderr, "Erreur : format de tuile invalide : %s (couche %d, ligne %d, colonne %d)\n", token, coucheActuelle, y, x);
                 token = strtok(NULL, " ");
                 continue;
@@ -121,7 +121,8 @@ t_grid* loadMap(char* filename, t_tileset* tileset) {
                 tile->entity.flip = (SDL_RendererFlip)orientation;
                 tile->entity.animationController = initAnimationController();
                 tile->entity.animationController->haveAnimation = SDL_FALSE;
-                tile->entity.debug = SDL_FALSE;
+                tile->entity.debug = collisions;
+                tile->solide = collisions;
             } else {
                 fprintf(stderr, "Erreur : impossible d'accéder à la tuile [%d][%d][%d]\n", coucheActuelle, y, x);
             }

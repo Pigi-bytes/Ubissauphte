@@ -1,9 +1,9 @@
 #ifndef LISTB_H
 #define LISTB_H
 
+#include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 
 #define NBTYPE 6
 
@@ -60,6 +60,7 @@ typedef enum {
 typedef struct {
     char* tiles;
     char* rotation;
+    SDL_bool collisions;
     t_blocktype type;
     double proba;
     nom_block name;
@@ -72,7 +73,7 @@ typedef struct {
 
 t_listeBlock** InitAllBlock();
 void freeListeBlock(t_listeBlock** listAllBlock);
-void ajouterBlock(t_listeBlock** listAllBlock, t_blocktype type, nom_block name, char* tailes, char* rotation, double proba);
+void ajouterBlock(t_listeBlock** listAllBlock, t_blocktype type, nom_block name, char* tailes, char* rotation, double proba, SDL_bool collisions);
 t_listeBlock* listeByType(t_listeBlock** listAllBlock, t_blocktype type);
 t_block* blockByName(t_listeBlock* listBlock, nom_block name);
 t_block* randomBlocByType(t_listeBlock* listBlock);
