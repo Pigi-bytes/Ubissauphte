@@ -3,6 +3,7 @@
 
 #define MAX_ITEM_NAME 64
 
+#include "../debug.h"
 #include "../utils/fonctionManager.h"
 #include "../utils/objectManager.h"
 #include "fichierLoader.h"
@@ -42,8 +43,8 @@ typedef struct {
     char name[MAX_ITEM_NAME];
     t_stats stats;
     int id;
-    // unsigned int flags; // Propriete
-    // unsigned int validSlot; // Ou il va
+    unsigned int flags;      // Propriete
+    unsigned int validSlot;  // Ou il va
 
     // t_fonctionParam* onUse;
 } t_item;
@@ -61,7 +62,7 @@ typedef struct {
 } t_equipementSlotType;
 
 typedef struct {
-    t_objectManager* items;
+    t_objectManager* itemsStack;
 } t_inventaire;
 
 typedef struct {
@@ -78,8 +79,10 @@ typedef struct {
 
 // Gestion Inventaire
 t_inventaire* createInventaire();
-bool inventaireAjoutObjet(t_inventaire* inv, t_item* item, int quantite);
+void inventaireAjoutObjet(t_inventaire* inv, t_item* item, int quantite);
 t_itemsStack* inventaireFindStack(t_inventaire* inv, t_item* item);
+void itemFree(void* data);
+void itemFreeFunc(void* data);
 
 // Gestion equipement
 bool equiperEquipement(t_character* c, int inventoryIndex, equipementSlotType slot);
@@ -94,9 +97,10 @@ void equipementRecalculerStats(t_character* c);
 void inventory_print(t_inventaire* inv);
 void equipment_print(t_character* c);
 
-t_fichier* item_save(t_item** item, int count);
+void item_save(t_item** item, t_fichier* fichier, int count);
 t_item** item_load(t_fichier* fichier);
 void free_item(t_item** items, int count);
+
 
 bool inventory_save(t_inventaire* inv, char* filename);
 bool inventory_load(t_inventaire* inv, char* filename);

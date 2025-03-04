@@ -1,8 +1,6 @@
 #include "equipementsManager.h"
 
-t_fichier* item_save(t_item** item, int count) {
-    printf("yes");
-    t_fichier* fichier = (t_fichier*)malloc(sizeof(t_fichier));
+void item_save(t_item** item, t_fichier* fichier, int count) {
     t_typeRegistry* registre = createTypeRegistry();
     registerType(registre, blockFreeFunc, "BLOCK_TYPE");
     registerType(registre, pairFreeFunc, "PAIR_TYPE");
@@ -13,8 +11,6 @@ t_fichier* item_save(t_item** item, int count) {
 
         t_pairData* data;
         t_block* block = createNewBlock();
-
-        printf("yes");
 
         sprintf(value, "%d", item[i]->id);
         data = createPairData("id Item", value);
@@ -82,14 +78,7 @@ t_fichier* item_save(t_item** item, int count) {
 
         addBlock(fichier, block);
     }
-    return fichier;
 }
-
-// bool inventory_save(t_fichier* fichier, t_inventaire* inv) {
-//     t_block* block;
-//     block->pairManager = inv->items;
-//     addBlock(fichier, block);
-// }
 
 t_item** item_load(t_fichier* fichier) {
     t_item** item = (t_item**)malloc(fichier->blockManager->count * sizeof(t_item*));
@@ -167,4 +156,49 @@ void free_item(t_item** item, int count) {
         }
     }
     free(item);
+}
+
+t_inventaire* createInventaire() {
+    t_inventaire* inv = (t_inventaire*)malloc(sizeof(t_inventaire));
+
+    t_typeRegistry* registre = createTypeRegistry();
+    registerType(registre, itemFreeFunc, "ITEMSTACK_TYPE");
+    inv->itemsStack = initObjectManager(registre);
+    return inv;
+}
+
+void inventaireAjoutObjet(t_inventaire* inv, t_item* item, int quantite) {
+    t_itemsStack* itemStack = inventaireFindStack(inv, item);
+
+    if (itemStack != NULL)
+        itemStack->quantite += quantite;
+    else {
+        t_itemsStack* itemStackNew = (t_itemsStack*)malloc(sizeof(t_itemsStack));
+        itemStackNew->definition = item;
+        itemStackNew->quantite = quantite;
+        addObject(inv->itemsStack, itemStackNew, getTypeIdByName(inv->itemsStack->registry, "ITEMSTACK_TYPE"));
+    }
+}
+
+t_itemsStack* inventaireFindStack(t_inventaire* inv, t_item* item) {
+    for (int i = 0; i < inv->itemsStack->count; i++) {
+        t_itemsStack* itemStack = (t_itemsStack*)getObject(inv->itemsStack, i);
+        if (strcmp(itemStack->definition->name, item->name) == 0)
+            return itemStack;
+    }
+    return NULL;
+}
+
+void itemFree(void* data) {
+    t_inventaire* inv = (t_inventaire*)data;
+    if (inv && inv->itemsStack)
+        freeObjectManager(inv->itemsStack);
+
+    free(inv);
+}
+
+void itemFreeFunc(void* data) {
+    t_itemsStack* inv = (t_itemsStack*)data;
+    if (inv)
+        free(inv);
 }
