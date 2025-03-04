@@ -212,7 +212,7 @@ void choixTiles(t_listeBlock **listAllBlock, t_grille *g) {
 }
 
 void saveMap(t_grille * g) {
-    system("find ~ -name 'testmap*.txt'|wc -l > nb.txt");
+    system("ls  ./assets/map/map*.txt|wc -l > ./src/nb.txt");
     FILE *nbFichier = fopen("nb.txt", "r");
     if (!nbFichier) {
         perror("problème d'ouverture du fichie 1r\n");
@@ -222,19 +222,19 @@ void saveMap(t_grille * g) {
     int entier;
     fscanf(nbFichier, "%d", &entier);
     entier += 1;
-    g->numeroNiveau = entier;
     sprintf(nb, "%d", entier);
-    char chaine[100] = "testmap";
+    char chaine[100] = "map";
     strcat(chaine, nb);
     strcat(chaine, ".txt");
     fclose(nbFichier);
-    char ouverture[100] = "../../assets/map/";
+    char ouverture[100] = "assets/map/";
     strcat(ouverture, chaine);
     FILE *fichier = fopen(ouverture, "a");
     if (!fichier) {
         perror("problème d'ouverture du fichier\n");
         exit(EXIT_FAILURE);
     }
+    sprintf(g->nom,"%s",ouverture);
     fprintf(fichier, "%dx%dx1\n", g->nbColonne, g->nbLigne);
     for (int i = 0; i < g->nbLigne; i++) {
         for (int j = 0; j < g->nbColonne; j++) {

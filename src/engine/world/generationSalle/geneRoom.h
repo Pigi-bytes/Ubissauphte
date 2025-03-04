@@ -34,6 +34,7 @@ SDL_bool bordureMurGauche(t_case *c);
 SDL_bool bordureMurDroit(t_case *c);
 
 //fonctions de genération de la map
+t_grille * geneRoom();
 void choixTiles(t_listeBlock **listAllBlock, t_grille *g);
 void saveMap(t_grille *g);
 
