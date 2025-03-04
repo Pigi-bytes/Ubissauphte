@@ -3,6 +3,7 @@
 #include "engine/core/frame.h"
 #include "engine/entities/player.h"
 #include "engine/gameplay/movementPlayer.h"
+#include "engine/world/generationSalle/geneRoom.h"
 #include "engine/world/tilesManager.h"
 #include "io/imageLoader.h"
 #include "io/input.h"
@@ -13,12 +14,11 @@
 #include "utils/fonctionManager.h"
 #include "utils/fscene.h"
 #include "utils/objectManager.h"
-#include "engine/world/generationSalle/geneRoom.h"
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 960
 
-const SDL_Color WHITE = {255, 255, 255}, BLACK = {0, 0, 0}, MAGENTA = {255, 0, 255}, BLUE = {0, 0, 255};
+const SDL_Color WHITE = {255, 255, 255}, BLACK = {0, 0, 0}, MAGENTA = {255, 0, 255}, BLUE = {0, 0, 255}, GREEN = {0, 255, 0};
 
 SDL_Rect creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio) {
     return (SDL_Rect){WINDOW_WIDTH * x_ratio, WINDOW_HEIGHT * y_ratio, WINDOW_WIDTH * w_ratio, WINDOW_HEIGHT * h_ratio};
@@ -49,6 +49,93 @@ GENERATE_WRAPPER_3(centerCameraOn, t_camera*, int*, int*)
 
 GENERATE_WRAPPER_3(resizeViewport, t_viewPort*, int*, int*)
 GENERATE_WRAPPER_4(resizeMinimap, SDL_Renderer*, t_minimap*, int*, int*)
+
+typedef struct {
+    SDL_bool affihcher_fps;
+} t_option;
+
+void afficherFps(t_fonctionParam* fonction) {
+    t_fpsDisplay* fps = GET_PTR(fonction, 0, t_fpsDisplay*);
+    t_text* text = GET_PTR(fonction, 1, t_text*);
+    SDL_Renderer* renderer = GET_PTR(fonction, 2, SDL_Renderer*);
+    int* sizeOutline = GET_PTR(fonction, 3, int*);
+    if (fps->showFPS) {
+        fps->showFPS = SDL_FALSE;
+        updateText(text, renderer, "FPS/OFF", BLACK);
+    } else {
+        fps->showFPS = SDL_TRUE;
+        updateText(text, renderer, "FPS/ON", BLACK);
+    }
+}
+
+t_scene* createFPSMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData) {
+    t_typeRegistry* registre = createTypeRegistry();
+    const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
+    const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
+    const uint8_t FRAME_DISPLAY_TYPE = registerType(registre, freeFPSDisplay, "frameData");
+
+    t_scene* scene = createScene(initObjectManager(registre), "scene2");
+    t_text* text = createText(renderer, "Option", font, GREEN);
+    text->rect = creerRect((1 - 0.8f) / 2, 0.05f, 0.8f, 0.2f);
+
+    ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Commande", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.30f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Volume", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.58f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Affichage", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.72f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Menu Principal", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.86f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, frameData, FRAME_DISPLAY_TYPE);
+
+    sceneRegisterFunction(scene, BUTTON_TYPE, HANDLE_INPUT, handleInputButtonWrapper, 1, FONCTION_PARAMS(input));
+
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, 0, FONCTION_PARAMS(frameData, renderer));
+
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, 1, FONCTION_PARAMS(renderer));
+    sceneRegisterFunction(scene, BUTTON_TYPE, RENDER_UI, renderButtonWrapper, 1, FONCTION_PARAMS(renderer));
+    sceneRegisterFunction(scene, TEXTE_TYPE, RENDER_UI, renderTextWrapper, 1, FONCTION_PARAMS(renderer));
+
+    return scene;
+}
+
+t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData) {
+    t_typeRegistry* registre = createTypeRegistry();
+    const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
+    const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
+    const uint8_t FRAME_DISPLAY_TYPE = registerType(registre, freeFPSDisplay, "frameData");
+
+    t_scene* scene = createScene(initObjectManager(registre), "scene2");
+    t_fpsDisplay* fpsDisplay = initFPSDisplay(renderer, font);
+
+    int sizeOutline = 2;
+
+    t_text* textFps = createTextOutline(renderer, "FPS/ON", font, BLACK, WHITE, sizeOutline);
+
+    t_button* fpsButton;
+    t_fonctionParam* fp = creerFonction(afficherFps, NULL);
+    fpsButton = createButton(textFps, GREEN, WHITE, creerRect(0.35f, 0.44f, 0.3f, 0.1f), fp);
+    addPamaretre(fp, FONCTION_PARAMS(fpsDisplay, fpsButton->label, renderer));
+
+    t_text* text = createText(renderer, "Option", font, GREEN);
+    text->rect = creerRect((1 - 0.8f) / 2, 0.05f, 0.8f, 0.2f);
+
+    ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Commande", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.30f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, fpsButton, BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Volume", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.58f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Affichage", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.72f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Menu Principal", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.86f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, fpsDisplay, FRAME_DISPLAY_TYPE);
+
+    sceneRegisterFunction(scene, BUTTON_TYPE, HANDLE_INPUT, handleInputButtonWrapper, 1, FONCTION_PARAMS(input));
+
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, 0, FONCTION_PARAMS(frameData, renderer));
+
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, 1, FONCTION_PARAMS(renderer));
+    sceneRegisterFunction(scene, BUTTON_TYPE, RENDER_UI, renderButtonWrapper, 1, FONCTION_PARAMS(renderer));
+    sceneRegisterFunction(scene, TEXTE_TYPE, RENDER_UI, renderTextWrapper, 1, FONCTION_PARAMS(renderer));
+
+    return scene;
+}
 
 t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData) {
     t_typeRegistry* registre = createTypeRegistry();
@@ -152,8 +239,8 @@ int main(int argc, char* argv[]) {
     TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     t_frameData* frameData = initFrameData(60);
 
-    // t_scene* scene = createMainMenu(renderer, input, font, frameData);
-    t_scene* scene = createMainWord(renderer, input, font, frameData);
+    t_scene* scene = createOptionMenu(renderer, input, font, frameData);
+    // t_scene* scene = createMainWord(renderer, input, font, frameData);
 
     while (!input->quit) {
         startFrame(frameData);

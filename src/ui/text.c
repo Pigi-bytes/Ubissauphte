@@ -156,6 +156,14 @@ void updateText(t_text* text, SDL_Renderer* renderer, char* newText, SDL_Color c
     SDL_FreeSurface(surface);
 }
 
+void updateTextOutline(t_text* text, SDL_Renderer* renderer, char* newText, SDL_Color color, SDL_Color CouleurOutline, int* sizeOutline) {
+    if (!text || !renderer || !newText) return;
+    TTF_Font* font = text->font;
+    // Libère l'ancien texte
+    freeText(text);
+    text = createTextOutline(renderer, newText, font, color, CouleurOutline, *sizeOutline);
+}
+
 void renderText(SDL_Renderer* renderer, t_text* text) {
     SDL_RenderCopy(renderer, text->texture, NULL, &text->rect);
     DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, text->rect, 3);

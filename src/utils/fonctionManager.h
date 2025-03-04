@@ -75,6 +75,9 @@ typedef struct fonction {
  */
 t_fonctionParam* creerFonction(void (*f)(t_fonctionParam*), ...);
 
+void ajoutParametreInFonction(t_fonctionParam* funct, va_list list);
+void addPamaretre(t_fonctionParam* funct, ...);
+
 /**
  * @brief Execute la fonctionParam
  * @param func Pointeur vers le fonctionParam à exécuter
