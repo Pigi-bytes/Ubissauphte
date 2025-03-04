@@ -13,6 +13,7 @@
 #include "utils/fonctionManager.h"
 #include "utils/fscene.h"
 #include "utils/objectManager.h"
+#include "engine/world/generationSalle/geneRoom.h"
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 960
@@ -92,7 +93,9 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     t_tileset* playerIdle = initTileset(renderer, 16, 80, 16, "assets/imgs/chevalierAnimation.bmp");
     t_tileset* playerCours = initTileset(renderer, 16, 32, 16, "assets/imgs/cours.bmp");
 
-    t_grid* level = loadMap("assets/map/map02.txt", tileset);
+    t_grille* grille = geneRoom();
+    t_grid* level = loadMap(grille->nom, tileset);
+    freeGrille(grille);
 
     int levelWidth = level->width * tileset->tileSize;
     int levelHeight = level->height * tileset->tileSize;

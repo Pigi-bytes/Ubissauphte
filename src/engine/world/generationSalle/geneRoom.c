@@ -213,7 +213,7 @@ void choixTiles(t_listeBlock **listAllBlock, t_grille *g) {
 
 void saveMap(t_grille * g) {
     system("ls  ./assets/map/map*.txt|wc -l > ./src/nb.txt");
-    FILE *nbFichier = fopen("nb.txt", "r");
+    FILE *nbFichier = fopen("./src/nb.txt", "r");
     if (!nbFichier) {
         perror("problème d'ouverture du fichie 1r\n");
         exit(EXIT_FAILURE);
@@ -221,6 +221,7 @@ void saveMap(t_grille * g) {
     char nb[100];
     int entier;
     fscanf(nbFichier, "%d", &entier);
+    system("rm ./src/nb.txt");
     entier += 1;
     sprintf(nb, "%d", entier);
     char chaine[100] = "map";

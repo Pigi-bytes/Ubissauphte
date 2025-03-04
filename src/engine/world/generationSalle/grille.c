@@ -110,8 +110,7 @@ int existeVoisin(t_case* c, ...) {
     va_list l;
     va_start(l, c);
     t_case* arg;
-    while (arg = va_arg(l, t_case*)) {
-        //printf("Argument reçu: %p\n", (void*)arg);
+    while ((arg = va_arg(l, t_case*))) {
         if (!existe(arg)) {
             va_end(l);
             return 0;
