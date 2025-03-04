@@ -1,5 +1,8 @@
 #include "fillGaps.h"
 
+
+t_element* Tete;
+
 void initPile() {
     Tete = NULL;
 }

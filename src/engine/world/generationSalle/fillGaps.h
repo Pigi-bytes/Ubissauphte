@@ -9,7 +9,7 @@ typedef struct s_element {
     struct s_element* precedent;
 } t_element;
 
-t_element* Tete;
+
 
 //fonction pour les piles
 void initPile();
