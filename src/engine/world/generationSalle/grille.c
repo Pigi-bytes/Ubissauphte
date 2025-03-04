@@ -1,5 +1,7 @@
 #include "grille.h"
 
+t_case case_null = {-1, -1, NULL, -1, {NULL}};
+
 int inMatrice(int x, int y, int maxx, int maxy) {
     return (x >= 0 && x < maxx && y >= 0 && y < maxy);
 }

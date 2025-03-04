@@ -38,11 +38,12 @@ typedef struct s_grille {
     int nbLigne;
     int nbColonne;
     t_case*** grille;
-    int numeroNiveau;
+    char nom[100];
 } t_grille;
 
-t_case* case_null = {-1, -1, NULL, -1, {NULL}};
+#ifndef CASE_NULL
 #define CASE_NULL (&case_null)
+#endif
 
 #define EXISTE_VOISIN(c, ...) existeVoisin(c, ##__VA_ARGS__, NULL)
 
