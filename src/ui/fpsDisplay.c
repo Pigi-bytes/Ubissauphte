@@ -20,7 +20,7 @@ void updateFPSDisplay(t_fpsDisplay* display, t_frameData* frame, SDL_Renderer* r
     if (display->showFPS && (currentTime - display->lastUpdateTime) >= frame->fpsUpdateInterval) {
         char fpsStr[50];
         sprintf(fpsStr, "FPS: %d | Delta: %2.2fms", frame->fps, frame->deltaTime * SECONDE_EN_MS);
-        updateText(display->fpsText, renderer, fpsStr, (SDL_Color){255, 255, 255, 255});
+        updateText(&(display->fpsText), renderer, fpsStr, (SDL_Color){255, 255, 255, 255});
         display->lastUpdateTime = currentTime;
     }
 }

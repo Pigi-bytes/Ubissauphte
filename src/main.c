@@ -56,15 +56,15 @@ typedef struct {
 
 void afficherFps(t_fonctionParam* fonction) {
     t_fpsDisplay* fps = GET_PTR(fonction, 0, t_fpsDisplay*);
-    t_text* text = GET_PTR(fonction, 1, t_text*);
+    t_text** text = GET_PTR(fonction, 1, t_text**);
     SDL_Renderer* renderer = GET_PTR(fonction, 2, SDL_Renderer*);
-    int* sizeOutline = GET_PTR(fonction, 3, int*);
+    int sizeOutline = 2;
     if (fps->showFPS) {
         fps->showFPS = SDL_FALSE;
-        updateText(text, renderer, "FPS/OFF", BLACK);
+        updateTextOutline(text, renderer, "FPS/OFF", BLACK, WHITE, sizeOutline);
     } else {
         fps->showFPS = SDL_TRUE;
-        updateText(text, renderer, "FPS/ON", BLACK);
+        updateTextOutline(text, renderer, "FPS/ON", BLACK, WHITE, sizeOutline);
     }
 }
 
@@ -106,14 +106,14 @@ t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font
     t_scene* scene = createScene(initObjectManager(registre), "scene2");
     t_fpsDisplay* fpsDisplay = initFPSDisplay(renderer, font);
 
-    int sizeOutline = 2;
+    int nb = 2;
 
-    t_text* textFps = createTextOutline(renderer, "FPS/ON", font, BLACK, WHITE, sizeOutline);
+    t_text* textFps = createTextOutline(renderer, "FPS/ON", font, BLACK, WHITE, nb);
 
     t_button* fpsButton;
     t_fonctionParam* fp = creerFonction(afficherFps, NULL);
     fpsButton = createButton(textFps, GREEN, WHITE, creerRect(0.35f, 0.44f, 0.3f, 0.1f), fp);
-    addPamaretre(fp, FONCTION_PARAMS(fpsDisplay, fpsButton->label, renderer));
+    addPamaretre(fp, FONCTION_PARAMS(fpsDisplay, &(fpsButton->label), renderer));
 
     t_text* text = createText(renderer, "Option", font, GREEN);
     text->rect = creerRect((1 - 0.8f) / 2, 0.05f, 0.8f, 0.2f);

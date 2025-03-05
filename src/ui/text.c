@@ -124,44 +124,54 @@ t_text* createText(SDL_Renderer* renderer, char* text, TTF_Font* font, SDL_Color
     return label;
 }
 
-void updateText(t_text* text, SDL_Renderer* renderer, char* newText, SDL_Color color) {
-    if (!text || !renderer || !newText) return;
+void updateText(t_text** text, SDL_Renderer* renderer, char* newText, SDL_Color color) {
+    if (!(*text) || !(text) || !renderer || !newText) return;
+
+    int xSave = (*text)->rect.x;
+    int ySave = (*text)->rect.y;
 
     // Libère l'ancien texte
-    if (text->text) {
-        free(text->text);
-        text->text = NULL;
+    if ((*text)->text) {
+        free((*text)->text);
+        (*text)->text = NULL;
     }
-    if (text->texture) {
-        SDL_DestroyTexture(text->texture);
-        text->texture = NULL;
+    if ((*text)->texture) {
+        SDL_DestroyTexture((*text)->texture);
+        (*text)->texture = NULL;
+    }
+
+    TTF_Font* fontSave = (*text)->font;
+    // Crée le nouveau texte
+    free((*text));
+
+    (*text) = createText(renderer, newText, fontSave, color);
+    (*text)->rect.x = xSave;
+    (*text)->rect.y = ySave;
+}
+
+void updateTextOutline(t_text** text, SDL_Renderer* renderer, char* newText, SDL_Color color, SDL_Color CouleurOutline, int sizeOutline) {
+    if (!(*text) || !(text) || !renderer || !newText) return;
+
+    TTF_Font* fontSave = (*text)->font;
+    int xSave = (*text)->rect.x;
+    int ySave = (*text)->rect.y;
+
+    // Libère l'ancien texte
+    if ((*text)->text) {
+        free((*text)->text);
+        (*text)->text = NULL;
+    }
+    if ((*text)->texture) {
+        SDL_DestroyTexture((*text)->texture);
+        (*text)->texture = NULL;
     }
 
     // Crée le nouveau texte
-    text->text = malloc(strlen(newText) + 1);
-    strcpy(text->text, newText);
+    free((*text));
 
-    SDL_Surface* surface = TTF_RenderUTF8_Solid(text->font, newText, color);
-    if (!surface) {
-        fprintf(stderr, "Erreur création surface: %s\n", TTF_GetError());
-        free(text->text);
-        text->text = NULL;
-        return;
-    }
-
-    text->texture = SDL_CreateTextureFromSurface(renderer, surface);
-    text->rect.w = surface->w;
-    text->rect.h = surface->h;
-
-    SDL_FreeSurface(surface);
-}
-
-void updateTextOutline(t_text* text, SDL_Renderer* renderer, char* newText, SDL_Color color, SDL_Color CouleurOutline, int* sizeOutline) {
-    if (!text || !renderer || !newText) return;
-    TTF_Font* font = text->font;
-    // Libère l'ancien texte
-    freeText(text);
-    text = createTextOutline(renderer, newText, font, color, CouleurOutline, *sizeOutline);
+    (*text) = createTextOutline(renderer, newText, fontSave, color, CouleurOutline, sizeOutline);
+    (*text)->rect.x = xSave;
+    (*text)->rect.y = ySave;
 }
 
 void renderText(SDL_Renderer* renderer, t_text* text) {

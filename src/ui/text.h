@@ -19,9 +19,9 @@ typedef struct {
 TTF_Font* loadFont(char* filename, int size);
 SDL_bool initTextEngine();
 t_text* createTextOutline(SDL_Renderer* renderer, char* text, TTF_Font* font, SDL_Color color, SDL_Color colorOutline, int outlineSize);
-void updateTextOutline(t_text* text, SDL_Renderer* renderer, char* newText, SDL_Color color, SDL_Color CouleurOutline, int* sizeOutline);
+void updateTextOutline(t_text** text, SDL_Renderer* renderer, char* newText, SDL_Color color, SDL_Color CouleurOutline, int sizeOutline);
 t_text* createText(SDL_Renderer* renderer, char* text, TTF_Font* font, SDL_Color color);
-void updateText(t_text* text, SDL_Renderer* renderer, char* newText, SDL_Color color);
+void updateText(t_text** text, SDL_Renderer* renderer, char* newText, SDL_Color color);
 
 void renderText(SDL_Renderer* renderer, t_text* text);
 void freeText(void* objet);
