@@ -7,8 +7,8 @@
 
 #define DEBUG_MODE 1
 #define DEBUG_MEMORY_MODE 1
-#define RECTANGLE_COLOR \
-    (SDL_Color){41, 182, 246, 255}
+#define RECTANGLE_COLOR (SDL_Color){41, 182, 246, 255}
+#define CIRCLE_COLOR (SDL_Color){255, 0, 0, 255}
 
 #if DEBUG_MODE
 #define DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, rect, largeur)                                                      \
@@ -22,8 +22,26 @@
         }                                                                                                             \
         SDL_SetRenderDrawColor(renderer, currentColor.r, currentColor.g, currentColor.b, currentColor.a);             \
     }
+#define DEBUG_DRAW_CIRCLE(renderer, circle)                                                                   \
+    {                                                                                                         \
+        SDL_Color currentColor;                                                                               \
+        SDL_GetRenderDrawColor(renderer, &currentColor.r, &currentColor.g, &currentColor.b, &currentColor.a); \
+        SDL_SetRenderDrawColor(renderer, CIRCLE_COLOR.r, CIRCLE_COLOR.g, CIRCLE_COLOR.b, CIRCLE_COLOR.a);     \
+        for (int w = 0; w < circle.radius * 2; w++) {                                                         \
+            for (int h = 0; h < circle.radius * 2; h++) {                                                     \
+                int dx = circle.radius - w;                                                                   \
+                int dy = circle.radius - h;                                                                   \
+                if ((dx * dx + dy * dy) <= (circle.radius * circle.radius)) {                                 \
+                    SDL_RenderDrawPoint(renderer, circle.x + dx, circle.y + dy);                              \
+                }                                                                                             \
+            }                                                                                                 \
+        }                                                                                                     \
+        SDL_SetRenderDrawColor(renderer, currentColor.r, currentColor.g, currentColor.b, currentColor.a);     \
+    }
+
 #else
 #define DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, rect, largeur)
+#define DEBUG_DRAW_CIRCLE(renderer, circle)
 #endif
 
 #if DEBUG_MODE

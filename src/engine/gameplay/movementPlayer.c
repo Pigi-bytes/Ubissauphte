@@ -1,25 +1,44 @@
 #include "movementPlayer.h"
 
-SDL_bool checkCollision(SDL_Rect* rect1, SDL_Rect* rect2) {
-    return (SDL_bool)((rect1->x < rect2->x + rect2->w &&
-                       rect1->x + rect1->w > rect2->x &&
-                       rect1->y < rect2->y + rect2->h &&
-                       rect1->y + rect1->h > rect2->y));
+SDL_bool checkCircleRectCollision(t_circle* circle, SDL_Rect* rect, SDL_Point* impactPoint, float* penetrationDepth) {
+    float closestX = fmaxf(rect->x, fminf(circle->x, rect->x + rect->w));
+    float closestY = fmaxf(rect->y, fminf(circle->y, rect->y + rect->h));
+
+    float distanceX = circle->x - closestX;
+    float distanceY = circle->y - closestY;
+
+    float distanceSquared = (distanceX * distanceX) + (distanceY * distanceY);
+    float radiusSquared = circle->radius * circle->radius;
+
+    if (distanceSquared < radiusSquared) {
+        if (impactPoint) {
+            impactPoint->x = (int)closestX;
+            impactPoint->y = (int)closestY;
+        }
+
+        *penetrationDepth = circle->radius - sqrtf(distanceSquared);
+        return SDL_TRUE;
+    }
+    return SDL_FALSE;
 }
 
-SDL_bool checkGridCollision(t_grid* grid, SDL_Rect* rect) {
+SDL_bool checkGridCollision(t_grid* grid, t_circle* circle) {
     int tileSize = 16;
-    int startX = rect->x / tileSize;
-    int startY = rect->y / tileSize;
-    int endX = (rect->x + rect->w) / tileSize;
-    int endY = (rect->y + rect->h) / tileSize;
+    int startX = (circle->x - circle->radius) / tileSize;
+    int startY = (circle->y - circle->radius) / tileSize;
+    int endX = (circle->x + circle->radius) / tileSize;
+    int endY = (circle->y + circle->radius) / tileSize;
 
     for (int z = 0; z < grid->depth; z++) {
         for (int y = startY; y <= endY; y++) {
             for (int x = startX; x <= endX; x++) {
                 t_tile* tile = getTile(grid, x, y, z);
-                if (tile->solide && checkCollision(rect, &tile->entity.rect)) {
-                    return SDL_TRUE;
+                if (tile->solide) {
+                    SDL_Point impactPoint;
+                    float penetrationDepth;
+                    if (checkCircleRectCollision(circle, &tile->entity.collisionRect, &impactPoint, &penetrationDepth)) {
+                        return SDL_TRUE;
+                    }
                 }
             }
         }
@@ -52,19 +71,29 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float* de
     dx *= speed * (*deltaTime * 10);
     dy *= speed * (*deltaTime * 10);
 
+    SDL_Point impactPoint;
+    float penetrationDepth;
+    SDL_bool collision = SDL_FALSE;
+
     if (dx != 0) {
-        SDL_Rect tempX = player->entity.rect;
-        tempX.x += dx;
-        if (!checkGridCollision(grid, &tempX)) {
-            player->entity.rect.x = tempX.x;
+        t_circle tempCircle = player->entity.collisionCircle;
+        tempCircle.x += dx;
+        if (checkGridCollision(grid, &tempCircle)) {
+            collision = SDL_TRUE;
+        } else {
+            player->entity.displayRect.x += dx;
+            player->entity.collisionCircle.x = player->entity.displayRect.x + player->entity.displayRect.w / 2;
         }
     }
 
     if (dy != 0) {
-        SDL_Rect tempY = player->entity.rect;
-        tempY.y += dy;
-        if (!checkGridCollision(grid, &tempY)) {
-            player->entity.rect.y = tempY.y;
+        t_circle tempCircle = player->entity.collisionCircle;
+        tempCircle.y += dy;
+        if (checkGridCollision(grid, &tempCircle)) {
+            collision = SDL_TRUE;
+        } else {
+            player->entity.displayRect.y += dy;
+            player->entity.collisionCircle.y = player->entity.displayRect.y + player->entity.displayRect.h / 2;
         }
     }
 }
