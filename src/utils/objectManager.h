@@ -13,6 +13,7 @@ typedef enum {
     BUTTON_TYPE = 0,
     SDL_TEXTURE_TYPE,
     TEXT_TYPE,
+    AUDIO_TYPE,
 } t_objectType;
 
 typedef struct {
