@@ -174,7 +174,7 @@ void jouerMusique(char * path, int volume, int loops, t_audiomanager *audioManag
     t_music *music = initMusic(path);
     music->music = (Mix_Music*)chercheSon(path, audioManager);
     strcpy(music->title, path);
-
+ 
     if (!music->music) {
         music->music = Mix_LoadMUS(path);
         addMusique(audioManager, music);
