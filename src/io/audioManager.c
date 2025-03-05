@@ -18,14 +18,12 @@ t_audiomanager* initAudioManager(){
 }
 
 void *chercheSon(char *path, t_audiomanager *audioManager) {
-    printf("Le comptage : %d\n", audioManager->sons->count);
     for (int i = 0; i < audioManager->sons->count; i++) {
         int typeItem = getObjectTypeId(audioManager->sons, i);
 
         if (typeItem == getTypeIdByName(audioManager->sons->registry, "MUSIQUE_TYPE")) {
             t_music *music = (t_music *)getObject(audioManager->sons, i);
             if (strcmp(path, music->title) == 0) {
-                printf("Musique %s trouvée à l'index %d\n", music->title, i);
                 return music->music;
             }
         }
@@ -33,11 +31,9 @@ void *chercheSon(char *path, t_audiomanager *audioManager) {
         else if (typeItem == getTypeIdByName(audioManager->sons->registry, "SFX_TYPE")) {
             t_sfx *sfx = (t_sfx *)getObject(audioManager->sons, i);
             if (strcmp(path, sfx->title) == 0) {
-                printf("Musique %s trouvée à l'index %d\n", sfx->title, i);
                 return sfx->sfx;
             }
         }
-        printf("Musique %s pas trouvé\n", path);
     }
     return NULL;
 }
@@ -165,11 +161,8 @@ void jouerSFX(char *path, int volume, int loops, t_audiomanager *audioManager){
         printf("Failed to load SFX audio file %s\n", path);
         return; 
     }
-    printf("Nb de sons enregistrées : %d\n", audioManager->sons->count);
     Mix_VolumeChunk(sfx->sfx, volume);
     Mix_PlayChannel(-1, sfx->sfx, loops);
-    
-    printf("Bajour4\n");
 }
 
 void jouerMusique(char * path, int volume, int loops, t_audiomanager *audioManager){
@@ -185,7 +178,6 @@ void jouerMusique(char * path, int volume, int loops, t_audiomanager *audioManag
         printf("Failed to load music audio file %s\n", path);
         return;
     }
-    printf("Nb de sons enregistrées : %d\n", audioManager->sons->count);
     
     Mix_VolumeMusic(volume);
     if (current_music == music->music) return;

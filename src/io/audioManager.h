@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL_mixer.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include <stdio.h> 
 #include "../utils/objectManager.h"
 
 typedef struct{
