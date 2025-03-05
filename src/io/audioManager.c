@@ -139,7 +139,6 @@ t_sfx* initSFX(char *path){
         free(sfx);
         return NULL;
     }
-
     return sfx;
 }
 

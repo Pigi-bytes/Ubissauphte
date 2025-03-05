@@ -14,7 +14,7 @@ typedef struct{
 typedef struct{
     char *title;       // Titre de la mweosique
     Mix_Music *music;  // Pointeur vers la mweosique chargée
-}t_music; 
+}t_music;  
 
 typedef struct{
     t_objectManager* sons;
