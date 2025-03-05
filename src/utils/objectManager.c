@@ -1,83 +1,125 @@
 #include "objectManager.h"
 
-t_objectManager* initObjectManager(t_objectType type, void (*freeFunc)(void*), int capacity) {
+t_typeRegistry* createTypeRegistry() {
+    t_typeRegistry* registre = (t_typeRegistry*)malloc(sizeof(t_typeRegistry));
+    // Initialisation memoire via memset pour garantir l'absence de valeurs dans la memoire
+    memset(registre, 0, sizeof(t_typeRegistry));
+    registre->nextTypeId = 0;
+    return registre;
+}
+
+uint8_t registerType(t_typeRegistry* registre, freeFunc freeFunc, char* name) {
+    // Récupère l'ID disponible actuel et l'incrémente pour le prochain ajout
+    uint8_t id = registre->nextTypeId++;
+    registre->types[id] = (t_typeMetadata){.freeFunc = freeFunc, .name = name};
+    return id;
+}
+
+uint8_t getTypeIdByName(t_typeRegistry* registry, char* name) {
+    for (uint8_t i = 0; i < registry->nextTypeId; i++) {
+        if (strcmp(registry->types[i].name, name) == 0) {
+            return i;
+        }
+    }
+
+    return -1;  // Retourne une valeur invalide si non trouvé
+}
+
+t_objectManager* initObjectManager(t_typeRegistry* registre) {
+    // Allocation du gestionnaire principal
     t_objectManager* manager = (t_objectManager*)malloc(sizeof(t_objectManager));
-    if (!manager) {
-        fprintf(stderr, "Erreur d'allocation de mémoire pour le gestionnaire d'objets.\n");
-        exit(EXIT_FAILURE);
-    }
 
-    manager->freeFunc = freeFunc;
+    // Creation du premier bloc mémoire
+    manager->firstPool = (t_objectMemoryPool*)malloc(sizeof(t_objectMemoryPool));
+    manager->firstPool->next = NULL;  // Pas de bloc suivant
+
+    manager->currentPool = manager->firstPool;
+    manager->nbItemsInPool = 0;
     manager->count = 0;
-    manager->capacity = capacity;
-    manager->type = type;
-    manager->items = (t_typedObject**)malloc(manager->capacity * sizeof(t_typedObject*));
-    if (!manager->items) {
-        fprintf(stderr, "Erreur d'allocation de mémoire pour les items.\n");
-        exit(EXIT_FAILURE);
-    }
-
-    DEBUG_PRINT("Gestionnaire d'objets créé à l'adresse %p avec une capacité initiale de %d\n", manager, manager->capacity);
+    manager->registry = registre;
     return manager;
 }
 
-t_typedObject* createTypedObject(t_objectType type, void* data) {
-    t_typedObject* obj = (t_typedObject*)malloc(sizeof(t_typedObject));
-    if (!obj) {
-        fprintf(stderr, "Erreur d'allocation de mémoire pour l'objet.\n");
-        exit(EXIT_FAILURE);
+uint8_t getObjectTypeId(t_objectManager* manager, int index) {
+    if (index >= manager->count) {
+        return -1;  // Index hors limites
     }
 
-    obj->type = type;
-    obj->data = data;
-    DEBUG_PRINT("Objet créé à l'adresse %p avec type %d\n", obj, obj->type);
-    return obj;
+    int poolIndex = index / POOL_SIZE;
+    int localIndex = index % POOL_SIZE;
+
+    t_objectMemoryPool* pool = manager->firstPool;
+    for (int i = 0; i < poolIndex; i++) {
+        pool = pool->next;
+    }
+
+    return pool->items[localIndex].typeId;
 }
 
-void addObject(t_objectManager* manager, t_typedObject* object) {
-    DEBUG_PRINT("Ajout de l'objet d'adresse %p au gestionnaire d'objets à l'adresse %p\n", object, manager);
+void addObject(t_objectManager* manager, void* data, uint8_t typeId) {
+    // Vérifie si le pool actif est plein
+    if (manager->nbItemsInPool >= POOL_SIZE) {
+        // Allocation d'un nouveau bloc mémoire
+        t_objectMemoryPool* newPool = (t_objectMemoryPool*)malloc(sizeof(t_objectMemoryPool));
+        newPool->next = NULL;  // Pas de bloc suivant
 
-    if (manager->type != object->type) {
-        fprintf(stderr, "Erreur : tentative d'ajout d'un objet de type %d incorrect dans un gestionnaire de type %d\n", object->type, manager->type);
-        exit(EXIT_FAILURE);
+        // Chainage du nouveau bloc avec le precedent
+        manager->currentPool->next = newPool;
+        manager->currentPool = newPool;
+        manager->nbItemsInPool = 0;
     }
 
-    if (manager->count >= manager->capacity) {
-        manager->capacity *= 2;
-        manager->items = (t_typedObject**)realloc(manager->items, manager->capacity * sizeof(t_typedObject*));
-        if (!manager->items) {
-            fprintf(stderr, "Erreur lors du redimensionnement de la mémoire pour les items.\n");
-            exit(EXIT_FAILURE);
-        }
-        DEBUG_PRINT("Capacité du gestionnaire atteinte. Redimensionnement de la capacité de %d à %d \n", manager->capacity, manager->capacity);
-    }
-
-    manager->items[manager->count] = object;
+    // Stockage de l'objet
+    manager->currentPool->items[manager->nbItemsInPool++] = (t_typedObject){.data = data, .typeId = typeId};
     manager->count++;
-
-    DEBUG_PRINT("Objet ajouté. Nombre d'objets dans le gestionnaire : %d, capacité : %d\n", manager->count, manager->capacity);
 }
 
-void* getObject(t_objectManager* manager, size_t index) {
-    if (manager == NULL || index >= manager->count) {
-        return NULL;
+void* getObject(t_objectManager* manager, int index) {
+    if (index >= manager->count) {
+        return NULL;  // Index hors limites
     }
 
-    t_typedObject* obj = manager->items[index];
-    return obj->data;
+    // Calcule le pool et l'index local dans le pool
+    int poolIndex = index / POOL_SIZE;   // Division pour trouver le pool
+    int localIndex = index % POOL_SIZE;  // Modulo pour trouver l'index dans le pool
+
+    // Parcourt les pools jusqu'à atteindre le bon
+    t_objectMemoryPool* pool = manager->firstPool;
+    for (int i = 0; i < poolIndex; i++) {
+        pool = pool->next;
+    }
+
+    return pool->items[localIndex].data;
 }
 
-void freeObjectManager(t_objectManager** manager) {
-    DEBUG_PRINT("Libération du gestionnaire d'objets à l'adresse %p. Nombre d'objets à libérer : %d\n", (*manager), (*manager)->count);
+void freeObjectManager(t_objectManager* manager) {
+    t_objectMemoryPool* pool = manager->firstPool;
 
-    if (!(manager) || !(*manager)) return;
-    for (int i = 0; i < (*manager)->count; ++i) {
-        (*manager)->freeFunc((*manager)->items[i]->data);
-        free((*manager)->items[i]);
-        (*manager)->items[i] = NULL;
+    // Parcours de tous les blocs memoires
+    while (pool != NULL) {
+        // Détermine combien d'objets sont utilisés dans ce bloc
+        int items2Free = POOL_SIZE;          // Bloc plein par default
+        if (pool == manager->currentPool) {  // Si le bloc est pas plein on regarde combien d'element sont stocké
+            items2Free = manager->nbItemsInPool;
+        }
+
+        // Libération de chaque objet dans le bloc
+        for (int i = 0; i < items2Free; i++) {
+            t_typedObject entry = pool->items[i];
+            // Récupère les metadonnées du type
+            t_typeMetadata* metaData = &manager->registry->types[entry.typeId];
+            if (entry.data != NULL) {
+                metaData->freeFunc(entry.data);
+            }
+        }
+
+        // Passage au bloc suivant et libération du bloc actuel
+        t_objectMemoryPool* next = pool->next;
+        free(pool);
+        pool = next;
     }
-    free((*manager)->items);
-    (*manager)->items = NULL;
-    free((*manager));
-    (*manager) = NULL;
+    if (manager->registry != NULL) {
+        free(manager->registry);
+    }
+    free(manager);
 }
