@@ -7,7 +7,7 @@ CFLAGS   = -Wall -g
 
 LINKER   = gcc
 # linking flags here
-LFLAGS   = -Wall -lSDL2 -lSDL2_ttf -lm
+LFLAGS   = -Wall -lSDL2 -lSDL2_ttf -lSDL2_mixer -lm
 
 # change these to proper directories where each file should be
 SRCDIR   = src

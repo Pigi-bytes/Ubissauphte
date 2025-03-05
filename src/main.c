@@ -233,6 +233,10 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
 }
 
 int main(int argc, char* argv[]) {
+    if (initAudioSystem() != 0) {
+        return 1;  // Arrêter si l'initialisation échoue
+    }
+
     SDL_Init(SDL_INIT_VIDEO);
     initTextEngine();
     SDL_Window* window = SDL_CreateWindow("animation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
