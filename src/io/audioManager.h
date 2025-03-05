@@ -32,6 +32,7 @@ void jouerSFX(char * path, int volume, int loops, t_audiomanager *audioManager);
 void jouerMusique(char * path, int volume, int loops, t_audiomanager *audioManager);
 void addSFX(t_audiomanager *audioManager, t_sfx *sfx);
 void addMusique(t_audiomanager *audioManager, t_music *musique);
+void freeAudioManager(t_audiomanager *audioManager);
 
 #endif // AUDIO_MANAGER_H
  

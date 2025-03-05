@@ -17,25 +17,28 @@ t_audiomanager* initAudioManager(){
     return audioManager;
 }
 
-void *chercheSon(char * path, t_audiomanager *audioManager){
+void *chercheSon(char *path, t_audiomanager *audioManager) {
     printf("Le comptage : %d\n", audioManager->sons->count);
-    for (int i = 1; i < audioManager->sons->count+1; i++){
-        printf("TEST MUSIQUE; %d, %d\n", getObjectTypeId(audioManager->sons, i), getTypeIdByName(audioManager->sons->registry, "MUSIQUE_TYPE"));
-        if (getObjectTypeId(audioManager->sons, i) == getTypeIdByName(audioManager->sons->registry, "MUSIQUE_TYPE")){
-            if (strcmp(path, ((t_music*)(audioManager->sons->registry))->title) == 0){
-                    printf("Musique %s trouvée à l'index %d\n", path, i);
-                    return ((t_music*)(audioManager->sons->registry))->music;
+    for (int i = 0; i < audioManager->sons->count; i++) {
+        int typeItem = getObjectTypeId(audioManager->sons, i);
+
+        if (typeItem == getTypeIdByName(audioManager->sons->registry, "MUSIQUE_TYPE")) {
+            t_music *music = (t_music *)getObject(audioManager->sons, i);
+            if (strcmp(path, music->title) == 0) {
+                printf("Musique %s trouvée à l'index %d\n", music->title, i);
+                return music->music;
             }
         }
-        printf("TEST SFX; %d, %d\n", getObjectTypeId(audioManager->sons, i), getTypeIdByName(audioManager->sons->registry, "SFX_TYPE"));
-        if (getObjectTypeId(audioManager->sons, i) == getTypeIdByName(audioManager->sons->registry, "SFX_TYPE")){
-            if (strcmp(path, ((t_sfx*)(audioManager->sons->registry))->title) == 0){
-                printf("SFX %s trouvée à l'index %d\n", path, i);
-                return ((t_sfx*)(audioManager->sons->registry))->sfx;
+
+        else if (typeItem == getTypeIdByName(audioManager->sons->registry, "SFX_TYPE")) {
+            t_sfx *sfx = (t_sfx *)getObject(audioManager->sons, i);
+            if (strcmp(path, sfx->title) == 0) {
+                printf("Musique %s trouvée à l'index %d\n", sfx->title, i);
+                return sfx->sfx;
             }
         }
+        printf("Musique %s pas trouvé\n", path);
     }
-    printf("Musique %s pas trouvé\n", path);
     return NULL;
 }
 
@@ -200,5 +203,16 @@ void addMusique(t_audiomanager *audioManager, t_music *musique) {
 }
  
 
-
+void freeAudioManager(t_audiomanager *audioManager){
+    if (audioManager->sons != NULL){
+        freeObjectManager(audioManager->sons);
+        audioManager->sons = NULL;
+    }
+    if (audioManager != NULL){
+        free(audioManager);
+        audioManager = NULL;
+    }
+        
+    return;
+}
 

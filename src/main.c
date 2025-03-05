@@ -19,13 +19,6 @@ int main(int argc, char* argv[]) {
 
     printf("Bonjoir\n");
     t_audiomanager *audioManager = initAudioManager();
-    /*t_objectManager *audioManager = initObjectManager(AUDIO_TYPE, freeMusic, INITIAL_CAPACITY);
-    t_music *mwusique1 = (t_music*)malloc(sizeof(t_music));
-    t_music *mwusique2 = (t_music*)malloc(sizeof(t_music));
-    mwusique1 = initMusic("meow", "src/io/meow.wav");
-    ADD_TYPED_OBJECT(audioManager, AUDIO_TYPE, mwusique1);
-    mwusique2 = initMusic("skibidi", "src/io/skibidi.wav");
-    ADD_TYPED_OBJECT(audioManager, AUDIO_TYPE, mwusique2);*/
     
     printf("Bonjoir2\n");
     jouerSFX("src/io/start.wav", MIX_MAX_VOLUME, 0, audioManager);     
@@ -61,7 +54,7 @@ int main(int argc, char* argv[]) {
         SDL_RenderClear(renderer);
         SDL_RenderPresent(renderer);
     }
-    //freeObjectManager(&audioManager);
+    freeAudioManager(audioManager);
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
