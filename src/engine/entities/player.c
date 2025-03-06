@@ -5,10 +5,15 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
 
     joueur->control = control;
     joueur->entity.texture = texture;
-    joueur->entity.rect = rect;
+    joueur->entity.displayRect = rect;
     joueur->entity.flip = SDL_FLIP_NONE;
     joueur->entity.animationController = initAnimationController();
     joueur->entity.debug = SDL_TRUE;
+
+    joueur->entity.useCircleCollision = SDL_TRUE;
+    joueur->entity.collisionCircle.x = rect.x + rect.w / 2;
+    joueur->entity.collisionCircle.y = rect.y + rect.h / 2;
+    joueur->entity.collisionCircle.radius = fminf(rect.w, rect.h) / 2;  // Set radius to half the smaller dimension of the rect
 
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 4, 5}, 5, 240, true, "idle"));
     addAnimation(joueur->entity.animationController, createAnimation(tileset2, (int[]){1, 2}, 2, 240, true, "walk"));
