@@ -6,11 +6,11 @@
 
 #include "../../debug.h"
 #include "../../io/input.h"
+#include "../entities/entity.h"
 #include "../entities/player.h"
 #include "../world/tilesManager.h"
 
-SDL_bool checkCollision(SDL_Rect* rect1, SDL_Rect* rect2);
-void movePlayer(t_joueur* player, int dx, int dy, t_grid* grid);
+SDL_bool checkCircleRectCollision(t_circle* circle, SDL_Rect* rect, float* penetrationDepth, SDL_FPoint* normal);
 void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float*);
 
 #endif

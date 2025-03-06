@@ -16,8 +16,10 @@ t_grid* createGrid(int width, int height, int depth) {
             for (int x = 0; x < width; x++) {
                 t_tile* tile = &grid->tiles[z][y][x];
                 tile->solide = SDL_FALSE;
+                tile->entity.useCircleCollision = SDL_FALSE;
+                tile->entity.displayRect = (SDL_Rect){x * 16, y * 16, 16, 16};
+                tile->entity.collisionRect = (SDL_Rect){x * 16, y * 16, 16, 16};
 
-                tile->entity.rect = (SDL_Rect){x * 16, y * 16, 16, 16};
                 tile->entity.texture = NULL;
                 tile->entity.flip = SDL_FLIP_NONE;
             }
