@@ -10,8 +10,7 @@
 #include "../entities/player.h"
 #include "../world/tilesManager.h"
 
-SDL_bool checkCollision(SDL_Rect* rect1, SDL_Rect* rect2);
-SDL_bool checkCircleRectCollision(t_circle* circle, SDL_Rect* rect, SDL_Point* impactPoint, float* penetrationDepth);
+SDL_bool checkCircleRectCollision(t_circle* circle, SDL_Rect* rect, float* penetrationDepth, SDL_FPoint* normal);
 void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float*);
 
 #endif
