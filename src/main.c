@@ -87,8 +87,8 @@ void renderBarreVolumme(SDL_Renderer* renderer, t_barreVolumme* barre) {
 
     SDL_RenderFillRect(renderer, &barre->curseur);
 
-    DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, button->barre, 3);
-    DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, button->curseur, 3);
+    DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, barre->barre, 3);
+    DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, barre->curseur, 3);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
@@ -172,14 +172,9 @@ t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font
 
     ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Commande", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.30f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
-<<<<<<< HEAD
     ADD_OBJECT_TO_SCENE(scene, fpsButton, BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, CreerBarreVolumme(creerRect(0.35f, (0.58f + 0.05f), 0.3f, 0.01f), creerRect((0.35f + 0.14f), (0.58f + 0.032f), 0.02f, 0.04f), GREEN, WHITE, creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), VOLUME_TYPE);
-=======
-    t_text* textFps = createTextOutline(renderer, "FPS/ON", font, BLACK, WHITE, 2);
     ADD_OBJECT_TO_SCENE(scene, createButton(textFps, GREEN, WHITE, creerRect(0.35f, 0.44f, 0.3f, 0.1f), creerFonction(afficherFps, FONCTION_PARAMS(fpsDisplay, textFps, renderer))), BUTTON_TYPE);
-    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Volume", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.58f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
->>>>>>> 3914f0c541fac12cd4551b86087c772b97adc97a
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Affichage", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.72f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Menu Principal", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.86f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, fpsDisplay, FRAME_DISPLAY_TYPE);
@@ -303,8 +298,8 @@ int main(int argc, char* argv[]) {
     TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     t_frameData* frameData = initFrameData(0);
 
-    // t_scene* scene = createOptionMenu(renderer, input, font, frameData);
-    t_scene* scene = createMainWord(renderer, input, font, frameData);
+    t_scene* scene = createOptionMenu(renderer, input, font, frameData);
+    // t_scene* scene = createMainWord(renderer, input, font, frameData);
 
     while (!input->quit) {
         startFrame(frameData);
