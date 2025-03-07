@@ -9,7 +9,6 @@
 #include "fichierLoader.h"
 
 typedef enum {
-    ITEM_FLAG_NONE = 0,
     ITEM_FLAG_STACKABLE = 1 << 0,
     ITEM_FLAG_CONSUMABLE = 1 << 1,
     ITEM_FLAG_EQUIPABLE = 1 << 2,
@@ -21,7 +20,7 @@ typedef enum {
     SLOT_ARMURE,
     SLOT_ACTIVABLE1,
     SLOT_ACTIVABLE2,
-    NUM_EQUIPMENT_SLOTS
+    TOTAL_EQUIPMENT_SLOTS
 } equipementSlotType;
 
 typedef struct {
@@ -44,7 +43,7 @@ typedef struct {
     t_stats stats;
     int id;
     unsigned int flags;      // Propriete
-    unsigned int validSlot;  // Ou il va
+    int validSlot[2];  // Ou il va
 
     // t_fonctionParam* onUse;
 } t_item;
@@ -56,8 +55,8 @@ typedef struct {
 
 typedef struct {
     equipementSlotType slotType;
-    t_itemsStack stack;
-    // t_fonctionParam* onEquip;
+    t_itemsStack *stack;
+    t_fonctionParam* onEquip;
     // t_fonctionParam* onDeEquip;
 } t_equipementSlotType;
 
@@ -66,15 +65,15 @@ typedef struct {
 } t_inventaire;
 
 typedef struct {
-    t_stats baseStats;
-    t_stats calculatedStats;
+    // t_stats baseStats;
+    // t_stats calculatedStats;
 
-    equipementSlotType equipment[NUM_EQUIPMENT_SLOTS];
-    t_inventaire inventaire;
+    t_equipementSlotType equipement[TOTAL_EQUIPMENT_SLOTS];
+    t_inventaire* inventaire;
 
-    int level;
-    int experience;
-    int gold;
+    // int level;
+    // int experience;
+    // int gold;
 } t_character;
 
 // Gestion Inventaire
@@ -83,10 +82,11 @@ void inventaireAjoutObjet(t_inventaire* inv, t_item* item, int quantite);
 t_itemsStack* inventaireFindStack(t_inventaire* inv, t_item* item);
 void itemFree(void* data);
 void itemFreeFunc(void* data);
+int hasFlag(int itemFlags, itemsFlags flag);
 
 // Gestion equipement
-bool equiperEquipement(t_character* c, int inventoryIndex, equipementSlotType slot);
-bool desequiperEquipement(t_character* c, equipementSlotType slot);
+void equiperEquipement(t_character* c, int inventoryIndex, equipementSlotType slot);
+void desequiperEquipement(t_character* c, equipementSlotType slot);
 t_itemsStack* equipementGetEquiper(t_character* c, equipementSlotType slot);
 
 // Gestion Interaction
@@ -100,7 +100,6 @@ void equipment_print(t_character* c);
 void item_save(t_item** item, t_fichier* fichier, int count);
 t_item** item_load(t_fichier* fichier);
 void free_item(t_item** items, int count);
-
 
 bool inventory_save(t_inventaire* inv, char* filename);
 bool inventory_load(t_inventaire* inv, char* filename);

@@ -1,5 +1,9 @@
 #include "equipementsManager.h"
 
+int hasFlag(int itemFlags, itemsFlags flag) {
+    return (itemFlags & flag) != 0;  // Vérifie si le bit correspondant est activé
+}
+
 void item_save(t_item** item, t_fichier* fichier, int count) {
     t_typeRegistry* registre = createTypeRegistry();
     registerType(registre, blockFreeFunc, "BLOCK_TYPE");
@@ -76,6 +80,19 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
         data = createPairData("speed Mult Modifier", value);
         addPairData(block, data);
 
+        sprintf(value, "%d", item[i]->flags);
+        data = createPairData("flags", value);
+        addPairData(block, data);
+
+        if (item[i]->validSlot[0] == SLOT_ARME)
+            data = createPairData("type", "arme");
+        else if (item[i]->validSlot[0] == SLOT_ARMURE)
+            data = createPairData("type", "armure");
+        else if (item[i]->validSlot[0] == SLOT_ACTIVABLE1 || item[i]->validSlot[0] == SLOT_ACTIVABLE2)
+            data = createPairData("type", "activable");
+
+        addPairData(block, data);
+
         addBlock(fichier, block);
     }
 }
@@ -144,18 +161,23 @@ t_item** item_load(t_fichier* fichier) {
 
         getValue(block, "speed Mult Modifier", &resultFLOAT, FLOAT);
         item[i]->stats.speed.multiplicative = resultFLOAT;
+
+        getValue(block, "flags", &resultInt, INT);
+        item[i]->flags = resultInt;
+
+        getValue(block, "type", &resultChar, STRING);
+        if (strcmp(resultChar, "arme") == 0)
+            item[i]->validSlot[0] = SLOT_ARME;
+        else if (strcmp(resultChar, "armure") == 0)
+            item[i]
+                ->validSlot[0] = SLOT_ARMURE;
+        else if (strcmp(resultChar, "activable") == 0) {
+            item[i]->validSlot[0] = SLOT_ACTIVABLE1;
+            item[i]->validSlot[1] = SLOT_ACTIVABLE2;
+        }
     }
 
     return item;
-}
-
-void free_item(t_item** item, int count) {
-    for (int i = 0; i < count; i++) {
-        if (item[i] != NULL) {
-            free(item[i]);
-        }
-    }
-    free(item);
 }
 
 t_inventaire* createInventaire() {
@@ -170,12 +192,17 @@ t_inventaire* createInventaire() {
 void inventaireAjoutObjet(t_inventaire* inv, t_item* item, int quantite) {
     t_itemsStack* itemStack = inventaireFindStack(inv, item);
 
-    if (itemStack != NULL)
-        itemStack->quantite += quantite;
-    else {
+    if (itemStack != NULL) {
+        if ((hasFlag(itemStack->definition->flags, ITEM_FLAG_STACKABLE)))
+            itemStack->quantite += quantite;
+
+    } else {
         t_itemsStack* itemStackNew = (t_itemsStack*)malloc(sizeof(t_itemsStack));
         itemStackNew->definition = item;
-        itemStackNew->quantite = quantite;
+        if (hasFlag(item->flags, ITEM_FLAG_STACKABLE))
+            itemStackNew->quantite = quantite;
+        else
+            itemStackNew->quantite = 1;
         addObject(inv->itemsStack, itemStackNew, getTypeIdByName(inv->itemsStack->registry, "ITEMSTACK_TYPE"));
     }
 }
@@ -187,6 +214,38 @@ t_itemsStack* inventaireFindStack(t_inventaire* inv, t_item* item) {
             return itemStack;
     }
     return NULL;
+}
+
+void equiperEquipement(t_character* c, int inventoryIndex, equipementSlotType slot) {
+    int i;
+
+    t_itemsStack* itemStack = (t_itemsStack*)getObject(c->inventaire->itemsStack, inventoryIndex);
+    if (itemStack == NULL || itemStack->definition == NULL) {
+        fprintf(stderr, "Erreur: ItemStack ou definition invalide.\n");
+        return;
+    }
+    for (i = 0; i < 2; i++) {
+        printf("%d\n", itemStack->definition->validSlot[i]);
+        if (slot == itemStack->definition->validSlot[i])
+            break;
+    }
+    if (slot == itemStack->definition->validSlot[i])
+        c->equipement[slot].stack = itemStack;
+    else
+        printf("Slot invalide\n");
+}
+
+void desequiperEquipement(t_character* c, equipementSlotType slot) {
+    c->equipement[slot].stack = NULL;
+}
+
+void free_item(t_item** item, int count) {
+    for (int i = 0; i < count; i++) {
+        if (item[i] != NULL) {
+            free(item[i]);
+        }
+    }
+    free(item);
 }
 
 void itemFree(void* data) {
