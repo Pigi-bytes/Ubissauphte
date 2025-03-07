@@ -52,10 +52,6 @@ GENERATE_WRAPPER_3(resizeViewport, t_viewPort*, int*, int*)
 GENERATE_WRAPPER_4(resizeMinimap, SDL_Renderer*, t_minimap*, int*, int*)
 
 typedef struct {
-    SDL_bool affihcher_fps;
-} t_option;
-
-typedef struct {
     SDL_Rect barre;
     float volumme;
     SDL_Rect curseur;
@@ -66,6 +62,20 @@ typedef struct {
     t_fonctionParam* OnClick;
 
 } t_barreVolumme;
+
+typedef struct {
+    SDL_bool PleinEcran;
+} t_option;
+
+t_option* creeOption() {
+    t_option* option = malloc(sizeof(t_option));
+    option->PleinEcran = SDL_FALSE;
+    return option;
+}
+
+void freeOption(void* elt) {
+    free((t_option*)elt);
+}
 
 t_barreVolumme* CreerBarreVolumme(SDL_Rect barre, SDL_Rect curseur, SDL_Color couleur, SDL_Color couleurCurseur, t_fonctionParam* OnClick) {
     t_barreVolumme* bv = malloc(sizeof(t_barreVolumme));
@@ -97,14 +107,13 @@ void renderBarreVolumeWrapper(t_fonctionParam* fonction) {
     renderBarreVolumme((SDL_Renderer*)fonction->param[0], (t_barreVolumme*)fonction->param[1]);
 }
 
-void UpdateBarreVolumme(t_fonctionParam* fonction) {
-    return;
-}
-
 void handleInputButtonVolumme(t_input* input, t_barreVolumme* barre) {
     if (barre->isClicked) {
-        if (((input->mouseX - (barre->curseur.w / 2)) >= (barre->barre.x)) && (input->mouseX + (barre->curseur.w / 2)) <= (barre->barre.x + barre->barre.w))
+        if (((input->mouseX - (barre->curseur.w / 2)) >= (barre->barre.x)) && (input->mouseX + (barre->curseur.w / 2)) <= (barre->barre.x + barre->barre.w)) {
             barre->curseur.x = input->mouseX - (barre->curseur.w / 2);
+            barre->volumme = ((float)(barre->curseur.x - barre->barre.x) * 100.0f) / ((float)(barre->barre.w - barre->curseur.w));
+            printf("%f\n", barre->volumme);
+        }
     }
 
     if (isMouseInsideRect(input->mouseX, input->mouseY, &barre->curseur)) {
@@ -140,7 +149,25 @@ void afficherFps(t_fonctionParam* fonction) {
     }
 }
 
-t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData) {
+void changementAffichage(t_fonctionParam* fonction) {
+    SDL_Window* window = GET_PTR(fonction, 0, SDL_Window*);
+    t_option* option = GET_PTR(fonction, 1, t_option*);
+    t_text** text = GET_PTR(fonction, 2, t_text**);
+    SDL_Renderer* renderer = GET_PTR(fonction, 3, SDL_Renderer*);
+    int sizeOutline = 2;
+    if (option->PleinEcran == SDL_FALSE) {
+        option->PleinEcran = SDL_TRUE;
+        updateTextOutline(text, renderer, "Fullscreen", BLACK, WHITE, sizeOutline);
+    } else {
+        option->PleinEcran = SDL_FALSE;
+        updateTextOutline(text, renderer, "windowed", BLACK, WHITE, sizeOutline);
+    }
+    Uint32 fullscreenFlag = SDL_WINDOW_FULLSCREEN;
+    bool isFullscreen = SDL_GetWindowFlags(window) & fullscreenFlag;
+    SDL_SetWindowFullscreen(window, isFullscreen ? 0 : fullscreenFlag);
+}
+
+t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, SDL_Window* window, t_option* option) {
     t_typeRegistry* registre = createTypeRegistry();
     const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
     const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
@@ -157,6 +184,11 @@ t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font
     t_button* fpsButton = createButton(textFps, GREEN, WHITE, creerRect(0.35f, 0.44f, 0.3f, 0.1f), fp);
     addPamaretre(fp, FONCTION_PARAMS(fpsDisplay, &(fpsButton->label), renderer));
 
+    t_text* textEcran = createTextOutline(renderer, "windowed", font, BLACK, WHITE, nb);
+    t_fonctionParam* fonctionEcran = creerFonction(changementAffichage, NULL);
+    t_button* fpsButtonEcran = createButton(textEcran, GREEN, WHITE, creerRect(0.35f, 0.72f, 0.3f, 0.1f), fonctionEcran);
+    addPamaretre(fonctionEcran, FONCTION_PARAMS(window, option, &(fpsButtonEcran->label), renderer));
+
     t_text* text = createText(renderer, "Option", font, GREEN);
     text->rect = creerRect((1 - 0.8f) / 2, 0.05f, 0.8f, 0.2f);
 
@@ -164,7 +196,7 @@ t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Commande", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.30f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, fpsButton, BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, CreerBarreVolumme(creerRect(0.35f, (0.58f + 0.05f), 0.3f, 0.01f), creerRect((0.35f + 0.14f), (0.58f + 0.032f), 0.02f, 0.04f), GREEN, WHITE, creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), VOLUME_TYPE);
-    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Affichage", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.72f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, fpsButtonEcran, BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Menu Principal", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.86f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, fpsDisplay, FRAME_DISPLAY_TYPE);
 
@@ -286,9 +318,10 @@ int main(int argc, char* argv[]) {
     t_input* input = initInput(WINDOW_WIDTH, WINDOW_HEIGHT);
     TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     t_frameData* frameData = initFrameData(0);
+    t_option* option = creeOption();
 
-    t_scene* scene = createOptionMenu(renderer, input, font, frameData);
-    // t_scene* scene = createMainWord(renderer, input, font, frameData);
+    // t_scene* scene = createOptionMenu(renderer, input, font, frameData, window, option);
+    t_scene* scene = createMainWord(renderer, input, font, frameData);
 
     while (!input->quit) {
         startFrame(frameData);
@@ -314,6 +347,7 @@ int main(int argc, char* argv[]) {
         capFrameRate(frameData);
     }
 
+    freeOption(option);
     freeFrameData(frameData);
     freeScene(scene);
 
