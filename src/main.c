@@ -297,8 +297,8 @@ int main(int argc, char* argv[]) {
     TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     t_frameData* frameData = initFrameData(0);
 
-    t_scene* scene = createOptionMenu(renderer, input, font, frameData);
-    // t_scene* scene = createMainWord(renderer, input, font, frameData);
+    // t_scene* scene = createOptionMenu(renderer, input, font, frameData);
+    t_scene* scene = createMainWord(renderer, input, font, frameData);
 
     while (!input->quit) {
         startFrame(frameData);
