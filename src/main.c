@@ -57,7 +57,7 @@ typedef struct {
 
 typedef struct {
     SDL_Rect barre;
-    int volumme;
+    float volumme;
     SDL_Rect curseur;
     SDL_Rect curseurDefault;
     SDL_Color colorBarre;
@@ -102,25 +102,15 @@ void UpdateBarreVolumme(t_fonctionParam* fonction) {
 }
 
 void handleInputButtonVolumme(t_input* input, t_barreVolumme* barre) {
-    int newWidth = barre->curseurDefault.w * SCALE_FACTOR;
-    int newHeight = barre->curseurDefault.h * SCALE_FACTOR;
-    int deltaX = (newWidth - barre->curseurDefault.w) / 2;
-    int deltaY = (newHeight - barre->curseurDefault.h) / 2;
+    if (barre->isClicked) {
+        if (((input->mouseX - (barre->curseur.w / 2)) >= (barre->barre.x)) && (input->mouseX + (barre->curseur.w / 2)) <= (barre->barre.x + barre->barre.w))
+            barre->curseur.x = input->mouseX - (barre->curseur.w / 2);
+    }
 
     if (isMouseInsideRect(input->mouseX, input->mouseY, &barre->curseur)) {
-        barre->curseur.w = newWidth;
-        barre->curseur.h = newHeight;
-
-        barre->curseur.y = barre->curseurDefault.y - deltaY;
-
         if (input->mouseButtons[SDL_BUTTON_LEFT]) {
-            barre->curseur.x = input->mouseX - ((input->mouseX + barre->curseurDefault.x) / 2);
             if (!barre->isClicked) {
                 barre->isClicked = SDL_TRUE;
-
-                if (barre->OnClick) {
-                    // callFonction(barre->OnClick);
-                }
             }
         } else if (barre->isClicked) {
             barre->isClicked = SDL_FALSE;
