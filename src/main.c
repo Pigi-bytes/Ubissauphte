@@ -2,6 +2,7 @@
 #include "engine/core/camera.h"
 #include "engine/core/frame.h"
 #include "engine/entities/components/physic/movementPlayer.h"
+#include "engine/entities/enemy.h"
 #include "engine/entities/player.h"
 #include "engine/entities/tiles.h"
 #include "engine/world/generationSalle/geneRoom.h"
@@ -37,6 +38,7 @@ GENERATE_WRAPPER_3(renderGrid, SDL_Renderer*, t_grid*, t_camera*)
 GENERATE_WRAPPER_2(renderMinimap, SDL_Renderer*, t_minimap*)
 GENERATE_WRAPPER_2(renderViewport, SDL_Renderer*, t_viewPort*)
 GENERATE_WRAPPER_3(renderPlayer, SDL_Renderer*, t_joueur*, t_camera*)
+GENERATE_WRAPPER_3(renderEnemy, SDL_Renderer*, t_ennemi*, t_camera*)
 
 GENERATE_WRAPPER_3(updateFPSDisplay, t_fpsDisplay*, t_frameData*, SDL_Renderer*)
 GENERATE_WRAPPER_3(updatePhysics, t_joueur*, float*, t_grid*);
@@ -251,6 +253,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     const uint8_t CAMERA_TYPE = registerType(registre, freeCamera, "camera");
     const uint8_t VIEWPORT_TYPE = registerType(registre, freeViewport, "viewport");
     const uint8_t MINIMAP_TYPE = registerType(registre, freeMinimap, "minimap");
+    const uint8_t ENEMY_TYPE = registerType(registre, freeEnemy, "enemy");
 
     t_scene* scene = createScene(initObjectManager(registre), "scene1");
 
@@ -272,14 +275,17 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     contr->right = SDL_SCANCODE_RIGHT;
 
     t_joueur* joueur = createPlayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerIdle, playerCours);
+    placeOnRandomTile(level, &joueur->entity);
+    t_ennemi* enemy = createEnemy((SDL_Texture*)getObject(tileset->textureTiles, 98 + 14), (SDL_Rect){100, 100, 16, 16});
+    placeOnRandomTile(level, &enemy->entity);
 
     t_camera* camera = createCamera(levelWidth, levelHeight, 300, 300);
-
     t_viewPort* viewport = createViewport(renderer, camera, WINDOW_WIDTH, WINDOW_HEIGHT);
     t_minimap* minimap = createMinimap(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     ADD_OBJECT_TO_SCENE(scene, initFPSDisplay(renderer, font), FRAME_DISPLAY_TYPE);
     ADD_OBJECT_TO_SCENE(scene, joueur, PLAYER_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
     ADD_OBJECT_TO_SCENE(scene, level, GRID_TYPE);
     ADD_OBJECT_TO_SCENE(scene, camera, CAMERA_TYPE);
     ADD_OBJECT_TO_SCENE(scene, viewport, VIEWPORT_TYPE);
@@ -300,6 +306,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
 
     sceneRegisterFunction(scene, GRID_TYPE, RENDER_GAME, renderGridWrapper, 1, FONCTION_PARAMS(renderer, camera));
     sceneRegisterFunction(scene, PLAYER_TYPE, RENDER_GAME, renderPlayerWrapper, 1, FONCTION_PARAMS(renderer, camera));
+    sceneRegisterFunction(scene, ENEMY_TYPE, RENDER_GAME, renderEnemyWrapper, 1, FONCTION_PARAMS(renderer, camera));
 
     sceneRegisterFunction(scene, VIEWPORT_TYPE, RENDER_BUFFER, renderViewportWrapper, 1, FONCTION_PARAMS(renderer));
 

@@ -10,13 +10,7 @@ typedef struct {
     SDL_FPoint acceleration;  // Accélération (forces appliquées)
     float mass;               // 0 = infinité (statique)
     float friction;           // Frottement (pour ralentir l'entité)
+    float restitution;        // Elasticité des collisions (0.0 = pas elastique, 1.0 = elastique)
 } t_physics;
-
-typedef struct {
-    t_entity* entityA;
-    t_entity* entityB;
-    SDL_FPoint normal;
-    float depth;
-} t_entityCollision;
 
 #endif

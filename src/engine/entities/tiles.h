@@ -2,6 +2,8 @@
 #define TILESMANAGER_H
 
 #include <SDL2/SDL.h>
+#include <stdlib.h>
+#include <time.h>
 
 #include "../../debug.h"
 #include "../core/camera.h"
@@ -28,7 +30,7 @@ t_grid* createGrid(int width, int height, int depth);
 t_grid* loadMap(char* filename, t_tileset* tileset);
 void renderGrid(SDL_Renderer* renderer, t_grid* grid, t_camera* camera);
 void freeGrid(void* object);
-
+void placeOnRandomTile(t_grid* grid, t_entity* entity);
 void SDL_DestroyTextureWrapper(void* object);
 
 #endif

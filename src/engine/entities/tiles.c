@@ -135,3 +135,36 @@ t_grid* loadMap(char* filename, t_tileset* tileset) {
     DEBUG_PRINT("Chargement de la carte terminé\n");
     return grid;
 }
+
+void placeOnRandomTile(t_grid* grid, t_entity* entity) {
+    // Hack temporaire avant d'avoir le module d'aléatoire
+    static SDL_bool initialized = SDL_FALSE;
+    if (!initialized) {
+        srand(time(NULL));
+        initialized = SDL_TRUE;
+    }
+
+    int maxAttempts = 1000;
+    int attempts = 0;
+
+    while (attempts < maxAttempts) {
+        int x = rand() % grid->width;
+        int y = rand() % grid->height;
+        int z = 0;
+
+        t_tile* tile = getTile(grid, x, y, z);
+
+        if (tile && !tile->solide) {
+            float centerX = x * 16 + 16 / 2.0f;
+            float centerY = y * 16 + 16 / 2.0f;
+            entity->collisionCircle.x = centerX;
+            entity->collisionCircle.y = centerY;
+
+            entity->displayRect.x = centerX - entity->displayRect.w / 2;
+            entity->displayRect.y = centerY - entity->displayRect.h / 2;
+            return;
+        }
+
+        attempts++;
+    }
+}
