@@ -1,6 +1,4 @@
-#include "tilesManager.h"
-
-#define MAX_LINE_LENGTH 2048
+#include "tiles.h"
 
 t_grid* createGrid(int width, int height, int depth) {
     t_grid* grid = (t_grid*)malloc(sizeof(t_grid));

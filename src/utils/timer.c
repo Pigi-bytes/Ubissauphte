@@ -18,7 +18,7 @@ void startTimer(t_timer *timer) {
     timer->isPaused = false;
     timer->startTicks = SDL_GetTicks();
     timer->pausedTicks = 0;
-    DEBUG_PRINT("Timer start à l'adresse : %p\n", timer);
+    // DEBUG_PRINT("Timer start à l'adresse : %p\n", timer);
 }
 
 void stopTimer(t_timer *timer) {
@@ -26,7 +26,7 @@ void stopTimer(t_timer *timer) {
     timer->isPaused = false;
     timer->startTicks = 0;
     timer->pausedTicks = 0;
-    DEBUG_PRINT("Timer stop à l'adresse : %p\n", timer);
+    // DEBUG_PRINT("Timer stop à l'adresse : %p\n", timer);
 }
 
 void pauseTimer(t_timer *timer) {
@@ -35,7 +35,7 @@ void pauseTimer(t_timer *timer) {
         timer->pausedTicks = SDL_GetTicks() - timer->startTicks;
         timer->startTicks = 0;
     }
-    DEBUG_PRINT("Timer mit en pause à l'adresse : %p\n", timer);
+    // DEBUG_PRINT("Timer mit en pause à l'adresse : %p\n", timer);
 }
 
 void unpauseTimer(t_timer *timer) {
@@ -44,7 +44,7 @@ void unpauseTimer(t_timer *timer) {
         timer->startTicks = SDL_GetTicks() - timer->pausedTicks;
         timer->pausedTicks = 0;
     }
-    DEBUG_PRINT("Timer remit en marche à l'adresse : %p\n", timer);
+    // DEBUG_PRINT("Timer remit en marche à l'adresse : %p\n", timer);
 }
 
 Uint32 getTicks(t_timer *timer) {

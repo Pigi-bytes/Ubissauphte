@@ -1,10 +1,10 @@
 #include "debug.h"
 #include "engine/core/camera.h"
 #include "engine/core/frame.h"
+#include "engine/entities/components/physic/movementPlayer.h"
 #include "engine/entities/player.h"
-#include "engine/gameplay/movementPlayer.h"
+#include "engine/entities/tiles.h"
 #include "engine/world/generationSalle/geneRoom.h"
-#include "engine/world/tilesManager.h"
 #include "io/audioManager.h"
 #include "io/imageLoader.h"
 #include "io/input.h"
@@ -39,6 +39,8 @@ GENERATE_WRAPPER_2(renderViewport, SDL_Renderer*, t_viewPort*)
 GENERATE_WRAPPER_3(renderPlayer, SDL_Renderer*, t_joueur*, t_camera*)
 
 GENERATE_WRAPPER_3(updateFPSDisplay, t_fpsDisplay*, t_frameData*, SDL_Renderer*)
+GENERATE_WRAPPER_3(updatePhysics, t_joueur*, float*, t_grid*);
+
 GENERATE_WRAPPER_3(updateMinimap, t_minimap*, t_camera*, SDL_Renderer*)
 GENERATE_WRAPPER_2(cameraHandleZoom, t_viewPort*, int*)
 
@@ -286,6 +288,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level, &frameData->deltaTime));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&input->mouseYWheel));
 
+    sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePhysicsWrapper, 0, FONCTION_PARAMS(&frameData->deltaTime, level));
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, 0, FONCTION_PARAMS(frameData, renderer));
     sceneRegisterFunction(scene, MINIMAP_TYPE, UPDATE, updateMinimapWrapper, 0, FONCTION_PARAMS(camera, renderer));
     sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&joueur->entity.displayRect.x, &joueur->entity.displayRect.y));

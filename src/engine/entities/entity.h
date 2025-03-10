@@ -4,8 +4,9 @@
 #include <SDL2/SDL.h>
 
 #include "../../debug.h"
-#include "../animation.h"
 #include "../core/camera.h"
+#include "components/animation/animation.h"
+#include "components/physic/physics.h"
 
 typedef struct {
     float x, y;
@@ -18,6 +19,8 @@ typedef struct {
     SDL_Rect collisionRect;       // Position et taille pour les collisions rectangulaires
     t_circle collisionCircle;     // Position et taille pour les collisions circulaires
     SDL_bool useCircleCollision;  // Indicateur pour utiliser le cercle de collision
+
+    t_physics physics;
 
     SDL_Texture* texture;
     t_animationController* animationController;

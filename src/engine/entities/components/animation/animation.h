@@ -3,10 +3,10 @@
 
 #include <SDL2/SDL.h>
 
-#include "../utils/objectManager.h"
-#include "../utils/timer.h"
+#include "../../../../utils/objectManager.h"
+#include "../../../../utils/timer.h"
+#include "../../../tileset.h"
 #include "string.h"
-#include "tileset.h"
 
 typedef struct {
     char* name;            // Nom de l'animation

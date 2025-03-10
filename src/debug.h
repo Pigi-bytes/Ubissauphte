@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 #define DEBUG_MODE 1
-#define DEBUG_MEMORY_MODE 1
+#define DEBUG_MEMORY_MODE 0
 #define RECTANGLE_COLOR (SDL_Color){41, 182, 246, 255}
 #define CIRCLE_COLOR (SDL_Color){255, 0, 0, 255}
 

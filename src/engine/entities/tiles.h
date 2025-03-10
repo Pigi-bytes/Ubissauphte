@@ -4,10 +4,12 @@
 #include <SDL2/SDL.h>
 
 #include "../../debug.h"
-#include "../animation.h"
 #include "../core/camera.h"
-#include "../entities/entity.h"
 #include "../tileset.h"
+#include "components/animation/animation.h"
+#include "entity.h"
+
+#define MAX_LINE_LENGTH 2048
 
 typedef struct {
     SDL_bool solide;  // Propriété de collision
@@ -22,7 +24,6 @@ typedef struct {
 } t_grid;
 
 t_tile* getTile(t_grid* grid, int x, int y, int z);
-
 t_grid* createGrid(int width, int height, int depth);
 t_grid* loadMap(char* filename, t_tileset* tileset);
 void renderGrid(SDL_Renderer* renderer, t_grid* grid, t_camera* camera);

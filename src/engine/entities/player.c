@@ -15,6 +15,14 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->entity.collisionCircle.y = rect.y + rect.h / 2;
     joueur->entity.collisionCircle.radius = fminf(rect.w, rect.h) / 2;  // Set radius to half the smaller dimension of the rect
 
+    t_physics playerPhysics = {
+        .velocity = {0, 0},  // Vitesse initiale
+        .acceleration = {0.0f, 0.0f},
+        .mass = 1.0f,
+        .friction = 0.03f};
+
+    joueur->entity.physics = playerPhysics;
+
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 4, 5}, 5, 240, true, "idle"));
     addAnimation(joueur->entity.animationController, createAnimation(tileset2, (int[]){1, 2}, 2, 240, true, "walk"));
     setAnimation(joueur->entity.animationController, "idle");
@@ -31,3 +39,4 @@ void freePlayer(void* object) {
     SDL_DestroyTexture(player->entity.texture);
     free(player);
 }
+
