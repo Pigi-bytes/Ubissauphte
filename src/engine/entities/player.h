@@ -7,6 +7,11 @@
 #include "entity.h"
 
 typedef struct {
+    SDL_Scancode scancode;
+    int signification;
+} t_touche;
+
+typedef struct {
     SDL_Scancode up;
     SDL_Scancode down;
     SDL_Scancode left;

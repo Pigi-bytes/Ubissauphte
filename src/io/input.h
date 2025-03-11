@@ -55,4 +55,6 @@ SDL_bool keyPressOnce(t_input* input, SDL_Scancode scancode);
  */
 void freeInput(t_input* input);
 
+int indiceToucheCliquer(t_input* input);
+
 #endif  // INPUT_H

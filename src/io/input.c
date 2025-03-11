@@ -64,3 +64,10 @@ void freeInput(t_input* input) {
         free(input);
     }
 }
+
+int indiceToucheCliquer(t_input* input) {
+    for (int i = 0; i < SDL_NUM_SCANCODES; i++) {
+        if (input->key[i] == SDL_TRUE) return i;
+    }
+    return -1;
+}
