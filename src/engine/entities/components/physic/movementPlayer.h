@@ -14,9 +14,15 @@ typedef struct {
     float depth;
 } t_collisionData;
 
-void resolveCollisions(t_entity* entity, t_grid* grid);
-void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float*);
+typedef struct {
+    t_entity* entityA;
+    t_entity* entityB;
+    SDL_FPoint normal;
+    float depth;
+} t_entityCollision;
 
+void resolveCollisions(t_entity* entity, t_grid* grid);
+void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float* deltaTime);
 void updatePhysics(t_joueur* joueur, float* deltaTime, t_grid* grid);
 
 #endif

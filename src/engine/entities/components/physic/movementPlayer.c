@@ -78,7 +78,7 @@ void resolveCollisions(t_entity* entity, t_grid* grid) {
 }
 
 void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float* deltaTime) {
-    float force = 1000.0f;
+    float force = 5.0f;
 
     // Reset de l'accelaration a chaque frame
     player->entity.physics.acceleration.x = 0.0f;
@@ -123,12 +123,11 @@ void updatePhysics(t_joueur* joueur, float* deltaTime, t_grid* grid) {
     PHYSICS_LOG("Pre-update - Velocity: (%.1f,%.1f) Pos: (%.1f,%.1f)", joueur->entity.physics.velocity.x, joueur->entity.physics.velocity.y, joueur->entity.collisionCircle.x, joueur->entity.collisionCircle.y);
 
     SDL_Point lastPosVisuelle = {joueur->entity.collisionCircle.x, joueur->entity.collisionCircle.y};
-
     // Application de l'accéleration a la velocite : velocity += (acceleratio) * deltaTime
     // Division par mass pour simuler une certaine interie differente selon la masse
     // DeltaTime pour conversion force par frame en force par seconde
-    joueur->entity.physics.velocity.x += (joueur->entity.physics.acceleration.x) * *deltaTime;
-    joueur->entity.physics.velocity.y += (joueur->entity.physics.acceleration.y) * *deltaTime;
+    joueur->entity.physics.velocity.x += (joueur->entity.physics.acceleration.x);
+    joueur->entity.physics.velocity.y += (joueur->entity.physics.acceleration.y);
     PHYSICS_LOG("After acceleration - Velocity: (%.1f,%.1f)", joueur->entity.physics.velocity.x, joueur->entity.physics.velocity.y);
 
     // Reduction progressive de la velocite (1.0 = 100% de friction) pour simuler les frottements
@@ -144,9 +143,25 @@ void updatePhysics(t_joueur* joueur, float* deltaTime, t_grid* grid) {
     // On resout les collisions
     resolveCollisions(&joueur->entity, grid);
 
-    // On
     joueur->entity.displayRect.x += joueur->entity.collisionCircle.x - lastPosVisuelle.x;
     joueur->entity.displayRect.y += joueur->entity.collisionCircle.y - lastPosVisuelle.y;
 
     PHYSICS_LOG("New position: (%.1f,%.1f)", joueur->entity.collisionCircle.x, joueur->entity.collisionCircle.y);
+}
+
+SDL_bool checkCircleCircleCollision(t_circle* a, t_circle* b, t_collisionData* out) {
+    float dx = a->x - b->x;
+    float dy = a->y - b->y;
+    float distanceSquared = dx * dx + dy * dy;  // On utilise le carré de la distance
+    float radii = a->radius + b->radius;
+    float radiiSquared = radii * radii;  // On utilise le carré de la somme des rayons
+
+    if (distanceSquared < radiiSquared) {
+        float distance = sqrtf(distanceSquared);  // On ne calcule sqrtf que si nécessaire
+        out->depth = radii - distance;
+        out->normal.x = dx / distance;
+        out->normal.y = dy / distance;
+        return SDL_TRUE;
+    }
+    return SDL_FALSE;
 }
