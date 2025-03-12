@@ -92,6 +92,65 @@ void* getObject(t_objectManager* manager, int index) {
     return pool->items[localIndex].data;
 }
 
+void deleteObject(t_objectManager* manager, int index) {
+    if (index < 0 || index >= manager->count) return;
+
+    // Récupère l'objet et son type
+    void* dataToDelete = getObject(manager, index);
+    uint8_t typeIdToDelete = getObjectTypeId(manager, index);
+
+    // Libère les données de l'objet supprimé
+    if (dataToDelete) {
+        t_typeMetadata* metadata = &manager->registry->types[typeIdToDelete];
+        metadata->freeFunc(dataToDelete);
+    }
+
+    // Si ce n'est pas le dernier élément, on effectue un swap avec le dernier objet
+    if (index != manager->count - 1) {
+        // Récupère le dernier élément
+        void* lastData = getObject(manager, manager->count - 1);
+        uint8_t lastTypeId = getObjectTypeId(manager, manager->count - 1);
+
+        // Recherche le pool correspondant au dernier élément
+        t_objectMemoryPool* lastPool = manager->firstPool;
+        int lastPoolIndex = (manager->count - 1) / POOL_SIZE;
+        for (int i = 0; i < lastPoolIndex; i++) {
+            lastPool = lastPool->next;
+        }
+
+        // Recherche le pool de l'élément à supprimer
+        t_objectMemoryPool* targetPool = manager->firstPool;
+        int poolIndex = index / POOL_SIZE;
+        for (int i = 0; i < poolIndex; i++) {
+            targetPool = targetPool->next;
+        }
+
+        // Remplace l'objet supprimé par le dernier objet
+        targetPool->items[index % POOL_SIZE].data = lastData;
+        targetPool->items[index % POOL_SIZE].typeId = lastTypeId;
+
+        // Sécurise l'ancienne position du dernier objet pour éviter un double free
+        lastPool->items[(manager->count - 1) % POOL_SIZE].data = NULL;
+    } else {
+        // Si l'objet supprimé est le dernier, on le met directement à NULL
+        t_objectMemoryPool* targetPool = manager->firstPool;
+        int poolIndex = index / POOL_SIZE;
+        for (int i = 0; i < poolIndex; i++) {
+            targetPool = targetPool->next;
+        }
+        targetPool->items[index % POOL_SIZE].data = NULL;
+    }
+
+    // Mise à jour du nombre total d'objets
+    manager->count--;
+
+    // Mise à jour du nombre d'éléments dans le pool courant
+    if (manager->count % POOL_SIZE == 0 && manager->count > 0)
+        manager->nbItemsInPool = POOL_SIZE;
+    else
+        manager->nbItemsInPool = manager->count % POOL_SIZE;
+}
+
 void freeObjectManager(t_objectManager* manager) {
     t_objectMemoryPool* pool = manager->firstPool;
 
