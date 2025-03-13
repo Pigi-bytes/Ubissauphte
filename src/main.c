@@ -3,10 +3,12 @@
 int main() {
     t_fichier* fichier = chargerFichier("./src/test.txt");
     t_fichier* fichier1 = (t_fichier*)malloc(sizeof(t_fichier));
+    t_fichier* fichier2 = (t_fichier*)malloc(sizeof(t_fichier));
 
     t_item** item = item_load(fichier);
 
     t_character* c1 = createCharactere();
+    t_inventaire* inv;
 
     item_save(item, fichier1, fichier->blockManager->count);
     saveFichier(fichier1, "nouv.txt");
@@ -32,9 +34,18 @@ int main() {
     equipment_print(c1);
     printf("\n");
 
+    inventory_save(c1->inventaire, fichier2);
+    saveFichier(fichier2, "inventaire");
+
+    inv = inventory_load(fichier2, item, fichier->blockManager->count);
+    inventory_print(inv);
+
+    
     free_item(item, fichier->blockManager->count);
     charactereFree(c1);
+    itemFree(inv);
     freeFichier(fichier);
     freeFichier(fichier1);
+    freeFichier(fichier2);
     return 0;
 }

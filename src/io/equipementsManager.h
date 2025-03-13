@@ -106,7 +106,7 @@ void item_save(t_item** item, t_fichier* fichier, int count);
 t_item** item_load(t_fichier* fichier);
 void free_item(t_item** items, int count);
 
-void inventory_save(t_inventaire* inv, t_fichier* fichier, int count);
-t_item** inventory_load(t_fichier* fichier);
+void inventory_save(t_inventaire* inv, t_fichier* fichier);
+t_inventaire* inventory_load(t_fichier* fichier, t_item** item, int count);
 
 #endif

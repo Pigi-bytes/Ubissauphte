@@ -198,7 +198,88 @@ t_item** item_load(t_fichier* fichier) {
     return item;
 }
 
+void inventory_save(t_inventaire* inv, t_fichier* fichier) {
+    t_typeRegistry* registre = createTypeRegistry();
+    registerType(registre, blockFreeFunc, "BLOCK_TYPE");
+    registerType(registre, pairFreeFunc, "PAIR_TYPE");
 
+    fichier->blockManager = initObjectManager(registre);
+
+    char value[50];
+
+    t_pairData* data;
+    t_block* block = createNewBlock();
+
+    sprintf(value, "%d", inv->itemsStack->count);
+    data = createPairData("nbItems", value);
+    addPairData(block, data);
+    addBlock(fichier, block);
+
+    for (int i = 0; i < inv->itemsStack->count; i++) {
+        char value[50];
+
+        t_pairData* data;
+        t_block* block = createNewBlock();
+
+        t_itemsStack* Stack = (t_itemsStack*)getObject(inv->itemsStack, i);
+
+        sprintf(value, "%d", i);
+        data = createPairData("itemNb", value);
+        addPairData(block, data);
+
+        sprintf(value, "%d", Stack->definition->id);
+        data = createPairData("id Item", value);
+        addPairData(block, data);
+
+        data = createPairData("Name", Stack->definition->name);
+        addPairData(block, data);
+
+        sprintf(value, "%d", Stack->quantite);
+        data = createPairData("Quantite", value);
+        addPairData(block, data);
+
+        addBlock(fichier, block);
+    }
+}
+
+t_inventaire* inventory_load(t_fichier* fichier, t_item** item, int count) {
+    t_inventaire* inv = createInventaire();
+    if (inv == NULL) {
+        fprintf(stderr, "Erreur d'allocation de mémoire");
+        exit(EXIT_FAILURE);
+    }
+
+    int resultInt;
+    char resultChar[50];
+    t_block* block;
+
+    for (int i = 1; i < fichier->blockManager->count; i++) {
+        block = (t_block*)getObject(fichier->blockManager, i);
+
+        t_itemsStack* Stack = (t_itemsStack*)malloc(sizeof(t_itemsStack));
+        Stack->definition = (t_item*)malloc(sizeof(t_item));
+
+        getValue(block, "id Item", &resultInt, INT);
+        Stack->definition->id = resultInt;
+
+        getValue(block, "Name", resultChar, STRING);
+        strcpy(Stack->definition->name, resultChar);
+
+        getValue(block, "Quantite", &resultInt, INT);
+        Stack->quantite = resultInt;
+
+        for (int j = 0; j < count; j++) {
+            if ((Stack->definition->id == item[j]->id) && (!strcmp(Stack->definition->name, item[j]->name))) {
+                inventaireAjoutObjet(inv, item[j], Stack->quantite);
+                break;
+            }
+        }
+        free(Stack->definition); 
+        free(Stack);
+    }
+
+    return inv;
+}
 
 t_inventaire* createInventaire() {
     t_inventaire* inv = (t_inventaire*)malloc(sizeof(t_inventaire));
