@@ -1,34 +1,34 @@
 #include "enemy.h"
 
-t_ennemi* createEnemy(SDL_Texture* texture, SDL_Rect rect) {
+t_ennemi* createEnemy(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
     t_ennemi* enemy = (t_ennemi*)malloc(sizeof(t_ennemi));
 
-    // Configuration de base
     enemy->entity.texture = texture;
     enemy->entity.displayRect = rect;
     enemy->entity.flip = SDL_FLIP_NONE;
     enemy->entity.animationController = initAnimationController();
-    enemy->entity.debug = SDL_FALSE;
+    enemy->entity.debug = SDL_TRUE;
 
-    // Configuration des collisions
     enemy->entity.useCircleCollision = SDL_TRUE;
     enemy->entity.collisionCircle.x = rect.x + rect.w / 2;
     enemy->entity.collisionCircle.y = rect.y + rect.h / 2;
     enemy->entity.collisionCircle.radius = fminf(rect.w, rect.h) / 2;
 
-    enemy->wanderTimer = initTimer();
+    enemy->wanderTimer = NULL;
     startTimer(enemy->wanderTimer);
 
-    // Physique statique
     t_physics enemyPhysics = {
         .velocity = {0, 0},
         .acceleration = {0.0f, 0.0f},
         .mass = 0.8f,  // Masse nulle = statique
         .friction = 0.03f,
         .restitution = 0.2f};
+
     enemy->entity.physics = enemyPhysics;
 
-    enemy->entity.animationController->haveAnimation = SDL_FALSE;
+    addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){2, 3}, 2, 240, true, "idle"));
+    addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 2}, 4, 150, true, "walk"));
+    setAnimation(enemy->entity.animationController, "walk");
 
     return enemy;
 }
@@ -42,6 +42,8 @@ void updateEnemy(t_ennemi* enemy, float* deltaTime, t_grid* grid, t_objectManage
     const float MAX_DIRECTION_TIME = 10.0f;        // Temps maximum avant changement de direction
     const float MAX_ACCELERATION = 5.0f;           // Accélération maximale
     const float ACCELERATION_CHANGE_SPEED = 1.0f;  // Vitesse de transition
+
+    
 
     if (getTicks(enemy->wanderTimer) / 1000.0f >= MIN_DIRECTION_TIME + (rand() % (int)(MAX_DIRECTION_TIME - MIN_DIRECTION_TIME))) {
         // Génère une nouvelle accélération aléatoire

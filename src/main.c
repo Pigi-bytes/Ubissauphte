@@ -336,8 +336,10 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     t_scene* scene = createScene(initObjectManager(registre), "scene1");
 
     t_tileset* tileset = initTileset(renderer, 192, 176, 16, "assets/imgs/tileMapDungeon.bmp");
-    t_tileset* playerIdle = initTileset(renderer, 16, 80, 16, "assets/imgs/chevalierAnimation.bmp");
-    t_tileset* playerCours = initTileset(renderer, 16, 32, 16, "assets/imgs/cours.bmp");
+    t_tileset* playerIdle = initTileset(renderer, 32, 32, 16, "assets/imgs/chevaliervisiereouverteidle12run34.bmp");
+    // t_tileset* playerCours = initTileset(renderer, 16, 32, 16, "assets/imgs/cours.bmp");
+
+    // t_tileset* fantom = initTileset(renderer, 48, 16, 16, "assets/imgs/fantomidle23run1232.bmp");
 
     t_grille* grille = geneRoom();
     t_grid* level = loadMap(grille->nom, tileset);
@@ -355,13 +357,13 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     t_objectManager* entities = initObjectManager(createTypeRegistry());
     const uint8_t ENTITY = registerType(entities->registry, NULL, "ENTITY");
 
-    t_joueur* joueur = createPlayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerIdle, playerCours);
+    t_joueur* joueur = createPlayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerIdle);
     addObject(entities, &joueur->entity, ENTITY);
     placeOnRandomTile(level, &joueur->entity, entities);
 
     t_ennemi* enemy;
     for (int i = 0; i < 5; i++) {
-        enemy = createEnemy((SDL_Texture*)getObject(tileset->textureTiles, 98 + 14), (SDL_Rect){100, 100, 16, 16});
+        enemy = createEnemy((SDL_Texture*)getObject(tileset->textureTiles, 122), (SDL_Rect){100, 100, 16, 16}, playerIdle);
         addObject(entities, &enemy->entity, ENTITY);
         placeOnRandomTile(level, &enemy->entity, entities);
         ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
