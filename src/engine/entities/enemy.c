@@ -1,16 +1,14 @@
 #include "enemy.h"
 
-t_ennemi* createEnemy(SDL_Texture* texture, SDL_Rect rect) {
+t_ennemi* createEnemy(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
     t_ennemi* enemy = (t_ennemi*)malloc(sizeof(t_ennemi));
 
-    // Configuration de base
     enemy->entity.texture = texture;
     enemy->entity.displayRect = rect;
     enemy->entity.flip = SDL_FLIP_NONE;
     enemy->entity.animationController = initAnimationController();
-    enemy->entity.debug = SDL_FALSE;
+    enemy->entity.debug = SDL_TRUE;
 
-    // Configuration des collisions
     enemy->entity.useCircleCollision = SDL_TRUE;
     enemy->entity.collisionCircle.x = rect.x + rect.w / 2;
     enemy->entity.collisionCircle.y = rect.y + rect.h / 2;
@@ -19,16 +17,25 @@ t_ennemi* createEnemy(SDL_Texture* texture, SDL_Rect rect) {
     enemy->wanderTimer = initTimer();
     startTimer(enemy->wanderTimer);
 
-    // Physique statique
     t_physics enemyPhysics = {
         .velocity = {0, 0},
         .acceleration = {0.0f, 0.0f},
-        .mass = 0.8f,  // Masse nulle = statique
-        .friction = 0.03f,
+        .mass = 0.01f,  // Masse nulle = statique
+        .friction = 0.05f,
         .restitution = 0.2f};
+
     enemy->entity.physics = enemyPhysics;
 
-    enemy->entity.animationController->haveAnimation = SDL_FALSE;
+    // addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){2, 3}, 2, 240, true, "idle"));
+    // addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 2}, 4, 150, true, "walk"));
+
+    addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, true, "idle"));
+    addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 1, 3}, 4, 150, true, "walk"));
+
+    // addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 2, 3, 2}, 6, 240, true, "idle"));
+    // addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){4, 1, 5}, 3, 150, true, "walk"));
+
+    setAnimation(enemy->entity.animationController, "walk");
 
     return enemy;
 }

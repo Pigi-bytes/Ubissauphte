@@ -12,7 +12,7 @@ typedef struct {
     SDL_FPoint targetAcceleration;
 } t_ennemi;
 
-t_ennemi* createEnemy(SDL_Texture* texture, SDL_Rect rect);
+t_ennemi* createEnemy(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset);
 void renderEnemy(SDL_Renderer* renderer, t_ennemi* enemy, t_camera* camera);
 void updateEnemy(t_ennemi* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities);
 void freeEnemy(void* object);
