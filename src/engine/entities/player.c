@@ -18,13 +18,13 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     t_physics playerPhysics = {
         .velocity = {0, 0},  // Vitesse initiale
         .acceleration = {0.0f, 0.0f},
-        .mass = 5.0f,
+        .mass = 10.0f,
         .friction = 0.05f};
 
     joueur->entity.physics = playerPhysics;
 
-    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 4, 5}, 5, 240, true, "idle"));
-    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, true, "walk"));
+    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, true, "idle"));
+    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){3, 4}, 2, 240, true, "walk"));
     setAnimation(joueur->entity.animationController, "idle");
 
     return joueur;

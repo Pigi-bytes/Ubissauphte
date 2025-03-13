@@ -14,20 +14,27 @@ t_ennemi* createEnemy(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
     enemy->entity.collisionCircle.y = rect.y + rect.h / 2;
     enemy->entity.collisionCircle.radius = fminf(rect.w, rect.h) / 2;
 
-    enemy->wanderTimer = NULL;
+    enemy->wanderTimer = initTimer();
     startTimer(enemy->wanderTimer);
 
     t_physics enemyPhysics = {
         .velocity = {0, 0},
         .acceleration = {0.0f, 0.0f},
-        .mass = 0.8f,  // Masse nulle = statique
-        .friction = 0.03f,
+        .mass = 0.01f,  // Masse nulle = statique
+        .friction = 0.05f,
         .restitution = 0.2f};
 
     enemy->entity.physics = enemyPhysics;
 
-    addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){2, 3}, 2, 240, true, "idle"));
-    addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 2}, 4, 150, true, "walk"));
+    // addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){2, 3}, 2, 240, true, "idle"));
+    // addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 2}, 4, 150, true, "walk"));
+
+    addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, true, "idle"));
+    addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 1, 3}, 4, 150, true, "walk"));
+
+    // addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 2, 3, 2}, 6, 240, true, "idle"));
+    // addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){4, 1, 5}, 3, 150, true, "walk"));
+
     setAnimation(enemy->entity.animationController, "walk");
 
     return enemy;
@@ -42,8 +49,6 @@ void updateEnemy(t_ennemi* enemy, float* deltaTime, t_grid* grid, t_objectManage
     const float MAX_DIRECTION_TIME = 10.0f;        // Temps maximum avant changement de direction
     const float MAX_ACCELERATION = 5.0f;           // Accélération maximale
     const float ACCELERATION_CHANGE_SPEED = 1.0f;  // Vitesse de transition
-
-    
 
     if (getTicks(enemy->wanderTimer) / 1000.0f >= MIN_DIRECTION_TIME + (rand() % (int)(MAX_DIRECTION_TIME - MIN_DIRECTION_TIME))) {
         // Génère une nouvelle accélération aléatoire

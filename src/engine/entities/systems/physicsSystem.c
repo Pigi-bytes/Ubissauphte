@@ -56,23 +56,6 @@ void resolveCollision(t_entity* entity, t_grid* grid, t_objectManager* entities)
 
     t_collisionData out;
 
-    for (int z = 0; z < grid->depth; z++) {
-        for (int y = startY; y <= endY; y++) {
-            for (int x = startX; x <= endX; x++) {
-                t_tile* tile = getTile(grid, x, y, z);
-                if (tile && tile->solide) {
-                    if (checkCircleRectCollision(&entity->collisionCircle, &tile->entity.collisionRect, &out)) {
-                        // RESOLVE_LOG("Pre-collision pos: (%.1f,%.1f)", entity->collisionCircle.x, entity->collisionCircle.y);
-                        //  Résoudre la collision en déplaçant l'entité
-                        entity->collisionCircle.x += out.normal.x * out.depth;
-                        entity->collisionCircle.y += out.normal.y * out.depth;
-                        // RESOLVE_LOG("Post-collision pos: (%.1f,%.1f)", entity->collisionCircle.x, entity->collisionCircle.y);
-                    }
-                }
-            }
-        }
-    }
-
     for (int i = 0; i < entities->count; i++) {
         t_entity* otherEntity = getObject(entities, i);
         if (otherEntity == entity) continue;
@@ -87,8 +70,57 @@ void resolveCollision(t_entity* entity, t_grid* grid, t_objectManager* entities)
         // SDL_Color lineColor = collision ? (SDL_Color){0, 255, 0, 255, 0} : (SDL_Color){255, 0, 0, 255};
 
         if (collision) {
+            // Apply impulse based on the collision normal and depth
+            // Assuming the entities have velocity properties (e.g., velocityX, velocityY)
+            float relativeVelocityX = otherEntity->physics.velocity.x - entity->physics.velocity.x;
+            float relativeVelocityY = otherEntity->physics.velocity.y - entity->physics.velocity.y;
+
+            float normalDotVel = out.normal.x * relativeVelocityX + out.normal.y * relativeVelocityY;
+
+            if (normalDotVel) {                                                                  // Only apply impulse if objects are moving towards each other
+                float impulseMagnitude = -(1 + 1.0f) * normalDotVel;                             // 0.8 is the coefficient of restitution (elasticity)
+                impulseMagnitude /= (1 / entity->physics.mass + 1 / otherEntity->physics.mass);  // Apply based on mass
+
+                // Apply impulse to velocities (scaled by mass)
+                entity->physics.velocity.x -= impulseMagnitude / entity->physics.mass * out.normal.x;
+                entity->physics.velocity.y -= impulseMagnitude / entity->physics.mass * out.normal.y;
+
+                otherEntity->physics.velocity.x += impulseMagnitude / otherEntity->physics.mass * out.normal.x;
+                otherEntity->physics.velocity.y += impulseMagnitude / otherEntity->physics.mass * out.normal.y;
+            }
+
+            // Move the entity away from the collision, based on the depth of the collision
             entity->collisionCircle.x += out.normal.x * out.depth;
             entity->collisionCircle.y += out.normal.y * out.depth;
+        }
+
+        for (int z = 0; z < grid->depth; z++) {
+            for (int y = startY; y <= endY; y++) {
+                for (int x = startX; x <= endX; x++) {
+                    t_tile* tile = getTile(grid, x, y, z);
+                    if (tile && tile->solide) {
+                        if (checkCircleRectCollision(&entity->collisionCircle, &tile->entity.collisionRect, &out)) {
+                            // RESOLVE_LOG("Pre-collision pos: (%.1f,%.1f)", entity->collisionCircle.x, entity->collisionCircle.y);
+                            //  Résoudre la collision en déplaçant l'entité
+
+                            float relativeVelocityX = 0.0f - entity->physics.velocity.x;
+                            float relativeVelocityY = 0.0f - entity->physics.velocity.y;
+                            float normalDotVel = out.normal.x * relativeVelocityX + out.normal.y * relativeVelocityY;
+
+                            if (normalDotVel) {  // Only apply impulse if objects are moving towards each other
+                                float impulseMagnitude = -(1 + 1.0f) * normalDotVel;
+                                // Apply impulse to velocities (scaled by mass)
+                                entity->physics.velocity.x -= impulseMagnitude * out.normal.x;
+                                entity->physics.velocity.y -= impulseMagnitude * out.normal.y;
+                            }
+
+                            entity->collisionCircle.x += out.normal.x * out.depth;
+                            entity->collisionCircle.y += out.normal.y * out.depth;
+                            // RESOLVE_LOG("Post-collision pos: (%.1f,%.1f)", entity->collisionCircle.x, entity->collisionCircle.y);
+                        }
+                    }
+                }
+            }
         }
     }
 }
