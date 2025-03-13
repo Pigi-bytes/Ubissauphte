@@ -469,7 +469,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     placeOnRandomTile(level, &joueur->entity, entities);
 
     t_ennemi* enemy;
-    for (int i = 0; i < 200; i++) {
+    for (int i = 0; i < 300; i++) {
         enemy = createEnemy((SDL_Texture*)getObject(tileset->textureTiles, 122), (SDL_Rect){100, 100, 16, 16}, slimeTileSet);
         addObject(entities, &enemy->entity, ENTITY);
         placeOnRandomTile(level, &enemy->entity, entities);
