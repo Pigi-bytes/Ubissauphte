@@ -42,10 +42,11 @@ typedef struct {
     char name[MAX_ITEM_NAME];
     t_stats stats;
     int id;
-    unsigned int flags;      // Propriete
-    int validSlot[2];  // Ou il va
-
-    // t_fonctionParam* onUse;
+    unsigned int flags;  // Propriete
+    int validSlot[2];    // Ou il va
+    t_fonctionParam* onEquip;
+    t_fonctionParam* onDeEquip;
+    t_fonctionParam* onUse;
 } t_item;
 
 typedef struct {
@@ -55,9 +56,8 @@ typedef struct {
 
 typedef struct {
     equipementSlotType slotType;
-    t_itemsStack *stack;
-    t_fonctionParam* onEquip;
-    // t_fonctionParam* onDeEquip;
+    t_itemsStack* stack;
+
 } t_equipementSlotType;
 
 typedef struct {
@@ -65,15 +65,15 @@ typedef struct {
 } t_inventaire;
 
 typedef struct {
-    // t_stats baseStats;
-    // t_stats calculatedStats;
+    t_stats baseStats;
+    t_stats calculatedStats;
 
     t_equipementSlotType equipement[TOTAL_EQUIPMENT_SLOTS];
     t_inventaire* inventaire;
 
-    // int level;
-    // int experience;
-    // int gold;
+    int level;
+    int experience;
+    int gold;
 } t_character;
 
 // Gestion Inventaire
@@ -85,13 +85,18 @@ void itemFreeFunc(void* data);
 int hasFlag(int itemFlags, itemsFlags flag);
 
 // Gestion equipement
-void equiperEquipement(t_character* c, int inventoryIndex, equipementSlotType slot);
-void desequiperEquipement(t_character* c, equipementSlotType slot);
-t_itemsStack* equipementGetEquiper(t_character* c, equipementSlotType slot);
+void equiperEquipement(t_character** c, int inventoryIndex, equipementSlotType slot);
+void desequiperEquipement(t_character** c, equipementSlotType slot);
+
+// Gestion personnage
+t_character* createCharactere();
+void charactereFree(t_character* c);
 
 // Gestion Interaction
 void equipementRecalculerStats(t_character* c);
+
 // fonction use
+void equipementUse(t_character* c, equipementSlotType slot);
 
 // Debug
 void inventory_print(t_inventaire* inv);
@@ -101,7 +106,7 @@ void item_save(t_item** item, t_fichier* fichier, int count);
 t_item** item_load(t_fichier* fichier);
 void free_item(t_item** items, int count);
 
-bool inventory_save(t_inventaire* inv, char* filename);
-bool inventory_load(t_inventaire* inv, char* filename);
+void inventory_save(t_inventaire* inv, t_fichier* fichier, int count);
+t_item** inventory_load(t_fichier* fichier);
 
 #endif
