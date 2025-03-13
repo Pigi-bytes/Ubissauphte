@@ -1,9 +1,7 @@
 #ifndef PHYSIC_H
 #define PHYSIC_H
 
-#include <SDL2/SDL.h>
-
-#include "../../entity.h"
+#include "../core.h"
 
 typedef struct {
     SDL_FPoint velocity;      // Vélocité actuelle
@@ -12,5 +10,8 @@ typedef struct {
     float friction;           // Frottement (pour ralentir l'entité)
     float restitution;        // Elasticité des collisions (0.0 = pas elastique, 1.0 = elastique)
 } t_physics;
+
+SDL_bool checkCircleRectCollision(t_circle* circle, SDL_Rect* rect, t_collisionData* out);
+SDL_bool checkCircleCircleCollision(t_circle* a, t_circle* b, t_collisionData* out);
 
 #endif

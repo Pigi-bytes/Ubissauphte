@@ -18,8 +18,8 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     t_physics playerPhysics = {
         .velocity = {0, 0},  // Vitesse initiale
         .acceleration = {0.0f, 0.0f},
-        .mass = 1.0f,
-        .friction = 0.03f};
+        .mass = 5.0f,
+        .friction = 0.05f};
 
     joueur->entity.physics = playerPhysics;
 
@@ -34,9 +34,48 @@ void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
     renderEntity(renderer, &player->entity, camera);
 }
 
+void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectManager* entities) {
+    updatePhysicEntity(&player->entity, deltaTime, grid, entities);
+}
+
+void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float* deltaTime) {
+    float force = 10.0f;
+    float force_dash = force * 3.5;
+
+    // Reset de l'accelaration a chaque frame
+    player->entity.physics.acceleration.x = 0.0f;
+    player->entity.physics.acceleration.y = 0.0f;
+
+    if (input->key[player->control->left]) {
+        player->entity.physics.acceleration.x -= force;
+        player->entity.flip = SDL_FLIP_HORIZONTAL;
+    }
+    if (input->key[player->control->right]) {
+        player->entity.physics.acceleration.x += force;
+        player->entity.flip = SDL_FLIP_NONE;
+    }
+    if (input->key[player->control->up]) player->entity.physics.acceleration.y -= force;
+    if (input->key[player->control->down]) player->entity.physics.acceleration.y += force;
+
+    // Dash
+    if (input->key[SDL_SCANCODE_SPACE]) {
+        if (input->key[player->control->left]) player->entity.physics.acceleration.x -= force_dash;
+        if (input->key[player->control->right]) player->entity.physics.acceleration.x += force_dash;
+        if (input->key[player->control->up]) player->entity.physics.acceleration.y -= force_dash;
+        if (input->key[player->control->down]) player->entity.physics.acceleration.y += force_dash;
+    }
+
+    if (player->entity.physics.acceleration.x != 0.0f || player->entity.physics.acceleration.y != 0.0f) {
+        setAnimation(player->entity.animationController, "walk");
+    } else {
+        setAnimation(player->entity.animationController, "idle");
+    }
+
+    // INPUT_LOG("Accélération finale: (%.1f,%.1f)", player->entity.physics.acceleration.x, player->entity.physics.acceleration.y);
+}
+
 void freePlayer(void* object) {
     t_joueur* player = (t_joueur*)object;
     SDL_DestroyTexture(player->entity.texture);
     free(player);
 }
-

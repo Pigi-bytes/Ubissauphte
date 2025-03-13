@@ -28,9 +28,10 @@ typedef struct {
 t_tile* getTile(t_grid* grid, int x, int y, int z);
 t_grid* createGrid(int width, int height, int depth);
 t_grid* loadMap(char* filename, t_tileset* tileset);
+
 void renderGrid(SDL_Renderer* renderer, t_grid* grid, t_camera* camera);
 void freeGrid(void* object);
-void placeOnRandomTile(t_grid* grid, t_entity* entity);
+void placeOnRandomTile(t_grid* grid, t_entity* entity, t_objectManager* entities);
 void SDL_DestroyTextureWrapper(void* object);
 
 #endif

@@ -4,12 +4,10 @@
 #include <SDL2/SDL.h>
 
 #include "../../debug.h"
+#include "../../io/input.h"
 #include "entity.h"
-
-typedef struct {
-    SDL_Scancode scancode;
-    int signification;
-} t_touche;
+#include "systems/physicsSystem.h"
+#include "tiles.h"
 
 typedef struct {
     SDL_Scancode up;
@@ -24,7 +22,10 @@ typedef struct {
 } t_joueur;
 
 t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, t_tileset* tileset2);
+
+void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectManager* entities);
 void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera);
+void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float* deltaTime);
 void freePlayer(void* object);
 
 #endif

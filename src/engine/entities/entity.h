@@ -6,12 +6,8 @@
 #include "../../debug.h"
 #include "../core/camera.h"
 #include "components/animation/animation.h"
+#include "components/core.h"
 #include "components/physic/physics.h"
-
-typedef struct {
-    float x, y;
-    float radius;
-} t_circle;
 
 typedef struct {
     SDL_Rect displayRect;  // Position et taille pour l'affichage

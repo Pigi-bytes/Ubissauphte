@@ -1,9 +1,9 @@
 #include "debug.h"
 #include "engine/core/camera.h"
 #include "engine/core/frame.h"
-#include "engine/entities/components/physic/movementPlayer.h"
 #include "engine/entities/enemy.h"
 #include "engine/entities/player.h"
+#include "engine/entities/systems/physicsSystem.h"
 #include "engine/entities/tiles.h"
 #include "engine/world/generationSalle/geneRoom.h"
 #include "io/audioManager.h"
@@ -105,7 +105,6 @@ GENERATE_WRAPPER_3(renderPlayer, SDL_Renderer*, t_joueur*, t_camera*)
 GENERATE_WRAPPER_3(renderEnemy, SDL_Renderer*, t_ennemi*, t_camera*)
 
 GENERATE_WRAPPER_3(updateFPSDisplay, t_fpsDisplay*, t_frameData*, SDL_Renderer*)
-GENERATE_WRAPPER_3(updatePhysics, t_joueur*, float*, t_grid*);
 
 GENERATE_WRAPPER_3(updateMinimap, t_minimap*, t_camera*, SDL_Renderer*)
 GENERATE_WRAPPER_2(cameraHandleZoom, t_viewPort*, int*)
@@ -124,6 +123,9 @@ GENERATE_WRAPPER_2(handleInputButtonVolumme, t_input*, t_barreVolumme*)
 
 GENERATE_WRAPPER_2(renderTouche, SDL_Renderer*, t_touche*)
 GENERATE_WRAPPER_3(handleInputTouche, t_input*, t_touche*, SDL_Renderer*)
+
+GENERATE_WRAPPER_4(updatePlayer, t_joueur*, float*, t_grid*, t_objectManager*)
+GENERATE_WRAPPER_4(updateEnemy, t_ennemi*, float*, t_grid*, t_objectManager*)
 
 t_option* creeOption() {
     t_option* option = malloc(sizeof(t_option));
@@ -331,7 +333,6 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     const uint8_t VIEWPORT_TYPE = registerType(registre, freeViewport, "viewport");
     const uint8_t MINIMAP_TYPE = registerType(registre, freeMinimap, "minimap");
     const uint8_t ENEMY_TYPE = registerType(registre, freeEnemy, "enemy");
-
     t_scene* scene = createScene(initObjectManager(registre), "scene1");
 
     t_tileset* tileset = initTileset(renderer, 192, 176, 16, "assets/imgs/tileMapDungeon.bmp");
@@ -351,10 +352,20 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     contr->left = SDL_SCANCODE_LEFT;
     contr->right = SDL_SCANCODE_RIGHT;
 
+    t_objectManager* entities = initObjectManager(createTypeRegistry());
+    const uint8_t ENTITY = registerType(entities->registry, NULL, "ENTITY");
+
     t_joueur* joueur = createPlayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerIdle, playerCours);
-    placeOnRandomTile(level, &joueur->entity);
-    t_ennemi* enemy = createEnemy((SDL_Texture*)getObject(tileset->textureTiles, 98 + 14), (SDL_Rect){100, 100, 16, 16});
-    placeOnRandomTile(level, &enemy->entity);
+    addObject(entities, &joueur->entity, ENTITY);
+    placeOnRandomTile(level, &joueur->entity, entities);
+
+    t_ennemi* enemy;
+    for (int i = 0; i < 5; i++) {
+        enemy = createEnemy((SDL_Texture*)getObject(tileset->textureTiles, 98 + 14), (SDL_Rect){100, 100, 16, 16});
+        addObject(entities, &enemy->entity, ENTITY);
+        placeOnRandomTile(level, &enemy->entity, entities);
+        ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
+    }
 
     t_camera* camera = createCamera(levelWidth, levelHeight, 300, 300);
     t_viewPort* viewport = createViewport(renderer, camera, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -362,7 +373,6 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
 
     ADD_OBJECT_TO_SCENE(scene, initFPSDisplay(renderer, font), FRAME_DISPLAY_TYPE);
     ADD_OBJECT_TO_SCENE(scene, joueur, PLAYER_TYPE);
-    ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
     ADD_OBJECT_TO_SCENE(scene, level, GRID_TYPE);
     ADD_OBJECT_TO_SCENE(scene, camera, CAMERA_TYPE);
     ADD_OBJECT_TO_SCENE(scene, viewport, VIEWPORT_TYPE);
@@ -371,7 +381,9 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level, &frameData->deltaTime));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&input->mouseYWheel));
 
-    sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePhysicsWrapper, 0, FONCTION_PARAMS(&frameData->deltaTime, level));
+    sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, 0, FONCTION_PARAMS(&frameData->deltaTime, level, entities));
+    sceneRegisterFunction(scene, ENEMY_TYPE, UPDATE, updateEnemyWrapper, 0, FONCTION_PARAMS(&frameData->deltaTime, level, entities));
+
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, 0, FONCTION_PARAMS(frameData, renderer));
     sceneRegisterFunction(scene, MINIMAP_TYPE, UPDATE, updateMinimapWrapper, 0, FONCTION_PARAMS(camera, renderer));
     sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&joueur->entity.displayRect.x, &joueur->entity.displayRect.y));
@@ -402,6 +414,7 @@ int main(int argc, char* argv[]) {
     initTextEngine();
     SDL_Window* window = SDL_CreateWindow("animation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
     t_input* input = initInput(WINDOW_WIDTH, WINDOW_HEIGHT);
     TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     t_frameData* frameData = initFrameData(0);
@@ -409,14 +422,13 @@ int main(int argc, char* argv[]) {
 
     t_control* contr = malloc(sizeof(t_control));
     contr->up = SDL_SCANCODE_UP;
-    printf("%s", SDL_GetKeyName(SDL_GetKeyFromScancode(contr->up)));
     contr->down = SDL_SCANCODE_DOWN;
     contr->left = SDL_SCANCODE_LEFT;
     contr->right = SDL_SCANCODE_RIGHT;
 
     // t_scene* scene = createOptionMenu(renderer, input, font, frameData, window, option, contr);
-    //    t_scene* scene = createMainWord(renderer, input, font, frameData);
-    t_scene* scene = createCommandeMenu(renderer, input, font, window, option, contr);
+    t_scene* scene = createMainWord(renderer, input, font, frameData);
+    // t_scene* scene = createCommandeMenu(renderer, input, font, window, option, contr);
 
     while (!input->quit) {
         startFrame(frameData);

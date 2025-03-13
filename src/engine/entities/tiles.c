@@ -136,18 +136,16 @@ t_grid* loadMap(char* filename, t_tileset* tileset) {
     return grid;
 }
 
-void placeOnRandomTile(t_grid* grid, t_entity* entity) {
-    // Hack temporaire avant d'avoir le module d'aléatoire
+void placeOnRandomTile(t_grid* grid, t_entity* entity, t_objectManager* entities) {
     static SDL_bool initialized = SDL_FALSE;
     if (!initialized) {
         srand(time(NULL));
         initialized = SDL_TRUE;
     }
 
-    int maxAttempts = 1000;
-    int attempts = 0;
+    int entitiesPlaced = 0;
 
-    while (attempts < maxAttempts) {
+    while (1) {
         int x = rand() % grid->width;
         int y = rand() % grid->height;
         int z = 0;
@@ -157,14 +155,34 @@ void placeOnRandomTile(t_grid* grid, t_entity* entity) {
         if (tile && !tile->solide) {
             float centerX = x * 16 + 16 / 2.0f;
             float centerY = y * 16 + 16 / 2.0f;
-            entity->collisionCircle.x = centerX;
-            entity->collisionCircle.y = centerY;
 
-            entity->displayRect.x = centerX - entity->displayRect.w / 2;
-            entity->displayRect.y = centerY - entity->displayRect.h / 2;
-            return;
+            SDL_bool collisionFound = SDL_FALSE;
+            for (int i = 0; i < entities->count; i++) {
+                t_entity* otherEntity = getObject(entities, i);
+                if (otherEntity == entity) continue;
+
+                float dx = centerX - otherEntity->collisionCircle.x;
+                float dy = centerY - otherEntity->collisionCircle.y;
+                float distanceSq = dx * dx + dy * dy;
+
+                float minDistance = entity->collisionCircle.radius + otherEntity->collisionCircle.radius;
+                if (distanceSq < minDistance * minDistance) {
+                    collisionFound = SDL_TRUE;
+                    break;
+                }
+            }
+
+            if (!collisionFound) {
+                entity->collisionCircle.x = centerX;
+                entity->collisionCircle.y = centerY;
+
+                entity->displayRect.x = centerX - entity->displayRect.w / 2;
+                entity->displayRect.y = centerY - entity->displayRect.h / 2;
+
+                entitiesPlaced++;
+                DEBUG_PRINT("Entité placée avec succès ! Total d'entités placées : %d\n", entitiesPlaced);
+                return;
+            }
         }
-
-        attempts++;
     }
 }
