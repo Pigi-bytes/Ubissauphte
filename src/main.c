@@ -155,7 +155,7 @@ GENERATE_WRAPPER_3(renderGrid, SDL_Renderer*, t_grid*, t_camera*)
 GENERATE_WRAPPER_2(renderMinimap, SDL_Renderer*, t_minimap*)
 GENERATE_WRAPPER_2(renderViewport, SDL_Renderer*, t_viewPort*)
 GENERATE_WRAPPER_3(renderPlayer, SDL_Renderer*, t_joueur*, t_camera*)
-GENERATE_WRAPPER_3(renderEnemy, SDL_Renderer*, t_ennemi*, t_camera*)
+GENERATE_WRAPPER_3(renderEnemy, SDL_Renderer*, t_enemy*, t_camera*)
 
 GENERATE_WRAPPER_3(updateFPSDisplay, t_fpsDisplay*, t_frameData*, SDL_Renderer*)
 
@@ -178,7 +178,7 @@ GENERATE_WRAPPER_2(renderTouche, SDL_Renderer*, t_touche*)
 GENERATE_WRAPPER_3(handleInputTouche, t_input*, t_touche*, SDL_Renderer*)
 
 GENERATE_WRAPPER_4(updatePlayer, t_joueur*, float*, t_grid*, t_objectManager*)
-GENERATE_WRAPPER_4(updateEnemy, t_ennemi*, float*, t_grid*, t_objectManager*)
+GENERATE_WRAPPER_4(updateEnemy, t_enemy*, float*, t_grid*, t_objectManager*)
 
 GENERATE_WRAPPER_2(setScene, t_sceneController*, char*)
 
@@ -468,9 +468,11 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     addObject(entities, &joueur->entity, ENTITY);
     placeOnRandomTile(level, &joueur->entity, entities);
 
-    t_ennemi* enemy;
-    for (int i = 0; i < 300; i++) {
-        enemy = createEnemy((SDL_Texture*)getObject(tileset->textureTiles, 122), (SDL_Rect){100, 100, 16, 16}, slimeTileSet);
+    t_enemy* enemy;
+    for (int i = 0; i < 700; i++) {
+        enemy = createRandomEnemy((SDL_Texture*)getObject(tileset->textureTiles, 122), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, fantomTileSet, crabeTileSet);
+
+        // enemy = createEnemy((SDL_Texture*)getObject(tileset->textureTiles, 122), (SDL_Rect){100, 100, 16, 16}, slimeTileSet);
         addObject(entities, &enemy->entity, ENTITY);
         placeOnRandomTile(level, &enemy->entity, entities);
         ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);

@@ -1,7 +1,7 @@
 #include "enemy.h"
 
-t_ennemi* createEnemy(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
-    t_ennemi* enemy = (t_ennemi*)malloc(sizeof(t_ennemi));
+t_enemy* createEnemy(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, EnemyType type) {
+    t_enemy* enemy = (t_enemy*)malloc(sizeof(t_enemy));
 
     enemy->entity.texture = texture;
     enemy->entity.displayRect = rect;
@@ -17,34 +17,56 @@ t_ennemi* createEnemy(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
     enemy->wanderTimer = initTimer();
     startTimer(enemy->wanderTimer);
 
-    t_physics enemyPhysics = {
-        .velocity = {0, 0},
-        .acceleration = {0.0f, 0.0f},
-        .mass = 0.01f,  // Masse nulle = statique
-        .friction = 0.05f,
-        .restitution = 0.2f};
+    switch (type) {
+        case SLIME:
+            enemy->entity.physics = (t_physics){.velocity = {0, 0}, .acceleration = {0.0f, 0.0f}, .mass = 1.0f, .friction = 0.05f, .restitution = 0.9f};
+            addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, true, "idle"));
+            addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 1, 3}, 4, 240, true, "walk"));
+            setAnimation(enemy->entity.animationController, "walk");
+            break;
 
-    enemy->entity.physics = enemyPhysics;
+        case CRABE:
+            enemy->entity.physics = (t_physics){.velocity = {0, 0}, .acceleration = {0.0f, 0.0f}, .mass = 5.0f, .friction = 0.06f, .restitution = 0.02f};
+            addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 2, 3, 2}, 6, 240, true, "idle"));
+            addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){4, 1, 5}, 3, 150, true, "walk"));
+            setAnimation(enemy->entity.animationController, "walk");
+            break;
 
-    // addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){2, 3}, 2, 240, true, "idle"));
-    // addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 2}, 4, 150, true, "walk"));
+        case FANTOME:
+            enemy->entity.physics = (t_physics){.velocity = {0, 0}, .acceleration = {0.0f, 0.0f}, .mass = 0.05f, .friction = 0.02f, .restitution = 0.05f};
+            addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){2, 3}, 2, 240, true, "idle"));
+            addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 2}, 4, 150, true, "walk"));
+            setAnimation(enemy->entity.animationController, "walk");
+            break;
 
-    addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, true, "idle"));
-    addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 1, 3}, 4, 150, true, "walk"));
-
-    // addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 2, 3, 2}, 6, 240, true, "idle"));
-    // addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){4, 1, 5}, 3, 150, true, "walk"));
+        default:
+            break;
+    }
 
     setAnimation(enemy->entity.animationController, "walk");
 
     return enemy;
 }
 
-void renderEnemy(SDL_Renderer* renderer, t_ennemi* enemy, t_camera* camera) {
+void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
     renderEntity(renderer, &enemy->entity, camera);
 }
 
-void updateEnemy(t_ennemi* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities) {
+t_enemy* createRandomEnemy(SDL_Texture* texture, SDL_Rect rect, t_tileset* slimeTileSet, t_tileset* fantomTileSet, t_tileset* crabeTileSet) {
+    // Générer un nombre aléatoire pour le type d'ennemi
+    int randomType = rand() % 3;  // Cela génère 0 (SLIME), 1 (FANTOME) ou 2 (CRABE)
+
+    // Créer l'ennemi en fonction du type aléatoire
+    if (randomType == 0) {
+        return createEnemy(texture, rect, slimeTileSet, SLIME);  // Créer un SLIME
+    } else if (randomType == 1) {
+        return createEnemy(texture, rect, fantomTileSet, FANTOME);  // Créer un FANTOME
+    } else {
+        return createEnemy(texture, rect, crabeTileSet, CRABE);  // Créer un CRABE
+    }
+}
+
+void updateEnemy(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities) {
     const float MIN_DIRECTION_TIME = 5.0f;         // Temps minimum avant changement de direction
     const float MAX_DIRECTION_TIME = 10.0f;        // Temps maximum avant changement de direction
     const float MAX_ACCELERATION = 5.0f;           // Accélération maximale
@@ -76,8 +98,14 @@ void updateEnemy(t_ennemi* enemy, float* deltaTime, t_grid* grid, t_objectManage
 }
 
 void freeEnemy(void* object) {
-    t_ennemi* enemy = (t_ennemi*)object;
+    t_enemy* enemy = (t_enemy*)object;
     SDL_DestroyTexture(enemy->entity.texture);
     // freeAnimationController(enemy->entity.animationController);
     free(enemy);
 }
+
+// addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){2, 3}, 2, 240, true, "idle"));
+// addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 2}, 4, 150, true, "walk"));
+
+// addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 2, 3, 2}, 6, 240, true, "idle"));
+// addAnimation(enemy->entity.animationController, createAnimation(tileset, (int[]){4, 1, 5}, 3, 150, true, "walk"));
