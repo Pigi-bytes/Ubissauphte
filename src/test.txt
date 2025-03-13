@@ -1,0 +1,158 @@
+id Item: 56
+Name: Épée de feu
+manaMax Add Modifier: 1.05
+manaMax Mult Modifier: 1.5
+speed Modifier: 1.15
+attack Add Modifier: 1.25
+attack Mult Modifier: 1.25
+defense Add Modifier: 1.10
+defense Mult Modifier: 1.10
+health Add Modifier: 41.0
+health Mult Modifier: 20.0
+healthMax Add Modifier: 45.0
+healthMax Mult Modifier: 25.0
+mana Add Modifier: 14.0
+mana Mult Modifier: 1.2
+speed Add Modifier: 5.0
+speed Mult Modifier: 7.0
+flags: 9
+type: arme
+OnEquipe: 0
+OnDeEquipe: 0
+
+id Item: 56
+Name: Épée de glace
+manaMax Add Modifier: 1.05
+manaMax Mult Modifier: 1.5
+speed Modifier: 1.15
+attack Add Modifier: 1.25
+attack Mult Modifier: 1.25
+defense Add Modifier: 1.10
+defense Mult Modifier: 1.10
+health Add Modifier: 41.0
+health Mult Modifier: 20.0
+healthMax Add Modifier: 45.0
+healthMax Mult Modifier: 25.0
+mana Add Modifier: 14.0
+mana Mult Modifier: 1.2
+speed Add Modifier: 5.0
+speed Mult Modifier: 7.0
+flags: 8
+type: armure
+OnEquipe: 0
+OnDeEquipe: 0
+
+id Item: 56
+Type: 0.0
+Name: Épée de feu
+manaMax Add Modifier: 1.05
+manaMax Mult Modifier: 1.5
+speed Modifier: 1.15
+attack Add Modifier: 1.25
+attack Mult Modifier: 1.25
+defense Add Modifier: 1.10
+defense Mult Modifier: 1.10
+health Add Modifier: 41.0
+health Mult Modifier: 20.0
+healthMax Add Modifier: 45.0
+healthMax Mult Modifier: 25.0
+mana Add Modifier: 14.0
+mana Mult Modifier: 1.2
+speed Add Modifier: 5.0
+speed Mult Modifier: 7.0
+flags: 6
+type: arme
+OnEquipe: 0
+OnDeEquipe: 0
+
+id Item: 56
+Type: 0.0
+Name: Épée de feu
+manaMax Add Modifier: 1.05
+manaMax Mult Modifier: 1.5
+speed Modifier: 1.15
+attack Add Modifier: 1.25
+attack Mult Modifier: 1.25
+defense Add Modifier: 1.10
+defense Mult Modifier: 1.10
+health Add Modifier: 41.0
+health Mult Modifier: 20.0
+healthMax Add Modifier: 45.0
+healthMax Mult Modifier: 25.0
+mana Add Modifier: 14.0
+mana Mult Modifier: 1.2
+speed Add Modifier: 5.0
+speed Mult Modifier: 7.0
+flags: 10
+type: arme
+OnEquipe: 0
+OnDeEquipe: 0
+
+id Item: 56
+Type: 0.0
+Name: Épée de feu
+manaMax Add Modifier: 1.05
+manaMax Mult Modifier: 1.5
+speed Modifier: 1.15
+attack Add Modifier: 1.25
+attack Mult Modifier: 1.25
+defense Add Modifier: 1.10
+defense Mult Modifier: 1.10
+health Add Modifier: 41.0
+health Mult Modifier: 20.0
+healthMax Add Modifier: 45.0
+healthMax Mult Modifier: 25.0
+mana Add Modifier: 14.0
+mana Mult Modifier: 1.2
+speed Add Modifier: 5.0
+speed Mult Modifier: 7.0
+flags: 13
+type: activable
+OnEquipe: 0
+OnDeEquipe: 0
+
+id Item: 56
+Type: 0.0
+Name: potion
+manaMax Add Modifier: 1.05
+manaMax Mult Modifier: 1.5
+speed Modifier: 1.15
+attack Add Modifier: 1.25
+attack Mult Modifier: 1.25
+defense Add Modifier: 1.10
+defense Mult Modifier: 1.10
+health Add Modifier: 41.0
+health Mult Modifier: 20.0
+healthMax Add Modifier: 45.0
+healthMax Mult Modifier: 25.0
+mana Add Modifier: 14.0
+mana Mult Modifier: 1.2
+speed Add Modifier: 5.0
+speed Mult Modifier: 7.0
+flags: 12
+type: activable
+OnEquipe: 0
+OnDeEquipe: 0
+
+id Item: 56
+Type: 0.0
+Name: Épée de feu
+manaMax Add Modifier: 1.05
+manaMax Mult Modifier: 1.5
+speed Modifier: 1.15
+attack Add Modifier: 1.25
+attack Mult Modifier: 1.25
+defense Add Modifier: 1.10
+defense Mult Modifier: 1.10
+health Add Modifier: 41.0
+health Mult Modifier: 20.0
+healthMax Add Modifier: 45.0
+healthMax Mult Modifier: 25.0
+mana Add Modifier: 14.0
+mana Mult Modifier: 1.2
+speed Add Modifier: 5.0
+speed Mult Modifier: 7.0
+flags: 11
+type: armure
+OnEquipe: 0
+OnDeEquipe: 0
