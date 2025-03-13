@@ -56,13 +56,13 @@ void handleInputButton(t_input* input, t_button* button) {
             if (!button->isClicked) {
                 button->isClicked = SDL_TRUE;
                 button->color = button->colorOnClick;
-                if (button->OnClick) {
-                    callFonction(button->OnClick);
-                }
             }
         } else if (button->isClicked) {
             button->isClicked = SDL_FALSE;
             button->color = button->colorDefault;
+            if (button->OnClick) {
+                callFonction(button->OnClick);
+            }
         }
     } else {
         button->rect = button->rectDefault;

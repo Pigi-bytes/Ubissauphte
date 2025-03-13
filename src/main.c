@@ -36,12 +36,67 @@ typedef struct {
     t_button* button;
     SDL_Scancode* scancode;
     SDL_bool flagCommande;
+    char nom[10];
 } t_touche;
 
 typedef struct {
     SDL_bool PleinEcran;
     SDL_bool FlagCommande;
 } t_option;
+
+typedef struct {
+    t_objectManager* scene;
+    int currentScene;
+} t_sceneController;
+
+typedef struct {
+    t_scene* scene;
+    char nomScene[10];
+} t_sceneWithName;
+
+t_sceneWithName* InitSceneWithName(t_scene* scene, char* nomScene) {
+    t_sceneWithName* sceneWithName = malloc(sizeof(sceneWithName));
+    sceneWithName->scene = scene;
+    sprintf(sceneWithName->nomScene, "%s", nomScene);
+    return sceneWithName;
+}
+
+void freeSceneWithName(t_sceneWithName* sceneWithName) {
+    freeScene(sceneWithName->scene);
+    free(sceneWithName);
+}
+void freeSceneWithNameWrapper(void* elt) {
+    freeSceneWithName((t_sceneWithName*)elt);
+}
+t_sceneController* initSceneController() {
+    t_sceneController* controller = malloc(sizeof(t_sceneController));
+
+    t_typeRegistry* registre = createTypeRegistry();
+    registerType(registre, freeSceneWithNameWrapper, "ALLSCENE_TYPE");
+
+    controller->scene = initObjectManager(registre);
+    controller->currentScene = -1;
+
+    return controller;
+}
+
+void addScene(t_sceneController* controller, t_sceneWithName* sceneWithName) {
+    addObject(controller->scene, sceneWithName, getTypeIdByName(controller->scene->registry, "ALLSCENE_TYPE"));
+}
+
+void setScene(t_sceneController* controller, char* name) {
+    for (int i = 0; i < controller->scene->count; i++) {
+        t_sceneWithName* scene = (t_sceneWithName*)getObject(controller->scene, i);
+        if (strcmp(scene->nomScene, name) == 0) {
+            controller->currentScene = i;
+            return;
+        }
+    }
+}
+
+t_sceneController* getCurrentScene(t_sceneController* controller) {
+    return (t_sceneController*)getObject(controller->scene, controller->currentScene);
+}
 
 void renderTouche(SDL_Renderer* renderer, t_touche* touche) {
     renderButton(renderer, touche->button);
@@ -63,21 +118,20 @@ void handleInputTouche(t_input* input, t_touche* touche, SDL_Renderer* renderer)
             if (!touche->button->isClicked) {
                 touche->button->isClicked = SDL_TRUE;
                 touche->button->color = touche->button->colorOnClick;
-                if (touche->button->OnClick) {
-                    callFonction(touche->button->OnClick);
-                }
             }
         } else if (touche->button->isClicked) {
             touche->button->isClicked = SDL_FALSE;
             touche->button->color = touche->button->colorDefault;
+            if (touche->button->OnClick) {
+                callFonction(touche->button->OnClick);
+            }
         }
     } else {
         touche->button->rect = touche->button->rectDefault;
         if (touche->flagCommande) {
             touche->flagCommande = SDL_FALSE;
             char newtouche[50];
-            sprintf(newtouche, "Commande : %s", SDL_GetKeyName(SDL_GetKeyFromScancode(*touche->scancode)));
-            printf("coucou");
+            sprintf(newtouche, "Commande %s : %s", touche->nom, SDL_GetKeyName(SDL_GetKeyFromScancode(*touche->scancode)));
             updateTextOutline(&(touche->button->label), renderer, newtouche, BLACK, WHITE, 2);
         }
         if (touche->button->isClicked) {
@@ -87,10 +141,9 @@ void handleInputTouche(t_input* input, t_touche* touche, SDL_Renderer* renderer)
     }
     if (touche->flagCommande && indiceToucheCliquer(input) != -1) {
         char newtouche[50];
-        sprintf(newtouche, "Commande : %s", SDL_GetKeyName(SDL_GetKeyFromScancode(indiceToucheCliquer(input))));
+        sprintf(newtouche, "Commande %s : %s", touche->nom, SDL_GetKeyName(SDL_GetKeyFromScancode(indiceToucheCliquer(input))));
         updateTextOutline(&(touche->button->label), renderer, newtouche, BLACK, WHITE, 2);
         *touche->scancode = ((SDL_Scancode)indiceToucheCliquer(input));
-        printf("%s", SDL_GetKeyName(SDL_GetKeyFromScancode(*touche->scancode)));
         touche->flagCommande = SDL_FALSE;
     }
 }
@@ -127,10 +180,13 @@ GENERATE_WRAPPER_3(handleInputTouche, t_input*, t_touche*, SDL_Renderer*)
 GENERATE_WRAPPER_4(updatePlayer, t_joueur*, float*, t_grid*, t_objectManager*)
 GENERATE_WRAPPER_4(updateEnemy, t_ennemi*, float*, t_grid*, t_objectManager*)
 
+GENERATE_WRAPPER_2(setScene, t_sceneController*, char*)
+
 t_option* creeOption() {
     t_option* option = malloc(sizeof(t_option));
     option->PleinEcran = SDL_FALSE;
     option->FlagCommande = SDL_FALSE;
+
     return option;
 }
 
@@ -152,17 +208,50 @@ void afficherFps(t_fonctionParam* fonction) {
     }
 }
 
+void modifierFps(t_fonctionParam* fonction) {
+    t_frameData* fps = GET_PTR(fonction, 0, t_frameData*);
+    printf("%d\n", fps->targetFPS);
+    t_text** text = GET_PTR(fonction, 1, t_text**);
+    SDL_Renderer* renderer = GET_PTR(fonction, 2, SDL_Renderer*);
+    int sizeOutline = 2;
+    switch (fps->targetFPS) {
+        case 30: {
+            fps->targetFPS = 60;
+            updateTextOutline(text, renderer, "FPS : 60", BLACK, WHITE, sizeOutline);
+            break;
+        }
+        case 60: {
+            fps->targetFPS = 120;
+            updateTextOutline(text, renderer, "FPS : 120", BLACK, WHITE, sizeOutline);
+            break;
+        }
+        case 120: {
+            fps->targetFPS = 0;
+            updateTextOutline(text, renderer, "FPS : MAX", BLACK, WHITE, sizeOutline);
+            break;
+        }
+        case 0: {
+            fps->targetFPS = 30;
+            updateTextOutline(text, renderer, "FPS : 30", BLACK, WHITE, sizeOutline);
+            break;
+        }
+    }
+}
+
 void changementAffichage(t_fonctionParam* fonction) {
     SDL_Window* window = GET_PTR(fonction, 0, SDL_Window*);
     t_option* option = GET_PTR(fonction, 1, t_option*);
     t_text** text = GET_PTR(fonction, 2, t_text**);
     SDL_Renderer* renderer = GET_PTR(fonction, 3, SDL_Renderer*);
+    t_input* input = GET_PTR(fonction, 4, t_input*);
     int sizeOutline = 2;
     if (option->PleinEcran == SDL_FALSE) {
         option->PleinEcran = SDL_TRUE;
+        input->resized = SDL_TRUE;
         updateTextOutline(text, renderer, "Fullscreen", BLACK, WHITE, sizeOutline);
     } else {
         option->PleinEcran = SDL_FALSE;
+        input->resized = SDL_FALSE;
         updateTextOutline(text, renderer, "windowed", BLACK, WHITE, sizeOutline);
     }
     Uint32 fullscreenFlag = SDL_WINDOW_FULLSCREEN;
@@ -170,11 +259,12 @@ void changementAffichage(t_fonctionParam* fonction) {
     SDL_SetWindowFullscreen(window, isFullscreen ? 0 : fullscreenFlag);
 }
 
-t_touche* createTouche(t_text* text, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, t_fonctionParam* OnClick, SDL_Scancode* scancode) {
+t_touche* createTouche(t_text* text, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, t_fonctionParam* OnClick, SDL_Scancode* scancode, char* nom) {
     t_touche* touche = malloc(sizeof(t_touche));
     touche->button = createButton(text, color, colorOnClick, rect, OnClick);
     touche->scancode = scancode;
     touche->flagCommande = SDL_FALSE;
+    strcpy(touche->nom, nom);
     return touche;
 }
 
@@ -189,37 +279,46 @@ void miseAjourCommande(t_fonctionParam* fonction) {
     SDL_Renderer* renderer = GET_PTR(fonction, 1, SDL_Renderer*);
 
     int sizeOutline = 2;
-    updateTextOutline(&(touche->button->label), renderer, "Commande : _", BLACK, WHITE, sizeOutline);
+    char commande[50];
+    sprintf(commande, "Commande %s : _", touche->nom);
+    updateTextOutline(&(touche->button->label), renderer, commande, BLACK, WHITE, sizeOutline);
     touche->flagCommande = SDL_TRUE;
 }
 
-t_scene* createCommandeMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, SDL_Window* window, t_option* option, t_control* control) {
+t_scene* createCommandeMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, SDL_Window* window, t_option* option, t_control* control, t_sceneController* sceneController) {
     t_typeRegistry* registre = createTypeRegistry();
     const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
     const uint8_t COMMANDE_TYPE = registerType(registre, freeTouche, "commande");
+    const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
 
     t_scene* scene = createScene(initObjectManager(registre), "scene2");
 
     int nb = 2;
 
     char newTouche[50];
-    sprintf(newTouche, "Commande : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((control->up))));
+    sprintf(newTouche, "Commande Up : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((control->up))));
     t_text* textCommande = createTextOutline(renderer, newTouche, font, BLACK, WHITE, nb);
     t_fonctionParam* fonctionCommande = creerFonction(miseAjourCommande, NULL);
-    t_touche* touche = createTouche(textCommande, GREEN, WHITE, creerRect(0.35f, 0.30f, 0.3f, 0.1f), fonctionCommande, &control->up);
+    t_touche* touche = createTouche(textCommande, GREEN, WHITE, creerRect(0.35f, 0.30f, 0.3f, 0.1f), fonctionCommande, &control->up, "Up");
     addPamaretre(fonctionCommande, FONCTION_PARAMS(touche, renderer));
 
-    sprintf(newTouche, "Commande : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((control->down))));
+    sprintf(newTouche, "Commande Down : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((control->down))));
     t_text* textCommande2 = createTextOutline(renderer, newTouche, font, BLACK, WHITE, nb);
     t_fonctionParam* fonctionCommande2 = creerFonction(miseAjourCommande, NULL);
-    t_touche* touche2 = createTouche(textCommande2, GREEN, WHITE, creerRect(0.35f, 0.5f, 0.3f, 0.1f), fonctionCommande2, &control->down);
+    t_touche* touche2 = createTouche(textCommande2, GREEN, WHITE, creerRect(0.35f, 0.44f, 0.3f, 0.1f), fonctionCommande2, &control->down, "Down");
     addPamaretre(fonctionCommande2, FONCTION_PARAMS(touche2, renderer));
 
-    sprintf(newTouche, "Commande : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((control->right))));
+    sprintf(newTouche, "Commande Right : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((control->right))));
     t_text* textCommande3 = createTextOutline(renderer, newTouche, font, BLACK, WHITE, nb);
     t_fonctionParam* fonctionCommande3 = creerFonction(miseAjourCommande, NULL);
-    t_touche* touche3 = createTouche(textCommande3, GREEN, WHITE, creerRect(0.35f, 0.65f, 0.3f, 0.1f), fonctionCommande3, &control->right);
+    t_touche* touche3 = createTouche(textCommande3, GREEN, WHITE, creerRect(0.35f, 0.58f, 0.3f, 0.1f), fonctionCommande3, &control->right, "Right");
     addPamaretre(fonctionCommande3, FONCTION_PARAMS(touche3, renderer));
+
+    sprintf(newTouche, "Commande Left : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((control->left))));
+    t_text* textCommande4 = createTextOutline(renderer, newTouche, font, BLACK, WHITE, nb);
+    t_fonctionParam* fonctionCommande4 = creerFonction(miseAjourCommande, NULL);
+    t_touche* touche4 = createTouche(textCommande4, GREEN, WHITE, creerRect(0.35f, 0.72f, 0.3f, 0.1f), fonctionCommande4, &control->left, "Left");
+    addPamaretre(fonctionCommande4, FONCTION_PARAMS(touche4, renderer));
 
     t_text* text = createText(renderer, "Commande", font, GREEN);
     text->rect = creerRect((1 - 0.8f) / 2, 0.05f, 0.8f, 0.2f);
@@ -229,15 +328,20 @@ t_scene* createCommandeMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* fo
     ADD_OBJECT_TO_SCENE(scene, touche, COMMANDE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, touche2, COMMANDE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, touche3, COMMANDE_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, touche4, COMMANDE_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Retour", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.86f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "option"))), BUTTON_TYPE);
     sceneRegisterFunction(scene, COMMANDE_TYPE, HANDLE_INPUT, handleInputToucheWrapper, 1, FONCTION_PARAMS(input, renderer));
     sceneRegisterFunction(scene, COMMANDE_TYPE, RENDER_UI, renderToucheWrapper, 1, FONCTION_PARAMS(renderer));
 
     sceneRegisterFunction(scene, TEXTE_TYPE, RENDER_UI, renderTextWrapper, 1, FONCTION_PARAMS(renderer));
+    sceneRegisterFunction(scene, BUTTON_TYPE, RENDER_UI, renderButtonWrapper, 1, FONCTION_PARAMS(renderer));
+
+    sceneRegisterFunction(scene, BUTTON_TYPE, HANDLE_INPUT, handleInputButtonWrapper, 1, FONCTION_PARAMS(input));
 
     return scene;
 }
 
-t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, SDL_Window* window, t_option* option, t_control* control) {
+t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, SDL_Window* window, t_option* option, t_control* control, t_sceneController* sceneController) {
     t_typeRegistry* registre = createTypeRegistry();
     const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
     const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
@@ -258,25 +362,28 @@ t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font
     t_text* textEcran = createTextOutline(renderer, "windowed", font, BLACK, WHITE, nb);
     t_fonctionParam* fonctionEcran = creerFonction(changementAffichage, NULL);
     t_button* fpsButtonEcran = createButton(textEcran, GREEN, WHITE, creerRect(0.35f, 0.72f, 0.3f, 0.1f), fonctionEcran);
-    addPamaretre(fonctionEcran, FONCTION_PARAMS(window, option, &(fpsButtonEcran->label), renderer));
+    addPamaretre(fonctionEcran, FONCTION_PARAMS(window, option, &(fpsButtonEcran->label), renderer, input));
 
-    char newTouche[50];
-    sprintf(newTouche, "Commande : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((control->up))));
-    t_text* textCommande = createTextOutline(renderer, newTouche, font, BLACK, WHITE, nb);
-    t_fonctionParam* fonctionCommande = creerFonction(miseAjourCommande, NULL);
-    t_touche* touche = createTouche(textCommande, GREEN, WHITE, creerRect(0.35f, 0.30f, 0.3f, 0.1f), fonctionCommande, &control->up);
-    addPamaretre(fonctionCommande, FONCTION_PARAMS(touche, renderer));
+    /*
+    char Newtext[50];
+    sprintf(Newtext, "FPS : %d", frameData->targetFPS);
+    t_text* textFpsMax = createTextOutline(renderer, Newtext, font, BLACK, WHITE, nb);
+    t_fonctionParam* fonctiontextFpsMax = creerFonction(modifierFps, NULL);
+    t_button* fpsMaxButton = createButton(textFpsMax, GREEN, WHITE, creerRect(0.35f, 0.30f, 0.3f, 0.1f), fonctiontextFpsMax);
+    addPamaretre(fonctiontextFpsMax, FONCTION_PARAMS(frameData, &(fpsMaxButton->label), renderer));
+    */
 
     t_text* text = createText(renderer, "Option", font, GREEN);
     text->rect = creerRect((1 - 0.8f) / 2, 0.05f, 0.8f, 0.2f);
 
     ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
 
-    ADD_OBJECT_TO_SCENE(scene, touche, COMMANDE_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Commandes", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.3f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "commande"))), BUTTON_TYPE);
+    // ADD_OBJECT_TO_SCENE(scene, fpsMaxButton, BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, fpsButton, BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, CreerBarreVolume(creerRect(0.35f, (0.58f + 0.05f), 0.3f, 0.01f), creerRect((0.35f + 0.14f), (0.58f + 0.032f), 0.02f, 0.04f), GREEN, WHITE, creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), VOLUME_TYPE);
     ADD_OBJECT_TO_SCENE(scene, fpsButtonEcran, BUTTON_TYPE);
-    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Menu Principal", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.86f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Menu Principal", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.86f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "menuPrincipal"))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, fpsDisplay, FRAME_DISPLAY_TYPE);
 
     sceneRegisterFunction(scene, BUTTON_TYPE, HANDLE_INPUT, handleInputButtonWrapper, 1, FONCTION_PARAMS(input));
@@ -296,7 +403,7 @@ t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font
     return scene;
 }
 
-t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData) {
+t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, t_sceneController* sceneController) {
     t_typeRegistry* registre = createTypeRegistry();
     const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
     const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
@@ -308,8 +415,8 @@ t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     text->rect = creerRect((1 - 0.8f) / 2, 0.1f, 0.8f, 0.2f);
 
     ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
-    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Jouer", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.35f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
-    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Option", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.5f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Jouer", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.35f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "main"))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Option", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.5f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "option"))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Quitter", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.65f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, initFPSDisplay(renderer, font), FRAME_DISPLAY_TYPE);
 
@@ -419,6 +526,7 @@ int main(int argc, char* argv[]) {
     TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     t_frameData* frameData = initFrameData(0);
     t_option* option = creeOption();
+    t_sceneController* sceneController = initSceneController();
 
     t_control* contr = malloc(sizeof(t_control));
     contr->up = SDL_SCANCODE_UP;
@@ -426,28 +534,36 @@ int main(int argc, char* argv[]) {
     contr->left = SDL_SCANCODE_LEFT;
     contr->right = SDL_SCANCODE_RIGHT;
 
-    // t_scene* scene = createOptionMenu(renderer, input, font, frameData, window, option, contr);
-    t_scene* scene = createMainWord(renderer, input, font, frameData);
-    // t_scene* scene = createCommandeMenu(renderer, input, font, window, option, contr);
+    t_sceneWithName* scene = InitSceneWithName(createMainMenu(renderer, input, font, frameData, sceneController), "menuPrincipal");
+    t_sceneWithName* scene0 = InitSceneWithName(createOptionMenu(renderer, input, font, frameData, window, option, contr, sceneController), "option");
+    t_sceneWithName* scene1 = InitSceneWithName(createMainWord(renderer, input, font, frameData), "main");
+    t_sceneWithName* scene2 = InitSceneWithName(createCommandeMenu(renderer, input, font, window, option, contr, sceneController), "commande");
 
+    addScene(sceneController, scene);
+    addScene(sceneController, scene0);
+    addScene(sceneController, scene1);
+    addScene(sceneController, scene2);
+
+    setScene(sceneController, "menuPrincipal");
     while (!input->quit) {
         startFrame(frameData);
 
+        executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), HANDLE_INPUT);
         updateInput(input);
-        executeSceneFunctions(scene, HANDLE_INPUT);
 
         updateFPS(frameData);
-        executeSceneFunctions(scene, UPDATE);
+        executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), UPDATE);
 
         if (input->resized) {
-            executeSceneFunctions(scene, HANDLE_RESIZE);
+            printf("coucou");
+            executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), HANDLE_RESIZE);
         }
 
         SDL_RenderClear(renderer);
-        executeSceneFunctions(scene, SET_BUFFER);
-        executeSceneFunctions(scene, RENDER_GAME);
-        executeSceneFunctions(scene, RENDER_BUFFER);
-        executeSceneFunctions(scene, RENDER_UI);
+        executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), SET_BUFFER);
+        executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), RENDER_GAME);
+        executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), RENDER_BUFFER);
+        executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), RENDER_UI);
 
         SDL_RenderPresent(renderer);
 
@@ -456,7 +572,7 @@ int main(int argc, char* argv[]) {
 
     freeOption(option);
     freeFrameData(frameData);
-    freeScene(scene);
+    freeObjectManager(sceneController->scene);
     free(contr);
 
     TTF_CloseFont(font);
