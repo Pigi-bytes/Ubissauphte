@@ -6,8 +6,20 @@ t_block *getPlafond(t_listeBlock **listAllBlock) {
     return randomBlocByType(listBlock);
 }
 
-t_block *getSol(t_listeBlock **listAllBlock) {
+t_block *getSol(t_listeBlock **listAllBlock, t_case *c) {
     t_listeBlock *listBlock = listeByType(listAllBlock, SOL_TYPE);
+    if ((c->tabVoisin[VOISIN_HAUT]->val == 1) && (c->tabVoisin[VOISIN_DROIT]->val == 1))
+        return blockByName(listBlock, SOL_OMBRE_ARRONDI_DROIT);
+    if ((c->tabVoisin[VOISIN_HAUT]->val == 1) && (c->tabVoisin[VOISIN_GAUCHE]->val == 1))
+        return blockByName(listBlock, SOL_OMBRE_ARRONDI_GAUCHE);
+    if (c->tabVoisin[VOISIN_HAUT]->val == 1 && (c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]->val == 1 || (c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT]->val == 1)))
+        return blockByName(listBlock, SOL_OMBRE_MUR);
+
+    if ((c->tabVoisin[VOISIN_HAUT2]->val == 1) && (c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]->val == 1) && (c->tabVoisin[VOISIN_DROIT]->val == 0))
+        return blockByName(listBlock, SOL_OMBRE_ANGLE_DROIT);
+    if ((c->tabVoisin[VOISIN_HAUT2]->val == 1) && (c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT]->val == 1) && (c->tabVoisin[VOISIN_GAUCHE]->val == 0))
+        return blockByName(listBlock, SOL_OMBRE_ANGLE_GAUCHE);
+
     return randomBlocByType(listBlock);
 }
 
@@ -16,8 +28,12 @@ t_block *getDeco(t_listeBlock **listAllBlock) {
     return randomBlocByType(listBlock);
 }
 
-t_block *getFrontale(t_listeBlock **listAllBlock) {
+t_block *getFrontale(t_listeBlock **listAllBlock, t_case *c) {
     t_listeBlock *listBlock = listeByType(listAllBlock, FRONTAL_TYPE);
+    if (c->tabVoisin[VOISIN_GAUCHE]->val == 0)
+        return blockByName(listBlock, FRONTALE_ANGLE_DROIT);
+    if (c->tabVoisin[VOISIN_DROIT]->val == 0)
+        return blockByName(listBlock, FRONTALE_ANGLE_GAUCHE);
     return randomBlocByType(listBlock);
 }
 
@@ -93,11 +109,12 @@ void choixTiles(t_listeBlock **listAllBlock, t_grille *g) {
     for (int i = 0; i < g->nbLigne; i++) {
         for (int j = 0; j < g->nbColonne; j++) {
             if ((!g->grille[i][j]->val)) {
-                g->grille[i][j]->tiles = getSol(listAllBlock);
+                g->grille[i][j]->tiles = getSol(listAllBlock, g->grille[i][j]);
+                rotationAleatoire(g->grille[i][j]->tiles);
             } else if (blocSeul(g->grille[i][j])) {
                 g->grille[i][j]->tiles = getDeco(listAllBlock);
             } else if (murAvant(g->grille[i][j])) {
-                g->grille[i][j]->tiles = getFrontale(listAllBlock);
+                g->grille[i][j]->tiles = getFrontale(listAllBlock, g->grille[i][j]);
             } else if (angleDroit(g->grille[i][j])) {
                 g->grille[i][j]->tiles = blockByName(listBlock, MUR_ANGLE_DROIT);
             } else if (angleGauche(g->grille[i][j])) {
@@ -122,8 +139,10 @@ void choixTiles(t_listeBlock **listAllBlock, t_grille *g) {
                 g->grille[i][j]->tiles = blockByName(listBlock, MUR_BORDURE_MUR_GAUCHE);
             } else if (bordureMurDroit(g->grille[i][j])) {
                 g->grille[i][j]->tiles = blockByName(listBlock, MUR_BORDURE_MUR_DROIT);
-            } else
+            } else {
                 g->grille[i][j]->tiles = getPlafond(listAllBlock);
+                rotationAleatoire(g->grille[i][j]->tiles);
+            }
         }
     }
 }

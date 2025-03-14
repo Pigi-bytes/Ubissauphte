@@ -24,12 +24,19 @@ typedef enum {
     SOL_SIMPLE,
     SOL_FRACTURE,
     SOL_POINT,
+    SOL_OMBRE_MUR,
+    SOL_OMBRE_ARRONDI_DROIT,
+    SOL_OMBRE_ARRONDI_GAUCHE,
+    SOL_OMBRE_ANGLE_GAUCHE,
+    SOL_OMBRE_ANGLE_DROIT,
 
     FRONTALE_BRIQUE_SIMPLE,
     FRONTALE_BRIQUE_FENETRE,
     FRONTALE_DRAPEAU,
     FRONTALE_FONTAINE_EAUX,
     FRONTALE_FONTAINE_PAS_EAUX,
+    FRONTALE_ANGLE_GAUCHE,
+    FRONTALE_ANGLE_DROIT,
 
     PLAFOND_SIMPLE,
     PLAFOND_FRACTURE,
@@ -64,6 +71,7 @@ typedef struct {
     t_blocktype type;
     double proba;
     nom_block name;
+    SDL_bool rotationAutorise;
 } t_block;
 
 typedef struct {
@@ -73,10 +81,10 @@ typedef struct {
 
 t_listeBlock** InitAllBlock();
 void freeListeBlock(t_listeBlock** listAllBlock);
-void ajouterBlock(t_listeBlock** listAllBlock, t_blocktype type, nom_block name, char* tailes, char* rotation, double proba, SDL_bool collisions);
+void ajouterBlock(t_listeBlock** listAllBlock, t_blocktype type, nom_block name, char* tailes, char* rotation, double proba, SDL_bool collisions, SDL_bool rotationAutorise);
 t_listeBlock* listeByType(t_listeBlock** listAllBlock, t_blocktype type);
+void rotationAleatoire(t_block* block);
 t_block* blockByName(t_listeBlock* listBlock, nom_block name);
 t_block* randomBlocByType(t_listeBlock* listBlock);
 t_listeBlock** createListAllBlock();
-
 #endif

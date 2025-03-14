@@ -32,7 +32,7 @@ void freeListeBlock(t_listeBlock** listAllBlock) {
     free(listAllBlock);
 }
 
-void ajouterBlock(t_listeBlock** listAllBlock, t_blocktype type, nom_block name, char* tailes, char* rotation, double proba, SDL_bool collisions) {
+void ajouterBlock(t_listeBlock** listAllBlock, t_blocktype type, nom_block name, char* tailes, char* rotation, double proba, SDL_bool collisions, SDL_bool rotationAutorise) {
     t_block* block = malloc(sizeof(t_block));
     if (!block) {
         printf("erreur lors de l'allocation de mémoire de listBlock\n");
@@ -44,6 +44,7 @@ void ajouterBlock(t_listeBlock** listAllBlock, t_blocktype type, nom_block name,
     block->type = type;
     block->name = name;
     block->collisions = collisions;
+    block->rotationAutorise = rotationAutorise;
 
     listAllBlock[type]->listeBlock =
         realloc(listAllBlock[type]->listeBlock, sizeof(t_block) * (listAllBlock[type]->nbElem + 1));
@@ -77,47 +78,62 @@ t_block* randomBlocByType(t_listeBlock* listBlock) {
     return listBlock->listeBlock[listBlock->nbElem - 1];
 }
 
-t_listeBlock** createListAllBlock() {
+void rotationAleatoire(t_block* block) {
+    if (block->rotationAutorise == SDL_TRUE) {
+        block->rotation = (rand() % 2 == 0) ? "0" : "1";
+        printf("coucou");
+    }
+}
+
+t_listeBlock**
+createListAllBlock() {
     t_listeBlock** listAllBlock = InitAllBlock();
 
-    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ANGLE_DROIT, "6", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ANGLE_GAUCHE, "5", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ARRONDI_INF_GAUCHE, "28", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ARRONDI_INF_DROIT, "26", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ARRONDI_SUP_GAUCHE, "4", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ARRONDI_SUP_DROIT, "2", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ANGLE_CONTINUE_GAUCHE, "17", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ANGLE_CONTINUE_DROIT, "18", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, MUR_TYPE, MUR_BORDURE_MUR_AVANT, "3", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, MUR_TYPE, MUR_BORDURE_MUR_ARRIERE, "27", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, MUR_TYPE, MUR_BORDURE_MUR_GAUCHE, "14", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, MUR_TYPE, MUR_BORDURE_MUR_DROIT, "16", "0", 1, SDL_TRUE);
+    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ANGLE_DROIT, "6", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ANGLE_GAUCHE, "5", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ARRONDI_INF_GAUCHE, "28", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ARRONDI_INF_DROIT, "26", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ARRONDI_SUP_GAUCHE, "4", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ARRONDI_SUP_DROIT, "2", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ANGLE_CONTINUE_GAUCHE, "17", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, MUR_TYPE, MUR_ANGLE_CONTINUE_DROIT, "18", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, MUR_TYPE, MUR_BORDURE_MUR_AVANT, "3", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, MUR_TYPE, MUR_BORDURE_MUR_ARRIERE, "27", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, MUR_TYPE, MUR_BORDURE_MUR_GAUCHE, "14", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, MUR_TYPE, MUR_BORDURE_MUR_DROIT, "16", "0", 1, SDL_TRUE, SDL_FALSE);
 
-    ajouterBlock(listAllBlock, SOL_TYPE, SOL_SIMPLE, "49", "0", (0.33), SDL_FALSE);
-    ajouterBlock(listAllBlock, SOL_TYPE, SOL_FRACTURE, "43", "0", (0.33), SDL_FALSE);
-    ajouterBlock(listAllBlock, SOL_TYPE, SOL_POINT, "50", "0", 0.33, SDL_FALSE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_SIMPLE, "49", "0", (0.33), SDL_FALSE, SDL_TRUE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_FRACTURE, "43", "0", (0.33), SDL_FALSE, SDL_TRUE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_POINT, "50", "0", 0.33, SDL_FALSE, SDL_TRUE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_MUR, "52", "0", 0.0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_ARRONDI_DROIT, "53", "0", 0.0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_ARRONDI_GAUCHE, "53", "1", 0.0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_ANGLE_GAUCHE, "54", "0", 0.0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_ANGLE_DROIT, "54", "1", 0.0, SDL_FALSE, SDL_FALSE);
 
-    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_BRIQUE_SIMPLE, "41", "0", (0.3), SDL_TRUE);
-    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_BRIQUE_FENETRE, "29", "0", (0.3), SDL_TRUE);
-    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_DRAPEAU, "30", "0", (0.3), SDL_TRUE);
-    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_FONTAINE_EAUX, "21", "0", (0.05), SDL_TRUE);
-    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_FONTAINE_PAS_EAUX, "20", "0", (0.05), SDL_TRUE);
+    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_BRIQUE_SIMPLE, "41", "0", (0.3), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_BRIQUE_FENETRE, "29", "0", (0.3), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_DRAPEAU, "30", "0", (0.3), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_FONTAINE_EAUX, "21", "0", (0.05), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_FONTAINE_PAS_EAUX, "20", "0", (0.05), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_ANGLE_DROIT, "58", "0", (0.0), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_ANGLE_GAUCHE, "60", "0", (0.0), SDL_TRUE, SDL_FALSE);
 
-    ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_SIMPLE, "1", "0", (((double)2) / ((double)4)), SDL_TRUE);
-    ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_FRACTURE, "13", "0", (((double)2) / ((double)4)), SDL_TRUE);
-    ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_POINT, "25", "0", (((double)2) / ((double)4)), SDL_TRUE);
+    ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_SIMPLE, "1", "0", (((double)2) / ((double)4)), SDL_TRUE, SDL_TRUE);
+    ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_FRACTURE, "13", "0", (((double)2) / ((double)4)), SDL_TRUE, SDL_TRUE);
+    ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_POINT, "25", "0", (((double)2) / ((double)4)), SDL_TRUE, SDL_TRUE);
 
-    ajouterBlock(listAllBlock, DECO_TYPE, DECO_HAUT_BOITE, "64", "0", (((double)1) / ((double)5)), SDL_TRUE);
-    ajouterBlock(listAllBlock, DECO_TYPE, DECO_CROIX_TOMBE, "65", "0", (((double)1) / ((double)5)), SDL_TRUE);
-    ajouterBlock(listAllBlock, DECO_TYPE, DECO_PIERRE_TOMBALE, "66", "0", (((double)1) / ((double)5)), SDL_TRUE);
-    ajouterBlock(listAllBlock, DECO_TYPE, DECO_TABLE, "73", "0", (((double)1) / ((double)5)), SDL_TRUE);
-    ajouterBlock(listAllBlock, DECO_TYPE, DECO_ENCLUME, "66", "0", (((double)1) / ((double)5)), SDL_TRUE);
+    ajouterBlock(listAllBlock, DECO_TYPE, DECO_HAUT_BOITE, "64", "0", (((double)1) / ((double)5)), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, DECO_TYPE, DECO_CROIX_TOMBE, "65", "0", (((double)1) / ((double)5)), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, DECO_TYPE, DECO_PIERRE_TOMBALE, "66", "0", (((double)1) / ((double)5)), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, DECO_TYPE, DECO_TABLE, "73", "0", (((double)1) / ((double)5)), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, DECO_TYPE, DECO_ENCLUME, "66", "0", (((double)1) / ((double)5)), SDL_TRUE, SDL_FALSE);
 
-    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_BAS_BOITE, "76", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_CHAISE, "65", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_TOMBE, "66", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_BAS_FONTAINE_EAUX, "33", "0", 1, SDL_TRUE);
-    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_BAS_FONTAINE_SANS_EAUX, "32", "0", 1, SDL_TRUE);
+    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_BAS_BOITE, "76", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_CHAISE, "65", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_TOMBE, "66", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_BAS_FONTAINE_EAUX, "33", "0", 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_BAS_FONTAINE_SANS_EAUX, "32", "0", 1, SDL_TRUE, SDL_FALSE);
 
     return listAllBlock;
 }

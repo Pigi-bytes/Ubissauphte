@@ -1,7 +1,7 @@
 #ifndef GENEROOM_H
 #define GENEROOM_H
 
-//#include "../debug.h"
+// #include "../debug.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,11 +14,11 @@
 #include "perlinNoise.h"
 
 t_block *getPlafond(t_listeBlock **listAllBlock);
-t_block *getSol(t_listeBlock **listAllBlock);
+t_block *getSol(t_listeBlock **listAllBlock, t_case *c);
 t_block *getDeco(t_listeBlock **listAllBlock);
-t_block *getFrontale(t_listeBlock **listAllBlock);
+t_block *getFrontale(t_listeBlock **listAllBlock, t_case *c);
 
-//regles pour le choix du tiles trié par priorité
+// regles pour le choix du tiles trié par priorité
 SDL_bool murAvant(t_case *c);
 SDL_bool angleDroit(t_case *c);
 SDL_bool angleGauche(t_case *c);
@@ -33,8 +33,8 @@ SDL_bool bordureMurAvant(t_case *c);
 SDL_bool bordureMurGauche(t_case *c);
 SDL_bool bordureMurDroit(t_case *c);
 
-//fonctions de genération de la map
-t_grille * geneRoom();
+// fonctions de genération de la map
+t_grille *geneRoom();
 void choixTiles(t_listeBlock **listAllBlock, t_grille *g);
 void saveMap(t_grille *g);
 
