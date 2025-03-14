@@ -341,16 +341,13 @@ t_scene* createCommandeMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* fo
     return scene;
 }
 
-t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, SDL_Window* window, t_option* option, t_control* control, t_sceneController* sceneController) {
+t_scene* createFpsMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, t_fpsDisplay* fpsDisplay, SDL_Window* window, t_option* option, t_sceneController* sceneController) {
     t_typeRegistry* registre = createTypeRegistry();
     const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
     const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
     const uint8_t FRAME_DISPLAY_TYPE = registerType(registre, freeFPSDisplay, "frameData");
-    const uint8_t VOLUME_TYPE = registerType(registre, freeBv, "volumme");
-    const uint8_t COMMANDE_TYPE = registerType(registre, freeTouche, "commande");
 
-    t_scene* scene = createScene(initObjectManager(registre), "scene2");
-    t_fpsDisplay* fpsDisplay = initFPSDisplay(renderer, font);
+    t_scene* scene = createScene(initObjectManager(registre), "scene4");
 
     int nb = 2;
 
@@ -359,19 +356,48 @@ t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font
     t_button* fpsButton = createButton(textFps, GREEN, WHITE, creerRect(0.35f, 0.44f, 0.3f, 0.1f), fp);
     addPamaretre(fp, FONCTION_PARAMS(fpsDisplay, &(fpsButton->label), renderer));
 
-    t_text* textEcran = createTextOutline(renderer, "windowed", font, BLACK, WHITE, nb);
-    t_fonctionParam* fonctionEcran = creerFonction(changementAffichage, NULL);
-    t_button* fpsButtonEcran = createButton(textEcran, GREEN, WHITE, creerRect(0.35f, 0.72f, 0.3f, 0.1f), fonctionEcran);
-    addPamaretre(fonctionEcran, FONCTION_PARAMS(window, option, &(fpsButtonEcran->label), renderer, input));
-
-    /*
     char Newtext[50];
     sprintf(Newtext, "FPS : %d", frameData->targetFPS);
     t_text* textFpsMax = createTextOutline(renderer, Newtext, font, BLACK, WHITE, nb);
     t_fonctionParam* fonctiontextFpsMax = creerFonction(modifierFps, NULL);
-    t_button* fpsMaxButton = createButton(textFpsMax, GREEN, WHITE, creerRect(0.35f, 0.30f, 0.3f, 0.1f), fonctiontextFpsMax);
+    t_button* fpsMaxButton = createButton(textFpsMax, GREEN, WHITE, creerRect(0.35f, 0.58f, 0.3f, 0.1f), fonctiontextFpsMax);
     addPamaretre(fonctiontextFpsMax, FONCTION_PARAMS(frameData, &(fpsMaxButton->label), renderer));
-    */
+
+    t_text* text = createText(renderer, "Frame Menu", font, GREEN);
+    text->rect = creerRect((1 - 0.8f) / 2, 0.05f, 0.8f, 0.2f);
+
+    ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
+
+    ADD_OBJECT_TO_SCENE(scene, fpsMaxButton, BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, fpsButton, BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Retour", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.72f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "option"))), BUTTON_TYPE);
+
+    sceneRegisterFunction(scene, BUTTON_TYPE, HANDLE_INPUT, handleInputButtonWrapper, 1, FONCTION_PARAMS(input));
+
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, 0, FONCTION_PARAMS(frameData, renderer));
+
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, 1, FONCTION_PARAMS(renderer));
+    sceneRegisterFunction(scene, BUTTON_TYPE, RENDER_UI, renderButtonWrapper, 1, FONCTION_PARAMS(renderer));
+    sceneRegisterFunction(scene, TEXTE_TYPE, RENDER_UI, renderTextWrapper, 1, FONCTION_PARAMS(renderer));
+
+    return scene;
+}
+
+t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, SDL_Window* window, t_option* option, t_control* control, t_sceneController* sceneController) {
+    t_typeRegistry* registre = createTypeRegistry();
+    const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
+    const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
+    const uint8_t VOLUME_TYPE = registerType(registre, freeBv, "volumme");
+    const uint8_t COMMANDE_TYPE = registerType(registre, freeTouche, "commande");
+
+    t_scene* scene = createScene(initObjectManager(registre), "scene2");
+
+    int nb = 2;
+
+    t_text* textEcran = createTextOutline(renderer, "windowed", font, BLACK, WHITE, nb);
+    t_fonctionParam* fonctionEcran = creerFonction(changementAffichage, NULL);
+    t_button* fpsButtonEcran = createButton(textEcran, GREEN, WHITE, creerRect(0.35f, 0.72f, 0.3f, 0.1f), fonctionEcran);
+    addPamaretre(fonctionEcran, FONCTION_PARAMS(window, option, &(fpsButtonEcran->label), renderer, input));
 
     t_text* text = createText(renderer, "Option", font, GREEN);
     text->rect = creerRect((1 - 0.8f) / 2, 0.05f, 0.8f, 0.2f);
@@ -379,12 +405,10 @@ t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font
     ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
 
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Commandes", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.3f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "commande"))), BUTTON_TYPE);
-    // ADD_OBJECT_TO_SCENE(scene, fpsMaxButton, BUTTON_TYPE);
-    ADD_OBJECT_TO_SCENE(scene, fpsButton, BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Menu Fps", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.44f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "fpsMenu"))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, CreerBarreVolume(creerRect(0.35f, (0.58f + 0.05f), 0.3f, 0.01f), creerRect((0.35f + 0.14f), (0.58f + 0.032f), 0.02f, 0.04f), GREEN, WHITE, creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), VOLUME_TYPE);
     ADD_OBJECT_TO_SCENE(scene, fpsButtonEcran, BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Menu Principal", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.86f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "menuPrincipal"))), BUTTON_TYPE);
-    ADD_OBJECT_TO_SCENE(scene, fpsDisplay, FRAME_DISPLAY_TYPE);
 
     sceneRegisterFunction(scene, BUTTON_TYPE, HANDLE_INPUT, handleInputButtonWrapper, 1, FONCTION_PARAMS(input));
     sceneRegisterFunction(scene, VOLUME_TYPE, HANDLE_INPUT, handleInputButtonVolummeWrapper, 1, FONCTION_PARAMS(input));
@@ -393,9 +417,6 @@ t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font
     sceneRegisterFunction(scene, VOLUME_TYPE, RENDER_UI, renderBarreVolummeWrapper, 1, FONCTION_PARAMS(renderer));
     sceneRegisterFunction(scene, COMMANDE_TYPE, RENDER_UI, renderToucheWrapper, 1, FONCTION_PARAMS(renderer));
 
-    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, 0, FONCTION_PARAMS(frameData, renderer));
-
-    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, 1, FONCTION_PARAMS(renderer));
     sceneRegisterFunction(scene, BUTTON_TYPE, RENDER_UI, renderButtonWrapper, 1, FONCTION_PARAMS(renderer));
     sceneRegisterFunction(scene, TEXTE_TYPE, RENDER_UI, renderTextWrapper, 1, FONCTION_PARAMS(renderer));
     sceneRegisterFunction(scene, VOLUME_TYPE, RENDER_UI, renderBarreVolummeWrapper, 1, FONCTION_PARAMS(renderer));
@@ -418,11 +439,8 @@ t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Jouer", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.35f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "main"))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Option", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.5f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "option"))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Quitter", font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.65f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), BUTTON_TYPE);
-    ADD_OBJECT_TO_SCENE(scene, initFPSDisplay(renderer, font), FRAME_DISPLAY_TYPE);
 
     sceneRegisterFunction(scene, BUTTON_TYPE, HANDLE_INPUT, handleInputButtonWrapper, 1, FONCTION_PARAMS(input));
-
-    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, 0, FONCTION_PARAMS(frameData, renderer));
 
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, 1, FONCTION_PARAMS(renderer));
     sceneRegisterFunction(scene, BUTTON_TYPE, RENDER_UI, renderButtonWrapper, 1, FONCTION_PARAMS(renderer));
@@ -431,7 +449,7 @@ t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     return scene;
 }
 
-t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData) {
+t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, t_control* contr) {
     t_typeRegistry* registre = createTypeRegistry();
     const uint8_t GRID_TYPE = registerType(registre, freeGrid, "Grid");
     const uint8_t PLAYER_TYPE = registerType(registre, freePlayer, "player");
@@ -455,12 +473,6 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     int levelWidth = level->width * tileset->tileSize;
     int levelHeight = level->height * tileset->tileSize;
 
-    t_control* contr = malloc(sizeof(t_control));
-    contr->up = SDL_SCANCODE_UP;
-    contr->down = SDL_SCANCODE_DOWN;
-    contr->left = SDL_SCANCODE_LEFT;
-    contr->right = SDL_SCANCODE_RIGHT;
-
     t_objectManager* entities = initObjectManager(createTypeRegistry());
     const uint8_t ENTITY = registerType(entities->registry, NULL, "ENTITY");
 
@@ -469,7 +481,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     placeOnRandomTile(level, &joueur->entity, entities);
 
     t_enemy* enemy;
-    for (int i = 0; i < 700; i++) {
+    for (int i = 0; i < 10; i++) {
         enemy = createRandomEnemy((SDL_Texture*)getObject(tileset->textureTiles, 122), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, fantomTileSet, crabeTileSet);
 
         // enemy = createEnemy((SDL_Texture*)getObject(tileset->textureTiles, 122), (SDL_Rect){100, 100, 16, 16}, slimeTileSet);
@@ -482,7 +494,6 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     t_viewPort* viewport = createViewport(renderer, camera, WINDOW_WIDTH, WINDOW_HEIGHT);
     t_minimap* minimap = createMinimap(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    ADD_OBJECT_TO_SCENE(scene, initFPSDisplay(renderer, font), FRAME_DISPLAY_TYPE);
     ADD_OBJECT_TO_SCENE(scene, joueur, PLAYER_TYPE);
     ADD_OBJECT_TO_SCENE(scene, level, GRID_TYPE);
     ADD_OBJECT_TO_SCENE(scene, camera, CAMERA_TYPE);
@@ -495,7 +506,8 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, 0, FONCTION_PARAMS(&frameData->deltaTime, level, entities));
     sceneRegisterFunction(scene, ENEMY_TYPE, UPDATE, updateEnemyWrapper, 0, FONCTION_PARAMS(&frameData->deltaTime, level, entities));
 
-    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, 0, FONCTION_PARAMS(frameData, renderer));
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, 1, FONCTION_PARAMS(renderer));
+
     sceneRegisterFunction(scene, MINIMAP_TYPE, UPDATE, updateMinimapWrapper, 0, FONCTION_PARAMS(camera, renderer));
     sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&joueur->entity.displayRect.x, &joueur->entity.displayRect.y));
 
@@ -511,7 +523,6 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     sceneRegisterFunction(scene, VIEWPORT_TYPE, RENDER_BUFFER, renderViewportWrapper, 1, FONCTION_PARAMS(renderer));
 
     sceneRegisterFunction(scene, MINIMAP_TYPE, RENDER_UI, renderMinimapWrapper, 1, FONCTION_PARAMS(renderer));
-    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, 1, FONCTION_PARAMS(renderer));
 
     return scene;
 }
@@ -531,6 +542,7 @@ int main(int argc, char* argv[]) {
     t_frameData* frameData = initFrameData(0);
     t_option* option = creeOption();
     t_sceneController* sceneController = initSceneController();
+    t_fpsDisplay* fpsDisplay = initFPSDisplay(renderer, font);
 
     t_control* contr = malloc(sizeof(t_control));
     contr->up = SDL_SCANCODE_UP;
@@ -540,13 +552,15 @@ int main(int argc, char* argv[]) {
 
     t_sceneWithName* scene = InitSceneWithName(createMainMenu(renderer, input, font, frameData, sceneController), "menuPrincipal");
     t_sceneWithName* scene0 = InitSceneWithName(createOptionMenu(renderer, input, font, frameData, window, option, contr, sceneController), "option");
-    t_sceneWithName* scene1 = InitSceneWithName(createMainWord(renderer, input, font, frameData), "main");
+    t_sceneWithName* scene1 = InitSceneWithName(createMainWord(renderer, input, font, frameData, contr), "main");
     t_sceneWithName* scene2 = InitSceneWithName(createCommandeMenu(renderer, input, font, window, option, contr, sceneController), "commande");
+    t_sceneWithName* scene3 = InitSceneWithName(createFpsMenu(renderer, input, font, frameData, fpsDisplay, window, option, sceneController), "fpsMenu");
 
     addScene(sceneController, scene);
     addScene(sceneController, scene0);
     addScene(sceneController, scene1);
     addScene(sceneController, scene2);
+    addScene(sceneController, scene3);
 
     setScene(sceneController, "menuPrincipal");
     while (!input->quit) {
@@ -555,8 +569,10 @@ int main(int argc, char* argv[]) {
         executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), HANDLE_INPUT);
         updateInput(input);
 
-        updateFPS(frameData);
         executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), UPDATE);
+
+        updateFPS(frameData);
+        updateFPSDisplay(fpsDisplay, frameData, renderer);
 
         if (input->resized) {
             printf("coucou");
@@ -566,8 +582,10 @@ int main(int argc, char* argv[]) {
         SDL_RenderClear(renderer);
         executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), SET_BUFFER);
         executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), RENDER_GAME);
+
         executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), RENDER_BUFFER);
         executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), RENDER_UI);
+        renderFPSDisplay(renderer, fpsDisplay);
 
         SDL_RenderPresent(renderer);
 
