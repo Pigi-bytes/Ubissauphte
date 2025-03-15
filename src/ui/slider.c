@@ -20,8 +20,8 @@ void renderBarreVolumme(SDL_Renderer* renderer, t_barreVolumme* barre) {
 
     SDL_RenderFillRect(renderer, &barre->curseur);
 
-    Debug_PushRect(&barre->barre, 3);
-    Debug_PushRect(&barre->curseur, 3);
+    Debug_PushRect(&barre->barre, 3, COLORDEFAULT);
+    Debug_PushRect(&barre->curseur, 3, COLORDEFAULT);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }

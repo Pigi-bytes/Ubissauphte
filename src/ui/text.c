@@ -176,7 +176,7 @@ void updateTextOutline(t_text** text, SDL_Renderer* renderer, char* newText, SDL
 
 void renderText(SDL_Renderer* renderer, t_text* text) {
     SDL_RenderCopy(renderer, text->texture, NULL, &text->rect);
-    Debug_PushRect(&text->rect, 3);
+    Debug_PushRect(&text->rect, 3, COLORDEFAULT);
 }
 
 void freeText(void* objet) {

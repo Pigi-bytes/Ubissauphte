@@ -27,7 +27,7 @@ void renderButton(SDL_Renderer* renderer, t_button* button) {
     SDL_RenderFillRect(renderer, &button->rect);
     renderText(renderer, button->label);
 
-    Debug_PushRect(&button->rect, 3);
+    Debug_PushRect(&button->rect, 3, COLORDEFAULT);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
