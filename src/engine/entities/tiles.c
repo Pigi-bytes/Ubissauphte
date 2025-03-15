@@ -121,8 +121,12 @@ t_grid* loadMap(char* filename, t_tileset* tileset) {
                 tile->entity.flip = (SDL_RendererFlip)orientation;
                 tile->entity.animationController = initAnimationController();
                 tile->entity.animationController->haveAnimation = SDL_FALSE;
-                tile->entity.debug = collisions;
+                // tile->entity.debug = collisions;
+                tile->entity.debug = SDL_FALSE;
+
                 tile->solide = collisions;
+                tile->entity.physics.mass = 0;
+                tile->entity.physics.restitution = 0.5;
             } else {
                 fprintf(stderr, "Erreur : impossible d'accéder à la tuile [%d][%d][%d]\n", coucheActuelle, y, x);
             }

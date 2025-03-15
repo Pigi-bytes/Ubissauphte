@@ -1,6 +1,7 @@
 #include "debug.h"
 
 #include <SDL2/SDL.h>
+#include <math.h>  // Pour sin() et cos()
 
 #if DEBUG_MODE
 
@@ -32,35 +33,50 @@ static DebugCommand command_stack[MAX_DEBUG_COMMANDS];
 static int command_stack_index = 0;
 static SDL_Renderer* renderer = NULL;
 
+static SDL_Color DEFAULT_COLOR_RECT = {41, 182, 246, 255};  // Rouge par défaut pour le rectangle
+static SDL_Color DEFAULT_COLOR_CIRCLE = {255, 0, 0, 255};   // Vert par défaut pour le cercle
+static SDL_Color DEFAULT_COLOR_LINE = {0, 0, 255, 255};     // Bleu par défaut pour la ligne
+
 void Debug_Init(SDL_Renderer* r) {
     renderer = r;
 }
-void Debug_PushRect(const SDL_Rect* rect, int border_width) {
+
+void Debug_PushRect(const SDL_Rect* rect, int border_width, SDL_Color color) {
     if (command_stack_index < MAX_DEBUG_COMMANDS) {
+        if (color.r == 0 && color.g == 0 && color.b == 0 && color.a == 0) {
+            color = DEFAULT_COLOR_RECT;  // Utilisation de la couleur par défaut si aucune couleur n'est donnée
+        }
         DebugCommand* cmd = &command_stack[command_stack_index++];
         *cmd = (DebugCommand){
             .type = DEBUG_RECT,
-            .color = RECTANGLE_COLOR,
+            .color = color,
             .rect = *rect,
             .border = border_width};
     }
 }
 
-// Pousser un cercle dans la pile des commandes
-void Debug_PushCircle(int x, int y, int radius) {
+// Pousser un cercle vide dans la pile des commandes avec la possibilité de spécifier une couleur
+void Debug_PushCircle(int x, int y, int radius, SDL_Color color) {
     if (command_stack_index < MAX_DEBUG_COMMANDS) {
+        if (color.r == 0 && color.g == 0 && color.b == 0 && color.a == 0) {
+            color = DEFAULT_COLOR_CIRCLE;  // Utilisation de la couleur par défaut si aucune couleur n'est donnée
+        }
         DebugCommand* cmd = &command_stack[command_stack_index++];
         *cmd = (DebugCommand){
             .type = DEBUG_CIRCLE,
-            .color = CIRCLE_COLOR,
+            .color = color,
             .x = x,
             .y = y,
             .radius = radius};
     }
 }
 
-void Debug_PushLine(int x1, int y1, int x2, int y2, SDL_Color color, int lineWidth) {
+// Pousser une ligne dans la pile des commandes avec la possibilité de spécifier une couleur
+void Debug_PushLine(int x1, int y1, int x2, int y2, int lineWidth, SDL_Color color) {
     if (command_stack_index < MAX_DEBUG_COMMANDS) {
+        if (color.r == 0 && color.g == 0 && color.b == 0 && color.a == 0) {
+            color = DEFAULT_COLOR_LINE;  // Utilisation de la couleur par défaut si aucune couleur n'est donnée
+        }
         DebugCommand* cmd = &command_stack[command_stack_index++];
         *cmd = (DebugCommand){
             .type = DEBUG_LINE,
@@ -70,6 +86,21 @@ void Debug_PushLine(int x1, int y1, int x2, int y2, SDL_Color color, int lineWid
             .x2 = x2,
             .y2 = y2,
             .lineWidth = lineWidth};
+    }
+}
+
+// Fonction pour dessiner un cercle vide en utilisant sin et cos
+void Debug_RenderCircle(int x, int y, int radius) {
+    const int numSegments = 360 * 2;                         // 360 points pour un cercle
+    const float angleIncrement = 2 * 3.14159 / numSegments;  // Incrément d'angle pour chaque segment
+
+    // Dessiner chaque segment du cercle
+    for (int i = 0; i < numSegments; i++) {
+        float angle = i * angleIncrement;    // Calculer l'angle pour ce point
+        int xPos = x + radius * cos(angle);  // Calculer la coordonnée x
+        int yPos = y + radius * sin(angle);  // Calculer la coordonnée y
+
+        SDL_RenderDrawPoint(renderer, xPos, yPos);  // Dessiner le point
     }
 }
 
@@ -114,15 +145,7 @@ void Debug_RenderAll(void) {
                 break;
 
             case DEBUG_CIRCLE:
-                for (int w = -current->radius; w <= current->radius; w++) {
-                    for (int h = -current->radius; h <= current->radius; h++) {
-                        if (w * w + h * h <= current->radius * current->radius) {
-                            SDL_RenderDrawPoint(renderer,
-                                                current->x + w,
-                                                current->y + h);
-                        }
-                    }
-                }
+                Debug_RenderCircle(current->x, current->y, current->radius);
                 break;
 
             case DEBUG_LINE:

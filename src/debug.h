@@ -8,8 +8,25 @@
 #define DEBUG_MODE 1
 #define DEBUG_MEMORY_MODE 0
 
-#define RECTANGLE_COLOR (SDL_Color){41, 182, 246, 255}
-#define CIRCLE_COLOR (SDL_Color){255, 0, 0, 255}
+#define COLORDEFAULT (SDL_Color){0, 0, 0, 0}
+
+#define SDL_COLOR_RED (SDL_Color){255, 0, 0, 255}        // Rouge
+#define SDL_COLOR_GREEN (SDL_Color){0, 255, 0, 255}      // Vert
+#define SDL_COLOR_BLUE (SDL_Color){0, 0, 255, 255}       // Bleu
+#define SDL_COLOR_YELLOW (SDL_Color){255, 255, 0, 255}   // Jaune
+#define SDL_COLOR_MAGENTA (SDL_Color){255, 0, 255, 255}  // Magenta
+#define SDL_COLOR_CYAN (SDL_Color){0, 255, 255, 255}     // Cyan
+#define SDL_COLOR_WHITE (SDL_Color){255, 255, 255, 255}  // Blanc
+#define SDL_COLOR_BLACK (SDL_Color){0, 0, 0, 255}        // Noir
+
+#define SDL_COLOR_GRAY (SDL_Color){169, 169, 169, 255}      // Gris
+#define SDL_COLOR_ORANGE (SDL_Color){255, 165, 0, 255}      // Orange
+#define SDL_COLOR_PURPLE (SDL_Color){128, 0, 128, 255}      // Violet
+#define SDL_COLOR_BROWN (SDL_Color){139, 69, 19, 255}       // Marron
+#define SDL_COLOR_LIME (SDL_Color){0, 255, 0, 255}          // Lime
+#define SDL_COLOR_TURQUOISE (SDL_Color){64, 224, 208, 255}  // Turquoise
+#define SDL_COLOR_PINK (SDL_Color){255, 105, 180, 255}      // Rose
+#define SDL_COLOR_INDIGO (SDL_Color){75, 0, 130, 255}       // Indigo
 
 #if DEBUG_MODE
 
@@ -18,9 +35,10 @@ typedef struct DebugCommand DebugCommand;
 void Debug_Init(SDL_Renderer *renderer);
 void Debug_RenderAll(void);
 void Debug_ClearStack(void);
-void Debug_PushRect(const SDL_Rect *rect, int border_width);
-void Debug_PushCircle(int x, int y, int radius);
-void Debug_PushLine(int x1, int y1, int x2, int y2, SDL_Color color, int lineWidth);
+void Debug_PushRect(const SDL_Rect *rect, int border_width, SDL_Color color);
+void Debug_PushCircle(int x, int y, int radius, SDL_Color color);
+void Debug_PushLine(int x1, int y1, int x2, int y2, int lineWidth, SDL_Color color);
+void Debug_RenderCircle(int x, int y, int radius);
 
 #define DEBUG_DRAW_RECTANGLE_WITH_WIDTH(rect, largeur) Debug_PushRect(&(rect), largeur)
 #define DEBUG_DRAW_CIRCLE(circle) Debug_PushCircle((circle).x, (circle).y, (circle).radius)

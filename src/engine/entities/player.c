@@ -19,7 +19,8 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
         .velocity = {0, 0},  // Vitesse initiale
         .acceleration = {0.0f, 0.0f},
         .mass = 10.0f,
-        .friction = 0.05f};
+        .friction = 0.05f,
+        .restitution = 0.02};
 
     joueur->entity.physics = playerPhysics;
 

@@ -3,6 +3,7 @@
 #include "engine/core/frame.h"
 #include "engine/entities/enemy.h"
 #include "engine/entities/player.h"
+#include "engine/entities/slime.h"
 #include "engine/entities/systems/physicsSystem.h"
 #include "engine/entities/tiles.h"
 #include "engine/world/generationSalle/geneRoom.h"
@@ -481,10 +482,8 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     placeOnRandomTile(level, &joueur->entity, entities);
 
     t_enemy* enemy;
-    for (int i = 0; i < 10; i++) {
-        enemy = createRandomEnemy((SDL_Texture*)getObject(tileset->textureTiles, 122), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, fantomTileSet, crabeTileSet);
-
-        // enemy = createEnemy((SDL_Texture*)getObject(tileset->textureTiles, 122), (SDL_Rect){100, 100, 16, 16}, slimeTileSet);
+    for (int i = 0; i < 5; i++) {
+        enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 122), (SDL_Rect){100, 100, 16, 16}, slimeTileSet);
         addObject(entities, &enemy->entity, ENTITY);
         placeOnRandomTile(level, &enemy->entity, entities);
         ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
@@ -536,6 +535,7 @@ int main(int argc, char* argv[]) {
     initTextEngine();
     SDL_Window* window = SDL_CreateWindow("animation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    Debug_Init(renderer);
 
     t_input* input = initInput(WINDOW_WIDTH, WINDOW_HEIGHT);
     TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
@@ -571,11 +571,10 @@ int main(int argc, char* argv[]) {
 
         executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), UPDATE);
 
-        updateFPS(frameData);
-        updateFPSDisplay(fpsDisplay, frameData, renderer);
+        // updateFPS(frameData);
+        // updateFPSDisplay(fpsDisplay, frameData, renderer);
 
         if (input->resized) {
-            printf("coucou");
             executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), HANDLE_RESIZE);
         }
 
@@ -583,9 +582,10 @@ int main(int argc, char* argv[]) {
         executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), SET_BUFFER);
         executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), RENDER_GAME);
 
+        Debug_RenderAll();
         executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), RENDER_BUFFER);
         executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), RENDER_UI);
-        renderFPSDisplay(renderer, fpsDisplay);
+        // renderFPSDisplay(renderer, fpsDisplay);
 
         SDL_RenderPresent(renderer);
 
