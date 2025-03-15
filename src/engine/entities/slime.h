@@ -4,6 +4,8 @@
 typedef struct {
     t_enemy base;
     t_circle detectionRange;
+    SDL_FPoint lastKnownPlayerPos;
+    SDL_bool hasLastKnownPos;
     float jumpCooldown;
     SDL_bool isJumping;
     float slimeJumpPower;

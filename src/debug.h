@@ -33,22 +33,20 @@
 typedef struct DebugCommand DebugCommand;
 
 void Debug_Init(SDL_Renderer *renderer);
-void Debug_RenderAll(void);
-void Debug_ClearStack(void);
+void Debug_RenderAll();
+void Debug_ClearStack();
 void Debug_PushRect(const SDL_Rect *rect, int border_width, SDL_Color color);
 void Debug_PushCircle(int x, int y, int radius, SDL_Color color);
 void Debug_PushLine(int x1, int y1, int x2, int y2, int lineWidth, SDL_Color color);
 void Debug_RenderCircle(int x, int y, int radius);
 
-#define DEBUG_DRAW_RECTANGLE_WITH_WIDTH(rect, largeur) Debug_PushRect(&(rect), largeur)
-#define DEBUG_DRAW_CIRCLE(circle) Debug_PushCircle((circle).x, (circle).y, (circle).radius)
-
 #else
-#define DEBUG_DRAW_RECTANGLE_WITH_WIDTH(rect, largeur)
-#define DEBUG_DRAW_CIRCLE(circle)
-#define Debug_Init(renderer)
+#define Debug_Init(a)
 #define Debug_RenderAll()
 #define Debug_ClearStack()
+#define Debug_PushRect(a, b, c)
+#define Debug_PushCircle(a, b, c, d)
+#define Debug_PushLine(a, b, c, d, e, f)
 #endif
 
 #if DEBUG_MODE
