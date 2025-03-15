@@ -176,7 +176,7 @@ void updateTextOutline(t_text** text, SDL_Renderer* renderer, char* newText, SDL
 
 void renderText(SDL_Renderer* renderer, t_text* text) {
     SDL_RenderCopy(renderer, text->texture, NULL, &text->rect);
-    DEBUG_DRAW_RECTANGLE_WITH_WIDTH(renderer, text->rect, 3);
+    Debug_PushRect(&text->rect, 3);
 }
 
 void freeText(void* objet) {

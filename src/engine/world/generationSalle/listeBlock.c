@@ -81,7 +81,6 @@ t_block* randomBlocByType(t_listeBlock* listBlock) {
 void rotationAleatoire(t_block* block) {
     if (block->rotationAutorise == SDL_TRUE) {
         block->rotation = (rand() % 2 == 0) ? "0" : "1";
-        printf("coucou");
     }
 }
 
