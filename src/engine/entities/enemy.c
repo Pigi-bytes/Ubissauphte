@@ -90,10 +90,6 @@ void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect) {
     base->entity.collisionCircle.x = rect.x + rect.w / 2;
     base->entity.collisionCircle.y = rect.y + rect.h / 2;
     base->entity.collisionCircle.radius = fminf(rect.w, rect.h) / 2;
-
-    base->wanderTimer = initTimer();
-
-    startTimer(base->wanderTimer);
 }
 
 void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {

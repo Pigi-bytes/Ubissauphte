@@ -9,8 +9,6 @@
 typedef struct t_enemy {
     t_entity entity;
     void (*update)(struct t_enemy*, float*, t_grid*, t_objectManager*);
-    t_timer* wanderTimer;
-    SDL_FPoint targetAcceleration;
 } t_enemy;
 
 void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect);
