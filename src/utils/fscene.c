@@ -62,7 +62,8 @@ void executeSceneFunctions(t_scene* scene, t_fonctionType ftype) {
     }
 }
 
-void freeScene(t_scene* scene) {
+void freeScene(void* object) {
+    t_scene* scene = (t_scene*)object;
     freeObjectManager(scene->objectManager);
     for (int i = 0; i < NUM_FONCTION; i++) {
         for (int j = 0; j < scene->nbFonctions[i]; j++) {
@@ -74,26 +75,11 @@ void freeScene(t_scene* scene) {
     free(scene);
 }
 
-t_sceneWithName* InitSceneWithName(t_scene* scene, char* nomScene) {
-    t_sceneWithName* sceneWithName = malloc(sizeof(sceneWithName));
-    sceneWithName->scene = scene;
-    sprintf(sceneWithName->nomScene, "%s", nomScene);
-    return sceneWithName;
-}
-
-void freeSceneWithName(t_sceneWithName* sceneWithName) {
-    freeScene(sceneWithName->scene);
-    free(sceneWithName);
-}
-void freeSceneWithNameWrapper(void* elt) {
-    freeSceneWithName((t_sceneWithName*)elt);
-}
-
 t_sceneController* initSceneController() {
     t_sceneController* controller = malloc(sizeof(t_sceneController));
 
     t_typeRegistry* registre = createTypeRegistry();
-    registerType(registre, freeSceneWithNameWrapper, "ALLSCENE_TYPE");
+    registerType(registre, freeScene, "ALLSCENE_TYPE");
 
     controller->scene = initObjectManager(registre);
     controller->currentScene = -1;
@@ -101,20 +87,21 @@ t_sceneController* initSceneController() {
     return controller;
 }
 
-void addScene(t_sceneController* controller, t_sceneWithName* sceneWithName) {
-    addObject(controller->scene, sceneWithName, getTypeIdByName(controller->scene->registry, "ALLSCENE_TYPE"));
+void addScene(t_sceneController* controller, t_scene* scene) {
+    addObject(controller->scene, scene, getTypeIdByName(controller->scene->registry, "ALLSCENE_TYPE"));
 }
 
 void setScene(t_sceneController* controller, char* name) {
     for (int i = 0; i < controller->scene->count; i++) {
-        t_sceneWithName* scene = (t_sceneWithName*)getObject(controller->scene, i);
-        if (strcmp(scene->nomScene, name) == 0) {
+        t_scene* scene = (t_scene*)getObject(controller->scene, i);
+        if (strcmp(scene->name, name) == 0) {
             controller->currentScene = i;
+            executeSceneFunctions(scene, HANDLE_RESIZE);
             return;
         }
     }
 }
 
-t_sceneController* getCurrentScene(t_sceneController* controller) {
-    return (t_sceneController*)getObject(controller->scene, controller->currentScene);
+t_scene* getCurrentScene(t_sceneController* controller) {
+    return (t_scene*)getObject(controller->scene, controller->currentScene);
 }
