@@ -45,60 +45,6 @@ typedef struct {
     SDL_bool FlagCommande;
 } t_option;
 
-typedef struct {
-    t_objectManager* scene;
-    int currentScene;
-} t_sceneController;
-
-typedef struct {
-    t_scene* scene;
-    char nomScene[10];
-} t_sceneWithName;
-
-t_sceneWithName* InitSceneWithName(t_scene* scene, char* nomScene) {
-    t_sceneWithName* sceneWithName = malloc(sizeof(sceneWithName));
-    sceneWithName->scene = scene;
-    sprintf(sceneWithName->nomScene, "%s", nomScene);
-    return sceneWithName;
-}
-
-void freeSceneWithName(t_sceneWithName* sceneWithName) {
-    freeScene(sceneWithName->scene);
-    free(sceneWithName);
-}
-void freeSceneWithNameWrapper(void* elt) {
-    freeSceneWithName((t_sceneWithName*)elt);
-}
-t_sceneController* initSceneController() {
-    t_sceneController* controller = malloc(sizeof(t_sceneController));
-
-    t_typeRegistry* registre = createTypeRegistry();
-    registerType(registre, freeSceneWithNameWrapper, "ALLSCENE_TYPE");
-
-    controller->scene = initObjectManager(registre);
-    controller->currentScene = -1;
-
-    return controller;
-}
-
-void addScene(t_sceneController* controller, t_sceneWithName* sceneWithName) {
-    addObject(controller->scene, sceneWithName, getTypeIdByName(controller->scene->registry, "ALLSCENE_TYPE"));
-}
-
-void setScene(t_sceneController* controller, char* name) {
-    for (int i = 0; i < controller->scene->count; i++) {
-        t_sceneWithName* scene = (t_sceneWithName*)getObject(controller->scene, i);
-        if (strcmp(scene->nomScene, name) == 0) {
-            controller->currentScene = i;
-            return;
-        }
-    }
-}
-
-t_sceneController* getCurrentScene(t_sceneController* controller) {
-    return (t_sceneController*)getObject(controller->scene, controller->currentScene);
-}
-
 void renderTouche(SDL_Renderer* renderer, t_touche* touche) {
     renderButton(renderer, touche->button);
 }
