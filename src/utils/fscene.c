@@ -96,6 +96,7 @@ void setScene(t_sceneController* controller, char* name) {
         t_scene* scene = (t_scene*)getObject(controller->scene, i);
         if (strcmp(scene->name, name) == 0) {
             controller->currentScene = i;
+            executeSceneFunctions(scene, HANDLE_RESIZE);
             return;
         }
     }
