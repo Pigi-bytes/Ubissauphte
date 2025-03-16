@@ -18,6 +18,7 @@ typedef enum {
     MUR_ANGLE_CONTINUE_GAUCHE,
     MUR_ANGLE_CONTINUE_DROIT,
     MUR_BORDURE_MUR_AVANT,
+    MUR_BORDURE_MUR_AVANT_PILONNE,
     MUR_BORDURE_MUR_ARRIERE,
     MUR_BORDURE_MUR_GAUCHE,
     MUR_BORDURE_MUR_DROIT,
@@ -26,10 +27,16 @@ typedef enum {
     SOL_FRACTURE,
     SOL_POINT,
     SOL_OMBRE_MUR,
+    SOL_OMBRE_MUR_GAUCHE,
     SOL_OMBRE_ARRONDI_DROIT,
     SOL_OMBRE_ARRONDI_GAUCHE,
     SOL_OMBRE_ANGLE_GAUCHE,
     SOL_OMBRE_ANGLE_DROIT,
+    SOL_BAS_PILONNE,
+    SOL_BAS_FONTAINE_EAUX_PROFOND,
+    SOL_BAS_FONTAINE_EAUX_GRILLE,
+    SOL_BAS_FONTAINE_SANS_EAUX_PROFOND,
+    SOL_BAS_FONTAINE_SANS_EAUX_GRILLE,
 
     FRONTALE_BRIQUE_SIMPLE,
     FRONTALE_BRIQUE_FENETRE,
@@ -38,6 +45,7 @@ typedef enum {
     FRONTALE_FONTAINE_PAS_EAUX,
     FRONTALE_ANGLE_GAUCHE,
     FRONTALE_ANGLE_DROIT,
+    FRONTALE_CORP_PILONNE,
 
     PLAFOND_SIMPLE,
     PLAFOND_FRACTURE,
@@ -48,12 +56,11 @@ typedef enum {
     DECO_PIERRE_TOMBALE,
     DECO_TABLE,
     DECO_ENCLUME,
+    DECO_TONNEAU,
 
     COMPDECO_BAS_BOITE,
     COMPDECO_CHAISE,
-    COMPDECO_TOMBE,
-    COMPDECO_BAS_FONTAINE_EAUX,
-    COMPDECO_BAS_FONTAINE_SANS_EAUX
+    COMPDECO_TOMBE
 } nom_block;
 
 typedef enum {
@@ -86,6 +93,7 @@ void ajouterBlock(t_listeBlock** listAllBlock, t_blocktype type, nom_block name,
 t_listeBlock* listeByType(t_listeBlock** listAllBlock, t_blocktype type);
 void rotationAleatoire(t_block* block);
 t_block* blockByName(t_listeBlock* listBlock, nom_block name);
+SDL_bool blockIs(t_block* block, nom_block nom);
 t_block* randomBlocByType(t_listeBlock* listBlock);
 t_listeBlock** createListAllBlock();
 void copierVal(t_block* src, t_block** det);

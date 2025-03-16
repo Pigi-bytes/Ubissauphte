@@ -13,6 +13,9 @@
 #include "listeBlock.h"
 #include "perlinNoise.h"
 
+#define OBSTACLE 1
+#define SOL 0
+
 t_block *getPlafond(t_listeBlock **listAllBlock);
 t_block *getSol(t_listeBlock **listAllBlock, t_case *c);
 t_block *getDeco(t_listeBlock **listAllBlock);
