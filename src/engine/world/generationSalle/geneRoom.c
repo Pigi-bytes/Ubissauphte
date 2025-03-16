@@ -109,38 +109,39 @@ void choixTiles(t_listeBlock **listAllBlock, t_grille *g) {
     for (int i = 0; i < g->nbLigne; i++) {
         for (int j = 0; j < g->nbColonne; j++) {
             if ((!g->grille[i][j]->val)) {
-                g->grille[i][j]->tiles = getSol(listAllBlock, g->grille[i][j]);
+                copierVal(getSol(listAllBlock, g->grille[i][j]), &(g->grille[i][j]->tiles));
                 rotationAleatoire(g->grille[i][j]->tiles);
             } else if (blocSeul(g->grille[i][j])) {
-                g->grille[i][j]->tiles = getDeco(listAllBlock);
+                copierVal(getDeco(listAllBlock), &(g->grille[i][j]->tiles));
             } else if (murAvant(g->grille[i][j])) {
-                g->grille[i][j]->tiles = getFrontale(listAllBlock, g->grille[i][j]);
+                copierVal(getFrontale(listAllBlock, g->grille[i][j]), &(g->grille[i][j]->tiles));
             } else if (angleDroit(g->grille[i][j])) {
-                g->grille[i][j]->tiles = blockByName(listBlock, MUR_ANGLE_DROIT);
+                copierVal(blockByName(listBlock, MUR_ANGLE_DROIT), &(g->grille[i][j]->tiles));
             } else if (angleGauche(g->grille[i][j])) {
-                g->grille[i][j]->tiles = blockByName(listBlock, MUR_ANGLE_GAUCHE);
+                copierVal(blockByName(listBlock, MUR_ANGLE_GAUCHE), &(g->grille[i][j]->tiles));
             } else if (arrondiInferieurDroit(g->grille[i][j])) {
-                g->grille[i][j]->tiles = blockByName(listBlock, MUR_ARRONDI_INF_DROIT);
+                copierVal(blockByName(listBlock, MUR_ARRONDI_INF_DROIT), &(g->grille[i][j]->tiles));
             } else if (arrondiInferieurGauche(g->grille[i][j])) {
-                g->grille[i][j]->tiles = blockByName(listBlock, MUR_ARRONDI_INF_GAUCHE);
+                copierVal(blockByName(listBlock, MUR_ARRONDI_INF_GAUCHE), &(g->grille[i][j]->tiles));
             } else if (arrondiSuperieurDroit(g->grille[i][j])) {
-                g->grille[i][j]->tiles = blockByName(listBlock, MUR_ARRONDI_SUP_DROIT);
+                copierVal(blockByName(listBlock, MUR_ARRONDI_SUP_DROIT), &(g->grille[i][j]->tiles));
             } else if (arrondiSuperieurGauche(g->grille[i][j])) {
-                g->grille[i][j]->tiles = blockByName(listBlock, MUR_ARRONDI_SUP_GAUCHE);
+                copierVal(blockByName(listBlock, MUR_ARRONDI_SUP_GAUCHE), &(g->grille[i][j]->tiles));
             } else if (murArriere(g->grille[i][j])) {
-                g->grille[i][j]->tiles = blockByName(listBlock, MUR_BORDURE_MUR_ARRIERE);
+                copierVal(blockByName(listBlock, MUR_BORDURE_MUR_ARRIERE), &(g->grille[i][j]->tiles));
             } else if (angleContinueGauche(g->grille[i][j])) {
-                g->grille[i][j]->tiles = blockByName(listBlock, MUR_ANGLE_CONTINUE_GAUCHE);
+                copierVal(blockByName(listBlock, MUR_ANGLE_CONTINUE_GAUCHE), &(g->grille[i][j]->tiles));
             } else if (angleContinueDroit(g->grille[i][j])) {
-                g->grille[i][j]->tiles = blockByName(listBlock, MUR_ANGLE_CONTINUE_DROIT);
+                copierVal(blockByName(listBlock, MUR_ANGLE_CONTINUE_DROIT), &(g->grille[i][j]->tiles));
             } else if (bordureMurAvant(g->grille[i][j])) {
-                g->grille[i][j]->tiles = blockByName(listBlock, MUR_BORDURE_MUR_AVANT);
+                copierVal(blockByName(listBlock, MUR_BORDURE_MUR_AVANT), &(g->grille[i][j]->tiles));
             } else if (bordureMurGauche(g->grille[i][j])) {
-                g->grille[i][j]->tiles = blockByName(listBlock, MUR_BORDURE_MUR_GAUCHE);
+                copierVal(blockByName(listBlock, MUR_BORDURE_MUR_GAUCHE), &(g->grille[i][j]->tiles));
             } else if (bordureMurDroit(g->grille[i][j])) {
-                g->grille[i][j]->tiles = blockByName(listBlock, MUR_BORDURE_MUR_DROIT);
+                copierVal(blockByName(listBlock, MUR_BORDURE_MUR_DROIT), &(g->grille[i][j]->tiles));
             } else {
-                g->grille[i][j]->tiles = getPlafond(listAllBlock);
+                copierVal(getPlafond(listAllBlock), &(g->grille[i][j]->tiles));
+
                 rotationAleatoire(g->grille[i][j]->tiles);
             }
         }
@@ -175,7 +176,7 @@ void saveMap(t_grille *g) {
     fprintf(fichier, "%dx%dx1\n", g->nbColonne, g->nbLigne);
     for (int i = 0; i < g->nbLigne; i++) {
         for (int j = 0; j < g->nbColonne; j++) {
-            fprintf(fichier, "%s:%s:%d ", g->grille[i][j]->tiles->tiles, g->grille[i][j]->tiles->rotation, g->grille[i][j]->tiles->collisions);
+            fprintf(fichier, "%d:%d:%d ", g->grille[i][j]->tiles->tiles, g->grille[i][j]->tiles->rotation, g->grille[i][j]->tiles->collisions);
         }
         fprintf(fichier, "\n");
     }

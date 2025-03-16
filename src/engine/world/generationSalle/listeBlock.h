@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define NBTYPE 6
 
@@ -65,8 +66,8 @@ typedef enum {
 } t_blocktype;
 
 typedef struct {
-    char* tiles;
-    char* rotation;
+    int tiles;
+    int rotation;
     SDL_bool collisions;
     t_blocktype type;
     double proba;
@@ -81,10 +82,11 @@ typedef struct {
 
 t_listeBlock** InitAllBlock();
 void freeListeBlock(t_listeBlock** listAllBlock);
-void ajouterBlock(t_listeBlock** listAllBlock, t_blocktype type, nom_block name, char* tailes, char* rotation, double proba, SDL_bool collisions, SDL_bool rotationAutorise);
+void ajouterBlock(t_listeBlock** listAllBlock, t_blocktype type, nom_block name, int tailes, int rotation, double proba, SDL_bool collisions, SDL_bool rotationAutorise);
 t_listeBlock* listeByType(t_listeBlock** listAllBlock, t_blocktype type);
 void rotationAleatoire(t_block* block);
 t_block* blockByName(t_listeBlock* listBlock, nom_block name);
 t_block* randomBlocByType(t_listeBlock* listBlock);
 t_listeBlock** createListAllBlock();
+void copierVal(t_block* src, t_block** det);
 #endif

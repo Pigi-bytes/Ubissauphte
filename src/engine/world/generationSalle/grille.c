@@ -54,6 +54,7 @@ void ajouterCase(t_grille* g, int i, int j, int val) {
 void freeGrille(t_grille* g) {
     for (int i = 0; i < g->nbLigne; i++) {
         for (int j = 0; j < g->nbColonne; j++) {
+            free(g->grille[i][j]->tiles);
             free(g->grille[i][j]);
         }
         free(g->grille[i]);
@@ -100,7 +101,7 @@ t_grille* intToGrilleNiveau(int** entier, int nbLigne, int nbColonne) {
 }
 
 int existe(const t_case* c) {
-    return ((c->i != -1) && (c->j !=-1) && (c->val != -1));
+    return ((c->i != -1) && (c->j != -1) && (c->val != -1));
 }
 
 int existeVoisin(t_case* c, ...) {
