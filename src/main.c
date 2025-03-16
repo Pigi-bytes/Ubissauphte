@@ -238,7 +238,7 @@ t_scene* createCommandeMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* fo
     const uint8_t COMMANDE_TYPE = registerType(registre, freeTouche, "commande");
     const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
 
-    t_scene* scene = createScene(initObjectManager(registre), "scene2");
+    t_scene* scene = createScene(initObjectManager(registre), "commande");
 
     int nb = 2;
 
@@ -294,7 +294,7 @@ t_scene* createFpsMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t
     const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
     const uint8_t FRAME_DISPLAY_TYPE = registerType(registre, freeFPSDisplay, "frameData");
 
-    t_scene* scene = createScene(initObjectManager(registre), "scene4");
+    t_scene* scene = createScene(initObjectManager(registre), "fpsMenu");
 
     int nb = 2;
 
@@ -337,7 +337,7 @@ t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font
     const uint8_t VOLUME_TYPE = registerType(registre, freeBv, "volumme");
     const uint8_t COMMANDE_TYPE = registerType(registre, freeTouche, "commande");
 
-    t_scene* scene = createScene(initObjectManager(registre), "scene2");
+    t_scene* scene = createScene(initObjectManager(registre), "option");
 
     int nb = 2;
 
@@ -377,7 +377,7 @@ t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
     const uint8_t FRAME_DISPLAY_TYPE = registerType(registre, freeFPSDisplay, "frameData");
 
-    t_scene* scene = createScene(initObjectManager(registre), "scene1");
+    t_scene* scene = createScene(initObjectManager(registre), "menuPrincipal");
 
     t_text* text = createText(renderer, "Ubissauphte1", font, WHITE);
     text->rect = creerRect((1 - 0.8f) / 2, 0.1f, 0.8f, 0.2f);
@@ -405,7 +405,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     const uint8_t VIEWPORT_TYPE = registerType(registre, freeViewport, "viewport");
     const uint8_t MINIMAP_TYPE = registerType(registre, freeMinimap, "minimap");
     const uint8_t ENEMY_TYPE = registerType(registre, freeEnemy, "enemy");
-    t_scene* scene = createScene(initObjectManager(registre), "scene1");
+    t_scene* scene = createScene(initObjectManager(registre), "main");
 
     t_tileset* tileset = initTileset(renderer, 192, 176, 16, "assets/imgs/tileMapDungeon.bmp");
     t_tileset* playerTileSet = initTileset(renderer, 32, 32, 16, "assets/imgs/chevaliervisiereouverteidle12run34.bmp");
@@ -496,11 +496,11 @@ int main(int argc, char* argv[]) {
     contr->left = SDL_SCANCODE_LEFT;
     contr->right = SDL_SCANCODE_RIGHT;
 
-    t_sceneWithName* scene = InitSceneWithName(createMainMenu(renderer, input, font, frameData, sceneController), "menuPrincipal");
-    t_sceneWithName* scene0 = InitSceneWithName(createOptionMenu(renderer, input, font, frameData, window, option, contr, sceneController), "option");
-    t_sceneWithName* scene1 = InitSceneWithName(createMainWord(renderer, input, font, frameData, contr), "main");
-    t_sceneWithName* scene2 = InitSceneWithName(createCommandeMenu(renderer, input, font, window, option, contr, sceneController), "commande");
-    t_sceneWithName* scene3 = InitSceneWithName(createFpsMenu(renderer, input, font, frameData, fpsDisplay, window, option, sceneController), "fpsMenu");
+    t_scene* scene = createMainMenu(renderer, input, font, frameData, sceneController);
+    t_scene* scene0 = createOptionMenu(renderer, input, font, frameData, window, option, contr, sceneController);
+    t_scene* scene1 = createMainWord(renderer, input, font, frameData, contr);
+    t_scene* scene2 = createCommandeMenu(renderer, input, font, window, option, contr, sceneController);
+    t_scene* scene3 = createFpsMenu(renderer, input, font, frameData, fpsDisplay, window, option, sceneController);
 
     addScene(sceneController, scene);
     addScene(sceneController, scene0);
@@ -511,26 +511,27 @@ int main(int argc, char* argv[]) {
     setScene(sceneController, "menuPrincipal");
     while (!input->quit) {
         startFrame(frameData);
+        t_scene* currentScene = getCurrentScene(sceneController);
 
-        executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), HANDLE_INPUT);
+        executeSceneFunctions(currentScene, HANDLE_INPUT);
         updateInput(input);
 
-        executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), UPDATE);
+        executeSceneFunctions(currentScene, UPDATE);
 
         // updateFPS(frameData);
         // updateFPSDisplay(fpsDisplay, frameData, renderer);
 
         if (input->resized) {
-            executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), HANDLE_RESIZE);
+            executeSceneFunctions(currentScene, HANDLE_RESIZE);
         }
 
         SDL_RenderClear(renderer);
-        executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), SET_BUFFER);
-        executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), RENDER_GAME);
+        executeSceneFunctions(currentScene, SET_BUFFER);
+        executeSceneFunctions(currentScene, RENDER_GAME);
 
         Debug_RenderAll();
-        executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), RENDER_BUFFER);
-        executeSceneFunctions(((t_scene*)getCurrentScene(sceneController)->scene), RENDER_UI);
+        executeSceneFunctions(currentScene, RENDER_BUFFER);
+        executeSceneFunctions(currentScene, RENDER_UI);
         // renderFPSDisplay(renderer, fpsDisplay);
 
         SDL_RenderPresent(renderer);
