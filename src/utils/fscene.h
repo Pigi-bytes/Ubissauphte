@@ -50,4 +50,8 @@ void addScene(t_sceneController* controller, t_sceneWithName* sceneWithName);
 void setScene(t_sceneController* controller, char* name);
 t_sceneController* getCurrentScene(t_sceneController* controller);
 
+t_sceneWithName* InitSceneWithName(t_scene* scene, char* nomScene);
+void freeSceneWithName(t_sceneWithName* sceneWithName);
+void freeSceneWithNameWrapper(void* elt)
+
 #endif
