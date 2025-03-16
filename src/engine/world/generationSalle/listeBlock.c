@@ -121,6 +121,8 @@ createListAllBlock() {
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_BAS_FONTAINE_EAUX_GRILLE, 45, 0, 0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_BAS_FONTAINE_SANS_EAUX_PROFOND, 32, 0, 0, SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_BAS_FONTAINE_SANS_EAUX_GRILLE, 44, 0, 0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_BAS_BOITE, 76, 0, 0, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_TOMBE, 67, 0, 0, SDL_FALSE, SDL_FALSE);
 
     ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_BRIQUE_SIMPLE, 41, 0, (0.3), SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_BRIQUE_FENETRE, 29, 0, (0.3), SDL_TRUE, SDL_FALSE);
@@ -142,9 +144,10 @@ createListAllBlock() {
     ajouterBlock(listAllBlock, DECO_TYPE, DECO_ENCLUME, 75, 0, (((double)1) / ((double)6)), SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, DECO_TYPE, DECO_TONNEAU, 83, 0, (((double)1) / ((double)6)), SDL_TRUE, SDL_FALSE);
 
-    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_BAS_BOITE, 76, 0, 1, SDL_TRUE, SDL_FALSE);
-    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_CHAISE, 65, 0, 1, SDL_TRUE, SDL_FALSE);
-    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_TOMBE, 66, 0, 1, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_DEBUT_ESCALIER, 37, 0, 0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_MILLIEU_ESCALIER, 38, 0, 0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_FIN_ESCALIER, 39, 0, 0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_FIN_ESCALIER, 40, 0, 0, SDL_FALSE, SDL_FALSE);
 
     return listAllBlock;
 }

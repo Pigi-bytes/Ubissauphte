@@ -15,6 +15,7 @@
 
 #define OBSTACLE 1
 #define SOL 0
+#define ELTAJOUTE 2
 
 t_block *getPlafond(t_listeBlock **listAllBlock);
 t_block *getSol(t_listeBlock **listAllBlock, t_case *c);
