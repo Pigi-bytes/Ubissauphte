@@ -137,8 +137,10 @@ SDL_bool gridRaycast(t_grid* grid, SDL_FPoint start, SDL_FPoint end, int tileSiz
     while (1) {
         for (int z = 0; z < grid->depth; z++) {
             if (grid->tiles[z][y0][x0].solide) {
-                (*obstructionPoint).x = x0 * tileSize + tileSize / 2;
-                (*obstructionPoint).y = y0 * tileSize + tileSize / 2;
+                if (obstructionPoint != NULL) {
+                    (*obstructionPoint).x = x0 * tileSize + tileSize / 2;
+                    (*obstructionPoint).y = y0 * tileSize + tileSize / 2;
+                }
                 return SDL_FALSE;
             }
         }

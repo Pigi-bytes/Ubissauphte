@@ -50,9 +50,11 @@ SDL_bool checkCircleCircleCollision(t_circle* a, t_circle* b, t_collisionData* o
 
     if (distanceSquared < radiiSquared) {
         float distance = sqrtf(distanceSquared);  // On ne calcule sqrtf que si nécessaire
-        out->depth = radii - distance;
-        out->normal.x = dx / distance;
-        out->normal.y = dy / distance;
+        if (out != NULL) {
+            out->depth = radii - distance;
+            out->normal.x = dx / distance;
+            out->normal.y = dy / distance;
+        }
         return SDL_TRUE;
     }
     return SDL_FALSE;
