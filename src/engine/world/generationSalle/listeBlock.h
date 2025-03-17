@@ -27,7 +27,11 @@ typedef enum {
     SOL_FRACTURE,
     SOL_POINT,
     SOL_OMBRE_MUR,
+    SOL_OMBRE_MUR2,
     SOL_OMBRE_MUR_GAUCHE,
+    SOL_OMBRE_MUR_GAUCHE2,
+    SOL_OMBRE_MUR_DROIT,
+    SOL_OMBRE_MUR_DROIT2,
     SOL_OMBRE_ARRONDI_DROIT,
     SOL_OMBRE_ARRONDI_GAUCHE,
     SOL_OMBRE_ANGLE_GAUCHE,
@@ -97,6 +101,7 @@ t_listeBlock* listeByType(t_listeBlock** listAllBlock, t_blocktype type);
 void rotationAleatoire(t_block* block);
 t_block* blockByName(t_listeBlock* listBlock, nom_block name);
 SDL_bool blockIs(t_block* block, nom_block nom);
+SDL_bool blockIsOmbre(t_block* block);
 t_block* randomBlocByType(t_listeBlock* listBlock);
 t_listeBlock** createListAllBlock();
 void copierVal(t_block* src, t_block** det);

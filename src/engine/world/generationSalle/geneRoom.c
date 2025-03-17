@@ -34,13 +34,18 @@ t_block *getSol(t_listeBlock **listAllBlock, t_case *c) {
         return blockByName(listBlock, SOL_OMBRE_ARRONDI_GAUCHE);
     if (c->tabVoisin[VOISIN_HAUT]->val == OBSTACLE && (c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]->val == OBSTACLE || (c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT]->val == OBSTACLE))) {
         if (rand() % 2)
-            return blockByName(listBlock, SOL_OMBRE_MUR_GAUCHE);
+            return blockByName(listBlock, SOL_OMBRE_MUR2);
         return blockByName(listBlock, SOL_OMBRE_MUR);
     }
-    if ((c->tabVoisin[VOISIN_HAUT2]->val == OBSTACLE) && (c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]->val == OBSTACLE) && (c->tabVoisin[VOISIN_DROIT]->val == OBSTACLE))
-        return blockByName(listBlock, SOL_OMBRE_ANGLE_DROIT);
-    if ((c->tabVoisin[VOISIN_HAUT2]->val == OBSTACLE) && (c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT]->val == OBSTACLE) && (c->tabVoisin[VOISIN_GAUCHE]->val == OBSTACLE))
+    if (c->tabVoisin[VOISIN_GAUCHE]->val == OBSTACLE) {
+        if (rand() % 2)
+            return blockByName(listBlock, SOL_OMBRE_MUR_GAUCHE2);
+        return blockByName(listBlock, SOL_OMBRE_MUR_GAUCHE);
+    }
+    if (c->tabVoisin[VOISIN_HAUT]->tiles != NULL && blockIsOmbre(c->tabVoisin[VOISIN_HAUT]->tiles) && c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT]->val == OBSTACLE && c->tabVoisin[VOISIN_GAUCHE]->val == SOL)
         return blockByName(listBlock, SOL_OMBRE_ANGLE_GAUCHE);
+    if (c->tabVoisin[VOISIN_HAUT]->tiles != NULL && blockIsOmbre(c->tabVoisin[VOISIN_HAUT]->tiles) && c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]->val == OBSTACLE && c->tabVoisin[VOISIN_DROIT]->val == SOL)
+        return blockByName(listBlock, SOL_OMBRE_ANGLE_DROIT);
 
     return randomBlocByType(listBlock);
 }

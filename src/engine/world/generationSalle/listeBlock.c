@@ -89,8 +89,11 @@ SDL_bool blockIs(t_block* block, nom_block nom) {
     return block->name == nom;
 }
 
-t_listeBlock**
-createListAllBlock() {
+SDL_bool blockIsOmbre(t_block* block) {
+    return blockIs(block, SOL_OMBRE_MUR) || blockIs(block, SOL_OMBRE_MUR2) || blockIs(block, SOL_OMBRE_MUR_DROIT2) || blockIs(block, SOL_OMBRE_MUR_DROIT) || blockIs(block, SOL_OMBRE_MUR_GAUCHE) || blockIs(block, SOL_OMBRE_MUR_GAUCHE2) || blockIs(block, SOL_OMBRE_ANGLE_DROIT) || blockIs(block, SOL_OMBRE_ANGLE_GAUCHE) || blockIs(block, SOL_OMBRE_ARRONDI_DROIT) || blockIs(block, SOL_OMBRE_ARRONDI_GAUCHE);
+}
+
+t_listeBlock** createListAllBlock() {
     t_listeBlock** listAllBlock = InitAllBlock();
 
     ajouterBlock(listAllBlock, MUR_TYPE, MUR_ANGLE_DROIT, 6, 0, 1, SDL_TRUE, SDL_FALSE);
@@ -107,11 +110,15 @@ createListAllBlock() {
     ajouterBlock(listAllBlock, MUR_TYPE, MUR_BORDURE_MUR_GAUCHE, 14, 0, 1, SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, MUR_TYPE, MUR_BORDURE_MUR_DROIT, 16, 0, 1, SDL_TRUE, SDL_FALSE);
 
-    ajouterBlock(listAllBlock, SOL_TYPE, SOL_SIMPLE, 49, 0, (0.33), SDL_FALSE, SDL_TRUE);
-    ajouterBlock(listAllBlock, SOL_TYPE, SOL_FRACTURE, 43, 0, (0.33), SDL_FALSE, SDL_TRUE);
-    ajouterBlock(listAllBlock, SOL_TYPE, SOL_POINT, 50, 0, 0.33, SDL_FALSE, SDL_TRUE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_SIMPLE, 49, 0, 0.4, SDL_FALSE, SDL_TRUE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_FRACTURE, 43, 0, 0.2, SDL_FALSE, SDL_TRUE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_POINT, 50, 0, 0.4, SDL_FALSE, SDL_TRUE);
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_MUR, 52, 0, 0.0, SDL_FALSE, SDL_FALSE);
-    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_MUR_GAUCHE, 51, 0, 0.0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_MUR2, 51, 0, 0.0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_MUR_GAUCHE, 133, 0, 0.0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_MUR_GAUCHE2, 134, 0, 0.0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_MUR_DROIT, 133, 1, 0.0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_MUR_DROIT2, 134, 1, 0.0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_ARRONDI_DROIT, 53, 0, 0.0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_ARRONDI_GAUCHE, 53, 1, 0.0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_ANGLE_GAUCHE, 54, 0, 0.0, SDL_FALSE, SDL_FALSE);
@@ -133,9 +140,9 @@ createListAllBlock() {
     ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_ANGLE_GAUCHE, 60, 0, (0.0), SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_CORP_PILONNE, 19, 0, (0.0), SDL_TRUE, SDL_FALSE);
 
-    ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_SIMPLE, 1, 0, (((double)2) / ((double)4)), SDL_TRUE, SDL_TRUE);
-    ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_FRACTURE, 13, 0, (((double)2) / ((double)4)), SDL_TRUE, SDL_TRUE);
-    ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_POINT, 25, 0, (((double)2) / ((double)4)), SDL_TRUE, SDL_TRUE);
+    ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_SIMPLE, 1, 0, (((double)1) / ((double)3)), SDL_TRUE, SDL_TRUE);
+    ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_FRACTURE, 13, 0, (((double)1) / ((double)3)), SDL_TRUE, SDL_TRUE);
+    ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_POINT, 25, 0, (((double)1) / ((double)3)), SDL_TRUE, SDL_TRUE);
 
     ajouterBlock(listAllBlock, DECO_TYPE, DECO_HAUT_BOITE, 64, 0, (((double)1) / ((double)6)), SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, DECO_TYPE, DECO_CROIX_TOMBE, 65, 0, (((double)1) / ((double)6)), SDL_TRUE, SDL_FALSE);
