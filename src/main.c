@@ -6,10 +6,13 @@ int main() {
 
     t_input* input = initInput(window_width, window_height);
 
+    t_character* c = createCharactere();
+
     while (!input->quit) {
         updateInput(input);
 
-        afficherInventaire(renderer, input);
+        afficherInventaire(renderer, input, c);
+
         SDL_RenderPresent(renderer);
     }
 
