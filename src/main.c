@@ -407,7 +407,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     const uint8_t ENEMY_TYPE = registerType(registre, freeEnemy, "enemy");
     t_scene* scene = createScene(initObjectManager(registre), "main");
 
-    t_tileset* tileset = initTileset(renderer, 192, 176, 16, "assets/imgs/tileMapDungeon.bmp");
+    t_tileset* tileset = initTileset(renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
     t_tileset* playerTileSet = initTileset(renderer, 32, 32, 16, "assets/imgs/chevaliervisiereouverteidle12run34.bmp");
     t_tileset* fantomTileSet = initTileset(renderer, 48, 16, 16, "assets/imgs/fantomeidle23un1232.bmp");
     t_tileset* slimeTileSet = initTileset(renderer, 48, 16, 16, "assets/imgs/slimeidle12run1213.bmp");
