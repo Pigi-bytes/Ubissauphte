@@ -28,8 +28,7 @@ t_block *getSol(t_listeBlock **listAllBlock, t_case *c) {
             return blockByName(listBlock, SOL_BAS_FONTAINE_EAUX_GRILLE);
         return blockByName(listBlock, SOL_BAS_FONTAINE_EAUX_PROFOND);
     }
-    if ((c->tabVoisin[VOISIN_HAUT]->val == OBSTACLE) && (c->tabVoisin[VOISIN_DROIT]->val == OBSTACLE))
-        return blockByName(listBlock, SOL_OMBRE_ARRONDI_DROIT);
+
     if ((c->tabVoisin[VOISIN_HAUT]->val == OBSTACLE) && (c->tabVoisin[VOISIN_GAUCHE]->val == OBSTACLE))
         return blockByName(listBlock, SOL_OMBRE_ARRONDI_GAUCHE);
     if (c->tabVoisin[VOISIN_HAUT]->val == OBSTACLE && (c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]->val == OBSTACLE || (c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT]->val == OBSTACLE))) {
