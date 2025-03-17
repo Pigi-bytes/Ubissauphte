@@ -105,3 +105,13 @@ SDL_bool isRectOnCamera(SDL_Rect* rect, t_camera* camera) {
              (rect->y + rect->h <= camera->y) ||    // Trop en haut
              (rect->y >= camera->y + camera->h));   // Trop en bas
 }
+
+void convertMouseToWorld(t_viewPort* vp, int mouseX, int mouseY, float* worldX, float* worldY) {
+    // Conversion viewport => espace normalisé [0-1]
+    float nx = (mouseX - vp->screenRect.x) / (float)vp->screenRect.w;
+    float ny = (mouseY - vp->screenRect.y) / (float)vp->screenRect.h;
+
+    // Application du zoom et du decalage de la caméra
+    *worldX = vp->camera->x + (nx * vp->camera->w);
+    *worldY = vp->camera->y + (ny * vp->camera->h);
+}

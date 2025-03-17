@@ -140,4 +140,6 @@ void freeCamera(void* object);
  */
 SDL_bool isRectOnCamera(SDL_Rect* rect, t_camera* camera);
 
+void convertMouseToWorld(t_viewPort* vp, int mouseX, int mouseY, float* worldX, float* worldY);
+
 #endif

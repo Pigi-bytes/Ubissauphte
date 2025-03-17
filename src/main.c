@@ -110,7 +110,7 @@ GENERATE_WRAPPER_3(updateMinimap, t_minimap*, t_camera*, SDL_Renderer*)
 GENERATE_WRAPPER_2(cameraHandleZoom, t_viewPort*, int*)
 
 GENERATE_WRAPPER_2(handleInputButton, t_input*, t_button*)
-GENERATE_WRAPPER_4(handleInputPlayer, t_input*, t_joueur*, t_grid*, float*)
+GENERATE_WRAPPER_4(handleInputPlayer, t_input*, t_joueur*, t_grid*, t_viewPort*)
 
 GENERATE_WRAPPER_2(setRenderTarget, SDL_Renderer*, t_viewPort*)
 GENERATE_WRAPPER_3(centerCameraOn, t_camera*, int*, int*)
@@ -445,7 +445,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     ADD_OBJECT_TO_SCENE(scene, viewport, VIEWPORT_TYPE);
     ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
 
-    sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level, &frameData->deltaTime));
+    sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level, viewport));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&input->mouseYWheel));
 
     sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, 0, FONCTION_PARAMS(&frameData->deltaTime, level, entities));
@@ -485,7 +485,7 @@ int main(int argc, char* argv[]) {
 
     t_input* input = initInput(WINDOW_WIDTH, WINDOW_HEIGHT);
     TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
-    t_frameData* frameData = initFrameData(0);
+    t_frameData* frameData = initFrameData(60);
     t_option* option = creeOption();
     t_sceneController* sceneController = initSceneController();
     t_fpsDisplay* fpsDisplay = initFPSDisplay(renderer, font);

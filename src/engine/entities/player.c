@@ -24,6 +24,11 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
 
     joueur->entity.physics = playerPhysics;
 
+    joueur->isAttacking = SDL_FALSE;
+    joueur->attackDuration = 0.2f;  // 200ms
+    joueur->attackTimer = 0.0f;
+    joueur->attackHitbox.radius = 8.0f;  // Taille de la hitbox
+
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, true, "idle"));
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){3, 4}, 2, 240, true, "walk"));
     setAnimation(joueur->entity.animationController, "idle");
@@ -33,17 +38,32 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
 
 void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
     renderEntity(renderer, &player->entity, camera);
+
+    if (player->entity.debug && player->isAttacking) {
+        Debug_PushCircle(player->attackHitbox.x, player->attackHitbox.y, player->attackHitbox.radius, SDL_COLOR_PINK);
+        Debug_PushLine(player->entity.collisionCircle.x, player->entity.collisionCircle.y, player->entity.collisionCircle.x + cosf(player->attackAngle) * 40, player->entity.collisionCircle.y - sinf(player->attackAngle) * 40, 3, SDL_COLOR_TURQUOISE);
+    }
 }
 
 void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectManager* entities) {
+    if (player->isAttacking) {
+        player->attackTimer += *deltaTime;
+
+        float weaponLength = 10.0f;
+        player->attackHitbox.x = player->entity.collisionCircle.x + cosf(player->attackAngle) * weaponLength;
+        player->attackHitbox.y = player->entity.collisionCircle.y - sinf(player->attackAngle) * weaponLength;
+
+        if (player->attackTimer >= player->attackDuration) {
+            player->isAttacking = SDL_FALSE;
+        }
+    }
     updatePhysicEntity(&player->entity, deltaTime, grid, entities);
 }
 
-void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float* deltaTime) {
+void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp) {
     float force = 10.0f;
     float force_dash = force * 3.5;
 
-    // Reset de l'accelaration a chaque frame
     player->entity.physics.acceleration.x = 0.0f;
     player->entity.physics.acceleration.y = 0.0f;
 
@@ -66,13 +86,30 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, float* de
         if (input->key[player->control->down]) player->entity.physics.acceleration.y += force_dash;
     }
 
+    if (input->mouseButtons[SDL_BUTTON_LEFT]) {
+        printf("Attack \n");
+        float mouseWorldX, mouseWorldY;
+        convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
+
+        // Position du joueur dans le monde (pas écran !)
+        float playerX = player->entity.collisionCircle.x;
+        float playerY = player->entity.collisionCircle.y;
+
+        // Vecteur relatif
+        float relX = mouseWorldX - playerX;
+        float relY = mouseWorldY - playerY;
+
+        // Angle (inversion Y si nécessaire)
+        player->attackAngle = atan2f(-relY, relX);
+        player->isAttacking = SDL_TRUE;
+        player->attackTimer = 0.0f;
+    }
+
     if (player->entity.physics.acceleration.x != 0.0f || player->entity.physics.acceleration.y != 0.0f) {
         setAnimation(player->entity.animationController, "walk");
     } else {
         setAnimation(player->entity.animationController, "idle");
     }
-
-    // INPUT_LOG("Accélération finale: (%.1f,%.1f)", player->entity.physics.acceleration.x, player->entity.physics.acceleration.y);
 }
 
 void freePlayer(void* object) {
