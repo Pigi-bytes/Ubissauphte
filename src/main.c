@@ -7,11 +7,20 @@ int main() {
     t_input* input = initInput(window_width, window_height);
 
     t_character* c = createCharactere();
+    t_item* item = malloc(sizeof(t_item));
 
+    strcpy(item->name, "Marteau de thor");
+    item->stats.attack.additive = 10;
+    item->stats.defense.additive = 5;
+    item->stats.health.additive = 50;
+    item->stats.healthMax.additive = 500;
+    item->stats.mana.additive = 15;
+    item->stats.manaMax.additive = 20;
+    item->stats.speed.additive = 60;
     while (!input->quit) {
         updateInput(input);
 
-        afficherInventaire(renderer, input, c);
+        afficherInventaire(renderer, input, c, item);
 
         SDL_RenderPresent(renderer);
     }

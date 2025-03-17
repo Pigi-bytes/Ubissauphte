@@ -72,45 +72,45 @@ void calculEquiper(SDL_Rect* statsItem, SDL_Rect* descrItem, SDL_Rect* Equiper, 
     Equiper->y = descrItem->y + descrItem->h + input->windowHeight * 0.03;
 }
 
-void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c) {
+t_text* createStatText(SDL_Renderer* renderer, char* statName, float statValue, TTF_Font* font, SDL_Color color) {
+    char name[50];
+    char value[50];
+
+    // Prépare le nom et la valeur
+    strcpy(name, statName);
+    sprintf(value, "%.2f", statValue);
+    strcat(name, value);
+
+    // Crée et retourne le texte
+    return createText(renderer, name, font, color);
+}
+void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, t_item* item) {
     initTextEngine();
     TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
+    TTF_Font* font1 = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 18);
+
     SDL_Color color = {
         .a = 255,
         .b = 255,
         .g = 0,
         .r = 255};
 
-    char name[50] = "Health : ";
-    char value[50];
+    t_text* txt1 = createStatText(renderer, "Health : ", c->baseStats.health.additive, font, color);
+    t_text* txt2 = createStatText(renderer, "Health Max : ", c->baseStats.healthMax.additive, font, color);
+    t_text* txt3 = createStatText(renderer, "Mana : ", c->baseStats.mana.additive, font, color);
+    t_text* txt4 = createStatText(renderer, "Mana Max : ", c->baseStats.manaMax.additive, font, color);
+    t_text* txt5 = createStatText(renderer, "Attack : ", c->baseStats.attack.additive, font, color);
+    t_text* txt6 = createStatText(renderer, "Defense : ", c->baseStats.defense.additive, font, color);
+    t_text* txt7 = createStatText(renderer, "Speed : ", c->baseStats.speed.additive, font, color);
 
-    sprintf(value, "%.2f", c->baseStats.health.additive);
-    strcat(name, value);
-    t_text* txt1 = createText(renderer, name, font, color);
-    strcpy(name, "Health Max : ");
-    sprintf(value, "%.2f", c->baseStats.healthMax.additive);
-    strcat(name, value);
-    t_text* txt2 = createText(renderer, name, font, color);
-    strcpy(name, "Mana : ");
-    sprintf(value, "%.2f", c->baseStats.mana.additive);
-    strcat(name, value);
-    t_text* txt3 = createText(renderer, name, font, color);
-    strcpy(name, "Mana Max : ");
-    sprintf(value, "%.2f", c->baseStats.manaMax.additive);
-    strcat(name, value);
-    t_text* txt4 = createText(renderer, name, font, color);
-    strcpy(name, "Attack : ");
-    sprintf(value, "%.2f", c->baseStats.attack.additive);
-    strcat(name, value);
-    t_text* txt5 = createText(renderer, name, font, color);
-    strcpy(name, "Defense : ");
-    sprintf(value, "%.2f", c->baseStats.defense.additive);
-    strcat(name, value);
-    t_text* txt6 = createText(renderer, name, font, color);
-    strcpy(name, "Speed : ");
-    sprintf(value, "%.2f", c->baseStats.speed.additive);
-    strcat(name, value);
-    t_text* txt7 = createText(renderer, name, font, color);
+    t_text* name = createText(renderer, item->name, font1, color);
+    t_text* txt8 = createStatText(renderer, "Health : ", item->stats.health.additive, font1, color);
+    t_text* txt9 = createStatText(renderer, "Health Max : ", item->stats.healthMax.additive, font1, color);
+    t_text* txt10 = createStatText(renderer, "Mana : ", item->stats.mana.additive, font1, color);
+    t_text* txt11 = createStatText(renderer, "Mana Max : ", item->stats.manaMax.additive, font1, color);
+    t_text* txt12 = createStatText(renderer, "Attack : ", item->stats.attack.additive, font1, color);
+    t_text* txt13 = createStatText(renderer, "Defense : ", item->stats.defense.additive, font1, color);
+    t_text* txt14 = createStatText(renderer, "Speed : ", item->stats.speed.additive, font1, color);
 
     SDL_Rect casePerso;
     SDL_Rect caseArme;
@@ -182,6 +182,38 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c) 
 
     SDL_RenderDrawRect(renderer, &inv);
     SDL_RenderDrawRect(renderer, &statsItem);
+
+    name->rect.x = statsItem.x + statsItem.x * 0.025;
+    name->rect.y = statsItem.y + input->windowHeight * 0.005;
+    renderText(renderer, name);
+    txt8->rect.x = statsItem.x + input->windowWidth * 0.005;
+    txt8->rect.y = name->rect.y + input->windowHeight * 0.04;
+    renderText(renderer, txt8);
+
+    txt9->rect.x = txt8->rect.x;
+    txt9->rect.y = txt8->rect.y + input->windowWidth * 0.03;
+    renderText(renderer, txt9);
+
+    txt10->rect.x = txt9->rect.x;
+    txt10->rect.y = txt9->rect.y + input->windowWidth * 0.03;
+    renderText(renderer, txt10);
+
+    txt11->rect.x = txt10->rect.x;
+    txt11->rect.y = txt10->rect.y + input->windowWidth * 0.03;
+    renderText(renderer, txt11);
+
+    txt12->rect.x = txt11->rect.x;
+    txt12->rect.y = txt11->rect.y + input->windowWidth * 0.03;
+    renderText(renderer, txt12);
+
+    txt13->rect.x = txt12->rect.x;
+    txt13->rect.y = txt12->rect.y + input->windowWidth * 0.03;
+    renderText(renderer, txt13);
+
+    txt14->rect.x = txt13->rect.x;
+    txt14->rect.y = txt13->rect.y + input->windowWidth * 0.03;
+    renderText(renderer, txt14);
+
     SDL_RenderDrawRect(renderer, &descrItem);
     SDL_RenderDrawRect(renderer, &equiper);
 }
