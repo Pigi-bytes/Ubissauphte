@@ -1,25 +1,16 @@
 #include "physicsSystem.h"
 
 void updatePhysicEntity(t_entity* entity, float* deltaTime, t_grid* grid, t_objectManager* entities) {
-    // Schéma d'intégration (pseudo-code)
-    //  * 1. vel(t+dt) = vel(t) + a(t) * dt
-    //  * 2. pos(t+dt) = pos(t) + vel(t+dt)
 
-    // PHYSICS_LOG("Pre-update - Velocity: (%.1f,%.1f) Pos: (%.1f,%.1f)", entity->physics.velocity.x, entity->physics.velocity.y, entity->collisionCircle.x, entity->collisionCircle.y);
+    printf("%f \n", *deltaTime);
 
     SDL_Point lastPosVisuelle = {entity->collisionCircle.x, entity->collisionCircle.y};
-
-    // Update de la vélocité avec l'accélération
-    // Note: l'acceleration est déjà en unite/s
-    entity->physics.velocity.x += (entity->physics.acceleration.x);
-    entity->physics.velocity.y += (entity->physics.acceleration.y);
-    // PHYSICS_LOG("After acceleration - Velocity: (%.1f,%.1f)", entity->physics.velocity.x, entity->physics.velocity.y);
 
     // Application de la friction
     // La friction est un pourcentage de reduction de la velocite par seconde
     // (1.0 = 100% de friction, arret immediat, 0.0 = pas de friction)
-    entity->physics.velocity.x *= (1.0f - entity->physics.friction);
-    entity->physics.velocity.y *= (1.0f - entity->physics.friction);
+    entity->physics.velocity.x *= powf(entity->physics.friction, *deltaTime);
+    entity->physics.velocity.y *= powf(entity->physics.friction, *deltaTime);
     // PHYSICS_LOG("After friction - Velocity: (%.1f,%.1f)", entity->physics.velocity.x, entity->physics.velocity.y);
 
     // Intégration de la position

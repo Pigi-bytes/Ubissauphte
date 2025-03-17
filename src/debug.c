@@ -55,7 +55,6 @@ void Debug_PushRect(const SDL_Rect* rect, int border_width, SDL_Color color) {
     }
 }
 
-// Pousser un cercle vide dans la pile des commandes avec la possibilité de spécifier une couleur
 void Debug_PushCircle(int x, int y, int radius, SDL_Color color) {
     if (command_stack_index < MAX_DEBUG_COMMANDS) {
         if (color.r == 0 && color.g == 0 && color.b == 0 && color.a == 0) {
@@ -71,7 +70,6 @@ void Debug_PushCircle(int x, int y, int radius, SDL_Color color) {
     }
 }
 
-// Pousser une ligne dans la pile des commandes avec la possibilité de spécifier une couleur
 void Debug_PushLine(int x1, int y1, int x2, int y2, int lineWidth, SDL_Color color) {
     if (command_stack_index < MAX_DEBUG_COMMANDS) {
         if (color.r == 0 && color.g == 0 && color.b == 0 && color.a == 0) {
@@ -89,7 +87,6 @@ void Debug_PushLine(int x1, int y1, int x2, int y2, int lineWidth, SDL_Color col
     }
 }
 
-// Fonction pour dessiner un cercle vide en utilisant sin et cos
 void Debug_RenderCircle(int x, int y, int radius) {
     const int numSegments = 360 * 2;                         // 360 points pour un cercle
     const float angleIncrement = 2 * 3.14159 / numSegments;  // Incrément d'angle pour chaque segment

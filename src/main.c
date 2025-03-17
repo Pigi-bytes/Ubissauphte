@@ -110,7 +110,7 @@ GENERATE_WRAPPER_3(updateMinimap, t_minimap*, t_camera*, SDL_Renderer*)
 GENERATE_WRAPPER_2(cameraHandleZoom, t_viewPort*, int*)
 
 GENERATE_WRAPPER_2(handleInputButton, t_input*, t_button*)
-GENERATE_WRAPPER_4(handleInputPlayer, t_input*, t_joueur*, t_grid*, t_viewPort*)
+GENERATE_WRAPPER_5(handleInputPlayer, t_input*, t_joueur*, t_grid*, t_viewPort*, float*)
 
 GENERATE_WRAPPER_2(setRenderTarget, SDL_Renderer*, t_viewPort*)
 GENERATE_WRAPPER_3(centerCameraOn, t_camera*, int*, int*)
@@ -428,7 +428,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     placeOnRandomTile(level, &joueur->entity, entities);
 
     t_enemy* enemy;
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < 8; i++) {
         enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 122), (SDL_Rect){100, 100, 16, 16}, slimeTileSet);
         addObject(entities, &enemy->entity, ENTITY);
         placeOnRandomTile(level, &enemy->entity, entities);
@@ -445,7 +445,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     ADD_OBJECT_TO_SCENE(scene, viewport, VIEWPORT_TYPE);
     ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
 
-    sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level, viewport));
+    sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level, viewport, &frameData->deltaTime));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&input->mouseYWheel));
 
     sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, 0, FONCTION_PARAMS(&frameData->deltaTime, level, entities));
@@ -518,8 +518,8 @@ int main(int argc, char* argv[]) {
 
         executeSceneFunctions(currentScene, UPDATE);
 
-        // updateFPS(frameData);
-        // updateFPSDisplay(fpsDisplay, frameData, renderer);
+        updateFPS(frameData);
+        updateFPSDisplay(fpsDisplay, frameData, renderer);
 
         if (input->resized) {
             executeSceneFunctions(currentScene, HANDLE_RESIZE);
@@ -532,7 +532,7 @@ int main(int argc, char* argv[]) {
         Debug_RenderAll();
         executeSceneFunctions(currentScene, RENDER_BUFFER);
         executeSceneFunctions(currentScene, RENDER_UI);
-        // renderFPSDisplay(renderer, fpsDisplay);
+        renderFPSDisplay(renderer, fpsDisplay);
 
         SDL_RenderPresent(renderer);
 

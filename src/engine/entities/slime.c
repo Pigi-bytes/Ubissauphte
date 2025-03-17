@@ -21,7 +21,7 @@ t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
     initEnemyBase(&slime->base, texture, rect);
     slime->base.update = updateSlime;
 
-    slime->base.entity.physics = (t_physics){.velocity = {0, 0}, .acceleration = {0, 0}, .mass = 2.0f, .friction = 0.07f, .restitution = 1.0f};
+    slime->base.entity.physics = (t_physics){.velocity = {0, 0}, .mass = 2.0f, .friction = 0.02f, .restitution = 1.0f};
     addAnimation(slime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 480, true, "idle"));
     addAnimation(slime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2, 1, 3}, 4, 180, true, "walk"));
 
@@ -29,7 +29,7 @@ t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
 
     slime->detectionRange = (t_circle){.x = rect.x + rect.w / 2, .y = rect.y + rect.h / 2, .radius = randomWithPercentageVariation(DETECTION_RADIUS, 0.2)};
 
-    slime->jumpCooldownDuration = randomWithPercentageVariation(TIME_UNTIL_JUMP, 0.3);
+    slime->jumpCooldownDuration = TIME_UNTIL_JUMP;  // randomWithPercentageVariation(TIME_UNTIL_JUMP, 0.3);
     slime->idleDurationBeforePatrol = randomWithPercentageVariation(TIME_UNTIL_PATROL, 0.5);
     slime->jumpForce = randomWithPercentageVariation(JUMP_FORCE, 0.4);
     slime->patrolMovesBaseValue = randomWithPercentageVariation(PATROL_NUMER_MOVE, 0.5);
@@ -46,8 +46,8 @@ void initiateSlimeJump(t_slime* slime, SDL_FPoint direction, float powerJump) {
         direction.y /= length;
     }
 
-    slime->base.entity.physics.acceleration.x += direction.x * (slime->jumpForce * powerJump);
-    slime->base.entity.physics.acceleration.y += direction.y * (slime->jumpForce * powerJump);
+    slime->base.entity.physics.velocity.x += (direction.x * (slime->jumpForce * powerJump));
+    slime->base.entity.physics.velocity.y += (direction.y * (slime->jumpForce * powerJump));
     slime->slimeJumpCooldownTimer = slime->jumpCooldownDuration;
 }
 
@@ -147,8 +147,6 @@ void updateSlime(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager
 
     slime->detectionRange.x = enemy->entity.collisionCircle.x;
     slime->detectionRange.y = enemy->entity.collisionCircle.y;
-    slime->base.entity.physics.acceleration.x = 0;
-    slime->base.entity.physics.acceleration.y = 0;
 
     slime->slimeJumpCooldownTimer -= *deltaTime;
 

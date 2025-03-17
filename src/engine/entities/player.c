@@ -17,9 +17,8 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
 
     t_physics playerPhysics = {
         .velocity = {0, 0},  // Vitesse initiale
-        .acceleration = {0.0f, 0.0f},
         .mass = 10.0f,
-        .friction = 0.05f,
+        .friction = 0.02f,
         .restitution = 0.02};
 
     joueur->entity.physics = playerPhysics;
@@ -60,30 +59,42 @@ void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectMana
     updatePhysicEntity(&player->entity, deltaTime, grid, entities);
 }
 
-void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp) {
-    float force = 10.0f;
+void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime) {
+    float force = 400.0f;
     float force_dash = force * 3.5;
 
-    player->entity.physics.acceleration.x = 0.0f;
-    player->entity.physics.acceleration.y = 0.0f;
+    float mouseWorldX, mouseWorldY;
+    convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
 
     if (input->key[player->control->left]) {
-        player->entity.physics.acceleration.x -= force;
+        player->entity.physics.velocity.x -= force * *deltaTime;
         player->entity.flip = SDL_FLIP_HORIZONTAL;
     }
     if (input->key[player->control->right]) {
-        player->entity.physics.acceleration.x += force;
+        player->entity.physics.velocity.x += force * *deltaTime;
         player->entity.flip = SDL_FLIP_NONE;
     }
-    if (input->key[player->control->up]) player->entity.physics.acceleration.y -= force;
-    if (input->key[player->control->down]) player->entity.physics.acceleration.y += force;
+    if (input->key[player->control->up]) player->entity.physics.velocity.y -= force * *deltaTime;
+    if (input->key[player->control->down]) player->entity.physics.velocity.y += force * *deltaTime;
 
     // Dash
-    if (input->key[SDL_SCANCODE_SPACE]) {
-        if (input->key[player->control->left]) player->entity.physics.acceleration.x -= force_dash;
-        if (input->key[player->control->right]) player->entity.physics.acceleration.x += force_dash;
-        if (input->key[player->control->up]) player->entity.physics.acceleration.y -= force_dash;
-        if (input->key[player->control->down]) player->entity.physics.acceleration.y += force_dash;
+    if (input->mouseButtons[SDL_BUTTON_RIGHT]) {
+        float playerX = player->entity.collisionCircle.x;
+        float playerY = player->entity.collisionCircle.y;
+
+        float dirX = mouseWorldX - playerX;
+        float dirY = mouseWorldY - playerY;
+
+        // Normalize the direction vector
+        float magnitude = sqrt(dirX * dirX + dirY * dirY);
+        if (magnitude > 0) {
+            dirX /= magnitude;
+            dirY /= magnitude;
+        }
+
+        // Apply dash force in the direction of the mouse
+        player->entity.physics.velocity.x += dirX * force_dash * *deltaTime;
+        player->entity.physics.velocity.y += dirY * force_dash * *deltaTime;
     }
 
     if (input->mouseButtons[SDL_BUTTON_LEFT]) {
@@ -105,7 +116,7 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
         player->attackTimer = 0.0f;
     }
 
-    if (player->entity.physics.acceleration.x != 0.0f || player->entity.physics.acceleration.y != 0.0f) {
+    if (player->entity.physics.velocity.x != 0.0f || player->entity.physics.velocity.y != 0.0f) {
         setAnimation(player->entity.animationController, "walk");
     } else {
         setAnimation(player->entity.animationController, "idle");

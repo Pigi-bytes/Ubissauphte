@@ -31,7 +31,7 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
 
 void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectManager* entities);
 void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera);
-void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp);
+void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime);
 void freePlayer(void* object);
 
 #endif
