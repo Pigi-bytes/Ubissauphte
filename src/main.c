@@ -379,7 +379,7 @@ t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
 
     t_scene* scene = createScene(initObjectManager(registre), "menuPrincipal");
 
-    t_text* text = createText(renderer, "Ubissauphte1", font, WHITE);
+    t_text* text = createText(renderer, "Lo Poti Donjon", font, WHITE);
     text->rect = creerRect((1 - 0.8f) / 2, 0.1f, 0.8f, 0.2f);
 
     ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
@@ -428,7 +428,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     placeOnRandomTile(level, &joueur->entity, entities);
 
     t_enemy* enemy;
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 15; i++) {
         enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 122), (SDL_Rect){100, 100, 16, 16}, slimeTileSet);
         addObject(entities, &enemy->entity, ENTITY);
         placeOnRandomTile(level, &enemy->entity, entities);
@@ -479,7 +479,7 @@ int main(int argc, char* argv[]) {
 
     SDL_Init(SDL_INIT_VIDEO);
     initTextEngine();
-    SDL_Window* window = SDL_CreateWindow("animation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("Lo Poti Donjon", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     Debug_Init(renderer);
 
