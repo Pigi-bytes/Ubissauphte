@@ -39,7 +39,7 @@ void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
 
     Debug_PushRect(&player->arme.displayRect, 1, SDL_COLOR_RED);
 
-    float angleEnDegres = -player->attackAngle * (180.0f / M_PI);
+    float angleEnDegres = -player->attackAngle * (180.0f / M_PI) + 90.0f; // oe ba enfait fallait ajouter 90 skibidis et pas sigmatiser le signe
     SDL_Point pivot = {player->arme.displayRect.w / 2, player->arme.displayRect.h / 2 + player->arme.displayRect.h / 4};
 
     SDL_FPoint pivotWorldPos = {
@@ -58,11 +58,11 @@ void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
         1,
         SDL_COLOR_PINK);
 
-    SDL_RenderCopyEx(renderer, player->arme.texture, NULL, &player->arme.displayRect, -angleEnDegres, &pivot, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(renderer, player->arme.texture, NULL, &player->arme.displayRect, angleEnDegres, &pivot, SDL_FLIP_NONE);
 
     if (player->entity.debug && player->isAttacking) {
         Debug_PushCircle(player->arme.attackHitbox.x, player->arme.attackHitbox.y, player->arme.attackHitbox.radius, SDL_COLOR_PINK);
-        Debug_PushLine(player->entity.collisionCircle.x, player->entity.collisionCircle.y, player->entity.collisionCircle.x + cosf(player->attackAngle) * 40, player->entity.collisionCircle.y - sinf(player->attackAngle) * 40, 3, SDL_COLOR_TURQUOISE);
+        Debug_PushLine(player->entity.collisionCircle.x, player->entity.collisionCircle.y, player->entity.collisionCircle.x + cosf(-player->attackAngle) * 40, player->entity.collisionCircle.y - sinf(player->attackAngle) * 40, 3, SDL_COLOR_TURQUOISE);
     }
 }
 
@@ -89,8 +89,11 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
     float playerX = player->entity.collisionCircle.x;
     float playerY = player->entity.collisionCircle.y;
-    float dirX = mouseWorldX - playerX;
-    float dirY = mouseWorldY - playerY;
+
+    SDL_Point pivot = {player->arme.displayRect.w / 2, player->arme.displayRect.h / 2 + player->arme.displayRect.h / 4};
+
+    float dirX = mouseWorldX - (player->arme.displayRect.x + pivot.x); // oe oe l'ékip g fix le bug skibidi sigma
+    float dirY = mouseWorldY - (player->arme.displayRect.y + pivot.y);
 
     player->attackAngle = atan2f(-dirY, dirX);
 
