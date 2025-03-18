@@ -13,6 +13,7 @@ typedef struct {
     e_slime_state state;
 
     t_circle detectionRange;
+    float baseDetectionRange;
     float jumpCooldownDuration;
     float idleDurationBeforePatrol;
     float jumpForce;

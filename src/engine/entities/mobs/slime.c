@@ -28,6 +28,7 @@ t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
     slime->state = SLIME_IDLE;
 
     slime->detectionRange = (t_circle){.x = rect.x + rect.w / 2, .y = rect.y + rect.h / 2, .radius = randomWithPercentageVariation(DETECTION_RADIUS, 0.2)};
+    slime->baseDetectionRange = slime->detectionRange.radius;
 
     slime->jumpCooldownDuration = randomWithPercentageVariation(TIME_UNTIL_JUMP, 0.3);
     slime->idleDurationBeforePatrol = randomWithPercentageVariation(TIME_UNTIL_PATROL, 0.5);
@@ -56,6 +57,7 @@ void initiateSlimeJump(t_slime* slime, SDL_FPoint direction, float powerJump) {
 }
 
 void handleIdleState(t_slime* slime, t_entity* player, float* deltaTime) {
+    slime->detectionRange.radius = slime->baseDetectionRange;
     setAnimation(slime->base.entity.animationController, "idle");
     if (slime->playerInDetection && slime->playerInSight) {
         setAnimation(slime->base.entity.animationController, "walk");
@@ -74,6 +76,7 @@ void handleIdleState(t_slime* slime, t_entity* player, float* deltaTime) {
 }
 
 void handlePatrolState(t_slime* slime, t_entity* player, t_grid* grid) {
+    slime->detectionRange.radius = slime->baseDetectionRange;
     if (slime->playerInDetection && slime->playerInSight) {
         slime->state = SLIME_CHASE_PLAYER;
         return;
@@ -96,6 +99,8 @@ void handlePatrolState(t_slime* slime, t_entity* player, t_grid* grid) {
 }
 
 void handleChasePlayerState(t_slime* slime, t_entity* player, t_grid* grid) {
+    slime->detectionRange.radius = slime->baseDetectionRange * 1.1f;
+
     slime->lastKnownPlayerPos = (SDL_FPoint){player->collisionCircle.x, player->collisionCircle.y};
     if (!slime->playerInSight || !slime->playerInDetection) {
         slime->state = SLIME_CHASE_LAST_KNOWN;
@@ -109,6 +114,8 @@ void handleChasePlayerState(t_slime* slime, t_entity* player, t_grid* grid) {
 }
 
 void handleChaseLastKnownState(t_slime* slime) {
+    slime->detectionRange.radius = slime->baseDetectionRange * 1.1f;
+
     SDL_FPoint currentPos = {slime->base.entity.collisionCircle.x, slime->base.entity.collisionCircle.y};
     SDL_FPoint toLastKnown = {slime->lastKnownPlayerPos.x - currentPos.x, slime->lastKnownPlayerPos.y - currentPos.y};
     Debug_PushLine(currentPos.x, currentPos.y, slime->lastKnownPlayerPos.x, slime->lastKnownPlayerPos.y, 3, SDL_COLOR_ORANGE);
