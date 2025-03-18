@@ -10,6 +10,15 @@
 #include "tiles.h"
 
 typedef struct {
+    SDL_Rect displayRect;
+    SDL_Texture* texture;
+
+    t_circle attackHitbox;
+    float attackDuration;
+    float attackTimer;
+} t_arme;
+
+typedef struct {
     SDL_Scancode up;
     SDL_Scancode down;
     SDL_Scancode left;
@@ -20,11 +29,10 @@ typedef struct {
     t_entity entity;
     t_control* control;
 
+    SDL_FPoint armeOffset;
     SDL_bool isAttacking;
     float attackAngle;
-    float attackDuration;
-    float attackTimer;
-    t_circle attackHitbox;
+    t_arme arme;
 } t_joueur;
 
 t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset);

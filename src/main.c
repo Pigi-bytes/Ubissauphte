@@ -424,12 +424,19 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     const uint8_t ENTITY = registerType(entities->registry, NULL, "ENTITY");
 
     t_joueur* joueur = createPlayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerTileSet);
+
+    joueur->arme.attackDuration = 0.2f;
+    joueur->arme.attackTimer = 0.0f;
+    joueur->arme.attackHitbox.radius = 8.0f;
+    joueur->arme.texture = getObject(tileset->textureTiles, 105);
+    joueur->arme.displayRect = (SDL_Rect){0, 0, 16, 16};
+
     addObject(entities, &joueur->entity, ENTITY);
     placeOnRandomTile(level, &joueur->entity, entities);
 
     t_enemy* enemy;
     for (int i = 0; i < 8; i++) {
-        enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 122), (SDL_Rect){100, 100, 16, 16}, slimeTileSet);
+        enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet);
         addObject(entities, &enemy->entity, ENTITY);
         placeOnRandomTile(level, &enemy->entity, entities);
         ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);

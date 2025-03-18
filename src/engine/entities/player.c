@@ -8,7 +8,7 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->entity.displayRect = rect;
     joueur->entity.flip = SDL_FLIP_NONE;
     joueur->entity.animationController = initAnimationController();
-    joueur->entity.debug = SDL_TRUE;
+    joueur->entity.debug = SDL_FALSE;
 
     joueur->entity.useCircleCollision = SDL_TRUE;
     joueur->entity.collisionCircle.x = rect.x + rect.w / 2;
@@ -22,11 +22,7 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
         .restitution = 0.02};
 
     joueur->entity.physics = playerPhysics;
-
     joueur->isAttacking = SDL_FALSE;
-    joueur->attackDuration = 0.2f;  // 200ms
-    joueur->attackTimer = 0.0f;
-    joueur->attackHitbox.radius = 8.0f;  // Taille de la hitbox
 
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, SDL_TRUE, "idle"));
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){3, 4}, 2, 240, SDL_TRUE, "walk"));
@@ -38,40 +34,65 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
 void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
     renderEntity(renderer, &player->entity, camera);
 
+    player->arme.displayRect.x = (player->entity.collisionCircle.x - player->arme.displayRect.w / 2) + 8;
+    player->arme.displayRect.y = (player->entity.collisionCircle.y - player->arme.displayRect.h / 2) + 2;
+
+    Debug_PushRect(&player->arme.displayRect, 1, SDL_COLOR_RED);
+
+    float angleEnDegres = -player->attackAngle * (180.0f / M_PI);
+    SDL_Point pivot = {player->arme.displayRect.w / 2, player->arme.displayRect.h / 2 + player->arme.displayRect.h / 4};
+
+    SDL_FPoint pivotWorldPos = {
+        player->arme.displayRect.x + pivot.x,
+        player->arme.displayRect.y + pivot.y};
+
+    float crossSize = 3.0f;
+    Debug_PushLine(
+        pivotWorldPos.x - crossSize, pivotWorldPos.y,
+        pivotWorldPos.x + crossSize, pivotWorldPos.y,
+        1,
+        SDL_COLOR_PINK);
+    Debug_PushLine(
+        pivotWorldPos.x, pivotWorldPos.y - crossSize,
+        pivotWorldPos.x, pivotWorldPos.y + crossSize,
+        1,
+        SDL_COLOR_PINK);
+
+    SDL_RenderCopyEx(renderer, player->arme.texture, NULL, &player->arme.displayRect, -angleEnDegres, &pivot, SDL_FLIP_NONE);
+
     if (player->entity.debug && player->isAttacking) {
-        Debug_PushCircle(player->attackHitbox.x, player->attackHitbox.y, player->attackHitbox.radius, SDL_COLOR_PINK);
+        Debug_PushCircle(player->arme.attackHitbox.x, player->arme.attackHitbox.y, player->arme.attackHitbox.radius, SDL_COLOR_PINK);
         Debug_PushLine(player->entity.collisionCircle.x, player->entity.collisionCircle.y, player->entity.collisionCircle.x + cosf(player->attackAngle) * 40, player->entity.collisionCircle.y - sinf(player->attackAngle) * 40, 3, SDL_COLOR_TURQUOISE);
     }
 }
 
 void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectManager* entities) {
     if (player->isAttacking) {
-        player->attackTimer += *deltaTime;
+        player->arme.attackTimer += *deltaTime;
 
         float weaponLength = 10.0f;
-        player->attackHitbox.x = player->entity.collisionCircle.x + cosf(player->attackAngle) * weaponLength;
-        player->attackHitbox.y = player->entity.collisionCircle.y - sinf(player->attackAngle) * weaponLength;
+        player->arme.attackHitbox.x = player->entity.collisionCircle.x + cosf(player->attackAngle) * weaponLength;
+        player->arme.attackHitbox.y = player->entity.collisionCircle.y - sinf(player->attackAngle) * weaponLength;
 
-        if (player->attackTimer >= player->attackDuration) {
+        if (player->arme.attackTimer >= player->arme.attackDuration) {
             player->isAttacking = SDL_FALSE;
         }
     }
     updatePhysicEntity(&player->entity, deltaTime, grid, entities);
 }
+
 void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime) {
     float force = 400.0f;
     float force_dash = force * 3.5;
 
     float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
-    float dirX = 0.0f, dirY = 0.0f;
+    convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
+    float playerX = player->entity.collisionCircle.x;
+    float playerY = player->entity.collisionCircle.y;
+    float dirX = mouseWorldX - playerX;
+    float dirY = mouseWorldY - playerY;
 
-    if (input->mouseButtons[SDL_BUTTON_RIGHT] || input->mouseButtons[SDL_BUTTON_LEFT]) {
-        convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
-        float playerX = player->entity.collisionCircle.x;
-        float playerY = player->entity.collisionCircle.y;
-        dirX = mouseWorldX - playerX;
-        dirY = mouseWorldY - playerY;
-    }
+    player->attackAngle = atan2f(-dirY, dirX);
 
     if (input->key[player->control->left]) {
         player->entity.physics.velocity.x -= force * *deltaTime;
@@ -85,8 +106,6 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     if (input->key[player->control->down]) player->entity.physics.velocity.y += force * *deltaTime;
 
     if (input->mouseButtons[SDL_BUTTON_RIGHT]) {
-        printf("Dash \n");
-
         float magnitude = sqrt(dirX * dirX + dirY * dirY);
         if (magnitude > 0.0f) {
             dirX /= magnitude;
@@ -98,10 +117,8 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     }
 
     if (input->mouseButtons[SDL_BUTTON_LEFT]) {
-        printf("Attack \n");
-        player->attackAngle = atan2f(-dirY, dirX);
         player->isAttacking = SDL_TRUE;
-        player->attackTimer = 0.0f;
+        player->arme.attackTimer = 0.0f;
     }
 
     if (player->entity.physics.velocity.x != 0.0f || player->entity.physics.velocity.y != 0.0f) {
