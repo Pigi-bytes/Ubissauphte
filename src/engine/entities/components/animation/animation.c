@@ -35,13 +35,13 @@ void updateAnimation(t_animation* animation) {
 }
 
 void startAnimation(t_animation* animation) {
-    animation->isActive = true;
+    animation->isActive = SDL_TRUE;
     animation->currentFrame = 0;
     startTimer(animation->frameTimer);
 }
 
 void stopAnimation(t_animation* animation) {
-    animation->isActive = false;
+    animation->isActive = SDL_FALSE;
 }
 
 t_animationController* initAnimationController() {

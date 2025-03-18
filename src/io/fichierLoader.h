@@ -6,7 +6,6 @@
 #ifndef FICHIER_LOADER_H
 #define FICHIER_LOADER_H
 
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -69,7 +68,7 @@ t_fichier *chargerFichier(char *filename);
  * @param type permet de cast result dans le type de la valeur recherché e
  * @return Renvoie True si la valeur est bien récupéré sinon false
  */
-bool getValue(t_block *block, char *name, void *result, t_valueType type);
+SDL_bool getValue(t_block *block, char *name, void *result, t_valueType type);
 
 /**
  * @brief Sauvegarde des donnees dans un fichier

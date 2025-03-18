@@ -1,9 +1,6 @@
 #include "physicsSystem.h"
 
 void updatePhysicEntity(t_entity* entity, float* deltaTime, t_grid* grid, t_objectManager* entities) {
-
-    printf("%f \n", *deltaTime);
-
     SDL_Point lastPosVisuelle = {entity->collisionCircle.x, entity->collisionCircle.y};
 
     // Application de la friction
@@ -48,7 +45,7 @@ void resolveCollision(t_entity* entity, t_grid* grid, t_objectManager* entities)
         // int x2 = otherEntity->collisionCircle.x;
         // int y2 = otherEntity->collisionCircle.y;
 
-        bool collision = checkCircleCircleCollision(&entity->collisionCircle, &otherEntity->collisionCircle, &out);
+        SDL_bool collision = checkCircleCircleCollision(&entity->collisionCircle, &otherEntity->collisionCircle, &out);
 
         SDL_Color lineColor = collision ? (SDL_Color){0, 255, 0, 255} : (SDL_Color){255, 0, 0, 255};
         // Debug_PushLine(x1, y1, x2, y2, 3, lineColor);

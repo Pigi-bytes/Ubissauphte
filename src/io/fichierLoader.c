@@ -85,7 +85,7 @@ t_fichier *chargerFichier(char *filename) {
     return fichier;
 }
 
-bool getValue(t_block *block, char *name, void *result, t_valueType type) {
+SDL_bool getValue(t_block *block, char *name, void *result, t_valueType type) {
     for (int i = 0; i < block->pairManager->count; i++) {
         t_pairData *pair = (t_pairData *)getObject(block->pairManager, i);
         if (strcmp(pair->key, name) == 0) {
@@ -103,12 +103,12 @@ bool getValue(t_block *block, char *name, void *result, t_valueType type) {
                     strcpy((char *)result, pair->value);
                     break;
                 default:
-                    return false;
+                    return SDL_FALSE;
             }
-            return true;
+            return SDL_TRUE;
         }
     }
-    return false;
+    return SDL_FALSE;
 }
 
 t_block *createNewBlock() {
@@ -125,7 +125,7 @@ t_pairData *createPairData(char *key, char *value) {
 
     pair->key = strdup(key);
     pair->value = strdup(value);
-    
+
     return pair;
 }
 

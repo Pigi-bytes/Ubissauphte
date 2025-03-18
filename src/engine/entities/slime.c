@@ -22,19 +22,23 @@ t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
     slime->base.update = updateSlime;
 
     slime->base.entity.physics = (t_physics){.velocity = {0, 0}, .mass = 2.0f, .friction = 0.02f, .restitution = 1.0f};
-    addAnimation(slime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 480, true, "idle"));
-    addAnimation(slime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2, 1, 3}, 4, 180, true, "walk"));
+    addAnimation(slime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 480, SDL_TRUE, "idle"));
+    addAnimation(slime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2, 1, 3}, 4, 180, SDL_TRUE, "walk"));
 
     slime->state = SLIME_IDLE;
 
     slime->detectionRange = (t_circle){.x = rect.x + rect.w / 2, .y = rect.y + rect.h / 2, .radius = randomWithPercentageVariation(DETECTION_RADIUS, 0.2)};
 
-    slime->jumpCooldownDuration = TIME_UNTIL_JUMP;  // randomWithPercentageVariation(TIME_UNTIL_JUMP, 0.3);
+    slime->jumpCooldownDuration = randomWithPercentageVariation(TIME_UNTIL_JUMP, 0.3);
     slime->idleDurationBeforePatrol = randomWithPercentageVariation(TIME_UNTIL_PATROL, 0.5);
     slime->jumpForce = randomWithPercentageVariation(JUMP_FORCE, 0.4);
     slime->patrolMovesBaseValue = randomWithPercentageVariation(PATROL_NUMER_MOVE, 0.5);
 
-    slime->slimeJumpCooldownTimer = 0.0;
+    slime->jumpCooldownTimer = initDeltaTimer();
+    slime->idleTimer = initDeltaTimer();
+
+    startDeltaTimer(slime->jumpCooldownTimer);
+    startDeltaTimer(slime->idleTimer);
 
     return (t_enemy*)slime;
 }
@@ -48,7 +52,7 @@ void initiateSlimeJump(t_slime* slime, SDL_FPoint direction, float powerJump) {
 
     slime->base.entity.physics.velocity.x += (direction.x * (slime->jumpForce * powerJump));
     slime->base.entity.physics.velocity.y += (direction.y * (slime->jumpForce * powerJump));
-    slime->slimeJumpCooldownTimer = slime->jumpCooldownDuration;
+    resetDeltaTimer(slime->jumpCooldownTimer);
 }
 
 void handleIdleState(t_slime* slime, t_entity* player, float* deltaTime) {
@@ -56,15 +60,15 @@ void handleIdleState(t_slime* slime, t_entity* player, float* deltaTime) {
     if (slime->playerInDetection && slime->playerInSight) {
         setAnimation(slime->base.entity.animationController, "walk");
         slime->state = SLIME_CHASE_PLAYER;
-        slime->idleTimer = 0.0f;
+        resetDeltaTimer(slime->idleTimer);
     }
 
-    slime->idleTimer += *deltaTime;
+    updateDeltaTimer(slime->idleTimer, *deltaTime);
 
-    if (slime->idleTimer >= slime->idleDurationBeforePatrol) {
+    if (getDeltaTimer(slime->idleTimer) >= slime->idleDurationBeforePatrol) {
         slime->state = SLIME_PATROL;
         slime->patrolMovesLeft = slime->patrolMovesBaseValue;
-        slime->idleTimer = 0.0f;
+        resetDeltaTimer(slime->idleTimer);
         setAnimation(slime->base.entity.animationController, "walk");
     }
 }
@@ -80,7 +84,7 @@ void handlePatrolState(t_slime* slime, t_entity* player, t_grid* grid) {
         return;
     }
 
-    if (slime->slimeJumpCooldownTimer <= 0) {
+    if (getDeltaTimer(slime->jumpCooldownTimer) >= slime->jumpCooldownDuration) {
         float angle = (float)(rand() % 360) * (M_PI / 180.0f);
         SDL_FPoint currentPatrolDirection = {cosf(angle), sinf(angle)};
         SDL_FPoint pos = {slime->base.entity.collisionCircle.x, slime->base.entity.collisionCircle.y};
@@ -98,7 +102,7 @@ void handleChasePlayerState(t_slime* slime, t_entity* player, t_grid* grid) {
         return;
     }
 
-    if (slime->slimeJumpCooldownTimer <= 0) {
+    if (getDeltaTimer(slime->jumpCooldownTimer) >= slime->jumpCooldownDuration) {
         SDL_FPoint direction = {player->collisionCircle.x - slime->detectionRange.x, player->collisionCircle.y - slime->detectionRange.y};
         initiateSlimeJump(slime, direction, FULL_JUMP_POWER);
     }
@@ -118,7 +122,7 @@ void handleChaseLastKnownState(t_slime* slime) {
         slime->state = SLIME_IDLE;
         return;
     } else {
-        if (slime->slimeJumpCooldownTimer <= 0) {
+        if (getDeltaTimer(slime->jumpCooldownTimer) >= slime->jumpCooldownDuration) {
             initiateSlimeJump(slime, toLastKnown, FULL_JUMP_POWER);
         }
     }
@@ -148,7 +152,7 @@ void updateSlime(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager
     slime->detectionRange.x = enemy->entity.collisionCircle.x;
     slime->detectionRange.y = enemy->entity.collisionCircle.y;
 
-    slime->slimeJumpCooldownTimer -= *deltaTime;
+    updateDeltaTimer(slime->jumpCooldownTimer, *deltaTime);
 
     updateSlimeInfo(slime, player, grid);
 

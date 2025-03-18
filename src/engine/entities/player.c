@@ -28,8 +28,8 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->attackTimer = 0.0f;
     joueur->attackHitbox.radius = 8.0f;  // Taille de la hitbox
 
-    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, true, "idle"));
-    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){3, 4}, 2, 240, true, "walk"));
+    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, SDL_TRUE, "idle"));
+    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){3, 4}, 2, 240, SDL_TRUE, "walk"));
     setAnimation(joueur->entity.animationController, "idle");
 
     return joueur;
@@ -58,13 +58,20 @@ void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectMana
     }
     updatePhysicEntity(&player->entity, deltaTime, grid, entities);
 }
-
 void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime) {
     float force = 400.0f;
     float force_dash = force * 3.5;
 
-    float mouseWorldX, mouseWorldY;
-    convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
+    float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
+    float dirX = 0.0f, dirY = 0.0f;
+
+    if (input->mouseButtons[SDL_BUTTON_RIGHT] || input->mouseButtons[SDL_BUTTON_LEFT]) {
+        convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
+        float playerX = player->entity.collisionCircle.x;
+        float playerY = player->entity.collisionCircle.y;
+        dirX = mouseWorldX - playerX;
+        dirY = mouseWorldY - playerY;
+    }
 
     if (input->key[player->control->left]) {
         player->entity.physics.velocity.x -= force * *deltaTime;
@@ -77,41 +84,22 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     if (input->key[player->control->up]) player->entity.physics.velocity.y -= force * *deltaTime;
     if (input->key[player->control->down]) player->entity.physics.velocity.y += force * *deltaTime;
 
-    // Dash
     if (input->mouseButtons[SDL_BUTTON_RIGHT]) {
-        float playerX = player->entity.collisionCircle.x;
-        float playerY = player->entity.collisionCircle.y;
+        printf("Dash \n");
 
-        float dirX = mouseWorldX - playerX;
-        float dirY = mouseWorldY - playerY;
-
-        // Normalize the direction vector
         float magnitude = sqrt(dirX * dirX + dirY * dirY);
-        if (magnitude > 0) {
+        if (magnitude > 0.0f) {
             dirX /= magnitude;
             dirY /= magnitude;
         }
 
-        // Apply dash force in the direction of the mouse
         player->entity.physics.velocity.x += dirX * force_dash * *deltaTime;
         player->entity.physics.velocity.y += dirY * force_dash * *deltaTime;
     }
 
     if (input->mouseButtons[SDL_BUTTON_LEFT]) {
         printf("Attack \n");
-        float mouseWorldX, mouseWorldY;
-        convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
-
-        // Position du joueur dans le monde (pas écran !)
-        float playerX = player->entity.collisionCircle.x;
-        float playerY = player->entity.collisionCircle.y;
-
-        // Vecteur relatif
-        float relX = mouseWorldX - playerX;
-        float relY = mouseWorldY - playerY;
-
-        // Angle (inversion Y si nécessaire)
-        player->attackAngle = atan2f(-relY, relX);
+        player->attackAngle = atan2f(-dirY, dirX);
         player->isAttacking = SDL_TRUE;
         player->attackTimer = 0.0f;
     }

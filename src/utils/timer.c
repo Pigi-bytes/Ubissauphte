@@ -1,60 +1,23 @@
 #include "timer.h"
 
-#include <stdbool.h>
-
 #include "../debug.h"
 
 t_timer *initTimer() {
     t_timer *timer = malloc(sizeof(t_timer));
+    timer->isStarted = SDL_FALSE;
     timer->startTicks = 0;
-    timer->pausedTicks = 0;
-    timer->isPaused = false;
-    timer->isStarted = false;
     return timer;
 }
 
 void startTimer(t_timer *timer) {
-    timer->isStarted = true;
-    timer->isPaused = false;
+    timer->isStarted = SDL_TRUE;
     timer->startTicks = SDL_GetTicks();
-    timer->pausedTicks = 0;
-    // DEBUG_PRINT("Timer start à l'adresse : %p\n", timer);
-}
-
-void stopTimer(t_timer *timer) {
-    timer->isStarted = false;
-    timer->isPaused = false;
-    timer->startTicks = 0;
-    timer->pausedTicks = 0;
-    // DEBUG_PRINT("Timer stop à l'adresse : %p\n", timer);
-}
-
-void pauseTimer(t_timer *timer) {
-    if (timer->isStarted && !timer->isPaused) {
-        timer->isPaused = true;
-        timer->pausedTicks = SDL_GetTicks() - timer->startTicks;
-        timer->startTicks = 0;
-    }
-    // DEBUG_PRINT("Timer mit en pause à l'adresse : %p\n", timer);
-}
-
-void unpauseTimer(t_timer *timer) {
-    if (timer->isStarted && timer->isPaused) {
-        timer->isPaused = false;
-        timer->startTicks = SDL_GetTicks() - timer->pausedTicks;
-        timer->pausedTicks = 0;
-    }
-    // DEBUG_PRINT("Timer remit en marche à l'adresse : %p\n", timer);
 }
 
 Uint32 getTicks(t_timer *timer) {
     Uint32 time = 0;
     if (timer->isStarted) {
-        if (timer->isPaused) {
-            time = timer->pausedTicks;
-        } else {
-            time = SDL_GetTicks() - timer->startTicks;
-        }
+        time = SDL_GetTicks() - timer->startTicks;
     }
 
     return time;
@@ -69,6 +32,37 @@ void freeTimer(t_timer *timer) {
 void resetTimer(t_timer *timer) {
     if (timer->isStarted) {
         timer->startTicks = SDL_GetTicks();
-        timer->pausedTicks = 0;
+    }
+}
+
+t_deltaTimer *initDeltaTimer() {
+    t_deltaTimer *timer = malloc(sizeof(t_deltaTimer));
+    timer->isStarted = SDL_FALSE;
+    timer->accumulatedTime = 0;
+    return timer;
+}
+
+void startDeltaTimer(t_deltaTimer *timer) {
+    timer->isStarted = SDL_TRUE;
+    timer->accumulatedTime = 0;
+}
+
+void updateDeltaTimer(t_deltaTimer *timer, float deltaTime) {
+    if (timer->isStarted) {
+        timer->accumulatedTime += deltaTime;
+    }
+}
+
+float getDeltaTimer(t_deltaTimer *timer) {
+    return timer->accumulatedTime;
+}
+
+void resetDeltaTimer(t_deltaTimer *timer) {
+    timer->accumulatedTime = 0;
+}
+
+void freeDeltaTimer(t_deltaTimer *timer) {
+    if (timer != NULL) {
+        free(timer);
     }
 }

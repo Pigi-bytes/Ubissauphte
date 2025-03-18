@@ -3,7 +3,6 @@
 #define SCENE_H
 
 #include <SDL2/SDL.h>
-#include <stdbool.h>
 
 #include "../debug.h"
 #include "../io/input.h"

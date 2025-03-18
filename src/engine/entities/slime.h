@@ -23,8 +23,8 @@ typedef struct {
     SDL_FPoint lastKnownPlayerPos;
 
     int patrolMovesLeft;
-    float idleTimer;
-    float slimeJumpCooldownTimer;
+    t_deltaTimer* idleTimer;
+    t_deltaTimer* jumpCooldownTimer;
 } t_slime;
 
 void updateSlime(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities);
