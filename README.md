@@ -21,7 +21,6 @@ Fonctionnalités du jeu:
     - Amélioration des statistiques des joueurs (PV, mana, armure, attaque et vitesse).
     - Changer d'équipements en les récupérant sur des ennemis ou en les achetant dans un magasin grâce à un système d'argent pour en obtenir des plus puissants (armure, arme).
     - Objets activables pour l'attaque ou pour la défense.
-    - Le recrutement de famille qui peut avoir plusieurs classes : soit il l'aide dans le combat, soit il le soutient en lui donnant du soutien, par exemple.
 
 
 lien vers le Gantt: https://github.com/users/Pigi-bytes/projects/1/views/4
