@@ -1,5 +1,5 @@
-#include "../../debug.h"
-#include "enemy.h"
+#include "../../../debug.h"
+#include "../enemy.h"
 
 typedef enum {
     SLIME_IDLE,
