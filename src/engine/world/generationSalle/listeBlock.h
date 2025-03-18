@@ -68,6 +68,7 @@ typedef enum {
     COMPDECO_MILLIEU_ESCALIER,
     COMPDECO_FIN_ESCALIER,
     COMPDECO_SOLO_ESCALIER,
+    COMPDECO_COFFRE,
 } nom_block;
 
 typedef enum {

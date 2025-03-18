@@ -155,6 +155,7 @@ t_listeBlock** createListAllBlock() {
     ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_MILLIEU_ESCALIER, 38, 0, 0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_FIN_ESCALIER, 39, 0, 0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_FIN_ESCALIER, 40, 0, 0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_COFFRE, 90, 0, (0.0), SDL_TRUE, SDL_FALSE);
 
     return listAllBlock;
 }
