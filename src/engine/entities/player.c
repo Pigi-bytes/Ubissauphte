@@ -190,34 +190,46 @@ void start_attack(t_joueur* player) {
 void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities) {
     if (!player->attack.isActive) return;
 
-    t_arme* weapon = player->currentWeapon;
-    SDL_FPoint centreAttack = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
+    player->attack.progress += *deltaTime / player->currentWeapon->attackDuration;
+    player->attack.hitBox.origin.x = player->entity.collisionCircle.x;
+    player->attack.hitBox.origin.y = player->entity.collisionCircle.y;
 
-    player->attack.progress += *deltaTime / weapon->attackDuration;
-    float currentAngle = lerpAngle(player->attack.hitBox.startAngle, player->attack.hitBox.endAngle, smoothStepf(player->attack.progress));
+    float current_angle = lerpAngle(player->attack.hitBox.startAngle, player->attack.hitBox.endAngle, smoothStepf(player->attack.progress));
 
-    float halfArc = weapon->angleAttack / 2.0f;
-    player->attack.hitBox.startAngle = currentAngle - halfArc;
-    player->attack.hitBox.endAngle = currentAngle + halfArc;
+    float knockback_force = 100.0f;
 
-    float knockbackForce = weapon->mass * 10.0f;
+    // Calculer l'extrémité du slash pour le dessiner plus tard
+    float slash_range = player->currentWeapon->range;  // Ajuste la distance du slash
+    float slash_width = M_PI / 12;                     // Ajuste l'épaisseur du slash
+    // player->attack.slash_angle = current_angle;        // On garde l'angle actuel
+    // player->attack.slash_range = slash_range;
+    // player->attack.slash_width = slash_width;
+
+    float start_angle = current_angle - slash_width / 2;
+    float end_angle = current_angle + slash_width / 2;
+    SDL_FPoint edge1 = {player->attack.hitBox.origin.x + slash_range * cosf(start_angle), player->attack.hitBox.origin.y + slash_range * sinf(start_angle)};
+    SDL_FPoint edge2 = {player->attack.hitBox.origin.x + slash_range * cosf(end_angle), player->attack.hitBox.origin.y + slash_range * sinf(end_angle)};
+
+    Debug_PushLine(player->attack.hitBox.origin.x, player->attack.hitBox.origin.y, edge1.x, edge1.y, 2, SDL_COLOR_RED);
+    Debug_PushLine(player->attack.hitBox.origin.x, player->attack.hitBox.origin.y, edge2.x, edge2.y, 2, SDL_COLOR_RED);
 
     for (int i = 1; i < entities->count; i++) {
         t_entity* enemy = getObject(entities, i);
-        SDL_FPoint positionEnemy = {enemy->collisionCircle.x, enemy->collisionCircle.y};
+        SDL_FPoint position = {enemy->collisionCircle.x, enemy->collisionCircle.y};
 
-        if (is_in_attack_sector(positionEnemy, enemy->collisionCircle.radius, player->attack.hitBox.origin, currentAngle, player->currentWeapon->range, player->currentWeapon->angleAttack)) {
-            takeDamage((t_enemy*)enemy, player->currentWeapon->damage);
-            float dx = positionEnemy.x - centreAttack.x;
-            float dy = positionEnemy.y - centreAttack.y;
+        if (is_in_attack_sector(position, enemy->collisionCircle.radius, player->attack.hitBox.origin, current_angle, player->currentWeapon->range, player->currentWeapon->angleAttack)) {
+            takeDamageAndCheckDeath((t_enemy*)enemy, player->currentWeapon->damage);
+            float dx = position.x - player->attack.hitBox.origin.x;
+            float dy = position.y - player->attack.hitBox.origin.y;
 
             float length = sqrtf(dx * dx + dy * dy);
             if (length > 0) {
                 dx /= length;
                 dy /= length;
+
+                enemy->physics.velocity.x += dx * knockback_force / enemy->physics.mass;
+                enemy->physics.velocity.y += dy * knockback_force / enemy->physics.mass;
             }
-            enemy->physics.velocity.x += dx * knockbackForce / enemy->physics.mass;
-            enemy->physics.velocity.y += dy * knockbackForce / enemy->physics.mass;
             player->attack.nbHits++;
         }
     }
