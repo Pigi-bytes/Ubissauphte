@@ -90,7 +90,7 @@ SDL_bool blockIs(t_block* block, nom_block nom) {
 }
 
 SDL_bool blockIsOmbre(t_block* block) {
-    return blockIs(block, SOL_OMBRE_MUR) || blockIs(block, SOL_OMBRE_MUR2) || blockIs(block, SOL_OMBRE_MUR_DROIT2) || blockIs(block, SOL_OMBRE_MUR_DROIT) || blockIs(block, SOL_OMBRE_MUR_GAUCHE) || blockIs(block, SOL_OMBRE_MUR_GAUCHE2) || blockIs(block, SOL_OMBRE_ANGLE_DROIT) || blockIs(block, SOL_OMBRE_ANGLE_GAUCHE) || blockIs(block, SOL_OMBRE_ARRONDI_DROIT) || blockIs(block, SOL_OMBRE_ARRONDI_GAUCHE);
+    return blockIs(block, SOL_OMBRE_MUR) || blockIs(block, SOL_OMBRE_MUR2) || blockIs(block, SOL_OMBRE_MUR_GAUCHE) || blockIs(block, SOL_OMBRE_MUR_GAUCHE2) || blockIs(block, SOL_OMBRE_ANGLE_GAUCHE) || blockIs(block, SOL_OMBRE_ARRONDI_GAUCHE);
 }
 
 t_listeBlock** createListAllBlock() {
@@ -117,12 +117,8 @@ t_listeBlock** createListAllBlock() {
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_MUR2, 51, 0, 0.0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_MUR_GAUCHE, 133, 0, 0.0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_MUR_GAUCHE2, 134, 0, 0.0, SDL_FALSE, SDL_FALSE);
-    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_MUR_DROIT, 133, 1, 0.0, SDL_FALSE, SDL_FALSE);
-    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_MUR_DROIT2, 134, 1, 0.0, SDL_FALSE, SDL_FALSE);
-    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_ARRONDI_DROIT, 53, 0, 0.0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_ARRONDI_GAUCHE, 53, 1, 0.0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_ANGLE_GAUCHE, 54, 0, 0.0, SDL_FALSE, SDL_FALSE);
-    ajouterBlock(listAllBlock, SOL_TYPE, SOL_OMBRE_ANGLE_DROIT, 54, 1, 0.0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_BAS_PILONNE, 31, 0, 0.0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_BAS_FONTAINE_EAUX_PROFOND, 33, 0, 0, SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, SOL_TYPE, SOL_BAS_FONTAINE_EAUX_GRILLE, 45, 0, 0, SDL_FALSE, SDL_FALSE);
@@ -150,11 +146,12 @@ t_listeBlock** createListAllBlock() {
     ajouterBlock(listAllBlock, DECO_TYPE, DECO_TABLE, 73, 0, (((double)1) / ((double)6)), SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, DECO_TYPE, DECO_ENCLUME, 75, 0, (((double)1) / ((double)6)), SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, DECO_TYPE, DECO_TONNEAU, 83, 0, (((double)1) / ((double)6)), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, DECO_TYPE, DECO_PIQUE, 42, 0, 0, SDL_TRUE, SDL_FALSE);
 
     ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_DEBUT_ESCALIER, 37, 0, 0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_SOLO_ESCALIER, 40, 0, 0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_MILLIEU_ESCALIER, 38, 0, 0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_FIN_ESCALIER, 39, 0, 0, SDL_FALSE, SDL_FALSE);
-    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_FIN_ESCALIER, 40, 0, 0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_COFFRE, 90, 0, (0.0), SDL_TRUE, SDL_FALSE);
 
     return listAllBlock;
@@ -162,11 +159,13 @@ t_listeBlock** createListAllBlock() {
 
 void copierVal(t_block* src, t_block** det) {
     (*det) = malloc(sizeof(t_block));
-    (*det)->collisions = src->collisions;
-    (*det)->tiles = src->tiles;
-    (*det)->rotation = src->rotation;
-    (*det)->tiles = src->tiles;
-    (*det)->rotationAutorise = src->rotationAutorise;
-    (*det)->name = src->name;
-    (*det)->type = src->type;
+    if (src != NULL) {
+        (*det)->collisions = src->collisions;
+        (*det)->tiles = src->tiles;
+        (*det)->rotation = src->rotation;
+        (*det)->tiles = src->tiles;
+        (*det)->rotationAutorise = src->rotationAutorise;
+        (*det)->name = src->name;
+        (*det)->type = src->type;
+    }
 }

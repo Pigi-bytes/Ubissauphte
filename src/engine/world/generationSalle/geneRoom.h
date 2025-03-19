@@ -8,15 +8,12 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "../genmap.h"
 #include "fillGaps.h"
 #include "grille.h"
 #include "lissage.h"
 #include "listeBlock.h"
 #include "perlinNoise.h"
-
-#define OBSTACLE 1
-#define SOL 0
-#define ELTAJOUTE 2
 
 t_block *getPlafond(t_listeBlock **listAllBlock);
 t_block *getSol(t_listeBlock **listAllBlock, t_case *c);
@@ -39,8 +36,11 @@ SDL_bool bordureMurGauche(t_case *c);
 SDL_bool bordureMurDroit(t_case *c);
 
 // fonctions de genération de la map
-t_grille *geneRoom();
+t_grille *geneRoom(t_salle *s);
 void choixTiles(t_listeBlock **listAllBlock, t_grille *g);
 void saveMap(t_grille *g);
 
+int estOuvert(t_case *c, int changementLigne, int changementColonne);
+SDL_bool trouerGrille(t_grille *grille, int xdebut, int ydebut, int changementLigne, int changementColonne);
+void placerSortie(t_grille **grille, t_salle *salle);
 #endif

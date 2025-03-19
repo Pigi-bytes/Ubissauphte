@@ -412,7 +412,15 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     t_tileset* slimeTileSet = initTileset(renderer, 48, 16, 16, "assets/imgs/slimeidle12run1213.bmp");
     t_tileset* crabeTileSet = initTileset(renderer, 80, 16, 16, "assets/imgs/crabeidle123232run416.bmp");
 
-    t_grille* grille = geneRoom();
+    SDL_Rect* rectcord = malloc(sizeof(SDL_Rect) * 3);
+    for (int i = 0; i < 3; i++) {
+        rectcord[i].x = 1;
+        rectcord[i].y = 1;
+        rectcord[i].w = 1;
+        rectcord[i].h = 1;
+    }
+    t_salle** salle = genMap(14, rectcord);
+    t_grille* grille = geneRoom(salle[6]);
     t_grid* level = loadMap(grille->nom, tileset);
     freeGrille(grille);
 
