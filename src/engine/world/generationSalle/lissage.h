@@ -1,16 +1,17 @@
 #ifndef LISSAGE_H
 #define LISSAGE_H
 
-#include "grille.h"
 #include <SDL2/SDL.h>
 
-SDL_bool caseSansVoisins(int i, int j, int** mat, int nbLigne, int nbColonne);
-SDL_bool caseIsSol(int i, int j, int ** mat ,int nbLigne, int nbColonne);
-SDL_bool caseIsPlafond(int i, int j, int** mat, int nbLigne, int nbColonne);
-SDL_bool ajoutArriere(int i, int j, int** mat, int nbLigne, int nbColonne);
-SDL_bool blockDiagHaut(int i, int j, int** mat, int nbLigne, int nbColonne);
-SDL_bool blockDiagCoin(int i, int j, int** mat, int nbLigne, int nbColonne);
-SDL_bool blockDiagBas(int i, int j, int** mat, int nbLigne, int nbColonne);
-void lissage(int ** mat ,int nbLigne, int nbColonne);
+#include "grille.h"
+
+SDL_bool caseSansVoisins(t_case* c);
+SDL_bool caseIsSol(t_case* c);
+SDL_bool caseIsPlafond(t_case* c);
+SDL_bool ajoutArriere(t_case* c);
+SDL_bool blockDiagHaut(t_case* c);
+SDL_bool blockDiagCoin(t_case* c);
+SDL_bool blockDiagBas(t_case* c);
+void lissage(t_grille* grille);
 
 #endif

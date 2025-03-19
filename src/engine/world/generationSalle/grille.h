@@ -1,8 +1,9 @@
 #ifndef GRILLE_H
 #define GRILLE_H
 
-#include "listeBlock.h"
 #include <stdarg.h>
+
+#include "listeBlock.h"
 
 #define VOISIN_GAUCHE 0
 #define VOISIN_DROIT 1
@@ -25,14 +26,16 @@
 #define VOISIN_CENTRE_BAS2_DROIT 16
 #define VOISIN_CENTRE_BAS2_GAUCHE 17
 
+#define OBSTACLE 1
+#define SOL 0
+#define ELTAJOUTE 2
+
 typedef struct s_case {
     int i, j;
     t_block* tiles;
     int val;
     struct s_case* tabVoisin[18];
 } t_case;
-
-
 
 typedef struct s_grille {
     int nbLigne;
