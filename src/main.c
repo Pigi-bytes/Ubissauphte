@@ -113,7 +113,7 @@ GENERATE_WRAPPER_2(handleInputButton, t_input*, t_button*)
 GENERATE_WRAPPER_5(handleInputPlayer, t_input*, t_joueur*, t_grid*, t_viewPort*, float*)
 
 GENERATE_WRAPPER_2(setRenderTarget, SDL_Renderer*, t_viewPort*)
-GENERATE_WRAPPER_3(centerCameraOn, t_camera*, int*, int*)
+GENERATE_WRAPPER_4(centerCameraOn, t_camera*, int*, int*, float*)
 
 GENERATE_WRAPPER_3(resizeViewport, t_viewPort*, int*, int*)
 GENERATE_WRAPPER_4(resizeMinimap, SDL_Renderer*, t_minimap*, int*, int*)
@@ -157,7 +157,6 @@ void afficherFps(t_fonctionParam* fonction) {
 
 void modifierFps(t_fonctionParam* fonction) {
     t_frameData* fps = GET_PTR(fonction, 0, t_frameData*);
-    printf("%d\n", fps->targetFPS);
     t_text** text = GET_PTR(fonction, 1, t_text**);
     SDL_Renderer* renderer = GET_PTR(fonction, 2, SDL_Renderer*);
     int sizeOutline = 2;
@@ -424,19 +423,49 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     const uint8_t ENTITY = registerType(entities->registry, NULL, "ENTITY");
 
     t_joueur* joueur = createPlayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerTileSet);
+    t_arme* hache = malloc(sizeof(t_arme));
+    t_arme* epee = malloc(sizeof(t_arme));
+    t_arme* dague = malloc(sizeof(t_arme));
 
-    joueur->arme.attackDuration = 0.2f;
-    joueur->arme.attackTimer = 0.0f;
-    joueur->arme.attackHitbox.radius = 8.0f;
-    joueur->arme.texture = getObject(tileset->textureTiles, 105);
-    joueur->arme.displayRect = (SDL_Rect){0, 0, 16, 16};
+    *hache = (t_arme){.mass = 8.0f, .damage = 30.0f, .range = 10.0f, .angleAttack = M_PI * 2, .attackDuration = 1.0f, .attackCooldown = 1.5f};
+    hache->texture = getObject(tileset->textureTiles, 119);
+    hache->displayRect = (SDL_Rect){0, 0, 16, 16};
+    *epee = (t_arme){.mass = 3.0f, .damage = 20.0f, .range = 35.0f, .angleAttack = M_PI / 3, .attackDuration = 0.5f, .attackCooldown = 0.6f};
+    epee->texture = getObject(tileset->textureTiles, 105);
+    epee->displayRect = (SDL_Rect){0, 0, 16, 16};
+    *dague = (t_arme){.mass = 2.0f, .damage = 15.0f, .range = 35.0f, .angleAttack = M_PI / 2, .attackDuration = 0.3f, .attackCooldown = 0.2f};
+    dague->texture = getObject(tileset->textureTiles, 104);
+    dague->displayRect = (SDL_Rect){0, 0, 16, 16};
+
+    joueur->currentWeapon = dague;
 
     addObject(entities, &joueur->entity, ENTITY);
     placeOnRandomTile(level, &joueur->entity, entities);
 
     t_enemy* enemy;
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 3; i++) {
         enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet);
+        addObject(entities, &enemy->entity, ENTITY);
+        placeOnRandomTile(level, &enemy->entity, entities);
+        ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
+    }
+
+    for (int i = 0; i < 3; i++) {
+        enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 24, 24}, slimeTileSet);
+        enemy->entity.physics.mass = 5;
+        enemy->maxHealth = 200;
+        enemy->health = 200;
+        addObject(entities, &enemy->entity, ENTITY);
+        placeOnRandomTile(level, &enemy->entity, entities);
+        ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
+    }
+
+    for (int i = 0; i < 2; i++) {
+        enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 32, 32}, slimeTileSet);
+        enemy->entity.physics.mass = 10;
+        enemy->maxHealth = 300;
+        enemy->health = 300;
+
         addObject(entities, &enemy->entity, ENTITY);
         placeOnRandomTile(level, &enemy->entity, entities);
         ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
@@ -461,6 +490,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, 1, FONCTION_PARAMS(renderer));
 
     sceneRegisterFunction(scene, MINIMAP_TYPE, UPDATE, updateMinimapWrapper, 0, FONCTION_PARAMS(camera, renderer));
+    sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&joueur->entity.displayRect.x, &joueur->entity.displayRect.y, &frameData->deltaTime));
     sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&joueur->entity.displayRect.x, &joueur->entity.displayRect.y));
 
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_RESIZE, resizeViewportWrapper, 0, FONCTION_PARAMS(&input->windowWidth, &input->windowHeight));
@@ -502,6 +532,7 @@ int main(int argc, char* argv[]) {
     contr->down = SDL_SCANCODE_DOWN;
     contr->left = SDL_SCANCODE_LEFT;
     contr->right = SDL_SCANCODE_RIGHT;
+    contr->dash = SDL_SCANCODE_SPACE;
 
     t_scene* scene = createMainMenu(renderer, input, font, frameData, sceneController);
     t_scene* scene0 = createOptionMenu(renderer, input, font, frameData, window, option, contr, sceneController);

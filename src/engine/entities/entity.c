@@ -9,11 +9,11 @@ void renderEntity(SDL_Renderer* renderer, t_entity* entity, t_camera* camera) {
         }
         SDL_RenderCopyEx(renderer, entity->texture, NULL, &entity->displayRect, 0, NULL, entity->flip);
         if (entity->debug == SDL_TRUE) {
-            Debug_PushRect(&entity->displayRect, 1, COLORDEFAULT);
+            Debug_PushRect(&entity->displayRect, 1, SDL_COLOR_BLUE);
             if (entity->useCircleCollision) {
-                Debug_PushCircle(entity->collisionCircle.x, entity->collisionCircle.y, entity->collisionCircle.radius, COLORDEFAULT);
+                Debug_PushCircle(entity->collisionCircle.x, entity->collisionCircle.y, entity->collisionCircle.radius, SDL_COLOR_RED);
             } else {
-                Debug_PushRect(&entity->collisionRect, 1, COLORDEFAULT);
+                Debug_PushRect(&entity->collisionRect, 1, SDL_COLOR_RED);
             }
         }
     }

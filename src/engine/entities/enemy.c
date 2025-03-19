@@ -90,14 +90,68 @@ void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect) {
     base->entity.collisionCircle.x = rect.x + rect.w / 2;
     base->entity.collisionCircle.y = rect.y + rect.h / 2;
     base->entity.collisionCircle.radius = fminf(rect.w, rect.h) / 2;
+
+    base->showHealthBar = SDL_FALSE;          // La barre de vie est cachée par défaut
+    base->healthBarTimer = initDeltaTimer();  // Timer pour la barre de vie
+    startDeltaTimer(base->healthBarTimer);    // Timer pour la barre de vie
 }
 
 void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
+    if (enemy->isInvincible) {
+        // Alterner entre rouge et blanc toutes les 0.1 seconde
+        float timer = getDeltaTimer(enemy->invincibilityTimer);
+        if ((int)(timer * 10) % 2 == 0) {
+            SDL_SetTextureColorMod(enemy->entity.texture, 255, 0, 0);  // Rouge
+        } else {
+            SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);  // Blanc
+        }
+    } else {
+        SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);  // Couleur normale
+    }
+
     renderEntity(renderer, &enemy->entity, camera);
+
+    if (enemy->showHealthBar) {
+        SDL_Rect enemyPos = enemy->entity.displayRect;  // Position de l'ennemi
+        float healthRatio = (float)enemy->health / (float)enemy->maxHealth;
+
+        float barWidth = enemy->entity.displayRect.w;  // Largeur de la barre de vie
+        float barHeight = 5.0f;                        // Hauteur de la barre de vie
+        float barX = enemyPos.x;                       // Centrer la barre au-dessus de l'ennemi
+        float barY = enemyPos.y - 20.0f;               // Position Y de la barre (au-dessus de l'ennemi)
+
+        // Dessiner le fond de la barre de vie (en rouge)
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);  // Rouge
+        SDL_Rect backgroundRect = {barX, barY, barWidth, barHeight};
+        SDL_RenderFillRect(renderer, &backgroundRect);
+
+        // Dessiner la partie remplie de la barre de vie (en vert)
+        SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);  // Vert
+        SDL_Rect healthRect = {barX, barY, barWidth * healthRatio, barHeight};
+        SDL_RenderFillRect(renderer, &healthRect);
+    }
 }
 
 void updateEnemy(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities) {
-    enemy->update(enemy, deltaTime, grid, entities);
+    if (enemy->isInvincible) {
+        updateDeltaTimer(enemy->invincibilityTimer, *deltaTime);
+
+        if (getDeltaTimer(enemy->invincibilityTimer) >= enemy->invincibilityDuration) {
+            enemy->isInvincible = SDL_FALSE;
+        }
+    }
+
+    if (enemy->showHealthBar) {
+        updateDeltaTimer(enemy->healthBarTimer, *deltaTime);
+
+        if (getDeltaTimer(enemy->healthBarTimer) >= 3.0f) {
+            enemy->showHealthBar = SDL_FALSE;
+        }
+    }
+
+    if (enemy->health != 0 && enemy->update) {
+        enemy->update(enemy, deltaTime, grid, entities);
+    }
 }
 
 void freeEnemy(void* object) {
@@ -105,4 +159,22 @@ void freeEnemy(void* object) {
     SDL_DestroyTexture(enemy->entity.texture);
     // freeAnimationController(enemy->entity.animationController);
     free(enemy);
+}
+
+void takeDamage(t_enemy* enemy, int damage) {
+    if (enemy->isInvincible) return;  // Si l'ennemi est invincible, on ne fait rien
+
+    enemy->showHealthBar = SDL_TRUE;
+    resetDeltaTimer(enemy->healthBarTimer);
+
+    enemy->health -= damage;
+    if (enemy->health < 0) {
+        enemy->health = 0;
+        enemy->showHealthBar = SDL_FALSE;
+    }
+    printf("%d \n", enemy->health);
+
+    // Activer l'invincibilité
+    enemy->isInvincible = SDL_TRUE;
+    resetDeltaTimer(enemy->invincibilityTimer);
 }

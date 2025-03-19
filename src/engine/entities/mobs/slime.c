@@ -21,11 +21,19 @@ t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
     initEnemyBase(&slime->base, texture, rect);
     slime->base.update = updateSlime;
 
+    slime->base.health = 100;  // Valeur par défaut
+    slime->base.maxHealth = 100;
+    slime->base.isInvincible = SDL_FALSE;
+    slime->base.invincibilityDuration = 1.0f;  // 1 seconde d'invincibilité
+    slime->base.invincibilityTimer = initDeltaTimer();
+    startDeltaTimer(slime->base.invincibilityTimer);
+
     slime->base.entity.physics = (t_physics){.velocity = {0, 0}, .mass = 2.0f, .friction = 0.02f, .restitution = 1.0f};
     addAnimation(slime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 480, SDL_TRUE, "idle"));
     addAnimation(slime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2, 1, 3}, 4, 180, SDL_TRUE, "walk"));
 
     slime->state = SLIME_IDLE;
+    slime->base.entity.debug = SDL_TRUE;
 
     slime->detectionRange = (t_circle){.x = rect.x + rect.w / 2, .y = rect.y + rect.h / 2, .radius = randomWithPercentageVariation(DETECTION_RADIUS, 0.2)};
     slime->baseDetectionRange = slime->detectionRange.radius;
@@ -160,7 +168,6 @@ void updateSlime(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager
     slime->detectionRange.y = enemy->entity.collisionCircle.y;
 
     updateDeltaTimer(slime->jumpCooldownTimer, *deltaTime);
-
     updateSlimeInfo(slime, player, grid);
 
     switch (slime->state) {
