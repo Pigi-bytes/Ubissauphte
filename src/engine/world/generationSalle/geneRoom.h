@@ -2,6 +2,7 @@
 #define GENEROOM_H
 
 // #include "../debug.h"
+#include <dirent.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>

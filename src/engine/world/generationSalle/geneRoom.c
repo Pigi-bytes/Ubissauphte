@@ -47,15 +47,10 @@ t_block *getSol(t_listeBlock **listAllBlock, t_case *c) {
             return blockByName(listBlock, SOL_OMBRE_MUR_GAUCHE2);
         return blockByName(listBlock, SOL_OMBRE_MUR_GAUCHE);
     }
-    if (c->tabVoisin[VOISIN_HAUT]->tiles != NULL && blockIsOmbre(c->tabVoisin[VOISIN_HAUT]->tiles) && c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT]->val == OBSTACLE && c->tabVoisin[VOISIN_GAUCHE]->val == SOL) {
+    if (c->tabVoisin[VOISIN_HAUT]->tiles != NULL && blockIsOmbre(c->tabVoisin[VOISIN_HAUT]->tiles) && c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT]->val == OBSTACLE && blockIsOmbre(c->tabVoisin[VOISIN_GAUCHE]->tiles)) {
         c->val = ELTAJOUTE;
         return blockByName(listBlock, SOL_OMBRE_ANGLE_GAUCHE);
     }
-    if (c->tabVoisin[VOISIN_HAUT]->tiles != NULL && blockIsOmbre(c->tabVoisin[VOISIN_HAUT]->tiles) && c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]->val == OBSTACLE && c->tabVoisin[VOISIN_DROIT]->val == SOL) {
-        c->val = ELTAJOUTE;
-        return blockByName(listBlock, SOL_OMBRE_ANGLE_DROIT);
-    }
-
     return randomBlocByType(listBlock);
 }
 
@@ -191,22 +186,21 @@ void choixTiles(t_listeBlock **listAllBlock, t_grille *g) {
 }
 
 void saveMap(t_grille *g) {
-    system("ls  ./assets/map/map*.txt|wc -l > ./src/nb.txt");
-    FILE *nbFichier = fopen("./src/nb.txt", "r");
-    if (!nbFichier) {
-        perror("problème d'ouverture du fichie 1r\n");
-        exit(EXIT_FAILURE);
+    DIR *dir;
+    int count = 0;
+    struct dirent *entry;
+    char chaine[100];
+    dir = opendir("./assets/map");
+    if (!dir) {
+        printf("Erreur lors de l'ouverture des fichiers");
     }
-    char nb[100];
-    int entier;
-    fscanf(nbFichier, "%d", &entier);
-    system("rm ./src/nb.txt");
-    entier += 1;
-    sprintf(nb, "%d", entier);
-    char chaine[100] = "map";
-    strcat(chaine, nb);
-    strcat(chaine, ".txt");
-    fclose(nbFichier);
+
+    while ((entry = readdir(dir)) != NULL) {
+        if ((strncmp(entry->d_name, "map", strlen("map")) == 0) && (strstr(entry->d_name, ".txt") != NULL)) {
+            count++;
+        }
+    }
+    sprintf(chaine, "map%d.txt", count);
     char ouverture[100] = "assets/map/";
     strcat(ouverture, chaine);
     FILE *fichier = fopen(ouverture, "a");
