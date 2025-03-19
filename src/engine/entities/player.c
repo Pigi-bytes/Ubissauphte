@@ -1,5 +1,19 @@
 #include "player.h"
 
+float lerpAngle(float a, float b, float t) {
+    float diff = b - a;
+    // Si la différence est proche de 2pi (ou -2pi), on effectue une interpolation linéaire sur 2pi
+    if (fabsf(diff - 2.0f * M_PI) < EPSILON || fabsf(diff + 2.0f * M_PI) < EPSILON) {
+        return a + 2.0f * M_PI * t;
+    }
+    float delta = fmodf(diff + M_PI, 2.0f * M_PI) - M_PI;
+    return a + delta * t;
+}
+
+float smoothStepf(float step) {
+    return step * step * (3.0f - 2.0f * step);
+}
+
 t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
     t_joueur* joueur = (t_joueur*)malloc(sizeof(t_joueur));
 
@@ -13,16 +27,13 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->entity.useCircleCollision = SDL_TRUE;
     joueur->entity.collisionCircle.x = rect.x + rect.w / 2;
     joueur->entity.collisionCircle.y = rect.y + rect.h / 2;
-    joueur->entity.collisionCircle.radius = fminf(rect.w, rect.h) / 2;  // Set radius to half the smaller dimension of the rect
+    joueur->entity.collisionCircle.radius = fminf(rect.w, rect.h) / 2;
 
-    t_physics playerPhysics = {
-        .velocity = {0, 0},  // Vitesse initiale
-        .mass = 10.0f,
-        .friction = 0.02f,
-        .restitution = 0.02};
+    joueur->entity.physics = (t_physics){.velocity = {0, 0}, .mass = 10.0f, .friction = 0.02f, .restitution = 0.02};
 
-    joueur->entity.physics = playerPhysics;
-    joueur->isAttacking = SDL_FALSE;
+    joueur->currentWeapon = NULL;
+    joueur->aimAngle = 0.0f;
+    joueur->attack = (t_attack){.isActive = SDL_FALSE, .progress = 0.0f, .hitBox = {{0, 0}, 0.0f, 0.0f, 0.0f}, .nbHits = 0};
 
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, SDL_TRUE, "idle"));
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){3, 4}, 2, 240, SDL_TRUE, "walk"));
@@ -31,53 +42,85 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     return joueur;
 }
 
+// void draw_slash(SDL_Renderer* renderer, SDL_FPoint center, float angle, float range, float arc_width, float line_width) {
+//     const int segments = 50;                 // Nombre de segments pour l'arc (plus élevé = plus lisse)
+//     const int point_size = (int)line_width;  // Taille des points (épaisseur du slash)
+
+//     float start_angle = angle - arc_width / 2;  // Angle de départ du slash
+//     float end_angle = angle + arc_width / 2;    // Angle de fin du slash
+
+//     // Couleur jaune/blanc du slash
+//     SDL_SetRenderDrawColor(renderer, 255, 255, 100, 255);
+
+//     // Dessiner des gros points le long de l'arc
+//     for (int i = 0; i <= segments; i++) {
+//         float t = (float)i / segments;                                      // Progression le long de l'arc (0.0 à 1.0)
+//         float current_angle = start_angle + t * (end_angle - start_angle);  // Angle actuel
+
+//         // Point central de l'arc
+//         SDL_FPoint arc_point = {
+//             center.x + cosf(current_angle) * range,
+//             center.y + sinf(current_angle) * range};
+
+//         // Dessiner un gros point (carré de taille `point_size`)
+//         for (int dx = -point_size / 2; dx <= point_size / 2; dx++) {
+//             for (int dy = -point_size / 2; dy <= point_size / 2; dy++) {
+//                 SDL_RenderDrawPoint(renderer, (int)(arc_point.x + dx), (int)(arc_point.y + dy));
+//             }
+//         }
+//     }
+// }
+
 void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
-    renderEntity(renderer, &player->entity, camera);
+    player->currentWeapon->displayRect.x = (player->entity.collisionCircle.x - player->currentWeapon->displayRect.w / 2) + 8;
+    player->currentWeapon->displayRect.y = (player->entity.collisionCircle.y - player->currentWeapon->displayRect.h / 2) + 2;
 
-    player->arme.displayRect.x = (player->entity.collisionCircle.x - player->arme.displayRect.w / 2) + 8;
-    player->arme.displayRect.y = (player->entity.collisionCircle.y - player->arme.displayRect.h / 2) + 2;
-
-    Debug_PushRect(&player->arme.displayRect, 1, SDL_COLOR_RED);
-
-    float angleEnDegres = -player->attackAngle * (180.0f / M_PI) + 90.0f; // oe ba enfait fallait ajouter 90 skibidis et pas sigmatiser le signe
-    SDL_Point pivot = {player->arme.displayRect.w / 2, player->arme.displayRect.h / 2 + player->arme.displayRect.h / 4};
-
-    SDL_FPoint pivotWorldPos = {
-        player->arme.displayRect.x + pivot.x,
-        player->arme.displayRect.y + pivot.y};
-
-    float crossSize = 3.0f;
-    Debug_PushLine(
-        pivotWorldPos.x - crossSize, pivotWorldPos.y,
-        pivotWorldPos.x + crossSize, pivotWorldPos.y,
-        1,
-        SDL_COLOR_PINK);
-    Debug_PushLine(
-        pivotWorldPos.x, pivotWorldPos.y - crossSize,
-        pivotWorldPos.x, pivotWorldPos.y + crossSize,
-        1,
-        SDL_COLOR_PINK);
-
-    SDL_RenderCopyEx(renderer, player->arme.texture, NULL, &player->arme.displayRect, angleEnDegres, &pivot, SDL_FLIP_NONE);
-
-    if (player->entity.debug && player->isAttacking) {
-        Debug_PushCircle(player->arme.attackHitbox.x, player->arme.attackHitbox.y, player->arme.attackHitbox.radius, SDL_COLOR_PINK);
-        Debug_PushLine(player->entity.collisionCircle.x, player->entity.collisionCircle.y, player->entity.collisionCircle.x + cosf(-player->attackAngle) * 40, player->entity.collisionCircle.y - sinf(player->attackAngle) * 40, 3, SDL_COLOR_TURQUOISE);
+    if (player->attack.nbHits != 0) {
+        cameraAddShake(camera, 3, 0.3f);
     }
+
+    if (player->attack.isActive) {
+        SDL_FPoint origin = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
+        float range = player->currentWeapon->range;
+        float angle = player->aimAngle;
+        float arc = player->currentWeapon->angleAttack;
+
+        SDL_FPoint start = {origin.x + cosf(angle - arc / 2) * range, origin.y + sinf(angle - arc / 2) * range};
+        SDL_FPoint end = {origin.x + cosf(angle + arc / 2) * range, origin.y + sinf(angle + arc / 2) * range};
+
+        Debug_PushLine(origin.x, origin.y, start.x, start.y, 2, SDL_COLOR_CYAN);  // Bord gauche
+        Debug_PushLine(origin.x, origin.y, end.x, end.y, 2, SDL_COLOR_CYAN);      // Bord droit
+
+        int segments = 20;
+        float angle_step = arc / segments;
+        SDL_FPoint prev_point = start;
+
+        for (int i = 1; i <= segments; i++) {
+            float current_angle = angle - arc / 2 + angle_step * i;
+            SDL_FPoint current_point = {origin.x + cosf(current_angle) * range, origin.y + sinf(current_angle) * range};
+
+            Debug_PushLine(prev_point.x, prev_point.y, current_point.x, current_point.y, 1, SDL_COLOR_CYAN);
+            prev_point = current_point;
+        }
+
+        // draw_slash(renderer, origin, player->attack.slash_angle, player->attack.slash_range, player->attack.slash_width, 3);
+    }
+
+    renderEntity(renderer, &player->entity, camera);
+    SDL_RenderCopyEx(renderer, player->currentWeapon->texture, NULL, &player->currentWeapon->displayRect, 0, NULL, SDL_FLIP_NONE);
 }
 
 void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectManager* entities) {
-    if (player->isAttacking) {
-        player->arme.attackTimer += *deltaTime;
+    player->attack.nbHits = 0;
 
-        float weaponLength = 10.0f;
-        player->arme.attackHitbox.x = player->entity.collisionCircle.x + cosf(player->attackAngle) * weaponLength;
-        player->arme.attackHitbox.y = player->entity.collisionCircle.y - sinf(player->attackAngle) * weaponLength;
-
-        if (player->arme.attackTimer >= player->arme.attackDuration) {
-            player->isAttacking = SDL_FALSE;
-        }
+    if (player->attack.isActive) {
+        update_attack(player, deltaTime, entities);
     }
+
+    if (player->attack.cooldown > 0) {
+        player->attack.cooldown -= *deltaTime;
+    }
+
     updatePhysicEntity(&player->entity, deltaTime, grid, entities);
 }
 
@@ -85,43 +128,38 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     float force = 400.0f;
     float force_dash = force * 3.5;
 
-    float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
-    convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
-    float playerX = player->entity.collisionCircle.x;
-    float playerY = player->entity.collisionCircle.y;
-
-    SDL_Point pivot = {player->arme.displayRect.w / 2, player->arme.displayRect.h / 2 + player->arme.displayRect.h / 4};
-
-    float dirX = mouseWorldX - (player->arme.displayRect.x + pivot.x); // oe oe l'ékip g fix le bug skibidi sigma
-    float dirY = mouseWorldY - (player->arme.displayRect.y + pivot.y);
-
-    player->attackAngle = atan2f(-dirY, dirX);
-
-    if (input->key[player->control->left]) {
-        player->entity.physics.velocity.x -= force * *deltaTime;
-        player->entity.flip = SDL_FLIP_HORIZONTAL;
-    }
-    if (input->key[player->control->right]) {
-        player->entity.physics.velocity.x += force * *deltaTime;
-        player->entity.flip = SDL_FLIP_NONE;
-    }
-    if (input->key[player->control->up]) player->entity.physics.velocity.y -= force * *deltaTime;
-    if (input->key[player->control->down]) player->entity.physics.velocity.y += force * *deltaTime;
-
-    if (input->mouseButtons[SDL_BUTTON_RIGHT]) {
-        float magnitude = sqrt(dirX * dirX + dirY * dirY);
-        if (magnitude > 0.0f) {
-            dirX /= magnitude;
-            dirY /= magnitude;
+    if (!player->attack.isActive) {
+        if (input->key[player->control->left]) {
+            player->entity.physics.velocity.x -= force * *deltaTime;
+            player->entity.flip = SDL_FLIP_HORIZONTAL;
         }
+        if (input->key[player->control->right]) {
+            player->entity.physics.velocity.x += force * *deltaTime;
+            player->entity.flip = SDL_FLIP_NONE;
+        }
+        if (input->key[player->control->up]) player->entity.physics.velocity.y -= force * *deltaTime;
+        if (input->key[player->control->down]) player->entity.physics.velocity.y += force * *deltaTime;
 
-        player->entity.physics.velocity.x += dirX * force_dash * *deltaTime;
-        player->entity.physics.velocity.y += dirY * force_dash * *deltaTime;
-    }
+        if (input->mouseButtons[SDL_BUTTON_LEFT] || input->key[player->control->dash]) {
+            float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
+            convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
+            float dx = mouseWorldX - player->entity.collisionCircle.x;
+            float dy = mouseWorldY - player->entity.collisionCircle.y;
 
-    if (input->mouseButtons[SDL_BUTTON_LEFT]) {
-        player->isAttacking = SDL_TRUE;
-        player->arme.attackTimer = 0.0f;
+            if (input->key[player->control->dash]) {
+                float magnitude = sqrt(dx * dx + dy * dy);
+                if (magnitude > 0.0f) {
+                    dx /= magnitude;
+                    dy /= magnitude;
+                }
+                player->entity.physics.velocity.x += dx * force_dash * *deltaTime;
+                player->entity.physics.velocity.y += dy * force_dash * *deltaTime;
+            }
+            if (input->mouseButtons[SDL_BUTTON_LEFT]) {
+                player->aimAngle = atan2f(dy, dx);
+                start_attack(player);
+            }
+        }
     }
 
     if (player->entity.physics.velocity.x != 0.0f || player->entity.physics.velocity.y != 0.0f) {
@@ -129,6 +167,91 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     } else {
         setAnimation(player->entity.animationController, "idle");
     }
+}
+
+void start_attack(t_joueur* player) {
+    if (!player || !player->currentWeapon) return;
+
+    t_arme* weapon = player->currentWeapon;
+    player->attack.isActive = SDL_TRUE;
+    player->attack.progress = 0.0f;
+    player->attack.nbHits = 0;
+
+    player->attack.hitBox.origin = (SDL_FPoint){player->entity.collisionCircle.x, player->entity.collisionCircle.y},
+    player->attack.hitBox.radius = weapon->range;
+
+    player->attack.cooldown = player->currentWeapon->attackCooldown;
+
+    float halfArc = weapon->angleAttack / 2.0f;
+    player->attack.hitBox.startAngle = player->aimAngle - halfArc;
+    player->attack.hitBox.endAngle = player->aimAngle + halfArc;
+}
+
+void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities) {
+    if (!player->attack.isActive) return;
+
+    t_arme* weapon = player->currentWeapon;
+    SDL_FPoint centreAttack = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
+
+    player->attack.progress += *deltaTime / weapon->attackDuration;
+    float currentAngle = lerpAngle(player->attack.hitBox.startAngle, player->attack.hitBox.endAngle, smoothStepf(player->attack.progress));
+
+    float halfArc = weapon->angleAttack / 2.0f;
+    player->attack.hitBox.startAngle = currentAngle - halfArc;
+    player->attack.hitBox.endAngle = currentAngle + halfArc;
+
+    float knockbackForce = weapon->mass * 10.0f;
+
+    for (int i = 1; i < entities->count; i++) {
+        t_entity* enemy = getObject(entities, i);
+        SDL_FPoint positionEnemy = {enemy->collisionCircle.x, enemy->collisionCircle.y};
+
+        if (is_in_attack_sector(positionEnemy, enemy->collisionCircle.radius, player->attack.hitBox.origin, currentAngle, player->currentWeapon->range, player->currentWeapon->angleAttack)) {
+            takeDamage((t_enemy*)enemy, player->currentWeapon->damage);
+            float dx = positionEnemy.x - centreAttack.x;
+            float dy = positionEnemy.y - centreAttack.y;
+
+            float length = sqrtf(dx * dx + dy * dy);
+            if (length > 0) {
+                dx /= length;
+                dy /= length;
+            }
+            enemy->physics.velocity.x += dx * knockbackForce / enemy->physics.mass;
+            enemy->physics.velocity.y += dy * knockbackForce / enemy->physics.mass;
+            player->attack.nbHits++;
+        }
+    }
+
+    if (player->attack.progress >= 1.0f) {
+        player->attack.isActive = SDL_FALSE;
+    }
+}
+
+SDL_bool is_in_attack_sector(SDL_FPoint target, float target_radius, SDL_FPoint origin, float current_angle, float range, float arc) {
+    // Calcul de la distance au carré pour éviter la racine carrée
+    SDL_FPoint diff = {target.x - origin.x, target.y - origin.y};
+    float dist_sq = diff.x * diff.x + diff.y * diff.y;
+
+    float max_distance = range + target_radius;
+    // Vérification si la cible est dans le rayon de l'attaque
+    if (dist_sq > max_distance * max_distance) return SDL_FALSE;
+
+    float distance = sqrtf(dist_sq);
+    if (distance <= target_radius) {
+        return SDL_TRUE;
+    }
+
+    // Calcul de l'angle de la cible par rapport à l'origine
+    float target_angle = atan2f(diff.y, diff.x);
+
+    // Normalisation de la différence d'angle
+    float angle_diff = fmodf(target_angle - current_angle + M_PI, 2 * M_PI) - M_PI;
+
+    float theta = asinf(target_radius / distance);
+    float allowed_angle = (arc / 2) + theta;
+
+    // Vérification si l'angle de la cible est dans l'arc d'attaque
+    return fabsf(angle_diff) <= allowed_angle;
 }
 
 void freePlayer(void* object) {

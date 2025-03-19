@@ -5,17 +5,36 @@
 
 #include "../../debug.h"
 #include "../../io/input.h"
+#include "enemy.h"
 #include "entity.h"
 #include "systems/physicsSystem.h"
 #include "tiles.h"
 
-typedef struct {
-    SDL_Rect displayRect;
-    SDL_Texture* texture;
+// Anticipation > contact > recovery
+// https://www.youtube.com/watch?v=8X4fx-YncqA
 
-    t_circle attackHitbox;
-    float attackDuration;
-    float attackTimer;
+typedef struct {
+    SDL_bool isActive;
+    float cooldown;
+    float progress;   // Progression de 0.0 à 1.0
+    t_sector hitBox;  // Secteur d'attaque (origine, angles, portée)
+    int nbHits;
+
+    // float slash_angle;
+    // float slash_range;
+    // float slash_width;
+} t_attack;
+
+typedef struct {
+    float mass;            // Masse (influence le knockback)
+    float damage;          // Dégâts infligés
+    float range;           // Portée effective
+    float angleAttack;     // Largeur du cone d'attaque
+    float attackDuration;  // Duree de l'animation d'attaque
+    float attackCooldown;  // Temps de recharge
+
+    SDL_Texture* texture;  // Sprite optionnel de l'arme
+    SDL_Rect displayRect;  // Position d'affichage sur le joueur
 } t_arme;
 
 typedef struct {
@@ -23,16 +42,16 @@ typedef struct {
     SDL_Scancode down;
     SDL_Scancode left;
     SDL_Scancode right;
+    SDL_Scancode dash;
 } t_control;
 
 typedef struct {
     t_entity entity;
     t_control* control;
 
-    SDL_FPoint armeOffset;
-    SDL_bool isAttacking;
-    float attackAngle;
-    t_arme arme;
+    t_arme* currentWeapon;
+    t_attack attack;
+    float aimAngle;
 } t_joueur;
 
 t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset);
@@ -41,5 +60,9 @@ void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectMana
 void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera);
 void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime);
 void freePlayer(void* object);
+
+SDL_bool is_in_attack_sector(SDL_FPoint target, float target_radius, SDL_FPoint origin, float current_angle, float range, float arc);
+void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities);
+void start_attack(t_joueur* player);
 
 #endif
