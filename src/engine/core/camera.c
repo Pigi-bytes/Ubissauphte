@@ -6,6 +6,13 @@ t_camera* createCamera(int levelW, int levelH, int camW, int camH) {
         fprintf(stderr, "Erreur: Impossible d'allouer la mémoire pour la camera.\n");
         return NULL;
     }
+    cam->shakeOffset.x = 0;
+    cam->shakeOffset.y = 0;
+
+    cam->shakeIntensity = 0.0;
+    cam->shakeTimer = initDeltaTimer();
+    startDeltaTimer(cam->shakeTimer);
+
     cam->x = 0;
     cam->y = 0;
     cam->w = camW;
@@ -15,11 +22,16 @@ t_camera* createCamera(int levelW, int levelH, int camW, int camH) {
     return cam;
 }
 
-void centerCameraOn(t_camera* cam, int* x, int* y) {
+void centerCameraOn(t_camera* cam, int* x, int* y, float* deltaTime) {
+    cameraUpdateShake(cam, deltaTime);
+
     // X = position cible - demi-largeur de la vue camera
     // Y = position cible - demi-hauteur de la vue camera
     int newX = *x - (cam->w / 2);
     int newY = *y - (cam->h / 2);
+
+    newX += cam->shakeOffset.x;
+    newY += cam->shakeOffset.y;
 
     // Calcul des limites maximales autorisées
     // Max X = taille niveau - largeur camera (pour éviter sortie droite/bas)
@@ -72,7 +84,31 @@ t_viewPort* createViewport(SDL_Renderer* renderer, t_camera* camera, int windowW
 void renderViewport(SDL_Renderer* renderer, t_viewPort* vp) {
     SDL_SetRenderTarget(renderer, NULL);
     SDL_Rect srcRect = {vp->camera->x, vp->camera->y, vp->camera->w, vp->camera->h};
-    SDL_RenderCopy(renderer, vp->renderTarget, &srcRect, &vp->screenRect);
+    if (vp->camera->shakeIntensity > 0) {
+        SDL_RenderCopy(renderer, vp->renderTarget, &srcRect, &vp->screenRect);
+
+        SDL_Texture* temp = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, vp->screenRect.w, vp->screenRect.h);
+
+        SDL_SetRenderTarget(renderer, temp);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+        SDL_RenderClear(renderer);
+
+        SDL_RenderCopy(renderer, vp->renderTarget, &srcRect, NULL);
+
+        SDL_SetTextureBlendMode(temp, SDL_BLENDMODE_BLEND);
+        Uint8 alpha = 150 - (vp->camera->shakeIntensity * 30);
+        alpha = alpha > 255 ? 255 : (alpha < 50 ? 50 : alpha);  // Clamp [50-255]
+        SDL_SetTextureAlphaMod(temp, alpha);
+
+        SDL_SetRenderTarget(renderer, NULL);
+        for (int i = 0; i < 3; i++) {
+            SDL_Rect offsetRect = {vp->screenRect.x + (rand() % 5 - 2), vp->screenRect.y + (rand() % 5 - 2), vp->screenRect.w, vp->screenRect.h};
+            SDL_RenderCopy(renderer, temp, NULL, &offsetRect);
+        }
+        SDL_DestroyTexture(temp);
+    } else {
+        SDL_RenderCopy(renderer, vp->renderTarget, &srcRect, &vp->screenRect);
+    }
 }
 
 void setRenderTarget(SDL_Renderer* renderer, t_viewPort* vp) {
@@ -114,4 +150,35 @@ void convertMouseToWorld(t_viewPort* vp, int mouseX, int mouseY, float* worldX, 
     // Application du zoom et du decalage de la caméra
     *worldX = vp->camera->x + (nx * vp->camera->w);
     *worldY = vp->camera->y + (ny * vp->camera->h);
+}
+
+void cameraUpdateShake(t_camera* cam, float* deltaTime) {
+    if (cam->shakeTimer->accumulatedTime <= 0.0f) return;
+
+    updateDeltaTimer(cam->shakeTimer, *deltaTime);
+
+    float currentTime = getDeltaTimer(cam->shakeTimer);
+    float progress = currentTime / cam->shakeTimer->accumulatedTime;
+
+    float currentIntensity = cam->shakeIntensity * (1.0f - progress * progress);
+
+    cam->shakeIntensity = currentIntensity;
+
+    cam->shakeOffset.x = (rand() % (int)(currentIntensity * 2 + 1)) - currentIntensity;
+    cam->shakeOffset.y = (rand() % (int)(currentIntensity * 2 + 1)) - currentIntensity;
+
+    if (currentTime >= cam->shakeTimer->accumulatedTime) {
+        resetDeltaTimer(cam->shakeTimer);
+        cam->shakeOffset.x = 0;
+        cam->shakeOffset.y = 0;
+        cam->shakeIntensity = 0.0f;
+    }
+}
+
+void cameraAddShake(t_camera* cam, float intensity, float duration) {
+    if (intensity > cam->shakeIntensity) {
+        cam->shakeIntensity = intensity;
+        cam->shakeTimer->accumulatedTime = duration;
+        cam->shakeTimer->isStarted = SDL_FALSE;
+    }
 }

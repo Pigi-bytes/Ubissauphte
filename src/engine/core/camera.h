@@ -10,6 +10,7 @@
 #include <stdlib.h>
 
 #include "../../debug.h"
+#include "../../utils/timer.h"
 
 /**
  * @struct t_camera
@@ -22,6 +23,11 @@ typedef struct {
     int x, y;            ///< Coin supérieur gauche en coordonnées niveau (pixels)
     int w, h;            ///< Dimensions de la zone visible (pixels)
     int levelW, levelH;  ///< Dimensions totales du niveau (limites de déplacement)
+
+    float shakeIntensity;  ///< Force actuelle du shake (0 = aucun)
+    float baseShakeIntensity;
+    t_deltaTimer* shakeTimer;  // Timer pour la durée du shake
+    SDL_Point shakeOffset;     ///< Décalage aléatoire actuel
 } t_camera;
 
 /**
@@ -58,7 +64,7 @@ t_camera* createCamera(int levelW, int levelH, int camW, int camH);
  * @details
  * @note Les coordonnées (x,y) sont relatives au niveau, pas à l'écran
  */
-void centerCameraOn(t_camera* cam, int* x, int* y);
+void centerCameraOn(t_camera* cam, int* x, int* y, float*);
 
 /**
  * @brief Applique un zoom relatif à la caméra via le viewport
@@ -141,5 +147,8 @@ void freeCamera(void* object);
 SDL_bool isRectOnCamera(SDL_Rect* rect, t_camera* camera);
 
 void convertMouseToWorld(t_viewPort* vp, int mouseX, int mouseY, float* worldX, float* worldY);
+
+void cameraAddShake(t_camera* cam, float intensity, float duration);
+void cameraUpdateShake(t_camera* cam, float* deltaTime);
 
 #endif
