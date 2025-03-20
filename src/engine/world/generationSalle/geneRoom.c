@@ -66,6 +66,12 @@ t_block *getFrontale(t_listeBlock **listAllBlock, t_case *c) {
         return blockByName(listBlock, FRONTALE_ANGLE_DROIT);
     if (c->tabVoisin[VOISIN_DROIT]->val != OBSTACLE)
         return blockByName(listBlock, FRONTALE_ANGLE_GAUCHE);
+    if (blockIs(c->tabVoisin[VOISIN_GAUCHE]->tiles, FRONTALE_PORTE_SOLO)) {
+        if (((long)rand()) / RAND_MAX < 0.2) {
+            copierVal(blockByName(listBlock, FRONTALE_PORTE_DUO_GAUCHE), &c->tabVoisin[VOISIN_GAUCHE]->tiles);
+            return blockByName(listBlock, FRONTALE_PORTE_DUO_DROITE);
+        }
+    }
     if (c->tabVoisin[VOISIN_HAUT]->tiles != NULL && blockIs(c->tabVoisin[VOISIN_HAUT]->tiles, MUR_BORDURE_MUR_AVANT_PILONNE))
         return blockByName(listBlock, FRONTALE_CORP_PILONNE);
     return randomBlocByType(listBlock);
@@ -236,6 +242,8 @@ void addComplement(t_grille *g, t_listeBlock **listAllBlock) {
 
     for (int i = 0; i < nbEscalier; i++) {
         ligne = rand() % (g->nbLigne - 2) + 1;
+
+        nbBlock = 0;
         for (int j = 0, flag = 0; j < g->nbColonne; j++) {
             if (g->grille[ligne][j]->val != OBSTACLE && !flag) {
                 positionDep[nbBlock++] = j;
@@ -244,7 +252,7 @@ void addComplement(t_grille *g, t_listeBlock **listAllBlock) {
             }
             if (g->grille[ligne][j]->val != OBSTACLE) {
                 count += 1;
-            } else if (g->grille[ligne][j]->val == 1) {
+            } else if (g->grille[ligne][j]->val == OBSTACLE) {
                 if (count > 10 && nbBlock > 0) {
                     nbBlock -= 1;
                 }
@@ -252,9 +260,9 @@ void addComplement(t_grille *g, t_listeBlock **listAllBlock) {
             }
         }
         if (nbBlock <= 0) {
-            break;
+            continue;
         }
-        for (int k = positionDep[rand() % nbBlock]; g->grille[ligne][k]->val != OBSTACLE; k++) {
+        for (int k = positionDep[rand() % nbBlock]; k < g->nbColonne && g->grille[ligne][k]->val != OBSTACLE; k++) {
             if (g->grille[ligne][k]->tabVoisin[VOISIN_HAUT]->val != OBSTACLE) {
                 if (g->grille[ligne][k]->tabVoisin[VOISIN_GAUCHE]->val == OBSTACLE && g->grille[ligne][k]->tabVoisin[VOISIN_DROIT]->val == OBSTACLE) {
                     copierVal(blockByName(listBlock, COMPDECO_SOLO_ESCALIER), &g->grille[ligne][k]->tiles);
@@ -269,6 +277,7 @@ void addComplement(t_grille *g, t_listeBlock **listAllBlock) {
             }
         }
     }
+
     int nbCoffre;
     long int val = (g->nbLigne * g->nbColonne);
     if (val < 900) {
@@ -296,9 +305,9 @@ int estOuvert(t_case *c, int changementLigne, int changementColonne) {
     } else if (changementLigne == 0 && changementColonne == -1) {
         return ((existe(c->tabVoisin[VOISIN_GAUCHE]) && (c->tabVoisin[VOISIN_GAUCHE]->val == SOL)) || (existe(c->tabVoisin[VOISIN_BAS]) && (c->tabVoisin[VOISIN_BAS]->val == SOL)) || (existe(c->tabVoisin[VOISIN_HAUT]) && (c->tabVoisin[VOISIN_HAUT]->val == SOL)));
     } else if (changementLigne == 1 && changementColonne == 0) {
-        return ((existe(c->tabVoisin[VOISIN_GAUCHE]) && (c->tabVoisin[VOISIN_GAUCHE]->val == SOL)) || (existe(c->tabVoisin[VOISIN_DROIT]) && (c->tabVoisin[VOISIN_DROIT]->val == SOL)) || (existe(c->tabVoisin[VOISIN_HAUT]) && (c->tabVoisin[VOISIN_HAUT]->val == SOL)));
-    } else {
         return ((existe(c->tabVoisin[VOISIN_GAUCHE]) && (c->tabVoisin[VOISIN_GAUCHE]->val == SOL)) || (existe(c->tabVoisin[VOISIN_DROIT]) && (c->tabVoisin[VOISIN_DROIT]->val == SOL)) || (existe(c->tabVoisin[VOISIN_BAS]) && (c->tabVoisin[VOISIN_BAS]->val == SOL)));
+    } else {
+        return ((existe(c->tabVoisin[VOISIN_GAUCHE]) && (c->tabVoisin[VOISIN_GAUCHE]->val == SOL)) || (existe(c->tabVoisin[VOISIN_DROIT]) && (c->tabVoisin[VOISIN_DROIT]->val == SOL)) || (existe(c->tabVoisin[VOISIN_HAUT]) && (c->tabVoisin[VOISIN_HAUT]->val == SOL)));
     }
 }
 
@@ -323,6 +332,9 @@ SDL_bool trouerGrille(t_grille **grille, int xdebut, int ydebut, int changementL
             (*grille)->grille[i][j]->val = OBSTACLE;
         }
         return SDL_FALSE;
+    }
+    if ((*grille)->grille[i + changementLigne][j + changementColonne]->val == OBSTACLE) {
+        (*grille)->grille[i + changementLigne][j + changementColonne]->val = SOL;
     }
 
     return SDL_TRUE;
@@ -375,6 +387,7 @@ t_grille *geneRoom(t_salle *salle) {
     lissage(grille);
 
     choixTiles(listAllBlock, grille);
+
     addComplement(grille, listAllBlock);
 
     saveMap(grille);

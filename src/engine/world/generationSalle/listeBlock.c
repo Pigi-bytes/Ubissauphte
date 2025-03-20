@@ -165,7 +165,8 @@ t_listeBlock** createListAllBlock() {
 }
 
 void copierVal(t_block* src, t_block** det) {
-    (*det) = malloc(sizeof(t_block));
+    if ((*det) == NULL)
+        (*det) = malloc(sizeof(t_block));
     if (src != NULL) {
         (*det)->collisions = src->collisions;
         (*det)->tiles = src->tiles;
