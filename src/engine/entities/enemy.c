@@ -120,7 +120,9 @@ void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
         SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);  // Couleur normale
     }
 
-    renderEntity(renderer, &enemy->entity, camera);
+    if (!(enemy->isInvincible && fmodf(getDeltaTimer(enemy->invincibilityTimer), 0.1) < 0.05)) {
+        renderEntity(renderer, &enemy->entity, camera);
+    }
 
     // Le reste du code pour la barre de vie reste inchangé
     if (enemy->showHealthBar) {

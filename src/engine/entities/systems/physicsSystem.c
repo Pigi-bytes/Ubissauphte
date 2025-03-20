@@ -38,43 +38,6 @@ void resolveCollision(t_entity* entity, t_grid* grid, t_objectManager* entities)
 
     for (int i = 0; i < entities->count; i++) {
         t_entity* otherEntity = getObject(entities, i);
-        if (otherEntity == entity) continue;
-
-        // int x1 = entity->collisionCircle.x;
-        // int y1 = entity->collisionCircle.y;
-        // int x2 = otherEntity->collisionCircle.x;
-        // int y2 = otherEntity->collisionCircle.y;
-
-        SDL_bool collision = checkCircleCircleCollision(&entity->collisionCircle, &otherEntity->collisionCircle, &out);
-
-        SDL_Color lineColor = collision ? (SDL_Color){0, 255, 0, 255} : (SDL_Color){255, 0, 0, 255};
-        // Debug_PushLine(x1, y1, x2, y2, 3, lineColor);
-
-        if (collision) {
-            // Apply impulse based on the collision normal and depth
-            // Assuming the entities have velocity properties (e.g., velocityX, velocityY)
-            float relativeVelocityX = otherEntity->physics.velocity.x - entity->physics.velocity.x;
-            float relativeVelocityY = otherEntity->physics.velocity.y - entity->physics.velocity.y;
-
-            float normalDotVel = out.normal.x * relativeVelocityX + out.normal.y * relativeVelocityY;
-
-            if (normalDotVel) {
-                float combinedRestitution = (entity->physics.restitution + otherEntity->physics.restitution) / 2;  // Only apply impulse if objects are moving towards each other
-                float impulseMagnitude = -(1 + combinedRestitution) * normalDotVel;                                // 0.8 is the coefficient of restitution (elasticity)
-                impulseMagnitude /= (1 / entity->physics.mass + 1 / otherEntity->physics.mass);                    // Apply based on mass
-
-                // Apply impulse to velocities (scaled by mass)
-                entity->physics.velocity.x -= impulseMagnitude / entity->physics.mass * out.normal.x;
-                entity->physics.velocity.y -= impulseMagnitude / entity->physics.mass * out.normal.y;
-
-                otherEntity->physics.velocity.x += impulseMagnitude / otherEntity->physics.mass * out.normal.x;
-                otherEntity->physics.velocity.y += impulseMagnitude / otherEntity->physics.mass * out.normal.y;
-            }
-
-            // Move the entity away from the collision, based on the depth of the collision
-            entity->collisionCircle.x += out.normal.x * out.depth;
-            entity->collisionCircle.y += out.normal.y * out.depth;
-        }
 
         for (int z = 0; z < grid->depth; z++) {
             for (int y = startY; y <= endY; y++) {
@@ -105,6 +68,44 @@ void resolveCollision(t_entity* entity, t_grid* grid, t_objectManager* entities)
                     }
                 }
             }
+        }
+
+        // int x1 = entity->collisionCircle.x;
+        // int y1 = entity->collisionCircle.y;q
+        // int x2 = otherEntity->collisionCircle.x;
+        // int y2 = otherEntity->collisionCircle.y;
+
+        if (otherEntity == entity) continue;
+
+        SDL_bool collision = checkCircleCircleCollision(&entity->collisionCircle, &otherEntity->collisionCircle, &out);
+
+        SDL_Color lineColor = collision ? (SDL_Color){0, 255, 0, 255} : (SDL_Color){255, 0, 0, 255};
+        // Debug_PushLine(x1, y1, x2, y2, 3, lineColor);
+
+        if (collision) {
+            // Apply impulse based on the collision normal and depth
+            // Assuming the entities have velocity properties (e.g., velocityX, velocityY)
+            float relativeVelocityX = otherEntity->physics.velocity.x - entity->physics.velocity.x;
+            float relativeVelocityY = otherEntity->physics.velocity.y - entity->physics.velocity.y;
+
+            float normalDotVel = out.normal.x * relativeVelocityX + out.normal.y * relativeVelocityY;
+
+            if (normalDotVel) {
+                float combinedRestitution = (entity->physics.restitution + otherEntity->physics.restitution) / 2;  // Only apply impulse if objects are moving towards each other
+                float impulseMagnitude = -(1 + combinedRestitution) * normalDotVel;                                // 0.8 is the coefficient of restitution (elasticity)
+                impulseMagnitude /= (1 / entity->physics.mass + 1 / otherEntity->physics.mass);                    // Apply based on mass
+
+                // Apply impulse to velocities (scaled by mass)
+                entity->physics.velocity.x -= impulseMagnitude / entity->physics.mass * out.normal.x;
+                entity->physics.velocity.y -= impulseMagnitude / entity->physics.mass * out.normal.y;
+
+                otherEntity->physics.velocity.x += impulseMagnitude / otherEntity->physics.mass * out.normal.x;
+                otherEntity->physics.velocity.y += impulseMagnitude / otherEntity->physics.mass * out.normal.y;
+            }
+
+            // Move the entity away from the collision, based on the depth of the collision
+            entity->collisionCircle.x += out.normal.x * out.depth;
+            entity->collisionCircle.y += out.normal.y * out.depth;
         }
     }
 }
