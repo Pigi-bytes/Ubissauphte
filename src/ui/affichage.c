@@ -72,7 +72,7 @@ void calculEquiper(SDL_Rect* statsItem, SDL_Rect* descrItem, SDL_Rect* Equiper, 
     Equiper->y = descrItem->y + descrItem->h + input->windowHeight * 0.03;
 }
 
-char* createStatText(SDL_Renderer* renderer, char* statName, float statValue, TTF_Font* font, SDL_Color color) {
+char* createStatText(char* statName, float statValue) {
     char* name = strdup(statName);
     char* value = malloc(sizeof(char*));
     sprintf(value, "%.2f", statValue);
@@ -81,40 +81,129 @@ char* createStatText(SDL_Renderer* renderer, char* statName, float statValue, TT
     return name;
 }
 
-void afficherText(SDL_Renderer* renderer, t_text* txt1, t_text* txt2, SDL_Rect rect, t_input* input) {
+void calculerItem(SDL_Rect* item, SDL_Rect inv, int nb, t_input* input) {
+    item->h = inv.h / 5;
+    item->w = inv.w / 5;
+    if (nb != 0)
+        item->x = inv.x + inv.x * nb / 4 + input->windowWidth * 0.02 * nb;
+    else
+        item->x = inv.x + input->windowWidth * 0.004;
+    item->y = inv.y + input->windowHeight * 0.004;
+}
+
+void afficherText(SDL_Renderer* renderer, t_text* txt1, t_text* txt2, t_input* input) {
     txt2->rect.x = txt1->rect.x;
     txt2->rect.y = txt1->rect.y + input->windowWidth * 0.03;
     renderText(renderer, txt2);
 }
+
+void afficherStatsPlayer(SDL_Renderer* renderer, SDL_Rect rect, t_character* c, TTF_Font* font, SDL_Color color, t_input* input) {
+    char* nom_txt1 = createStatText("Health : ", c->baseStats.health.additive);
+    t_text* txt1 = createText(renderer, nom_txt1, font, color);
+    char* nom_txt2 = createStatText("Health Max : ", c->baseStats.healthMax.additive);
+    t_text* txt2 = createText(renderer, nom_txt2, font, color);
+    char* nom_txt3 = createStatText("Mana : ", c->baseStats.mana.additive);
+    char* nom_txt4 = createStatText("Mana Max : ", c->baseStats.manaMax.additive);
+    char* nom_txt5 = createStatText("Attack : ", c->baseStats.attack.additive);
+    char* nom_txt6 = createStatText("Defense : ", c->baseStats.defense.additive);
+    char* nom_txt7 = createStatText("Speed : ", c->baseStats.speed.additive);
+
+    txt1->rect.x = rect.x + input->windowWidth * 0.01;
+    txt1->rect.y = rect.y + input->windowHeight * 0.01;
+    renderText(renderer, txt1);
+
+    afficherText(renderer, txt1, txt2, input);
+
+    updateText(&txt1, renderer, nom_txt3, color);
+    afficherText(renderer, txt2, txt1, input);
+
+    updateText(&txt2, renderer, nom_txt4, color);
+    afficherText(renderer, txt1, txt2, input);
+
+    updateText(&txt1, renderer, nom_txt5, color);
+    afficherText(renderer, txt2, txt1, input);
+
+    updateText(&txt2, renderer, nom_txt6, color);
+    afficherText(renderer, txt1, txt2, input);
+
+    updateText(&txt1, renderer, nom_txt7, color);
+    afficherText(renderer, txt2, txt1, input);
+}
+
+void afficherStatsItem(SDL_Renderer* renderer, SDL_Rect rect, t_item* item, TTF_Font* font, SDL_Color color, t_input* input) {
+    t_text* name = createText(renderer, item->name, font, color);
+    char* nom_txt1 = createStatText("Health : ", item->stats.health.additive);
+    t_text* txt1 = createText(renderer, nom_txt1, font, color);
+    char* nom_txt2 = createStatText("Health Max : ", item->stats.healthMax.additive);
+    t_text* txt2 = createText(renderer, nom_txt2, font, color);
+    char* nom_txt3 = createStatText("Mana : ", item->stats.mana.additive);
+    char* nom_txt4 = createStatText("Mana Max : ", item->stats.manaMax.additive);
+    char* nom_txt5 = createStatText("Attack : ", item->stats.attack.additive);
+    char* nom_txt6 = createStatText("Defense : ", item->stats.defense.additive);
+    char* nom_txt7 = createStatText("Speed : ", item->stats.speed.additive);
+
+    name->rect.x = rect.x + rect.x * 0.025;
+    name->rect.y = rect.y + input->windowHeight * 0.005;
+    renderText(renderer, name);
+
+    updateText(&txt1, renderer, nom_txt1, color);
+    txt1->rect.x = rect.x + input->windowWidth * 0.005;
+    txt1->rect.y = name->rect.y + input->windowHeight * 0.04;
+    renderText(renderer, txt1);
+
+    updateText(&txt2, renderer, nom_txt2, color);
+    afficherText(renderer, txt1, txt2, input);
+
+    updateText(&txt1, renderer, nom_txt3, color);
+    afficherText(renderer, txt2, txt1, input);
+
+    updateText(&txt2, renderer, nom_txt4, color);
+    afficherText(renderer, txt1, txt2, input);
+
+    updateText(&txt1, renderer, nom_txt5, color);
+    afficherText(renderer, txt2, txt1, input);
+
+    updateText(&txt2, renderer, nom_txt6, color);
+    afficherText(renderer, txt1, txt2, input);
+
+    updateText(&txt1, renderer, nom_txt7, color);
+    afficherText(renderer, txt2, txt1, input);
+}
+
+void afficherDescription(SDL_Renderer* renderer, SDL_Rect rect, t_item* item, TTF_Font* font, SDL_Color color, t_input* input) {
+    t_text* name = createText(renderer, "Description :", font, color);
+
+    name->rect.x = rect.x + rect.x * 0.025;
+    name->rect.y = rect.y + input->windowHeight * 0.005;
+    renderText(renderer, name);
+
+    int i = 0, j, nb = 1;
+
+    while (item->description[i++] != '\0') {
+        char descr[50];
+        for (j = 0; item->description[i] != '\n' && item->description[i] != '\0'; i++, j++) {
+            descr[j] = item->description[i];
+        }
+        descr[j] = '\0';
+
+        printf("%d\n", i);
+
+        t_text* description = createText(renderer, descr, font, color);
+        description->rect.x = rect.x + input->windowWidth * 0.005;
+        description->rect.y = name->rect.y + input->windowHeight * 0.03 * nb;
+        renderText(renderer, description);
+        nb++;
+    }
+}
+
 void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, t_item* item) {
     initTextEngine();
-    TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
-    TTF_Font* font1 = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 18);
 
     SDL_Color color = {
         .a = 255,
         .b = 255,
         .g = 0,
         .r = 255};
-
-    char* nom_txt1 = createStatText(renderer, "Health : ", c->baseStats.health.additive, font, color);
-    t_text* txt1 = createText(renderer, nom_txt1, font, color);
-    char* nom_txt2 = createStatText(renderer, "Health Max : ", c->baseStats.healthMax.additive, font, color);
-    t_text* txt2 = createText(renderer, nom_txt2, font, color);
-    char* nom_txt3 = createStatText(renderer, "Mana : ", c->baseStats.mana.additive, font, color);
-    char* nom_txt4 = createStatText(renderer, "Mana Max : ", c->baseStats.manaMax.additive, font, color);
-    char* nom_txt5 = createStatText(renderer, "Attack : ", c->baseStats.attack.additive, font, color);
-    char* nom_txt6 = createStatText(renderer, "Defense : ", c->baseStats.defense.additive, font, color);
-    char* nom_txt7 = createStatText(renderer, "Speed : ", c->baseStats.speed.additive, font, color);
-
-    t_text* name = createText(renderer, item->name, font1, color);
-    char* nom_txt8 = createStatText(renderer, "Health : ", item->stats.health.additive, font1, color);
-    char* nom_txt9 = createStatText(renderer, "Health Max : ", item->stats.healthMax.additive, font1, color);
-    char* nom_txt10 = createStatText(renderer, "Mana : ", item->stats.mana.additive, font1, color);
-    char* nom_txt11 = createStatText(renderer, "Mana Max : ", item->stats.manaMax.additive, font1, color);
-    char* nom_txt12 = createStatText(renderer, "Attack : ", item->stats.attack.additive, font1, color);
-    char* nom_txt13 = createStatText(renderer, "Defense : ", item->stats.defense.additive, font1, color);
-    char* nom_txt14 = createStatText(renderer, "Speed : ", item->stats.speed.additive, font1, color);
 
     SDL_Rect casePerso;
     SDL_Rect caseArme;
@@ -126,6 +215,7 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
     SDL_Rect statsItem;
     SDL_Rect descrItem;
     SDL_Rect equiper;
+    SDL_Rect caseItem[16];
 
     calculCasePlayer(&casePerso, input, "Perso");
 
@@ -144,8 +234,11 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
 
     calculEquiper(&statsItem, &descrItem, &equiper, input);
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    for (int i = 0; i < 4; i++) {
+        calculerItem(&caseItem[i], inv, i, input);
+    }
 
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -156,57 +249,25 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
     SDL_RenderDrawRect(renderer, &caseActivable2);
     SDL_RenderDrawRect(renderer, &statsPlayer);
 
-    txt1->rect.x = statsPlayer.x + input->windowWidth * 0.01;
-    txt1->rect.y = statsPlayer.y + input->windowHeight * 0.01;
-    renderText(renderer, txt1);
+    TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", statsPlayer.h * statsPlayer.w * 0.0002);
 
-    afficherText(renderer, txt1, txt2, statsPlayer, input);
-
-    updateText(&txt1, renderer, nom_txt3, color);
-    afficherText(renderer, txt2, txt1, statsPlayer, input);
-
-    updateText(&txt2, renderer, nom_txt4, color);
-    afficherText(renderer, txt1, txt2, statsPlayer, input);
-
-    updateText(&txt1, renderer, nom_txt5, color);
-    afficherText(renderer, txt2, txt1, statsPlayer, input);
-
-    updateText(&txt2, renderer, nom_txt6, color);
-    afficherText(renderer, txt1, txt2, statsPlayer, input);
-
-    updateText(&txt1, renderer, nom_txt7, color);
-    afficherText(renderer, txt2, txt1, statsPlayer, input);
+    afficherStatsPlayer(renderer, statsPlayer, c, font, color, input);
 
     SDL_RenderDrawRect(renderer, &inv);
+
+    for (int i = 0; i < 4; i++) {
+        SDL_RenderDrawRect(renderer, &caseItem[i]);
+    }
+
     SDL_RenderDrawRect(renderer, &statsItem);
 
-    name->rect.x = statsItem.x + statsItem.x * 0.025;
-    name->rect.y = statsItem.y + input->windowHeight * 0.005;
-    renderText(renderer, name);
+    TTF_Font* font1 = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", statsItem.h * statsItem.w * 0.0002);
 
-    updateText(&txt1, renderer, nom_txt8, color);
-    txt1->rect.x = statsItem.x + input->windowWidth * 0.005;
-    txt1->rect.y = name->rect.y + input->windowHeight * 0.04;
-    renderText(renderer, txt1);
-
-    updateText(&txt2, renderer, nom_txt9, color);
-    afficherText(renderer, txt1, txt2, statsPlayer, input);
-
-    updateText(&txt1, renderer, nom_txt10, color);
-    afficherText(renderer, txt2, txt1, statsPlayer, input);
-
-    updateText(&txt2, renderer, nom_txt11, color);
-    afficherText(renderer, txt1, txt2, statsPlayer, input);
-
-    updateText(&txt1, renderer, nom_txt12, color);
-    afficherText(renderer, txt2, txt1, statsPlayer, input);
-
-    updateText(&txt2, renderer, nom_txt13, color);
-    afficherText(renderer, txt1, txt2, statsPlayer, input);
-
-    updateText(&txt1, renderer, nom_txt14, color);
-    afficherText(renderer, txt2, txt1, statsPlayer, input);
+    afficherStatsItem(renderer, statsItem, item, font1, color, input);
 
     SDL_RenderDrawRect(renderer, &descrItem);
+    TTF_Font* font2 = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", descrItem.h * descrItem.w * 0.0003);
+
+    afficherDescription(renderer, descrItem, item, font2, color, input);
     SDL_RenderDrawRect(renderer, &equiper);
 }

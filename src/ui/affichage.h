@@ -5,6 +5,7 @@
 #include "../engine/entities/systems/equipementsManager.h"
 #include "../io/imageLoader.h"
 #include "../io/input.h"
+#include "button.h"
 #include "text.h"
 
 #define window_width 1280
