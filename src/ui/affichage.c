@@ -81,14 +81,20 @@ char* createStatText(char* statName, float statValue) {
     return name;
 }
 
-void calculerItem(SDL_Rect* item, SDL_Rect inv, int nb, t_input* input) {
-    item->h = inv.h / 5;
-    item->w = inv.w / 5;
-    if (nb != 0)
-        item->x = inv.x + inv.x * nb / 4 + input->windowWidth * 0.02 * nb;
+
+void calculerItem(SDL_Rect* item, SDL_Rect inv, SDL_Rect* comp, int nb, int ind, t_input* input) {
+    item->h = inv.h / 6;
+    item->w = item->h;
+    if (ind != 0 && ind != 4)
+        item->x = comp->x + comp->w + input->windowWidth * 0.02;
     else
-        item->x = inv.x + input->windowWidth * 0.004;
-    item->y = inv.y + input->windowHeight * 0.004;
+        item->x = inv.x + input->windowWidth * 0.02;
+    if (ind == 0)
+        item->y = inv.y + input->windowHeight * 0.016;
+    else if (ind == 4)
+        item->y = comp->y + comp->h + input->windowHeight * 0.02;
+    else
+        item->y = comp->y;
 }
 
 void afficherText(SDL_Renderer* renderer, t_text* txt1, t_text* txt2, t_input* input) {
@@ -186,8 +192,6 @@ void afficherDescription(SDL_Renderer* renderer, SDL_Rect rect, t_item* item, TT
         }
         descr[j] = '\0';
 
-        printf("%d\n", i);
-
         t_text* description = createText(renderer, descr, font, color);
         description->rect.x = rect.x + input->windowWidth * 0.005;
         description->rect.y = name->rect.y + input->windowHeight * 0.03 * nb;
@@ -215,7 +219,7 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
     SDL_Rect statsItem;
     SDL_Rect descrItem;
     SDL_Rect equiper;
-    SDL_Rect caseItem[16];
+    SDL_Rect caseItem[20];
 
     calculCasePlayer(&casePerso, input, "Perso");
 
@@ -234,8 +238,11 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
 
     calculEquiper(&statsItem, &descrItem, &equiper, input);
 
-    for (int i = 0; i < 4; i++) {
-        calculerItem(&caseItem[i], inv, i, input);
+    for (int i = 0, j = 0; i < 20; j++, i++) {
+        calculerItem(&caseItem[i], inv, &caseItem[i - 1], i, j, input);
+
+        if (j == 4)
+            j = 0;
     }
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -255,7 +262,7 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
 
     SDL_RenderDrawRect(renderer, &inv);
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 20; i++) {
         SDL_RenderDrawRect(renderer, &caseItem[i]);
     }
 
