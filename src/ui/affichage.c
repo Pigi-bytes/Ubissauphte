@@ -251,11 +251,17 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
         .h = inv.h - caseItem[0].h * 2};
 
     static int scrollOffset = 0;  // Décalage du défilement
+    static int isDragging = 0;   // État de glissement de la barre de défilement
+    static int dragStartY = 0;   // Position Y initiale du glissement
 
-    SDL_Rect scrollbar = {scrollViewport.x + scrollViewport.w - 10,
-                          inv.y,
-                          10,
-                          (scrollViewport.h * 24) / (caseItem[0].h)};
+    int maxScrollOffset = (24 * caseItem[0].h) - scrollViewport.h;
+
+    SDL_Rect scrollbar = {
+        .x = scrollViewport.x + scrollViewport.w - 10,
+        .y = scrollViewport.y + (scrollOffset * scrollViewport.h) / maxScrollOffset,
+        .w = 10,
+        .h = (scrollViewport.h * scrollViewport.h) / (24 * caseItem[0].h)
+    };
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
@@ -292,15 +298,38 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
                     // Vérifier si le clic est sur la barre de défilement
                     if (mouseX >= scrollbar.x && mouseX <= scrollbar.x + scrollbar.w &&
                         mouseY >= scrollbar.y && mouseY <= scrollbar.y + scrollbar.h) {
-                        // Mettre à jour la position de défilement pour tout en haut
-                        scrollOffset = 0;
+                        isDragging = 1; // Activer le glissement
+                        dragStartY = mouseY - scrollbar.y; // Enregistrer la position initiale du glissement
                     }
+                }
+                break;
+            case SDL_MOUSEBUTTONUP:
+                if (event.button.button == SDL_BUTTON_LEFT) {
+                    isDragging = 0; // Désactiver le glissement
+                }
+                break;
+            case SDL_MOUSEMOTION:
+                if (isDragging) {
+                    int mouseY = event.motion.y;
+
+                    // Calculer la nouvelle position de la barre de défilement
+                    int newScrollbarY = mouseY - dragStartY;
+
+                    // Limiter la position de la barre de défilement
+                    if (newScrollbarY < scrollViewport.y) {
+                        newScrollbarY = scrollViewport.y;
+                    } else if (newScrollbarY > scrollViewport.y + scrollViewport.h - scrollbar.h) {
+                        newScrollbarY = scrollViewport.y + scrollViewport.h - scrollbar.h;
+                    }
+
+                    // Mettre à jour le décalage de défilement
+                    scrollOffset = (newScrollbarY - scrollViewport.y) * maxScrollOffset / (scrollViewport.h - scrollbar.h);
                 }
                 break;
         }
     }
 
-    int maxScrollOffset = (24 * caseItem[0].h) - scrollViewport.h;
+    // Limiter le décalage de défilement
     if (scrollOffset < 0) {
         scrollOffset = 0;
     } else if (scrollOffset > maxScrollOffset) {
@@ -322,7 +351,10 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
     }
 
     SDL_RenderSetViewport(renderer, NULL);  // Réinitialiser le viewport
+
+    // Mettre à jour la position de la barre de défilement
     scrollbar.y = scrollViewport.y + (scrollOffset * scrollViewport.h) / maxScrollOffset;
+
     SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
     SDL_RenderFillRect(renderer, &scrollbar);
     SDL_RenderDrawRect(renderer, &statsItem);
