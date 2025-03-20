@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define DEBUG_MODE 1
+#define DEBUG_MODE 0
 #define DEBUG_MEMORY_MODE 0
 
 #define COLORDEFAULT (SDL_Color){0, 0, 0, 0}

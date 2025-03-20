@@ -435,13 +435,13 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     t_arme* epee = malloc(sizeof(t_arme));
     t_arme* dague = malloc(sizeof(t_arme));
 
-    *hache = (t_arme){.mass = 8.0f, .damage = 30.0f, .range = 15.0f, .angleAttack = M_PI * 2, .attackDuration = 1.0f, .attackCooldown = 2.0f};
+    *hache = (t_arme){.mass = 8.0f, .damage = 30.0f, .range = 15.0f, .angleAttack = M_PI * 2, .attackDuration = 0.5f, .attackCooldown = 2.0f};
     hache->texture = getObject(tileset->textureTiles, 119);
     hache->displayRect = (SDL_Rect){0, 0, 16, 16};
     *epee = (t_arme){.mass = 3.0f, .damage = 20.0f, .range = 35.0f, .angleAttack = M_PI / 2, .attackDuration = 0.3f, .attackCooldown = 1.0f};
     epee->texture = getObject(tileset->textureTiles, 105);
     epee->displayRect = (SDL_Rect){0, 0, 16, 16};
-    *dague = (t_arme){.mass = 2.0f, .damage = 15.0f, .range = 20.0f, .angleAttack = M_PI / 3, .attackDuration = 0.2f, .attackCooldown = 0.4f};
+    *dague = (t_arme){.mass = 2.0f, .damage = 15.0f, .range = 25.0f, .angleAttack = M_PI / 3, .attackDuration = 0.2f, .attackCooldown = 0.4f};
     dague->texture = getObject(tileset->textureTiles, 104);
     dague->displayRect = (SDL_Rect){0, 0, 16, 16};
 

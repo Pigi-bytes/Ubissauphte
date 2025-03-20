@@ -13,6 +13,8 @@
 // Anticipation > contact > recovery
 // https://www.youtube.com/watch?v=8X4fx-YncqA
 
+// Shift / FRICTION / TIME slown down scaling // ralentissement en cas d'attaque / 
+
 typedef struct {
     SDL_bool isActive;
     float cooldown;
@@ -20,9 +22,10 @@ typedef struct {
     t_sector hitBox;  // Secteur d'attaque (origine, angles, portée)
     int nbHits;
 
-    // float slash_angle;
-    // float slash_range;
-    // float slash_width;
+    // Propriétés pour le ralentissement du temps
+    float timeSlowFactor;     // Facteur de ralentissement (1.0 = normal, 0.3 = ralenti à 30%)
+    float timeSlowDuration;   // Durée totale du ralentissement
+    float timeSlowRemaining;  // Temps restant de ralentissement
 } t_attack;
 
 typedef struct {
