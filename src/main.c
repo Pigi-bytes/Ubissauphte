@@ -17,6 +17,8 @@ int main() {
     item->stats.mana.additive = 15;
     item->stats.manaMax.additive = 20;
     item->stats.speed.additive = 60;
+    strcpy(item->description, "\nça c'est de l'arme \nguts weapon\nbla bla bla\navec ça tu gagnes\nà coup sur");
+
     while (!input->quit) {
         updateInput(input);
 

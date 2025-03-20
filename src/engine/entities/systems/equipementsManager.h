@@ -3,10 +3,10 @@
 
 #define MAX_ITEM_NAME 64
 
-#include "../debug.h"
-#include "../utils/fonctionManager.h"
-#include "../utils/objectManager.h"
-#include "fichierLoader.h"
+#include "../../../debug.h"
+#include "../../../io/fichierLoader.h"
+#include "../../../utils/fonctionManager.h"
+#include "../../../utils/objectManager.h"
 
 typedef enum {
     ITEM_FLAG_STACKABLE = 1 << 0,
@@ -47,6 +47,7 @@ typedef struct {
     t_fonctionParam* onEquip;
     t_fonctionParam* onDeEquip;
     t_fonctionParam* onUse;
+    char description[200];
 } t_item;
 
 typedef struct {

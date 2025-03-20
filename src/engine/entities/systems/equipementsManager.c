@@ -24,6 +24,9 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
         data = createPairData("Name", item[i]->name);
         addPairData(block, data);
 
+        data = createPairData("descrition", item[i]->description);
+        addPairData(block, data);
+
         sprintf(value, "%f", item[i]->stats.attack.additive);
         data = createPairData("attack Add Modifier", value);
         addPairData(block, data);
@@ -117,7 +120,7 @@ t_item** item_load(t_fichier* fichier) {
 
     int resultInt;
     float resultFLOAT;
-    char resultChar[50];
+    char resultChar[200];
     t_block* block;
 
     for (int i = 0; i < fichier->blockManager->count; i++) {
@@ -130,6 +133,9 @@ t_item** item_load(t_fichier* fichier) {
 
         getValue(block, "Name", resultChar, STRING);
         strcpy(item[i]->name, resultChar);
+
+        getValue(block, "description", resultChar, STRING);
+        strcpy(item[i]->description, resultChar);
 
         getValue(block, "attack Add Modifier", &resultFLOAT, FLOAT);
         item[i]->stats.attack.additive = resultFLOAT;
@@ -274,7 +280,7 @@ t_inventaire* inventory_load(t_fichier* fichier, t_item** item, int count) {
                 break;
             }
         }
-        free(Stack->definition); 
+        free(Stack->definition);
         free(Stack);
     }
 
