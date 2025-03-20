@@ -81,7 +81,6 @@ char* createStatText(char* statName, float statValue) {
     return name;
 }
 
-
 void calculerItem(SDL_Rect* item, SDL_Rect inv, SDL_Rect* comp, int nb, int ind, t_input* input) {
     item->h = inv.h / 6;
     item->w = item->h;
@@ -219,7 +218,7 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
     SDL_Rect statsItem;
     SDL_Rect descrItem;
     SDL_Rect equiper;
-    SDL_Rect caseItem[20];
+    SDL_Rect caseItem[24];
 
     calculCasePlayer(&casePerso, input, "Perso");
 
@@ -238,13 +237,20 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
 
     calculEquiper(&statsItem, &descrItem, &equiper, input);
 
-    for (int i = 0, j = 0; i < 20; j++, i++) {
+    for (int i = 0, j = 0; i < 24; j++, i++) {
         calculerItem(&caseItem[i], inv, &caseItem[i - 1], i, j, input);
 
         if (j == 4)
             j = 0;
     }
 
+    SDL_Rect scrollViewport = {
+        .x = inv.x,
+        .y = inv.y + caseItem[0].y + input->windowHeight * 0.02,
+        .w = inv.w,
+        .h = inv.h - caseItem[0].h * 2 - input->windowHeight * 0.04};
+
+    static int scrollOffset = 0;  // Décalage du défilement
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
@@ -262,9 +268,41 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
 
     SDL_RenderDrawRect(renderer, &inv);
 
-    for (int i = 0; i < 20; i++) {
-        SDL_RenderDrawRect(renderer, &caseItem[i]);
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        switch (event.type) {
+            case SDL_MOUSEWHEEL:
+                if (event.wheel.y > 0) {
+                    scrollOffset -= 50;  // Défilement vers le haut
+                } else if (event.wheel.y < 0) {
+                    scrollOffset += 50;  // Défilement vers le bas
+                }
+                break;
+        }
     }
+
+    int maxScrollOffset = (24 * caseItem[0].h) - scrollViewport.h;
+    if (scrollOffset < 0) {
+        scrollOffset = 0;
+    } else if (scrollOffset > maxScrollOffset) {
+        scrollOffset = maxScrollOffset;
+    }
+
+    // Appliquer le viewport
+    SDL_RenderSetViewport(renderer, &scrollViewport);
+
+    for (int i = 0; i < 24; i++) {
+        SDL_RenderSetViewport(renderer, NULL);  // Réinitialiser le viewport
+
+        SDL_Rect itemRect = caseItem[i];
+        itemRect.y -= scrollOffset;
+
+        if (itemRect.y + itemRect.h > scrollViewport.y && itemRect.y < scrollViewport.y + scrollViewport.h) {
+            SDL_RenderDrawRect(renderer, &itemRect);
+        }
+    }
+
+    SDL_RenderSetViewport(renderer, NULL);  // Réinitialiser le viewport
 
     SDL_RenderDrawRect(renderer, &statsItem);
 
