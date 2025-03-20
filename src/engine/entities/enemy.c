@@ -80,7 +80,7 @@
 //     return enemy;
 // }
 
-void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect) {
+void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect, t_scene* scene) {
     base->entity.texture = texture;
     base->entity.displayRect = rect;
     base->entity.flip = SDL_FLIP_NONE;
@@ -94,6 +94,9 @@ void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect) {
     base->showHealthBar = SDL_FALSE;          // La barre de vie est cachée par défaut
     base->healthBarTimer = initDeltaTimer();  // Timer pour la barre de vie
     startDeltaTimer(base->healthBarTimer);    // Timer pour la barre de vie
+
+    // Associer la scène
+    base->entity.currentScene = scene;
 }
 
 void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
@@ -156,25 +159,33 @@ void updateEnemy(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager
 
 void freeEnemy(void* object) {
     t_enemy* enemy = (t_enemy*)object;
-    SDL_DestroyTexture(enemy->entity.texture);
+    if (enemy != NULL) {
+        free(enemy);
+    }
+    // SDL_DestroyTexture(enemy->entity.texture);
     // freeAnimationController(enemy->entity.animationController);
-    free(enemy);
 }
 
-void takeDamage(t_enemy* enemy, int damage) {
-    if (enemy->isInvincible) return;  // Si l'ennemi est invincible, on ne fait rien
+void takeDamageAndCheckDeath(t_enemy* enemy, int damage) {
+    if (!enemy || enemy->isInvincible) return;
 
     enemy->showHealthBar = SDL_TRUE;
     resetDeltaTimer(enemy->healthBarTimer);
 
     enemy->health -= damage;
-    if (enemy->health < 0) {
+    if (enemy->health <= 0) {
         enemy->health = 0;
         enemy->showHealthBar = SDL_FALSE;
+
+        // L'ennemi est mort, on utilise sa référence à la scène
+        sceneRemoveObject(enemy->entity.currentScene, enemy);
+        // Ne pas accéder à enemy après cet appel car l'objet est libéré!
+        return;
     }
+
     printf("%d \n", enemy->health);
 
-    // Activer l'invincibilité
+    // Activer l'invincibilité seulement si l'ennemi est vivant
     enemy->isInvincible = SDL_TRUE;
     resetDeltaTimer(enemy->invincibilityTimer);
 }

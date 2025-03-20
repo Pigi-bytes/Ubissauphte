@@ -29,4 +29,4 @@ typedef struct {
 } t_slime;
 
 void updateSlime(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities);
-t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset);
+t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, t_scene* scene);

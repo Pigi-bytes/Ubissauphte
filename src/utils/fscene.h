@@ -44,4 +44,20 @@ void addScene(t_sceneController* controller, t_scene* scene);
 void setScene(t_sceneController* controller, char* name);
 t_scene* getCurrentScene(t_sceneController* voidcontroller);
 
+// Ajouter ces déclarations avant la fin du fichier (#endif)
+
+// Ajouter un objet à une scène et l'enregistrer automatiquement pour un type de fonction
+void* sceneAddObject(t_scene* scene, void* object, uint8_t typeId);
+
+// Supprimer un objet et toutes ses fonctions associées d'une scène
+void sceneRemoveObject(t_scene* scene, void* object);
+
+// Enregistrer une fonction pour un objet spécifique uniquement
+void registerFunctionForObject(t_scene* scene, void* object, uint8_t typeId,
+                               t_fonctionType funcType, void (*fonct)(t_fonctionParam*),
+                               int indexObj, ...);
+
+// Trouver l'index d'un objet dans le gestionnaire d'objets
+int findObjectIndex(t_objectManager* manager, void* object);
+
 #endif

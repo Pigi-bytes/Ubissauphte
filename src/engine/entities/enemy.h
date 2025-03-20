@@ -1,6 +1,7 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+#include "../../utils/fscene.h"
 #include "../../utils/timer.h"
 #include "entity.h"
 #include "systems/physicsSystem.h"
@@ -20,11 +21,11 @@ typedef struct t_enemy {
     t_deltaTimer* healthBarTimer;
 } t_enemy;
 
-void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect);
+void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect, t_scene* scene);
 
 void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera);
 void updateEnemy(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities);
 void freeEnemy(void* object);
-void takeDamage(t_enemy* enemy, int damage);
+void takeDamageAndCheckDeath(t_enemy* enemy, int damage);
 
 #endif

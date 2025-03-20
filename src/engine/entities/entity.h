@@ -22,6 +22,9 @@ typedef struct {
     t_animationController* animationController;
     SDL_RendererFlip flip;
     SDL_bool debug;
+
+    // Référence à la scène
+    struct t_scene* currentScene;  // Ajout de ce champ
 } t_entity;
 
 void renderEntity(SDL_Renderer* renderer, t_entity* entity, t_camera* camera);

@@ -72,42 +72,134 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
 // }
 
 void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
-    player->currentWeapon->displayRect.x = (player->entity.collisionCircle.x - player->currentWeapon->displayRect.w / 2) + 8;
-    player->currentWeapon->displayRect.y = (player->entity.collisionCircle.y - player->currentWeapon->displayRect.h / 2) + 2;
-
     if (player->attack.nbHits != 0) {
-        cameraAddShake(camera, 3, 0.3f);
+        cameraAddShake(camera, 3.0f, 0.3f);
     }
+
+    SDL_FPoint origin = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
+    float range = player->currentWeapon->range;
+    float angle = player->aimAngle;
+    float arc = player->currentWeapon->angleAttack;
+
+    // Afficher le cône d'attaque (debug)
+    SDL_FPoint start = {origin.x + cosf(angle - arc / 2) * range, origin.y + sinf(angle - arc / 2) * range};
+    SDL_FPoint end = {origin.x + cosf(angle + arc / 2) * range, origin.y + sinf(angle + arc / 2) * range};
+
+    Debug_PushLine(origin.x, origin.y, start.x, start.y, 2, SDL_COLOR_CYAN);
+    Debug_PushLine(origin.x, origin.y, end.x, end.y, 2, SDL_COLOR_CYAN);
+
+    int segments = 20;
+    float angle_step = arc / segments;
+    SDL_FPoint prev_point = start;
+
+    for (int i = 1; i <= segments; i++) {
+        float current_angle = angle - arc / 2 + angle_step * i;
+        SDL_FPoint current_point = {origin.x + cosf(current_angle) * range, origin.y + sinf(current_angle) * range};
+
+        Debug_PushLine(prev_point.x, prev_point.y, current_point.x, current_point.y, 1, SDL_COLOR_CYAN);
+        prev_point = current_point;
+    }
+
+    // Scale calculations optimisé pour atteindre le bord de la hitbox
+    // Maintenant, l'échelle est calculée pour que l'épée atteigne exactement le bord de la hitbox
+    float baseScale = 1.0f;
+    float idealRangeScale = range / (player->currentWeapon->displayRect.h * 0.8f);  // 0.8 car le pivot est à 80% de la hauteur
+    float minScale = 0.1f;
+    float maxScale = 3.0f;
+    float scaleY = fmaxf(minScale, fminf(maxScale, idealRangeScale));
+    float scaleX = scaleY;  // Garde les proportions
+
+    int scaledWidth = (int)(player->currentWeapon->displayRect.w);
+    int scaledHeight = (int)(player->currentWeapon->displayRect.h * scaleY);
+
+    // Point de pivot fixe sur l'arme
+    float pivotRatioX = 0.5f;  // Milieu horizontal de l'arme
+    float pivotRatioY = 0.8f;  // Près du bas de l'arme (position du manche)
+
+    SDL_Point pivotPoint = {(int)(scaledWidth * pivotRatioX), (int)(scaledHeight * pivotRatioY)};
+
+    // Position et rotation de l'arme selon l'état (attaque ou non)
+    float rotationAngle;
+    SDL_Rect displayRect;
+    SDL_RendererFlip weaponFlip = SDL_FLIP_NONE;
 
     if (player->attack.isActive) {
-        SDL_FPoint origin = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
-        float range = player->currentWeapon->range;
-        float angle = player->aimAngle;
-        float arc = player->currentWeapon->angleAttack;
+        // PENDANT L'ATTAQUE: on déplace l'arme pour que le point de pivot coïncide avec le joueur
 
-        SDL_FPoint start = {origin.x + cosf(angle - arc / 2) * range, origin.y + sinf(angle - arc / 2) * range};
-        SDL_FPoint end = {origin.x + cosf(angle + arc / 2) * range, origin.y + sinf(angle + arc / 2) * range};
+        // Calcul de l'angle actuel pour l'animation d'attaque
+        float current_angle = lerpAngle(player->attack.hitBox.startAngle, player->attack.hitBox.endAngle, smoothStepf(player->attack.progress));
 
-        Debug_PushLine(origin.x, origin.y, start.x, start.y, 2, SDL_COLOR_CYAN);  // Bord gauche
-        Debug_PushLine(origin.x, origin.y, end.x, end.y, 2, SDL_COLOR_CYAN);      // Bord droit
+        // Position de l'arme: on place l'arme pour que son pivot coïncide avec le centre du joueur
+        displayRect = (SDL_Rect){(int)(origin.x - pivotPoint.x), (int)(origin.y - pivotPoint.y), scaledWidth, scaledHeight};
 
-        int segments = 20;
-        float angle_step = arc / segments;
-        SDL_FPoint prev_point = start;
+        // Angle de rotation pour suivre exactement les lignes rouges
+        rotationAngle = current_angle * 180.0f / M_PI + 90;
 
-        for (int i = 1; i <= segments; i++) {
-            float current_angle = angle - arc / 2 + angle_step * i;
-            SDL_FPoint current_point = {origin.x + cosf(current_angle) * range, origin.y + sinf(current_angle) * range};
+        // Arme rendue derrière le joueur
+        SDL_RenderCopyEx(renderer, player->currentWeapon->texture, NULL, &displayRect, rotationAngle, &pivotPoint, weaponFlip);
 
-            Debug_PushLine(prev_point.x, prev_point.y, current_point.x, current_point.y, 1, SDL_COLOR_CYAN);
-            prev_point = current_point;
+        // Dessiner le point de pivot pour le debug
+        SDL_FPoint visualPivot = {
+            displayRect.x + pivotPoint.x,
+            displayRect.y + pivotPoint.y};
+
+        Debug_PushLine(visualPivot.x - 3, visualPivot.y, visualPivot.x + 3, visualPivot.y, 2, SDL_COLOR_RED);
+        Debug_PushLine(visualPivot.x, visualPivot.y - 3, visualPivot.x, visualPivot.y + 3, 2, SDL_COLOR_RED);
+
+        // Dessiner un point à l'extrémité de l'arme pour vérifier qu'elle atteint bien le bord de la hitbox
+        // Calculer la position de la pointe de l'arme
+        float weaponLength = scaledHeight * (1.0f - pivotRatioY);  // Distance du pivot à la pointe de l'arme
+        SDL_FPoint weaponTip = {
+            origin.x + cosf(current_angle) * weaponLength,
+            origin.y + sinf(current_angle) * weaponLength};
+
+        // Dessiner un point jaune à la pointe de l'arme
+        Debug_PushLine(weaponTip.x - 3, weaponTip.y, weaponTip.x + 3, weaponTip.y, 3, SDL_COLOR_YELLOW);
+        Debug_PushLine(weaponTip.x, weaponTip.y - 3, weaponTip.x, weaponTip.y + 3, 3, SDL_COLOR_YELLOW);
+
+        // Joueur rendu par-dessus l'arme
+        renderEntity(renderer, &player->entity, camera);
+    } else {
+        // SANS ATTAQUE: arme à côté du joueur avec un offset simple
+        renderEntity(renderer, &player->entity, camera);
+
+        // Positionnement simple de l'arme avec un offset (à droite ou à gauche selon orientation)
+        float offsetX = 8.0f;
+        float offsetY = 4.0f;
+
+        // Ajustement pour l'orientation du joueur
+        if (player->entity.flip == SDL_FLIP_HORIZONTAL) {
+            offsetX = -offsetX;
+            weaponFlip = SDL_FLIP_HORIZONTAL;
         }
 
-        // draw_slash(renderer, origin, player->attack.slash_angle, player->attack.slash_range, player->attack.slash_width, 3);
-    }
+        // Position de l'arme avec offset par rapport au joueur
+        displayRect = (SDL_Rect){
+            (int)(origin.x - pivotPoint.x + offsetX),
+            (int)(origin.y - pivotPoint.y + offsetY),
+            scaledWidth,
+            scaledHeight};
 
-    renderEntity(renderer, &player->entity, camera);
-    SDL_RenderCopyEx(renderer, player->currentWeapon->texture, NULL, &player->currentWeapon->displayRect, 0, NULL, SDL_FLIP_NONE);
+        // Angle 0 pour l'arme au repos (orientée à 12h)
+        rotationAngle = 0.0f;
+
+        // Afficher l'arme
+        SDL_RenderCopyEx(renderer,
+                         player->currentWeapon->texture,
+                         NULL,
+                         &displayRect,
+                         rotationAngle,
+                         &pivotPoint,
+                         weaponFlip);
+
+        // Dessiner le point de pivot pour le debug
+        SDL_FPoint visualPivot = {
+            displayRect.x + pivotPoint.x,
+            displayRect.y + pivotPoint.y};
+
+        Debug_PushLine(visualPivot.x - 3, visualPivot.y, visualPivot.x + 3, visualPivot.y, 2, SDL_COLOR_RED);
+        Debug_PushLine(visualPivot.x, visualPivot.y - 3, visualPivot.x, visualPivot.y + 3, 2, SDL_COLOR_RED);
+    }
 }
 
 void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectManager* entities) {
@@ -155,7 +247,7 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
                 player->entity.physics.velocity.x += dx * force_dash * *deltaTime;
                 player->entity.physics.velocity.y += dy * force_dash * *deltaTime;
             }
-            if (input->mouseButtons[SDL_BUTTON_LEFT]) {
+            if (input->mouseButtons[SDL_BUTTON_LEFT] && player->attack.cooldown <= 0) {
                 player->aimAngle = atan2f(dy, dx);
                 start_attack(player);
             }
@@ -196,14 +288,9 @@ void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities
 
     float current_angle = lerpAngle(player->attack.hitBox.startAngle, player->attack.hitBox.endAngle, smoothStepf(player->attack.progress));
 
-    float knockback_force = 100.0f;
-
     // Calculer l'extrémité du slash pour le dessiner plus tard
-    float slash_range = player->currentWeapon->range;  // Ajuste la distance du slash
-    float slash_width = M_PI / 12;                     // Ajuste l'épaisseur du slash
-    // player->attack.slash_angle = current_angle;        // On garde l'angle actuel
-    // player->attack.slash_range = slash_range;
-    // player->attack.slash_width = slash_width;
+    float slash_range = player->currentWeapon->range;
+    float slash_width = M_PI / 12;
 
     float start_angle = current_angle - slash_width / 2;
     float end_angle = current_angle + slash_width / 2;
@@ -212,6 +299,9 @@ void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities
 
     Debug_PushLine(player->attack.hitBox.origin.x, player->attack.hitBox.origin.y, edge1.x, edge1.y, 2, SDL_COLOR_RED);
     Debug_PushLine(player->attack.hitBox.origin.x, player->attack.hitBox.origin.y, edge2.x, edge2.y, 2, SDL_COLOR_RED);
+
+    // Base de la force de knockback provient de l'arme
+    float base_knockback_force = player->currentWeapon->mass * 10.0f;  // Facteur de 15 pour une bonne sensation
 
     for (int i = 1; i < entities->count; i++) {
         t_entity* enemy = getObject(entities, i);
@@ -227,8 +317,25 @@ void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities
                 dx /= length;
                 dy /= length;
 
-                enemy->physics.velocity.x += dx * knockback_force / enemy->physics.mass;
-                enemy->physics.velocity.y += dy * knockback_force / enemy->physics.mass;
+                // Calcul du knockback en fonction du rapport des masses (F = ma)
+                // Formule : Force = (masse de l'arme / masse de l'ennemi) * force de base
+                // On ajoute une constante pour éviter une division par zéro et pour que les ennemis
+                // très lourds ressentent quand même un peu de knockback
+
+                float mass_ratio = player->currentWeapon->mass / (enemy->physics.mass + 1.0f);
+
+                // On utilise une courbe logarithmique pour avoir un effet plus naturel
+                // Les ennemis très légers sont fortement projetés, les lourds résistent mieux
+                float effective_knockback = base_knockback_force * (0.2f + 0.8f * mass_ratio);
+
+                // Application d'un facteur minimum pour garantir un effet visuel même sur les ennemis lourds
+                effective_knockback = fmaxf(effective_knockback, base_knockback_force * 0.1f);
+
+                // Limite supérieure pour éviter des effets trop extrêmes sur des ennemis très légers
+                effective_knockback = fminf(effective_knockback, base_knockback_force * 3.0f);
+
+                enemy->physics.velocity.x += dx * effective_knockback;
+                enemy->physics.velocity.y += dy * effective_knockback;
             }
             player->attack.nbHits++;
         }

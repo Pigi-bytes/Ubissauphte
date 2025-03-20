@@ -16,9 +16,9 @@ float randomWithPercentageVariation(float x, float percentage) {
     return min + (float)rand() / (float)(RAND_MAX / (max - min));
 }
 
-t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
+t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, t_scene* scene) {
     t_slime* slime = malloc(sizeof(t_slime));
-    initEnemyBase(&slime->base, texture, rect);
+    initEnemyBase(&slime->base, texture, rect, scene);
     slime->base.update = updateSlime;
 
     slime->base.health = 100;  // Valeur par défaut

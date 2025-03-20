@@ -419,8 +419,8 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
         rectcord[i].w = 1;
         rectcord[i].h = 1;
     }
-    t_salle** salle = genMap(14, rectcord);
-    t_grille* grille = geneRoom(salle[6]);
+    t_salle** salle = genMap(3, rectcord);
+    t_grille* grille = geneRoom(salle[0]);
     t_grid* level = loadMap(grille->nom, tileset);
     freeGrille(grille);
 
@@ -435,41 +435,31 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     t_arme* epee = malloc(sizeof(t_arme));
     t_arme* dague = malloc(sizeof(t_arme));
 
-    *hache = (t_arme){.mass = 8.0f, .damage = 30.0f, .range = 10.0f, .angleAttack = M_PI * 2, .attackDuration = 1.0f, .attackCooldown = 1.5f};
+    *hache = (t_arme){.mass = 8.0f, .damage = 30.0f, .range = 15.0f, .angleAttack = M_PI * 2, .attackDuration = 1.0f, .attackCooldown = 2.0f};
     hache->texture = getObject(tileset->textureTiles, 119);
     hache->displayRect = (SDL_Rect){0, 0, 16, 16};
-    *epee = (t_arme){.mass = 3.0f, .damage = 20.0f, .range = 35.0f, .angleAttack = M_PI / 3, .attackDuration = 0.5f, .attackCooldown = 0.6f};
+    *epee = (t_arme){.mass = 3.0f, .damage = 20.0f, .range = 35.0f, .angleAttack = M_PI / 2, .attackDuration = 0.3f, .attackCooldown = 1.0f};
     epee->texture = getObject(tileset->textureTiles, 105);
     epee->displayRect = (SDL_Rect){0, 0, 16, 16};
-    *dague = (t_arme){.mass = 2.0f, .damage = 15.0f, .range = 35.0f, .angleAttack = M_PI / 2, .attackDuration = 0.3f, .attackCooldown = 0.2f};
+    *dague = (t_arme){.mass = 2.0f, .damage = 15.0f, .range = 20.0f, .angleAttack = M_PI / 3, .attackDuration = 0.2f, .attackCooldown = 0.4f};
     dague->texture = getObject(tileset->textureTiles, 104);
     dague->displayRect = (SDL_Rect){0, 0, 16, 16};
 
-    joueur->currentWeapon = dague;
+    joueur->currentWeapon = epee;
 
     addObject(entities, &joueur->entity, ENTITY);
     placeOnRandomTile(level, &joueur->entity, entities);
 
     t_enemy* enemy;
     for (int i = 0; i < 3; i++) {
-        enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet);
-        addObject(entities, &enemy->entity, ENTITY);
-        placeOnRandomTile(level, &enemy->entity, entities);
-        ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
-    }
-
-    for (int i = 0; i < 3; i++) {
-        enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 24, 24}, slimeTileSet);
-        enemy->entity.physics.mass = 5;
-        enemy->maxHealth = 200;
-        enemy->health = 200;
+        enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, scene);
         addObject(entities, &enemy->entity, ENTITY);
         placeOnRandomTile(level, &enemy->entity, entities);
         ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
     }
 
     for (int i = 0; i < 2; i++) {
-        enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 32, 32}, slimeTileSet);
+        enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 32, 32}, slimeTileSet, scene);
         enemy->entity.physics.mass = 10;
         enemy->maxHealth = 300;
         enemy->health = 300;
@@ -530,7 +520,7 @@ int main(int argc, char* argv[]) {
 
     t_input* input = initInput(WINDOW_WIDTH, WINDOW_HEIGHT);
     TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
-    t_frameData* frameData = initFrameData(60);
+    t_frameData* frameData = initFrameData(0);
     t_option* option = creeOption();
     t_sceneController* sceneController = initSceneController();
     t_fpsDisplay* fpsDisplay = initFPSDisplay(renderer, font);
