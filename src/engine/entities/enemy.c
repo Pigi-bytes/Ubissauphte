@@ -98,11 +98,17 @@ void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect, t_scene* 
     startDeltaTimer(base->flashTimer);    // Timer pour la barre de vie
     base->flashDuration = 0.15f;
 
+    base->isDead = SDL_FALSE;
+
     // Associer la scène
     base->entity.currentScene = scene;
 }
 
 void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
+    if (enemy->isDead) {
+        return;
+    }
+
     if (enemy->isFlashing) {
         // Effet blanc pur - tout en blanc sans aucune autre couleur
         SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);
@@ -137,6 +143,15 @@ void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
 }
 
 void updateEnemy(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities) {
+    if (enemy->isDead) {
+        for (int i = 0; i < entities->count; i++) {
+            if (getObject(entities, i) == enemy) {
+                deleteObject(entities, i);
+            }
+        }
+        return;
+    }
+
     if (enemy->isFlashing) {
         updateDeltaTimer(enemy->flashTimer, *deltaTime);
 
@@ -161,7 +176,7 @@ void updateEnemy(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager
         }
     }
 
-    if (enemy->health != 0 && enemy->update) {
+    if (enemy->health > 0 && enemy->update) {
         enemy->update(enemy, deltaTime, grid, entities);
     }
 }
@@ -176,7 +191,7 @@ void freeEnemy(void* object) {
 }
 
 void takeDamageAndCheckDeath(t_enemy* enemy, int damage) {
-    if (!enemy || enemy->isInvincible) return;
+    if (!enemy || enemy->isInvincible || enemy->isDead) return;  // Ignorer si déjà mort
 
     enemy->showHealthBar = SDL_TRUE;
     resetDeltaTimer(enemy->healthBarTimer);
@@ -190,15 +205,16 @@ void takeDamageAndCheckDeath(t_enemy* enemy, int damage) {
         enemy->health = 0;
         enemy->showHealthBar = SDL_FALSE;
 
-        // L'ennemi est mort, on utilise sa référence à la scène
-        sceneRemoveObject(enemy->entity.currentScene, enemy);
-        // Ne pas accéder à enemy après cet appel car l'objet est libéré!
+        // Marquer l'ennemi comme mort
+        enemy->isDead = SDL_TRUE;
+
+        // Désactiver les collisions pour qu'il n'interagisse plus avec le monde
+        enemy->entity.useCircleCollision = SDL_FALSE;
+
+        // Les graphismes et la suppression seront gérés par updateEnemy
         return;
     }
 
-    printf("%d \n", enemy->health);
-
-    // Activer l'invincibilité seulement si l'ennemi est vivant
     enemy->isInvincible = SDL_TRUE;
     resetDeltaTimer(enemy->invincibilityTimer);
 }

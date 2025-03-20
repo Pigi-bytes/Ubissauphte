@@ -42,35 +42,6 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     return joueur;
 }
 
-// void draw_slash(SDL_Renderer* renderer, SDL_FPoint center, float angle, float range, float arc_width, float line_width) {
-//     const int segments = 50;                 // Nombre de segments pour l'arc (plus élevé = plus lisse)
-//     const int point_size = (int)line_width;  // Taille des points (épaisseur du slash)
-
-//     float start_angle = angle - arc_width / 2;  // Angle de départ du slash
-//     float end_angle = angle + arc_width / 2;    // Angle de fin du slash
-
-//     // Couleur jaune/blanc du slash
-//     SDL_SetRenderDrawColor(renderer, 255, 255, 100, 255);
-
-//     // Dessiner des gros points le long de l'arc
-//     for (int i = 0; i <= segments; i++) {
-//         float t = (float)i / segments;                                      // Progression le long de l'arc (0.0 à 1.0)
-//         float current_angle = start_angle + t * (end_angle - start_angle);  // Angle actuel
-
-//         // Point central de l'arc
-//         SDL_FPoint arc_point = {
-//             center.x + cosf(current_angle) * range,
-//             center.y + sinf(current_angle) * range};
-
-//         // Dessiner un gros point (carré de taille `point_size`)
-//         for (int dx = -point_size / 2; dx <= point_size / 2; dx++) {
-//             for (int dy = -point_size / 2; dy++) {
-//                 SDL_RenderDrawPoint(renderer, (int)(arc_point.x + dx), (int)(arc_point.y + dy));
-//             }
-//         }
-//     }
-// }
-
 void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
     if (player->attack.nbHits > 0) {
         // Calculer l'intensité du shake basée sur l'arme et les dégâts
@@ -137,7 +108,7 @@ void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
     // Position et rotation de l'arme selon l'état (attaque ou non)
     float rotationAngle;
     SDL_Rect displayRect;
-    SDL_RendererFlip weaponFlip = SDL_FLIP_NONE;
+    SDL_RendererFlip weaponFlip = SDL_FLIP_HORIZONTAL;
 
     if (player->attack.isActive) {
         // PENDANT L'ATTAQUE: on déplace l'arme pour que le point de pivot coïncide avec le joueur
@@ -251,37 +222,69 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     float force = 400.0f;
     float force_dash = force * 3.5;
 
+    // Variables pour stocker la dernière direction d'entrée
+    float lastDirX = 0.0f;
+    float lastDirY = 0.0f;
+    float currentDirX = 0.0f;
+    float currentDirY = 0.0f;
+
+    // Détection des mouvements directionnels
     if (input->key[player->control->left]) {
         player->entity.physics.velocity.x -= force * *deltaTime;
         player->entity.flip = SDL_FLIP_HORIZONTAL;
+        currentDirX = -1.0f;
     }
     if (input->key[player->control->right]) {
         player->entity.physics.velocity.x += force * *deltaTime;
         player->entity.flip = SDL_FLIP_NONE;
+        currentDirX = 1.0f;
     }
-    if (input->key[player->control->up]) player->entity.physics.velocity.y -= force * *deltaTime;
-    if (input->key[player->control->down]) player->entity.physics.velocity.y += force * *deltaTime;
+    if (input->key[player->control->up]) {
+        player->entity.physics.velocity.y -= force * *deltaTime;
+        currentDirY = -1.0f;
+    }
+    if (input->key[player->control->down]) {
+        player->entity.physics.velocity.y += force * *deltaTime;
+        currentDirY = 1.0f;
+    }
 
+    // Mettre à jour la dernière direction si le joueur se déplace
+    if (currentDirX != 0.0f || currentDirY != 0.0f) {
+        lastDirX = currentDirX;
+        lastDirY = currentDirY;
+
+        // Normaliser la direction pour les mouvements diagonaux
+        float length = sqrtf(lastDirX * lastDirX + lastDirY * lastDirY);
+        if (length > 0.0f) {
+            lastDirX /= length;
+            lastDirY /= length;
+        }
+    }
+
+    // Changement d'arme
     if (keyPressOnce(input, SDL_SCANCODE_T)) {
         switchToNextWeapon(player);
     }
 
+    // Gestion du dash et de l'attaque
     if (input->mouseButtons[SDL_BUTTON_LEFT] || input->key[player->control->dash]) {
-        float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
-        convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
-        float dx = mouseWorldX - player->entity.collisionCircle.x;
-        float dy = mouseWorldY - player->entity.collisionCircle.y;
-
+        // Pour le dash : utiliser la dernière direction de déplacement
         if (input->key[player->control->dash]) {
-            float magnitude = sqrt(dx * dx + dy * dy);
-            if (magnitude > 0.0f) {
-                dx /= magnitude;
-                dy /= magnitude;
+            // Vérifier si le joueur a une direction enregistrée
+            if (lastDirX != 0.0f || lastDirY != 0.0f) {
+                // Appliquer le dash dans la direction mémorisée
+                player->entity.physics.velocity.x += lastDirX * force_dash * *deltaTime;
+                player->entity.physics.velocity.y += lastDirY * force_dash * *deltaTime;
             }
-            player->entity.physics.velocity.x += dx * force_dash * *deltaTime;
-            player->entity.physics.velocity.y += dy * force_dash * *deltaTime;
         }
+
+        // Pour l'attaque : conserver le comportement basé sur la souris
         if (input->mouseButtons[SDL_BUTTON_LEFT] && player->attack.cooldown <= 0) {
+            float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
+            convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
+            float dx = mouseWorldX - player->entity.collisionCircle.x;
+            float dy = mouseWorldY - player->entity.collisionCircle.y;
+
             player->aimAngle = atan2f(dy, dx);
             player->entity.physics.velocity.x *= 0.2f;
             player->entity.physics.velocity.y *= 0.2f;
@@ -289,6 +292,7 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
         }
     }
 
+    // Animation selon la vitesse
     if (player->entity.physics.velocity.x != 0.0f || player->entity.physics.velocity.y != 0.0f) {
         setAnimation(player->entity.animationController, "walk");
     } else {
@@ -313,6 +317,7 @@ void start_attack(t_joueur* player) {
     player->attack.hitBox.startAngle = player->aimAngle - halfArc;
     player->attack.hitBox.endAngle = player->aimAngle + halfArc;
 }
+
 void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities) {
     if (!player->attack.isActive) return;
 
@@ -326,6 +331,11 @@ void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities
 
     for (int i = 1; i < entities->count; i++) {
         t_entity* enemy = getObject(entities, i);
+
+        if (((t_enemy*)enemy)->isDead) {
+            continue;
+        }
+
         SDL_FPoint position = {enemy->collisionCircle.x, enemy->collisionCircle.y};
 
         if (is_in_attack_sector(position, enemy->collisionCircle.radius, player->attack.hitBox.origin, current_angle, player->currentWeapon->range, player->currentWeapon->angleAttack)) {
