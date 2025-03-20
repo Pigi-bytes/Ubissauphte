@@ -5,7 +5,7 @@ SDL_bool caseSansVoisins(t_case* c) {
 }
 
 SDL_bool caseIsSol(t_case* c) {
-    return existe(c) && c->val == SOL;
+    return existe(c) && c->val != OBSTACLE;
 }
 SDL_bool caseIsPlafond(t_case* c) {
     return existe(c) && (c->val != SOL);
