@@ -72,8 +72,24 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
 // }
 
 void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
-    if (player->attack.nbHits != 0) {
-        cameraAddShake(camera, player->currentWeapon->damage, 0.5f);
+    if (player->attack.nbHits > 0) {
+        // Calculer l'intensité du shake basée sur l'arme et les dégâts
+        float impact_force = player->currentWeapon->damage * player->currentWeapon->mass / 10.0f;
+
+        // Shake non-linéaire (exponential pour les gros impacts)
+        float shake_intensity = 0.3f * powf(impact_force, 1.2f);
+
+        // Facteur de distance (diminue si l'ennemi est touché loin du joueur)
+        float distance_factor = 1.0f;
+        if (player->attack.hit_distance > 0) {
+            distance_factor = fmaxf(0.5f, 1.0f - (player->attack.hit_distance / (player->currentWeapon->range * 1.5f)));
+        }
+
+        // Durée du shake en fonction de la masse (armes lourdes = plus long)
+        float shake_duration = 0.3f + (player->currentWeapon->mass * 0.05f);
+
+        // Application du shake avec intensité modulée
+        cameraAddShake(camera, shake_intensity * distance_factor, shake_duration);
     }
 
     SDL_FPoint origin = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
@@ -235,7 +251,6 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     float force = 400.0f;
     float force_dash = force * 3.5;
 
-    // if (!player->attack.isActive) {
     if (input->key[player->control->left]) {
         player->entity.physics.velocity.x -= force * *deltaTime;
         player->entity.flip = SDL_FLIP_HORIZONTAL;
@@ -246,6 +261,10 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     }
     if (input->key[player->control->up]) player->entity.physics.velocity.y -= force * *deltaTime;
     if (input->key[player->control->down]) player->entity.physics.velocity.y += force * *deltaTime;
+
+    if (keyPressOnce(input, SDL_SCANCODE_T)) {
+        switchToNextWeapon(player);
+    }
 
     if (input->mouseButtons[SDL_BUTTON_LEFT] || input->key[player->control->dash]) {
         float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
@@ -269,7 +288,6 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
             start_attack(player);
         }
     }
-    //}
 
     if (player->entity.physics.velocity.x != 0.0f || player->entity.physics.velocity.y != 0.0f) {
         setAnimation(player->entity.animationController, "walk");
@@ -304,9 +322,6 @@ void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities
 
     float current_angle = lerpAngle(player->attack.hitBox.startAngle, player->attack.hitBox.endAngle, smoothStepf(player->attack.progress));
 
-    // Base de la force de knockback provient de l'arme
-    float base_knockback_force = player->currentWeapon->mass * 600.0f;
-
     int previousHits = player->attack.nbHits;
 
     for (int i = 1; i < entities->count; i++) {
@@ -323,17 +338,15 @@ void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities
                 dx /= length;
                 dy /= length;
 
-                // Calcul du knockback en fonction du rapport des masses
-                float mass_ratio = player->currentWeapon->mass / (enemy->physics.mass + 1.0f);
+                float knockback_base = player->currentWeapon->mass * 750.0f;                    // Augmenté de 600 à 750 pour plus d'impact
+                float mass_ratio = player->currentWeapon->mass / (enemy->physics.mass + 0.5f);  // Diminution du dénominateur pour amplifier l'effet
 
-                // On utilise une courbe logarithmique pour avoir un effet plus naturel
-                float effective_knockback = base_knockback_force * (0.2f + 0.8f * mass_ratio);
+                // Courbe exponentielle pour des knockbacks plus impactants
+                float power_curve = powf(mass_ratio, 0.7f);  // Exposant <1 pour atténuer les différences extrêmes
+                float effective_knockback = knockback_base * (0.15f + 0.85f * power_curve);
 
-                // Application d'un facteur minimum pour garantir un effet visuel même sur les ennemis lourds
-                effective_knockback = fmaxf(effective_knockback, base_knockback_force * 0.1f);
-
-                // Limite supérieure pour éviter des effets trop extrêmes sur des ennemis très légers
-                effective_knockback = fminf(effective_knockback, base_knockback_force * 4.0f);
+                effective_knockback = fmaxf(effective_knockback, knockback_base * 0.12f);
+                effective_knockback = fminf(effective_knockback, knockback_base * 4.5f);
 
                 // *** MODIFICATION: Tenir compte du deltaTime pour le knockback ***
                 // Au lieu d'appliquer une impulsion instantanée, on applique une force continue
@@ -347,11 +360,19 @@ void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities
         }
     }
 
-    // Si on vient de toucher un ennemi, déclencher le ralentissement du temps
     if (player->attack.nbHits > previousHits) {
-        // Configurer le ralentissement du temps
-        player->attack.timeSlowFactor = 0.65f;   // Ralentir à 30% de la vitesse normale
-        player->attack.timeSlowDuration = 0.2f;  // Durée courte du ralentissement (150ms)
+        // Armes lourdes = ralentissement plus intense mais plus court
+        float weight_factor = player->currentWeapon->mass / 5.0f;  // Normalisation (5.0f est une masse moyenne)
+
+        // Facteur: armes lourdes ralentissent plus (jusqu'à 0.4x pour les plus lourdes)
+        player->attack.timeSlowFactor = fmaxf(0.4f, 0.75f - (weight_factor * 0.1f));
+
+        // Durée: armes légères = ralentissement plus long
+        player->attack.timeSlowDuration = 0.15f + (0.3f / weight_factor);
+
+        // Limites pour la stabilité
+        player->attack.timeSlowDuration = fminf(player->attack.timeSlowDuration, 0.35f);
+
         player->attack.timeSlowRemaining = player->attack.timeSlowDuration;
     }
 
@@ -391,4 +412,32 @@ void freePlayer(void* object) {
     t_joueur* player = (t_joueur*)object;
     SDL_DestroyTexture(player->entity.texture);
     free(player);
+}
+
+void addWeaponToPlayer(t_joueur* player, t_arme* weapon) {
+    if (!player || !weapon || player->weaponCount >= 10) return;
+
+    // Ajouter l'arme au tableau
+    player->weapons[player->weaponCount] = weapon;
+    player->weaponCount++;
+
+    // Si c'est la première arme, l'équiper automatiquement
+    if (player->weaponCount == 1) {
+        player->currentWeaponIndex = 0;
+        player->currentWeapon = weapon;
+    }
+}
+
+void switchToNextWeapon(t_joueur* player) {
+    if (!player || player->weaponCount <= 1) return;
+
+    // Passer à l'arme suivante (avec retour au début si nécessaire)
+    player->currentWeaponIndex = (player->currentWeaponIndex + 1) % player->weaponCount;
+    player->currentWeapon = player->weapons[player->currentWeaponIndex];
+
+    // Effet visuel et sonore de changement d'arme (optionnel)
+    // playSound("weapon_switch");
+
+    // Reset du cooldown d'attaque pour éviter de spammer les attaques
+    player->attack.cooldown = 0.2f;
 }

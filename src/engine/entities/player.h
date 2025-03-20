@@ -13,7 +13,7 @@
 // Anticipation > contact > recovery
 // https://www.youtube.com/watch?v=8X4fx-YncqA
 
-// Shift / FRICTION / TIME slown down scaling // ralentissement en cas d'attaque / 
+// Shift / FRICTION / TIME slown down scaling // ralentissement en cas d'attaque /
 
 typedef struct {
     SDL_bool isActive;
@@ -21,6 +21,7 @@ typedef struct {
     float progress;   // Progression de 0.0 à 1.0
     t_sector hitBox;  // Secteur d'attaque (origine, angles, portée)
     int nbHits;
+    float hit_distance;  // Distance du dernier hit pour le screen shake
 
     // Propriétés pour le ralentissement du temps
     float timeSlowFactor;     // Facteur de ralentissement (1.0 = normal, 0.3 = ralenti à 30%)
@@ -52,7 +53,11 @@ typedef struct {
     t_entity entity;
     t_control* control;
 
-    t_arme* currentWeapon;
+    t_arme* weapons[10];     // Tableau d'armes disponibles
+    int weaponCount;         // Nombre d'armes actuellement disponibles
+    int currentWeaponIndex;  // Index de l'arme actuelle dans le tableau
+    t_arme* currentWeapon;   // Référence à l'arme actuelle (pour faciliter l'accès)
+
     t_attack attack;
     float aimAngle;
 } t_joueur;
@@ -68,4 +73,6 @@ SDL_bool is_in_attack_sector(SDL_FPoint target, float target_radius, SDL_FPoint 
 void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities);
 void start_attack(t_joueur* player);
 
+void addWeaponToPlayer(t_joueur* player, t_arme* weapon);
+void switchToNextWeapon(t_joueur* player);
 #endif
