@@ -248,9 +248,15 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
         .x = inv.x,
         .y = inv.y + caseItem[0].y + input->windowHeight * 0.02,
         .w = inv.w,
-        .h = inv.h - caseItem[0].h * 2 - input->windowHeight * 0.04};
+        .h = inv.h - caseItem[0].h * 2};
 
     static int scrollOffset = 0;  // Décalage du défilement
+
+    SDL_Rect scrollbar = {scrollViewport.x + scrollViewport.w - 10,
+                          inv.y,
+                          10,
+                          (scrollViewport.h * 24) / (caseItem[0].h)};
+
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
@@ -278,6 +284,19 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
                     scrollOffset += 50;  // Défilement vers le bas
                 }
                 break;
+            case SDL_MOUSEBUTTONDOWN:
+                if (event.button.button == SDL_BUTTON_LEFT) {
+                    int mouseX = event.button.x;
+                    int mouseY = event.button.y;
+
+                    // Vérifier si le clic est sur la barre de défilement
+                    if (mouseX >= scrollbar.x && mouseX <= scrollbar.x + scrollbar.w &&
+                        mouseY >= scrollbar.y && mouseY <= scrollbar.y + scrollbar.h) {
+                        // Mettre à jour la position de défilement pour tout en haut
+                        scrollOffset = 0;
+                    }
+                }
+                break;
         }
     }
 
@@ -303,7 +322,9 @@ void afficherInventaire(SDL_Renderer* renderer, t_input* input, t_character* c, 
     }
 
     SDL_RenderSetViewport(renderer, NULL);  // Réinitialiser le viewport
-
+    scrollbar.y = scrollViewport.y + (scrollOffset * scrollViewport.h) / maxScrollOffset;
+    SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
+    SDL_RenderFillRect(renderer, &scrollbar);
     SDL_RenderDrawRect(renderer, &statsItem);
 
     TTF_Font* font1 = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", statsItem.h * statsItem.w * 0.0002);
