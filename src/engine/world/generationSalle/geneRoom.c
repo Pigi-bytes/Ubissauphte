@@ -12,9 +12,9 @@ t_block *getSol(t_listeBlock **listAllBlock, t_case *c) {
         return blockByName(listBlock, SOL_BAS_PILONNE);
     if (existe(c->tabVoisin[VOISIN_HAUT]) && c->tabVoisin[VOISIN_HAUT]->tiles != NULL && blockIs(c->tabVoisin[VOISIN_HAUT]->tiles, FRONTALE_FONTAINE_PAS_EAUX)) {
         c->val = ELTAJOUTE;
-        if (rand() % 2)
-            return blockByName(listBlock, SOL_BAS_FONTAINE_SANS_EAUX_GRILLE);
-        return blockByName(listBlock, SOL_BAS_FONTAINE_SANS_EAUX_PROFOND);
+        if (rand() % 2 && c->tabVoisin[VOISIN_BAS]->val == SOL && c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS] == SOL && c->tabVoisin[VOISIN_DIAG_DROIT_BAS] == SOL)
+            return blockByName(listBlock, SOL_BAS_FONTAINE_SANS_EAUX_PROFOND);
+        return blockByName(listBlock, SOL_BAS_FONTAINE_SANS_EAUX_GRILLE);
     }
     if (existe(c->tabVoisin[VOISIN_HAUT]) && c->tabVoisin[VOISIN_HAUT]->tiles != NULL && (blockIs(c->tabVoisin[VOISIN_HAUT]->tiles, DECO_CROIX_TOMBE) || blockIs(c->tabVoisin[VOISIN_HAUT]->tiles, DECO_PIERRE_TOMBALE))) {
         c->val = ELTAJOUTE;
@@ -26,9 +26,10 @@ t_block *getSol(t_listeBlock **listAllBlock, t_case *c) {
     }
     if (existe(c->tabVoisin[VOISIN_HAUT]) && c->tabVoisin[VOISIN_HAUT]->tiles != NULL && blockIs(c->tabVoisin[VOISIN_HAUT]->tiles, FRONTALE_FONTAINE_EAUX)) {
         c->val = ELTAJOUTE;
-        if (rand() % 2)
-            return blockByName(listBlock, SOL_BAS_FONTAINE_EAUX_GRILLE);
-        return blockByName(listBlock, SOL_BAS_FONTAINE_EAUX_PROFOND);
+        if (rand() % 2 && c->tabVoisin[VOISIN_BAS]->val == SOL && c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS] == SOL && c->tabVoisin[VOISIN_DIAG_DROIT_BAS] == SOL)
+
+            return blockByName(listBlock, SOL_BAS_FONTAINE_EAUX_PROFOND);
+        return blockByName(listBlock, SOL_BAS_FONTAINE_EAUX_GRILLE);
     }
 
     if (EXISTE_VOISIN(c->tabVoisin[VOISIN_HAUT], c->tabVoisin[VOISIN_GAUCHE]) && (c->tabVoisin[VOISIN_HAUT]->val == OBSTACLE) && (c->tabVoisin[VOISIN_GAUCHE]->val == OBSTACLE)) {
@@ -141,47 +142,49 @@ void choixTiles(t_listeBlock **listAllBlock, t_grille *g) {
     t_listeBlock *listBlock = listeByType(listAllBlock, MUR_TYPE);
     for (int i = 0; i < g->nbLigne; i++) {
         for (int j = 0; j < g->nbColonne; j++) {
-            if ((!g->grille[i][j]->val)) {
-                t_block *block = getSol(listAllBlock, g->grille[i][j]);
-                copierVal(block, &(g->grille[i][j]->tiles));
-                rotationAleatoire(g->grille[i][j]->tiles);
-            } else if (blocSeul(g->grille[i][j])) {
-                copierVal(getDeco(listAllBlock), &(g->grille[i][j]->tiles));
-            } else if (murAvant(g->grille[i][j])) {
-                copierVal(getFrontale(listAllBlock, g->grille[i][j]), &(g->grille[i][j]->tiles));
-            } else if (angleDroit(g->grille[i][j])) {
-                copierVal(blockByName(listBlock, MUR_ANGLE_DROIT), &(g->grille[i][j]->tiles));
-            } else if (angleGauche(g->grille[i][j])) {
-                printf("e");
-                copierVal(blockByName(listBlock, MUR_ANGLE_GAUCHE), &(g->grille[i][j]->tiles));
-            } else if (arrondiInferieurDroit(g->grille[i][j])) {
-                copierVal(blockByName(listBlock, MUR_ARRONDI_INF_DROIT), &(g->grille[i][j]->tiles));
-            } else if (arrondiInferieurGauche(g->grille[i][j])) {
-                copierVal(blockByName(listBlock, MUR_ARRONDI_INF_GAUCHE), &(g->grille[i][j]->tiles));
-            } else if (arrondiSuperieurDroit(g->grille[i][j])) {
-                copierVal(blockByName(listBlock, MUR_ARRONDI_SUP_DROIT), &(g->grille[i][j]->tiles));
-            } else if (arrondiSuperieurGauche(g->grille[i][j])) {
-                copierVal(blockByName(listBlock, MUR_ARRONDI_SUP_GAUCHE), &(g->grille[i][j]->tiles));
-            } else if (murArriere(g->grille[i][j])) {
-                copierVal(blockByName(listBlock, MUR_BORDURE_MUR_ARRIERE), &(g->grille[i][j]->tiles));
-            } else if (angleContinueGauche(g->grille[i][j])) {
-                copierVal(blockByName(listBlock, MUR_ANGLE_CONTINUE_GAUCHE), &(g->grille[i][j]->tiles));
-            } else if (angleContinueDroit(g->grille[i][j])) {
-                copierVal(blockByName(listBlock, MUR_ANGLE_CONTINUE_DROIT), &(g->grille[i][j]->tiles));
-            } else if (bordureMurAvant(g->grille[i][j])) {
-                if (rand() % 5 < 2) {
-                    copierVal(blockByName(listBlock, MUR_BORDURE_MUR_AVANT_PILONNE), &(g->grille[i][j]->tiles));
+            if (g->grille[i][j]->tiles == NULL) {
+                if ((g->grille[i][j]->val != OBSTACLE)) {
+                    copierVal(getSol(listAllBlock, g->grille[i][j]), &(g->grille[i][j]->tiles));
+                    rotationAleatoire(g->grille[i][j]->tiles);
+                } else if (blocSeul(g->grille[i][j])) {
+                    copierVal(getDeco(listAllBlock),
+                              &(g->grille[i][j]->tiles));
+                    g->grille[i][j]->val = ELTAJOUTE;
+                } else if (murAvant(g->grille[i][j])) {
+                    copierVal(getFrontale(listAllBlock, g->grille[i][j]), &(g->grille[i][j]->tiles));
+                } else if (angleDroit(g->grille[i][j])) {
+                    copierVal(blockByName(listBlock, MUR_ANGLE_DROIT), &(g->grille[i][j]->tiles));
+                } else if (angleGauche(g->grille[i][j])) {
+                    copierVal(blockByName(listBlock, MUR_ANGLE_GAUCHE), &(g->grille[i][j]->tiles));
+                } else if (arrondiInferieurDroit(g->grille[i][j])) {
+                    copierVal(blockByName(listBlock, MUR_ARRONDI_INF_DROIT), &(g->grille[i][j]->tiles));
+                } else if (arrondiInferieurGauche(g->grille[i][j])) {
+                    copierVal(blockByName(listBlock, MUR_ARRONDI_INF_GAUCHE), &(g->grille[i][j]->tiles));
+                } else if (arrondiSuperieurDroit(g->grille[i][j])) {
+                    copierVal(blockByName(listBlock, MUR_ARRONDI_SUP_DROIT), &(g->grille[i][j]->tiles));
+                } else if (arrondiSuperieurGauche(g->grille[i][j])) {
+                    copierVal(blockByName(listBlock, MUR_ARRONDI_SUP_GAUCHE), &(g->grille[i][j]->tiles));
+                } else if (murArriere(g->grille[i][j])) {
+                    copierVal(blockByName(listBlock, MUR_BORDURE_MUR_ARRIERE), &(g->grille[i][j]->tiles));
+                } else if (angleContinueGauche(g->grille[i][j])) {
+                    copierVal(blockByName(listBlock, MUR_ANGLE_CONTINUE_GAUCHE), &(g->grille[i][j]->tiles));
+                } else if (angleContinueDroit(g->grille[i][j])) {
+                    copierVal(blockByName(listBlock, MUR_ANGLE_CONTINUE_DROIT), &(g->grille[i][j]->tiles));
+                } else if (bordureMurAvant(g->grille[i][j])) {
+                    if (rand() % 5 < 2) {
+                        copierVal(blockByName(listBlock, MUR_BORDURE_MUR_AVANT_PILONNE), &(g->grille[i][j]->tiles));
+                    } else {
+                        copierVal(blockByName(listBlock, MUR_BORDURE_MUR_AVANT), &(g->grille[i][j]->tiles));
+                    }
+                } else if (bordureMurGauche(g->grille[i][j])) {
+                    copierVal(blockByName(listBlock, MUR_BORDURE_MUR_GAUCHE), &(g->grille[i][j]->tiles));
+                } else if (bordureMurDroit(g->grille[i][j])) {
+                    copierVal(blockByName(listBlock, MUR_BORDURE_MUR_DROIT), &(g->grille[i][j]->tiles));
                 } else {
-                    copierVal(blockByName(listBlock, MUR_BORDURE_MUR_AVANT), &(g->grille[i][j]->tiles));
-                }
-            } else if (bordureMurGauche(g->grille[i][j])) {
-                copierVal(blockByName(listBlock, MUR_BORDURE_MUR_GAUCHE), &(g->grille[i][j]->tiles));
-            } else if (bordureMurDroit(g->grille[i][j])) {
-                copierVal(blockByName(listBlock, MUR_BORDURE_MUR_DROIT), &(g->grille[i][j]->tiles));
-            } else {
-                copierVal(getPlafond(listAllBlock), &(g->grille[i][j]->tiles));
+                    copierVal(getPlafond(listAllBlock), &(g->grille[i][j]->tiles));
 
-                rotationAleatoire(g->grille[i][j]->tiles);
+                    rotationAleatoire(g->grille[i][j]->tiles);
+                }
             }
         }
     }
@@ -293,41 +296,51 @@ int estOuvert(t_case *c, int changementLigne, int changementColonne) {
     } else if (changementLigne == 0 && changementColonne == -1) {
         return ((existe(c->tabVoisin[VOISIN_GAUCHE]) && (c->tabVoisin[VOISIN_GAUCHE]->val == SOL)) || (existe(c->tabVoisin[VOISIN_BAS]) && (c->tabVoisin[VOISIN_BAS]->val == SOL)) || (existe(c->tabVoisin[VOISIN_HAUT]) && (c->tabVoisin[VOISIN_HAUT]->val == SOL)));
     } else if (changementLigne == 1 && changementColonne == 0) {
-        return ((existe(c->tabVoisin[VOISIN_GAUCHE]) && (c->tabVoisin[VOISIN_GAUCHE]->val == SOL)) || (existe(c->tabVoisin[VOISIN_DROIT]) && (c->tabVoisin[VOISIN_DROIT]->val == SOL)) || (existe(c->tabVoisin[VOISIN_BAS]) && (c->tabVoisin[VOISIN_BAS]->val == SOL)));
-    } else {
         return ((existe(c->tabVoisin[VOISIN_GAUCHE]) && (c->tabVoisin[VOISIN_GAUCHE]->val == SOL)) || (existe(c->tabVoisin[VOISIN_DROIT]) && (c->tabVoisin[VOISIN_DROIT]->val == SOL)) || (existe(c->tabVoisin[VOISIN_HAUT]) && (c->tabVoisin[VOISIN_HAUT]->val == SOL)));
+    } else {
+        return ((existe(c->tabVoisin[VOISIN_GAUCHE]) && (c->tabVoisin[VOISIN_GAUCHE]->val == SOL)) || (existe(c->tabVoisin[VOISIN_DROIT]) && (c->tabVoisin[VOISIN_DROIT]->val == SOL)) || (existe(c->tabVoisin[VOISIN_BAS]) && (c->tabVoisin[VOISIN_BAS]->val == SOL)));
     }
 }
 
-SDL_bool trouerGrille(t_grille *grille, int xdebut, int ydebut, int changementLigne, int changementColonne) {
+SDL_bool trouerGrille(t_grille **grille, int xdebut, int ydebut, int changementLigne, int changementColonne, t_listeBlock *lb) {
     if (!grille) return SDL_FALSE;  // Vérification de la grille
 
     int i = xdebut, j = ydebut;
-    grille->grille[i][j]->val = SOL;
+    copierVal(blockByName(lb, DIRECTION_DROITE), &(*grille)->grille[i][j]->tiles);
+    (*grille)->grille[i][j]->val = SOL;
 
     // Creuser jusqu'à une case ouverte ou jusqu'à sortir des limites
-    while (i >= 0 && i < grille->nbLigne && j >= 0 && j < grille->nbColonne && !estOuvert(grille->grille[i][j], changementLigne, changementColonne)) {
+    while (i >= 0 && i < (*grille)->nbLigne && j >= 0 && j < (*grille)->nbColonne && !estOuvert((*grille)->grille[i][j], changementLigne, changementColonne)) {
         i += changementLigne;
         j += changementColonne;
-        grille->grille[i][j]->val = SOL;
+        if (i >= 0 && i < (*grille)->nbLigne && j >= 0 && j < (*grille)->nbColonne) {
+            (*grille)->grille[i][j]->val = SOL;
+        }
+    }
+
+    if (i < 0 || i > (*grille)->nbLigne || j < 0 || j > (*grille)->nbColonne) {
+        for (i = xdebut, j = ydebut; i >= 0 && i < (*grille)->nbLigne && j >= 0 && j < (*grille)->nbColonne; i += changementLigne, j += changementColonne) {
+            (*grille)->grille[i][j]->val = OBSTACLE;
+        }
+        return SDL_FALSE;
     }
 
     return SDL_TRUE;
 }
 
-void placerSortie(t_grille **grille, t_salle *salle) {
+void placerSortie(t_grille **grille, t_salle *salle, t_listeBlock **lab) {
+    t_listeBlock *lb = listeByType(lab, DIRECTION_TYPE);
     if (salle->droite != NULL) {
-        printf("je veux renter moi aussi\n");
-        while (!(trouerGrille((*grille), (rand() % ((*grille)->nbLigne - 3) + 1), (*grille)->nbColonne - 1, 0, -1)));
+        while (!(trouerGrille(grille, (rand() % ((*grille)->nbLigne - 3) + 1), (*grille)->nbColonne - 1, 0, -1, lb)));
     }
     if (salle->gauche != NULL) {
-        while (!(trouerGrille((*grille), (rand() % ((*grille)->nbLigne - 3) + 1), 0, 0, 1)));
+        while (!(trouerGrille(grille, (rand() % ((*grille)->nbLigne - 3) + 1), 0, 0, 1, lb)));
     }
     if (salle->haut != NULL) {
-        while (!(trouerGrille((*grille), 0, (rand() % ((*grille)->nbColonne - 3) + 1), 1, 0)));
+        while (!(trouerGrille(grille, 0, (rand() % ((*grille)->nbColonne - 3) + 1), 1, 0, lb)));
     }
     if (salle->bas != NULL) {
-        while (!(trouerGrille((*grille), (*grille)->nbLigne - 1, (rand() % ((*grille)->nbColonne - 2) + 1), -1, 0)));
+        while (!(trouerGrille(grille, (*grille)->nbLigne - 1, (rand() % ((*grille)->nbColonne - 2) + 1), -1, 0, lb)));
     }
 }
 t_grille *geneRoom(t_salle *salle) {
@@ -358,7 +371,7 @@ t_grille *geneRoom(t_salle *salle) {
     rendreMatriceContinue(entier, nbLigne, nbColonne);
     t_grille *grille = intToGrilleNiveau(entier, nbLigne, nbColonne);
 
-    placerSortie(&grille, salle);
+    placerSortie(&grille, salle, listAllBlock);
     lissage(grille);
 
     choixTiles(listAllBlock, grille);

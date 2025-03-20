@@ -130,11 +130,14 @@ t_listeBlock** createListAllBlock() {
     ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_BRIQUE_SIMPLE, 41, 0, (0.3), SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_BRIQUE_FENETRE, 29, 0, (0.3), SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_DRAPEAU, 30, 0, (0.3), SDL_TRUE, SDL_FALSE);
-    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_FONTAINE_EAUX, 21, 0, (0.05), SDL_TRUE, SDL_FALSE);
-    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_FONTAINE_PAS_EAUX, 20, 0, (0.05), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_FONTAINE_EAUX, 21, 0, (0.0333), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_FONTAINE_PAS_EAUX, 20, 0, (0.0333), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_PORTE_SOLO, 46, 0, 0.0333, SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_ANGLE_DROIT, 58, 0, (0.0), SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_ANGLE_GAUCHE, 60, 0, (0.0), SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_CORP_PILONNE, 19, 0, (0.0), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_PORTE_DUO_DROITE, 48, 0, 0, SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, FRONTAL_TYPE, FRONTALE_PORTE_DUO_GAUCHE, 47, 0, 0, SDL_TRUE, SDL_FALSE);
 
     ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_SIMPLE, 1, 0, (((double)1) / ((double)3)), SDL_TRUE, SDL_TRUE);
     ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_FRACTURE, 13, 0, (((double)1) / ((double)3)), SDL_TRUE, SDL_TRUE);
@@ -154,6 +157,10 @@ t_listeBlock** createListAllBlock() {
     ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_FIN_ESCALIER, 39, 0, 0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_COFFRE, 90, 0, (0.0), SDL_TRUE, SDL_FALSE);
 
+    ajouterBlock(listAllBlock, DIRECTION_TYPE, DIRECTION_HAUT, -1, 0, 0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, DIRECTION_TYPE, DIRECTION_BAS, -2, 0, 0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, DIRECTION_TYPE, DIRECTION_GAUCHE, -3, 0, 0, SDL_FALSE, SDL_FALSE);
+    ajouterBlock(listAllBlock, DIRECTION_TYPE, DIRECTION_DROITE, -4, 0, 0, SDL_FALSE, SDL_FALSE);
     return listAllBlock;
 }
 

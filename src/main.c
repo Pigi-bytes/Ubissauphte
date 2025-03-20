@@ -350,7 +350,7 @@ t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font
 
     ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
 
-    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Commandes", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.3f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "commande"))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Commandes  3", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.3f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "commande"))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Menu Fps", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.44f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "fpsMenu"))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, CreerBarreVolume(creerRect(0.35f, (0.58f + 0.05f), 0.3f, 0.01f), creerRect((0.35f + 0.14f), (0.58f + 0.032f), 0.02f, 0.04f), GREEN, WHITE, creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), VOLUME_TYPE);
     ADD_OBJECT_TO_SCENE(scene, fpsButtonEcran, BUTTON_TYPE);
@@ -412,15 +412,16 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     t_tileset* slimeTileSet = initTileset(renderer, 48, 16, 16, "assets/imgs/slimeidle12run1213.bmp");
     t_tileset* crabeTileSet = initTileset(renderer, 80, 16, 16, "assets/imgs/crabeidle123232run416.bmp");
 
-    SDL_Rect* rectcord = malloc(sizeof(SDL_Rect) * 3);
-    for (int i = 0; i < 3; i++) {
+    SDL_Rect* rectcord = malloc(sizeof(SDL_Rect) * 150);
+    for (int i = 0; i < 150; i++) {
         rectcord[i].x = 1;
         rectcord[i].y = 1;
         rectcord[i].w = 1;
-        rectcord[i].h = 1;
     }
-    t_salle** salle = genMap(3, rectcord);
-    t_grille* grille = geneRoom(salle[0]);
+    t_salle** salle = genMap(150, rectcord);
+    printf("%p\n", salle[1]->droite);
+    t_grille* grille = geneRoom(salle[1]);
+
     t_grid* level = loadMap(grille->nom, tileset);
     freeGrille(grille);
 
@@ -451,14 +452,14 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     placeOnRandomTile(level, &joueur->entity, entities);
 
     t_enemy* enemy;
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 1; i++) {
         enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, scene);
         addObject(entities, &enemy->entity, ENTITY);
         placeOnRandomTile(level, &enemy->entity, entities);
         ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
     }
 
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 0; i++) {
         enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 32, 32}, slimeTileSet, scene);
         enemy->entity.physics.mass = 10;
         enemy->maxHealth = 300;

@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define NBTYPE 6
+#define NBTYPE 7
 
 typedef enum {
     MUR_ANGLE_DROIT,
@@ -48,6 +48,9 @@ typedef enum {
     FRONTALE_ANGLE_GAUCHE,
     FRONTALE_ANGLE_DROIT,
     FRONTALE_CORP_PILONNE,
+    FRONTALE_PORTE_SOLO,
+    FRONTALE_PORTE_DUO_GAUCHE,
+    FRONTALE_PORTE_DUO_DROITE,
 
     PLAFOND_SIMPLE,
     PLAFOND_FRACTURE,
@@ -66,6 +69,11 @@ typedef enum {
     COMPDECO_FIN_ESCALIER,
     COMPDECO_SOLO_ESCALIER,
     COMPDECO_COFFRE,
+
+    DIRECTION_DROITE,
+    DIRECTION_GAUCHE,
+    DIRECTION_BAS,
+    DIRECTION_HAUT,
 } nom_block;
 
 typedef enum {
@@ -74,7 +82,8 @@ typedef enum {
     FRONTAL_TYPE,
     SOL_TYPE,
     DECO_TYPE,
-    COMPDECO_TYPE
+    COMPDECO_TYPE,
+    DIRECTION_TYPE
 } t_blocktype;
 
 typedef struct {

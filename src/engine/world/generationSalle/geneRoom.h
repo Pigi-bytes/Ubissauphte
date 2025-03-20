@@ -41,6 +41,6 @@ void choixTiles(t_listeBlock **listAllBlock, t_grille *g);
 void saveMap(t_grille *g);
 
 int estOuvert(t_case *c, int changementLigne, int changementColonne);
-SDL_bool trouerGrille(t_grille *grille, int xdebut, int ydebut, int changementLigne, int changementColonne);
-void placerSortie(t_grille **grille, t_salle *salle);
+SDL_bool trouerGrille(t_grille **grille, int xdebut, int ydebut, int changementLigne, int changementColonne, t_listeBlock *lb);
+void placerSortie(t_grille **grille, t_salle *salle, t_listeBlock **lab);
 #endif

@@ -5,10 +5,10 @@ SDL_bool caseSansVoisins(t_case* c) {
 }
 
 SDL_bool caseIsSol(t_case* c) {
-    return existe(c) && !c->val;
+    return existe(c) && c->val == SOL;
 }
 SDL_bool caseIsPlafond(t_case* c) {
-    return existe(c) && (c->val == OBSTACLE);
+    return existe(c) && (c->val != SOL);
 }
 SDL_bool ajoutArriere(t_case* c) {
     return caseIsPlafond(c->tabVoisin[VOISIN_BAS]) && caseIsSol(c->tabVoisin[VOISIN_BAS2]) && caseIsSol(c->tabVoisin[VOISIN_HAUT]);
@@ -29,7 +29,7 @@ SDL_bool blockDiagBas(t_case* c) {
 void lissage(t_grille* grille) {
     for (int i = 0; i < grille->nbLigne; i++) {
         for (int j = 0; j < grille->nbColonne; j++) {
-            if (grille->grille[i][j]->val == 1 && !(caseSansVoisins(grille->grille[i][j]))) {
+            if (grille->grille[i][j]->val == OBSTACLE && !(caseSansVoisins(grille->grille[i][j]))) {
                 if (((caseIsSol(grille->grille[i][j]->tabVoisin[VOISIN_DROIT]) && caseIsSol(grille->grille[i][j]->tabVoisin[VOISIN_GAUCHE])) || (caseIsSol(grille->grille[i][j]->tabVoisin[VOISIN_HAUT]) && caseIsSol(grille->grille[i][j]->tabVoisin[VOISIN_BAS])))) {
                     grille->grille[i][j]->val = SOL;
                 } else if (ajoutArriere(grille->grille[i][j])) {

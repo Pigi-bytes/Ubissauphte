@@ -117,11 +117,15 @@ t_grid* loadMap(char* filename, t_tileset* tileset) {
 
             t_tile* tile = getTile(grid, x, y, coucheActuelle);
             if (tile) {
-                tile->entity.texture = (SDL_Texture*)getObject(tileset->textureTiles, index);
+                if (index == -4) {
+                    tile->entity.texture = (SDL_Texture*)getObject(tileset->textureTiles, 42);
+                } else {
+                    tile->entity.texture = (SDL_Texture*)getObject(tileset->textureTiles, index);
+                }
                 tile->entity.flip = (SDL_RendererFlip)orientation;
                 tile->entity.animationController = initAnimationController();
                 tile->entity.animationController->haveAnimation = SDL_FALSE;
-                // tile->entity.debug = collisions;
+                tile->entity.debug = collisions;
                 tile->entity.debug = SDL_FALSE;
 
                 tile->solide = collisions;
