@@ -90,52 +90,61 @@ void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect, t_scene* 
     base->entity.collisionCircle.x = rect.x + rect.w / 2;
     base->entity.collisionCircle.y = rect.y + rect.h / 2;
     base->entity.collisionCircle.radius = fminf(rect.w, rect.h) / 2;
-
     base->showHealthBar = SDL_FALSE;          // La barre de vie est cachée par défaut
     base->healthBarTimer = initDeltaTimer();  // Timer pour la barre de vie
     startDeltaTimer(base->healthBarTimer);    // Timer pour la barre de vie
+
+    base->flashTimer = initDeltaTimer();  // Timer pour la barre de vie
+    startDeltaTimer(base->flashTimer);    // Timer pour la barre de vie
+    base->flashDuration = 0.15f;
 
     // Associer la scène
     base->entity.currentScene = scene;
 }
 
 void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
-    if (enemy->isInvincible) {
-        // Alterner entre rouge et blanc toutes les 0.1 seconde
-        float timer = getDeltaTimer(enemy->invincibilityTimer);
-        if ((int)(timer * 10) % 2 == 0) {
-            SDL_SetTextureColorMod(enemy->entity.texture, 255, 0, 0);  // Rouge
-        } else {
-            SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);  // Blanc
-        }
+    if (enemy->isFlashing) {
+        // Effet blanc pur - tout en blanc sans aucune autre couleur
+        SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);
+        // Utiliser le mode additif pour assurer une luminosité maximale
+        SDL_SetTextureBlendMode(enemy->entity.texture, SDL_BLENDMODE_ADD);
     } else {
+        // Rétablir le mode de fusion normal et les couleurs normales pour les autres états
+        SDL_SetTextureBlendMode(enemy->entity.texture, SDL_BLENDMODE_BLEND);
         SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);  // Couleur normale
     }
 
     renderEntity(renderer, &enemy->entity, camera);
 
+    // Le reste du code pour la barre de vie reste inchangé
     if (enemy->showHealthBar) {
-        SDL_Rect enemyPos = enemy->entity.displayRect;  // Position de l'ennemi
+        SDL_Rect enemyPos = enemy->entity.displayRect;
         float healthRatio = (float)enemy->health / (float)enemy->maxHealth;
 
-        float barWidth = enemy->entity.displayRect.w;  // Largeur de la barre de vie
-        float barHeight = 5.0f;                        // Hauteur de la barre de vie
-        float barX = enemyPos.x;                       // Centrer la barre au-dessus de l'ennemi
-        float barY = enemyPos.y - 20.0f;               // Position Y de la barre (au-dessus de l'ennemi)
+        float barWidth = enemy->entity.displayRect.w;
+        float barHeight = 5.0f;
+        float barX = enemyPos.x;
+        float barY = enemyPos.y - 20.0f;
 
-        // Dessiner le fond de la barre de vie (en rouge)
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);  // Rouge
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         SDL_Rect backgroundRect = {barX, barY, barWidth, barHeight};
         SDL_RenderFillRect(renderer, &backgroundRect);
 
-        // Dessiner la partie remplie de la barre de vie (en vert)
-        SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);  // Vert
+        SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
         SDL_Rect healthRect = {barX, barY, barWidth * healthRatio, barHeight};
         SDL_RenderFillRect(renderer, &healthRect);
     }
 }
 
 void updateEnemy(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities) {
+    if (enemy->isFlashing) {
+        updateDeltaTimer(enemy->flashTimer, *deltaTime);
+
+        if (getDeltaTimer(enemy->flashTimer) >= enemy->flashDuration) {
+            enemy->isFlashing = SDL_FALSE;
+        }
+    }
+
     if (enemy->isInvincible) {
         updateDeltaTimer(enemy->invincibilityTimer, *deltaTime);
 
@@ -171,6 +180,10 @@ void takeDamageAndCheckDeath(t_enemy* enemy, int damage) {
 
     enemy->showHealthBar = SDL_TRUE;
     resetDeltaTimer(enemy->healthBarTimer);
+
+    // Activer l'effet de flash
+    enemy->isFlashing = SDL_TRUE;
+    resetDeltaTimer(enemy->flashTimer);
 
     enemy->health -= damage;
     if (enemy->health <= 0) {

@@ -33,7 +33,7 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
 
     joueur->currentWeapon = NULL;
     joueur->aimAngle = 0.0f;
-    joueur->attack = (t_attack){.isActive = SDL_FALSE, .progress = 0.0f, .hitBox = {{0, 0}, 0.0f, 0.0f, 0.0f}, .nbHits = 0};
+    joueur->attack = (t_attack){.isActive = SDL_FALSE, .progress = 0.0f, .hitBox = {{0, 0}, 0.0f, 0.0f, 0.0f}, .nbHits = 0, .timeSlowFactor = 1.0f, .timeSlowDuration = 0.0f, .timeSlowRemaining = 0.0f};
 
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, SDL_TRUE, "idle"));
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){3, 4}, 2, 240, SDL_TRUE, "walk"));
@@ -64,7 +64,7 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
 
 //         // Dessiner un gros point (carré de taille `point_size`)
 //         for (int dx = -point_size / 2; dx <= point_size / 2; dx++) {
-//             for (int dy = -point_size / 2; dy <= point_size / 2; dy++) {
+//             for (int dy = -point_size / 2; dy++) {
 //                 SDL_RenderDrawPoint(renderer, (int)(arc_point.x + dx), (int)(arc_point.y + dy));
 //             }
 //         }
@@ -73,7 +73,7 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
 
 void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
     if (player->attack.nbHits != 0) {
-        cameraAddShake(camera, 3.0f, 0.3f);
+        cameraAddShake(camera, player->currentWeapon->damage, 0.5f);
     }
 
     SDL_FPoint origin = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
@@ -203,6 +203,21 @@ void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
 }
 
 void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectManager* entities) {
+    float originalDeltaTime = *deltaTime;
+
+    // Gestion du ralentissement temporel
+    if (player->attack.timeSlowRemaining > 0) {
+        player->attack.timeSlowRemaining -= originalDeltaTime;
+
+        // Calculer le facteur de ralentissement actuel (transition douce)
+        float progress = player->attack.timeSlowRemaining / player->attack.timeSlowDuration;
+        float smoothProgress = smoothStepf(progress);
+        float currentSlowFactor = 1.0f - (1.0f - player->attack.timeSlowFactor) * smoothProgress;
+
+        // Appliquer le ralentissement au deltaTime
+        *deltaTime *= currentSlowFactor;
+    }
+
     player->attack.nbHits = 0;
 
     if (player->attack.isActive) {
@@ -220,39 +235,41 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     float force = 400.0f;
     float force_dash = force * 3.5;
 
-    if (!player->attack.isActive) {
-        if (input->key[player->control->left]) {
-            player->entity.physics.velocity.x -= force * *deltaTime;
-            player->entity.flip = SDL_FLIP_HORIZONTAL;
-        }
-        if (input->key[player->control->right]) {
-            player->entity.physics.velocity.x += force * *deltaTime;
-            player->entity.flip = SDL_FLIP_NONE;
-        }
-        if (input->key[player->control->up]) player->entity.physics.velocity.y -= force * *deltaTime;
-        if (input->key[player->control->down]) player->entity.physics.velocity.y += force * *deltaTime;
+    // if (!player->attack.isActive) {
+    if (input->key[player->control->left]) {
+        player->entity.physics.velocity.x -= force * *deltaTime;
+        player->entity.flip = SDL_FLIP_HORIZONTAL;
+    }
+    if (input->key[player->control->right]) {
+        player->entity.physics.velocity.x += force * *deltaTime;
+        player->entity.flip = SDL_FLIP_NONE;
+    }
+    if (input->key[player->control->up]) player->entity.physics.velocity.y -= force * *deltaTime;
+    if (input->key[player->control->down]) player->entity.physics.velocity.y += force * *deltaTime;
 
-        if (input->mouseButtons[SDL_BUTTON_LEFT] || input->key[player->control->dash]) {
-            float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
-            convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
-            float dx = mouseWorldX - player->entity.collisionCircle.x;
-            float dy = mouseWorldY - player->entity.collisionCircle.y;
+    if (input->mouseButtons[SDL_BUTTON_LEFT] || input->key[player->control->dash]) {
+        float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
+        convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
+        float dx = mouseWorldX - player->entity.collisionCircle.x;
+        float dy = mouseWorldY - player->entity.collisionCircle.y;
 
-            if (input->key[player->control->dash]) {
-                float magnitude = sqrt(dx * dx + dy * dy);
-                if (magnitude > 0.0f) {
-                    dx /= magnitude;
-                    dy /= magnitude;
-                }
-                player->entity.physics.velocity.x += dx * force_dash * *deltaTime;
-                player->entity.physics.velocity.y += dy * force_dash * *deltaTime;
+        if (input->key[player->control->dash]) {
+            float magnitude = sqrt(dx * dx + dy * dy);
+            if (magnitude > 0.0f) {
+                dx /= magnitude;
+                dy /= magnitude;
             }
-            if (input->mouseButtons[SDL_BUTTON_LEFT] && player->attack.cooldown <= 0) {
-                player->aimAngle = atan2f(dy, dx);
-                start_attack(player);
-            }
+            player->entity.physics.velocity.x += dx * force_dash * *deltaTime;
+            player->entity.physics.velocity.y += dy * force_dash * *deltaTime;
+        }
+        if (input->mouseButtons[SDL_BUTTON_LEFT] && player->attack.cooldown <= 0) {
+            player->aimAngle = atan2f(dy, dx);
+            player->entity.physics.velocity.x *= 0.2f;
+            player->entity.physics.velocity.y *= 0.2f;
+            start_attack(player);
         }
     }
+    //}
 
     if (player->entity.physics.velocity.x != 0.0f || player->entity.physics.velocity.y != 0.0f) {
         setAnimation(player->entity.animationController, "walk");
@@ -278,7 +295,6 @@ void start_attack(t_joueur* player) {
     player->attack.hitBox.startAngle = player->aimAngle - halfArc;
     player->attack.hitBox.endAngle = player->aimAngle + halfArc;
 }
-
 void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities) {
     if (!player->attack.isActive) return;
 
@@ -288,20 +304,10 @@ void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities
 
     float current_angle = lerpAngle(player->attack.hitBox.startAngle, player->attack.hitBox.endAngle, smoothStepf(player->attack.progress));
 
-    // Calculer l'extrémité du slash pour le dessiner plus tard
-    float slash_range = player->currentWeapon->range;
-    float slash_width = M_PI / 12;
-
-    float start_angle = current_angle - slash_width / 2;
-    float end_angle = current_angle + slash_width / 2;
-    SDL_FPoint edge1 = {player->attack.hitBox.origin.x + slash_range * cosf(start_angle), player->attack.hitBox.origin.y + slash_range * sinf(start_angle)};
-    SDL_FPoint edge2 = {player->attack.hitBox.origin.x + slash_range * cosf(end_angle), player->attack.hitBox.origin.y + slash_range * sinf(end_angle)};
-
-    Debug_PushLine(player->attack.hitBox.origin.x, player->attack.hitBox.origin.y, edge1.x, edge1.y, 2, SDL_COLOR_RED);
-    Debug_PushLine(player->attack.hitBox.origin.x, player->attack.hitBox.origin.y, edge2.x, edge2.y, 2, SDL_COLOR_RED);
-
     // Base de la force de knockback provient de l'arme
-    float base_knockback_force = player->currentWeapon->mass * 10.0f;  // Facteur de 15 pour une bonne sensation
+    float base_knockback_force = player->currentWeapon->mass * 600.0f;
+
+    int previousHits = player->attack.nbHits;
 
     for (int i = 1; i < entities->count; i++) {
         t_entity* enemy = getObject(entities, i);
@@ -317,28 +323,36 @@ void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities
                 dx /= length;
                 dy /= length;
 
-                // Calcul du knockback en fonction du rapport des masses (F = ma)
-                // Formule : Force = (masse de l'arme / masse de l'ennemi) * force de base
-                // On ajoute une constante pour éviter une division par zéro et pour que les ennemis
-                // très lourds ressentent quand même un peu de knockback
-
+                // Calcul du knockback en fonction du rapport des masses
                 float mass_ratio = player->currentWeapon->mass / (enemy->physics.mass + 1.0f);
 
                 // On utilise une courbe logarithmique pour avoir un effet plus naturel
-                // Les ennemis très légers sont fortement projetés, les lourds résistent mieux
                 float effective_knockback = base_knockback_force * (0.2f + 0.8f * mass_ratio);
 
                 // Application d'un facteur minimum pour garantir un effet visuel même sur les ennemis lourds
                 effective_knockback = fmaxf(effective_knockback, base_knockback_force * 0.1f);
 
                 // Limite supérieure pour éviter des effets trop extrêmes sur des ennemis très légers
-                effective_knockback = fminf(effective_knockback, base_knockback_force * 3.0f);
+                effective_knockback = fminf(effective_knockback, base_knockback_force * 4.0f);
 
-                enemy->physics.velocity.x += dx * effective_knockback;
-                enemy->physics.velocity.y += dy * effective_knockback;
+                // *** MODIFICATION: Tenir compte du deltaTime pour le knockback ***
+                // Au lieu d'appliquer une impulsion instantanée, on applique une force continue
+                // divisée par deltaTime pour maintenir une force constante quelle que soit la fréquence
+                float knockback_impulse = effective_knockback * (*deltaTime);
+
+                enemy->physics.velocity.x += dx * knockback_impulse;
+                enemy->physics.velocity.y += dy * knockback_impulse;
             }
             player->attack.nbHits++;
         }
+    }
+
+    // Si on vient de toucher un ennemi, déclencher le ralentissement du temps
+    if (player->attack.nbHits > previousHits) {
+        // Configurer le ralentissement du temps
+        player->attack.timeSlowFactor = 0.65f;   // Ralentir à 30% de la vitesse normale
+        player->attack.timeSlowDuration = 0.2f;  // Durée courte du ralentissement (150ms)
+        player->attack.timeSlowRemaining = player->attack.timeSlowDuration;
     }
 
     if (player->attack.progress >= 1.0f) {
