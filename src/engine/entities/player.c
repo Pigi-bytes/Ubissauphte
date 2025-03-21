@@ -218,7 +218,7 @@ void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectMana
     updatePhysicEntity(&player->entity, deltaTime, grid, entities);
 }
 
-void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime) {
+void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime, t_sceneController* sceneController) {
     float force = 400.0f;
     float force_dash = force * 3.5;
 
@@ -246,6 +246,9 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     if (input->key[player->control->down]) {
         player->entity.physics.velocity.y += force * *deltaTime;
         currentDirY = 1.0f;
+    }
+    if (input->key[player->control->escape]) {
+        setScene(sceneController, "menuPrincipal");
     }
 
     // Mettre à jour la dernière direction si le joueur se déplace

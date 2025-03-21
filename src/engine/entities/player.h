@@ -47,6 +47,7 @@ typedef struct {
     SDL_Scancode left;
     SDL_Scancode right;
     SDL_Scancode dash;
+    SDL_Scancode escape;
 } t_control;
 
 typedef struct {
@@ -66,7 +67,7 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
 
 void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectManager* entities);
 void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera);
-void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime);
+void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime, t_sceneController* sceneController);
 void freePlayer(void* object);
 
 SDL_bool is_in_attack_sector(SDL_FPoint target, float target_radius, SDL_FPoint origin, float current_angle, float range, float arc);

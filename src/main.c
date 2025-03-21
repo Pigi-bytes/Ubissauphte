@@ -110,7 +110,7 @@ GENERATE_WRAPPER_3(updateMinimap, t_minimap*, t_camera*, SDL_Renderer*)
 GENERATE_WRAPPER_2(cameraHandleZoom, t_viewPort*, int*)
 
 GENERATE_WRAPPER_2(handleInputButton, t_input*, t_button*)
-GENERATE_WRAPPER_5(handleInputPlayer, t_input*, t_joueur*, t_grid*, t_viewPort*, float*)
+GENERATE_WRAPPER_6(handleInputPlayer, t_input*, t_joueur*, t_grid*, t_viewPort*, float*, t_sceneController*)
 
 GENERATE_WRAPPER_2(setRenderTarget, SDL_Renderer*, t_viewPort*)
 GENERATE_WRAPPER_4(centerCameraOn, t_camera*, int*, int*, float*)
@@ -395,7 +395,7 @@ t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     return scene;
 }
 
-t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, t_control* contr) {
+t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, t_control* contr, t_sceneController* sceneController) {
     t_typeRegistry* registre = createTypeRegistry();
     const uint8_t GRID_TYPE = registerType(registre, freeGrid, "Grid");
     const uint8_t PLAYER_TYPE = registerType(registre, freePlayer, "player");
@@ -419,7 +419,6 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
         rectcord[i].w = 1;
     }
     t_salle** salle = genMap(150, rectcord);
-    printf("%p\n", salle[1]->droite);
     t_grille* grille = geneRoom(salle[1]);
 
     t_grid* level = loadMap(grille->nom, tileset);
@@ -543,7 +542,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     ADD_OBJECT_TO_SCENE(scene, viewport, VIEWPORT_TYPE);
     ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
 
-    sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level, viewport, &frameData->deltaTime));
+    sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level, viewport, &frameData->deltaTime, sceneController));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&input->mouseYWheel));
 
     sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, 0, FONCTION_PARAMS(&frameData->deltaTime, level, entities));
@@ -595,10 +594,11 @@ int main(int argc, char* argv[]) {
     contr->left = SDL_SCANCODE_A;
     contr->right = SDL_SCANCODE_D;
     contr->dash = SDL_SCANCODE_SPACE;
+    contr->escape = SDL_SCANCODE_ESCAPE;
 
     t_scene* scene = createMainMenu(renderer, input, font, frameData, sceneController);
     t_scene* scene0 = createOptionMenu(renderer, input, font, frameData, window, option, contr, sceneController);
-    t_scene* scene1 = createMainWord(renderer, input, font, frameData, contr);
+    t_scene* scene1 = createMainWord(renderer, input, font, frameData, contr, sceneController);
     t_scene* scene2 = createCommandeMenu(renderer, input, font, window, option, contr, sceneController);
     t_scene* scene3 = createFpsMenu(renderer, input, font, frameData, fpsDisplay, window, option, sceneController);
 
