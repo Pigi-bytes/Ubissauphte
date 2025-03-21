@@ -37,7 +37,11 @@ typedef struct {
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 960
 
-const SDL_Color WHITE = {255, 255, 255}, BLACK = {0, 0, 0}, MAGENTA = {255, 0, 255}, BLUE = {0, 0, 255}, GREEN = {0, 255, 0};
+#define WHITE ((SDL_Color){255, 255, 255})
+#define BLACK ((SDL_Color){0, 0, 0})
+#define MAGENTA ((SDL_Color){255, 0, 255})
+#define BLUE ((SDL_Color){0, 0, 255})
+#define GREEN ((SDL_Color){0, 255, 0})
 
 SDL_Rect creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio);
 void bouttonClickQuit(t_fonctionParam* fonction);
