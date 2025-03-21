@@ -38,6 +38,8 @@ void Debug_ClearStack();
 void Debug_PushRect(const SDL_Rect *rect, int border_width, SDL_Color color);
 void Debug_PushCircle(int x, int y, int radius, SDL_Color color);
 void Debug_PushLine(int x1, int y1, int x2, int y2, int lineWidth, SDL_Color color);
+void Debug_PushSector(float originX, float originY, float startAngle, float endAngle,
+                      float radius, int segments, int lineWidth, SDL_Color color);
 void Debug_RenderCircle(int x, int y, int radius);
 
 #else
@@ -47,6 +49,7 @@ void Debug_RenderCircle(int x, int y, int radius);
 #define Debug_PushRect(a, b, c)
 #define Debug_PushCircle(a, b, c, d)
 #define Debug_PushLine(a, b, c, d, e, f)
+#define Debug_PushSector(a, b, c, d, e, f, g, h)
 #endif
 
 #if DEBUG_MODE

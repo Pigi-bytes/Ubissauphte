@@ -10,8 +10,18 @@ float lerpAngle(float a, float b, float t) {
     return a + delta * t;
 }
 
-float smoothStepf(float step) {
-    return step * step * (3.0f - 2.0f * step);
+float smoothStepf(float t) {
+    // Original smooth step: t * t * (3 - 2 * t)
+    // return t * t * (3.0f - 2.0f * t);
+
+    if (t < 0.4f) {
+        // Acceleration rapide au debut
+        return 0.8f * (t / 0.4f) * (t / 0.4f);
+    } else {
+        // Plus lent vers la fin
+        float normalized = (t - 0.4f) / 0.6f;
+        return 0.8f + 0.2f * (1.0f - powf(1.0f - normalized, 2.0f));
+    }
 }
 
 t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
@@ -42,346 +52,365 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     return joueur;
 }
 
-void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
-    if (player->attack.nbHits > 0) {
-        // Calculer l'intensité du shake basée sur l'arme et les dégâts
-        float impact_force = player->currentWeapon->damage * player->currentWeapon->mass / 10.0f;
+void renderWeaponRangeUI(SDL_Renderer* renderer, t_joueur* player) {
+    if (!renderer || !player || !player->currentWeapon) return;
 
-        // Shake non-linéaire (exponential pour les gros impacts)
-        float shake_intensity = 0.3f * powf(impact_force, 1.2f);
+    SDL_FPoint origin = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
+    float range = player->currentWeapon->range;
+    float arc = player->currentWeapon->angleAttack;
+    float angle = player->aimAngle;
 
-        // Facteur de distance (diminue si l'ennemi est touché loin du joueur)
-        float distance_factor = 1.0f;
-        if (player->attack.hit_distance > 0) {
-            distance_factor = fmaxf(0.5f, 1.0f - (player->attack.hit_distance / (player->currentWeapon->range * 1.5f)));
-        }
+    // Calcul du carre de la vitesse
+    float velocitySq = player->entity.physics.velocity.x * player->entity.physics.velocity.x + player->entity.physics.velocity.y * player->entity.physics.velocity.y;
 
-        // Durée du shake en fonction de la masse (armes lourdes = plus long)
-        float shake_duration = 0.3f + (player->currentWeapon->mass * 0.05f);
+    // Calcul de l'opacité: plus le joueur va vite, plus l'indicateur est transparent
+    // - Minimum: 35 (toujours légèrement visible)
+    // - Maximum: 55 (quand le joueur est immobile)
+    // Le facteur 8 ajuste la sensibilité au mouvement
+    uint8_t maxOpacity = (uint8_t)fmaxf(35, 55 - sqrtf(velocitySq) * 8);
 
-        // Application du shake avec intensité modulée
-        cameraAddShake(camera, shake_intensity * distance_factor, shake_duration);
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, maxOpacity);
+
+    // Division de l'arc en segments pour un rendu lisse
+    const int arcSegments = 10;               // Nombre de segments dans l'arc
+    const float arcStep = arc / arcSegments;  // Taille angulaire de chaque segment
+    float startAngle = angle - arc / 2;
+
+    for (int i = 0; i < arcSegments; i++) {
+        float a1 = startAngle + i * arcStep;
+        float a2 = startAngle + (i + 1) * arcStep;
+
+        // Conversion des coordonnées polaires en coordonnées cartésiennes
+        // et tracé de la ligne entre les deux points
+        SDL_RenderDrawLine(renderer, origin.x + cosf(a1) * range, origin.y + sinf(a1) * range, origin.x + cosf(a2) * range, origin.y + sinf(a2) * range);
     }
+
+    // Ligne directrice (plus légère)
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, maxOpacity / 2);
+    float aimX = origin.x + cosf(angle) * range;
+    float aimY = origin.y + sinf(angle) * range;
+    SDL_RenderDrawLine(renderer, origin.x, origin.y, aimX, aimY);
+
+    // Dessin d'un petit cercle plein au point ciblé
+    // Rayon 1.8 pixels pour une taille visible mais discrète
+    for (int w = 0; w < 1.8f * 2; w++) {
+        for (int h = 0; h < 1.8f * 2; h++) {
+            int dx = 1.8f - w;
+            int dy = 1.8f - h;
+            if ((dx * dx + dy * dy) <= (1.8f * 1.8f)) {
+                SDL_RenderDrawPoint(renderer, aimX + dx, aimY + dy);
+            }
+        }
+    }
+
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
+}
+
+void applyHitCameraShake(t_joueur* player, t_camera* camera) {
+    if (player->attack.nbHits <= 0) return;
+
+    // Force d'impact basée sur les caractéristiques de l'arme
+    // Degats × Masse / 10.0f donne une valeur de base cohérente
+    // Exemple: Arme (dégâts 20, masse 6) → impact_force = 12.0
+    float impactForce = player->currentWeapon->damage * player->currentWeapon->mass / 5.0f;
+
+    // Application d'une courbe de puissance pour accentuer les impacts forts
+    // L'exposant 1.2 amplifie legerement les differences
+    // 0.3f est un multiplicateur global pour ajuster l'intensite
+    // Exemple: impactForce 12.0 → shakeIntensity ≈ 5.4
+    float shakeIntensity = 0.3f * powf(impactForce, 1.2f);
+
+    float distanceFactor = 1.0f;
+    if (player->attack.hit_distance > 0) {
+        // L'atténuation est linéaire avec la distance
+        // Plus l'ennemi est loin, moins la caméra tremble
+        // La portée × 1.5 définit la distance maximale d'effet
+        // fmaxf garantit un minimum de 50% d'intensité même pour les impacts lointains
+        distanceFactor = fmaxf(0.5f, 1.0f - (player->attack.hit_distance / (player->currentWeapon->range * 1.5f)));
+    }
+
+    // Multiplicateur basé sur le nombre d'ennemis touchés
+    // Chaque ennemi supplémentaire ajoute 35% d'intensité
+    float hitMultiplier = 1.0f + 0.35f * (player->attack.nbHits - 1);
+
+    // Durée de base = 0.3 secondes
+    // Les armes lourdes produisent un tremblement plus long
+    // Chaque point de masse ajoute 0.05 secondes de durée
+    // Exemple: Masse 6.0 → durée = 0.3 + 6×0.05 = 0.6 secondes
+    float shakeDuration = 0.3f + (player->currentWeapon->mass * 0.05f);
+
+    // Augmentation de la durée avec le nombre d'ennemis (plus modérée)
+    float durationMultiplier = 1.0f + 0.15f * (player->attack.nbHits - 1);
+
+    cameraAddShake(camera, shakeIntensity * distanceFactor * hitMultiplier, shakeDuration * durationMultiplier);
+}
+
+void renderAttackConeDebug(t_joueur* player) {
+    if (!player->currentWeapon) return;
 
     SDL_FPoint origin = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
     float range = player->currentWeapon->range;
     float angle = player->aimAngle;
     float arc = player->currentWeapon->angleAttack;
 
-    // Afficher le cône d'attaque (debug)
-    SDL_FPoint start = {origin.x + cosf(angle - arc / 2) * range, origin.y + sinf(angle - arc / 2) * range};
-    SDL_FPoint end = {origin.x + cosf(angle + arc / 2) * range, origin.y + sinf(angle + arc / 2) * range};
+    Debug_PushSector(origin.x, origin.y, angle - arc / 2, angle + arc / 2, range, 20, 2, SDL_COLOR_CYAN);
 
-    Debug_PushLine(origin.x, origin.y, start.x, start.y, 2, SDL_COLOR_CYAN);
-    Debug_PushLine(origin.x, origin.y, end.x, end.y, 2, SDL_COLOR_CYAN);
+    SDL_FPoint directionPoint = {origin.x + cosf(angle) * range, origin.y + sinf(angle) * range};
+    Debug_PushLine(origin.x, origin.y, directionPoint.x, directionPoint.y, 3, SDL_COLOR_MAGENTA);
+}
 
-    int segments = 20;
-    float angle_step = arc / segments;
-    SDL_FPoint prev_point = start;
+float calculateWeaponScale(t_joueur* player) {
+    // Calcul de l'échelle idéale basée sur la portée de l'arme
+    // - La hauteur de l'arme est multipliée par 0.8 pour que la portée visuelle
+    //   soit légèrement plus grande que la texture (meilleur retour visuel)
+    // - Plus la portée est grande, plus l'arme apparaîtra grande à l'écran
+    float idealRangeScale = player->currentWeapon->range / (player->currentWeapon->displayRect.h * 0.8f);
 
-    for (int i = 1; i <= segments; i++) {
-        float current_angle = angle - arc / 2 + angle_step * i;
-        SDL_FPoint current_point = {origin.x + cosf(current_angle) * range, origin.y + sinf(current_angle) * range};
-
-        Debug_PushLine(prev_point.x, prev_point.y, current_point.x, current_point.y, 1, SDL_COLOR_CYAN);
-        prev_point = current_point;
-    }
-
-    // Scale calculations optimisé pour atteindre le bord de la hitbox
-    // Maintenant, l'échelle est calculée pour que l'épée atteigne exactement le bord de la hitbox
-    float baseScale = 1.0f;
-    float idealRangeScale = range / (player->currentWeapon->displayRect.h * 0.8f);  // 0.8 car le pivot est à 80% de la hauteur
+    // Limites pour éviter des échelles extrêmes qui nuiraient à l'expérience
     float minScale = 0.1f;
     float maxScale = 3.0f;
-    float scaleY = fmaxf(minScale, fminf(maxScale, idealRangeScale));
-    float scaleX = scaleY;  // Garde les proportions
 
-    int scaledWidth = (int)(player->currentWeapon->displayRect.w);
-    int scaledHeight = (int)(player->currentWeapon->displayRect.h * scaleY);
+    // fmaxf et fminf assurent que le résultat est dans l'intervalle [minScale, maxScale]
+    return fmaxf(minScale, fminf(maxScale, idealRangeScale));
+}
 
-    // Point de pivot fixe sur l'arme
-    float pivotRatioX = 0.5f;  // Milieu horizontal de l'arme
-    float pivotRatioY = 0.8f;  // Près du bas de l'arme (position du manche)
+void renderWeaponDuringAttack(SDL_Renderer* renderer, t_joueur* player, SDL_FPoint origin, SDL_Point pivotPoint, int scaledWidth, int scaledHeight, SDL_RendererFlip weaponFlip) {
+    t_arme* weapon = player->currentWeapon;
 
-    SDL_Point pivotPoint = {(int)(scaledWidth * pivotRatioX), (int)(scaledHeight * pivotRatioY)};
+    float rawProgress = player->attack.progress;
+    float adjustedProgress;
 
-    // Position et rotation de l'arme selon l'état (attaque ou non)
-    float rotationAngle;
-    SDL_Rect displayRect;
-    SDL_RendererFlip weaponFlip = SDL_FLIP_HORIZONTAL;
-
-    if (player->attack.isActive) {
-        // PENDANT L'ATTAQUE: on déplace l'arme pour que le point de pivot coïncide avec le joueur
-
-        // Calcul de l'angle actuel pour l'animation d'attaque
-        float current_angle = lerpAngle(player->attack.hitBox.startAngle, player->attack.hitBox.endAngle, smoothStepf(player->attack.progress));
-
-        // Position de l'arme: on place l'arme pour que son pivot coïncide avec le centre du joueur
-        displayRect = (SDL_Rect){(int)(origin.x - pivotPoint.x), (int)(origin.y - pivotPoint.y), scaledWidth, scaledHeight};
-
-        // Angle de rotation pour suivre exactement les lignes rouges
-        rotationAngle = current_angle * 180.0f / M_PI + 90;
-
-        // Arme rendue derrière le joueur
-        SDL_RenderCopyEx(renderer, player->currentWeapon->texture, NULL, &displayRect, rotationAngle, &pivotPoint, weaponFlip);
-
-        // Dessiner le point de pivot pour le debug
-        SDL_FPoint visualPivot = {
-            displayRect.x + pivotPoint.x,
-            displayRect.y + pivotPoint.y};
-
-        Debug_PushLine(visualPivot.x - 3, visualPivot.y, visualPivot.x + 3, visualPivot.y, 2, SDL_COLOR_RED);
-        Debug_PushLine(visualPivot.x, visualPivot.y - 3, visualPivot.x, visualPivot.y + 3, 2, SDL_COLOR_RED);
-
-        // Dessiner un point à l'extrémité de l'arme pour vérifier qu'elle atteint bien le bord de la hitbox
-        // Calculer la position de la pointe de l'arme
-        float weaponLength = scaledHeight * (1.0f - pivotRatioY);  // Distance du pivot à la pointe de l'arme
-        SDL_FPoint weaponTip = {
-            origin.x + cosf(current_angle) * weaponLength,
-            origin.y + sinf(current_angle) * weaponLength};
-
-        // Dessiner un point jaune à la pointe de l'arme
-        Debug_PushLine(weaponTip.x - 3, weaponTip.y, weaponTip.x + 3, weaponTip.y, 3, SDL_COLOR_YELLOW);
-        Debug_PushLine(weaponTip.x, weaponTip.y - 3, weaponTip.x, weaponTip.y + 3, 3, SDL_COLOR_YELLOW);
-
-        // Joueur rendu par-dessus l'arme
-        renderEntity(renderer, &player->entity, camera);
+    // Courbes de progression non-linéaires pour des animations plus naturelles
+    // Les armes lourdes et légères ont des comportements d'animation différents
+    if (weapon->mass >= 5.0f) {
+        // Arme lourde: mouvement en 3 phases distinctes
+        // 1. Préparation lente (wind-up): 0-25% de la durée
+        // 2. Frappe rapide: 25-60% de la durée
+        // 3. Récupération lente (wind-down): 60-100% de la durée
+        if (rawProgress < 0.25f) {
+            // Phase 1: Préparation lente (courbe exponentielle)
+            // L'exposant 1.5 donne un démarrage encore plus lent
+            adjustedProgress = 0.2f * powf(rawProgress / 0.25f, 1.5f);
+        } else if (rawProgress < 0.6f) {
+            // Phase 2: Frappe rapide (mouvement principal)
+            // L'exposant 0.7 donne une accélération rapide puis ralentissement
+            adjustedProgress = 0.2f + 0.6f * powf((rawProgress - 0.25f) / 0.35f, 0.7f);
+        } else {
+            // Phase 3: Récupération lente (linéaire)
+            adjustedProgress = 0.8f + 0.2f * (rawProgress - 0.6f) / 0.4f;  // Récupération lente
+        }
     } else {
-        // SANS ATTAQUE: arme à côté du joueur avec un offset simple
-        renderEntity(renderer, &player->entity, camera);
-
-        // Positionnement simple de l'arme avec un offset (à droite ou à gauche selon orientation)
-        float offsetX = 8.0f;
-        float offsetY = 4.0f;
-
-        // Ajustement pour l'orientation du joueur
-        if (player->entity.flip == SDL_FLIP_HORIZONTAL) {
-            offsetX = -offsetX;
-            weaponFlip = SDL_FLIP_HORIZONTAL;
+        // Arme légère: mouvement en 2 phases plus simples
+        // 1. Préparation rapide: 0-30% de la durée
+        // 2. Frappe constante: 30-100% de la durée
+        if (rawProgress < 0.3f) {
+            // Phase 1: Préparation rapide (linéaire)
+            adjustedProgress = 0.4f * (rawProgress / 0.3f);
+        } else {
+            // Phase 2: Frappe constante (légère courbe)
+            // L'exposant 0.9 donne une vitesse presque constante
+            adjustedProgress = 0.4f + 0.6f * powf((rawProgress - 0.3f) / 0.7f, 0.9f);
         }
-
-        // Position de l'arme avec offset par rapport au joueur
-        displayRect = (SDL_Rect){
-            (int)(origin.x - pivotPoint.x + offsetX),
-            (int)(origin.y - pivotPoint.y + offsetY),
-            scaledWidth,
-            scaledHeight};
-
-        // Angle 0 pour l'arme au repos (orientée à 12h)
-        rotationAngle = 0.0f;
-
-        // Afficher l'arme
-        SDL_RenderCopyEx(renderer,
-                         player->currentWeapon->texture,
-                         NULL,
-                         &displayRect,
-                         rotationAngle,
-                         &pivotPoint,
-                         weaponFlip);
-
-        // Dessiner le point de pivot pour le debug
-        SDL_FPoint visualPivot = {
-            displayRect.x + pivotPoint.x,
-            displayRect.y + pivotPoint.y};
-
-        Debug_PushLine(visualPivot.x - 3, visualPivot.y, visualPivot.x + 3, visualPivot.y, 2, SDL_COLOR_RED);
-        Debug_PushLine(visualPivot.x, visualPivot.y - 3, visualPivot.x, visualPivot.y + 3, 2, SDL_COLOR_RED);
     }
+
+    // Interpolation entre l'angle de départ et de fin basée sur la progression ajustée
+    float baseAngle = lerpAngle(player->attack.hitBox.startAngle, player->attack.hitBox.endAngle, adjustedProgress);
+
+    // Ajout d'une légère oscillation (tremblement de l'arme)
+    // 0.05f = amplitude de l'oscillation en radians (environ 3 degrés)
+    float oscillation = sinf(rawProgress * M_PI * 2.0f) * 0.05f;
+
+    // Angle final combinant l'interpolation et l'oscillation
+    float currentAngle = baseAngle + oscillation;
+
+    SDL_Rect displayRect = {(origin.x - pivotPoint.x), (origin.y - pivotPoint.y), scaledWidth, scaledHeight};
+
+    if (rawProgress > 0.3f && rawProgress < 0.7f) {
+        // Calcul de l'étirement avec une courbe sinus
+        // Maximum d'étirement au milieu de la phase d'impact (50%)
+        // 0.15f = 15% d'étirement maximum
+        float stretch = sinf((rawProgress - 0.3f) / 0.4f * M_PI) * 0.15f;
+
+        // Application de l'etirement à la hauteur de l'arme
+        displayRect.h = (int)(scaledHeight * (1.0f + stretch));
+    }
+
+    // Conversion de l'angle en radians vers degrés pour SDL
+    // Ajout de 90° car dans SDL, 0° = droite, alors que dans nos calculs, 0° = est
+
+    float rotationDegrees = currentAngle * 180.0f / M_PI + 90;
+    SDL_RenderCopyEx(renderer, weapon->texture, NULL, &displayRect, rotationDegrees, &pivotPoint, weaponFlip);
 }
 
-void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectManager* entities) {
-    float originalDeltaTime = *deltaTime;
+void renderWeaponIdle(SDL_Renderer* renderer, t_joueur* player, SDL_FPoint origin, SDL_Point pivotPoint, int scaledWidth, int scaledHeight, SDL_RendererFlip weaponFlip) {
+    // Constantes de décalage pour positionner l'arme par rapport au joueur
+    const float OFFSET_X = 8.0f;
+    const float offsetY = 4.0f;
 
-    // Gestion du ralentissement temporel
-    if (player->attack.timeSlowRemaining > 0) {
-        player->attack.timeSlowRemaining -= originalDeltaTime;
+    // Si le joueur est retourné (regarde à gauche), on inverse le décalage
+    float offsetX = player->entity.flip == SDL_FLIP_HORIZONTAL ? -OFFSET_X : OFFSET_X;
+    // (assure que l'arme pointe dans la même direction que le regard du joueur)
+    weaponFlip = player->entity.flip;
 
-        // Calculer le facteur de ralentissement actuel (transition douce)
-        float progress = player->attack.timeSlowRemaining / player->attack.timeSlowDuration;
-        float smoothProgress = smoothStepf(progress);
-        float currentSlowFactor = 1.0f - (1.0f - player->attack.timeSlowFactor) * smoothProgress;
+    SDL_Rect displayRect = {(origin.x - pivotPoint.x + offsetX), (origin.y - pivotPoint.y + offsetY), scaledWidth, scaledHeight};
+    SDL_RenderCopyEx(renderer, player->currentWeapon->texture, NULL, &displayRect, 0, &pivotPoint, weaponFlip);
 
-        // Appliquer le ralentissement au deltaTime
-        *deltaTime *= currentSlowFactor;
-    }
-
-    player->attack.nbHits = 0;
-
-    if (player->attack.isActive) {
-        update_attack(player, deltaTime, entities);
-    }
-
-    if (player->attack.cooldown > 0) {
-        player->attack.cooldown -= *deltaTime;
-    }
-
-    updatePhysicEntity(&player->entity, deltaTime, grid, entities);
+    SDL_FPoint  visualPivot = {displayRect.x + pivotPoint.x, displayRect.y + pivotPoint.y};
+    Debug_PushLine(visualPivot.x - 3, visualPivot.y, visualPivot.x + 3, visualPivot.y, 2, SDL_COLOR_RED);
+    Debug_PushLine(visualPivot.x, visualPivot.y - 3, visualPivot.x, visualPivot.y + 3, 2, SDL_COLOR_RED);
 }
 
-void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime) {
-    float force = 400.0f;
-    float force_dash = force * 3.5;
+void updateTimeSlowEffect(t_joueur* player, float* originalDeltaTime, float* modifiedDeltaTime) {
+    if (player->attack.timeSlowRemaining <= 0) return;
 
-    // Variables pour stocker la dernière direction d'entrée
-    float lastDirX = 0.0f;
-    float lastDirY = 0.0f;
-    float currentDirX = 0.0f;
-    float currentDirY = 0.0f;
+    // Decrementation du temps de ralentissement restant (en utilisant le temps non ralenti)
+    player->attack.timeSlowRemaining -= *originalDeltaTime;
 
-    // Détection des mouvements directionnels
-    if (input->key[player->control->left]) {
-        player->entity.physics.velocity.x -= force * *deltaTime;
-        player->entity.flip = SDL_FLIP_HORIZONTAL;
-        currentDirX = -1.0f;
-    }
-    if (input->key[player->control->right]) {
-        player->entity.physics.velocity.x += force * *deltaTime;
-        player->entity.flip = SDL_FLIP_NONE;
-        currentDirX = 1.0f;
-    }
-    if (input->key[player->control->up]) {
-        player->entity.physics.velocity.y -= force * *deltaTime;
-        currentDirY = -1.0f;
-    }
-    if (input->key[player->control->down]) {
-        player->entity.physics.velocity.y += force * *deltaTime;
-        currentDirY = 1.0f;
+    // Calculer le facteur de ralentissement actuel avec une transition douce
+    // Le ratio progress représente ou nous en sommes dans la durée de l'effet (1.0 => 0.0)
+    float progress = player->attack.timeSlowRemaining / player->attack.timeSlowDuration;
+
+    // Application d'une courbe de lissage pour une transition plus naturelle
+    // Cela transforme une progression linéaire en une courbe plus belle
+    float smoothProgress = smoothStepf(progress);
+
+    // Bonus de ralentissement basé sur le nombre d'ennemis touchés
+    // Limité à 3 ennemis maximum pour éviter les abus
+    int hitCount = fminf(player->attack.nbHits, 3);
+    float multiHitBonus = 0.0f;
+
+    if (hitCount > 1) {
+        multiHitBonus = 0.1f * (hitCount - 1);
     }
 
-    // Mettre à jour la dernière direction si le joueur se déplace
-    if (currentDirX != 0.0f || currentDirY != 0.0f) {
-        lastDirX = currentDirX;
-        lastDirY = currentDirY;
+    // Facteur de ralentissement amplifié par le nombre d'ennemis touchés
+    float baseSlowFactor = player->attack.timeSlowFactor;
+    float enhancedSlowFactor = fmaxf(0.2f, baseSlowFactor - multiHitBonus);
 
-        // Normaliser la direction pour les mouvements diagonaux
-        float length = sqrtf(lastDirX * lastDirX + lastDirY * lastDirY);
-        if (length > 0.0f) {
-            lastDirX /= length;
-            lastDirY /= length;
-        }
-    }
+    // Interpolation entre facteur normal (1.0) et facteur ralenti
+    // Exemple: si timeSlowFactor = 0.5, on passera progressivement de 0.5 à 1.0
+    float currentSlowFactor = 1.0f - (1.0f - enhancedSlowFactor) * smoothProgress;
 
-    // Changement d'arme
-    if (keyPressOnce(input, SDL_SCANCODE_T)) {
-        switchToNextWeapon(player);
-    }
-
-    // Gestion du dash et de l'attaque
-    if (input->mouseButtons[SDL_BUTTON_LEFT] || input->key[player->control->dash]) {
-        // Pour le dash : utiliser la dernière direction de déplacement
-        if (input->key[player->control->dash]) {
-            // Vérifier si le joueur a une direction enregistrée
-            if (lastDirX != 0.0f || lastDirY != 0.0f) {
-                // Appliquer le dash dans la direction mémorisée
-                player->entity.physics.velocity.x += lastDirX * force_dash * *deltaTime;
-                player->entity.physics.velocity.y += lastDirY * force_dash * *deltaTime;
-            }
-        }
-
-        // Pour l'attaque : conserver le comportement basé sur la souris
-        if (input->mouseButtons[SDL_BUTTON_LEFT] && player->attack.cooldown <= 0) {
-            float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
-            convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
-            float dx = mouseWorldX - player->entity.collisionCircle.x;
-            float dy = mouseWorldY - player->entity.collisionCircle.y;
-
-            player->aimAngle = atan2f(dy, dx);
-            player->entity.physics.velocity.x *= 0.2f;
-            player->entity.physics.velocity.y *= 0.2f;
-            start_attack(player);
-        }
-    }
-
-    // Animation selon la vitesse
-    if (player->entity.physics.velocity.x != 0.0f || player->entity.physics.velocity.y != 0.0f) {
-        setAnimation(player->entity.animationController, "walk");
-    } else {
-        setAnimation(player->entity.animationController, "idle");
-    }
+    // Application du ralentissement au deltaTime
+    // Cela affecte tous les systèmes dépendant du temps qui utilisent cette valeur
+    *modifiedDeltaTime *= currentSlowFactor;
 }
 
-void start_attack(t_joueur* player) {
+void startAttack(t_joueur* player) {
     if (!player || !player->currentWeapon) return;
 
     t_arme* weapon = player->currentWeapon;
+
     player->attack.isActive = SDL_TRUE;
     player->attack.progress = 0.0f;
     player->attack.nbHits = 0;
-
-    player->attack.hitBox.origin = (SDL_FPoint){player->entity.collisionCircle.x, player->entity.collisionCircle.y},
-    player->attack.hitBox.radius = weapon->range;
-
     player->attack.cooldown = player->currentWeapon->attackCooldown;
 
+    // Calcul de l'arc d'attaque
+    // On divise l'angle total d'attaque par 2 pour obtenir le demi-angle
     float halfArc = weapon->angleAttack / 2.0f;
+
+    // L'attaque commence a (angle visé - demi-arc) et se termine à (angle visé + demi-arc)
+    // Cela crée un secteur centré sur l'angle de visée du joueur
     player->attack.hitBox.startAngle = player->aimAngle - halfArc;
     player->attack.hitBox.endAngle = player->aimAngle + halfArc;
+    player->attack.hitBox.radius = weapon->range;
+    player->attack.hitBox.origin = (SDL_FPoint){player->entity.collisionCircle.x, player->entity.collisionCircle.y};
 }
 
-void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities) {
+void updateAttack(t_joueur* player, float* deltaTime, t_objectManager* entities) {
     if (!player->attack.isActive) return;
 
-    player->attack.progress += *deltaTime / player->currentWeapon->attackDuration;
-    player->attack.hitBox.origin.x = player->entity.collisionCircle.x;
-    player->attack.hitBox.origin.y = player->entity.collisionCircle.y;
+    t_arme* weapon = player->currentWeapon;
 
-    float current_angle = lerpAngle(player->attack.hitBox.startAngle, player->attack.hitBox.endAngle, smoothStepf(player->attack.progress));
+    // Mise a jour de la progression de l'attaque (0.0 à 1.0)
+    // Vitesse de progression determiné par la durée d'attaque de l'arme
+    player->attack.progress += *deltaTime / weapon->attackDuration;
+
+    // L'origine de l'attaque suit la position du joueur (permet d'attaquer en mouvement)
+    player->attack.hitBox.origin = (SDL_FPoint){player->entity.collisionCircle.x, player->entity.collisionCircle.y};
+
+    // Calcul de l'angle actuel de l'attaque par interpolation
+    // On utilise smoothStepf pour une progression plus naturelle (accélération/décélération)
+    float currentAngle = lerpAngle(player->attack.hitBox.startAngle, player->attack.hitBox.endAngle, smoothStepf(player->attack.progress));
 
     int previousHits = player->attack.nbHits;
 
     for (int i = 1; i < entities->count; i++) {
         t_entity* enemy = getObject(entities, i);
 
-        if (((t_enemy*)enemy)->isDead) {
-            continue;
-        }
+        // Ignorer les entités nulles ou les ennemis déjà morts
+        if (!enemy || ((t_enemy*)enemy)->isDead) continue;
 
-        SDL_FPoint position = {enemy->collisionCircle.x, enemy->collisionCircle.y};
+        SDL_FPoint enemyPos = {enemy->collisionCircle.x, enemy->collisionCircle.y};
 
-        if (is_in_attack_sector(position, enemy->collisionCircle.radius, player->attack.hitBox.origin, current_angle, player->currentWeapon->range, player->currentWeapon->angleAttack)) {
-            takeDamageAndCheckDeath((t_enemy*)enemy, player->currentWeapon->damage);
-            float dx = position.x - player->attack.hitBox.origin.x;
-            float dy = position.y - player->attack.hitBox.origin.y;
+        // Vérification si l'ennemi est dans le secteur d'attaque actuel
+        if (cercleInSector(enemyPos, enemy->collisionCircle.radius, player->attack.hitBox.origin, currentAngle, weapon->range, weapon->angleAttack)) {
+            takeDamageAndCheckDeath((t_enemy*)enemy, weapon->damage);
 
+            // Vecteur direction depuis l'origine de l'attaque vers l'ennemi
+            float dx = enemyPos.x - player->attack.hitBox.origin.x;
+            float dy = enemyPos.y - player->attack.hitBox.origin.y;
+
+            // Normalisation du vecteur direction (pour obtenir un vecteur unitaire)
             float length = sqrtf(dx * dx + dy * dy);
             if (length > 0) {
                 dx /= length;
                 dy /= length;
 
-                float knockback_base = player->currentWeapon->mass * 750.0f;                    // Augmenté de 600 à 750 pour plus d'impact
-                float mass_ratio = player->currentWeapon->mass / (enemy->physics.mass + 0.5f);  // Diminution du dénominateur pour amplifier l'effet
+                // Force de base du recul : 750.0f = multiplicateur de base pour une sensation de jeu satisfaisante
+                // Plus l'arme est lourde, plus le recul est puissant : Exemple: masse 2.0 → knockbackBase = 1500
+                float knockbackBase = weapon->mass * 750.0f;
 
-                // Courbe exponentielle pour des knockbacks plus impactants
-                float power_curve = powf(mass_ratio, 0.7f);  // Exposant <1 pour atténuer les différences extrêmes
-                float effective_knockback = knockback_base * (0.15f + 0.85f * power_curve);
+                // Rapport de masse: Arme / Ennemi
+                // Plus ce ratio est eleve, plus l'ennemi sera projete loin
+                // L'addition de 0.5f au dénominateur attenue les rapports extrêmes
+                // Exemple: Arme de masse 3.0 contre ennemi de masse 1.0 → ratio = 2.0
+                float ratioMass = weapon->mass / (enemy->physics.mass + 0.5f);
 
-                effective_knockback = fmaxf(effective_knockback, knockback_base * 0.12f);
-                effective_knockback = fminf(effective_knockback, knockback_base * 4.5f);
+                // Application d'une courbe de puissance pour un effet plus réaliste
+                // L'exposant 0.7 réduit les différences extreme entre armes légères et lourdes
+                // Exemple: ratio 2.0 → powerCurve = 2.0^0.7 ≈ 1.62
+                float powerCurve = powf(ratioMass, 0.7f);
 
-                // *** MODIFICATION: Tenir compte du deltaTime pour le knockback ***
-                // Au lieu d'appliquer une impulsion instantanée, on applique une force continue
-                // divisée par deltaTime pour maintenir une force constante quelle que soit la fréquence
-                float knockback_impulse = effective_knockback * (*deltaTime);
+                // Application de limites pour garantir un équilibre:
+                // - Minimum: 12% de la force de base (même contre des ennemis très lourds)
+                // - Maximum: 450% de la force de base (même contre des ennemis très légers)
+                float knockbackEfficace = knockbackBase * (0.15f + 0.85f * powerCurve);
+                knockbackEfficace = fmaxf(knockbackEfficace, knockbackBase * 0.12f);
+                knockbackEfficace = fminf(knockbackEfficace, knockbackBase * 4.5f);
 
-                enemy->physics.velocity.x += dx * knockback_impulse;
-                enemy->physics.velocity.y += dy * knockback_impulse;
+                // Application de la force avec prise en compte du deltaTime
+                // Cela garantit une force constante indépendamment du framerate
+                // Exemple: knockbackEfficace 2295 × deltaTime 0.016 ≈ 36.72 unités de force
+                float forceKnockback = knockbackEfficace * (*deltaTime);
+                enemy->physics.velocity.x += dx * forceKnockback;
+                enemy->physics.velocity.y += dy * forceKnockback;
             }
+
             player->attack.nbHits++;
         }
     }
 
     if (player->attack.nbHits > previousHits) {
-        // Armes lourdes = ralentissement plus intense mais plus court
-        float weight_factor = player->currentWeapon->mass / 5.0f;  // Normalisation (5.0f est une masse moyenne)
+        // Normalisation du facteur de poids de l'arme
+        // 5.0f représente une masse moyenne/référence
+        // Exemple: Arme masse 8.0 → facteurMass = 1.6 (60% plus lourde que la moyenne)
+        float facteurMass = weapon->mass / 5.0f;
 
-        // Facteur: armes lourdes ralentissent plus (jusqu'à 0.4x pour les plus lourdes)
-        player->attack.timeSlowFactor = fmaxf(0.4f, 0.75f - (weight_factor * 0.1f));
+        // Calcul du facteur de ralentissement temporel (entre 0.4 et 0.75)
+        // - 0.4 = temps ralenti à 40% de sa vitesse normale (ralentissement intense)
+        // - 0.75 = temps ralenti à 75% de sa vitesse normale (ralentissement léger)
+        // Les armes lourdes ralentissent davantage le temps
+        // Exemple: facteurMass 1.6 → timeSlowFactor = max(0.4, 0.75 - 1.6×0.1) = max(0.4, 0.59) = 0.59
+        player->attack.timeSlowFactor = fmaxf(0.4f, 0.75f - (facteurMass * 0.1f));
 
-        // Durée: armes légères = ralentissement plus long
-        player->attack.timeSlowDuration = 0.15f + (0.3f / weight_factor);
-
-        // Limites pour la stabilité
-        player->attack.timeSlowDuration = fminf(player->attack.timeSlowDuration, 0.35f);
+        // Calcul de la durée du ralentissement (en secondes)
+        // Les armes légères produisent un ralentissement plus long
+        // Formule: 0.15s (base) + 0.3s/facteurMass (bonus inversement proportionnel)
+        // Exemple: facteurMass 1.6 → durée = 0.15 + 0.3/1.6 ≈ 0.34 secondes
+        player->attack.timeSlowDuration = fminf(0.15f + (0.3f / facteurMass), 0.35f);
 
         player->attack.timeSlowRemaining = player->attack.timeSlowDuration;
     }
@@ -391,31 +420,145 @@ void update_attack(t_joueur* player, float* deltaTime, t_objectManager* entities
     }
 }
 
-SDL_bool is_in_attack_sector(SDL_FPoint target, float target_radius, SDL_FPoint origin, float current_angle, float range, float arc) {
-    // Calcul de la distance au carré pour éviter la racine carrée
-    SDL_FPoint diff = {target.x - origin.x, target.y - origin.y};
-    float dist_sq = diff.x * diff.x + diff.y * diff.y;
+void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime) {
+    float forceBase = 350.0f;              // Force de déplacement standard
+    float forceSprint = forceBase * 1.5f;  // Force quand on court (x1.5)
+    float forceDash = forceBase * 3.5f;    // Force du dash (x3.5)
 
-    float max_distance = range + target_radius;
-    // Vérification si la cible est dans le rayon de l'attaque
-    if (dist_sq > max_distance * max_distance) return SDL_FALSE;
+    // Force utilisee (course ou marche normale)
+    float force = input->key[SDL_SCANCODE_LSHIFT] ? forceSprint : forceBase;
 
-    float distance = sqrtf(dist_sq);
-    if (distance <= target_radius) {
-        return SDL_TRUE;
+    float lastDirX = 0.0f;     // Derniere direction horizontale
+    float lastDirY = 0.0f;     // Derniere direction verticale
+    float currentDirX = 0.0f;  // Direction horizontale actuelle
+    float currentDirY = 0.0f;  // Direction verticale actuelle
+
+    // gauche: -1 en X, 0  en Y
+    // droite:  1 en X, 0  en Y
+    // haut:    0 en X, -1 en Y
+    // bas:     0 en X, 1  en Y
+    int directions[4][3] = {{player->control->left, -1, 0}, {player->control->right, 1, 0}, {player->control->up, 0, -1}, {player->control->down, 0, 1}};
+
+    for (int i = 0; i < 4; i++) {
+        if (input->key[directions[i][0]]) {
+            player->entity.physics.velocity.x += directions[i][1] * force * *deltaTime;
+            player->entity.physics.velocity.y += directions[i][2] * force * *deltaTime;
+
+            if (directions[i][1] != 0) currentDirX = (float)directions[i][1];
+            if (directions[i][2] != 0) currentDirY = (float)directions[i][2];
+        }
     }
 
-    // Calcul de l'angle de la cible par rapport à l'origine
-    float target_angle = atan2f(diff.y, diff.x);
+    // Si le joueur se deplace, on memorise sa direction actuelle
+    if (currentDirX != 0.0f || currentDirY != 0.0f) {
+        lastDirX = currentDirX;
+        lastDirY = currentDirY;
 
-    // Normalisation de la différence d'angle
-    float angle_diff = fmodf(target_angle - current_angle + M_PI, 2 * M_PI) - M_PI;
+        // Normalisation du vecteur de direction pour les mouvements diagonaux
+        // (evite que le deplacement en diagonale soit plus rapide)
+        float length = sqrtf(lastDirX * lastDirX + lastDirY * lastDirY);
+        if (length > 0.0f) {
+            lastDirX /= length;
+            lastDirY /= length;
+        }
+    }
 
-    float theta = asinf(target_radius / distance);
-    float allowed_angle = (arc / 2) + theta;
+    if (keyPressOnce(input, SDL_SCANCODE_T)) {
+        switchToNextWeapon(player);
+    }
 
-    // Vérification si l'angle de la cible est dans l'arc d'attaque
-    return fabsf(angle_diff) <= allowed_angle;
+    // Conversion des coord souris en coord monde
+    float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
+    convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
+
+    // Calcul du vecteur joueur -> souris
+    float dx = mouseWorldX - player->entity.collisionCircle.x;
+    float dy = mouseWorldY - player->entity.collisionCircle.y;
+
+    // Calcul de l'angle de visée (en radians)
+    // atan2f nous donne l'angle du vecteur (dx,dy) par rapport a l'axe x
+    player->aimAngle = atan2f(dy, dx);
+
+    // Orientation du sprite en fonction de l'angle de visee
+    // Si le joueur regarde vers la gauche (cosinus negatif), on retourne le sprite
+    // cosf(angle) < 0 signifie que l'angle est entre pi/2 et 3pi/2 (donc côte gauche)
+    if (cosf(player->aimAngle) < 0) {
+        player->entity.flip = SDL_FLIP_HORIZONTAL;
+    } else {
+        player->entity.flip = SDL_FLIP_NONE;
+    }
+
+    // Dash
+    if (input->key[player->control->dash]) {
+        if (lastDirX != 0.0f || lastDirY != 0.0f) {
+            player->entity.physics.velocity.x += lastDirX * forceDash * *deltaTime;
+            player->entity.physics.velocity.y += lastDirY * forceDash * *deltaTime;
+        }
+    }
+
+    // Attaque
+    if (input->mouseButtons[SDL_BUTTON_LEFT] && player->attack.cooldown <= 0) {
+        startAttack(player);
+    }
+
+    // Si le joueur est en mouvement, on utilise l'animation de marche, sinon, on utilise l'animation d'idle
+    if (player->entity.physics.velocity.x >= EPSILON || player->entity.physics.velocity.y >= EPSILON) {
+        setAnimation(player->entity.animationController, "walk");
+    } else {
+        setAnimation(player->entity.animationController, "idle");
+    }
+}
+
+void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectManager* entities) {
+    // On conserve le deltaTime original pour certains calculs qui ne doivent pas être affecté par le ralentissement
+    float originalDeltaTime = *deltaTime;
+
+    // Gestion du ralentissement temporel (effet bullet-time apres une attaque reussie)
+    updateTimeSlowEffect(player, &originalDeltaTime, deltaTime);
+
+    player->attack.nbHits = 0;
+
+    if (player->attack.isActive) {
+        updateAttack(player, deltaTime, entities);
+    }
+
+    if (player->attack.cooldown > 0) {
+        player->attack.cooldown -= *deltaTime;
+    }
+
+    updatePhysicEntity(&player->entity, deltaTime, grid, entities);
+}
+
+void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
+    // Applique un tremblement de caméra si le joueur vient de toucher un ennemi
+    applyHitCameraShake(player, camera);
+
+    // Affiche l'indicateur de portée de l'arme quand le joueur ne frappe pas
+    if (!player->attack.isActive) {
+        renderWeaponRangeUI(renderer, player);
+    }
+
+    renderAttackConeDebug(player);
+
+    SDL_FPoint origin = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
+
+    // Calcul de l'échelle adaptée à la portée de l'arme
+    // Plus l'arme a une grande portée, plus elle apparaît grande à l'écran
+    float scaleY = calculateWeaponScale(player);
+
+    // Dimensions de l'arme après mise à l'échelle
+    int scaledWidth = player->currentWeapon->displayRect.w;
+    int scaledHeight = (player->currentWeapon->displayRect.h * scaleY);
+
+    SDL_Point pivotPoint = {(scaledWidth * 0.5f), (scaledHeight * 0.8f)};
+
+    if (player->attack.isActive) {
+        renderWeaponDuringAttack(renderer, player, origin, pivotPoint, scaledWidth, scaledHeight, player->entity.flip);
+        renderEntity(renderer, &player->entity, camera);
+    } else {
+        renderEntity(renderer, &player->entity, camera);
+        renderWeaponIdle(renderer, player, origin, pivotPoint, scaledWidth, scaledHeight, player->entity.flip);
+    }
 }
 
 void freePlayer(void* object) {
