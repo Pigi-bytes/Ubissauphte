@@ -48,7 +48,7 @@ void handleInputButtonWrapper(t_fonctionParam* f) {
 }
 
 void handleInputPlayerWrapper(t_fonctionParam* f) {
-    handleInputPlayer(((t_input*)(f)->param[0]), ((t_joueur*)(f)->param[1]), ((t_grid*)(f)->param[2]), ((t_viewPort*)(f)->param[3]), ((float*)(f)->param[4]));
+    handleInputPlayer(((t_input*)(f)->param[0]), ((t_joueur*)(f)->param[1]), ((t_grid*)(f)->param[2]), ((t_viewPort*)(f)->param[3]), ((float*)(f)->param[4]), ((t_sceneController*)(f)->param[5]));
 }
 
 void setRenderTargetWrapper(t_fonctionParam* f) {
@@ -87,7 +87,16 @@ void setSceneWrapper(t_fonctionParam* f) {
     setScene(((t_sceneController*)(f)->param[0]), ((char*)(f)->param[1]));
 }
 
-SDL_Rect creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio) {
+void renderToucheWrapper(t_fonctionParam* f) {
+    renderTouche(((SDL_Renderer*)f->param[0]), (t_touche*)f->param[1]);
+}
+
+void handleInputToucheWrapper(t_fonctionParam* f) {
+    handleInputTouche((t_input*)f->param[0], (t_touche*)f->param[1], (SDL_Renderer*)f->param[2]);
+}
+
+SDL_Rect
+creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio) {
     return (SDL_Rect){WINDOW_WIDTH * x_ratio, WINDOW_HEIGHT * y_ratio, WINDOW_WIDTH * w_ratio, WINDOW_HEIGHT * h_ratio};
 }
 

@@ -1,6 +1,6 @@
 #include "mainWorld.h"
 
-t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, t_control* contr) {
+t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, t_control* contr, t_sceneController* sceneController) {
     t_typeRegistry* registre = createTypeRegistry();
     const uint8_t GRID_TYPE = registerType(registre, freeGrid, "Grid");
     const uint8_t PLAYER_TYPE = registerType(registre, freePlayer, "player");
@@ -17,18 +17,22 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     t_tileset* slimeTileSet = initTileset(renderer, 48, 16, 16, "assets/imgs/slimeidle12run1213.bmp");
     t_tileset* crabeTileSet = initTileset(renderer, 80, 16, 16, "assets/imgs/crabeidle123232run416.bmp");
 
-    SDL_Rect* rectcord = malloc(sizeof(SDL_Rect) * 150);
-    for (int i = 0; i < 150; i++) {
+    SDL_Rect* rectcord = malloc(sizeof(SDL_Rect) * 10);
+    for (int i = 0; i < 10; i++) {
         rectcord[i].x = 1;
         rectcord[i].y = 1;
         rectcord[i].w = 1;
     }
-    t_salle** salle = genMap(150, rectcord);
-    printf("%p\n", salle[1]->droite);
-    t_grille* grille = geneRoom(salle[1]);
+    t_salle** salle = genMap(10, rectcord);
+    t_grille* grille[10];
+    for (int i = 0; i < 10; i++) {
+        grille[i] = geneRoom(salle[i]);
+    }
 
-    t_grid* level = loadMap(grille->nom, tileset);
-    freeGrille(grille);
+    t_grid* level = loadMap(grille[0]->nom, tileset);
+    for (int i = 0; i < 10; i++) {
+        freeGrille(grille[i]);
+    }
 
     int levelWidth = level->width * tileset->tileSize;
     int levelHeight = level->height * tileset->tileSize;
@@ -37,34 +41,96 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     const uint8_t ENTITY = registerType(entities->registry, NULL, "ENTITY");
 
     t_joueur* joueur = createPlayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerTileSet);
-    t_arme* hache = malloc(sizeof(t_arme));
-    t_arme* epee = malloc(sizeof(t_arme));
-    t_arme* dague = malloc(sizeof(t_arme));
 
-    *hache = (t_arme){.mass = 8.0f, .damage = 30.0f, .range = 15.0f, .angleAttack = M_PI * 2, .attackDuration = 1.0f, .attackCooldown = 2.0f};
-    hache->texture = getObject(tileset->textureTiles, 119);
-    hache->displayRect = (SDL_Rect){0, 0, 16, 16};
-    *epee = (t_arme){.mass = 3.0f, .damage = 20.0f, .range = 35.0f, .angleAttack = M_PI / 2, .attackDuration = 0.3f, .attackCooldown = 1.0f};
-    epee->texture = getObject(tileset->textureTiles, 105);
-    epee->displayRect = (SDL_Rect){0, 0, 16, 16};
-    *dague = (t_arme){.mass = 2.0f, .damage = 15.0f, .range = 20.0f, .angleAttack = M_PI / 3, .attackDuration = 0.2f, .attackCooldown = 0.4f};
+    joueur->weaponCount = 0;
+    joueur->currentWeaponIndex = 0;
+
+    // Création des armes avec statistiques équilibrées
+    t_arme* dague = malloc(sizeof(t_arme));
+    *dague = (t_arme){
+        .mass = 1.5f,             // Très légère pour des coups rapides
+        .damage = 12.0f,          // Dégâts modérés
+        .range = 20.0f,           // Courte portée
+        .angleAttack = M_PI / 4,  // Arc d'attaque étroit (45°)
+        .attackDuration = 0.15f,  // Animation très rapide
+        .attackCooldown = 0.35f   // Récupération très rapide
+    };
     dague->texture = getObject(tileset->textureTiles, 104);
     dague->displayRect = (SDL_Rect){0, 0, 16, 16};
 
-    joueur->currentWeapon = epee;
+    t_arme* epee = malloc(sizeof(t_arme));
+    *epee = (t_arme){
+        .mass = 3.0f,             // Masse moyenne
+        .damage = 20.0f,          // Dégâts moyens
+        .range = 30.0f,           // Portée moyenne
+        .angleAttack = M_PI / 2,  // Arc d'attaque de 90°
+        .attackDuration = 0.28f,  // Animation moyenne
+        .attackCooldown = 0.7f    // Récupération moyenne
+    };
+    epee->texture = getObject(tileset->textureTiles, 105);
+    epee->displayRect = (SDL_Rect){0, 0, 16, 16};
+
+    t_arme* hache = malloc(sizeof(t_arme));
+    *hache = (t_arme){
+        .mass = 15.0f,            // Lourde
+        .damage = 30.0f,          // Dégâts élevés
+        .range = 28.0f,           // Portée moyenne
+        .angleAttack = 2 * M_PI,  // Large arc d'attaque (120°)
+        .attackDuration = 0.45f,  // Animation lente
+        .attackCooldown = 1.2f    // Longue récupération
+    };
+    hache->texture = getObject(tileset->textureTiles, 119);
+    hache->displayRect = (SDL_Rect){0, 0, 16, 16};
+
+    t_arme* lance = malloc(sizeof(t_arme));
+    *lance = (t_arme){
+        .mass = 5.0f,             // Masse moyenne-légère
+        .damage = 18.0f,          // Dégâts moyens-faibles
+        .range = 40.0f,           // Longue portée
+        .angleAttack = M_PI / 5,  // Arc d'attaque très étroit (36°)
+        .attackDuration = 0.3f,   // Animation moyenne
+        .attackCooldown = 0.65f   // Récupération moyenne
+    };
+    lance->texture = getObject(tileset->textureTiles, 106);
+    lance->displayRect = (SDL_Rect){0, 0, 16, 16};
+
+    t_arme* marteau = malloc(sizeof(t_arme));
+    *marteau = (t_arme){
+        .mass = 8.0f,               // Très lourd
+        .damage = 40.0f,            // Dégâts très élevés
+        .range = 40.0f,             // Portée moyenne-courte
+        .angleAttack = M_PI / 1.5,  // Arc d'attaque de 90°
+        .attackDuration = 0.3f,     // Animation très lente
+        .attackCooldown = 1.5f      // Récupération très lente
+    };
+    marteau->texture = getObject(tileset->textureTiles, 132);
+    marteau->displayRect = (SDL_Rect){0, 0, 16, 16};
+
+    // Ajouter les armes à l'inventaire du joueur
+    joueur->weapons[0] = epee;     // Première arme (indice 0)
+    joueur->weapons[1] = dague;    // Deuxième arme (indice 1)
+    joueur->weapons[2] = hache;    // Troisième arme (indice 2)
+    joueur->weapons[3] = lance;    // Quatrième arme (indice 3)
+    joueur->weapons[4] = marteau;  // Cinquième arme (indice 4)
+
+    joueur->weaponCount = 5;  // Nombre total d'armes
+
+    // Définir l'arme actuelle
+    joueur->currentWeaponIndex = 0;
+    joueur->currentWeapon = joueur->weapons[joueur->currentWeaponIndex];
 
     addObject(entities, &joueur->entity, ENTITY);
     placeOnRandomTile(level, &joueur->entity, entities);
 
     t_enemy* enemy;
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 20; i++) {
         enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, scene);
         addObject(entities, &enemy->entity, ENTITY);
         placeOnRandomTile(level, &enemy->entity, entities);
         ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
     }
 
-    for (int i = 0; i < 0; i++) {
+    for (int i = 0; i < 2; i++) {
         enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 32, 32}, slimeTileSet, scene);
         enemy->entity.physics.mass = 10;
         enemy->maxHealth = 300;
@@ -85,7 +151,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     ADD_OBJECT_TO_SCENE(scene, viewport, VIEWPORT_TYPE);
     ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
 
-    sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level, viewport, &frameData->deltaTime));
+    sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level, viewport, &frameData->deltaTime, sceneController));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&input->mouseYWheel));
 
     sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, 0, FONCTION_PARAMS(&frameData->deltaTime, level, entities));

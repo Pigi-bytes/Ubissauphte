@@ -1,6 +1,7 @@
 #ifndef COMMUN_H
 #define COMMUN_H
 
+#include "color.h"
 #include "debug.h"
 #include "engine/core/camera.h"
 #include "engine/core/frame.h"
@@ -18,6 +19,7 @@
 #include "ui/minimap.h"
 #include "ui/slider.h"
 #include "ui/text.h"
+#include "ui/touche.h"
 #include "utils/fonctionManager.h"
 #include "utils/fscene.h"
 #include "utils/objectManager.h"
@@ -27,21 +29,8 @@ typedef struct {
     SDL_bool FlagCommande;
 } t_option;
 
-typedef struct {
-    t_button* button;
-    SDL_Scancode* scancode;
-    SDL_bool flagCommande;
-    char nom[10];
-} t_touche;
-
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 960
-
-#define WHITE ((SDL_Color){255, 255, 255})
-#define BLACK ((SDL_Color){0, 0, 0})
-#define MAGENTA ((SDL_Color){255, 0, 255})
-#define BLUE ((SDL_Color){0, 0, 255})
-#define GREEN ((SDL_Color){0, 255, 0})
 
 SDL_Rect creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio);
 void bouttonClickQuit(t_fonctionParam* fonction);
@@ -68,5 +57,7 @@ void handleInputButtonVolummeWrapper(t_fonctionParam* f);
 void updatePlayerWrapper(t_fonctionParam* f);
 void updateEnemyWrapper(t_fonctionParam* f);
 void setSceneWrapper(t_fonctionParam* f);
+void renderToucheWrapper(t_fonctionParam* f);
+void handleInputToucheWrapper(t_fonctionParam* f);
 
 #endif
