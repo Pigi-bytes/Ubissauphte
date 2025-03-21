@@ -280,9 +280,9 @@ void addComplement(t_grille *g, t_listeBlock **listAllBlock) {
 
     int nbCoffre;
     long int val = (g->nbLigne * g->nbColonne);
-    if (val < 900) {
+    if (val < 1600) {
         nbCoffre = 1;
-    } else if (val < 3600) {
+    } else if (val < 4900) {
         nbCoffre = 2;
     } else {
         nbCoffre = rand() % 2 + 3;
@@ -315,7 +315,15 @@ SDL_bool trouerGrille(t_grille **grille, int xdebut, int ydebut, int changementL
     if (!grille) return SDL_FALSE;  // Vérification de la grille
 
     int i = xdebut, j = ydebut;
-    copierVal(blockByName(lb, DIRECTION_DROITE), &(*grille)->grille[i][j]->tiles);
+    if (changementLigne == 0 && changementColonne == 1) {
+        copierVal(blockByName(lb, DIRECTION_GAUCHE), &(*grille)->grille[i][j]->tiles);
+    } else if (changementLigne == 0 && changementColonne == -1) {
+        copierVal(blockByName(lb, DIRECTION_DROITE), &(*grille)->grille[i][j]->tiles);
+    } else if (changementLigne == 1 && changementColonne == 0) {
+        copierVal(blockByName(lb, DIRECTION_BAS), &(*grille)->grille[i][j]->tiles);
+    } else {
+        copierVal(blockByName(lb, DIRECTION_HAUT), &(*grille)->grille[i][j]->tiles);
+    }
     (*grille)->grille[i][j]->val = SOL;
 
     // Creuser jusqu'à une case ouverte ou jusqu'à sortir des limites
@@ -358,7 +366,7 @@ void placerSortie(t_grille **grille, t_salle *salle, t_listeBlock **lab) {
 t_grille *geneRoom(t_salle *salle) {
     srand(time(NULL));
 
-    int nbLigne = (rand() % 60 + 20) & ~1;
+    int nbLigne = (rand() % 70 + 30) & ~1;
     int nbColonne = (rand() % 2) == 0 ? (nbLigne + rand() % 11) & ~1 : (nbLigne - rand() % 11) & ~1;
 
     SDL_FPoint seed;

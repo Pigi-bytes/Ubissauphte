@@ -110,7 +110,7 @@ GENERATE_WRAPPER_3(updateMinimap, t_minimap*, t_camera*, SDL_Renderer*)
 GENERATE_WRAPPER_2(cameraHandleZoom, t_viewPort*, int*)
 
 GENERATE_WRAPPER_2(handleInputButton, t_input*, t_button*)
-GENERATE_WRAPPER_5(handleInputPlayer, t_input*, t_joueur*, t_grid*, t_viewPort*, float*)
+GENERATE_WRAPPER_6(handleInputPlayer, t_input*, t_joueur*, t_grid*, t_viewPort*, float*, t_sceneController*)
 
 GENERATE_WRAPPER_2(setRenderTarget, SDL_Renderer*, t_viewPort*)
 GENERATE_WRAPPER_4(centerCameraOn, t_camera*, int*, int*, float*)
@@ -245,28 +245,40 @@ t_scene* createCommandeMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* fo
     sprintf(newTouche, "Commande Up : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((control->up))));
     t_text* textCommande = createTextOutline(renderer, newTouche, font, BLACK, WHITE, nb);
     t_fonctionParam* fonctionCommande = creerFonction(miseAjourCommande, NULL);
-    t_touche* touche = createTouche(textCommande, GREEN, WHITE, creerRect(0.35f, 0.30f, 0.3f, 0.1f), fonctionCommande, &control->up, "Up");
+    t_touche* touche = createTouche(textCommande, GREEN, WHITE, creerRect(0.2f, 0.30f, 0.3f, 0.1f), fonctionCommande, &control->up, "Up");
     addPamaretre(fonctionCommande, FONCTION_PARAMS(touche, renderer));
 
     sprintf(newTouche, "Commande Down : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((control->down))));
     t_text* textCommande2 = createTextOutline(renderer, newTouche, font, BLACK, WHITE, nb);
     t_fonctionParam* fonctionCommande2 = creerFonction(miseAjourCommande, NULL);
-    t_touche* touche2 = createTouche(textCommande2, GREEN, WHITE, creerRect(0.35f, 0.44f, 0.3f, 0.1f), fonctionCommande2, &control->down, "Down");
+    t_touche* touche2 = createTouche(textCommande2, GREEN, WHITE, creerRect(0.2f, 0.44f, 0.3f, 0.1f), fonctionCommande2, &control->down, "Down");
     addPamaretre(fonctionCommande2, FONCTION_PARAMS(touche2, renderer));
 
     sprintf(newTouche, "Commande Right : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((control->right))));
     t_text* textCommande3 = createTextOutline(renderer, newTouche, font, BLACK, WHITE, nb);
     t_fonctionParam* fonctionCommande3 = creerFonction(miseAjourCommande, NULL);
-    t_touche* touche3 = createTouche(textCommande3, GREEN, WHITE, creerRect(0.35f, 0.58f, 0.3f, 0.1f), fonctionCommande3, &control->right, "Right");
+    t_touche* touche3 = createTouche(textCommande3, GREEN, WHITE, creerRect(0.2f, 0.58f, 0.3f, 0.1f), fonctionCommande3, &control->right, "Right");
     addPamaretre(fonctionCommande3, FONCTION_PARAMS(touche3, renderer));
 
     sprintf(newTouche, "Commande Left : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((control->left))));
     t_text* textCommande4 = createTextOutline(renderer, newTouche, font, BLACK, WHITE, nb);
     t_fonctionParam* fonctionCommande4 = creerFonction(miseAjourCommande, NULL);
-    t_touche* touche4 = createTouche(textCommande4, GREEN, WHITE, creerRect(0.35f, 0.72f, 0.3f, 0.1f), fonctionCommande4, &control->left, "Left");
+    t_touche* touche4 = createTouche(textCommande4, GREEN, WHITE, creerRect(0.2, 0.72f, 0.3f, 0.1f), fonctionCommande4, &control->left, "Left");
     addPamaretre(fonctionCommande4, FONCTION_PARAMS(touche4, renderer));
 
-    t_text* text = createText(renderer, "Commande", font, GREEN);
+    sprintf(newTouche, "Commande Dash : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((control->dash))));
+    t_text* textCommande5 = createTextOutline(renderer, newTouche, font, BLACK, WHITE, nb);
+    t_fonctionParam* fonctionCommande5 = creerFonction(miseAjourCommande, NULL);
+    t_touche* touche5 = createTouche(textCommande5, GREEN, WHITE, creerRect(0.52f, 0.44f, 0.3f, 0.1f), fonctionCommande5, &control->dash, "Dash");
+    addPamaretre(fonctionCommande5, FONCTION_PARAMS(touche5, renderer));
+
+    sprintf(newTouche, "Commande Escape : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((control->escape))));
+    t_text* textCommande6 = createTextOutline(renderer, newTouche, font, BLACK, WHITE, nb);
+    t_fonctionParam* fonctionCommande6 = creerFonction(miseAjourCommande, NULL);
+    t_touche* touche6 = createTouche(textCommande6, GREEN, WHITE, creerRect(0.52f, 0.58f, 0.3f, 0.1f), fonctionCommande6, &control->escape, "Escape");
+    addPamaretre(fonctionCommande6, FONCTION_PARAMS(touche6, renderer));
+
+    t_text* text = createText(renderer, "Commandes", font, GREEN);
     text->rect = creerRect((1 - 0.8f) / 2, 0.05f, 0.8f, 0.2f);
 
     ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
@@ -275,6 +287,8 @@ t_scene* createCommandeMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* fo
     ADD_OBJECT_TO_SCENE(scene, touche2, COMMANDE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, touche3, COMMANDE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, touche4, COMMANDE_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, touche5, COMMANDE_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, touche6, COMMANDE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Retour", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.86f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "option"))), BUTTON_TYPE);
     sceneRegisterFunction(scene, COMMANDE_TYPE, HANDLE_INPUT, handleInputToucheWrapper, 1, FONCTION_PARAMS(input, renderer));
     sceneRegisterFunction(scene, COMMANDE_TYPE, RENDER_UI, renderToucheWrapper, 1, FONCTION_PARAMS(renderer));
@@ -350,7 +364,7 @@ t_scene* createOptionMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font
 
     ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
 
-    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Commandes  3", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.3f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "commande"))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Commandes", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.3f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "commande"))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(renderer, "Menu Fps", font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.44f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(sceneController, "fpsMenu"))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, CreerBarreVolume(creerRect(0.35f, (0.58f + 0.05f), 0.3f, 0.01f), creerRect((0.35f + 0.14f), (0.58f + 0.032f), 0.02f, 0.04f), GREEN, WHITE, creerFonction(bouttonClickQuit, FONCTION_PARAMS(input))), VOLUME_TYPE);
     ADD_OBJECT_TO_SCENE(scene, fpsButtonEcran, BUTTON_TYPE);
@@ -395,7 +409,7 @@ t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     return scene;
 }
 
-t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, t_control* contr) {
+t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, t_control* contr, t_sceneController* sceneController) {
     t_typeRegistry* registre = createTypeRegistry();
     const uint8_t GRID_TYPE = registerType(registre, freeGrid, "Grid");
     const uint8_t PLAYER_TYPE = registerType(registre, freePlayer, "player");
@@ -412,18 +426,22 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     t_tileset* slimeTileSet = initTileset(renderer, 48, 16, 16, "assets/imgs/slimeidle12run1213.bmp");
     t_tileset* crabeTileSet = initTileset(renderer, 80, 16, 16, "assets/imgs/crabeidle123232run416.bmp");
 
-    SDL_Rect* rectcord = malloc(sizeof(SDL_Rect) * 150);
-    for (int i = 0; i < 150; i++) {
+    SDL_Rect* rectcord = malloc(sizeof(SDL_Rect) * 10);
+    for (int i = 0; i < 10; i++) {
         rectcord[i].x = 1;
         rectcord[i].y = 1;
         rectcord[i].w = 1;
     }
-    t_salle** salle = genMap(150, rectcord);
-    printf("%p\n", salle[1]->droite);
-    t_grille* grille = geneRoom(salle[1]);
+    t_salle** salle = genMap(10, rectcord);
+    t_grille* grille[10];
+    for (int i = 0; i < 10; i++) {
+        grille[i] = geneRoom(salle[i]);
+    }
 
-    t_grid* level = loadMap(grille->nom, tileset);
-    freeGrille(grille);
+    t_grid* level = loadMap(grille[0]->nom, tileset);
+    for (int i = 0; i < 10; i++) {
+        freeGrille(grille[i]);
+    }
 
     int levelWidth = level->width * tileset->tileSize;
     int levelHeight = level->height * tileset->tileSize;
@@ -542,7 +560,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     ADD_OBJECT_TO_SCENE(scene, viewport, VIEWPORT_TYPE);
     ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
 
-    sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level, viewport, &frameData->deltaTime));
+    sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, 1, FONCTION_PARAMS(input, level, viewport, &frameData->deltaTime, sceneController));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&input->mouseYWheel));
 
     sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, 0, FONCTION_PARAMS(&frameData->deltaTime, level, entities));
@@ -594,10 +612,11 @@ int main(int argc, char* argv[]) {
     contr->left = SDL_SCANCODE_A;
     contr->right = SDL_SCANCODE_D;
     contr->dash = SDL_SCANCODE_SPACE;
+    contr->escape = SDL_SCANCODE_ESCAPE;
 
     t_scene* scene = createMainMenu(renderer, input, font, frameData, sceneController);
     t_scene* scene0 = createOptionMenu(renderer, input, font, frameData, window, option, contr, sceneController);
-    t_scene* scene1 = createMainWord(renderer, input, font, frameData, contr);
+    t_scene* scene1 = createMainWord(renderer, input, font, frameData, contr, sceneController);
     t_scene* scene2 = createCommandeMenu(renderer, input, font, window, option, contr, sceneController);
     t_scene* scene3 = createFpsMenu(renderer, input, font, frameData, fpsDisplay, window, option, sceneController);
 

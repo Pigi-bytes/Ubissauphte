@@ -26,6 +26,9 @@
  */
 #define FONCTION_PARAMS(...) __VA_ARGS__, NULL
 
+#define GENERATE_WRAPPER_6(FUNC, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6) \
+    void FUNC##Wrapper(t_fonctionParam* f) { FUNC(GET_PTR(f, 0, TYPE1), GET_PTR(f, 1, TYPE2), GET_PTR(f, 2, TYPE3), GET_PTR(f, 3, TYPE4), GET_PTR(f, 4, TYPE5), GET_PTR(f, 5, TYPE6)); }
+
 #define GENERATE_WRAPPER_5(FUNC, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5) \
     void FUNC##Wrapper(t_fonctionParam* f) { FUNC(GET_PTR(f, 0, TYPE1), GET_PTR(f, 1, TYPE2), GET_PTR(f, 2, TYPE3), GET_PTR(f, 3, TYPE4), GET_PTR(f, 4, TYPE5)); }
 

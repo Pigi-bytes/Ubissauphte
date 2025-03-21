@@ -256,7 +256,7 @@ void renderWeaponIdle(SDL_Renderer* renderer, t_joueur* player, SDL_FPoint origi
     SDL_Rect displayRect = {(origin.x - pivotPoint.x + offsetX), (origin.y - pivotPoint.y + offsetY), scaledWidth, scaledHeight};
     SDL_RenderCopyEx(renderer, player->currentWeapon->texture, NULL, &displayRect, 0, &pivotPoint, weaponFlip);
 
-    SDL_FPoint  visualPivot = {displayRect.x + pivotPoint.x, displayRect.y + pivotPoint.y};
+    SDL_FPoint visualPivot = {displayRect.x + pivotPoint.x, displayRect.y + pivotPoint.y};
     Debug_PushLine(visualPivot.x - 3, visualPivot.y, visualPivot.x + 3, visualPivot.y, 2, SDL_COLOR_RED);
     Debug_PushLine(visualPivot.x, visualPivot.y - 3, visualPivot.x, visualPivot.y + 3, 2, SDL_COLOR_RED);
 }
@@ -420,7 +420,7 @@ void updateAttack(t_joueur* player, float* deltaTime, t_objectManager* entities)
     }
 }
 
-void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime) {
+void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime, t_sceneController* sceneController) {
     float forceBase = 350.0f;              // Force de déplacement standard
     float forceSprint = forceBase * 1.5f;  // Force quand on court (x1.5)
     float forceDash = forceBase * 3.5f;    // Force du dash (x3.5)
@@ -465,6 +465,10 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
 
     if (keyPressOnce(input, SDL_SCANCODE_T)) {
         switchToNextWeapon(player);
+    }
+
+    if (input->key[player->control->escape]) {
+        setScene(sceneController, "menuPrincipal");
     }
 
     // Conversion des coord souris en coord monde
