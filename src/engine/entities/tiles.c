@@ -117,7 +117,7 @@ t_grid* loadMap(char* filename, t_tileset* tileset) {
 
             t_tile* tile = getTile(grid, x, y, coucheActuelle);
             if (tile) {
-                if (index == -4) {
+                if (index < 0) {
                     tile->entity.texture = (SDL_Texture*)getObject(tileset->textureTiles, 42);
                 } else {
                     tile->entity.texture = (SDL_Texture*)getObject(tileset->textureTiles, index);

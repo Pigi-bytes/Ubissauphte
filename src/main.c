@@ -426,17 +426,22 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     t_tileset* slimeTileSet = initTileset(renderer, 48, 16, 16, "assets/imgs/slimeidle12run1213.bmp");
     t_tileset* crabeTileSet = initTileset(renderer, 80, 16, 16, "assets/imgs/crabeidle123232run416.bmp");
 
-    SDL_Rect* rectcord = malloc(sizeof(SDL_Rect) * 150);
-    for (int i = 0; i < 150; i++) {
+    SDL_Rect* rectcord = malloc(sizeof(SDL_Rect) * 10);
+    for (int i = 0; i < 10; i++) {
         rectcord[i].x = 1;
         rectcord[i].y = 1;
         rectcord[i].w = 1;
     }
-    t_salle** salle = genMap(150, rectcord);
-    t_grille* grille = geneRoom(salle[1]);
+    t_salle** salle = genMap(10, rectcord);
+    t_grille* grille[10];
+    for (int i = 0; i < 10; i++) {
+        grille[i] = geneRoom(salle[i]);
+    }
 
-    t_grid* level = loadMap(grille->nom, tileset);
-    freeGrille(grille);
+    t_grid* level = loadMap(grille[0]->nom, tileset);
+    for (int i = 0; i < 10; i++) {
+        freeGrille(grille[i]);
+    }
 
     int levelWidth = level->width * tileset->tileSize;
     int levelHeight = level->height * tileset->tileSize;
