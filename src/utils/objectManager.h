@@ -23,7 +23,7 @@ typedef void (*freeFunc)(void*);
  * @def POOL_SIZE
  * @brief Taille fixe de chaque bloc memoire
  */
-#define POOL_SIZE 5
+#define POOL_SIZE 64
 
 /**
  * @def MAX_UINT8_T
