@@ -67,7 +67,7 @@ t_block *getFrontale(t_listeBlock **listAllBlock, t_case *c) {
     if (c->tabVoisin[VOISIN_DROIT]->val != OBSTACLE)
         return blockByName(listBlock, FRONTALE_ANGLE_GAUCHE);
     if (blockIs(c->tabVoisin[VOISIN_GAUCHE]->tiles, FRONTALE_PORTE_SOLO)) {
-        if (((long)rand()) / RAND_MAX < 0.2) {
+        if ((((double)rand()) / RAND_MAX) < 0.2) {
             copierVal(blockByName(listBlock, FRONTALE_PORTE_DUO_GAUCHE), &c->tabVoisin[VOISIN_GAUCHE]->tiles);
             return blockByName(listBlock, FRONTALE_PORTE_DUO_DROITE);
         }
@@ -279,13 +279,17 @@ void addComplement(t_grille *g, t_listeBlock **listAllBlock) {
     }
 
     int nbCoffre;
+    int nbTonneau;
     long int val = (g->nbLigne * g->nbColonne);
     if (val < 1600) {
         nbCoffre = 1;
+        nbTonneau = rand() % 5 + 5;
     } else if (val < 4900) {
         nbCoffre = 2;
+        nbTonneau = rand() % 9 + 6;
     } else {
         nbCoffre = rand() % 2 + 3;
+        nbTonneau = rand() % 10 + 10;
     }
 
     for (int i = 0; i < nbCoffre; i++) {
@@ -295,6 +299,16 @@ void addComplement(t_grille *g, t_listeBlock **listAllBlock) {
             y = rand() % g->nbColonne;
         } while (g->grille[x][y]->val != SOL);
         copierVal(blockByName(listBlock, COMPDECO_COFFRE), &g->grille[x][y]->tiles);
+        g->grille[x][y]->val = ELTAJOUTE;
+    }
+
+    for (int i = 0; i < nbTonneau; i++) {
+        int x, y;
+        do {
+            x = rand() % g->nbLigne;
+            y = rand() % g->nbColonne;
+        } while (g->grille[x][y]->val != SOL);
+        copierVal(blockByName(listBlock, COMPDECO_TONNEAU), &g->grille[x][y]->tiles);
         g->grille[x][y]->val = ELTAJOUTE;
     }
 }

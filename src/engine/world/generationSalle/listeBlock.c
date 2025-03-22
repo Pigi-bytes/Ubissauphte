@@ -143,12 +143,11 @@ t_listeBlock** createListAllBlock() {
     ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_FRACTURE, 13, 0, (((double)1) / ((double)3)), SDL_TRUE, SDL_TRUE);
     ajouterBlock(listAllBlock, PLAFOND_TYPE, PLAFOND_POINT, 25, 0, (((double)1) / ((double)3)), SDL_TRUE, SDL_TRUE);
 
-    ajouterBlock(listAllBlock, DECO_TYPE, DECO_HAUT_BOITE, 64, 0, (((double)1) / ((double)6)), SDL_TRUE, SDL_FALSE);
-    ajouterBlock(listAllBlock, DECO_TYPE, DECO_CROIX_TOMBE, 65, 0, (((double)1) / ((double)6)), SDL_TRUE, SDL_FALSE);
-    ajouterBlock(listAllBlock, DECO_TYPE, DECO_PIERRE_TOMBALE, 66, 0, (((double)1) / ((double)6)), SDL_TRUE, SDL_FALSE);
-    ajouterBlock(listAllBlock, DECO_TYPE, DECO_TABLE, 73, 0, (((double)1) / ((double)6)), SDL_TRUE, SDL_FALSE);
-    ajouterBlock(listAllBlock, DECO_TYPE, DECO_ENCLUME, 75, 0, (((double)1) / ((double)6)), SDL_TRUE, SDL_FALSE);
-    ajouterBlock(listAllBlock, DECO_TYPE, DECO_TONNEAU, 83, 0, (((double)1) / ((double)6)), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, DECO_TYPE, DECO_HAUT_BOITE, 64, 0, (((double)1) / ((double)5)), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, DECO_TYPE, DECO_CROIX_TOMBE, 65, 0, (((double)1) / ((double)5)), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, DECO_TYPE, DECO_PIERRE_TOMBALE, 66, 0, (((double)1) / ((double)5)), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, DECO_TYPE, DECO_TABLE, 73, 0, (((double)1) / ((double)5)), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, DECO_TYPE, DECO_ENCLUME, 75, 0, (((double)1) / ((double)5)), SDL_TRUE, SDL_FALSE);
     ajouterBlock(listAllBlock, DECO_TYPE, DECO_PIQUE, 42, 0, 0, SDL_TRUE, SDL_FALSE);
 
     ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_DEBUT_ESCALIER, 37, 0, 0, SDL_FALSE, SDL_FALSE);
@@ -156,6 +155,7 @@ t_listeBlock** createListAllBlock() {
     ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_MILLIEU_ESCALIER, 38, 0, 0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_FIN_ESCALIER, 39, 0, 0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_COFFRE, 90, 0, (0.0), SDL_TRUE, SDL_FALSE);
+    ajouterBlock(listAllBlock, COMPDECO_TYPE, COMPDECO_TONNEAU, 83, 0, 0, SDL_TRUE, SDL_FALSE);
 
     ajouterBlock(listAllBlock, DIRECTION_TYPE, DIRECTION_HAUT, -1, 0, 0, SDL_FALSE, SDL_FALSE);
     ajouterBlock(listAllBlock, DIRECTION_TYPE, DIRECTION_BAS, -2, 0, 0, SDL_FALSE, SDL_FALSE);
