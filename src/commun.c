@@ -95,6 +95,10 @@ void handleInputToucheWrapper(t_fonctionParam* f) {
     handleInputTouche((t_input*)f->param[0], (t_touche*)f->param[1], (SDL_Renderer*)f->param[2]);
 }
 
+void affichageWrapper(t_fonctionParam* fonction) {
+    affichage((SDL_Renderer*)fonction->param[0], (t_mapAffichage*)fonction->param[1]);
+}
+
 SDL_Rect
 creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio) {
     return (SDL_Rect){WINDOW_WIDTH * x_ratio, WINDOW_HEIGHT * y_ratio, WINDOW_WIDTH * w_ratio, WINDOW_HEIGHT * h_ratio};

@@ -19,4 +19,5 @@ typedef struct {
 void XYMinMax(int *zonneAff, SDL_Rect *roomCoords, int numberRoom);
 void generateMap(SDL_Rect *roomCoords, t_salle **listeRoom, int numberRoom, t_mapAffichage *map, int WW, int WH);
 void affichage(SDL_Renderer *pRendu, t_mapAffichage *map);
+void freeMapAffiche(void *elt);
 #endif

@@ -47,6 +47,7 @@ typedef struct {
     SDL_Scancode right;
     SDL_Scancode dash;
     SDL_Scancode escape;
+    SDL_Scancode map;
 } t_control;
 
 typedef struct {

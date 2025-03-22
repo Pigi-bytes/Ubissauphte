@@ -24,8 +24,11 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
         rectcord[i].x = 1;
         rectcord[i].y = 1;
         rectcord[i].w = 1;
+        rectcord[i].h = 1;
     }
     t_salle** salle = genMap(10, rectcord);
+    addScene(sceneController, createMapWord(renderer, salle, rectcord));
+
     t_grille* grille[10];
     for (int i = 0; i < 10; i++) {
         grille[i] = geneRoom(salle[i]);
@@ -181,6 +184,23 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
     sceneRegisterFunction(scene, VIEWPORT_TYPE, RENDER_BUFFER, renderViewportWrapper, 1, FONCTION_PARAMS(renderer));
 
     sceneRegisterFunction(scene, MINIMAP_TYPE, RENDER_UI, renderMinimapWrapper, 1, FONCTION_PARAMS(renderer));
+
+    return scene;
+}
+
+t_scene* createMapWord(SDL_Renderer* renderer, t_salle** salle, SDL_Rect* rectcord) {
+    t_typeRegistry* registre = createTypeRegistry();
+    const uint8_t MAP_TYPE = registerType(registre, freeMapAffiche, "mapView");
+
+    t_scene* scene = createScene(initObjectManager(registre), "carte");
+
+    t_mapAffichage* map = malloc(sizeof(t_mapAffichage));
+
+    generateMap(rectcord, salle, 10, map, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+    ADD_OBJECT_TO_SCENE(scene, map, MAP_TYPE);
+
+    sceneRegisterFunction(scene, MAP_TYPE, RENDER_UI, affichageWrapper, 1, FONCTION_PARAMS(renderer));
 
     return scene;
 }

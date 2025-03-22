@@ -471,6 +471,10 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
         setScene(sceneController, "menuPrincipal");
     }
 
+    if (input->key[player->control->map]) {
+        setScene(sceneController, "carte");
+    }
+
     // Conversion des coord souris en coord monde
     float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
     convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);

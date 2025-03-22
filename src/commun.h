@@ -16,6 +16,7 @@
 #include "io/input.h"
 #include "ui/button.h"
 #include "ui/fpsDisplay.h"
+#include "ui/mapview.h"
 #include "ui/minimap.h"
 #include "ui/slider.h"
 #include "ui/text.h"
@@ -59,5 +60,6 @@ void updateEnemyWrapper(t_fonctionParam* f);
 void setSceneWrapper(t_fonctionParam* f);
 void renderToucheWrapper(t_fonctionParam* f);
 void handleInputToucheWrapper(t_fonctionParam* f);
+void affichageWrapper(t_fonctionParam* fonction);
 
 #endif
