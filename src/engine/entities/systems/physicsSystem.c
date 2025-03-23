@@ -10,6 +10,15 @@ void updatePhysicEntity(t_entity* entity, float* deltaTime, t_grid* grid, t_obje
     entity->physics.velocity.y *= powf(entity->physics.friction, *deltaTime);
     // PHYSICS_LOG("After friction - Velocity: (%.1f,%.1f)", entity->physics.velocity.x, entity->physics.velocity.y);
 
+    float maxSafeSpeed = 16.0f / *deltaTime;
+    float currentSpeed = sqrtf(entity->physics.velocity.x * entity->physics.velocity.x + entity->physics.velocity.y * entity->physics.velocity.y);
+
+    if (currentSpeed > maxSafeSpeed) {
+        float scale = maxSafeSpeed / currentSpeed;
+        entity->physics.velocity.x *= scale;
+        entity->physics.velocity.y *= scale;
+    }
+
     // Intégration de la position
     // On multiplie la velocite (unites/s) par deltaTime (s) pour obtenir
     // le déplacement en unités pour cette frame
@@ -27,87 +36,88 @@ void updatePhysicEntity(t_entity* entity, float* deltaTime, t_grid* grid, t_obje
     // PHYSICS_LOG("New position: (%.1f,%.1f)", entity->collisionCircle.x, entity->collisionCircle.y);
 }
 
-void resolveCollision(t_entity* entity, t_grid* grid, t_objectManager* entities) {
+void resolveCircleRectCollision(t_entity* entity, SDL_Rect* rect, float rectRestitution, t_collisionData* collision) {
+    float relativeVelocityX = 0.0f - entity->physics.velocity.x;
+    float relativeVelocityY = 0.0f - entity->physics.velocity.y;
+    float normalDotVel = collision->normal.x * relativeVelocityX + collision->normal.y * relativeVelocityY;
+
+    if (normalDotVel > 0) {
+        float combinedRestitution = (entity->physics.restitution + rectRestitution) / 2;
+        float impulseMagnitude = -(1 + combinedRestitution) * normalDotVel;
+
+        entity->physics.velocity.x -= impulseMagnitude * collision->normal.x;
+        entity->physics.velocity.y -= impulseMagnitude * collision->normal.y;
+    }
+
+    entity->collisionCircle.x += collision->normal.x * collision->depth;
+    entity->collisionCircle.y += collision->normal.y * collision->depth;
+}
+
+void resolveCircleCircleCollision(t_entity* entity1, t_entity* entity2, t_collisionData* collision) {
+    float relativeVelocityX = entity2->physics.velocity.x - entity1->physics.velocity.x;
+    float relativeVelocityY = entity2->physics.velocity.y - entity1->physics.velocity.y;
+    float normalDotVel = collision->normal.x * relativeVelocityX + collision->normal.y * relativeVelocityY;
+
+    if (normalDotVel > 0) {
+        float combinedRestitution = (entity1->physics.restitution + entity2->physics.restitution) / 2;
+        float impulseMagnitude = -(1 + combinedRestitution) * normalDotVel;
+
+        float inverseMassSum = (1 / entity1->physics.mass + 1 / entity2->physics.mass);
+        impulseMagnitude /= inverseMassSum;
+
+        entity1->physics.velocity.x -= impulseMagnitude / entity1->physics.mass * collision->normal.x;
+        entity1->physics.velocity.y -= impulseMagnitude / entity1->physics.mass * collision->normal.y;
+
+        entity2->physics.velocity.x += impulseMagnitude / entity2->physics.mass * collision->normal.x;
+        entity2->physics.velocity.y += impulseMagnitude / entity2->physics.mass * collision->normal.y;
+    }
+
+    // Reposition first entity to resolve penetration
+    entity1->collisionCircle.x += collision->normal.x * collision->depth;
+    entity1->collisionCircle.y += collision->normal.y * collision->depth;
+}
+
+void resolveGridCollisions(t_entity* entity, t_grid* grid) {
     int tileSize = 16;
     int startX = (entity->collisionCircle.x - entity->collisionCircle.radius) / tileSize;
     int startY = (entity->collisionCircle.y - entity->collisionCircle.radius) / tileSize;
     int endX = (entity->collisionCircle.x + entity->collisionCircle.radius) / tileSize;
     int endY = (entity->collisionCircle.y + entity->collisionCircle.radius) / tileSize;
 
-    t_collisionData out;
+    t_collisionData collision;
 
-    for (int i = 0; i < entities->count; i++) {
-        t_entity* otherEntity = getObject(entities, i);
-
-        for (int z = 0; z < grid->depth; z++) {
-            for (int y = startY; y <= endY; y++) {
-                for (int x = startX; x <= endX; x++) {
-                    t_tile* tile = getTile(grid, x, y, z);
-                    if (tile && tile->solide) {
-                        if (checkCircleRectCollision(&entity->collisionCircle, &tile->entity.collisionRect, &out)) {
-                            // RESOLVE_LOG("Pre-collision pos: (%.1f,%.1f)", entity->collisionCircle.x, entity->collisionCircle.y);
-                            //  Résoudre la collision en déplaçant l'entité
-
-                            float relativeVelocityX = 0.0f - entity->physics.velocity.x;
-                            float relativeVelocityY = 0.0f - entity->physics.velocity.y;
-                            float normalDotVel = out.normal.x * relativeVelocityX + out.normal.y * relativeVelocityY;
-
-                            if (normalDotVel) {                                                                                    // Only apply impulse if objects are moving towards each other
-                                float combinedRestitution = (entity->physics.restitution + tile->entity.physics.restitution) / 2;  // Only apply impulse if objects are moving towards each other
-
-                                float impulseMagnitude = -(1 + combinedRestitution) * normalDotVel;
-                                // Apply impulse to velocities (scaled by mass)
-                                entity->physics.velocity.x -= impulseMagnitude * out.normal.x;
-                                entity->physics.velocity.y -= impulseMagnitude * out.normal.y;
-                            }
-
-                            entity->collisionCircle.x += out.normal.x * out.depth;
-                            entity->collisionCircle.y += out.normal.y * out.depth;
-                            // RESOLVE_LOG("Post-collision pos: (%.1f,%.1f)", entity->collisionCircle.x, entity->collisionCircle.y);
-                        }
+    for (int z = 0; z < grid->depth; z++) {
+        for (int y = startY; y <= endY; y++) {
+            for (int x = startX; x <= endX; x++) {
+                t_tile* tile = getTile(grid, x, y, z);
+                if (tile && tile->solide) {
+                    if (checkCircleRectCollision(&entity->collisionCircle, &tile->entity.collisionRect, &collision)) {
+                        resolveCircleRectCollision(entity, &tile->entity.collisionRect, tile->entity.physics.restitution, &collision);
                     }
                 }
             }
         }
+    }
+}
 
-        // int x1 = entity->collisionCircle.x;
-        // int y1 = entity->collisionCircle.y;q
-        // int x2 = otherEntity->collisionCircle.x;
-        // int y2 = otherEntity->collisionCircle.y;
+void resolveEntityCollisions(t_entity* entity, t_objectManager* entities) {
+    t_collisionData collision;
 
+    for (int i = 0; i < entities->count; i++) {
+        t_entity* otherEntity = getObject(entities, i);
         if (otherEntity == entity) continue;
 
-        SDL_bool collision = checkCircleCircleCollision(&entity->collisionCircle, &otherEntity->collisionCircle, &out);
-
-        SDL_Color lineColor = collision ? (SDL_Color){0, 255, 0, 255} : (SDL_Color){255, 0, 0, 255};
-        // Debug_PushLine(x1, y1, x2, y2, 3, lineColor);
-
-        if (collision) {
-            // Apply impulse based on the collision normal and depth
-            // Assuming the entities have velocity properties (e.g., velocityX, velocityY)
-            float relativeVelocityX = otherEntity->physics.velocity.x - entity->physics.velocity.x;
-            float relativeVelocityY = otherEntity->physics.velocity.y - entity->physics.velocity.y;
-
-            float normalDotVel = out.normal.x * relativeVelocityX + out.normal.y * relativeVelocityY;
-
-            if (normalDotVel) {
-                float combinedRestitution = (entity->physics.restitution + otherEntity->physics.restitution) / 2;  // Only apply impulse if objects are moving towards each other
-                float impulseMagnitude = -(1 + combinedRestitution) * normalDotVel;                                // 0.8 is the coefficient of restitution (elasticity)
-                impulseMagnitude /= (1 / entity->physics.mass + 1 / otherEntity->physics.mass);                    // Apply based on mass
-
-                // Apply impulse to velocities (scaled by mass)
-                entity->physics.velocity.x -= impulseMagnitude / entity->physics.mass * out.normal.x;
-                entity->physics.velocity.y -= impulseMagnitude / entity->physics.mass * out.normal.y;
-
-                otherEntity->physics.velocity.x += impulseMagnitude / otherEntity->physics.mass * out.normal.x;
-                otherEntity->physics.velocity.y += impulseMagnitude / otherEntity->physics.mass * out.normal.y;
+        if (entity->useCircleCollision && otherEntity->useCircleCollision) {
+            if (checkCircleCircleCollision(&entity->collisionCircle, &otherEntity->collisionCircle, &collision)) {
+                resolveCircleCircleCollision(entity, otherEntity, &collision);
             }
-
-            // Move the entity away from the collision, based on the depth of the collision
-            entity->collisionCircle.x += out.normal.x * out.depth;
-            entity->collisionCircle.y += out.normal.y * out.depth;
         }
     }
+}
+
+void resolveCollision(t_entity* entity, t_grid* grid, t_objectManager* entities) {
+    resolveGridCollisions(entity, grid);
+    resolveEntityCollisions(entity, entities);
 }
 
 SDL_bool gridRaycast(t_grid* grid, SDL_FPoint start, SDL_FPoint end, int tileSize, SDL_FPoint* obstructionPoint) {
