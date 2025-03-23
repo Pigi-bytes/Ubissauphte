@@ -60,6 +60,7 @@ typedef struct {
     int weaponCount;
     int currentWeaponIndex;
     t_arme* currentWeapon;
+    int indexCurrentRoom;
 
     t_attack attack;
     float aimAngle;

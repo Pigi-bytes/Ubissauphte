@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 
+#include "../engine/entities/player.h"
 #include "../engine/world/genmap.h"
 
 typedef struct {
@@ -18,6 +19,7 @@ typedef struct {
 
 void XYMinMax(int *zonneAff, SDL_Rect *roomCoords, int numberRoom);
 void generateMap(SDL_Rect *roomCoords, t_salle **listeRoom, int numberRoom, t_mapAffichage *map, int WW, int WH);
-void affichage(SDL_Renderer *pRendu, t_mapAffichage *map);
+void affichage(SDL_Renderer *renderer, t_mapAffichage *map, t_joueur *player);
+void handleInputMap(t_input *input, t_joueur *player, t_sceneController *sceneController);
 void freeMapAffiche(void *elt);
 #endif
