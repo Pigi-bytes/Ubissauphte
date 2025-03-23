@@ -51,7 +51,7 @@ t_scene* createMainWord(t_context* context) {
     joueur->weaponCount = 0;
     joueur->currentWeaponIndex = 0;
 
-    addScene(context->sceneController, createMapWord(context->renderer, salle, rectcord, context->input, joueur, context->sceneController));
+    addScene(context->sceneController, createMapWord(context, salle, rectcord, joueur));
 
     // Création des armes avec statistiques équilibrées
     t_arme* dague = malloc(sizeof(t_arme));
@@ -193,7 +193,7 @@ t_scene* createMainWord(t_context* context) {
     return scene;
 }
 
-t_scene* createMapWord(SDL_Renderer* renderer, t_salle** salle, SDL_Rect* rectcord, t_input* input, t_joueur* player, t_sceneController* scenecontroler) {
+t_scene* createMapWord(t_context* context, t_salle** salle, SDL_Rect* rectcord, t_joueur* player) {
     t_typeRegistry* registre = createTypeRegistry();
     const uint8_t MAP_TYPE = registerType(registre, freeMapAffiche, "mapView");
 
@@ -205,8 +205,8 @@ t_scene* createMapWord(SDL_Renderer* renderer, t_salle** salle, SDL_Rect* rectco
 
     ADD_OBJECT_TO_SCENE(scene, map, MAP_TYPE);
 
-    sceneRegisterFunction(scene, MAP_TYPE, RENDER_UI, affichageWrapper, 1, FONCTION_PARAMS(renderer, player));
-    sceneRegisterFunction(scene, MAP_TYPE, HANDLE_INPUT, handleInputMapWrapper, -1, FONCTION_PARAMS(input, player, scenecontroler));
+    sceneRegisterFunction(scene, MAP_TYPE, RENDER_UI, affichageWrapper, 1, FONCTION_PARAMS(context->renderer, player));
+    sceneRegisterFunction(scene, MAP_TYPE, HANDLE_INPUT, handleInputMapWrapper, -1, FONCTION_PARAMS(context->input, player, context->sceneController));
 
     return scene;
 }

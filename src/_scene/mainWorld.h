@@ -6,5 +6,5 @@
 
 t_scene* createMainWord(t_context* context);
 
-t_scene* createMapWord(SDL_Renderer* renderer, t_salle** salle, SDL_Rect* rectcord, t_input* input, t_joueur* player, t_sceneController* scenecontroler);
+t_scene* createMapWord(t_context* context, t_salle** salle, SDL_Rect* rectcord, t_joueur* player);
 #endif
