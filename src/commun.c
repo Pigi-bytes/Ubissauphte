@@ -36,7 +36,7 @@ void updateFPSDisplayWrapper(t_fonctionParam* f) {
 }
 
 void updateMinimapWrapper(t_fonctionParam* f) {
-    updateMinimap(((t_minimap*)(f)->param[0]), ((t_camera*)(f)->param[1]), ((SDL_Renderer*)(f)->param[2]));
+    updateMinimap(((t_minimap*)(f)->param[0]), ((t_camera*)(f)->param[1]), ((SDL_Renderer*)(f)->param[2]), ((t_objectManager*)(f)->param[3]), ((t_grid*)(f)->param[4]));
 }
 
 void cameraHandleZoomWrapper(t_fonctionParam* f) {

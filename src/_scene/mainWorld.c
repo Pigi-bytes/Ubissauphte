@@ -43,7 +43,8 @@ t_scene* createMainWord(t_context* context) {
     int levelHeight = level->height * tileset->tileSize;
 
     t_objectManager* entities = initObjectManager(createTypeRegistry());
-    const uint8_t ENTITY = registerType(entities->registry, NULL, "ENTITY");
+    const uint8_t PLAYER = registerType(entities->registry, NULL, "PLAYER");
+    const uint8_t ENEMY = registerType(entities->registry, NULL, "ENEMY");
     registerType(entities->registry, NULL, "TILE_ENTITY");
 
     t_joueur* joueur = createPlayer(context->control, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerTileSet);
@@ -129,13 +130,13 @@ t_scene* createMainWord(t_context* context) {
 
     joueur->indexCurrentRoom = 0;
 
-    addObject(entities, &joueur->entity, ENTITY);
+    addObject(entities, &joueur->entity, PLAYER);
     placeOnRandomTile(level, &joueur->entity, entities);
 
     t_enemy* enemy;
     for (int i = 0; i < 20; i++) {
         enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, scene);
-        addObject(entities, &enemy->entity, ENTITY);
+        addObject(entities, &enemy->entity, ENEMY);
         placeOnRandomTile(level, &enemy->entity, entities);
         ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
     }
@@ -146,7 +147,7 @@ t_scene* createMainWord(t_context* context) {
         enemy->maxHealth = 300;
         enemy->health = 300;
 
-        addObject(entities, &enemy->entity, ENTITY);
+        addObject(entities, &enemy->entity, ENEMY);
         placeOnRandomTile(level, &enemy->entity, entities);
         ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
     }
@@ -172,7 +173,7 @@ t_scene* createMainWord(t_context* context) {
 
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, 1, FONCTION_PARAMS(context->renderer));
 
-    sceneRegisterFunction(scene, MINIMAP_TYPE, UPDATE, updateMinimapWrapper, 0, FONCTION_PARAMS(camera, context->renderer));
+    sceneRegisterFunction(scene, MINIMAP_TYPE, UPDATE, updateMinimapWrapper, 0, FONCTION_PARAMS(camera, context->renderer, entities, level));
     sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&joueur->entity.displayRect.x, &joueur->entity.displayRect.y, &context->frameData->deltaTime));
     sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&joueur->entity.displayRect.x, &joueur->entity.displayRect.y));
 
