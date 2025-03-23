@@ -51,6 +51,8 @@ t_scene* createMainWord(t_context* context) {
     joueur->weaponCount = 0;
     joueur->currentWeaponIndex = 0;
 
+    addScene(sceneController, createMapWord(renderer, salle, rectcord, input, joueur, sceneController));
+
     // Création des armes avec statistiques équilibrées
     t_arme* dague = malloc(sizeof(t_arme));
     *dague = (t_arme){
@@ -125,6 +127,8 @@ t_scene* createMainWord(t_context* context) {
     joueur->currentWeaponIndex = 0;
     joueur->currentWeapon = joueur->weapons[joueur->currentWeaponIndex];
 
+    joueur->indexCurrentRoom = 0;
+
     addObject(entities, &joueur->entity, ENTITY);
     placeOnRandomTile(level, &joueur->entity, entities);
 
@@ -189,7 +193,7 @@ t_scene* createMainWord(t_context* context) {
     return scene;
 }
 
-t_scene* createMapWord(SDL_Renderer* renderer, t_salle** salle, SDL_Rect* rectcord) {
+t_scene* createMapWord(SDL_Renderer* renderer, t_salle** salle, SDL_Rect* rectcord, t_input* input, t_joueur* player, t_sceneController* scenecontroler) {
     t_typeRegistry* registre = createTypeRegistry();
     const uint8_t MAP_TYPE = registerType(registre, freeMapAffiche, "mapView");
 
@@ -201,7 +205,8 @@ t_scene* createMapWord(SDL_Renderer* renderer, t_salle** salle, SDL_Rect* rectco
 
     ADD_OBJECT_TO_SCENE(scene, map, MAP_TYPE);
 
-    sceneRegisterFunction(scene, MAP_TYPE, RENDER_UI, affichageWrapper, 1, FONCTION_PARAMS(renderer));
+    sceneRegisterFunction(scene, MAP_TYPE, RENDER_UI, affichageWrapper, 1, FONCTION_PARAMS(renderer, player));
+    sceneRegisterFunction(scene, MAP_TYPE, HANDLE_INPUT, handleInputMapWrapper, -1, FONCTION_PARAMS(input, player, scenecontroler));
 
     return scene;
 }

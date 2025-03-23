@@ -55,6 +55,7 @@ void updateEnemyWrapper(t_fonctionParam* f);
 void setSceneWrapper(t_fonctionParam* f);
 void renderToucheWrapper(t_fonctionParam* f);
 void handleInputToucheWrapper(t_fonctionParam* f);
-void affichageWrapper(t_fonctionParam* fonction);
+void affichageWrapper(t_fonctionParam* f);
+void handleInputMapWrapper(t_fonctionParam* f);
 
 #endif

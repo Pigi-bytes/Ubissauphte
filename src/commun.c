@@ -95,8 +95,12 @@ void handleInputToucheWrapper(t_fonctionParam* f) {
     handleInputTouche((t_input*)f->param[0], (t_touche*)f->param[1], (SDL_Renderer*)f->param[2]);
 }
 
-void affichageWrapper(t_fonctionParam* fonction) {
-    affichage((SDL_Renderer*)fonction->param[0], (t_mapAffichage*)fonction->param[1]);
+void affichageWrapper(t_fonctionParam* f) {
+    affichage((SDL_Renderer*)f->param[0], (t_mapAffichage*)f->param[1], (t_joueur*)f->param[2]);
+}
+
+void handleInputMapWrapper(t_fonctionParam* f) {
+    handleInputMap((t_input*)f->param[0], (t_joueur*)f->param[1], (t_sceneController*)f->param[2]);
 }
 
 SDL_Rect
