@@ -107,3 +107,8 @@ void affichage(SDL_Renderer *renderer, t_mapAffichage *map) {
         SDL_RenderDrawLine(renderer, map->lines[i].x1, map->lines[i].y1, map->lines[i].x2, map->lines[i].y2);
     }
 }
+
+void freeMapAffiche(void *obj) {
+    t_mapAffichage *map = (t_mapAffichage *)obj;
+    free(map);
+}
