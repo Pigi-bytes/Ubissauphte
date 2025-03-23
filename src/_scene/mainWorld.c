@@ -27,7 +27,7 @@ t_scene* createMainWord(t_context* context) {
         rectcord[i].h = 1;
     }
     t_salle** salle = genMap(10, rectcord);
-    addScene(context->sceneController, createMapWord(context->renderer, salle, rectcord));
+    // addScene(context->sceneController, createMapWord(context->renderer, salle, rectcord));
 
     t_grille* grille[10];
     for (int i = 0; i < 10; i++) {
@@ -51,7 +51,7 @@ t_scene* createMainWord(t_context* context) {
     joueur->weaponCount = 0;
     joueur->currentWeaponIndex = 0;
 
-    addScene(sceneController, createMapWord(renderer, salle, rectcord, input, joueur, sceneController));
+    addScene(context->sceneController, createMapWord(context->renderer, salle, rectcord, context->input, joueur, context->sceneController));
 
     // Création des armes avec statistiques équilibrées
     t_arme* dague = malloc(sizeof(t_arme));
