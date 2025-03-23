@@ -3,6 +3,7 @@
 #include "_scene/mainMenu.h"
 #include "_scene/mainWorld.h"
 #include "_scene/optionMenu.h"
+#include "context.h"
 
 int main(int argc, char* argv[]) {
     if (initAudioSystem() != 0) {
@@ -11,77 +12,80 @@ int main(int argc, char* argv[]) {
 
     SDL_Init(SDL_INIT_VIDEO);
     initTextEngine();
-    SDL_Window* window = SDL_CreateWindow("Lo Poti Donjon", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    Debug_Init(renderer);
 
-    t_input* input = initInput(WINDOW_WIDTH, WINDOW_HEIGHT);
-    TTF_Font* font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
-    t_frameData* frameData = initFrameData(0);
-    t_option* option = creeOption();
-    t_sceneController* sceneController = initSceneController();
-    t_fpsDisplay* fpsDisplay = initFPSDisplay(renderer, font);
+    t_context context;
 
-    t_control* contr = malloc(sizeof(t_control));
-    contr->up = SDL_SCANCODE_W;
-    contr->down = SDL_SCANCODE_S;
-    contr->left = SDL_SCANCODE_A;
-    contr->right = SDL_SCANCODE_D;
-    contr->dash = SDL_SCANCODE_SPACE;
-    contr->escape = SDL_SCANCODE_ESCAPE;
-    contr->map = SDL_SCANCODE_P;
-    contr->interact = SDL_SCANCODE_E;
-    t_scene* scene = createMainMenu(renderer, input, font, frameData, sceneController);
-    t_scene* scene0 = createOptionMenu(renderer, input, font, frameData, window, option, contr, sceneController);
-    t_scene* scene1 = createMainWord(renderer, input, font, frameData, contr, sceneController);
-    t_scene* scene2 = createCommandeMenu(renderer, input, font, window, option, contr, sceneController);
-    t_scene* scene3 = createFpsMenu(renderer, input, font, frameData, fpsDisplay, window, option, sceneController);
+    context.window = SDL_CreateWindow("Lo Poti Donjon", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
+    context.renderer = SDL_CreateRenderer(context.window, -1, SDL_RENDERER_ACCELERATED);
+    Debug_Init(context.renderer);
 
-    addScene(sceneController, scene);
-    addScene(sceneController, scene0);
-    addScene(sceneController, scene1);
-    addScene(sceneController, scene2);
-    addScene(sceneController, scene3);
+    context.input = initInput(WINDOW_WIDTH, WINDOW_HEIGHT);
+    context.font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
+    context.frameData = initFrameData(0);
+    context.option = creeOption();
+    context.sceneController = initSceneController();
+    context.audioManager = initAudioManager();
+    context.fpsDisplay = initFPSDisplay(context.renderer, context.font);
 
-    setScene(sceneController, "menuPrincipal");
-    while (!input->quit) {
-        startFrame(frameData);
-        t_scene* currentScene = getCurrentScene(sceneController);
+    context.control = malloc(sizeof(t_control));
+    context.control->up = SDL_SCANCODE_W;
+    context.control->down = SDL_SCANCODE_S;
+    context.control->left = SDL_SCANCODE_A;
+    context.control->right = SDL_SCANCODE_D;
+    context.control->dash = SDL_SCANCODE_SPACE;
+    context.control->escape = SDL_SCANCODE_ESCAPE;
+    context.control->map = SDL_SCANCODE_P;
+    context.control->interact = SDL_SCANCODE_E;
+
+    t_scene* scene = createMainMenu(&context);
+    t_scene* scene0 = createOptionMenu(&context);
+    t_scene* scene1 = createMainWord(&context);
+    t_scene* scene2 = createCommandeMenu(&context);
+    t_scene* scene3 = createFpsMenu(&context);
+
+    addScene(context.sceneController, scene);
+    addScene(context.sceneController, scene0);
+    addScene(context.sceneController, scene1);
+    addScene(context.sceneController, scene2);
+    addScene(context.sceneController, scene3);
+    setScene(context.sceneController, "menuPrincipal");
+
+    while (!context.input->quit) {
+        startFrame(context.frameData);
+        t_scene* currentScene = getCurrentScene(context.sceneController);
 
         executeSceneFunctions(currentScene, HANDLE_INPUT);
-        updateInput(input);
+        updateInput(context.input);
 
         executeSceneFunctions(currentScene, UPDATE);
 
-        updateFPS(frameData);
-        updateFPSDisplay(fpsDisplay, frameData, renderer);
+        updateFPS(context.frameData);
 
-        if (input->resized) {
+        if (context.input->resized) {
             executeSceneFunctions(currentScene, HANDLE_RESIZE);
         }
 
-        SDL_RenderClear(renderer);
+        SDL_RenderClear(context.renderer);
         executeSceneFunctions(currentScene, SET_BUFFER);
         executeSceneFunctions(currentScene, RENDER_GAME);
 
         Debug_RenderAll();
         executeSceneFunctions(currentScene, RENDER_BUFFER);
         executeSceneFunctions(currentScene, RENDER_UI);
-        renderFPSDisplay(renderer, fpsDisplay);
 
-        SDL_RenderPresent(renderer);
+        SDL_RenderPresent(context.renderer);
 
-        capFrameRate(frameData);
+        capFrameRate(context.frameData);
     }
 
-    freeOption(option);
-    freeFrameData(frameData);
-    freeObjectManager(sceneController->scene);
-    free(contr);
+    freeOption(context.option);
+    freeFrameData(context.frameData);
+    freeObjectManager(context.sceneController->scene);
+    free(context.control);
 
-    TTF_CloseFont(font);
-    freeInput(input);
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    TTF_CloseFont(context.font);
+    freeInput(context.input);
+    SDL_DestroyRenderer(context.renderer);
+    SDL_DestroyWindow(context.window);
     return EXIT_SUCCESS;
 }

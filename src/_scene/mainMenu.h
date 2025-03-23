@@ -2,7 +2,8 @@
 #define MAIN_MENU_H
 
 #include "../commun.h"
+#include "../context.h"
 
-t_scene* createMainMenu(SDL_Renderer* renderer, t_input* input, TTF_Font* font, t_frameData* frameData, t_sceneController* sceneController);
+t_scene* createMainMenu(t_context* context);
 
 #endif

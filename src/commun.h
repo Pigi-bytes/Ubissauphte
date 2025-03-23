@@ -25,11 +25,6 @@
 #include "utils/fscene.h"
 #include "utils/objectManager.h"
 
-typedef struct {
-    SDL_bool PleinEcran;
-    SDL_bool FlagCommande;
-} t_option;
-
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 960
 

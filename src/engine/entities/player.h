@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 
+#include "../../context.h"
 #include "../../debug.h"
 #include "../../io/input.h"
 #include "enemy.h"
@@ -39,17 +40,6 @@ typedef struct {
     SDL_Texture* texture;
     SDL_Rect displayRect;
 } t_arme;
-
-typedef struct {
-    SDL_Scancode up;
-    SDL_Scancode down;
-    SDL_Scancode left;
-    SDL_Scancode right;
-    SDL_Scancode dash;
-    SDL_Scancode escape;
-    SDL_Scancode map;
-    SDL_Scancode interact;
-} t_control;
 
 typedef struct {
     t_entity entity;
