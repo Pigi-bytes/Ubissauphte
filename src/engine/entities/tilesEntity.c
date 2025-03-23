@@ -9,8 +9,11 @@ void initTileEntityBase(t_tileEntity* base, SDL_Texture* texture, SDL_Rect rect,
     base->entity.animationController->haveAnimation = SDL_FALSE;
     base->entity.debug = SDL_TRUE;
 
-    base->entity.useCircleCollision = SDL_FALSE;
-    base->entity.collisionRect = rect;
+    // Utiliser une collision circulaire au lieu d'une rectangulaire
+    base->entity.useCircleCollision = SDL_TRUE;
+    base->entity.collisionCircle.x = rect.x + rect.w / 2;
+    base->entity.collisionCircle.y = rect.y + rect.h / 2;
+    base->entity.collisionCircle.radius = rect.w / 2;  // Rayon basé sur la largeur de la tuile
 
     base->entity.physics.mass = 1.0;
     base->entity.physics.friction = 0.5;
@@ -52,8 +55,9 @@ t_tileEntity* createSpikeEntity(t_tileset* tileset, t_scene* scene) {
     spike->damage = 10;
     spike->isActive = SDL_TRUE;
 
-    spike->base.entity.physics.mass = 0;
-    spike->base.entity.physics.friction = 1.0;
+    // Masse à 0 pour entité immobile
+    spike->base.entity.physics.mass = INFINITY;
+    spike->base.entity.physics.friction = 0;
     spike->base.entity.physics.restitution = 0.0;
 
     spike->base.update = updateSpike;
@@ -76,9 +80,10 @@ t_tileEntity* createChestEntity(t_tileset* tileset, t_scene* scene) {
     chest->isOpen = SDL_FALSE;
     chest->playerInRange = SDL_FALSE;
 
-    chest->base.entity.physics.mass = 5.0;
-    chest->base.entity.physics.friction = 0.9;
-    chest->base.entity.physics.restitution = 0.1;
+    // Masse à 0 pour entité immobile
+    chest->base.entity.physics.mass = INFINITY;
+    chest->base.entity.physics.friction = 0;
+    chest->base.entity.physics.restitution = 0.0;
 
     chest->base.update = updateChest;
     chest->base.render = renderChest;
@@ -96,8 +101,8 @@ t_tileEntity* createBarrelEntity(t_tileset* tileset, t_scene* scene) {
     barrel->health = 50;
     barrel->isExploding = SDL_FALSE;
 
-    barrel->base.entity.physics.mass = 2.0;
-    barrel->base.entity.physics.friction = 0.7;
+    barrel->base.entity.physics.mass = INFINITY;
+    barrel->base.entity.physics.friction = 0;
     barrel->base.entity.physics.restitution = 0.3;
 
     barrel->base.update = updateBarrel;
@@ -129,13 +134,8 @@ void updateSpike(t_tileEntity* entity, float* deltaTime, t_grid* grid, t_objectM
 
     t_entity* player = getObject(entities, 0);  // Assuming player is at index 0
     if (player && spike->isActive) {
-        SDL_bool collision = SDL_FALSE;
-
-        if (entity->entity.useCircleCollision) {
-            collision = checkCircleCircleCollision(&entity->entity.collisionCircle, &player->collisionCircle, NULL);
-        } else {
-            collision = checkCircleRectCollision(&player->collisionCircle, &entity->entity.collisionRect, NULL);
-        }
+        SDL_bool collision = checkCircleCircleCollision(&entity->entity.collisionCircle,
+                                                        &player->collisionCircle, NULL);
 
         if (collision) {
             printf("Spike damaged player for %d points\n", spike->damage);
@@ -199,19 +199,17 @@ void replaceTileWithEntity(t_tile* tile, int x, int y, t_tileEntity* entity, t_o
     tile->entity.texture = floorTexture;
     tile->solide = SDL_FALSE;
 
-    if (entity->entity.useCircleCollision) {
-        entity->entity.collisionCircle.x = tileX + 8;
-        entity->entity.collisionCircle.y = tileY + 8;
-    } else {
-        entity->entity.collisionRect = (SDL_Rect){.x = tileX, .y = tileY, .h = 16, .w = 16};
-    }
+    // Toujours configurer la collision circulaire, puisque nous les utilisons maintenant pour toutes les entités
+    entity->entity.collisionCircle.x = tileX + 8;  // Centre X
+    entity->entity.collisionCircle.y = tileY + 8;  // Centre Y
+    entity->entity.collisionCircle.radius = 8;     // Rayon (moitié de la largeur de la tuile)
 
     entity->entity.displayRect.x = tileX;
     entity->entity.displayRect.y = tileY;
 
-    printf("Placing entity at tile (%d,%d) => coords (%d,%d)\n", x, y, tileX, tileY);
+    printf("Placing entity at tile (%d,%d) => coords (%d,%d) with circle collision\n", x, y, tileX, tileY);
 
-    addObject(entities, entity, getTypeIdByName(entities->registry, "ENTITY"));
+    addObject(entities, entity, getTypeIdByName(entities->registry, "TILE_ENTITY"));
 }
 
 void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* entities, uint8_t entityTypeId, t_scene* scene) {
