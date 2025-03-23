@@ -97,13 +97,19 @@ void generateMap(SDL_Rect *roomCoords, t_salle **listeRoom, int numberRoom, t_ma
 }
 
 void affichage(SDL_Renderer *renderer, t_mapAffichage *map) {
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     for (int i = 0; i < map->numRooms; i++) {
         SDL_RenderDrawRect(renderer, &map->rooms[i]);
     }
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     for (int i = 0; i < map->numLines; i++) {
         SDL_RenderDrawLine(renderer, map->lines[i].x1, map->lines[i].y1, map->lines[i].x2, map->lines[i].y2);
     }
+}
+
+void freeMapAffiche(void *elt) {
+    free((t_mapAffichage *)elt);
 }
