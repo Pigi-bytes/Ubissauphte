@@ -30,6 +30,7 @@ int main(int argc, char* argv[]) {
     contr->dash = SDL_SCANCODE_SPACE;
     contr->escape = SDL_SCANCODE_ESCAPE;
     contr->map = SDL_SCANCODE_P;
+    contr->interact = SDL_SCANCODE_E;
     t_scene* scene = createMainMenu(renderer, input, font, frameData, sceneController);
     t_scene* scene0 = createOptionMenu(renderer, input, font, frameData, window, option, contr, sceneController);
     t_scene* scene1 = createMainWord(renderer, input, font, frameData, contr, sceneController);

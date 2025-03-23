@@ -15,9 +15,9 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
 
     t_tileset* tileset = initTileset(renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
     t_tileset* playerTileSet = initTileset(renderer, 32, 32, 16, "assets/imgs/chevaliervisiereouverteidle12run34.bmp");
-    t_tileset* fantomTileSet = initTileset(renderer, 48, 16, 16, "assets/imgs/fantomeidle23un1232.bmp");
+    // t_tileset* fantomTileSet = initTileset(renderer, 48, 16, 16, "assets/imgs/fantomeidle23un1232.bmp");
     t_tileset* slimeTileSet = initTileset(renderer, 48, 16, 16, "assets/imgs/slimeidle12run1213.bmp");
-    t_tileset* crabeTileSet = initTileset(renderer, 80, 16, 16, "assets/imgs/crabeidle123232run416.bmp");
+    // t_tileset* crabeTileSet = initTileset(renderer, 80, 16, 16, "assets/imgs/crabeidle123232run416.bmp");
 
     SDL_Rect* rectcord = malloc(sizeof(SDL_Rect) * 10);
     for (int i = 0; i < 10; i++) {
@@ -44,6 +44,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
 
     t_objectManager* entities = initObjectManager(createTypeRegistry());
     const uint8_t ENTITY = registerType(entities->registry, NULL, "ENTITY");
+    registerType(entities->registry, NULL, "TILE_ENTITY");
 
     t_joueur* joueur = createPlayer(contr, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerTileSet);
 
@@ -163,7 +164,7 @@ t_scene* createMainWord(SDL_Renderer* renderer, t_input* input, TTF_Font* font, 
 
     sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, 0, FONCTION_PARAMS(&frameData->deltaTime, level, entities));
     sceneRegisterFunction(scene, ENEMY_TYPE, UPDATE, updateEnemyWrapper, 0, FONCTION_PARAMS(&frameData->deltaTime, level, entities));
-    sceneRegisterFunction(scene, TILE_ENTITY, UPDATE, updateTileEntityWrapper, 1, FONCTION_PARAMS(&frameData->deltaTime, level, entities));
+    sceneRegisterFunction(scene, TILE_ENTITY, UPDATE, updateTileEntityWrapper, 1, FONCTION_PARAMS(&frameData->deltaTime, level, entities, input));
 
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, 1, FONCTION_PARAMS(renderer));
 
