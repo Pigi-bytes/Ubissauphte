@@ -41,14 +41,20 @@ t_scene* createCommandeMenu(t_context* context) {
     sprintf(newTouche, "Commande Dash : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((context->control->dash))));
     t_text* textCommande5 = createTextOutline(context->renderer, newTouche, context->font, BLACK, WHITE, nb);
     t_fonctionParam* fonctionCommande5 = creerFonction(miseAjourCommande, NULL);
-    t_touche* touche5 = createTouche(textCommande5, GREEN, WHITE, creerRect(0.52f, 0.44f, 0.3f, 0.1f), fonctionCommande5, &context->control->dash, "Dash");
+    t_touche* touche5 = createTouche(textCommande5, GREEN, WHITE, creerRect(0.52f, 0.30f, 0.3f, 0.1f), fonctionCommande5, &context->control->dash, "Dash");
     addPamaretre(fonctionCommande5, FONCTION_PARAMS(touche5, context->renderer));
 
     sprintf(newTouche, "Commande Escape : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((context->control->escape))));
     t_text* textCommande6 = createTextOutline(context->renderer, newTouche, context->font, BLACK, WHITE, nb);
     t_fonctionParam* fonctionCommande6 = creerFonction(miseAjourCommande, NULL);
-    t_touche* touche6 = createTouche(textCommande6, GREEN, WHITE, creerRect(0.52f, 0.58f, 0.3f, 0.1f), fonctionCommande6, &context->control->escape, "Escape");
+    t_touche* touche6 = createTouche(textCommande6, GREEN, WHITE, creerRect(0.52f, 0.44f, 0.3f, 0.1f), fonctionCommande6, &context->control->escape, "Escape");
     addPamaretre(fonctionCommande6, FONCTION_PARAMS(touche6, context->renderer));
+
+    sprintf(newTouche, "Commande Map : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((context->control->map))));
+    t_text* textCommande7 = createTextOutline(context->renderer, newTouche, context->font, BLACK, WHITE, nb);
+    t_fonctionParam* fonctionCommande7 = creerFonction(miseAjourCommande, NULL);
+    t_touche* touche7 = createTouche(textCommande7, GREEN, WHITE, creerRect(0.52f, 0.58f, 0.3f, 0.1f), fonctionCommande7, &context->control->map, "map");
+    addPamaretre(fonctionCommande7, FONCTION_PARAMS(touche7, context->renderer));
 
     t_text* text = createText(context->renderer, "Commandes", context->font, GREEN);
     text->rect = creerRect((1 - 0.8f) / 2, 0.05f, 0.8f, 0.2f);
@@ -61,6 +67,7 @@ t_scene* createCommandeMenu(t_context* context) {
     ADD_OBJECT_TO_SCENE(scene, touche4, COMMANDE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, touche5, COMMANDE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, touche6, COMMANDE_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, touche7, COMMANDE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, NULL, FRAME_DISPLAY_TYPE);
 
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "Retour", context->font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.86f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(context->sceneController, "option"))), BUTTON_TYPE);
