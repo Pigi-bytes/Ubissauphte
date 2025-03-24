@@ -24,7 +24,7 @@ t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, t_
     slime->base.health = 100;  // Valeur par défaut
     slime->base.maxHealth = 100;
     slime->base.isInvincible = SDL_FALSE;
-    slime->base.invincibilityDuration = 1.0f;  // 1 seconde d'invincibilité
+    slime->base.invincibilityDuration = 0.3f;  // 1 seconde d'invincibilité
     slime->base.invincibilityTimer = initDeltaTimer();
     startDeltaTimer(slime->base.invincibilityTimer);
 
