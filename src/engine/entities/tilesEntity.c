@@ -294,7 +294,7 @@ void replaceTileWithEntity(t_tile* tile, int x, int y, t_tileEntity* entity, t_o
 
     printf("Placing entity at tile (%d,%d) => coords (%d,%d) with circle collision\n", x, y, tileX, tileY);
 
-    addObject(entities, entity, getTypeIdByName(entities->registry, "TILE_ENTITY"));
+    addObject(entities, entity, entityTypeId);
 }
 
 void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* entities, uint8_t entityTypeId, t_scene* scene) {
@@ -321,17 +321,17 @@ void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* enti
 
                     if (tileTexture == spikeTexture) {
                         t_tileEntity* spikeEntity = createSpikeEntity(tileset, scene);
-                        replaceTileWithEntity(tile, x, y, spikeEntity, entities, entityTypeId, floorTexture);
+                        replaceTileWithEntity(tile, x, y, spikeEntity, entities, getTypeIdByName(entities->registry, "SPIKE"), floorTexture);
                         ADD_OBJECT_TO_SCENE(scene, spikeEntity, entityTypeId);
                         spikeCount++;
                     } else if (tileTexture == chestTexture) {
                         t_tileEntity* chestEntity = createChestEntity(tileset, scene);
-                        replaceTileWithEntity(tile, x, y, chestEntity, entities, entityTypeId, floorTexture);
+                        replaceTileWithEntity(tile, x, y, chestEntity, entities, getTypeIdByName(entities->registry, "CHEST"), floorTexture);
                         ADD_OBJECT_TO_SCENE(scene, chestEntity, entityTypeId);
                         chestCount++;
                     } else if (tileTexture == barrelTexture) {
                         t_tileEntity* barrelEntity = createBarrelEntity(tileset, scene);
-                        replaceTileWithEntity(tile, x, y, barrelEntity, entities, entityTypeId, floorTexture);
+                        replaceTileWithEntity(tile, x, y, barrelEntity, entities, getTypeIdByName(entities->registry, "BARREL"), floorTexture);
                         ADD_OBJECT_TO_SCENE(scene, barrelEntity, entityTypeId);
                         barrelCount++;
                     }

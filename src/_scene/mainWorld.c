@@ -9,7 +9,7 @@ t_scene* createMainWord(t_context* context) {
     const uint8_t VIEWPORT_TYPE = registerType(registre, freeViewport, "viewport");
     const uint8_t MINIMAP_TYPE = registerType(registre, freeMinimap, "minimap");
     const uint8_t ENEMY_TYPE = registerType(registre, freeEnemy, "enemy");
-    const uint8_t TILE_ENTITY = registerType(registre, freeTileEntity, "ENTITY");
+    const uint8_t TILE_ENTITY = registerType(registre, freeTileEntity, "tile_entity");
 
     t_scene* scene = createScene(initObjectManager(registre), "main");
 
@@ -45,7 +45,9 @@ t_scene* createMainWord(t_context* context) {
     t_objectManager* entities = initObjectManager(createTypeRegistry());
     const uint8_t PLAYER = registerType(entities->registry, NULL, "PLAYER");
     const uint8_t ENEMY = registerType(entities->registry, NULL, "ENEMY");
-    registerType(entities->registry, NULL, "TILE_ENTITY");
+    registerType(entities->registry, NULL, "CHEST");
+    registerType(entities->registry, NULL, "SPIKE");
+    registerType(entities->registry, NULL, "BARREL");
 
     t_joueur* joueur = createPlayer(context->control, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerTileSet);
 
@@ -134,14 +136,14 @@ t_scene* createMainWord(t_context* context) {
     placeOnRandomTile(level, &joueur->entity, entities);
 
     t_enemy* enemy;
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 10; i++) {
         enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, scene);
         addObject(entities, &enemy->entity, ENEMY);
         placeOnRandomTile(level, &enemy->entity, entities);
         ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
     }
 
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 10; i++) {
         enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 32, 32}, slimeTileSet, scene);
         enemy->entity.physics.mass = 10;
         enemy->maxHealth = 300;

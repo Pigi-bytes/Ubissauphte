@@ -12,7 +12,7 @@ t_minimap* createMinimap(SDL_Renderer* renderer, int windowW, int windowH) {
 
     minimap->area = (SDL_Rect){
         windowW - minimap->size - minimap->margin,  // X
-        windowH - minimap->size - minimap->margin,  // Y
+        minimap->margin,                            // Y
         minimap->size,                              // Largeur
         minimap->size                               // Hauteur
     };
@@ -33,14 +33,14 @@ t_minimap* createMinimap(SDL_Renderer* renderer, int windowW, int windowH) {
 void resizeMinimap(SDL_Renderer* renderer, t_minimap* minimap, int* windowW, int* windowH) {
     minimap->area = (SDL_Rect){
         *windowW - minimap->size - minimap->margin,  // X
-        *windowH - minimap->size - minimap->margin,  // Y
+        minimap->margin,                             // Y
         minimap->size,                               // Largeur
         minimap->size                                // Hauteur
     };
 }
 
 void updateMinimap(t_minimap* minimap, t_camera* camera, SDL_Renderer* renderer, t_objectManager* entities, t_grid* grid) {
-    int transparency = 196;
+    int transparency = 110;
 
     float scaleX = (float)minimap->size / camera->levelW;
     float scaleY = (float)minimap->size / camera->levelH;
@@ -77,6 +77,12 @@ void updateMinimap(t_minimap* minimap, t_camera* camera, SDL_Renderer* renderer,
     }
 
     if (entities != NULL) {
+        uint8_t playerTypeId = getTypeIdByName(entities->registry, "PLAYER");
+        uint8_t enemyTypeId = getTypeIdByName(entities->registry, "ENEMY");
+        uint8_t spikeTypeId = getTypeIdByName(entities->registry, "SPIKE");
+        uint8_t chestTypeId = getTypeIdByName(entities->registry, "CHEST");
+        uint8_t barrelTypeId = getTypeIdByName(entities->registry, "BARREL");
+
         for (int i = 0; i < entities->count; i++) {
             void* entity = getObject(entities, i);
             if (entity == NULL) continue;
@@ -86,26 +92,37 @@ void updateMinimap(t_minimap* minimap, t_camera* camera, SDL_Renderer* renderer,
             SDL_FPoint entityPos = {0, 0};
             SDL_Color entityColor = {255, 255, 255, transparency};
 
-            if (typeId == getTypeIdByName(entities->registry, "PLAYER")) {
+            if (typeId == playerTypeId) {
                 t_joueur* player = (t_joueur*)entity;
                 entityPos.x = player->entity.collisionCircle.x;
                 entityPos.y = player->entity.collisionCircle.y;
-                entityColor = (SDL_Color){255, 0, 0, 255}; 
-                entitySize = 4;                            
-            } else if (typeId == getTypeIdByName(entities->registry, "ENEMY")) {
+                entityColor = (SDL_Color){255, 0, 0, 255};
+                entitySize = 4;
+            } else if (typeId == enemyTypeId) {
                 t_enemy* enemy = (t_enemy*)entity;
                 entityPos.x = enemy->entity.collisionCircle.x;
                 entityPos.y = enemy->entity.collisionCircle.y;
-                entityColor = (SDL_Color){255, 150, 0, 220};
-            } else if (typeId == getTypeIdByName(entities->registry, "TILE_ENTITY")) {
-                t_tileEntity* tileEntity = (t_tileEntity*)entity;
-                entityPos.x = tileEntity->entity.collisionCircle.x;
-                entityPos.y = tileEntity->entity.collisionCircle.y;
-                entityColor = (SDL_Color){50, 200, 50, 220};
+                entityColor = (SDL_Color){255, 100, 0, 220};
+            } else if (typeId == spikeTypeId) {
+                t_tileEntity* spike = (t_tileEntity*)entity;
+                entityPos.x = spike->entity.collisionCircle.x;
+                entityPos.y = spike->entity.collisionCircle.y;
+                entityColor = (SDL_Color){30, 144, 255, 220};
+                entitySize = 4;
+            } else if (typeId == chestTypeId) {
+                t_tileEntity* chest = (t_tileEntity*)entity;
+                entityPos.x = chest->entity.collisionCircle.x;
+                entityPos.y = chest->entity.collisionCircle.y;
+                entityColor = (SDL_Color){50, 205, 50, 220};
+            } else if (typeId == barrelTypeId) {
+                t_tileEntity* barrel = (t_tileEntity*)entity;
+                entityPos.x = barrel->entity.collisionCircle.x;
+                entityPos.y = barrel->entity.collisionCircle.y;
+                entityColor = (SDL_Color){255, 215, 0, 220};
             }
 
-            int minimapX = (int)(entityPos.x * scaleX);
-            int minimapY = (int)(entityPos.y * scaleY);
+            int minimapX = entityPos.x * scaleX;
+            int minimapY = entityPos.y * scaleY;
 
             SDL_SetRenderDrawColor(renderer, entityColor.r, entityColor.g, entityColor.b, entityColor.a);
             for (int dx = -entitySize; dx <= entitySize; dx++) {
@@ -121,14 +138,14 @@ void updateMinimap(t_minimap* minimap, t_camera* camera, SDL_Renderer* renderer,
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, transparency);
     SDL_RenderDrawRect(renderer, NULL);
 
-    SDL_Rect cameraView = {
-        (int)(camera->x * scaleX),
-        (int)(camera->y * scaleY),
-        (int)(camera->w * scaleX),
-        (int)(camera->h * scaleY)};
+    // SDL_Rect cameraView = {
+    //     (int)(camera->x * scaleX),
+    //     (int)(camera->y * scaleY),
+    //     (int)(camera->w * scaleX),
+    //     (int)(camera->h * scaleY)};
 
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, transparency);
-    SDL_RenderDrawRect(renderer, &cameraView);
+    // SDL_SetRenderDrawColor(renderer, 255, 0, 0, transparency);
+    // SDL_RenderDrawRect(renderer, &cameraView);
 
     // Revenir au renderer
     SDL_SetRenderTarget(renderer, NULL);

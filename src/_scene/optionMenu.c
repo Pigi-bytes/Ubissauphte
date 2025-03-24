@@ -17,7 +17,7 @@ void changementAffichage(t_fonctionParam* fonction) {
         updateTextOutline(text, renderer, "windowed", BLACK, WHITE, sizeOutline);
     }
     Uint32 fullscreenFlag = SDL_WINDOW_FULLSCREEN;
-    SDL_bool isFullscreen = SDL_GetWindowFlags(window) & fullscreenFlag;
+    int isFullscreen = SDL_GetWindowFlags(window) & fullscreenFlag;
     SDL_SetWindowFullscreen(window, isFullscreen ? 0 : fullscreenFlag);
 }
 

@@ -314,7 +314,7 @@ void updateAttack(t_joueur* player, float* deltaTime, t_objectManager* entities)
     int previousHits = player->attack.nbHits;
 
     for (int i = 1; i < entities->count; i++) {
-        if (getObjectTypeId(entities, i) == getTypeIdByName(entities->registry, "TILE_ENTITY")) continue;
+        if (getObjectTypeId(entities, i) != getTypeIdByName(entities->registry, "ENEMY")) continue;
         t_entity* enemy = getObject(entities, i);
 
         // Ignorer les entités nulles ou les ennemis déjà morts
