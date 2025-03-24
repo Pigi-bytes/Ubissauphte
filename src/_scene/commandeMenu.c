@@ -7,6 +7,7 @@ t_scene* createCommandeMenu(t_context* context) {
     const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
     const uint8_t COMMANDE_TYPE = registerType(registre, freeTouche, "commande");
     const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
+    const uint8_t FRAME_DISPLAY_TYPE = registerType(registre, freeFPSDisplay, "frameData");
 
     t_scene* scene = createScene(initObjectManager(registre), "commande");
 
@@ -60,15 +61,19 @@ t_scene* createCommandeMenu(t_context* context) {
     ADD_OBJECT_TO_SCENE(scene, touche4, COMMANDE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, touche5, COMMANDE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, touche6, COMMANDE_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, NULL, FRAME_DISPLAY_TYPE);
 
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "Retour", context->font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.86f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(context->sceneController, "option"))), BUTTON_TYPE);
 
     sceneRegisterFunction(scene, COMMANDE_TYPE, HANDLE_INPUT, handleInputToucheWrapper, 1, FONCTION_PARAMS(context->input, context->renderer));
     sceneRegisterFunction(scene, COMMANDE_TYPE, RENDER_UI, renderToucheWrapper, 1, FONCTION_PARAMS(context->renderer));
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, -1, FONCTION_PARAMS(context->fpsDisplay, context->frameData, context->renderer));
+
     sceneRegisterFunction(scene, TEXTE_TYPE, RENDER_UI, renderTextWrapper, 1, FONCTION_PARAMS(context->renderer));
     sceneRegisterFunction(scene, BUTTON_TYPE, RENDER_UI, renderButtonWrapper, 1, FONCTION_PARAMS(context->renderer));
 
     sceneRegisterFunction(scene, BUTTON_TYPE, HANDLE_INPUT, handleInputButtonWrapper, 1, FONCTION_PARAMS(context->input));
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, -1, FONCTION_PARAMS(context->renderer, context->fpsDisplay));
 
     return scene;
 }

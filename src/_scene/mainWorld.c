@@ -163,6 +163,7 @@ t_scene* createMainWord(t_context* context) {
     ADD_OBJECT_TO_SCENE(scene, camera, CAMERA_TYPE);
     ADD_OBJECT_TO_SCENE(scene, viewport, VIEWPORT_TYPE);
     ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, NULL, FRAME_DISPLAY_TYPE);
 
     processSpecialTiles(level, tileset, entities, TILE_ENTITY, scene);
 
@@ -173,7 +174,8 @@ t_scene* createMainWord(t_context* context) {
     sceneRegisterFunction(scene, ENEMY_TYPE, UPDATE, updateEnemyWrapper, 0, FONCTION_PARAMS(&context->frameData->deltaTime, level, entities));
     sceneRegisterFunction(scene, TILE_ENTITY, UPDATE, updateTileEntityWrapper, 1, FONCTION_PARAMS(&context->frameData->deltaTime, level, entities, context->input));
 
-    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, 1, FONCTION_PARAMS(context->renderer));
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, -1, FONCTION_PARAMS(context->fpsDisplay, context->frameData, context->renderer));
+    sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, -1, FONCTION_PARAMS(context->renderer, context->fpsDisplay));
 
     sceneRegisterFunction(scene, MINIMAP_TYPE, UPDATE, updateMinimapWrapper, 0, FONCTION_PARAMS(camera, context->renderer, entities, level));
     sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&joueur->entity.displayRect.x, &joueur->entity.displayRect.y, &context->frameData->deltaTime));
