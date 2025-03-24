@@ -30,8 +30,10 @@ typedef struct {
 
 typedef struct {
     t_tileEntity base;
-    int damage;
+    float damage;
     SDL_bool isActive;
+    SDL_bool messageShown;
+    SDL_bool playerTouching;
 } t_spike;
 
 typedef struct {

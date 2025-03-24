@@ -53,6 +53,55 @@ void freeTileEntity(void* object) {
     }
 }
 
+void updateSpike(t_tileEntity* entity, float* deltaTime, t_grid* grid, t_objectManager* entities, t_input* input) {
+    t_spike* spike = (t_spike*)entity;
+    t_joueur* player = (t_joueur*)getObject(entities, 0);
+
+    if (spike->isActive) {
+        uint8_t enemyTypeId = getTypeIdByName(entities->registry, "ENEMY");
+        SDL_bool enemiesRemaining = SDL_FALSE;
+
+        for (int i = 0; i < entities->count; i++) {
+            void* obj = getObject(entities, i);
+            if (obj && getObjectTypeId(entities, i) == enemyTypeId) {
+                enemiesRemaining = SDL_TRUE;
+                break;
+            }
+        }
+
+        if (!enemiesRemaining) {
+            spike->isActive = SDL_FALSE;
+            entity->entity.useCircleCollision = SDL_FALSE;
+            printf("Les pièges se désactivent, Vous pouvez passer à travers.\n");
+        }
+    }
+
+    SDL_bool playerTouchingNow = checkCircleCircleCollision(&entity->entity.collisionCircle, &player->entity.collisionCircle, NULL);
+
+    if (playerTouchingNow) {
+        if (spike->isActive) {
+            printf("Spike damaged player for %.1f points\n", spike->damage);
+        } else if (!spike->messageShown) {
+            printf("*WHOOSH* Teleportation");
+            spike->messageShown = SDL_TRUE;
+        }
+    } else {
+        spike->playerTouching = SDL_FALSE;
+    }
+
+    spike->playerTouching = playerTouchingNow;
+    updatePhysicEntity(&entity->entity, deltaTime, grid, entities);
+}
+void renderSpike(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera) {
+    t_spike* spike = (t_spike*)entity;
+
+    if (!spike->isActive) {
+        // Animation
+    }
+
+    renderEntity(renderer, &entity->entity, camera);
+}
+
 t_tileEntity* createSpikeEntity(t_tileset* tileset, t_scene* scene) {
     t_spike* spike = malloc(sizeof(t_spike));
     memset(spike, 0, sizeof(t_spike));
@@ -62,6 +111,8 @@ t_tileEntity* createSpikeEntity(t_tileset* tileset, t_scene* scene) {
 
     spike->damage = 10;
     spike->isActive = SDL_TRUE;
+    spike->messageShown = SDL_FALSE;
+    spike->playerTouching = SDL_FALSE;
 
     spike->base.update = updateSpike;
     spike->base.render = renderSpike;
@@ -145,21 +196,6 @@ void updateChest(t_tileEntity* entity, float* deltaTime, t_grid* grid, t_objectM
     updatePhysicEntity(&entity->entity, deltaTime, grid, entities);
 }
 
-void updateSpike(t_tileEntity* entity, float* deltaTime, t_grid* grid, t_objectManager* entities, t_input* input) {
-    t_spike* spike = (t_spike*)entity;
-
-    t_entity* player = getObject(entities, 0);  // Assuming player is at index 0
-    if (player && spike->isActive) {
-        SDL_bool collision = checkCircleCircleCollision(&entity->entity.collisionCircle, &player->collisionCircle, NULL);
-
-        if (collision) {
-            printf("Spike damaged player for %d points\n", spike->damage);
-        }
-    }
-
-    updatePhysicEntity(&entity->entity, deltaTime, grid, entities);
-}
-
 void updateBarrel(t_tileEntity* entity, float* deltaTime, t_grid* grid, t_objectManager* entities, t_input* input) {
     t_barrel* barrel = (t_barrel*)entity;
 
@@ -205,29 +241,16 @@ void renderChest(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera)
     }
 }
 
-void renderSpike(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera) {
-    t_spike* spike = (t_spike*)entity;
-
-    if (!spike->isActive) {
-    }
-
-    renderEntity(renderer, &entity->entity, camera);
-}
-
 void renderBarrel(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera) {
     t_barrel* barrel = (t_barrel*)entity;
 
     if (barrel->isExploding) {
-        // Get screen position
         SDL_FPoint screenPos = {entity->entity.collisionCircle.x, entity->entity.collisionCircle.y};
 
-        // Draw wooden debris effect
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
-        // Small splinters/fragments (brown)
-        SDL_SetRenderDrawColor(renderer, 139, 69, 19, 200);  // Darker wood color
+        SDL_SetRenderDrawColor(renderer, 139, 69, 19, 200); 
 
-        // Draw some random wooden fragments flying outward
         const int NUM_FRAGMENTS = 12;
         for (int i = 0; i < NUM_FRAGMENTS; i++) {
             float angle = (i * (2 * M_PI / NUM_FRAGMENTS));
@@ -241,13 +264,11 @@ void renderBarrel(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera
             SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
         }
 
-        // Inner dust cloud (light brown/beige)
-        SDL_SetRenderDrawColor(renderer, 210, 180, 140, 120);  // Light wood dust color
+        SDL_SetRenderDrawColor(renderer, 210, 180, 140, 120);
         int dustRadius = 12;
         for (int w = -dustRadius; w <= dustRadius; w++) {
             for (int h = -dustRadius; h <= dustRadius; h++) {
                 if (w * w + h * h <= dustRadius * dustRadius) {
-                    // Only draw some points for a more sparse, dust-like effect
                     if ((w + h) % 3 == 0) {
                         SDL_RenderDrawPoint(renderer, screenPos.x + w, screenPos.y + h);
                     }
@@ -255,8 +276,7 @@ void renderBarrel(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera
             }
         }
 
-        // Draw a few larger wood chunks
-        SDL_SetRenderDrawColor(renderer, 160, 82, 45, 230);  // Medium wood color
+        SDL_SetRenderDrawColor(renderer, 160, 82, 45, 230);
         const int NUM_CHUNKS = 6;
         for (int i = 0; i < NUM_CHUNKS; i++) {
             float angle = (i * (2 * M_PI / NUM_CHUNKS)) + (M_PI / NUM_CHUNKS);
@@ -265,7 +285,6 @@ void renderBarrel(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera
             int x = screenPos.x + cosf(angle) * distance;
             int y = screenPos.y + sinf(angle) * distance;
 
-            // Draw small rectangles representing wood chunks
             SDL_Rect chunk = {x - 2, y - 2, 3 + (i % 3), 3 + (i % 2)};
             SDL_RenderFillRect(renderer, &chunk);
         }
@@ -284,10 +303,9 @@ void replaceTileWithEntity(t_tile* tile, int x, int y, t_tileEntity* entity, t_o
     tile->entity.texture = floorTexture;
     tile->solide = SDL_FALSE;
 
-    // Toujours configurer la collision circulaire, puisque nous les utilisons maintenant pour toutes les entités
-    entity->entity.collisionCircle.x = tileX + 8;  // Centre X
-    entity->entity.collisionCircle.y = tileY + 8;  // Centre Y
-    entity->entity.collisionCircle.radius = 8;     // Rayon (moitié de la largeur de la tuile)
+    entity->entity.collisionCircle.x = tileX + 8;
+    entity->entity.collisionCircle.y = tileY + 8;
+    entity->entity.collisionCircle.radius = 8;
 
     entity->entity.displayRect.x = tileX;
     entity->entity.displayRect.y = tileY;
