@@ -1,6 +1,26 @@
 #include "mainWorld.h"
 
-t_scene* createMainWord(t_context* context) {
+void generateSalle(t_salle** salle, int nbSalle, t_context* context, t_joueur** joueur) {
+    for (int i = 0; i < nbSalle; i++) {
+        salle[i]->scene = createMainWord(context, salle[i], joueur);
+        addScene(context->sceneController, salle[i]->scene);
+    }
+}
+
+void CreateNiveau(t_context* context, int nbSalle, t_joueur** joueur) {
+    SDL_Rect* rectcord = malloc(sizeof(SDL_Rect) * nbSalle);
+    for (int i = 0; i < nbSalle; i++) {
+        rectcord[i].x = 1;
+        rectcord[i].y = 1;
+        rectcord[i].w = 1;
+        rectcord[i].h = 1;
+    }
+    t_salle** salle = genMap(nbSalle, rectcord);
+    generateSalle(salle, nbSalle, context, joueur);
+    addScene(context->sceneController, createMapWord(context, salle, rectcord, *joueur));
+}
+
+t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player) {
     t_typeRegistry* registre = createTypeRegistry();
     const uint8_t GRID_TYPE = registerType(registre, freeGrid, "Grid");
     const uint8_t PLAYER_TYPE = registerType(registre, freePlayer, "player");
@@ -12,35 +32,13 @@ t_scene* createMainWord(t_context* context) {
     const uint8_t TILE_ENTITY = registerType(registre, freeTileEntity, "tile_entity");
 
     t_scene* scene = createScene(initObjectManager(registre), "main");
-
     t_tileset* tileset = initTileset(context->renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
     t_tileset* playerTileSet = initTileset(context->renderer, 32, 32, 16, "assets/imgs/chevaliervisiereouverteidle12run34.bmp");
     // t_tileset* fantomTileSet = initTileset(context->renderer, 48, 16, 16, "assets/imgs/fantomeidle23un1232.bmp");
     t_tileset* slimeTileSet = initTileset(context->renderer, 48, 16, 16, "assets/imgs/slimeidle12run1213.bmp");
     // t_tileset* crabeTileSet = initTileset(context->renderer, 80, 16, 16, "assets/imgs/crabeidle123232run416.bmp");
 
-    SDL_Rect* rectcord = malloc(sizeof(SDL_Rect) * 10);
-    for (int i = 0; i < 10; i++) {
-        rectcord[i].x = 1;
-        rectcord[i].y = 1;
-        rectcord[i].w = 1;
-        rectcord[i].h = 1;
-    }
-    t_salle** salle = genMap(10, rectcord);
     // addScene(context->sceneController, createMapWord(context->renderer, salle, rectcord));
-
-    t_grille* grille[10];
-    for (int i = 0; i < 10; i++) {
-        grille[i] = geneRoom(salle[i]);
-    }
-
-    t_grid* level = loadMap(grille[0]->nom, tileset);
-    for (int i = 0; i < 10; i++) {
-        freeGrille(grille[i]);
-    }
-
-    int levelWidth = level->width * tileset->tileSize;
-    int levelHeight = level->height * tileset->tileSize;
 
     t_objectManager* entities = initObjectManager(createTypeRegistry());
     const uint8_t PLAYER = registerType(entities->registry, NULL, "PLAYER");
@@ -49,12 +47,16 @@ t_scene* createMainWord(t_context* context) {
     registerType(entities->registry, NULL, "SPIKE");
     registerType(entities->registry, NULL, "BARREL");
 
-    t_joueur* joueur = createPlayer(context->control, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerTileSet);
+    t_grille* grille = geneRoom(salle);
+    t_grid* level = loadMap(grille->nom, tileset);
+    int levelWidth = level->width * tileset->tileSize;
+    int levelHeight = level->height * tileset->tileSize;
+    free(grille);
+
+    t_joueur* joueur = createPlayer((*player)->control, (*player)->entity.texture, (*player)->entity.displayRect, playerTileSet);
 
     joueur->weaponCount = 0;
     joueur->currentWeaponIndex = 0;
-
-    addScene(context->sceneController, createMapWord(context, salle, rectcord, joueur));
 
     // Création des armes avec statistiques équilibrées
     t_arme* dague = malloc(sizeof(t_arme));
