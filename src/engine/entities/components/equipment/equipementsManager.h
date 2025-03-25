@@ -3,10 +3,10 @@
 
 #define MAX_ITEM_NAME 64
 
-#include "../../../debug.h"
-#include "../../../io/fichierLoader.h"
-#include "../../../utils/fonctionManager.h"
-#include "../../../utils/objectManager.h"
+#include "../../../../debug.h"
+#include "../../../../io/fichierLoader.h"
+#include "../../../../utils/fonctionManager.h"
+#include "../../../../utils/objectManager.h"
 
 typedef enum {
     ITEM_FLAG_STACKABLE = 1 << 0,
