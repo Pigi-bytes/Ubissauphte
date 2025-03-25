@@ -7,6 +7,7 @@
 #include <time.h>
 
 #include "../../debug.h"
+#include "../../utils/fscene.h"
 
 typedef struct t_salle {
     int ID;                  // ID/Numéro de la salle
@@ -14,6 +15,7 @@ typedef struct t_salle {
     struct t_salle *gauche;  // Porte gauche
     struct t_salle *haut;    // Porte haut
     struct t_salle *bas;     // Porte bas
+    t_scene *scene;
 } t_salle;
 
 t_salle *initRoom();

@@ -2,6 +2,7 @@
 #define COMMUN_H
 
 #include "color.h"
+#include "context.h"
 #include "debug.h"
 #include "engine/core/camera.h"
 #include "engine/core/frame.h"
@@ -10,6 +11,7 @@
 #include "engine/entities/player.h"
 #include "engine/entities/tiles.h"
 #include "engine/world/generationSalle/geneRoom.h"
+#include "engine/world/genmap.h"
 #include "io/audioManager.h"
 #include "io/imageLoader.h"
 #include "io/input.h"

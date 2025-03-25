@@ -89,6 +89,7 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
                     roomList[i] = newRoom;
                 }
             }
+            currentRoom->scene = NULL;
         } while (!newRoom);  // newRoom point sur NULL si on genere pas -> on enleve la variable de control
     }
 

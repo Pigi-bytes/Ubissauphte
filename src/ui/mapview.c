@@ -1,9 +1,4 @@
 #include "mapview.h"
-
-#include <SDL2/SDL.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 void XYMinMax(int *zoneAffichage, SDL_Rect *roomCoords, int numberRoom) {
     zoneAffichage[0] = roomCoords[0].x;
     zoneAffichage[1] = roomCoords[0].x;
@@ -100,6 +95,7 @@ void affichage(SDL_Renderer *renderer, t_mapAffichage *map, t_joueur *player) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+
     for (int i = 0; i < map->numRooms; i++) {
         SDL_RenderDrawRect(renderer, &map->rooms[i]);
         if (i == player->indexCurrentRoom) {

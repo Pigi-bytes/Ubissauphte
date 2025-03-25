@@ -2,7 +2,6 @@
 #define OPTION_MENU_H
 
 #include "../commun.h"
-#include "../context.h"
 #include "../ui/slider.h"
 
 void changementAffichage(t_fonctionParam* fonction);
