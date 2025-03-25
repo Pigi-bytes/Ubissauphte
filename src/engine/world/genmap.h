@@ -8,6 +8,8 @@
 
 #include "../../debug.h"
 #include "../../utils/fscene.h"
+#include "../../utils/objectManager.h"
+#include "../entities/tiles.h"
 
 typedef struct t_salle {
     int ID;                  // ID/Numéro de la salle
@@ -16,6 +18,8 @@ typedef struct t_salle {
     struct t_salle *haut;    // Porte haut
     struct t_salle *bas;     // Porte bas
     t_scene *scene;
+    t_grid *grille;
+    t_objectManager *entities;
 } t_salle;
 
 t_salle *initRoom();

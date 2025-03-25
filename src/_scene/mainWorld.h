@@ -3,7 +3,7 @@
 #include "../commun.h"
 #include "../engine/entities/tilesEntity.h"
 
-t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player);
+t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t_grid** level);
 
 t_scene* createMapWord(t_context* context, t_salle** salle, SDL_Rect* rectcord, t_joueur* player);
 void CreateNiveau(t_context* context, int nbSalle, t_joueur** joueur);
