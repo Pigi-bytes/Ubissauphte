@@ -199,7 +199,7 @@ void afficherDescription(SDL_Renderer *renderer, SDL_Rect rect, t_item *item, TT
     }
 }
 
-void afficherInventaire(SDL_Renderer *renderer, t_input *input, t_character *c, t_item *item) {
+void afficherInventaire(SDL_Renderer *renderer, t_input *input, t_character *c, t_item **itemListe, t_item *item) {
     initTextEngine();
 
     SDL_Color color = {
@@ -268,8 +268,8 @@ void afficherInventaire(SDL_Renderer *renderer, t_input *input, t_character *c, 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     TTF_Font *font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", statsPlayer.h * statsPlayer.w * 0.0002);
 
-    SDL_Texture *perso = c->texture;
-    SDL_RenderCopy(renderer, perso, NULL, &casePerso);
+    // SDL_Texture *perso =;
+    SDL_RenderCopy(renderer, c->texture, NULL, &casePerso);
 
     SDL_RenderDrawRect(renderer, &casePerso);
     SDL_RenderDrawRect(renderer, &caseArme);
@@ -325,6 +325,7 @@ void afficherInventaire(SDL_Renderer *renderer, t_input *input, t_character *c, 
         itemRect.y -= scrollOffset;
 
         if (itemRect.y + itemRect.h > scrollViewport.y && itemRect.y < scrollViewport.y + scrollViewport.h) {
+            SDL_RenderCopy(renderer, itemListe[i]->texture, NULL, &itemRect);
             SDL_RenderDrawRect(renderer, &itemRect);
         }
     }

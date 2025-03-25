@@ -9,7 +9,7 @@ int main() {
     t_tileset* tileset = initTileset(renderer, 192, 240, 16, "./assets/imgs/tileMapDungeon.bmp");
     t_character* c = createCharactere(tileset, 98);
     t_item* item = malloc(sizeof(t_item));
-
+    t_item* itemListe[24];
     t_inventaire* inv = createInventaire();
 
     strcpy(item->name, "Marteau de thor");
@@ -21,12 +21,18 @@ int main() {
     item->stats.mana.additive = 15;
     item->stats.manaMax.additive = 20;
     item->stats.speed.additive = 60;
+    item->indiceTexture = 102;
+    item->texture = (SDL_Texture*)getObject(tileset->textureTiles, item->indiceTexture);
     strcpy(item->description, "\nça c'est de l'arme \nguts weapon\nbla bla bla\navec ça tu gagnes\nà coup sur");
+
+    for (int i = 0; i < 24; i++) {
+        itemListe[i] = item;
+    }
 
     while (!input->quit) {
         updateInput(input);
 
-        afficherInventaire(renderer, input, c, item);
+        afficherInventaire(renderer, input, c, itemListe, item);
 
         SDL_RenderPresent(renderer);
     }
