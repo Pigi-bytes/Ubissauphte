@@ -73,6 +73,7 @@ void updateSpike(t_tileEntity* entity, float* deltaTime, t_grid* grid, t_objectM
             spike->isActive = SDL_FALSE;
             entity->entity.useCircleCollision = SDL_FALSE;
             printf("Les pièges se désactivent, Vous pouvez passer à travers.\n");
+            setAnimation(spike->base.entity.animationController, "bas");
         }
     }
 
@@ -92,6 +93,7 @@ void updateSpike(t_tileEntity* entity, float* deltaTime, t_grid* grid, t_objectM
     spike->playerTouching = playerTouchingNow;
     updatePhysicEntity(&entity->entity, deltaTime, grid, entities);
 }
+
 void renderSpike(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera) {
     t_spike* spike = (t_spike*)entity;
 
@@ -107,7 +109,10 @@ t_tileEntity* createSpikeEntity(t_tileset* tileset, t_scene* scene) {
     memset(spike, 0, sizeof(t_spike));
 
     initTileEntityBase(&spike->base, getObject(tileset->textureTiles, 42), (SDL_Rect){0, 0, 16, 16}, scene);
-    spike->base.entity.animationController->haveAnimation = SDL_FALSE;
+
+    addAnimation(spike->base.entity.animationController, createAnimation(tileset, (int[]){42}, 1, 240, SDL_TRUE, "haut"));
+    addAnimation(spike->base.entity.animationController, createAnimation(tileset, (int[]){42, 137, 137, 136}, 4, 600, SDL_FALSE, "bas"));
+    setAnimation(spike->base.entity.animationController, "haut");
 
     spike->damage = 10;
     spike->isActive = SDL_TRUE;
@@ -125,7 +130,6 @@ t_tileEntity* createChestEntity(t_tileset* tileset, t_scene* scene) {
     memset(chest, 0, sizeof(t_chest));
 
     initTileEntityBase(&chest->base, getObject(tileset->textureTiles, 90), (SDL_Rect){0, 0, 16, 16}, scene);
-    chest->base.entity.animationController->haveAnimation = SDL_FALSE;
 
     addAnimation(chest->base.entity.animationController, createAnimation(tileset, (int[]){90}, 1, 240, SDL_TRUE, "close"));
     addAnimation(chest->base.entity.animationController, createAnimation(tileset, (int[]){90, 91, 92}, 3, 240, SDL_FALSE, "open"));
@@ -249,7 +253,7 @@ void renderBarrel(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera
 
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
-        SDL_SetRenderDrawColor(renderer, 139, 69, 19, 200); 
+        SDL_SetRenderDrawColor(renderer, 139, 69, 19, 200);
 
         const int NUM_FRAGMENTS = 12;
         for (int i = 0; i < NUM_FRAGMENTS; i++) {
