@@ -304,9 +304,10 @@ t_inventaire* createInventaire() {
     return inv;
 }
 
-t_character* createCharactere() {
+t_character* createCharactere(t_tileset* tileset, int indice_texture) {
     t_character* charactere = (t_character*)malloc(sizeof(t_character));
-
+    charactere->texture = (SDL_Texture*)getObject(tileset->textureTiles, indice_texture);
+    
     charactere->inventaire = createInventaire();
     charactere->baseStats.health.additive = 10;
     charactere->baseStats.health.multiplicative = 1;

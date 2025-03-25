@@ -75,6 +75,8 @@ typedef struct {
     t_equipementSlotType equipement[TOTAL_EQUIPMENT_SLOTS];
     t_inventaire* inventaire;
 
+    SDL_Texture* texture;
+
     int level;
     int experience;
     int gold;
@@ -93,7 +95,7 @@ void equiperEquipement(t_character** c, int inventoryIndex, equipementSlotType s
 void desequiperEquipement(t_character** c, equipementSlotType slot);
 
 // Gestion personnage
-t_character* createCharactere();
+t_character* createCharactere(t_tileset* tileset, int indice_texture);
 void charactereFree(t_character* c);
 
 // Gestion Interaction
