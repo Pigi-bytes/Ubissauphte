@@ -2,11 +2,9 @@
 
 void generateSalle(t_salle** salle, int nbSalle, t_context* context, t_joueur** joueur) {
     for (int i = 0; i < nbSalle; i++) {
-        salle[i]->scene = createMainWord(context, salle[i], joueur, &(salle[i]->grille));
-        printf("%d\n", salle[i]->grille->width);
+        salle[i]->scene = createMainWord(context, salle[i], joueur, salle[i]->grille);
         addScene(context->sceneController, salle[i]->scene);
     }
-    placeOnRandomTile(salle[0]->grille, &(*joueur)->entity, salle[0]->entities);
 }
 
 void CreateNiveau(t_context* context, int nbSalle, t_joueur** joueur) {
@@ -42,20 +40,102 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
 
     // addScene(context->sceneController, createMapWord(context->renderer, salle, rectcord));
 
-    salle->entities = initObjectManager(createTypeRegistry());
-    const uint8_t PLAYER = registerType(salle->entities->registry, NULL, "PLAYER");
-    const uint8_t ENEMY = registerType(salle->entities->registry, NULL, "ENEMY");
-    registerType(salle->entities->registry, NULL, "CHEST");
-    registerType(salle->entities->registry, NULL, "SPIKE");
-    registerType(salle->entities->registry, NULL, "BARREL");
+    t_objectManager* entities = initObjectManager(createTypeRegistry());
+    const uint8_t PLAYER = registerType(entities->registry, NULL, "PLAYER");
+    const uint8_t ENEMY = registerType(entities->registry, NULL, "ENEMY");
+    registerType(entities->registry, NULL, "CHEST");
+    registerType(entities->registry, NULL, "SPIKE");
+    registerType(entities->registry, NULL, "BARREL");
 
     t_grille* grille = geneRoom(salle);
-    (*level) = loadMap(grille->nom, tileset);
+    t_grid* level = loadMap(grille->nom, tileset);
     int levelWidth = (*level)->width * tileset->tileSize;
     int levelHeight = (*level)->height * tileset->tileSize;
     free(grille);
 
-    addObject(salle->entities, &(*player)->entity, PLAYER);
+    t_joueur* joueur = createPlayer((*player)->control, (*player)->entity.texture, (*player)->entity.displayRect, playerTileSet);
+
+    joueur->weaponCount = 0;
+    joueur->currentWeaponIndex = 0;
+
+    // Création des armes avec statistiques équilibrées
+    t_arme* dague = malloc(sizeof(t_arme));
+    *dague = (t_arme){
+        .mass = 1.5f,             // Très légère pour des coups rapides
+        .damage = 12.0f,          // Dégâts modérés
+        .range = 20.0f,           // Courte portée
+        .angleAttack = M_PI / 4,  // Arc d'attaque étroit (45°)
+        .attackDuration = 0.15f,  // Animation très rapide
+        .attackCooldown = 0.35f   // Récupération très rapide
+    };
+    dague->texture = getObject(tileset->textureTiles, 104);
+    dague->displayRect = (SDL_Rect){0, 0, 16, 16};
+
+    t_arme* epee = malloc(sizeof(t_arme));
+    *epee = (t_arme){
+        .mass = 3.0f,             // Masse moyenne
+        .damage = 20.0f,          // Dégâts moyens
+        .range = 30.0f,           // Portée moyenne
+        .angleAttack = M_PI / 2,  // Arc d'attaque de 90°
+        .attackDuration = 0.28f,  // Animation moyenne
+        .attackCooldown = 0.7f    // Récupération moyenne
+    };
+    epee->texture = getObject(tileset->textureTiles, 105);
+    epee->displayRect = (SDL_Rect){0, 0, 16, 16};
+
+    t_arme* hache = malloc(sizeof(t_arme));
+    *hache = (t_arme){
+        .mass = 15.0f,            // Lourde
+        .damage = 30.0f,          // Dégâts élevés
+        .range = 28.0f,           // Portée moyenne
+        .angleAttack = 2 * M_PI,  // Large arc d'attaque (120°)
+        .attackDuration = 0.45f,  // Animation lente
+        .attackCooldown = 1.2f    // Longue récupération
+    };
+    hache->texture = getObject(tileset->textureTiles, 119);
+    hache->displayRect = (SDL_Rect){0, 0, 16, 16};
+
+    t_arme* lance = malloc(sizeof(t_arme));
+    *lance = (t_arme){
+        .mass = 5.0f,             // Masse moyenne-légère
+        .damage = 18.0f,          // Dégâts moyens-faibles
+        .range = 40.0f,           // Longue portée
+        .angleAttack = M_PI / 5,  // Arc d'attaque très étroit (36°)
+        .attackDuration = 0.3f,   // Animation moyenne
+        .attackCooldown = 0.65f   // Récupération moyenne
+    };
+    lance->texture = getObject(tileset->textureTiles, 106);
+    lance->displayRect = (SDL_Rect){0, 0, 16, 16};
+
+    t_arme* marteau = malloc(sizeof(t_arme));
+    *marteau = (t_arme){
+        .mass = 8.0f,               // Très lourd
+        .damage = 40.0f,            // Dégâts très élevés
+        .range = 40.0f,             // Portée moyenne-courte
+        .angleAttack = M_PI / 1.5,  // Arc d'attaque de 90°
+        .attackDuration = 0.3f,     // Animation très lente
+        .attackCooldown = 1.5f      // Récupération très lente
+    };
+    marteau->texture = getObject(tileset->textureTiles, 132);
+    marteau->displayRect = (SDL_Rect){0, 0, 16, 16};
+
+    // Ajouter les armes à l'inventaire du joueur
+    joueur->weapons[0] = epee;     // Première arme (indice 0)
+    joueur->weapons[1] = dague;    // Deuxième arme (indice 1)
+    joueur->weapons[2] = hache;    // Troisième arme (indice 2)
+    joueur->weapons[3] = lance;    // Quatrième arme (indice 3)
+    joueur->weapons[4] = marteau;  // Cinquième arme (indice 4)
+
+    joueur->weaponCount = 5;  // Nombre total d'armes
+
+    // Définir l'arme actuelle
+    joueur->currentWeaponIndex = 0;
+    joueur->currentWeapon = joueur->weapons[joueur->currentWeaponIndex];
+
+    joueur->indexCurrentRoom = 0;
+
+    addObject(entities, &joueur->entity, PLAYER);
+    placeOnRandomTile(level, &joueur->entity, entities);
 
     t_enemy* enemy;
     for (int i = 0; i < 3; i++) {
