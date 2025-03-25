@@ -12,5 +12,6 @@ typedef struct {
 
 SDL_bool checkCircleRectCollision(t_circle* circle, SDL_Rect* rect, t_collisionData* out);
 SDL_bool checkCircleCircleCollision(t_circle* a, t_circle* b, t_collisionData* out);
+SDL_bool cercleInSector(SDL_FPoint target, float target_radius, SDL_FPoint origin, float currentAngle, float range, float arc);
 
 #endif

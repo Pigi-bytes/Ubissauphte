@@ -96,47 +96,98 @@ void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect, t_scene* 
 
     base->flashTimer = initDeltaTimer();  // Timer pour la barre de vie
     startDeltaTimer(base->flashTimer);    // Timer pour la barre de vie
-    base->flashDuration = 0.15f;
+    base->flashDuration = 0.17f;
+
+    base->isDead = SDL_FALSE;
 
     // Associer la scène
     base->entity.currentScene = scene;
 }
 
+void renderHealthBar(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
+    float healthRatio = (float)enemy->health / (float)enemy->maxHealth;
+    SDL_Rect enemyPos = enemy->entity.displayRect;
+
+    float barWidth = enemyPos.w * 0.8f;
+    float barHeight = 3.0f;
+    float barX = enemyPos.x + (enemyPos.w - barWidth) / 2;
+    float barY = enemyPos.y - 12.0f;
+    float fillWidth = barWidth * healthRatio;
+
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 60);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){barX, barY + 1, barWidth, barHeight});
+
+    SDL_SetRenderDrawColor(renderer, 20, 20, 20, 180);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){barX, barY, barWidth, barHeight});
+
+    float pulseIntensity = 0.85f + (sinf(SDL_GetTicks() * 0.005f) * 0.15f);
+
+    Uint8 r = 0, g = 0, b = 0;
+    if (healthRatio > 0.75f) {
+        // Bleu/turquoise -> vert
+        r = 0;
+        g = 255;
+        b = (Uint8)(255 * (1.0f - (healthRatio - 0.75f) * 4.0f));
+    } else if (healthRatio > 0.5f) {
+        // Vert -> jaune
+        r = (Uint8)(255 * (healthRatio - 0.5f) * 4.0f);
+        g = 255;
+        b = 0;
+    } else if (healthRatio > 0.25f) {
+        // Jaune -> orange
+        r = 255;
+        g = (Uint8)(255 * (healthRatio - 0.25f) * 4.0f);
+        b = 0;
+    } else {
+        // Orange -> rouge
+        r = 255;
+        g = (Uint8)(128 * healthRatio * 4.0f);
+        b = 0;
+    }
+
+    SDL_SetRenderDrawColor(renderer, (Uint8)(r * pulseIntensity), (Uint8)(g * pulseIntensity), (Uint8)(b * pulseIntensity), 255);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){barX, barY, fillWidth, barHeight});
+
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
+}
+
 void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
+    if (enemy->isDead) {
+        return;
+    }
+
     if (enemy->isFlashing) {
         // Effet blanc pur - tout en blanc sans aucune autre couleur
         SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);
         // Utiliser le mode additif pour assurer une luminosité maximale
         SDL_SetTextureBlendMode(enemy->entity.texture, SDL_BLENDMODE_ADD);
     } else {
-        // Rétablir le mode de fusion normal et les couleurs normales pour les autres états
         SDL_SetTextureBlendMode(enemy->entity.texture, SDL_BLENDMODE_BLEND);
-        SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);  // Couleur normale
+        SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);
     }
 
-    renderEntity(renderer, &enemy->entity, camera);
+    if (!(enemy->isInvincible && fmodf(getDeltaTimer(enemy->invincibilityTimer), 0.1) < 0.05)) {
+        renderEntity(renderer, &enemy->entity, camera);
+    }
 
     // Le reste du code pour la barre de vie reste inchangé
     if (enemy->showHealthBar) {
-        SDL_Rect enemyPos = enemy->entity.displayRect;
-        float healthRatio = (float)enemy->health / (float)enemy->maxHealth;
-
-        float barWidth = enemy->entity.displayRect.w;
-        float barHeight = 5.0f;
-        float barX = enemyPos.x;
-        float barY = enemyPos.y - 20.0f;
-
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-        SDL_Rect backgroundRect = {barX, barY, barWidth, barHeight};
-        SDL_RenderFillRect(renderer, &backgroundRect);
-
-        SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-        SDL_Rect healthRect = {barX, barY, barWidth * healthRatio, barHeight};
-        SDL_RenderFillRect(renderer, &healthRect);
+        renderHealthBar(renderer, enemy, camera);
     }
 }
 
 void updateEnemy(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities) {
+    if (enemy->isDead) {
+        for (int i = 0; i < entities->count; i++) {
+            if (getObject(entities, i) == enemy) {
+                deleteObject(entities, i);
+            }
+        }
+        return;
+    }
+
     if (enemy->isFlashing) {
         updateDeltaTimer(enemy->flashTimer, *deltaTime);
 
@@ -161,7 +212,7 @@ void updateEnemy(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager
         }
     }
 
-    if (enemy->health != 0 && enemy->update) {
+    if (enemy->health > 0 && enemy->update) {
         enemy->update(enemy, deltaTime, grid, entities);
     }
 }
@@ -176,7 +227,7 @@ void freeEnemy(void* object) {
 }
 
 void takeDamageAndCheckDeath(t_enemy* enemy, int damage) {
-    if (!enemy || enemy->isInvincible) return;
+    if (!enemy || enemy->isInvincible || enemy->isDead) return;  // Ignorer si déjà mort
 
     enemy->showHealthBar = SDL_TRUE;
     resetDeltaTimer(enemy->healthBarTimer);
@@ -190,15 +241,16 @@ void takeDamageAndCheckDeath(t_enemy* enemy, int damage) {
         enemy->health = 0;
         enemy->showHealthBar = SDL_FALSE;
 
-        // L'ennemi est mort, on utilise sa référence à la scène
-        sceneRemoveObject(enemy->entity.currentScene, enemy);
-        // Ne pas accéder à enemy après cet appel car l'objet est libéré!
+        // Marquer l'ennemi comme mort
+        enemy->isDead = SDL_TRUE;
+
+        // Désactiver les collisions pour qu'il n'interagisse plus avec le monde
+        enemy->entity.useCircleCollision = SDL_FALSE;
+
+        // Les graphismes et la suppression seront gérés par updateEnemy
         return;
     }
 
-    printf("%d \n", enemy->health);
-
-    // Activer l'invincibilité seulement si l'ennemi est vivant
     enemy->isInvincible = SDL_TRUE;
     resetDeltaTimer(enemy->invincibilityTimer);
 }

@@ -9,6 +9,11 @@
 #include <SDL2/SDL.h>
 
 #include "../engine/core/camera.h"
+#include "../engine/entities/player.h"
+#include "../engine/entities/tiles.h"
+#include "../engine/entities/tilesEntity.h"
+
+#define TILE_SIZE 16
 
 /**
  * @def MINIMAP_SIZE
@@ -50,7 +55,7 @@ t_minimap* createMinimap(SDL_Renderer* renderer, int windowW, int windowH);
  * @param camera Pointeur vers la caméra
  * @note Doit être appelee a chaque changement de la caméra
  */
-void updateMinimap(t_minimap* minimap, t_camera* camera, SDL_Renderer* renderer);
+void updateMinimap(t_minimap* minimap, t_camera* camera, SDL_Renderer* renderer, t_objectManager* entities, t_grid* grid);
 
 /**
  * @brief Dessine la minimap a l'écran
@@ -72,6 +77,6 @@ void freeMinimap(void* object);
  * @param windowW Largeur de la fenêtre
  * @param windowH Hauteur de la fenêtre
  */
-void resizeMinimap(SDL_Renderer* renderer, t_minimap* minimap, int *windowW, int *windowH);
+void resizeMinimap(SDL_Renderer* renderer, t_minimap* minimap, int* windowW, int* windowH);
 
 #endif

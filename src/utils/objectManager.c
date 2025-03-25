@@ -95,28 +95,11 @@ void* getObject(t_objectManager* manager, int index) {
 void deleteObject(t_objectManager* manager, int index) {
     if (index < 0 || index >= manager->count) return;
 
-    // Récupère l'objet et son type
-    void* dataToDelete = getObject(manager, index);
-    uint8_t typeIdToDelete = getObjectTypeId(manager, index);
-
-    // Libère les données de l'objet supprimé
-    if (dataToDelete) {
-        t_typeMetadata* metadata = &manager->registry->types[typeIdToDelete];
-        metadata->freeFunc(dataToDelete);
-    }
-
     // Si ce n'est pas le dernier élément, on effectue un swap avec le dernier objet
     if (index != manager->count - 1) {
         // Récupère le dernier élément
         void* lastData = getObject(manager, manager->count - 1);
         uint8_t lastTypeId = getObjectTypeId(manager, manager->count - 1);
-
-        // Recherche le pool correspondant au dernier élément
-        t_objectMemoryPool* lastPool = manager->firstPool;
-        int lastPoolIndex = (manager->count - 1) / POOL_SIZE;
-        for (int i = 0; i < lastPoolIndex; i++) {
-            lastPool = lastPool->next;
-        }
 
         // Recherche le pool de l'élément à supprimer
         t_objectMemoryPool* targetPool = manager->firstPool;
@@ -125,19 +108,51 @@ void deleteObject(t_objectManager* manager, int index) {
             targetPool = targetPool->next;
         }
 
+        // Stocke temporairement l'objet à supprimer
+        void* dataToDelete = targetPool->items[index % POOL_SIZE].data;
+        uint8_t typeIdToDelete = targetPool->items[index % POOL_SIZE].typeId;
+
         // Remplace l'objet supprimé par le dernier objet
         targetPool->items[index % POOL_SIZE].data = lastData;
         targetPool->items[index % POOL_SIZE].typeId = lastTypeId;
 
-        // Sécurise l'ancienne position du dernier objet pour éviter un double free
+        // Recherche le pool correspondant au dernier élément
+        t_objectMemoryPool* lastPool = manager->firstPool;
+        int lastPoolIndex = (manager->count - 1) / POOL_SIZE;
+        for (int i = 0; i < lastPoolIndex; i++) {
+            lastPool = lastPool->next;
+        }
+
+        // Met à NULL l'ancienne position du dernier objet
         lastPool->items[(manager->count - 1) % POOL_SIZE].data = NULL;
+
+        // MAINTENANT on peut libérer l'objet après avoir fait le swap
+        if (dataToDelete) {
+            t_typeMetadata* metadata = &manager->registry->types[typeIdToDelete];
+            if (metadata->freeFunc) {
+                metadata->freeFunc(dataToDelete);
+            }
+        }
     } else {
-        // Si l'objet supprimé est le dernier, on le met directement à NULL
+        // Si c'est le dernier élément, on peut simplement le libérer
         t_objectMemoryPool* targetPool = manager->firstPool;
         int poolIndex = index / POOL_SIZE;
         for (int i = 0; i < poolIndex; i++) {
             targetPool = targetPool->next;
         }
+
+        void* dataToDelete = targetPool->items[index % POOL_SIZE].data;
+        uint8_t typeIdToDelete = targetPool->items[index % POOL_SIZE].typeId;
+
+        // Libère les données
+        if (dataToDelete) {
+            t_typeMetadata* metadata = &manager->registry->types[typeIdToDelete];
+            if (metadata->freeFunc) {
+                metadata->freeFunc(dataToDelete);
+            }
+        }
+
+        // Met à NULL la position
         targetPool->items[index % POOL_SIZE].data = NULL;
     }
 

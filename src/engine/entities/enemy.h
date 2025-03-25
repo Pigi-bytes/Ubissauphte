@@ -23,6 +23,8 @@ typedef struct t_enemy {
     SDL_bool isFlashing;
     t_deltaTimer* flashTimer;
     float flashDuration;
+
+    SDL_bool isDead;
 } t_enemy;
 
 void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect, t_scene* scene);

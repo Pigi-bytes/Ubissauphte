@@ -38,9 +38,18 @@ void sceneRegisterFunction(t_scene* scene, uint8_t typeObject, t_fonctionType ty
             for (int j = 0; j < indexObj; j++) {
                 final_params[j] = params[j];
             }
-            final_params[indexObj] = getObject(scene->objectManager, i);
-            for (int j = indexObj; j < param_count; j++) {
-                final_params[j + 1] = params[j];
+            int j;
+            if (indexObj != -1) {
+                final_params[indexObj] = getObject(scene->objectManager, i);
+                j = indexObj;
+            } else {
+                j = 0;
+            }
+            for (; j < param_count; j++) {
+                if (indexObj != -1)
+                    final_params[j + 1] = params[j];
+                else
+                    final_params[j] = params[j];
             }
 
             t_fonctionParam* sf = malloc(sizeof(t_fonctionParam));
@@ -143,9 +152,10 @@ void registerFunctionForObject(t_scene* scene, void* object, uint8_t typeId,
         params[i] = va_arg(args, void*);
     }
     va_end(args);
+    void** final_params;
 
     // Construire le tableau de paramètres finaux
-    void** final_params = malloc((param_count + 1) * sizeof(void*));
+    final_params = malloc((param_count + 1) * sizeof(void*));
     for (int j = 0; j < indexObj; j++) {
         final_params[j] = params[j];
     }
