@@ -37,15 +37,19 @@ int main(int argc, char* argv[]) {
     context.control->map = SDL_SCANCODE_P;
     context.control->interact = SDL_SCANCODE_E;
 
+    t_tileset* tileset = initTileset(context.renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
+    t_tileset* playerTileSet = initTileset(context.renderer, 32, 32, 16, "assets/imgs/chevaliervisiereouverteidle12run34.bmp");
+
+    t_joueur* palyer = createPlayer(context.control, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerTileSet);
+
     t_scene* scene = createMainMenu(&context);
     t_scene* scene0 = createOptionMenu(&context);
-    t_scene* scene1 = createMainWord(&context);
+    CreateNiveau(&context, 10, &palyer);
     t_scene* scene2 = createCommandeMenu(&context);
     t_scene* scene3 = createFpsMenu(&context);
 
     addScene(context.sceneController, scene);
     addScene(context.sceneController, scene0);
-    addScene(context.sceneController, scene1);
     addScene(context.sceneController, scene2);
     addScene(context.sceneController, scene3);
     setScene(context.sceneController, "menuPrincipal");

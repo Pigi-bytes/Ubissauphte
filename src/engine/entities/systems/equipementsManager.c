@@ -274,7 +274,7 @@ t_inventaire* inventory_load(t_fichier* fichier, t_item** item, int count) {
                 break;
             }
         }
-        free(Stack->definition); 
+        free(Stack->definition);
         free(Stack);
     }
 
