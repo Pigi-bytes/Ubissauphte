@@ -7,7 +7,7 @@
 #include "../../../io/fichierLoader.h"
 #include "../../../utils/fonctionManager.h"
 #include "../../../utils/objectManager.h"
-#include "../../tiles.h"
+#include "../tiles.h"
 
 typedef enum {
     ITEM_FLAG_STACKABLE = 1 << 0,
@@ -109,7 +109,7 @@ void inventory_print(t_inventaire* inv);
 void equipment_print(t_character* c);
 
 void item_save(t_item** item, t_fichier* fichier, int count);
-t_item** item_load(t_fichier* fichier);
+t_item** item_load(t_fichier* fichier, t_tileset* tileset);
 void free_item(t_item** items, int count);
 
 void inventory_save(t_inventaire* inv, t_fichier* fichier);

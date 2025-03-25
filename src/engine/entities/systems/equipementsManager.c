@@ -87,7 +87,7 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
         data = createPairData("flags", value);
         addPairData(block, data);
 
-        sprintf(value, "%f", item[i]->indiceTexture);
+        sprintf(value, "%d", item[i]->indiceTexture);
         data = createPairData("texture", value);
         addPairData(block, data);
 
@@ -187,7 +187,7 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset) {
         item[i]->flags = resultInt;
 
         getValue(block, "texture", &resultInt, INT);
-        item[i]->texture = getObject(tileset->textureTiles, resultInt);
+        item[i]->texture = (SDL_Texture*)getObject(tileset->textureTiles, resultInt);
         item[i]->indiceTexture = resultInt;
 
         getValue(block, "type", &resultChar, STRING);
@@ -306,8 +306,9 @@ t_inventaire* createInventaire() {
 
 t_character* createCharactere(t_tileset* tileset, int indice_texture) {
     t_character* charactere = (t_character*)malloc(sizeof(t_character));
-    charactere->texture = (SDL_Texture*)getObject(tileset->textureTiles, indice_texture);
     
+    charactere->texture = (SDL_Texture*)getObject(tileset->textureTiles, indice_texture);
+
     charactere->inventaire = createInventaire();
     charactere->baseStats.health.additive = 10;
     charactere->baseStats.health.multiplicative = 1;
