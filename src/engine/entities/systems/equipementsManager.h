@@ -7,6 +7,7 @@
 #include "../../../io/fichierLoader.h"
 #include "../../../utils/fonctionManager.h"
 #include "../../../utils/objectManager.h"
+#include "../../tiles.h"
 
 typedef enum {
     ITEM_FLAG_STACKABLE = 1 << 0,
@@ -48,6 +49,8 @@ typedef struct {
     t_fonctionParam* onDeEquip;
     t_fonctionParam* onUse;
     char description[200];
+    SDL_Texture* texture;
+    int indiceTexture;
 } t_item;
 
 typedef struct {

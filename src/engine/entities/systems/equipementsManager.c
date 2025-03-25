@@ -87,6 +87,10 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
         data = createPairData("flags", value);
         addPairData(block, data);
 
+        sprintf(value, "%f", item[i]->indiceTexture);
+        data = createPairData("texture", value);
+        addPairData(block, data);
+
         if (item[i]->validSlot[0] == SLOT_ARME)
             data = createPairData("type", "arme");
         else if (item[i]->validSlot[0] == SLOT_ARMURE)
@@ -111,7 +115,7 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
     }
 }
 
-t_item** item_load(t_fichier* fichier) {
+t_item** item_load(t_fichier* fichier, t_tileset* tileset) {
     t_item** item = (t_item**)malloc(fichier->blockManager->count * sizeof(t_item*));
     if (item == NULL) {
         fprintf(stderr, "Erreur d'allocation de mémoire");
@@ -181,6 +185,10 @@ t_item** item_load(t_fichier* fichier) {
 
         getValue(block, "flags", &resultInt, INT);
         item[i]->flags = resultInt;
+
+        getValue(block, "texture", &resultInt, INT);
+        item[i]->texture = getObject(tileset->textureTiles, resultInt);
+        item[i]->indiceTexture = resultInt;
 
         getValue(block, "type", &resultChar, STRING);
         if (strcmp(resultChar, "arme") == 0)
