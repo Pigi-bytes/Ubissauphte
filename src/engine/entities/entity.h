@@ -9,7 +9,7 @@
 #include "components/core.h"
 #include "components/physic/physics.h"
 
-typedef struct {
+typedef struct s_entity {
     SDL_Rect displayRect;  // Position et taille pour l'affichage
 
     SDL_Rect collisionRect;       // Position et taille pour les collisions rectangulaires

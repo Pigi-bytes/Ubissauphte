@@ -8,7 +8,6 @@
 #include "engine/entities/enemy.h"
 #include "engine/entities/mobs/slime.h"
 #include "engine/entities/player.h"
-#include "engine/entities/systems/physicsSystem.h"
 #include "engine/entities/tiles.h"
 #include "engine/world/generationSalle/geneRoom.h"
 #include "io/audioManager.h"

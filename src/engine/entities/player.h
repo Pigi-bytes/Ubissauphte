@@ -6,9 +6,9 @@
 #include "../../context.h"
 #include "../../debug.h"
 #include "../../io/input.h"
+#include "components/physic/physics.h"  // Include physics.h before defining t_entity
 #include "enemy.h"
 #include "entity.h"
-#include "systems/physicsSystem.h"
 #include "tiles.h"
 
 // Anticipation > contact > recovery

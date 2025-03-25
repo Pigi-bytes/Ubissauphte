@@ -18,7 +18,7 @@ typedef struct {
     t_entity entity;  // Entité associée pour le rendu
 } t_tile;
 
-typedef struct {
+typedef struct s_grid {
     int width;
     int height;
     int depth;

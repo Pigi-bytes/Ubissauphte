@@ -5,9 +5,9 @@
 
 #include "../../utils/fscene.h"
 #include "../tileset.h"
+#include "components/physic/physics.h"  // Include physics.h before defining t_entity
 #include "entity.h"
 #include "player.h"
-#include "systems/physicsSystem.h"
 #include "tiles.h"
 
 typedef struct t_tileEntity {

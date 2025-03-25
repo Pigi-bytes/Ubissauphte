@@ -98,7 +98,7 @@ typedef struct t_objectMemoryPool {
  * @struct t_objectManager
  * @brief Gestionnaire des objets
  */
-typedef struct {
+typedef struct s_objectManager {
     t_objectMemoryPool* firstPool;    ///< Premier bloc de memoire
     t_objectMemoryPool* currentPool;  ///< Dernier bloc de memoire alloué
     int nbItemsInPool;                ///< Nombre d'objet dans le currentPool
