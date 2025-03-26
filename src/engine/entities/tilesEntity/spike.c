@@ -23,6 +23,10 @@ void updateSpike(t_tileEntity* entity, t_context* context, t_salle* salle, t_obj
     t_spike* spike = (t_spike*)entity;
     t_joueur* player = (t_joueur*)getObject(entities, 0);
 
+    if (!spike->playerTouching && spike->messageShown) {
+        spike->messageShown = SDL_FALSE;
+    }
+
     // Déterminer la direction et la salle liée si ce n'est pas déjà fait
     if (spike->direction == -1) {
         spike->direction = determineSpikeDirection(salle->grille, &entity->entity);
