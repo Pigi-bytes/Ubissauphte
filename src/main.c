@@ -47,8 +47,6 @@ int main()
         }
         inventoryUI_Render(&ui, renderer);
 
-        // inventoryUI_HandleEvent(&ui, input);
-
         SDL_RenderPresent(renderer);
     }
 

@@ -48,17 +48,12 @@ typedef struct
     TTF_Font *item_font;
     TTF_Font *descr_font;
 
-    t_text *player_stats_texts[7];  // Tableau pour les 7 stats du joueur
-    t_text *item_stats_texts[7];    // Tableau pour les 7 stats d'item
-    t_text *item_description_texts; // Texte de description
-
 } InventoryUI;
 
 void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input, int nbItems);
 void inventoryUI_Update(InventoryUI *ui);
 void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer);
-void inventoryUI_HandleEvent(InventoryUI *ui, t_input*input);
-void inventoryUI_Cleanup(InventoryUI *ui);
+void inventoryUI_HandleEvent(InventoryUI *ui, t_input *input);
 
 void calculCasePlayer(SDL_Rect *casePlayer, t_input *input, char *nom);
 void calculCaseSlots(SDL_Rect *comp, SDL_Rect *slot, t_input *input, char *nom1, char *nom2);

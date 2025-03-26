@@ -281,7 +281,7 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer)
     SDL_RenderDrawRect(renderer, &ui->caseActivable2.rect);
 
     SDL_RenderDrawRect(renderer, &ui->statsPlayer.rect);
-    afficherStatsPlayer(renderer, ui->statsPlayer.rect, ui->character, ui->item_font, ui->color, ui->input_ref);
+    // afficherStatsPlayer(renderer, ui->statsPlayer.rect, ui->character, ui->item_font, ui->color, ui->input_ref);
 
     SDL_RenderDrawRect(renderer, &ui->inventory_panel.rect);
 
@@ -294,10 +294,10 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer)
     }
 
     SDL_RenderDrawRect(renderer, &ui->statsItem.rect);
-    afficherStatsItem(renderer, ui->statsItem.rect, ui->items[0], ui->item_font, ui->color, ui->input_ref);
+    // afficherStatsItem(renderer, ui->statsItem.rect, ui->items[0], ui->item_font, ui->color, ui->input_ref);
 
     SDL_RenderDrawRect(renderer, &ui->descrItem.rect);
-    afficherDescription(renderer, ui->descrItem.rect, ui->items[0], ui->descr_font, ui->color, ui->input_ref);
+    // afficherDescription(renderer, ui->descrItem.rect, ui->items[0], ui->descr_font, ui->color, ui->input_ref);
 
     SDL_RenderDrawRect(renderer, &ui->equiper.rect);
 }
@@ -309,180 +309,4 @@ void inventoryUI_Update(InventoryUI *ui)
     inventoryUI_Init(ui, NULL, ui->character, ui->items, ui->input_ref, ui->nbItems);
 }
 
-// void inventoryUI_HandleEvent(InventoryUI *ui, t_input *input)
-// {
-//     ui->scroll_offset += input->mouseYWheel * 50;
-//     int max_scroll = (ui->nbItems * ui->inventory_slots[0].rect.h) - ui->scroll_viewport.h;
-//     ui->scroll_offset = CLAMP(ui->scroll_offset, 0, max_scroll);
-// }
 
-void inventoryUI_Cleanup(InventoryUI *ui)
-{
-    free(ui->inventory_slots);
-    TTF_CloseFont(ui->item_font);
-    TTF_CloseFont(ui->descr_font);
-}
-
-void afficherInventaire(SDL_Renderer *renderer, t_input *input, t_character *c, t_item **itemListe, t_item *item)
-{
-    initTextEngine();
-
-    SDL_Color color = {
-        .a = 255,
-        .b = 0,
-        .g = 128,
-        .r = 255};
-    SDL_Color color2 = {
-        .a = 255,
-        .b = 255,
-        .g = 0,
-        .r = 0};
-
-    SDL_Rect casePerso;
-    SDL_Rect caseArme;
-    SDL_Rect caseArmure;
-    SDL_Rect CaseActivable1;
-    SDL_Rect caseActivable2;
-
-    SDL_Rect statsPlayer;
-    SDL_Rect inv;
-    SDL_Rect statsItem;
-    SDL_Rect descrItem;
-    SDL_Rect equiper;
-    SDL_Rect caseItem[24];
-
-    calculCasePlayer(&casePerso, input, "Perso");
-
-    calculCaseSlots(&casePerso, &caseArme, input, "Perso", "arme");
-    calculCaseSlots(&caseArme, &caseArmure, input, "arme", "armure");
-    calculCaseSlots(&casePerso, &CaseActivable1, input, "Perso", "activable1");
-    calculCaseSlots(&CaseActivable1, &caseActivable2, input, "activable1", "activable2");
-
-    calculDescrStatsPlayer(&caseArme, &CaseActivable1, &casePerso, &statsPlayer, input);
-
-    calculInventaire(&inv, &statsPlayer, input);
-
-    calculStatsItem(&inv, &statsItem, input);
-
-    caculDescrItem(&statsItem, &descrItem, input);
-
-    calculEquiper(&statsItem, &descrItem, &equiper, input);
-
-    for (int i = 0, j = 0; i < 24; j++, i++)
-    {
-        calculerItem(&caseItem[i], inv, &caseItem[i - 1], i, j, input);
-
-        if (j == 4)
-            j = 0;
-    }
-
-    SDL_Rect scrollViewport = {
-        .x = inv.x,
-        .y = inv.y + caseItem[0].y + input->windowHeight * 0.02,
-        .w = inv.w,
-        .h = inv.h - caseItem[0].h * 2};
-
-    static int scrollOffset = 0; // Décalage du défilement
-
-    SDL_Rect scrollbar = {scrollViewport.x + scrollViewport.w - 10,
-                          inv.y,
-                          10,
-                          (scrollViewport.h * 24) / (caseItem[0].h)};
-
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    SDL_RenderClear(renderer);
-
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    TTF_Font *font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", statsPlayer.h * statsPlayer.w * 0.0002);
-
-    // SDL_Texture *perso =;
-    SDL_RenderCopy(renderer, c->texture, NULL, &casePerso);
-
-    SDL_RenderDrawRect(renderer, &casePerso);
-    SDL_RenderDrawRect(renderer, &caseArme);
-    SDL_RenderDrawRect(renderer, &caseArmure);
-    SDL_RenderDrawRect(renderer, &CaseActivable1);
-    SDL_RenderDrawRect(renderer, &caseActivable2);
-    SDL_RenderDrawRect(renderer, &statsPlayer);
-
-    afficherStatsPlayer(renderer, statsPlayer, c, font, color, input);
-
-    SDL_RenderDrawRect(renderer, &inv);
-
-    SDL_Event event;
-    while (SDL_PollEvent(&event))
-    {
-        switch (event.type)
-        {
-        case SDL_MOUSEWHEEL:
-            if (event.wheel.y > 0)
-            {
-                scrollOffset -= 50; // Défilement vers le haut (plus fluide)
-            }
-            else if (event.wheel.y < 0)
-            {
-                scrollOffset += 50; // Défilement vers le bas (plus fluide)
-            }
-            break;
-        case SDL_MOUSEBUTTONDOWN:
-            if (event.button.button == SDL_BUTTON_LEFT)
-            {
-                int mouseX = event.button.x;
-                int mouseY = event.button.y;
-
-                // Vérifier si le clic est sur la barre de défilement
-                if (mouseX >= scrollbar.x && mouseX <= scrollbar.x + scrollbar.w &&
-                    mouseY >= scrollbar.y && mouseY <= scrollbar.y + scrollbar.h)
-                {
-                    // Mettre à jour la position de défilement pour tout en haut
-                    scrollOffset = 0;
-                }
-            }
-            break;
-        }
-    }
-
-    int maxScrollOffset = (24 * caseItem[0].h) - scrollViewport.h;
-    if (scrollOffset < 0)
-    {
-        scrollOffset = 0;
-    }
-    else if (scrollOffset > maxScrollOffset)
-    {
-        scrollOffset = maxScrollOffset;
-    }
-
-    // Appliquer le viewport
-    SDL_RenderSetViewport(renderer, &scrollViewport);
-
-    for (int i = 0; i < 24; i++)
-    {
-        SDL_RenderSetViewport(renderer, NULL); // Réinitialiser le viewport
-
-        SDL_Rect itemRect = caseItem[i];
-        itemRect.y -= scrollOffset;
-
-        if (itemRect.y + itemRect.h > scrollViewport.y && itemRect.y < scrollViewport.y + scrollViewport.h)
-        {
-            SDL_RenderCopy(renderer, itemListe[i]->texture, NULL, &itemRect);
-            SDL_RenderDrawRect(renderer, &itemRect);
-        }
-    }
-
-    SDL_RenderSetViewport(renderer, NULL); // Réinitialiser le viewport
-    scrollbar.y = scrollViewport.y + (scrollOffset * scrollViewport.h) / maxScrollOffset;
-    SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
-    SDL_RenderFillRect(renderer, &scrollbar);
-    SDL_RenderDrawRect(renderer, &statsItem);
-
-    afficherStatsItem(renderer, statsItem, item, font, color, input);
-
-    SDL_RenderDrawRect(renderer, &descrItem);
-    TTF_Font *font2 = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", descrItem.h * descrItem.w * 0.0003);
-
-    afficherDescription(renderer, descrItem, item, font2, color, input);
-    SDL_RenderDrawRect(renderer, &equiper);
-
-    TTF_CloseFont(font);
-    TTF_CloseFont(font2);
-}
