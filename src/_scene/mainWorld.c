@@ -146,8 +146,8 @@ t_scene* createMainWord(t_context* context) {
     for (int i = 0; i < 1; i++) {
         enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 32, 32}, slimeTileSet, scene);
         enemy->entity.physics.mass = 10;
-        enemy->maxHealth = 300;
-        enemy->health = 300;
+        enemy->health.currentHealth = 300;
+        enemy->health.maxHealth = 300;
 
         addObject(entities, &enemy->entity, ENEMY);
         placeOnRandomTile(level, &enemy->entity, entities);

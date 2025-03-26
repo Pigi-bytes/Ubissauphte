@@ -21,12 +21,9 @@ t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, t_
     initEnemyBase(&slime->base, texture, rect, scene);
     slime->base.update = updateSlime;
 
-    slime->base.health = 100;  // Valeur par défaut
-    slime->base.maxHealth = 100;
-    slime->base.isInvincible = SDL_FALSE;
-    slime->base.invincibilityDuration = 0.3f;  // 1 seconde d'invincibilité
-    slime->base.invincibilityTimer = initDeltaTimer();
-    startDeltaTimer(slime->base.invincibilityTimer);
+    slime->base.health.maxHealth = 100;
+    slime->base.health.currentHealth = 100;
+    slime->base.health.invincibilityDuration = 0.5f;
 
     slime->base.entity.physics = (t_physics){.velocity = {0, 0}, .mass = 2.0f, .friction = 0.02f, .restitution = 1.0f};
     addAnimation(slime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 480, SDL_TRUE, "idle"));

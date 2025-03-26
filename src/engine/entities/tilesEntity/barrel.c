@@ -1,18 +1,22 @@
 #include "barrel.h"
 
+void onBarrelDestroy(void* entity) {
+    t_barrel* barrel = (t_barrel*)entity;
+    barrel->isExploding = SDL_TRUE;
+    printf("Barrel destroyed!\n");
+}
+
 void takeDamageBarrel(t_tileEntity* entity, float damage) {
     t_barrel* barrel = (t_barrel*)entity;
     if (barrel->base.isDestructible) {
-        barrel->health -= damage;
-        if (barrel->health <= 0) {
-            barrel->isExploding = SDL_TRUE;
-            printf("Barrel destroyed!\n");
-        }
+        applyDamage(&barrel->health, (int)damage, barrel);
     }
 }
 
 void updateBarrel(t_tileEntity* entity, float* deltaTime, t_grid* grid, t_objectManager* entities, t_input* input) {
     t_barrel* barrel = (t_barrel*)entity;
+
+    updateHealthSystem(&barrel->health, *deltaTime);
 
     t_joueur* player = (t_joueur*)getObject(entities, 0);
 
@@ -22,7 +26,7 @@ void updateBarrel(t_tileEntity* entity, float* deltaTime, t_grid* grid, t_object
         SDL_FPoint barrelPos = {entity->entity.collisionCircle.x, entity->entity.collisionCircle.y};
 
         if (cercleInSector(barrelPos, entity->entity.collisionCircle.radius, player->attack.hitBox.origin, currentAngle, player->currentWeapon->range, player->currentWeapon->angleAttack)) {
-            takeDamageBarrel(entity, barrel->health);
+            takeDamageBarrel(entity, player->currentWeapon->damage);
 
             player->attack.nbHits++;
 
@@ -96,7 +100,19 @@ void renderBarrel(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera
         return;
     }
 
+    if (barrel->health.isFlashing) {
+        SDL_SetTextureColorMod(entity->entity.texture, 255, 255, 255);
+        SDL_SetTextureBlendMode(entity->entity.texture, SDL_BLENDMODE_ADD);
+    } else {
+        SDL_SetTextureBlendMode(entity->entity.texture, SDL_BLENDMODE_BLEND);
+        SDL_SetTextureColorMod(entity->entity.texture, 255, 255, 255);
+    }
+
     renderEntity(renderer, &entity->entity, camera);
+
+    if (barrel->health.showHealthBar && barrel->health.healthBareRender) {
+        barrel->health.healthBareRender(renderer, &barrel->health, entity->entity.displayRect, camera);
+    }
 }
 
 t_tileEntity* createBarrelEntity(t_tileset* tileset, t_scene* scene) {
@@ -107,7 +123,15 @@ t_tileEntity* createBarrelEntity(t_tileset* tileset, t_scene* scene) {
     barrel->base.entity.animationController->haveAnimation = SDL_FALSE;
 
     barrel->base.isDestructible = SDL_TRUE;
-    barrel->health = 50;
+
+    initHealthSystem(&barrel->health, 50);
+    barrel->health.healthBarDuration = 2.5f;
+    barrel->health.flashDuration = 0.1f;
+    barrel->health.invincibilityDuration = 0.3f;
+    barrel->health.onDeathCallback = onBarrelDestroy;
+
+    barrel->health.healthBareRender = renderStandardHealthBar;
+
     barrel->isExploding = SDL_FALSE;
 
     barrel->base.update = updateBarrel;

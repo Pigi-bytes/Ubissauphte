@@ -318,7 +318,7 @@ void updateAttack(t_joueur* player, float* deltaTime, t_objectManager* entities)
         t_entity* enemy = getObject(entities, i);
 
         // Ignorer les entités nulles ou les ennemis déjà morts
-        if (!enemy || ((t_enemy*)enemy)->isDead) continue;
+        if (!enemy || ((t_enemy*)enemy)->health.isDead) continue;
 
         SDL_FPoint enemyPos = {enemy->collisionCircle.x, enemy->collisionCircle.y};
 

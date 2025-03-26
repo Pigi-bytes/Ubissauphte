@@ -6,7 +6,8 @@
 #include "../../context.h"
 #include "../../debug.h"
 #include "../../io/input.h"
-#include "components/physic/physics.h"  // Include physics.h before defining t_entity
+#include "components/health/health.h"
+#include "components/physic/physics.h"
 #include "enemy.h"
 #include "entity.h"
 #include "tiles.h"
