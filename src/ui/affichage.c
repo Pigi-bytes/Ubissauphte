@@ -120,7 +120,6 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     ui->items = items;
     ui->input_ref = input;
     ui->nbItems = nbItems;
-    ui->scroll_offset = 0;
 
     // Calculs initiaux (votre code original)
     calculCasePlayer(&ui->player_panel.rect, input, "Perso");
@@ -141,23 +140,11 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     ui->inventory_slots = malloc(nbItems * sizeof(UI_Element));
     for (int i = 0, j = 0; i < nbItems; j++, i++)
     {
-        calculerItem(&ui->inventory_slots[i].rect,
-                     ui->inventory_panel.rect,
-                     (i > 0) ? &ui->inventory_slots[i - 1].rect : NULL,
-                     i,
-                     j,
-                     input);
+        calculerItem(&ui->inventory_slots[i].rect, ui->inventory_panel.rect, &ui->inventory_slots[i - 1].rect, i, j, input);
         ui->inventory_slots[i].texture = items[i]->texture;
         if (j == 4)
             j = 0;
     }
-
-    // Scroll viewport (nouveau)
-    ui->scroll_viewport = (SDL_Rect){
-        ui->inventory_panel.rect.x,
-        ui->inventory_panel.rect.y + ui->inventory_slots[0].rect.y + input->windowHeight * 0.02,
-        ui->inventory_panel.rect.w,
-        ui->inventory_panel.rect.h - ui->inventory_slots[0].rect.h * 2};
 
     // Police
     ui->item_font = TTF_OpenFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->statsPlayer.rect.h * ui->statsPlayer.rect.w * 0.0002);
@@ -296,28 +283,15 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer)
     SDL_RenderDrawRect(renderer, &ui->statsPlayer.rect);
     afficherStatsPlayer(renderer, ui->statsPlayer.rect, ui->character, ui->item_font, ui->color, ui->input_ref);
 
-    SDL_RenderDrawRect(renderer, &ui->inventory_panel);
+    SDL_RenderDrawRect(renderer, &ui->inventory_panel.rect);
 
-    // Inventaire avec scroll
-    SDL_RenderSetViewport(renderer, &ui->scroll_viewport);
     for (int i = 0; i < ui->nbItems; i++)
     {
         SDL_Rect dest = ui->inventory_slots[i].rect;
-        dest.y -= ui->scroll_offset;
-        SDL_RenderCopy(renderer, ui->inventory_slots[i].texture, NULL, &dest);
-        SDL_RenderDrawRect(renderer, &dest);
+
+        SDL_RenderCopy(renderer, ui->inventory_slots[i].texture, NULL, &ui->inventory_slots[i].rect);
+        SDL_RenderDrawRect(renderer, &ui->inventory_slots[i].rect);
     }
-
-    SDL_RenderSetViewport(renderer, NULL);
-    // Barre de défilement (nouveau)
-    ui->scrollbar = (SDL_Rect){
-        ui->scroll_viewport.x + ui->scroll_viewport.w - 10,
-        ui->inventory_panel.rect.y,
-        10,
-        (ui->scroll_viewport.h * ui->nbItems) / (ui->inventory_slots[0].rect.h)};
-
-    SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
-    SDL_RenderFillRect(renderer, &ui->scrollbar);
 
     SDL_RenderDrawRect(renderer, &ui->statsItem.rect);
     afficherStatsItem(renderer, ui->statsItem.rect, ui->items[0], ui->item_font, ui->color, ui->input_ref);
@@ -331,22 +305,16 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer)
 void inventoryUI_Update(InventoryUI *ui)
 {
     // Recalcul si la fenêtre est redimensionnée
-    if (ui->input_ref->windowWidth != ui->player_panel.rect.w ||
-        ui->input_ref->windowHeight != ui->player_panel.rect.h)
-    {
-        inventoryUI_Init(ui, NULL, ui->character, ui->items, ui->input_ref, ui->nbItems);
-    }
+
+    inventoryUI_Init(ui, NULL, ui->character, ui->items, ui->input_ref, ui->nbItems);
 }
 
-void inventoryUI_HandleEvent(InventoryUI *ui, SDL_Event *e)
-{
-    if (e->type == SDL_MOUSEWHEEL)
-    {
-        ui->scroll_offset += e->wheel.y * 50;
-        int max_scroll = (ui->nbItems * ui->inventory_slots[0].rect.h) - ui->scroll_viewport.h;
-        ui->scroll_offset = CLAMP(ui->scroll_offset, 0, max_scroll);
-    }
-}
+// void inventoryUI_HandleEvent(InventoryUI *ui, t_input *input)
+// {
+//     ui->scroll_offset += input->mouseYWheel * 50;
+//     int max_scroll = (ui->nbItems * ui->inventory_slots[0].rect.h) - ui->scroll_viewport.h;
+//     ui->scroll_offset = CLAMP(ui->scroll_offset, 0, max_scroll);
+// }
 
 void inventoryUI_Cleanup(InventoryUI *ui)
 {

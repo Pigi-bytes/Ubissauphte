@@ -33,17 +33,25 @@ int main()
 
     InventoryUI ui;
     inventoryUI_Init(&ui, renderer, c, itemListe, input, 24);
+
     while (!input->quit)
     {
         updateInput(input);
 
-        inventoryUI_Update(&ui);
+        if (!(input->windowWidth == ui.input_ref->windowWidth) || !(input->windowHeight == ui.input_ref->windowHeight))
+        {
+
+            printf("%d %d\n", input->windowWidth, input->windowHeight);
+            printf("%d %d\n", ui.input_ref->windowWidth, ui.input_ref->windowHeight);
+            inventoryUI_Update(&ui);
+        }
         inventoryUI_Render(&ui, renderer);
+
+        // inventoryUI_HandleEvent(&ui, input);
 
         SDL_RenderPresent(renderer);
     }
 
- 
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();

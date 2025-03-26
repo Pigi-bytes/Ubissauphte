@@ -38,9 +38,6 @@ typedef struct
     UI_Element equiper;
     UI_Element *inventory_slots;
 
-    SDL_Rect scroll_viewport;
-    SDL_Rect scrollbar;
-    int scroll_offset;
     int nbItems;
     SDL_Color color;
 
@@ -51,12 +48,16 @@ typedef struct
     TTF_Font *item_font;
     TTF_Font *descr_font;
 
+    t_text *player_stats_texts[7];  // Tableau pour les 7 stats du joueur
+    t_text *item_stats_texts[7];    // Tableau pour les 7 stats d'item
+    t_text *item_description_texts; // Texte de description
+
 } InventoryUI;
 
 void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input, int nbItems);
 void inventoryUI_Update(InventoryUI *ui);
 void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer);
-void inventoryUI_HandleEvent(InventoryUI *ui, SDL_Event *e);
+void inventoryUI_HandleEvent(InventoryUI *ui, t_input*input);
 void inventoryUI_Cleanup(InventoryUI *ui);
 
 void calculCasePlayer(SDL_Rect *casePlayer, t_input *input, char *nom);
