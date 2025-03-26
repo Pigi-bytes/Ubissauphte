@@ -56,6 +56,12 @@ t_scene* createCommandeMenu(t_context* context) {
     t_touche* touche7 = createTouche(textCommande7, GREEN, WHITE, creerRect(0.52f, 0.58f, 0.3f, 0.1f), fonctionCommande7, &context->control->map, "map");
     addPamaretre(fonctionCommande7, FONCTION_PARAMS(touche7, context->renderer));
 
+    sprintf(newTouche, "Commande Interact : %s", SDL_GetKeyName(SDL_GetKeyFromScancode((context->control->interact))));
+    t_text* textCommande8 = createTextOutline(context->renderer, newTouche, context->font, BLACK, WHITE, nb);
+    t_fonctionParam* fonctionCommande8 = creerFonction(miseAjourCommande, NULL);
+    t_touche* touche8 = createTouche(textCommande8, GREEN, WHITE, creerRect(0.52f, 0.72f, 0.3f, 0.1f), fonctionCommande8, &context->control->interact, "Interact");
+    addPamaretre(fonctionCommande8, FONCTION_PARAMS(touche8, context->renderer));
+
     t_text* text = createText(context->renderer, "Commandes", context->font, GREEN);
     text->rect = creerRect((1 - 0.8f) / 2, 0.05f, 0.8f, 0.2f);
 
@@ -68,6 +74,7 @@ t_scene* createCommandeMenu(t_context* context) {
     ADD_OBJECT_TO_SCENE(scene, touche5, COMMANDE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, touche6, COMMANDE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, touche7, COMMANDE_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, touche8, COMMANDE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, NULL, FRAME_DISPLAY_TYPE);
 
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "Retour", context->font, BLACK, WHITE, 2), GREEN, WHITE, creerRect(0.35f, 0.86f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(context->sceneController, "option"))), BUTTON_TYPE);
