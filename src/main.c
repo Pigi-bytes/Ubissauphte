@@ -38,9 +38,6 @@ int main() {
         updateInput(input);
 
         if (input->windowWidth != width || input->windowHeight != height) {
-            printf("%d %d\n", input->windowWidth, input->windowHeight);
-            printf("%d %d\n", ui.input_ref->windowWidth, ui.input_ref->windowHeight);
-
             inventoryUI_Update(&ui, renderer, input);
         }
         inventoryUI_Render(&ui, renderer);

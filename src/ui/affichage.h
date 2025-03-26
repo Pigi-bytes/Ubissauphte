@@ -50,9 +50,13 @@ typedef struct
 
     t_text *text_player[7];
     t_text *text_item[7];
+    t_text *text_descr;
+    t_text *description[15];
 
     char *nom_txt_item[7];
     char *nom_txt_player[7];
+    char descr[50];
+    int count_descr;
     SDL_Color color_txt;
 
 } InventoryUI;

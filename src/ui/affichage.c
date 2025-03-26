@@ -193,6 +193,27 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     // Positionnement et affichage des textes
     ui->text_item[0]->rect.x = ui->statsItem.rect.x + ui->input_ref->windowWidth * 0.01;
     ui->text_item[0]->rect.y = ui->statsItem.rect.y + ui->input_ref->windowHeight * 0.01;
+
+    ui->text_descr = createText(renderer, "Description :", ui->descr_font, ui->color_txt);
+
+    ui->text_descr->rect.x = ui->descrItem.rect.x + ui->descrItem.rect.x * 0.025;
+    ui->text_descr->rect.y = ui->descrItem.rect.y + ui->input_ref->windowHeight * 0.005;
+
+    int i = 0, j, nb = 1;
+
+    while (ui->items[0]->description[i++] != '\0') {
+        for (j = 0; ui->items[0]->description[i] != '\n' && ui->items[0]->description[i] != '\0'; i++, j++) {
+            ui->descr[j] = ui->items[0]->description[i];
+        }
+        ui->descr[j] = '\0';
+
+        ui->description[nb - 1] = createText(renderer, ui->descr, ui->descr_font, ui->color_txt);
+        ui->description[nb - 1]->rect.x = ui->descrItem.rect.x + ui->input_ref->windowWidth * 0.005;
+        ui->description[nb - 1]->rect.y = ui->text_descr->rect.y + ui->input_ref->windowHeight * 0.03 * nb;
+        nb++;
+        ui->descr[0] = '\0';
+    }
+    ui->count_descr = nb - 1;
 }
 
 void afficherStatPlayer(SDL_Renderer *renderer, InventoryUI *ui, t_input *input) {
@@ -211,45 +232,22 @@ void afficherStatPlayer(SDL_Renderer *renderer, InventoryUI *ui, t_input *input)
     afficherText(renderer, ui->text_player[5], ui->text_player[6], input);
 }
 
-void afficherStatItem(SDL_Renderer *renderer, InventoryUI *ui, t_input *input) {
+void afficherStatItem(SDL_Renderer *renderer, InventoryUI *ui) {
     renderText(renderer, ui->text_item[0]);
 
-    afficherText(renderer, ui->text_item[0], ui->text_item[1], input);
+    afficherText(renderer, ui->text_item[0], ui->text_item[1], ui->input_ref);
 
-    afficherText(renderer, ui->text_item[1], ui->text_item[2], input);
+    afficherText(renderer, ui->text_item[1], ui->text_item[2], ui->input_ref);
 
-    afficherText(renderer, ui->text_item[2], ui->text_item[3], input);
+    afficherText(renderer, ui->text_item[2], ui->text_item[3], ui->input_ref);
 
-    afficherText(renderer, ui->text_item[3], ui->text_item[4], input);
+    afficherText(renderer, ui->text_item[3], ui->text_item[4], ui->input_ref);
 
-    afficherText(renderer, ui->text_item[4], ui->text_item[5], input);
+    afficherText(renderer, ui->text_item[4], ui->text_item[5], ui->input_ref);
 
-    afficherText(renderer, ui->text_item[5], ui->text_item[6], input);
+    afficherText(renderer, ui->text_item[5], ui->text_item[6], ui->input_ref);
 }
 
-void afficherDescription(SDL_Renderer *renderer, SDL_Rect rect, t_item *item, TTF_Font *font, SDL_Color color, t_input *input) {
-    t_text *name = createText(renderer, "Description :", font, color);
-
-    name->rect.x = rect.x + rect.x * 0.025;
-    name->rect.y = rect.y + input->windowHeight * 0.005;
-    renderText(renderer, name);
-
-    int i = 0, j, nb = 1;
-
-    while (item->description[i++] != '\0') {
-        char descr[50];
-        for (j = 0; item->description[i] != '\n' && item->description[i] != '\0'; i++, j++) {
-            descr[j] = item->description[i];
-        }
-        descr[j] = '\0';
-
-        t_text *description = createText(renderer, descr, font, color);
-        description->rect.x = rect.x + input->windowWidth * 0.005;
-        description->rect.y = name->rect.y + input->windowHeight * 0.03 * nb;
-        renderText(renderer, description);
-        nb++;
-    }
-}
 
 void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer) {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -278,16 +276,15 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer) {
     }
 
     SDL_RenderDrawRect(renderer, &ui->statsItem.rect);
-    afficherStatItem(renderer, ui, ui->input_ref);
+    afficherStatItem(renderer, ui);
 
     SDL_RenderDrawRect(renderer, &ui->descrItem.rect);
-    // afficherDescription(renderer, ui->descrItem.rect, ui->items[0], ui->descr_font, ui->color, ui->input_ref);
+    afficherDescription(renderer, ui);
 
     SDL_RenderDrawRect(renderer, &ui->equiper.rect);
 }
 
 void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
     // Recalcul si la fenêtre est redimensionnée
-
     inventoryUI_Init(ui, renderer, ui->character, ui->items, input, ui->nbItems);
 }
