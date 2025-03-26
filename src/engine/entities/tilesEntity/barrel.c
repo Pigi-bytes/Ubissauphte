@@ -13,10 +13,10 @@ void takeDamageBarrel(t_tileEntity* entity, float damage) {
     }
 }
 
-void updateBarrel(t_tileEntity* entity, float* deltaTime, t_grid* grid, t_objectManager* entities, t_input* input) {
+void updateBarrel(t_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities) {
     t_barrel* barrel = (t_barrel*)entity;
 
-    updateHealthSystem(&barrel->health, *deltaTime);
+    updateHealthSystem(&barrel->health, context->frameData->deltaTime);
 
     t_joueur* player = (t_joueur*)getObject(entities, 0);
 
@@ -45,18 +45,18 @@ void updateBarrel(t_tileEntity* entity, float* deltaTime, t_grid* grid, t_object
         return;
     }
 
-    updatePhysicEntity(&entity->entity, deltaTime, grid, entities);
+    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, grid, entities);
 }
 
-void renderBarrel(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera) {
+void renderBarrel(t_tileEntity* entity, t_context* context, t_camera* camera) {
     t_barrel* barrel = (t_barrel*)entity;
 
     if (barrel->isExploding) {
         SDL_FPoint screenPos = {entity->entity.collisionCircle.x, entity->entity.collisionCircle.y};
 
-        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+        SDL_SetRenderDrawBlendMode(context->renderer, SDL_BLENDMODE_BLEND);
 
-        SDL_SetRenderDrawColor(renderer, 139, 69, 19, 200);
+        SDL_SetRenderDrawColor(context->renderer, 139, 69, 19, 200);
 
         const int NUM_FRAGMENTS = 12;
         for (int i = 0; i < NUM_FRAGMENTS; i++) {
@@ -68,22 +68,22 @@ void renderBarrel(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera
             int x2 = x1 + cosf(angle) * (3 + (i % 4));
             int y2 = y1 + sinf(angle) * (3 + (i % 4));
 
-            SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+            SDL_RenderDrawLine(context->renderer, x1, y1, x2, y2);
         }
 
-        SDL_SetRenderDrawColor(renderer, 210, 180, 140, 120);
+        SDL_SetRenderDrawColor(context->renderer, 210, 180, 140, 120);
         int dustRadius = 12;
         for (int w = -dustRadius; w <= dustRadius; w++) {
             for (int h = -dustRadius; h <= dustRadius; h++) {
                 if (w * w + h * h <= dustRadius * dustRadius) {
                     if ((w + h) % 3 == 0) {
-                        SDL_RenderDrawPoint(renderer, screenPos.x + w, screenPos.y + h);
+                        SDL_RenderDrawPoint(context->renderer, screenPos.x + w, screenPos.y + h);
                     }
                 }
             }
         }
 
-        SDL_SetRenderDrawColor(renderer, 160, 82, 45, 230);
+        SDL_SetRenderDrawColor(context->renderer, 160, 82, 45, 230);
         const int NUM_CHUNKS = 6;
         for (int i = 0; i < NUM_CHUNKS; i++) {
             float angle = (i * (2 * M_PI / NUM_CHUNKS)) + (M_PI / NUM_CHUNKS);
@@ -93,10 +93,10 @@ void renderBarrel(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera
             int y = screenPos.y + sinf(angle) * distance;
 
             SDL_Rect chunk = {x - 2, y - 2, 3 + (i % 3), 3 + (i % 2)};
-            SDL_RenderFillRect(renderer, &chunk);
+            SDL_RenderFillRect(context->renderer, &chunk);
         }
 
-        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
+        SDL_SetRenderDrawBlendMode(context->renderer, SDL_BLENDMODE_NONE);
         return;
     }
 
@@ -108,10 +108,10 @@ void renderBarrel(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera
         SDL_SetTextureColorMod(entity->entity.texture, 255, 255, 255);
     }
 
-    renderEntity(renderer, &entity->entity, camera);
+    renderEntity(context->renderer, &entity->entity, camera);
 
     if (barrel->health.showHealthBar && barrel->health.healthBareRender) {
-        barrel->health.healthBareRender(renderer, &barrel->health, entity->entity.displayRect, camera);
+        barrel->health.healthBareRender(context->renderer, &barrel->health, entity->entity.displayRect, camera);
     }
 }
 

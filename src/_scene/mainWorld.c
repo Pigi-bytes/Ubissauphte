@@ -172,7 +172,7 @@ t_scene* createMainWord(t_context* context) {
 
     sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, 0, FONCTION_PARAMS(&context->frameData->deltaTime, level, entities));
     sceneRegisterFunction(scene, ENEMY_TYPE, UPDATE, updateEnemyWrapper, 0, FONCTION_PARAMS(&context->frameData->deltaTime, level, entities));
-    sceneRegisterFunction(scene, TILE_ENTITY, UPDATE, updateTileEntityWrapper, 1, FONCTION_PARAMS(&context->frameData->deltaTime, level, entities, context->input));
+    sceneRegisterFunction(scene, TILE_ENTITY, UPDATE, updateTileEntityWrapper, 1, FONCTION_PARAMS(context, level, entities));
 
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, -1, FONCTION_PARAMS(context->fpsDisplay, context->frameData, context->renderer));
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, -1, FONCTION_PARAMS(context->renderer, context->fpsDisplay));
@@ -187,7 +187,7 @@ t_scene* createMainWord(t_context* context) {
     sceneRegisterFunction(scene, VIEWPORT_TYPE, SET_BUFFER, setRenderTargetWrapper, 1, FONCTION_PARAMS(context->renderer));
 
     sceneRegisterFunction(scene, GRID_TYPE, RENDER_GAME, renderGridWrapper, 1, FONCTION_PARAMS(context->renderer, camera));
-    sceneRegisterFunction(scene, TILE_ENTITY, RENDER_GAME, renderTileEntityWrapper, 1, FONCTION_PARAMS(context->renderer, camera));
+    sceneRegisterFunction(scene, TILE_ENTITY, RENDER_GAME, renderTileEntityWrapper, 1, FONCTION_PARAMS(context, camera));
     sceneRegisterFunction(scene, PLAYER_TYPE, RENDER_GAME, renderPlayerWrapper, 1, FONCTION_PARAMS(context->renderer, camera));
     sceneRegisterFunction(scene, ENEMY_TYPE, RENDER_GAME, renderEnemyWrapper, 1, FONCTION_PARAMS(context->renderer, camera));
 

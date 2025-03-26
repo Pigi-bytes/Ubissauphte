@@ -1,6 +1,7 @@
 #ifndef SPIKE_H
 #define SPIKE_H
 
+#include "../../../context.h"
 #include "../tilesEntity.h"
 
 typedef struct {
@@ -12,7 +13,7 @@ typedef struct {
 } t_spike;
 
 t_tileEntity* createSpikeEntity(t_tileset* tileset, t_scene* scene);
-void updateSpike(t_tileEntity* entity, float* deltaTime, t_grid* grid, t_objectManager* entities, t_input* input);
-void renderSpike(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera);
+void updateSpike(t_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities);
+void renderSpike(t_tileEntity* entity, t_context* context, t_camera* camera);
 
 #endif

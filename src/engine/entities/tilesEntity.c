@@ -27,15 +27,15 @@ void initTileEntityBase(t_tileEntity* base, SDL_Texture* texture, SDL_Rect rect,
     base->entity.currentScene = scene;
 }
 
-void updateTileEntity(t_tileEntity* tileEntity, float* deltaTime, t_grid* grid, t_objectManager* entities, t_input* input) {
+void updateTileEntity(t_tileEntity* tileEntity, t_context* context, t_grid* grid, t_objectManager* entities) {
     if (tileEntity && tileEntity->update) {
-        tileEntity->update(tileEntity, deltaTime, grid, entities, input);
+        tileEntity->update(tileEntity, context, grid, entities);
     }
 }
 
-void renderTileEntity(SDL_Renderer* renderer, t_tileEntity* tileEntity, t_camera* camera) {
+void renderTileEntity(t_tileEntity* tileEntity, t_context* context, t_camera* camera) {
     if (tileEntity && tileEntity->render) {
-        tileEntity->render(renderer, tileEntity, camera);
+        tileEntity->render(tileEntity, context, camera);
     }
 }
 
@@ -111,19 +111,18 @@ void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* enti
 }
 
 void renderTileEntityWrapper(t_fonctionParam* f) {
-    SDL_Renderer* renderer = GET_PTR(f, 0, SDL_Renderer*);
+    t_context* context = GET_PTR(f, 0, t_context*);
     t_tileEntity* entity = GET_PTR(f, 1, t_tileEntity*);
     t_camera* camera = GET_PTR(f, 2, t_camera*);
 
-    renderTileEntity(renderer, entity, camera);
+    renderTileEntity(entity, context, camera);
 }
 
 void updateTileEntityWrapper(t_fonctionParam* f) {
-    float* deltaTime = GET_PTR(f, 0, float*);
+    t_context* context = GET_PTR(f, 0, t_context*);
     t_tileEntity* entity = GET_PTR(f, 1, t_tileEntity*);
     t_grid* grid = GET_PTR(f, 2, t_grid*);
     t_objectManager* entities = GET_PTR(f, 3, t_objectManager*);
-    t_input* input = GET_PTR(f, 4, t_input*);
 
-    updateTileEntity(entity, deltaTime, grid, entities, input);
+    updateTileEntity(entity, context, grid, entities);
 }

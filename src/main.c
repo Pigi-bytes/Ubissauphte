@@ -21,6 +21,8 @@ int main(int argc, char* argv[]) {
 
     context.input = initInput(WINDOW_WIDTH, WINDOW_HEIGHT);
     context.font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
+    context.gameFont = loadFont("assets/fonts/PressStart2P-vaV7.ttf", 7);
+
     context.frameData = initFrameData(0);
     context.option = creeOption();
     context.sceneController = initSceneController();

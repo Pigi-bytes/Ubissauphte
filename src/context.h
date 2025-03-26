@@ -33,6 +33,7 @@ typedef struct {
     t_input* input;
     t_control* control;
     TTF_Font* font;
+    TTF_Font* gameFont;
     t_audiomanager* audioManager;
     t_sceneController* sceneController;
     t_frameData* frameData;

@@ -1,6 +1,6 @@
 #include "spike.h"
 
-void updateSpike(t_tileEntity* entity, float* deltaTime, t_grid* grid, t_objectManager* entities, t_input* input) {
+void updateSpike(t_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities) {
     t_spike* spike = (t_spike*)entity;
     t_joueur* player = (t_joueur*)getObject(entities, 0);
 
@@ -38,13 +38,13 @@ void updateSpike(t_tileEntity* entity, float* deltaTime, t_grid* grid, t_objectM
     }
 
     spike->playerTouching = playerTouchingNow;
-    updatePhysicEntity(&entity->entity, deltaTime, grid, entities);
+    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, grid, entities);
 }
 
-void renderSpike(SDL_Renderer* renderer, t_tileEntity* entity, t_camera* camera) {
+void renderSpike(t_tileEntity* entity, t_context* context, t_camera* camera) {
     t_spike* spike = (t_spike*)entity;
 
-    renderEntity(renderer, &entity->entity, camera);
+    renderEntity(context->renderer, &entity->entity, camera);
 }
 
 t_tileEntity* createSpikeEntity(t_tileset* tileset, t_scene* scene) {
