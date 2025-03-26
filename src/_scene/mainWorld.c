@@ -92,9 +92,9 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, -1, FONCTION_PARAMS(context->input, *player, *level, viewport, &context->frameData->deltaTime, context->sceneController));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&context->input->mouseYWheel));
 
-    sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, -1, FONCTION_PARAMS((*player), &context->frameData->deltaTime, *level, salle->entities));
-    sceneRegisterFunction(scene, ENEMY_TYPE, UPDATE, updateEnemyWrapper, 0, FONCTION_PARAMS(&context->frameData->deltaTime, *level, salle->entities));
-    sceneRegisterFunction(scene, TILE_ENTITY, UPDATE, updateTileEntityWrapper, 1, FONCTION_PARAMS(context, *level, salle->entities));
+    sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, -1, FONCTION_PARAMS((*player), &context->frameData->deltaTime, salle, salle->entities));
+    sceneRegisterFunction(scene, ENEMY_TYPE, UPDATE, updateEnemyWrapper, 0, FONCTION_PARAMS(&context->frameData->deltaTime, salle, salle->entities));
+    sceneRegisterFunction(scene, TILE_ENTITY, UPDATE, updateTileEntityWrapper, 1, FONCTION_PARAMS(context, salle, salle->entities));
 
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, -1, FONCTION_PARAMS(context->fpsDisplay, context->frameData, context->renderer));
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, -1, FONCTION_PARAMS(context->renderer, context->fpsDisplay));

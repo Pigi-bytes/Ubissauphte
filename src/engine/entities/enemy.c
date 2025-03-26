@@ -58,7 +58,7 @@ void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
     }
 }
 
-void updateEnemy(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities) {
+void updateEnemy(t_enemy* enemy, float* deltaTime, t_salle* salle, t_objectManager* entities) {
     if (enemy->health.isDead) {
         for (int i = 0; i < entities->count; i++) {
             if (getObject(entities, i) == enemy) {
@@ -72,7 +72,7 @@ void updateEnemy(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager
     updateHealthSystem(&enemy->health, *deltaTime);
 
     if (enemy->update) {
-        enemy->update(enemy, deltaTime, grid, entities);
+        enemy->update(enemy, deltaTime, salle->grille, entities);
     }
 }
 

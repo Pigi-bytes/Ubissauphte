@@ -13,7 +13,7 @@
 typedef struct s_tileEntity {
     t_entity entity;
 
-    void (*update)(struct s_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities);
+    void (*update)(struct s_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities);
     void (*render)(struct s_tileEntity* entity, t_context* context, t_camera* camera);
 
     SDL_bool isDestructible;

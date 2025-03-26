@@ -1,6 +1,6 @@
 #include "spike.h"
 
-void updateSpike(t_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities) {
+void updateSpike(t_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities) {
     t_spike* spike = (t_spike*)entity;
     t_joueur* player = (t_joueur*)getObject(entities, 0);
 
@@ -32,13 +32,17 @@ void updateSpike(t_tileEntity* entity, t_context* context, t_grid* grid, t_objec
         } else if (!spike->messageShown) {
             printf("*WHOOSH* Teleportation \n");
             spike->messageShown = SDL_TRUE;
+            context->sceneController->currentScene = indiceByscene(context->sceneController, salle->gauche->scene);
+            t_joueur* joueur = (t_joueur*)getObject(entities, 0);
+            joueur->indexCurrentRoom = context->sceneController->currentScene;
+            placeOnRandomTile(salle->gauche->grille, &joueur->entity, entities);
         }
     } else {
         spike->playerTouching = SDL_FALSE;
     }
 
     spike->playerTouching = playerTouchingNow;
-    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, grid, entities);
+    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, salle->grille, entities);
 }
 
 void renderSpike(t_tileEntity* entity, t_context* context, t_camera* camera) {

@@ -115,7 +115,7 @@ void affichage(SDL_Renderer *renderer, t_mapAffichage *map, t_joueur *player) {
 }
 void handleInputMap(t_input *input, t_joueur *player, t_sceneController *sceneController) {
     if (input->key[player->control->map]) {
-        setScene(sceneController, "main");
+        getPrevuisScene(sceneController);
         input->key[player->control->map] = SDL_FALSE;
     }
 }

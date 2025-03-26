@@ -2,6 +2,7 @@
 #include "_scene/fpsMenu.h"
 #include "_scene/mainMenu.h"
 #include "_scene/mainWorld.h"
+#include "_scene/option2.h"
 #include "_scene/optionMenu.h"
 #include "context.h"
 
@@ -75,7 +76,7 @@ int main(int argc, char* argv[]) {
     t_arme* hache = malloc(sizeof(t_arme));
     *hache = (t_arme){
         .mass = 15.0f,            // Lourde
-        .damage = 30.0f,          // Dégâts élevés
+        .damage = 5000.0f,        // Dégâts élevés
         .range = 28.0f,           // Portée moyenne
         .angleAttack = 2 * M_PI,  // Large arc d'attaque (120°)
         .attackDuration = 0.45f,  // Animation lente
@@ -128,11 +129,13 @@ int main(int argc, char* argv[]) {
     CreateNiveau(&context, 10, &player);
     t_scene* scene2 = createCommandeMenu(&context);
     t_scene* scene3 = createFpsMenu(&context);
+    t_scene* scene4 = createOption2Menu(&context);
 
     addScene(context.sceneController, scene);
     addScene(context.sceneController, scene0);
     addScene(context.sceneController, scene2);
     addScene(context.sceneController, scene3);
+    addScene(context.sceneController, scene4);
     setScene(context.sceneController, "menuPrincipal");
 
     while (!context.input->quit) {

@@ -13,7 +13,7 @@ void takeDamageBarrel(t_tileEntity* entity, float damage) {
     }
 }
 
-void updateBarrel(t_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities) {
+void updateBarrel(t_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities) {
     t_barrel* barrel = (t_barrel*)entity;
 
     updateHealthSystem(&barrel->health, context->frameData->deltaTime);
@@ -45,7 +45,7 @@ void updateBarrel(t_tileEntity* entity, t_context* context, t_grid* grid, t_obje
         return;
     }
 
-    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, grid, entities);
+    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, salle->grille, entities);
 }
 
 void renderBarrel(t_tileEntity* entity, t_context* context, t_camera* camera) {

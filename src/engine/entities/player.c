@@ -445,10 +445,11 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     }
 
     if (input->key[player->control->escape]) {
-        setScene(sceneController, "menuPrincipal");
+        sceneController->lastScene = getObject(sceneController->scene, sceneController->currentScene);
+        setScene(sceneController, "retourOption");
     }
-
     if (input->key[player->control->map]) {
+        sceneController->lastScene = getObject(sceneController->scene, sceneController->currentScene);
         setScene(sceneController, "carte");
         input->key[player->control->map] = SDL_FALSE;
     }
@@ -495,7 +496,7 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     }
 }
 
-void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectManager* entities) {
+void updatePlayer(t_joueur* player, float* deltaTime, t_salle* salle, t_objectManager* entities) {
     // On conserve le deltaTime original pour certains calculs qui ne doivent pas être affecté par le ralentissement
     float originalDeltaTime = *deltaTime;
 
@@ -512,7 +513,7 @@ void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectMana
         player->attack.cooldown -= *deltaTime;
     }
 
-    updatePhysicEntity(&player->entity, deltaTime, grid, entities);
+    updatePhysicEntity(&player->entity, deltaTime, salle->grille, entities);
 }
 
 void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {

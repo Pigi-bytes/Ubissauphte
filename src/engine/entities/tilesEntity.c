@@ -121,8 +121,8 @@ void renderTileEntityWrapper(t_fonctionParam* f) {
 void updateTileEntityWrapper(t_fonctionParam* f) {
     t_context* context = GET_PTR(f, 0, t_context*);
     t_tileEntity* entity = GET_PTR(f, 1, t_tileEntity*);
-    t_grid* grid = GET_PTR(f, 2, t_grid*);
+    t_salle* salle = GET_PTR(f, 2, t_salle*);
     t_objectManager* entities = GET_PTR(f, 3, t_objectManager*);
 
-    updateTileEntity(entity, context, grid, entities);
+    updateTileEntity(entity, context, salle, entities);
 }

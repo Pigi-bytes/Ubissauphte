@@ -31,8 +31,8 @@
 
 SDL_Rect creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio);
 void bouttonClickQuit(t_fonctionParam* fonction);
-
 void renderTextWrapper(t_fonctionParam* f);
+void changementAffichage(t_fonctionParam* fonction);
 void renderButtonWrapper(t_fonctionParam* f);
 void renderFPSDisplayWrapper(t_fonctionParam* f);
 void renderGridWrapper(t_fonctionParam* f);
@@ -58,5 +58,6 @@ void renderToucheWrapper(t_fonctionParam* f);
 void handleInputToucheWrapper(t_fonctionParam* f);
 void affichageWrapper(t_fonctionParam* f);
 void handleInputMapWrapper(t_fonctionParam* f);
+void getPrevuisSceneWrapper(t_fonctionParam* f);
 
 #endif

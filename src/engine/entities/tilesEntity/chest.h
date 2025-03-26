@@ -15,7 +15,7 @@ typedef struct {
 } t_chest;
 
 t_tileEntity* createChestEntity(t_tileset* tileset, t_scene* scene);
-void updateChest(t_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities);
+void updateChest(t_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities);
 void renderChest(t_tileEntity* entity, t_context* context, t_camera* camera);
 
 #endif

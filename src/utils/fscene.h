@@ -32,6 +32,7 @@ typedef struct t_scene {
 typedef struct {
     t_objectManager* scene;
     int currentScene;
+    t_scene* lastScene;
 } t_sceneController;
 
 t_scene* createScene(t_objectManager* objectManager, char* name);
@@ -59,5 +60,9 @@ void registerFunctionForObject(t_scene* scene, void* object, uint8_t typeId,
 
 // Trouver l'index d'un objet dans le gestionnaire d'objets
 int findObjectIndex(t_objectManager* manager, void* object);
+
+// Revenir à la scene précedente
+void getPrevuisScene(t_sceneController* controller);
+int indiceByscene(t_sceneController* controller, t_scene* scene);
 
 #endif
