@@ -92,5 +92,9 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
         } while (!newRoom);  // newRoom point sur NULL si on genere pas -> on enleve la variable de control
     }
 
+    for (int i = 0; i < numberRoom; i++){
+        printf("X[%d] et Y[%d]\n", roomCoords[i].x, roomCoords[i].y);
+    }
+
     return roomList;
 }
