@@ -48,10 +48,17 @@ typedef struct
     TTF_Font *item_font;
     TTF_Font *descr_font;
 
+    t_text *text_player[7];
+    t_text *text_item[7];
+
+    char *nom_txt_item[7];
+    char *nom_txt_player[7];
+    SDL_Color color_txt;
+
 } InventoryUI;
 
 void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input, int nbItems);
-void inventoryUI_Update(InventoryUI *ui);
+void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input);
 void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer);
 void inventoryUI_HandleEvent(InventoryUI *ui, t_input *input);
 

@@ -1,7 +1,6 @@
 #include "./ui/affichage.h"
 
-int main()
-{
+int main() {
     SDL_Window *window = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_SHOWN);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
@@ -26,24 +25,23 @@ int main()
     item->texture = (SDL_Texture *)getObject(tileset->textureTiles, item->indiceTexture);
     strcpy(item->description, "\nça c'est de l'arme \nguts weapon\nbla bla bla\navec ça tu gagnes\nà coup sur");
 
-    for (int i = 0; i < 24; i++)
-    {
+    for (int i = 0; i < 24; i++) {
         itemListe[i] = item;
     }
 
     InventoryUI ui;
-    inventoryUI_Init(&ui, renderer, c, itemListe, input, 24);
+    inventoryUI_Init(&ui, renderer, c, itemListe, input, 10);
 
-    while (!input->quit)
-    {
+    while (!input->quit) {
+        int width = input->windowWidth;
+        int height = input->windowHeight;
         updateInput(input);
 
-        if (!(input->windowWidth == ui.input_ref->windowWidth) || !(input->windowHeight == ui.input_ref->windowHeight))
-        {
-
+        if (input->windowWidth != width || input->windowHeight != height) {
             printf("%d %d\n", input->windowWidth, input->windowHeight);
             printf("%d %d\n", ui.input_ref->windowWidth, ui.input_ref->windowHeight);
-            inventoryUI_Update(&ui);
+
+            inventoryUI_Update(&ui, renderer, input);
         }
         inventoryUI_Render(&ui, renderer);
 
