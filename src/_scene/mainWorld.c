@@ -49,13 +49,12 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     registerType(salle->entities->registry, NULL, "SPIKE");
     registerType(salle->entities->registry, NULL, "BARREL");
 
+    addObject(salle->entities, &(*player)->entity, PLAYER);
     t_grille* grille = geneRoom(salle);
     (*level) = loadMap(grille->nom, tileset);
     int levelWidth = (*level)->width * tileset->tileSize;
     int levelHeight = (*level)->height * tileset->tileSize;
     free(grille);
-
-    addObject(salle->entities, &(*player)->entity, PLAYER);
 
     t_enemy* enemy;
     for (int i = 0; i < 3; i++) {
@@ -86,23 +85,17 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
 
     ADD_OBJECT_TO_SCENE(scene, NULL, PLAYER_TYPE);
     ADD_OBJECT_TO_SCENE(scene, *level, GRID_TYPE);
-    ADD_OBJECT_TO_SCENE(scene, NULL, PLAYER_TYPE);
-    ADD_OBJECT_TO_SCENE(scene, *level, GRID_TYPE);
     ADD_OBJECT_TO_SCENE(scene, camera, CAMERA_TYPE);
     ADD_OBJECT_TO_SCENE(scene, viewport, VIEWPORT_TYPE);
     ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
     ADD_OBJECT_TO_SCENE(scene, NULL, FRAME_DISPLAY_TYPE);
 
     processSpecialTiles(*level, tileset, salle->entities, TILE_ENTITY, scene);
-    processSpecialTiles(*level, tileset, salle->entities, TILE_ENTITY, scene);
 
     sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, -1, FONCTION_PARAMS(context->input, *player, *level, viewport, &context->frameData->deltaTime, context->sceneController));
-    sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, -1, FONCTION_PARAMS(context->input, *player, *level, viewport, &context->frameData->deltaTime, context->sceneController));
+
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&context->input->mouseYWheel));
 
-    sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, -1, FONCTION_PARAMS((*player), &context->frameData->deltaTime, *level, salle->entities));
-    sceneRegisterFunction(scene, ENEMY_TYPE, UPDATE, updateEnemyWrapper, 0, FONCTION_PARAMS(&context->frameData->deltaTime, *level, salle->entities));
-    sceneRegisterFunction(scene, TILE_ENTITY, UPDATE, updateTileEntityWrapper, 1, FONCTION_PARAMS(&context->frameData->deltaTime, *level, salle->entities, context->input));
     sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, -1, FONCTION_PARAMS((*player), &context->frameData->deltaTime, *level, salle->entities));
     sceneRegisterFunction(scene, ENEMY_TYPE, UPDATE, updateEnemyWrapper, 0, FONCTION_PARAMS(&context->frameData->deltaTime, *level, salle->entities));
     sceneRegisterFunction(scene, TILE_ENTITY, UPDATE, updateTileEntityWrapper, 1, FONCTION_PARAMS(&context->frameData->deltaTime, *level, salle->entities, context->input));
@@ -112,10 +105,6 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
 
     sceneRegisterFunction(scene, MINIMAP_TYPE, UPDATE, updateMinimapWrapper, 0, FONCTION_PARAMS(camera, context->renderer, salle->entities, *level));
     sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&(*player)->entity.displayRect.x, &(*player)->entity.displayRect.y, &context->frameData->deltaTime));
-    sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&(*player)->entity.displayRect.x, &(*player)->entity.displayRect.y));
-    sceneRegisterFunction(scene, MINIMAP_TYPE, UPDATE, updateMinimapWrapper, 0, FONCTION_PARAMS(camera, context->renderer, salle->entities, *level));
-    sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&(*player)->entity.displayRect.x, &(*player)->entity.displayRect.y, &context->frameData->deltaTime));
-    sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&(*player)->entity.displayRect.x, &(*player)->entity.displayRect.y));
 
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_RESIZE, resizeViewportWrapper, 0, FONCTION_PARAMS(&context->input->windowWidth, &context->input->windowHeight));
     sceneRegisterFunction(scene, MINIMAP_TYPE, HANDLE_RESIZE, resizeMinimapWrapper, 1, FONCTION_PARAMS(context->renderer, &context->input->windowWidth, &context->input->windowHeight));
