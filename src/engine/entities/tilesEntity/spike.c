@@ -1,8 +1,48 @@
 #include "spike.h"
 
+int determineSpikeDirection(t_grid* grid, t_entity* entity) {
+    float centerX = grid->width * 16 / 2.0f;
+    float centerY = grid->height * 16 / 2.0f;
+
+    float spikeX = entity->collisionCircle.x;
+    float spikeY = entity->collisionCircle.y;
+
+    // Calculer les distances normalisées au centre
+    float dx = (spikeX - centerX) / centerX;
+    float dy = (spikeY - centerY) / centerY;
+
+    // Déterminer la direction principale
+    if (fabsf(dx) > fabsf(dy)) {
+        return (dx > 0) ? 1 : 3;  // Droite (1) ou Gauche (3)
+    } else {
+        return (dy > 0) ? 2 : 0;  // Bas (2) ou Haut (0)
+    }
+}
+
 void updateSpike(t_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities) {
     t_spike* spike = (t_spike*)entity;
     t_joueur* player = (t_joueur*)getObject(entities, 0);
+
+    // Déterminer la direction et la salle liée si ce n'est pas déjà fait
+    if (spike->direction == -1) {
+        spike->direction = determineSpikeDirection(salle->grille, &entity->entity);
+
+        // Associer la salle appropriée selon la direction
+        switch (spike->direction) {
+            case 0:
+                spike->linkedRoom = salle->haut;
+                break;
+            case 1:
+                spike->linkedRoom = salle->droite;
+                break;
+            case 2:
+                spike->linkedRoom = salle->bas;
+                break;
+            case 3:
+                spike->linkedRoom = salle->gauche;
+                break;
+        }
+    }
 
     if (spike->isActive) {
         uint8_t enemyTypeId = getTypeIdByName(entities->registry, "ENEMY");
@@ -24,18 +64,25 @@ void updateSpike(t_tileEntity* entity, t_context* context, t_salle* salle, t_obj
         }
     }
 
-    SDL_bool playerTouchingNow = checkCircleCircleCollision(&entity->entity.collisionCircle, &player->entity.collisionCircle, NULL);
+    SDL_bool playerTouchingNow = checkCircleCircleCollision(&entity->entity.collisionCircle,
+                                                            &player->entity.collisionCircle,
+                                                            NULL);
 
     if (playerTouchingNow) {
         if (spike->isActive) {
             printf("Spike damaged player for %.1f points\n", spike->damage);
-        } else if (!spike->messageShown) {
-            printf("*WHOOSH* Teleportation \n");
+            // Ici vous pourriez appliquer des dégâts au joueur
+        } else if (!spike->messageShown && spike->linkedRoom) {
+            printf("*WHOOSH* Teleportation direction: %d\n", spike->direction);
             spike->messageShown = SDL_TRUE;
-            context->sceneController->currentScene = indiceByscene(context->sceneController, salle->gauche->scene);
+
+            // Téléportation vers la salle liée
+            context->sceneController->currentScene =
+                indiceByscene(context->sceneController, spike->linkedRoom->scene);
+
             t_joueur* joueur = (t_joueur*)getObject(entities, 0);
             joueur->indexCurrentRoom = context->sceneController->currentScene;
-            placeOnRandomTile(salle->gauche->grille, &joueur->entity, entities);
+            placeOnRandomTile(spike->linkedRoom->grille, &joueur->entity, entities);
         }
     } else {
         spike->playerTouching = SDL_FALSE;
@@ -47,7 +94,6 @@ void updateSpike(t_tileEntity* entity, t_context* context, t_salle* salle, t_obj
 
 void renderSpike(t_tileEntity* entity, t_context* context, t_camera* camera) {
     t_spike* spike = (t_spike*)entity;
-
     renderEntity(context->renderer, &entity->entity, camera);
 }
 
@@ -57,14 +103,20 @@ t_tileEntity* createSpikeEntity(t_tileset* tileset, t_scene* scene) {
 
     initTileEntityBase(&spike->base, getObject(tileset->textureTiles, 42), (SDL_Rect){0, 0, 16, 16}, scene);
 
-    addAnimation(spike->base.entity.animationController, createAnimation(tileset, (int[]){42}, 1, 240, SDL_TRUE, "haut"));
-    addAnimation(spike->base.entity.animationController, createAnimation(tileset, (int[]){42, 137, 137, 136}, 4, 600, SDL_FALSE, "bas"));
+    // Configurer les animations
+    addAnimation(spike->base.entity.animationController,
+                 createAnimation(tileset, (int[]){42}, 1, 240, SDL_TRUE, "haut"));
+    addAnimation(spike->base.entity.animationController,
+                 createAnimation(tileset, (int[]){42, 137, 137, 136}, 4, 600, SDL_FALSE, "bas"));
     setAnimation(spike->base.entity.animationController, "haut");
 
+    // Initialisation des propriétés du spike
     spike->damage = 10;
     spike->isActive = SDL_TRUE;
     spike->messageShown = SDL_FALSE;
     spike->playerTouching = SDL_FALSE;
+    spike->direction = -1;  // Non déterminée au départ
+    spike->linkedRoom = NULL;
 
     spike->base.update = updateSpike;
     spike->base.render = renderSpike;

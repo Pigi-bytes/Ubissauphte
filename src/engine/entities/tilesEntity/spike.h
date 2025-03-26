@@ -10,6 +10,8 @@ typedef struct {
     SDL_bool isActive;
     SDL_bool messageShown;
     SDL_bool playerTouching;
+    int direction;
+    t_salle* linkedRoom;
 } t_spike;
 
 t_tileEntity* createSpikeEntity(t_tileset* tileset, t_scene* scene);
