@@ -1,35 +1,42 @@
 #include "affichage.h"
 
-void calculCasePlayer(SDL_Rect *casePlayer, t_input *input, char *nom) {
-    if (strcmp(nom, "Perso") == 0) {
+void calculCasePlayer(SDL_Rect *casePlayer, t_input *input, char *nom)
+{
+    if (strcmp(nom, "Perso") == 0)
+    {
         casePlayer->h = input->windowWidth * 0.14;
         casePlayer->w = input->windowWidth * 0.16;
         casePlayer->x = input->windowWidth * 0.02;
         casePlayer->y = input->windowHeight * 0.08;
     }
 }
-void calculCaseSlots(SDL_Rect *comp, SDL_Rect *slot, t_input *input, char *nom1, char *nom2) {
-    if (!strcmp(nom2, "arme") && !strcmp(nom1, "Perso")) {
+void calculCaseSlots(SDL_Rect *comp, SDL_Rect *slot, t_input *input, char *nom1, char *nom2)
+{
+    if (!strcmp(nom2, "arme") && !strcmp(nom1, "Perso"))
+    {
         slot->h = comp->h / 2 - comp->h * 0.05;
         slot->w = comp->w / 2;
         slot->x = comp->w + comp->x + input->windowWidth * 0.04;
         slot->y = comp->y;
     }
-    if (!strcmp(nom2, "armure") && !strcmp(nom1, "arme")) {
+    if (!strcmp(nom2, "armure") && !strcmp(nom1, "arme"))
+    {
         slot->h = comp->h;
         slot->w = comp->w;
         slot->x = comp->x;
         slot->y = comp->h + input->windowHeight * 0.08 + input->windowWidth * 0.13 * 0.1;
     }
 
-    if (!strcmp(nom2, "activable1") && !strcmp(nom1, "Perso")) {
+    if (!strcmp(nom2, "activable1") && !strcmp(nom1, "Perso"))
+    {
         slot->h = comp->h / 2;
         slot->w = comp->w / 2 - comp->w * 0.05;
         slot->x = comp->x;
         slot->y = comp->h + comp->y + input->windowHeight * 0.04;
     }
 
-    if (!strcmp(nom2, "activable2") && !strcmp(nom1, "activable1")) {
+    if (!strcmp(nom2, "activable2") && !strcmp(nom1, "activable1"))
+    {
         slot->h = comp->h;
         slot->w = comp->w;
         slot->x = comp->w + input->windowWidth * 0.02 + input->windowWidth * 0.185 * 0.1;
@@ -37,42 +44,48 @@ void calculCaseSlots(SDL_Rect *comp, SDL_Rect *slot, t_input *input, char *nom1,
     }
 }
 
-void calculDescrStatsPlayer(SDL_Rect *slotDroit, SDL_Rect *slotBas, SDL_Rect *casePlayer, SDL_Rect *caseStatsPlayer, t_input *input) {
+void calculDescrStatsPlayer(SDL_Rect *slotDroit, SDL_Rect *slotBas, SDL_Rect *casePlayer, SDL_Rect *caseStatsPlayer, t_input *input)
+{
     caseStatsPlayer->h = casePlayer->h + slotBas->h;
     caseStatsPlayer->w = casePlayer->w + slotDroit->w + input->windowWidth * 0.04;
     caseStatsPlayer->x = casePlayer->x;
     caseStatsPlayer->y = slotBas->y + slotBas->h + input->windowHeight * 0.04;
 }
 
-void calculInventaire(SDL_Rect *inv, SDL_Rect *statsPlayer, t_input *input) {
+void calculInventaire(SDL_Rect *inv, SDL_Rect *statsPlayer, t_input *input)
+{
     inv->h = statsPlayer->h * 2 + input->windowHeight * 0.08;
     inv->w = statsPlayer->w * 1.5;
     inv->x = statsPlayer->w + input->windowWidth * 0.04;
     inv->y = input->windowHeight * 0.08;
 }
 
-void calculStatsItem(SDL_Rect *inv, SDL_Rect *statsItem, t_input *input) {
+void calculStatsItem(SDL_Rect *inv, SDL_Rect *statsItem, t_input *input)
+{
     statsItem->h = inv->h / 2 - input->windowHeight * 0.01;
     statsItem->w = inv->w / 2.5;
     statsItem->x = inv->x + inv->w + input->windowWidth * 0.04;
     statsItem->y = inv->y;
 }
 
-void caculDescrItem(SDL_Rect *statsItem, SDL_Rect *descrItem, t_input *input) {
+void caculDescrItem(SDL_Rect *statsItem, SDL_Rect *descrItem, t_input *input)
+{
     descrItem->h = statsItem->h * 2 / 3 - input->windowHeight * 0.01;
     descrItem->w = statsItem->w;
     descrItem->x = statsItem->x;
     descrItem->y = statsItem->h + statsItem->y + input->windowHeight * 0.03;
 }
 
-void calculEquiper(SDL_Rect *statsItem, SDL_Rect *descrItem, SDL_Rect *Equiper, t_input *input) {
+void calculEquiper(SDL_Rect *statsItem, SDL_Rect *descrItem, SDL_Rect *Equiper, t_input *input)
+{
     Equiper->h = statsItem->h / 3 - input->windowHeight * 0.03;
     Equiper->w = descrItem->w;
     Equiper->x = descrItem->x;
     Equiper->y = descrItem->y + descrItem->h + input->windowHeight * 0.03;
 }
 
-char *createStatText(char *statName, float statValue) {
+char *createStatText(char *statName, float statValue)
+{
     char *name = strdup(statName);
     char *value = malloc(sizeof(char *));
     sprintf(value, "%.2f", statValue);
@@ -81,7 +94,8 @@ char *createStatText(char *statName, float statValue) {
     return name;
 }
 
-void calculerItem(SDL_Rect *item, SDL_Rect inv, SDL_Rect *comp, int nb, int ind, t_input *input) {
+void calculerItem(SDL_Rect *item, SDL_Rect inv, SDL_Rect *comp, int nb, int ind, t_input *input)
+{
     item->h = inv.h / 6;
     item->w = item->h;
     if (ind != 0 && ind != 4)
@@ -96,13 +110,73 @@ void calculerItem(SDL_Rect *item, SDL_Rect inv, SDL_Rect *comp, int nb, int ind,
         item->y = comp->y;
 }
 
-void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *input) {
+void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input, int nbItems)
+{
+
+    initTextEngine();
+
+    // Initialisation des références
+    ui->character = c;
+    ui->items = items;
+    ui->input_ref = input;
+    ui->nbItems = nbItems;
+    ui->scroll_offset = 0;
+
+    // Calculs initiaux (votre code original)
+    calculCasePlayer(&ui->player_panel.rect, input, "Perso");
+    ui->player_panel.texture = c->texture;
+
+    calculCaseSlots(&ui->player_panel.rect, &ui->caseArme.rect, input, "Perso", "arme");
+    calculCaseSlots(&ui->caseArme.rect, &ui->caseArmure.rect, input, "arme", "armure");
+    calculCaseSlots(&ui->player_panel.rect, &ui->CaseActivable1.rect, input, "Perso", "activable1");
+    calculCaseSlots(&ui->CaseActivable1.rect, &ui->caseActivable2.rect, input, "activable1", "activable2");
+
+    calculDescrStatsPlayer(&ui->caseArme.rect, &ui->CaseActivable1.rect, &ui->player_panel.rect, &ui->statsPlayer.rect, input);
+    calculInventaire(&ui->inventory_panel.rect, &ui->statsPlayer.rect, input);
+    calculStatsItem(&ui->inventory_panel.rect, &ui->statsItem.rect, input);
+    caculDescrItem(&ui->statsItem.rect, &ui->descrItem.rect, input);
+    calculEquiper(&ui->statsItem.rect, &ui->descrItem.rect, &ui->equiper.rect, input);
+
+    // Initialisation slots (votre code original)
+    ui->inventory_slots = malloc(nbItems * sizeof(UI_Element));
+    for (int i = 0, j = 0; i < nbItems; j++, i++)
+    {
+        calculerItem(&ui->inventory_slots[i].rect,
+                     ui->inventory_panel.rect,
+                     (i > 0) ? &ui->inventory_slots[i - 1].rect : NULL,
+                     i,
+                     j,
+                     input);
+        ui->inventory_slots[i].texture = items[i]->texture;
+        if (j == 4)
+            j = 0;
+    }
+
+    // Scroll viewport (nouveau)
+    ui->scroll_viewport = (SDL_Rect){
+        ui->inventory_panel.rect.x,
+        ui->inventory_panel.rect.y + ui->inventory_slots[0].rect.y + input->windowHeight * 0.02,
+        ui->inventory_panel.rect.w,
+        ui->inventory_panel.rect.h - ui->inventory_slots[0].rect.h * 2};
+
+    // Police
+    ui->item_font = TTF_OpenFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->statsPlayer.rect.h * ui->statsPlayer.rect.w * 0.0002);
+    ui->descr_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->descrItem.rect.h * ui->descrItem.rect.w * 0.0003);
+    ui->color.a = 255;
+    ui->color.b = 0;
+    ui->color.g = 128;
+    ui->color.r = 255;
+}
+
+void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *input)
+{
     txt2->rect.x = txt1->rect.x;
     txt2->rect.y = txt1->rect.y + input->windowWidth * 0.03;
     renderText(renderer, txt2);
 }
 
-void afficherStatsPlayer(SDL_Renderer *renderer, SDL_Rect rect, t_character *c, TTF_Font *font, SDL_Color color, t_input *input) {
+void afficherStatsPlayer(SDL_Renderer *renderer, SDL_Rect rect, t_character *c, TTF_Font *font, SDL_Color color, t_input *input)
+{
     char *nom_txt1 = createStatText("Health : ", c->baseStats.health.additive);
     t_text *txt1 = createText(renderer, nom_txt1, font, color);
     char *nom_txt2 = createStatText("Health Max : ", c->baseStats.healthMax.additive);
@@ -135,7 +209,8 @@ void afficherStatsPlayer(SDL_Renderer *renderer, SDL_Rect rect, t_character *c, 
     afficherText(renderer, txt2, txt1, input);
 }
 
-void afficherStatsItem(SDL_Renderer *renderer, SDL_Rect rect, t_item *item, TTF_Font *font, SDL_Color color, t_input *input) {
+void afficherStatsItem(SDL_Renderer *renderer, SDL_Rect rect, t_item *item, TTF_Font *font, SDL_Color color, t_input *input)
+{
     t_text *name = createText(renderer, item->name, font, color);
     char *nom_txt1 = createStatText("Health : ", item->stats.health.additive);
     t_text *txt1 = createText(renderer, nom_txt1, font, color);
@@ -175,7 +250,8 @@ void afficherStatsItem(SDL_Renderer *renderer, SDL_Rect rect, t_item *item, TTF_
     afficherText(renderer, txt2, txt1, input);
 }
 
-void afficherDescription(SDL_Renderer *renderer, SDL_Rect rect, t_item *item, TTF_Font *font, SDL_Color color, t_input *input) {
+void afficherDescription(SDL_Renderer *renderer, SDL_Rect rect, t_item *item, TTF_Font *font, SDL_Color color, t_input *input)
+{
     t_text *name = createText(renderer, "Description :", font, color);
 
     name->rect.x = rect.x + rect.x * 0.025;
@@ -184,9 +260,11 @@ void afficherDescription(SDL_Renderer *renderer, SDL_Rect rect, t_item *item, TT
 
     int i = 0, j, nb = 1;
 
-    while (item->description[i++] != '\0') {
+    while (item->description[i++] != '\0')
+    {
         char descr[50];
-        for (j = 0; item->description[i] != '\n' && item->description[i] != '\0'; i++, j++) {
+        for (j = 0; item->description[i] != '\n' && item->description[i] != '\0'; i++, j++)
+        {
             descr[j] = item->description[i];
         }
         descr[j] = '\0';
@@ -199,7 +277,86 @@ void afficherDescription(SDL_Renderer *renderer, SDL_Rect rect, t_item *item, TT
     }
 }
 
-void afficherInventaire(SDL_Renderer *renderer, t_input *input, t_character *c, t_item **itemListe, t_item *item) {
+void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer)
+{
+
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_RenderClear(renderer);
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+    SDL_RenderCopy(renderer, ui->player_panel.texture, NULL, &ui->player_panel.rect);
+    SDL_RenderDrawRect(renderer, &ui->player_panel.rect);
+
+    SDL_RenderDrawRect(renderer, &ui->caseArme.rect);
+    SDL_RenderDrawRect(renderer, &ui->caseArmure.rect);
+    SDL_RenderDrawRect(renderer, &ui->CaseActivable1.rect);
+    SDL_RenderDrawRect(renderer, &ui->caseActivable2.rect);
+
+    SDL_RenderDrawRect(renderer, &ui->statsPlayer.rect);
+    afficherStatsPlayer(renderer, ui->statsPlayer.rect, ui->character, ui->item_font, ui->color, ui->input_ref);
+
+    SDL_RenderDrawRect(renderer, &ui->inventory_panel);
+
+    // Inventaire avec scroll
+    SDL_RenderSetViewport(renderer, &ui->scroll_viewport);
+    for (int i = 0; i < ui->nbItems; i++)
+    {
+        SDL_Rect dest = ui->inventory_slots[i].rect;
+        dest.y -= ui->scroll_offset;
+        SDL_RenderCopy(renderer, ui->inventory_slots[i].texture, NULL, &dest);
+        SDL_RenderDrawRect(renderer, &dest);
+    }
+
+    SDL_RenderSetViewport(renderer, NULL);
+    // Barre de défilement (nouveau)
+    ui->scrollbar = (SDL_Rect){
+        ui->scroll_viewport.x + ui->scroll_viewport.w - 10,
+        ui->inventory_panel.rect.y,
+        10,
+        (ui->scroll_viewport.h * ui->nbItems) / (ui->inventory_slots[0].rect.h)};
+
+    SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
+    SDL_RenderFillRect(renderer, &ui->scrollbar);
+
+    SDL_RenderDrawRect(renderer, &ui->statsItem.rect);
+    afficherStatsItem(renderer, ui->statsItem.rect, ui->items[0], ui->item_font, ui->color, ui->input_ref);
+
+    SDL_RenderDrawRect(renderer, &ui->descrItem.rect);
+    afficherDescription(renderer, ui->descrItem.rect, ui->items[0], ui->descr_font, ui->color, ui->input_ref);
+
+    SDL_RenderDrawRect(renderer, &ui->equiper.rect);
+}
+
+void inventoryUI_Update(InventoryUI *ui)
+{
+    // Recalcul si la fenêtre est redimensionnée
+    if (ui->input_ref->windowWidth != ui->player_panel.rect.w ||
+        ui->input_ref->windowHeight != ui->player_panel.rect.h)
+    {
+        inventoryUI_Init(ui, NULL, ui->character, ui->items, ui->input_ref, ui->nbItems);
+    }
+}
+
+void inventoryUI_HandleEvent(InventoryUI *ui, SDL_Event *e)
+{
+    if (e->type == SDL_MOUSEWHEEL)
+    {
+        ui->scroll_offset += e->wheel.y * 50;
+        int max_scroll = (ui->nbItems * ui->inventory_slots[0].rect.h) - ui->scroll_viewport.h;
+        ui->scroll_offset = CLAMP(ui->scroll_offset, 0, max_scroll);
+    }
+}
+
+void inventoryUI_Cleanup(InventoryUI *ui)
+{
+    free(ui->inventory_slots);
+    TTF_CloseFont(ui->item_font);
+    TTF_CloseFont(ui->descr_font);
+}
+
+void afficherInventaire(SDL_Renderer *renderer, t_input *input, t_character *c, t_item **itemListe, t_item *item)
+{
     initTextEngine();
 
     SDL_Color color = {
@@ -218,6 +375,7 @@ void afficherInventaire(SDL_Renderer *renderer, t_input *input, t_character *c, 
     SDL_Rect caseArmure;
     SDL_Rect CaseActivable1;
     SDL_Rect caseActivable2;
+
     SDL_Rect statsPlayer;
     SDL_Rect inv;
     SDL_Rect statsItem;
@@ -242,7 +400,8 @@ void afficherInventaire(SDL_Renderer *renderer, t_input *input, t_character *c, 
 
     calculEquiper(&statsItem, &descrItem, &equiper, input);
 
-    for (int i = 0, j = 0; i < 24; j++, i++) {
+    for (int i = 0, j = 0; i < 24; j++, i++)
+    {
         calculerItem(&caseItem[i], inv, &caseItem[i - 1], i, j, input);
 
         if (j == 4)
@@ -255,7 +414,7 @@ void afficherInventaire(SDL_Renderer *renderer, t_input *input, t_character *c, 
         .w = inv.w,
         .h = inv.h - caseItem[0].h * 2};
 
-    static int scrollOffset = 0;  // Décalage du défilement
+    static int scrollOffset = 0; // Décalage du défilement
 
     SDL_Rect scrollbar = {scrollViewport.x + scrollViewport.w - 10,
                           inv.y,
@@ -283,66 +442,79 @@ void afficherInventaire(SDL_Renderer *renderer, t_input *input, t_character *c, 
     SDL_RenderDrawRect(renderer, &inv);
 
     SDL_Event event;
-    while (SDL_PollEvent(&event)) {
-        switch (event.type) {
-            case SDL_MOUSEWHEEL:
-                if (event.wheel.y > 0) {
-                    scrollOffset -= 50;  // Défilement vers le haut (plus fluide)
-                } else if (event.wheel.y < 0) {
-                    scrollOffset += 50;  // Défilement vers le bas (plus fluide)
-                }
-                break;
-            case SDL_MOUSEBUTTONDOWN:
-                if (event.button.button == SDL_BUTTON_LEFT) {
-                    int mouseX = event.button.x;
-                    int mouseY = event.button.y;
+    while (SDL_PollEvent(&event))
+    {
+        switch (event.type)
+        {
+        case SDL_MOUSEWHEEL:
+            if (event.wheel.y > 0)
+            {
+                scrollOffset -= 50; // Défilement vers le haut (plus fluide)
+            }
+            else if (event.wheel.y < 0)
+            {
+                scrollOffset += 50; // Défilement vers le bas (plus fluide)
+            }
+            break;
+        case SDL_MOUSEBUTTONDOWN:
+            if (event.button.button == SDL_BUTTON_LEFT)
+            {
+                int mouseX = event.button.x;
+                int mouseY = event.button.y;
 
-                    // Vérifier si le clic est sur la barre de défilement
-                    if (mouseX >= scrollbar.x && mouseX <= scrollbar.x + scrollbar.w &&
-                        mouseY >= scrollbar.y && mouseY <= scrollbar.y + scrollbar.h) {
-                        // Mettre à jour la position de défilement pour tout en haut
-                        scrollOffset = 0;
-                    }
+                // Vérifier si le clic est sur la barre de défilement
+                if (mouseX >= scrollbar.x && mouseX <= scrollbar.x + scrollbar.w &&
+                    mouseY >= scrollbar.y && mouseY <= scrollbar.y + scrollbar.h)
+                {
+                    // Mettre à jour la position de défilement pour tout en haut
+                    scrollOffset = 0;
                 }
-                break;
+            }
+            break;
         }
     }
 
     int maxScrollOffset = (24 * caseItem[0].h) - scrollViewport.h;
-    if (scrollOffset < 0) {
+    if (scrollOffset < 0)
+    {
         scrollOffset = 0;
-    } else if (scrollOffset > maxScrollOffset) {
+    }
+    else if (scrollOffset > maxScrollOffset)
+    {
         scrollOffset = maxScrollOffset;
     }
 
     // Appliquer le viewport
     SDL_RenderSetViewport(renderer, &scrollViewport);
 
-    for (int i = 0; i < 24; i++) {
-        SDL_RenderSetViewport(renderer, NULL);  // Réinitialiser le viewport
+    for (int i = 0; i < 24; i++)
+    {
+        SDL_RenderSetViewport(renderer, NULL); // Réinitialiser le viewport
 
         SDL_Rect itemRect = caseItem[i];
         itemRect.y -= scrollOffset;
 
-        if (itemRect.y + itemRect.h > scrollViewport.y && itemRect.y < scrollViewport.y + scrollViewport.h) {
+        if (itemRect.y + itemRect.h > scrollViewport.y && itemRect.y < scrollViewport.y + scrollViewport.h)
+        {
             SDL_RenderCopy(renderer, itemListe[i]->texture, NULL, &itemRect);
             SDL_RenderDrawRect(renderer, &itemRect);
         }
     }
 
-    SDL_RenderSetViewport(renderer, NULL);  // Réinitialiser le viewport
+    SDL_RenderSetViewport(renderer, NULL); // Réinitialiser le viewport
     scrollbar.y = scrollViewport.y + (scrollOffset * scrollViewport.h) / maxScrollOffset;
     SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
     SDL_RenderFillRect(renderer, &scrollbar);
     SDL_RenderDrawRect(renderer, &statsItem);
 
-    TTF_Font *font1 = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", statsItem.h * statsItem.w * 0.0002);
-
-    afficherStatsItem(renderer, statsItem, item, font1, color, input);
+    afficherStatsItem(renderer, statsItem, item, font, color, input);
 
     SDL_RenderDrawRect(renderer, &descrItem);
     TTF_Font *font2 = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", descrItem.h * descrItem.w * 0.0003);
 
     afficherDescription(renderer, descrItem, item, font2, color, input);
     SDL_RenderDrawRect(renderer, &equiper);
+
+    TTF_CloseFont(font);
+    TTF_CloseFont(font2);
 }
