@@ -29,6 +29,7 @@ void updateSpike(t_tileEntity* entity, t_context* context, t_grid* grid, t_objec
     if (playerTouchingNow) {
         if (spike->isActive) {
             printf("Spike damaged player for %.1f points\n", spike->damage);
+            applyDamage(&player->health, 10, &player->entity, NULL);
         } else if (!spike->messageShown) {
             printf("*WHOOSH* Teleportation \n");
             spike->messageShown = SDL_TRUE;

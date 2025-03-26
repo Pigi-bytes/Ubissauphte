@@ -21,6 +21,11 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->aimAngle = 0.0f;
     joueur->attack = (t_attack){.isActive = SDL_FALSE, .progress = 0.0f, .hitBox = {{0, 0}, 0.0f, 0.0f, 0.0f}, .nbHits = 0, .timeSlowFactor = 1.0f, .timeSlowDuration = 0.0f, .timeSlowRemaining = 0.0f};
 
+    initHealthSystem(&joueur->health, 100);
+    joueur->level = 1;
+    joueur->xp = 0;
+    joueur->xpToNextLevel = 100;
+
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, SDL_TRUE, "idle"));
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){3, 4}, 2, 240, SDL_TRUE, "walk"));
     setAnimation(joueur->entity.animationController, "idle");
@@ -324,7 +329,7 @@ void updateAttack(t_joueur* player, float* deltaTime, t_objectManager* entities)
 
         // Vérification si l'ennemi est dans le secteur d'attaque actuel
         if (cercleInSector(enemyPos, enemy->collisionCircle.radius, player->attack.hitBox.origin, currentAngle, weapon->range, weapon->angleAttack)) {
-            takeDamageAndCheckDeath((t_enemy*)enemy, weapon->damage);
+            takeDamageAndCheckDeath((t_enemy*)enemy, weapon->damage, NULL);
 
             // Vecteur direction depuis l'origine de l'attaque vers l'ennemi
             float dx = enemyPos.x - player->attack.hitBox.origin.x;
@@ -444,6 +449,18 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
         switchToNextWeapon(player);
     }
 
+    if (keyPressOnce(input, SDL_SCANCODE_N)) {
+        applyDamage(&player->health, 10, &player->entity, NULL);
+
+        player->xp += 10;
+
+        if (player->xp >= player->xpToNextLevel) {
+            player->level += 1;
+            player->xp = player->xp - player->xpToNextLevel;
+            player->xpToNextLevel = (int)(player->xpToNextLevel * 1.2f);
+        }
+    }
+
     if (input->key[player->control->escape]) {
         setScene(sceneController, "menuPrincipal");
     }
@@ -453,7 +470,6 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
         input->key[player->control->map] = SDL_FALSE;
     }
 
-    // Conversion des coord souris en coord monde
     float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
     convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
 
@@ -498,6 +514,8 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
 void updatePlayer(t_joueur* player, float* deltaTime, t_grid* grid, t_objectManager* entities) {
     // On conserve le deltaTime original pour certains calculs qui ne doivent pas être affecté par le ralentissement
     float originalDeltaTime = *deltaTime;
+
+    updateHealthSystem(&player->health, *deltaTime);
 
     // Gestion du ralentissement temporel (effet bullet-time apres une attaque reussie)
     updateTimeSlowEffect(player, &originalDeltaTime, deltaTime);
@@ -568,6 +586,7 @@ void addWeaponToPlayer(t_joueur* player, t_arme* weapon) {
 }
 
 void switchToNextWeapon(t_joueur* player) {
+    printf("switch \n");
     if (!player || player->weaponCount <= 1) return;
 
     // Passer à l'arme suivante (avec retour au début si nécessaire)

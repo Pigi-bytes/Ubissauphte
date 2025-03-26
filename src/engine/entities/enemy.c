@@ -1,12 +1,10 @@
 #include "enemy.h"
 
-void onEnemyDeath(void* entity) {
+void onEnemyDeath(t_context* context, void* entity) {
     t_enemy* enemy = (t_enemy*)entity;
 
-    // Désactiver les collisions pour qu'il n'interagisse plus avec le monde
     enemy->entity.useCircleCollision = SDL_FALSE;
 
-    // Le reste du nettoyage sera géré dans updateEnemy
     printf("Ennemi détruit !\n");
 }
 
@@ -85,6 +83,6 @@ void freeEnemy(void* object) {
     // freeAnimationController(enemy->entity.animationController);
 }
 
-void takeDamageAndCheckDeath(t_enemy* enemy, int damage) {
-    applyDamage(&enemy->health, damage, enemy);
+void takeDamageAndCheckDeath(t_enemy* enemy, int damage, t_context* context) {
+    applyDamage(&enemy->health, damage, enemy, context);
 }

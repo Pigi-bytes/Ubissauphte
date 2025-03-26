@@ -10,6 +10,7 @@ t_scene* createMainWord(t_context* context) {
     const uint8_t MINIMAP_TYPE = registerType(registre, freeMinimap, "minimap");
     const uint8_t ENEMY_TYPE = registerType(registre, freeEnemy, "enemy");
     const uint8_t TILE_ENTITY = registerType(registre, freeTileEntity, "tile_entity");
+    const uint8_t HUD_TYPE = registerType(registre, freeHUD, "hud");
 
     t_scene* scene = createScene(initObjectManager(registre), "main");
 
@@ -135,6 +136,9 @@ t_scene* createMainWord(t_context* context) {
     addObject(entities, &joueur->entity, PLAYER);
     placeOnRandomTile(level, &joueur->entity, entities);
 
+    t_hud* playerHUD = createHUD(context->renderer, context->font);
+    ADD_OBJECT_TO_SCENE(scene, playerHUD, HUD_TYPE);
+
     t_enemy* enemy;
     for (int i = 0; i < 3; i++) {
         enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, scene);
@@ -180,6 +184,7 @@ t_scene* createMainWord(t_context* context) {
     sceneRegisterFunction(scene, MINIMAP_TYPE, UPDATE, updateMinimapWrapper, 0, FONCTION_PARAMS(camera, context->renderer, entities, level));
     sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&joueur->entity.displayRect.x, &joueur->entity.displayRect.y, &context->frameData->deltaTime));
     sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&joueur->entity.displayRect.x, &joueur->entity.displayRect.y));
+    sceneRegisterFunction(scene, HUD_TYPE, UPDATE, updateHUDWrapper, 0, FONCTION_PARAMS(context->renderer, joueur));
 
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_RESIZE, resizeViewportWrapper, 0, FONCTION_PARAMS(&context->input->windowWidth, &context->input->windowHeight));
     sceneRegisterFunction(scene, MINIMAP_TYPE, HANDLE_RESIZE, resizeMinimapWrapper, 1, FONCTION_PARAMS(context->renderer, &context->input->windowWidth, &context->input->windowHeight));
@@ -193,6 +198,7 @@ t_scene* createMainWord(t_context* context) {
 
     sceneRegisterFunction(scene, VIEWPORT_TYPE, RENDER_BUFFER, renderViewportWrapper, 1, FONCTION_PARAMS(context->renderer));
 
+    sceneRegisterFunction(scene, HUD_TYPE, RENDER_UI, renderHUDWrapper, 1, FONCTION_PARAMS(context->renderer));
     sceneRegisterFunction(scene, MINIMAP_TYPE, RENDER_UI, renderMinimapWrapper, 1, FONCTION_PARAMS(context->renderer));
 
     return scene;

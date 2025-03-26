@@ -26,7 +26,7 @@ void initHealthSystem(t_healthSystem* health, int maxHealth) {
     health->onDeathCallback = NULL;
 }
 
-void applyDamage(t_healthSystem* health, int damage, void* entity) {
+void applyDamage(t_healthSystem* health, int damage, void* entity, t_context* context) {
     if (!health || health->isInvincible || health->isDead) return;
 
     health->showHealthBar = SDL_TRUE;
@@ -35,6 +35,7 @@ void applyDamage(t_healthSystem* health, int damage, void* entity) {
     health->isFlashing = SDL_TRUE;
     resetDeltaTimer(health->flashTimer);
 
+    
     health->currentHealth -= damage;
     if (health->currentHealth <= 0) {
         health->currentHealth = 0;
@@ -42,7 +43,7 @@ void applyDamage(t_healthSystem* health, int damage, void* entity) {
         health->isDead = SDL_TRUE;
 
         if (health->onDeathCallback) {
-            health->onDeathCallback(entity);
+            health->onDeathCallback(context, entity);
         }
         return;
     }

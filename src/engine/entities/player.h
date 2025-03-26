@@ -46,6 +46,12 @@ typedef struct {
     t_entity entity;
     t_control* control;
 
+    t_healthSystem health;
+
+    int level;
+    int xp;
+    int xpToNextLevel;
+
     // TEMPORAIRE TEST
     t_arme* weapons[10];
     int weaponCount;

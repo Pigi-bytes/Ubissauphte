@@ -29,6 +29,8 @@ void updateChest(t_tileEntity* entity, t_context* context, t_grid* grid, t_objec
 
             if (interactKeyIsPressed && !chest->interactKeyPressed) {
                 chest->isOpen = SDL_TRUE;
+                jouerSFX("assets/chestOpening.wav", SDL_MIX_MAXVOLUME, 0, context->audioManager);
+
                 setAnimation(chest->base.entity.animationController, "open");
                 printf("Coffre ouvert ! Vous avez trouvé un trésor !\n");
             }

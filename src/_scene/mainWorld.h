@@ -3,6 +3,7 @@
 #include "../commun.h"
 #include "../context.h"
 #include "../engine/entities/tilesEntity.h"
+#include "../ui/hud.h"
 
 t_scene* createMainWord(t_context* context);
 

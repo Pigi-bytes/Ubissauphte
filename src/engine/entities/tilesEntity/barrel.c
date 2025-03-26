@@ -1,15 +1,18 @@
 #include "barrel.h"
 
-void onBarrelDestroy(void* entity) {
+void onBarrelDestroy(t_context* context, void* entity) {
     t_barrel* barrel = (t_barrel*)entity;
     barrel->isExploding = SDL_TRUE;
+
+    jouerSFX("assets/barrel.wav", 100, 0, context->audioManager);
+
     printf("Barrel destroyed!\n");
 }
 
-void takeDamageBarrel(t_tileEntity* entity, float damage) {
+void takeDamageBarrel(t_tileEntity* entity, float damage, t_context* context) {
     t_barrel* barrel = (t_barrel*)entity;
     if (barrel->base.isDestructible) {
-        applyDamage(&barrel->health, (int)damage, barrel);
+        applyDamage(&barrel->health, (int)damage, barrel, context);
     }
 }
 
@@ -26,7 +29,7 @@ void updateBarrel(t_tileEntity* entity, t_context* context, t_grid* grid, t_obje
         SDL_FPoint barrelPos = {entity->entity.collisionCircle.x, entity->entity.collisionCircle.y};
 
         if (cercleInSector(barrelPos, entity->entity.collisionCircle.radius, player->attack.hitBox.origin, currentAngle, player->currentWeapon->range, player->currentWeapon->angleAttack)) {
-            takeDamageBarrel(entity, player->currentWeapon->damage);
+            takeDamageBarrel(entity, player->currentWeapon->damage, context);
 
             player->attack.nbHits++;
 
