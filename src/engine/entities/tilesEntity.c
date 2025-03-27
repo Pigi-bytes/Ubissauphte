@@ -27,9 +27,9 @@ void initTileEntityBase(t_tileEntity* base, SDL_Texture* texture, SDL_Rect rect,
     base->entity.currentScene = scene;
 }
 
-void updateTileEntity(t_tileEntity* tileEntity, t_context* context, t_grid* grid, t_objectManager* entities) {
+void updateTileEntity(t_tileEntity* tileEntity, t_context* context, t_salle* salle, t_objectManager* entities) {
     if (tileEntity && tileEntity->update) {
-        tileEntity->update(tileEntity, context, grid, entities);
+        tileEntity->update(tileEntity, context, salle, entities);
     }
 }
 

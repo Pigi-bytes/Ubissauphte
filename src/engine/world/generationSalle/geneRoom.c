@@ -378,7 +378,7 @@ void placerSortie(t_grille **grille, t_salle *salle, t_listeBlock **lab) {
     }
 }
 t_grille *geneRoom(t_salle *salle) {
-    srand(time(NULL));
+    // srand(time(NULL));
 
     int nbLigne = (rand() % 70 + 30) & ~1;
     int nbColonne = (rand() % 2) == 0 ? (nbLigne + rand() % 11) & ~1 : (nbLigne - rand() % 11) & ~1;

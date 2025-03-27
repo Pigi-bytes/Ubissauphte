@@ -21,7 +21,7 @@ typedef struct s_tileEntity {
 
 void initTileEntityBase(t_tileEntity* base, SDL_Texture* texture, SDL_Rect rect, t_scene* scene);
 
-void updateTileEntity(t_tileEntity* tileEntity, t_context* context, t_grid* grid, t_objectManager* entities);
+void updateTileEntity(t_tileEntity* tileEntity, t_context* context, t_salle* grid, t_objectManager* entities);
 void renderTileEntity(t_tileEntity* tileEntity, t_context* context, t_camera* camera);
 void freeTileEntity(void* object);
 

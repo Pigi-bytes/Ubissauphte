@@ -1,5 +1,4 @@
 #include "spike.h"
-
 int determineSpikeDirection(t_grid* grid, t_entity* entity) {
     float centerX = grid->width * 16 / 2.0f;
     float centerY = grid->height * 16 / 2.0f;
@@ -7,16 +6,34 @@ int determineSpikeDirection(t_grid* grid, t_entity* entity) {
     float spikeX = entity->collisionCircle.x;
     float spikeY = entity->collisionCircle.y;
 
-    // Calculer les distances normalisées au centre
     float dx = (spikeX - centerX) / centerX;
     float dy = (spikeY - centerY) / centerY;
 
-    // Déterminer la direction principale
     if (fabsf(dx) > fabsf(dy)) {
         return (dx > 0) ? 1 : 3;  // Droite (1) ou Gauche (3)
     } else {
         return (dy > 0) ? 2 : 0;  // Bas (2) ou Haut (0)
     }
+}
+void placeNearTeleporter(t_grid* grid, t_entity* entity, t_objectManager* entities, t_entity* teleporter, t_grid* lastGrid) {
+    printf("=== Debug Information ===\n");
+    printf("Grid pointer: %p\n", (void*)grid);
+    printf("LastGrid pointer: %p\n", (void*)lastGrid);
+    printf("Are grids same? %s\n", (grid == lastGrid) ? "YES" : "NO");
+    printf("entrer : %d\n", determineSpikeDirection(lastGrid, teleporter));
+
+    uint8_t spikeTypeId = getTypeIdByName(entities->registry, "SPIKE");
+    for (int i = 0; i < entities->count; i++) {
+        void* entity = getObject(entities, i);
+        if (entity == NULL) continue;
+
+        if (getObjectTypeId(entities, i) == spikeTypeId) {
+            t_tileEntity* spike = (t_tileEntity*)entity;
+            printf("sortie : %d\n", determineSpikeDirection(grid, &spike->entity));
+        }
+    }
+
+    placeOnRandomTile(grid, entity, entities);
 }
 
 void updateSpike(t_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities) {
@@ -86,7 +103,7 @@ void updateSpike(t_tileEntity* entity, t_context* context, t_salle* salle, t_obj
 
             t_joueur* joueur = (t_joueur*)getObject(entities, 0);
             joueur->indexCurrentRoom = context->sceneController->currentScene;
-            placeOnRandomTile(spike->linkedRoom->grille, &joueur->entity, entities);
+            placeNearTeleporter(spike->linkedRoom->grille, &joueur->entity, entities, &spike->base.entity, salle->grille);
         }
     } else {
         spike->playerTouching = SDL_FALSE;
