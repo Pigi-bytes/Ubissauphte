@@ -128,7 +128,7 @@ void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *i
     renderText(renderer, txt2);
 }
 
-void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input, int nbItems) {
+void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input) {
     initTextEngine();
 
     if (ui->ext == NULL) {
@@ -148,7 +148,7 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     // Initialisation des références
     ui->ext->character = c;
     ui->ext->items = items;
-    ui->nbItems = nbItems;
+    ui->nbItems = 40;
 
     // Pour les items
     ui->ecrit->nom_txt_item[0] = createStatLine("Health : ", items[0]->stats.health.additive, items[0]->stats.health.multiplicative);
@@ -184,8 +184,8 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     calculEquiper(&ui->elems->statsItem.rect, &ui->elems->descrItem.rect, &ui->elems->equiper.rect, input);
 
     // Initialisation slots (votre code original)
-    ui->elems->inventory_slots = malloc(nbItems * sizeof(UI_Element));
-    for (int i = 0, j = 0; i < nbItems; j++, i++) {
+    ui->elems->inventory_slots = malloc(40 * sizeof(UI_Element));
+    for (int i = 0, j = 0; i < 40; j++, i++) {
         calculerItem(&ui->elems->inventory_slots[i].rect, ui->elems->inventory_panel.rect, &ui->elems->inventory_slots[i - 1].rect, i, j, input);
         ui->elems->inventory_slots[i].texture = items[i]->texture;
         if (j == 4)
@@ -220,13 +220,9 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     ui->ecrit->color_txt.r = 255;
 
     // Initialisation des textes statsPlayer
-    ui->ecrit->text_player[0] = createText(renderer, ui->ecrit->nom_txt_player[0], ui->ext->item_font, ui->ecrit->color_txt);
-    ui->ecrit->text_player[1] = createText(renderer, ui->ecrit->nom_txt_player[1], ui->ext->item_font, ui->ecrit->color_txt);
-    ui->ecrit->text_player[2] = createText(renderer, ui->ecrit->nom_txt_player[2], ui->ext->item_font, ui->ecrit->color_txt);
-    ui->ecrit->text_player[3] = createText(renderer, ui->ecrit->nom_txt_player[3], ui->ext->item_font, ui->ecrit->color_txt);
-    ui->ecrit->text_player[4] = createText(renderer, ui->ecrit->nom_txt_player[4], ui->ext->item_font, ui->ecrit->color_txt);
-    ui->ecrit->text_player[5] = createText(renderer, ui->ecrit->nom_txt_player[5], ui->ext->item_font, ui->ecrit->color_txt);
-    ui->ecrit->text_player[6] = createText(renderer, ui->ecrit->nom_txt_player[6], ui->ext->item_font, ui->ecrit->color_txt);
+    for (int i = 0; i < 7; i++) {
+        ui->ecrit->text_player[i] = createText(renderer, ui->ecrit->nom_txt_player[i], ui->ext->item_font, ui->ecrit->color_txt);
+    }
 
     // Positionnement et affichage des textes
     ui->ecrit->text_player[0]->rect.x = ui->elems->statsPlayer.rect.x + input->windowWidth * 0.01;
@@ -234,13 +230,9 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
 
     // Initialisation des textes statsItem
 
-    ui->ecrit->text_item[0] = createText(renderer, ui->ecrit->nom_txt_item[0], ui->ext->descr_font, ui->ecrit->color_txt);
-    ui->ecrit->text_item[1] = createText(renderer, ui->ecrit->nom_txt_item[1], ui->ext->descr_font, ui->ecrit->color_txt);
-    ui->ecrit->text_item[2] = createText(renderer, ui->ecrit->nom_txt_item[2], ui->ext->descr_font, ui->ecrit->color_txt);
-    ui->ecrit->text_item[3] = createText(renderer, ui->ecrit->nom_txt_item[3], ui->ext->descr_font, ui->ecrit->color_txt);
-    ui->ecrit->text_item[4] = createText(renderer, ui->ecrit->nom_txt_item[4], ui->ext->descr_font, ui->ecrit->color_txt);
-    ui->ecrit->text_item[5] = createText(renderer, ui->ecrit->nom_txt_item[5], ui->ext->descr_font, ui->ecrit->color_txt);
-    ui->ecrit->text_item[6] = createText(renderer, ui->ecrit->nom_txt_item[6], ui->ext->descr_font, ui->ecrit->color_txt);
+    for (int i = 0; i < 7; i++) {
+        ui->ecrit->text_item[i] = createText(renderer, ui->ecrit->nom_txt_item[i], ui->ext->descr_font, ui->ecrit->color_txt);
+    }
 
     // Positionnement et affichage des textes
     ui->ecrit->text_item[0]->rect.x = ui->elems->statsItem.rect.x + input->windowWidth * 0.01;
@@ -270,33 +262,16 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
 void afficherStatPlayer(SDL_Renderer *renderer, InventoryUI *ui, t_input *input) {
     renderText(renderer, ui->ecrit->text_player[0]);
 
-    afficherText(renderer, ui->ecrit->text_player[0], ui->ecrit->text_player[1], input);
-
-    afficherText(renderer, ui->ecrit->text_player[1], ui->ecrit->text_player[2], input);
-
-    afficherText(renderer, ui->ecrit->text_player[2], ui->ecrit->text_player[3], input);
-
-    afficherText(renderer, ui->ecrit->text_player[3], ui->ecrit->text_player[4], input);
-
-    afficherText(renderer, ui->ecrit->text_player[4], ui->ecrit->text_player[5], input);
-
-    afficherText(renderer, ui->ecrit->text_player[5], ui->ecrit->text_player[6], input);
+    for (int i = 1; i < 6; i++) {
+        afficherText(renderer, ui->ecrit->text_player[i - 1], ui->ecrit->text_player[i], input);
+    }
 }
 
 void afficherStatItem(SDL_Renderer *renderer, InventoryUI *ui, t_input *input) {
     renderText(renderer, ui->ecrit->text_item[0]);
-
-    afficherText(renderer, ui->ecrit->text_item[0], ui->ecrit->text_item[1], input);
-
-    afficherText(renderer, ui->ecrit->text_item[1], ui->ecrit->text_item[2], input);
-
-    afficherText(renderer, ui->ecrit->text_item[2], ui->ecrit->text_item[3], input);
-
-    afficherText(renderer, ui->ecrit->text_item[3], ui->ecrit->text_item[4], input);
-
-    afficherText(renderer, ui->ecrit->text_item[4], ui->ecrit->text_item[5], input);
-
-    afficherText(renderer, ui->ecrit->text_item[5], ui->ecrit->text_item[6], input);
+    for (int i = 1; i < 6; i++) {
+        afficherText(renderer, ui->ecrit->text_item[i - 1], ui->ecrit->text_item[i], input);
+    }
 }
 
 void afficherDescription(SDL_Renderer *renderer, InventoryUI *ui) {
@@ -351,7 +326,7 @@ void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input,
         int lastScroll = ui->scrollY;
 
         // Réinitialiser l'UI
-        inventoryUI_Init(ui, renderer, ui->ext->character, ui->ext->items, input, ui->nbItems);
+        inventoryUI_Init(ui, renderer, ui->ext->character, ui->ext->items, input);
 
         // Restaurer le scroll dans les nouvelles limites
         ui->scrollY = lastScroll;
@@ -377,3 +352,7 @@ void update(t_input *input, int w, int h) {
     h = input->windowHeight;
     updateInput(input);
 }
+
+// void inventoryUI_InitWrapper(t_fonctionParam *f) {
+//     inventoryUI_Init(GET_PTR(f, 0, *InventoryUI), );
+// }

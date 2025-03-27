@@ -77,7 +77,7 @@ typedef struct
 
 } InventoryUI;
 
-void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input, int nbItems);
+void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input);
 void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input, int w, int h);
 void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input);
 void update(t_input *input, int w, int h);

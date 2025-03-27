@@ -43,7 +43,7 @@ t_scene *createMainInv(InventoryUI *ui) {
         itemListe[i] = item;
     }
 
-    inventoryUI_Init(ui, renderer, c, itemListe, input, ui->nbItems);
+    inventoryUI_Init(ui, renderer, c, itemListe, input);
 
     ADD_OBJECT_TO_SCENE(scene, ui->elems, ELEMENT_TYPE);
     ADD_OBJECT_TO_SCENE(scene, ui->ext, EXTERN_TYPE);
@@ -92,7 +92,9 @@ int main() {
     /* const uint8 Case_TYpe = (registre,null,"case")
 
     init (ui,) */
-    inventoryUI_Init(&ui, renderer, c, itemListe, input, 40);
+
+
+    inventoryUI_Init(&ui, renderer, c, itemListe, input);
 
     int width = 0, height = 0;
 
