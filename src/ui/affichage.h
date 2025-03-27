@@ -75,13 +75,21 @@ typedef struct
     int scrollY;
     int maxScrollY;
 
+    int width, height;
+
 } InventoryUI;
 
 void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input);
-void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input, int w, int h);
+void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input);
 void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input);
-void update(t_input *input, int w, int h);
+void update(t_input *input, InventoryUI *ui);
 void updateScroll(InventoryUI *ui, t_input *input);
+
+void inventoryUI_RenderWrapper(t_fonctionParam *f);
+void inventoryUI_UpdateWrapper(t_fonctionParam *f);
+void updateScrollWrapper(t_fonctionParam *f);
+void updateWrapper(t_fonctionParam *f);
+void inventoryUI_InitWrapper(t_fonctionParam *f);
 
 void calculCasePlayer(SDL_Rect *casePlayer, t_input *input, char *nom);
 void calculCaseSlots(SDL_Rect *comp, SDL_Rect *slot, t_input *input, char *nom1, char *nom2);

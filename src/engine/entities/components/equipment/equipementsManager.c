@@ -14,7 +14,7 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
         char value[50];
 
         t_pairData* data;
-        t_block* block = createNewBlock();
+        t_blockData* block = createNewBlock();
 
         sprintf(value, "%d", item[i]->id);
         data = createPairData("id Item", value);
@@ -125,12 +125,12 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset) {
     int resultInt;
     float resultFLOAT;
     char resultChar[200];
-    t_block* block;
+    t_blockData* block;
 
     for (int i = 0; i < fichier->blockManager->count; i++) {
         item[i] = (t_item*)malloc(sizeof(t_item));
 
-        block = (t_block*)getObject(fichier->blockManager, i);
+        block = (t_blockData*)getObject(fichier->blockManager, i);
 
         getValue(block, "id Item", &resultInt, INT);
         item[i]->id = resultInt;
@@ -222,7 +222,7 @@ void inventory_save(t_inventaire* inv, t_fichier* fichier) {
     char value[50];
 
     t_pairData* data;
-    t_block* block = createNewBlock();
+    t_blockData* block = createNewBlock();
 
     sprintf(value, "%d", inv->itemsStack->count);
     data = createPairData("nbItems", value);
@@ -233,7 +233,7 @@ void inventory_save(t_inventaire* inv, t_fichier* fichier) {
         char value[50];
 
         t_pairData* data;
-        t_block* block = createNewBlock();
+        t_blockData* block = createNewBlock();
 
         t_itemsStack* Stack = (t_itemsStack*)getObject(inv->itemsStack, i);
 
@@ -265,10 +265,10 @@ t_inventaire* inventory_load(t_fichier* fichier, t_item** item, int count) {
 
     int resultInt;
     char resultChar[50];
-    t_block* block;
+    t_blockData* block;
 
     for (int i = 1; i < fichier->blockManager->count; i++) {
-        block = (t_block*)getObject(fichier->blockManager, i);
+        block = (t_blockData*)getObject(fichier->blockManager, i);
 
         t_itemsStack* Stack = (t_itemsStack*)malloc(sizeof(t_itemsStack));
         Stack->definition = (t_item*)malloc(sizeof(t_item));

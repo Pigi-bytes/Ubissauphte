@@ -8,10 +8,10 @@ void saveFichier(t_fichier *fichier, char *filename) {
         exit(EXIT_FAILURE);
     }
 
-    t_block *Block;
+    t_blockData *Block;
     t_pairData *data;
     for (int i = 0; i < fichier->blockManager->count; i++) {
-        Block = (t_block *)getObject(fichier->blockManager, i);
+        Block = (t_blockData *)getObject(fichier->blockManager, i);
         for (int j = 0; j < Block->pairManager->count; j++) {
             data = (t_pairData *)getObject(Block->pairManager, j);
             fprintf(file, "%s: %s\n", data->key, data->value);
@@ -22,11 +22,11 @@ void saveFichier(t_fichier *fichier, char *filename) {
     fclose(file);
 }
 
-void addBlock(t_fichier *fichier, t_block *Block) {
+void addBlock(t_fichier *fichier, t_blockData *Block) {
     addObject(fichier->blockManager, Block, getTypeIdByName(fichier->blockManager->registry, "BLOCK_TYPE"));
 }
 
-void addPairData(t_block *block, t_pairData *pair) {
+void addPairData(t_blockData *block, t_pairData *pair) {
     addObject(block->pairManager, pair, getTypeIdByName(block->pairManager->registry, "PAIR_TYPE"));
 }
 
@@ -46,7 +46,7 @@ t_fichier *chargerFichier(char *filename) {
 
     fichier->blockManager = initObjectManager(registre);
 
-    t_block *currentBlock = NULL;
+    t_blockData *currentBlock = NULL;
     char line[MAX_LINE_LENGTH];
 
     // Lecture du fichier
@@ -58,7 +58,7 @@ t_fichier *chargerFichier(char *filename) {
                 addBlock(fichier, currentBlock);
                 currentBlock = NULL;
             }
-        } else {  // Allocation de mémoire pour chaque case du tableau t_block
+        } else {  // Allocation de mémoire pour chaque case du tableau t_blockData
             if (!currentBlock) {
                 currentBlock = createNewBlock();
             }
@@ -85,7 +85,7 @@ t_fichier *chargerFichier(char *filename) {
     return fichier;
 }
 
-SDL_bool getValue(t_block *block, char *name, void *result, t_valueType type) {
+SDL_bool getValue(t_blockData *block, char *name, void *result, t_valueType type) {
     for (int i = 0; i < block->pairManager->count; i++) {
         t_pairData *pair = (t_pairData *)getObject(block->pairManager, i);
         if (strcmp(pair->key, name) == 0) {
@@ -111,8 +111,8 @@ SDL_bool getValue(t_block *block, char *name, void *result, t_valueType type) {
     return SDL_FALSE;
 }
 
-t_block *createNewBlock() {
-    t_block *block = malloc(sizeof(t_block));
+t_blockData *createNewBlock() {
+    t_blockData *block = malloc(sizeof(t_blockData));
 
     t_typeRegistry *registre = createTypeRegistry();
     registerType(registre, pairFreeFunc, "PAIR_TYPE");
@@ -130,7 +130,7 @@ t_pairData *createPairData(char *key, char *value) {
 }
 
 void blockFreeFunc(void *data) {
-    t_block *block = (t_block *)data;
+    t_blockData *block = (t_blockData *)data;
     freeObjectManager(block->pairManager);
     free(block);
 }
