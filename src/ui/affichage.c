@@ -133,18 +133,17 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
 
     if (ui->ext == NULL) {
         ui->ext = malloc(sizeof(t_extern));
-        // Initialiser les membres si nécessaire
         ui->ext->item_font = NULL;
         ui->ext->descr_font = NULL;
     }
 
-    // Initialiser 'ecrit' si nécessaire
     if (ui->ecrit == NULL) {
         ui->ecrit = malloc(sizeof(t_ecritures));
         // Initialiser les membres si nécessaire
         memset(ui->ecrit->nom_txt_item, 0, sizeof(ui->ecrit->nom_txt_item));
         // etc.
     }
+    ui->elems = malloc(sizeof(t_elements));
 
     // Initialisation des références
     ui->ext->character = c;
@@ -170,44 +169,44 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     ui->ecrit->nom_txt_player[6] = createStatLine("Speed : ", c->baseStats.speed.additive, 1.0f);
 
     // Calculs initiaux (votre code original)
-    calculCasePlayer(&ui->player_panel.rect, input, "Perso");
-    ui->player_panel.texture = c->texture;
+    calculCasePlayer(&ui->elems->player_panel.rect, input, "Perso");
+    ui->elems->player_panel.texture = c->texture;
 
-    calculCaseSlots(&ui->player_panel.rect, &ui->caseArme.rect, input, "Perso", "arme");
-    calculCaseSlots(&ui->caseArme.rect, &ui->caseArmure.rect, input, "arme", "armure");
-    calculCaseSlots(&ui->player_panel.rect, &ui->CaseActivable1.rect, input, "Perso", "activable1");
-    calculCaseSlots(&ui->CaseActivable1.rect, &ui->caseActivable2.rect, input, "activable1", "activable2");
+    calculCaseSlots(&ui->elems->player_panel.rect, &ui->elems->caseArme.rect, input, "Perso", "arme");
+    calculCaseSlots(&ui->elems->caseArme.rect, &ui->elems->caseArmure.rect, input, "arme", "armure");
+    calculCaseSlots(&ui->elems->player_panel.rect, &ui->elems->CaseActivable1.rect, input, "Perso", "activable1");
+    calculCaseSlots(&ui->elems->CaseActivable1.rect, &ui->elems->caseActivable2.rect, input, "activable1", "activable2");
 
-    calculDescrStatsPlayer(&ui->caseArme.rect, &ui->CaseActivable1.rect, &ui->player_panel.rect, &ui->statsPlayer.rect, input);
-    calculInventaire(&ui->inventory_panel.rect, &ui->statsPlayer.rect, input);
-    calculStatsItem(&ui->inventory_panel.rect, &ui->statsItem.rect, input);
-    caculDescrItem(&ui->statsItem.rect, &ui->descrItem.rect, input);
-    calculEquiper(&ui->statsItem.rect, &ui->descrItem.rect, &ui->equiper.rect, input);
+    calculDescrStatsPlayer(&ui->elems->caseArme.rect, &ui->elems->CaseActivable1.rect, &ui->elems->player_panel.rect, &ui->elems->statsPlayer.rect, input);
+    calculInventaire(&ui->elems->inventory_panel.rect, &ui->elems->statsPlayer.rect, input);
+    calculStatsItem(&ui->elems->inventory_panel.rect, &ui->elems->statsItem.rect, input);
+    caculDescrItem(&ui->elems->statsItem.rect, &ui->elems->descrItem.rect, input);
+    calculEquiper(&ui->elems->statsItem.rect, &ui->elems->descrItem.rect, &ui->elems->equiper.rect, input);
 
     // Initialisation slots (votre code original)
-    ui->inventory_slots = malloc(nbItems * sizeof(UI_Element));
+    ui->elems->inventory_slots = malloc(nbItems * sizeof(UI_Element));
     for (int i = 0, j = 0; i < nbItems; j++, i++) {
-        calculerItem(&ui->inventory_slots[i].rect, ui->inventory_panel.rect, &ui->inventory_slots[i - 1].rect, i, j, input);
-        ui->inventory_slots[i].texture = items[i]->texture;
+        calculerItem(&ui->elems->inventory_slots[i].rect, ui->elems->inventory_panel.rect, &ui->elems->inventory_slots[i - 1].rect, i, j, input);
+        ui->elems->inventory_slots[i].texture = items[i]->texture;
         if (j == 4)
             j = 0;
     }
 
     int totalContentHeight = 0;
     for (int i = 0; i < ui->nbItems; i++) {
-        int slotBottom = ui->inventory_slots[i].rect.y + ui->inventory_slots[i].rect.h;
+        int slotBottom = ui->elems->inventory_slots[i].rect.y + ui->elems->inventory_slots[i].rect.h;
         if (slotBottom > totalContentHeight) {
             totalContentHeight = slotBottom;
         }
     }
-    totalContentHeight -= ui->inventory_panel.rect.y;
-    ui->maxScrollY = totalContentHeight - ui->inventory_panel.rect.h;
+    totalContentHeight -= ui->elems->inventory_panel.rect.y;
+    ui->maxScrollY = totalContentHeight - ui->elems->inventory_panel.rect.h;
     if (ui->maxScrollY < 0) ui->maxScrollY = 0;
     ui->scrollY = 0;
 
     // Police
-    ui->ext->item_font = TTF_OpenFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->statsPlayer.rect.h * ui->statsPlayer.rect.w * 0.0002);
-    ui->ext->descr_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->descrItem.rect.h * ui->descrItem.rect.w * 0.0003);
+    ui->ext->item_font = TTF_OpenFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
+    ui->ext->descr_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->descrItem.rect.h * ui->elems->descrItem.rect.w * 0.0003);
     ui->color.a = 255;
     ui->color.b = 255;
     ui->color.g = 0;
@@ -230,8 +229,8 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     ui->ecrit->text_player[6] = createText(renderer, ui->ecrit->nom_txt_player[6], ui->ext->item_font, ui->ecrit->color_txt);
 
     // Positionnement et affichage des textes
-    ui->ecrit->text_player[0]->rect.x = ui->statsPlayer.rect.x + input->windowWidth * 0.01;
-    ui->ecrit->text_player[0]->rect.y = ui->statsPlayer.rect.y + input->windowHeight * 0.01;
+    ui->ecrit->text_player[0]->rect.x = ui->elems->statsPlayer.rect.x + input->windowWidth * 0.01;
+    ui->ecrit->text_player[0]->rect.y = ui->elems->statsPlayer.rect.y + input->windowHeight * 0.01;
 
     // Initialisation des textes statsItem
 
@@ -244,12 +243,12 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     ui->ecrit->text_item[6] = createText(renderer, ui->ecrit->nom_txt_item[6], ui->ext->descr_font, ui->ecrit->color_txt);
 
     // Positionnement et affichage des textes
-    ui->ecrit->text_item[0]->rect.x = ui->statsItem.rect.x + input->windowWidth * 0.01;
-    ui->ecrit->text_item[0]->rect.y = ui->statsItem.rect.y + input->windowHeight * 0.01;
+    ui->ecrit->text_item[0]->rect.x = ui->elems->statsItem.rect.x + input->windowWidth * 0.01;
+    ui->ecrit->text_item[0]->rect.y = ui->elems->statsItem.rect.y + input->windowHeight * 0.01;
     ui->ecrit->text_descr = createText(renderer, "Description :", ui->ext->descr_font, ui->ecrit->color_txt);
 
-    ui->ecrit->text_descr->rect.x = ui->descrItem.rect.x + ui->descrItem.rect.x * 0.025;
-    ui->ecrit->text_descr->rect.y = ui->descrItem.rect.y + input->windowHeight * 0.005;
+    ui->ecrit->text_descr->rect.x = ui->elems->descrItem.rect.x + ui->elems->descrItem.rect.x * 0.025;
+    ui->ecrit->text_descr->rect.y = ui->elems->descrItem.rect.y + input->windowHeight * 0.005;
 
     int i = 0, j, nb = 1;
 
@@ -260,7 +259,7 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
         ui->ecrit->descr[j] = '\0';
 
         ui->ecrit->description[nb - 1] = createText(renderer, ui->ecrit->descr, ui->ext->descr_font, ui->ecrit->color_txt);
-        ui->ecrit->description[nb - 1]->rect.x = ui->descrItem.rect.x + input->windowWidth * 0.005;
+        ui->ecrit->description[nb - 1]->rect.x = ui->elems->descrItem.rect.x + input->windowWidth * 0.005;
         ui->ecrit->description[nb - 1]->rect.y = ui->ecrit->text_descr->rect.y + input->windowHeight * 0.03 * nb;
         nb++;
         ui->ecrit->descr[0] = '\0';
@@ -314,36 +313,36 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
-    SDL_RenderCopy(renderer, ui->player_panel.texture, NULL, &ui->player_panel.rect);
-    SDL_RenderDrawRect(renderer, &ui->player_panel.rect);
+    SDL_RenderCopy(renderer, ui->elems->player_panel.texture, NULL, &ui->elems->player_panel.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->player_panel.rect);
 
-    SDL_RenderDrawRect(renderer, &ui->caseArme.rect);
-    SDL_RenderDrawRect(renderer, &ui->caseArmure.rect);
-    SDL_RenderDrawRect(renderer, &ui->CaseActivable1.rect);
-    SDL_RenderDrawRect(renderer, &ui->caseActivable2.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->caseArme.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->caseArmure.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->CaseActivable1.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->caseActivable2.rect);
 
-    SDL_RenderDrawRect(renderer, &ui->statsPlayer.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->statsPlayer.rect);
     afficherStatPlayer(renderer, ui, input);
 
-    SDL_RenderDrawRect(renderer, &ui->inventory_panel.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->inventory_panel.rect);
 
-    SDL_RenderSetClipRect(renderer, &ui->inventory_panel.rect);
+    SDL_RenderSetClipRect(renderer, &ui->elems->inventory_panel.rect);
     for (int i = 0; i < ui->nbItems; i++) {
-        SDL_Rect dest = ui->inventory_slots[i].rect;
+        SDL_Rect dest = ui->elems->inventory_slots[i].rect;
         dest.y -= ui->scrollY;  // Appliquer le décalage
 
-        SDL_RenderCopy(renderer, ui->inventory_slots[i].texture, NULL, &dest);
+        SDL_RenderCopy(renderer, ui->elems->inventory_slots[i].texture, NULL, &dest);
         SDL_RenderDrawRect(renderer, &dest);
     }
     SDL_RenderSetClipRect(renderer, NULL);
 
-    SDL_RenderDrawRect(renderer, &ui->statsItem.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->statsItem.rect);
     afficherStatItem(renderer, ui, input);
 
-    SDL_RenderDrawRect(renderer, &ui->descrItem.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->descrItem.rect);
     afficherDescription(renderer, ui);
 
-    SDL_RenderDrawRect(renderer, &ui->equiper.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->equiper.rect);
 }
 
 void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input, int w, int h) {
@@ -373,7 +372,7 @@ void updateScroll(InventoryUI *ui, t_input *input) {
     }
 }
 
-void update(t_input*input ,int w,int h){
+void update(t_input *input, int w, int h) {
     w = input->windowWidth;
     h = input->windowHeight;
     updateInput(input);

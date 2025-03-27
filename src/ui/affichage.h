@@ -5,6 +5,7 @@
 #include "../engine/entities/components/equipment/equipementsManager.h"
 #include "../io/imageLoader.h"
 #include "../io/input.h"
+#include "../utils/fscene.h"
 #include "button.h"
 #include "text.h"
 
@@ -46,11 +47,6 @@ typedef struct {
 
 typedef struct
 {
-    // Éléments de base (votre structure originale)
-
-    int nbItems;
-    SDL_Color color;
-
     UI_Element player_panel;
     UI_Element caseArme;
     UI_Element caseArmure;
@@ -62,21 +58,19 @@ typedef struct
     UI_Element descrItem;
     UI_Element equiper;
     UI_Element *inventory_slots;
+} t_elements;
+
+typedef struct
+{
+    // Éléments de base (votre structure originale)
+
+    int nbItems;
+    SDL_Color color;
+    t_elements *elems;
     // Références externes
 
     t_extern *ext;
     t_ecritures *ecrit;
-
-    t_text *text_player[7];
-    t_text *text_item[7];
-    t_text *text_descr;
-    t_text *description[15];
-
-    char *nom_txt_item[7];
-    char *nom_txt_player[7];
-    char descr[50];
-    int count_descr;
-    SDL_Color color_txt;
 
     int scrollY;
     int maxScrollY;
