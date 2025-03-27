@@ -1,12 +1,11 @@
 #include "tilesEntity.h"
 
 #include "tilesEntity/barrel.h"
-#include "tilesEntity/chest.h"
-#include "tilesEntity/spike.h"
-#include "tilesEntity/merchant.h"
 #include "tilesEntity/blacksmith.h"
+#include "tilesEntity/chest.h"
+#include "tilesEntity/merchant.h"
+#include "tilesEntity/spike.h"
 #include "tilesEntity/wizard.h"
-
 
 void initTileEntityBase(t_tileEntity* base, SDL_Texture* texture, SDL_Rect rect, t_scene* scene) {
     base->entity.texture = texture;
@@ -117,7 +116,7 @@ void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* enti
                         t_tileEntity* blacksmithEntity = createBlacksmithEntity(tileset, scene);
                         replaceTileWithEntity(tile, x, y, blacksmithEntity, entities, getTypeIdByName(entities->registry, "BLACKSMITH"), floorTexture);
                         ADD_OBJECT_TO_SCENE(scene, blacksmithEntity, entityTypeId);
-                    }else if (tileTexture == wizardTexture) {
+                    } else if (tileTexture == wizardTexture) {
                         t_tileEntity* wizardEntity = createWizardEntity(tileset, scene);
                         replaceTileWithEntity(tile, x, y, wizardEntity, entities, getTypeIdByName(entities->registry, "WIZARD"), floorTexture);
                         ADD_OBJECT_TO_SCENE(scene, wizardEntity, entityTypeId);

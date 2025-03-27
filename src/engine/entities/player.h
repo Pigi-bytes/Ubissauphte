@@ -30,10 +30,18 @@ typedef struct {
     float timeSlowRemaining;
 } t_attack;
 
+typedef struct {
+    SDL_bool isActive;       // Indique si le dash est actif
+    float duration;          // Durée du dash
+    float speedMultiplier;   // Multiplicateur de vitesse pendant le dash
+    t_timer* cooldownTimer;  // Timer pour gérer le cooldown
+    Uint32 cooldownTime;     // Temps de cooldown en millisecondes
+} t_dash;
+
 typedef struct s_joueur {
     t_entity entity;
     t_control* control;
-
+    t_dash dash;
     t_healthSystem health;
 
     int level;

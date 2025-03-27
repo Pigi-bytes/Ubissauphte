@@ -23,6 +23,16 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->aimAngle = 0.0f;
     joueur->attack = (t_attack){.isActive = SDL_FALSE, .progress = 0.0f, .hitBox = {{0, 0}, 0.0f, 0.0f, 0.0f}, .nbHits = 0, .timeSlowFactor = 1.0f, .timeSlowDuration = 0.0f, .timeSlowRemaining = 0.0f};
 
+    joueur->dash = (t_dash){
+        .isActive = SDL_FALSE,
+        .duration = 300,  // Durée du dash en millisecondes
+        .speedMultiplier = 6.5f,
+        .cooldownTimer = initTimer(),
+        .cooldownTime = 4000  // Cooldown de 4 secondes
+    };
+
+    startTimer(joueur->dash.cooldownTimer);
+
     initHealthSystem(&joueur->health, 100);
     joueur->level = 1;
     joueur->xp = 0;
@@ -314,11 +324,19 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
         player->entity.flip = SDL_FLIP_NONE;
     }
 
-    // Dash
-    if (input->key[player->control->dash]) {
-        if (lastDirX != 0.0f || lastDirY != 0.0f) {
-            player->entity.physics.velocity.x += lastDirX * forceDash * *deltaTime;
-            player->entity.physics.velocity.y += lastDirY * forceDash * *deltaTime;
+    if (input->key[player->control->dash] && !player->dash.isActive && getTicks(player->dash.cooldownTimer) >= player->dash.cooldownTime) {
+        player->dash.isActive = SDL_TRUE;
+        startTimer(player->dash.cooldownTimer);  // Redémarre le timer pour le cooldown
+    }
+
+    if (player->dash.isActive) {
+        player->entity.physics.velocity.x += lastDirX * player->dash.speedMultiplier * forceBase * *deltaTime;
+        player->entity.physics.velocity.y += lastDirY * player->dash.speedMultiplier * forceBase * *deltaTime;
+
+        player->dash.duration -= *deltaTime * 1000;  // Convertir deltaTime en millisecondes
+        if (player->dash.duration <= 0.0f) {
+            player->dash.isActive = SDL_FALSE;
+            player->dash.duration = 200;  // Réinitialise la durée du dash
         }
     }
 

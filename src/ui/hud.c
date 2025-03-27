@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-t_hud* createHUD(SDL_Renderer* renderer, TTF_Font* font) {
+t_hud* createHUD(SDL_Renderer* renderer, TTF_Font* font, t_tileset* tileset) {
     t_hud* hud = malloc(sizeof(t_hud));
     if (!hud) {
         fprintf(stderr, "Erreur d'allocation mémoire pour le HUD\n");
@@ -47,6 +47,15 @@ t_hud* createHUD(SDL_Renderer* renderer, TTF_Font* font) {
         hud->healthBarRect.x,
         hud->xpBarRect.y + hud->xpBarRect.h + 10,
         32, 32};
+
+    hud->dashIconRect = (SDL_Rect){
+        hud->healthBarRect.x + hud->weaponIndicatorRect.w,  // Aligné en X avec la barre de vie
+        hud->xpBarRect.y + hud->xpBarRect.h + 10,           // Sous la barre de vie avec un décalage
+        32, 32                                              // Taille de l'icône
+    };
+
+    hud->dashIcon = getObject(tileset->textureTiles, 142);  // Charger l'icône de dash
+    hud->dashCooldownRatio = 0.0f;
 
     // Initialisation des valeurs
     hud->xpRatio = 0.0f;
@@ -106,6 +115,13 @@ void updateHUD(t_hud* hud, SDL_Renderer* renderer, t_joueur* player) {
         snprintf(levelStr, sizeof(levelStr), "%d", player->level);
         updateTextOutline(&hud->levelText, renderer, levelStr, hud->textColor, hud->outlineColor, 1);
         hud->levelText->rect.x = hud->playerIconRect.x + (hud->playerIconRect.w - hud->levelText->rect.w) / 2;
+    }
+
+    Uint32 elapsed = getTicks(player->dash.cooldownTimer);
+    if (elapsed < player->dash.cooldownTime) {
+        hud->dashCooldownRatio = 1.0f - (float)elapsed / player->dash.cooldownTime;
+    } else {
+        hud->dashCooldownRatio = 0.0f;
     }
 }
 
@@ -395,6 +411,26 @@ void renderHUD(SDL_Renderer* renderer, t_hud* hud) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 255, 120);
             SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
             SDL_RenderFillRect(renderer, &cooldownRect);
+            SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
+        }
+    }
+
+    if (hud->dashIcon) {
+        SDL_RenderCopy(renderer, hud->dashIcon, NULL, &hud->dashIconRect);
+
+        if (hud->dashCooldownRatio > 0.0f) {
+            SDL_Rect cooldownOverlay = hud->dashIconRect;
+
+            // Calculer la hauteur de l'overlay en fonction du cooldown
+            cooldownOverlay.h = (int)(hud->dashIconRect.h * hud->dashCooldownRatio);
+
+            // Ajuster la position Y pour que l'overlay commence en bas et monte
+            cooldownOverlay.y = hud->dashIconRect.y + hud->dashIconRect.h - cooldownOverlay.h;
+
+            // Dessiner l'overlay
+            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 120);  // Couleur sombre semi-transparente
+            SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+            SDL_RenderFillRect(renderer, &cooldownOverlay);
             SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
         }
     }
