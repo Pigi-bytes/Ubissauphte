@@ -44,10 +44,6 @@ int main() {
         int height = input->windowHeight;
         updateInput(input);
 
-        for (int i = 0; i < 40; i++) {
-            handleInputButton(input, ui.inventory_buttons[i]);
-        }
-
         if (input->mouseYWheel != 0) {
             int scrollStep = 40;  // Ajustez cette valeur selon vos besoins
             ui.scrollY -= input->mouseYWheel * scrollStep;

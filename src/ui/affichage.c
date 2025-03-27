@@ -128,90 +128,6 @@ void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *i
     renderText(renderer, txt2);
 }
 
-void handleItemClick(void *data) {
-    ItemClickData *clickData = (ItemClickData *)data;
-    clickData->ui->selectedItemIndex = clickData->index;
-}
-
-void updateItemDisplay(InventoryUI *ui, t_item *item, SDL_Renderer *renderer) {
-    // 1. Mise à jour des statistiques
-    //--------------------------------
-    // Libération des anciennes statistiques
-    for (int i = 0; i < 7; i++) {
-        free(ui->nom_txt_item[i]);
-        freeText(ui->text_item[i]);
-    }
-
-    // Génération des nouvelles statistiques
-    ui->nom_txt_item[0] = createStatLine("Health : ", item->stats.health.additive, item->stats.health.multiplicative);
-    ui->nom_txt_item[1] = createStatLine("Health Max : ", item->stats.healthMax.additive, item->stats.healthMax.multiplicative);
-    ui->nom_txt_item[2] = createStatLine("Mana : ", item->stats.mana.additive, item->stats.mana.multiplicative);
-    ui->nom_txt_item[3] = createStatLine("Mana Max : ", item->stats.manaMax.additive, item->stats.manaMax.multiplicative);
-    ui->nom_txt_item[4] = createStatLine("Attack : ", item->stats.attack.additive, item->stats.attack.multiplicative);
-    ui->nom_txt_item[5] = createStatLine("Defense : ", item->stats.defense.additive, item->stats.defense.multiplicative);
-    ui->nom_txt_item[6] = createStatLine("Speed : ", item->stats.speed.additive, item->stats.speed.multiplicative);
-
-    // Création des nouvelles textures pour les stats
-    for (int i = 0; i < 7; i++) {
-        ui->text_item[i] = createText(renderer,
-                                      ui->nom_txt_item[i],
-                                      ui->descr_font,
-                                      ui->color_txt);
-
-        // Positionnement relatif
-        ui->text_item[i]->rect.x = ui->statsItem.rect.x + ui->input_ref->windowWidth * 0.01;
-        ui->text_item[i]->rect.y = ui->statsItem.rect.y + ui->input_ref->windowHeight * 0.01 + (i * ui->statsItem.rect.h * 0.1);
-    }
-
-    // 2. Mise à jour de la description
-    //---------------------------------
-    // Libération de l'ancienne description
-    for (int i = 0; i < ui->count_descr; i++) {
-        freeText(ui->description[i]);
-    }
-    ui->count_descr = 0;
-
-    // Découpage de la nouvelle description
-    int lineIndex = 0;
-    int descLength = strlen(item->description);
-    char buffer[256];
-    int bufferIndex = 0;
-
-    for (int i = 0; i <= descLength; i++) {
-        if (item->description[i] == '\n' || item->description[i] == '\0') {
-            if (bufferIndex > 0) {
-                buffer[bufferIndex] = '\0';
-
-                // Création du texte pour la ligne
-                ui->description[lineIndex] = createText(renderer,
-                                                        buffer,
-                                                        ui->descr_font,
-                                                        ui->color_txt);
-
-                // Positionnement dynamique
-                ui->description[lineIndex]->rect.x = ui->descrItem.rect.x + ui->input_ref->windowWidth * 0.01;
-                ui->description[lineIndex]->rect.y = ui->text_descr->rect.y +
-                                                     ui->text_descr->rect.h +
-                                                     (lineIndex * ui->descrItem.rect.h * 0.1);
-
-                lineIndex++;
-                bufferIndex = 0;
-            }
-        } else {
-            buffer[bufferIndex++] = item->description[i];
-        }
-    }
-    ui->count_descr = lineIndex;
-
-    // 3. Mise à jour du nom de l'item
-    //--------------------------------
-    freeText(ui->text_descr);
-    char descrTitle[256];
-    snprintf(descrTitle, sizeof(descrTitle), "Description : %s", item->name);
-    ui->text_descr = createText(renderer, descrTitle, ui->descr_font, ui->color_txt);
-    ui->text_descr->rect.x = ui->descrItem.rect.x + ui->descrItem.rect.w * 0.02;
-    ui->text_descr->rect.y = ui->descrItem.rect.y + ui->descrItem.rect.h * 0.02;
-}
 void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input, int nbItems) {
     initTextEngine();
     // Initialisation des références
@@ -253,23 +169,27 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     caculDescrItem(&ui->statsItem.rect, &ui->descrItem.rect, ui->input_ref);
     calculEquiper(&ui->statsItem.rect, &ui->descrItem.rect, &ui->equiper.rect, ui->input_ref);
 
-    ui->selectedItemIndex = -1;
-    ui->inventory_buttons = malloc(nbItems * sizeof(t_button *));
-
-    SDL_Color transparent = {0, 0, 0, 0};
-    SDL_Color hoverColor = {255, 255, 255, 50};
-
+    // Initialisation slots (votre code original)
+    ui->inventory_slots = malloc(nbItems * sizeof(UI_Element));
     for (int i = 0, j = 0; i < nbItems; j++, i++) {
-        SDL_Rect slotRect;
-        calculerItem(&slotRect, ui->inventory_panel.rect, (i > 0) ? &ui->inventory_buttons[i - 1]->rect : NULL, i, j, ui->input_ref);
-
-        // Créer un bouton invisible pour l'interaction
-        t_text *buttonText = createText(renderer, "", NULL, transparent);
-        t_fonctionParam *onClick = creerFonction((void(*)(t_fonctionParam*))handleItemClick, &(ItemClickData){ui, i}, NULL);
-        ui->inventory_buttons[i] = createButton(buttonText, transparent, hoverColor, slotRect, onClick);
-
-        if (j == 4) j = 0;
+        calculerItem(&ui->inventory_slots[i].rect, ui->inventory_panel.rect, &ui->inventory_slots[i - 1].rect, i, j, ui->input_ref);
+        ui->inventory_slots[i].texture = items[i]->texture;
+        if (j == 4)
+            j = 0;
     }
+
+    int totalContentHeight = 0;
+    for (int i = 0; i < ui->nbItems; i++) {
+        int slotBottom = ui->inventory_slots[i].rect.y + ui->inventory_slots[i].rect.h;
+        if (slotBottom > totalContentHeight) {
+            totalContentHeight = slotBottom;
+        }
+    }
+    totalContentHeight -= ui->inventory_panel.rect.y;
+    ui->maxScrollY = totalContentHeight - ui->inventory_panel.rect.h;
+    if (ui->maxScrollY < 0) ui->maxScrollY = 0;
+    ui->scrollY = 0;
+
 
     // Police
     ui->item_font = TTF_OpenFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->statsPlayer.rect.h * ui->statsPlayer.rect.w * 0.0002);
@@ -394,27 +314,13 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer) {
 
     SDL_RenderDrawRect(renderer, &ui->inventory_panel.rect);
 
-    // Rendu des slots
     SDL_RenderSetClipRect(renderer, &ui->inventory_panel.rect);
     for (int i = 0; i < ui->nbItems; i++) {
-        // Rendu de l'item
-        SDL_Rect dest = ui->inventory_buttons[i]->rect;
-        dest.y -= ui->scrollY;
+        SDL_Rect dest = ui->inventory_slots[i].rect;
+        dest.y -= ui->scrollY;  // Appliquer le décalage
 
-        if (ui->items[i]->texture) {
-            SDL_RenderCopy(renderer, ui->items[i]->texture, NULL, &dest);
-        }
-
-        // Rendu du bouton (cadre interactif)
-        renderButton(renderer, ui->inventory_buttons[i]);
-    }
-    SDL_RenderSetClipRect(renderer, NULL);
-
-    // Afficher les stats de l'item sélectionné
-    if (ui->selectedItemIndex >= 0 && ui->selectedItemIndex < ui->nbItems) {
-        updateItemDisplay(ui, ui->items[ui->selectedItemIndex], renderer);
-        afficherStatItem(renderer, ui);
-        afficherDescription(renderer, ui);
+        SDL_RenderCopy(renderer, ui->inventory_slots[i].texture, NULL, &dest);
+        SDL_RenderDrawRect(renderer, &dest);
     }
     SDL_RenderSetClipRect(renderer, NULL);
 
