@@ -3,6 +3,10 @@
 #include "tilesEntity/barrel.h"
 #include "tilesEntity/chest.h"
 #include "tilesEntity/spike.h"
+#include "tilesEntity/merchant.h"
+#include "tilesEntity/blacksmith.h"
+#include "tilesEntity/wizard.h"
+
 
 void initTileEntityBase(t_tileEntity* base, SDL_Texture* texture, SDL_Rect rect, t_scene* scene) {
     base->entity.texture = texture;
@@ -77,6 +81,9 @@ void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* enti
     SDL_Texture* spikeTexture = getObject(tileset->textureTiles, 42);
     SDL_Texture* chestTexture = getObject(tileset->textureTiles, 90);
     SDL_Texture* barrelTexture = getObject(tileset->textureTiles, 83);
+    SDL_Texture* merchantTexture = getObject(tileset->textureTiles, 86);
+    SDL_Texture* blacksmithTexture = getObject(tileset->textureTiles, 87);
+    SDL_Texture* wizardTexture = getObject(tileset->textureTiles, 85);
 
     for (int z = 0; z < grid->depth; z++) {
         for (int y = 0; y < grid->height; y++) {
@@ -102,6 +109,18 @@ void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* enti
                         replaceTileWithEntity(tile, x, y, barrelEntity, entities, getTypeIdByName(entities->registry, "BARREL"), floorTexture);
                         ADD_OBJECT_TO_SCENE(scene, barrelEntity, entityTypeId);
                         barrelCount++;
+                    } else if (tileTexture == merchantTexture) {
+                        t_tileEntity* merchantEntity = createMerchantEntity(tileset, scene);
+                        replaceTileWithEntity(tile, x, y, merchantEntity, entities, getTypeIdByName(entities->registry, "MERCHANT"), floorTexture);
+                        ADD_OBJECT_TO_SCENE(scene, merchantEntity, entityTypeId);
+                    } else if (tileTexture == blacksmithTexture) {
+                        t_tileEntity* blacksmithEntity = createBlacksmithEntity(tileset, scene);
+                        replaceTileWithEntity(tile, x, y, blacksmithEntity, entities, getTypeIdByName(entities->registry, "BLACKSMITH"), floorTexture);
+                        ADD_OBJECT_TO_SCENE(scene, blacksmithEntity, entityTypeId);
+                    }else if (tileTexture == wizardTexture) {
+                        t_tileEntity* wizardEntity = createWizardEntity(tileset, scene);
+                        replaceTileWithEntity(tile, x, y, wizardEntity, entities, getTypeIdByName(entities->registry, "WIZARD"), floorTexture);
+                        ADD_OBJECT_TO_SCENE(scene, wizardEntity, entityTypeId);
                     }
                 }
             }
