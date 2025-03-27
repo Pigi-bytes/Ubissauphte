@@ -14,13 +14,20 @@ int main() {
 
     strcpy(item->name, "Marteau de thor");
     item->flags = ITEM_FLAG_STACKABLE;
-    item->stats.attack.additive = 10;
-    item->stats.defense.additive = 5;
+    item->stats.attack.additive = 0;
+    item->stats.attack.multiplicative = 10;
+    item->stats.defense.additive = 0;
+    item->stats.defense.multiplicative = 1;
     item->stats.health.additive = 50;
+    item->stats.health.multiplicative = 5;
     item->stats.healthMax.additive = 500;
+    item->stats.healthMax.multiplicative = -25;
     item->stats.mana.additive = 15;
+    item->stats.mana.multiplicative = 1.2;
     item->stats.manaMax.additive = 20;
+    item->stats.manaMax.multiplicative = 3;
     item->stats.speed.additive = 60;
+    item->stats.speed.multiplicative = 0;
     item->indiceTexture = 102;
     item->texture = (SDL_Texture *)getObject(tileset->textureTiles, item->indiceTexture);
     strcpy(item->description, "\nça c'est de l'arme \nguts weapon\nbla bla bla\navec ça tu gagnes\nà coup sur");
@@ -37,16 +44,21 @@ int main() {
         int height = input->windowHeight;
         updateInput(input);
 
-        if(input->mouseYWheel != 0) {
-            int scrollStep = 40; // Ajustez cette valeur selon vos besoins
+        for (int i = 0; i < 40; i++) {
+            handleInputButton(input, ui.inventory_buttons[i]);
+        }
+
+        if (input->mouseYWheel != 0) {
+            int scrollStep = 40;  // Ajustez cette valeur selon vos besoins
             ui.scrollY -= input->mouseYWheel * scrollStep;
-            
+
             // Limiter le défilement
-            if(ui.scrollY < 0) ui.scrollY = 0;
-            else if(ui.scrollY > ui.maxScrollY) ui.scrollY = ui.maxScrollY;
+            if (ui.scrollY < 0)
+                ui.scrollY = 0;
+            else if (ui.scrollY > ui.maxScrollY)
+                ui.scrollY = ui.maxScrollY;
         }
         if (input->windowWidth != width || input->windowHeight != height) {
-
             inventoryUI_Update(&ui, renderer, input);
         }
         inventoryUI_Render(&ui, renderer);

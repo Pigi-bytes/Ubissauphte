@@ -72,13 +72,39 @@ void calculEquiper(SDL_Rect *statsItem, SDL_Rect *descrItem, SDL_Rect *Equiper, 
     Equiper->y = descrItem->y + descrItem->h + input->windowHeight * 0.03;
 }
 
-char *createStatText(char *statName, float statValue) {
-    char value[32];  // Buffer statique suffisant
-    sprintf(value, "%.2f", statValue);
-    char *result = malloc(strlen(statName) + strlen(value) + 1);
-    strcpy(result, statName);
-    strcat(result, value);
-    return result;
+char *createStatLine(const char *statLabel, float additive, float multiplicative) {
+    char buffer[256] = {0};
+    char addPart[32] = {0};
+    char multPart[32] = {0};
+    int hasContent = 0;
+
+    // Partie additive
+    if (additive != 0) {
+        sprintf(addPart, "%+.0f", additive);
+        hasContent = 1;
+    }
+
+    // Partie multiplicative
+    if (multiplicative != 1.0f && multiplicative != 0) {
+        float percentage = (multiplicative);
+        sprintf(multPart, "%+.1f%%", percentage);
+        hasContent = 1;
+    }
+
+    // Construction de la ligne
+    if (hasContent) {
+        if (addPart[0] && multPart[0]) {
+            sprintf(buffer, "%s %s %s", statLabel, addPart, multPart);
+        } else if (addPart[0]) {
+            sprintf(buffer, "%s %s", statLabel, addPart);
+        } else {
+            sprintf(buffer, "%s %s", statLabel, multPart);
+        }
+    } else {
+        sprintf(buffer, "%s 0", statLabel);
+    }
+
+    return strdup(buffer);
 }
 
 void calculerItem(SDL_Rect *item, SDL_Rect inv, SDL_Rect *comp, int nb, int ind, t_input *input) {
@@ -102,30 +128,115 @@ void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *i
     renderText(renderer, txt2);
 }
 
+void handleItemClick(void *data) {
+    ItemClickData *clickData = (ItemClickData *)data;
+    clickData->ui->selectedItemIndex = clickData->index;
+}
+
+void updateItemDisplay(InventoryUI *ui, t_item *item, SDL_Renderer *renderer) {
+    // 1. Mise à jour des statistiques
+    //--------------------------------
+    // Libération des anciennes statistiques
+    for (int i = 0; i < 7; i++) {
+        free(ui->nom_txt_item[i]);
+        freeText(ui->text_item[i]);
+    }
+
+    // Génération des nouvelles statistiques
+    ui->nom_txt_item[0] = createStatLine("Health : ", item->stats.health.additive, item->stats.health.multiplicative);
+    ui->nom_txt_item[1] = createStatLine("Health Max : ", item->stats.healthMax.additive, item->stats.healthMax.multiplicative);
+    ui->nom_txt_item[2] = createStatLine("Mana : ", item->stats.mana.additive, item->stats.mana.multiplicative);
+    ui->nom_txt_item[3] = createStatLine("Mana Max : ", item->stats.manaMax.additive, item->stats.manaMax.multiplicative);
+    ui->nom_txt_item[4] = createStatLine("Attack : ", item->stats.attack.additive, item->stats.attack.multiplicative);
+    ui->nom_txt_item[5] = createStatLine("Defense : ", item->stats.defense.additive, item->stats.defense.multiplicative);
+    ui->nom_txt_item[6] = createStatLine("Speed : ", item->stats.speed.additive, item->stats.speed.multiplicative);
+
+    // Création des nouvelles textures pour les stats
+    for (int i = 0; i < 7; i++) {
+        ui->text_item[i] = createText(renderer,
+                                      ui->nom_txt_item[i],
+                                      ui->descr_font,
+                                      ui->color_txt);
+
+        // Positionnement relatif
+        ui->text_item[i]->rect.x = ui->statsItem.rect.x + ui->input_ref->windowWidth * 0.01;
+        ui->text_item[i]->rect.y = ui->statsItem.rect.y + ui->input_ref->windowHeight * 0.01 + (i * ui->statsItem.rect.h * 0.1);
+    }
+
+    // 2. Mise à jour de la description
+    //---------------------------------
+    // Libération de l'ancienne description
+    for (int i = 0; i < ui->count_descr; i++) {
+        freeText(ui->description[i]);
+    }
+    ui->count_descr = 0;
+
+    // Découpage de la nouvelle description
+    int lineIndex = 0;
+    int descLength = strlen(item->description);
+    char buffer[256];
+    int bufferIndex = 0;
+
+    for (int i = 0; i <= descLength; i++) {
+        if (item->description[i] == '\n' || item->description[i] == '\0') {
+            if (bufferIndex > 0) {
+                buffer[bufferIndex] = '\0';
+
+                // Création du texte pour la ligne
+                ui->description[lineIndex] = createText(renderer,
+                                                        buffer,
+                                                        ui->descr_font,
+                                                        ui->color_txt);
+
+                // Positionnement dynamique
+                ui->description[lineIndex]->rect.x = ui->descrItem.rect.x + ui->input_ref->windowWidth * 0.01;
+                ui->description[lineIndex]->rect.y = ui->text_descr->rect.y +
+                                                     ui->text_descr->rect.h +
+                                                     (lineIndex * ui->descrItem.rect.h * 0.1);
+
+                lineIndex++;
+                bufferIndex = 0;
+            }
+        } else {
+            buffer[bufferIndex++] = item->description[i];
+        }
+    }
+    ui->count_descr = lineIndex;
+
+    // 3. Mise à jour du nom de l'item
+    //--------------------------------
+    freeText(ui->text_descr);
+    char descrTitle[256];
+    snprintf(descrTitle, sizeof(descrTitle), "Description : %s", item->name);
+    ui->text_descr = createText(renderer, descrTitle, ui->descr_font, ui->color_txt);
+    ui->text_descr->rect.x = ui->descrItem.rect.x + ui->descrItem.rect.w * 0.02;
+    ui->text_descr->rect.y = ui->descrItem.rect.y + ui->descrItem.rect.h * 0.02;
+}
 void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input, int nbItems) {
     initTextEngine();
-
-    ui->nom_txt_item[0] = createStatText("Health : ", items[0]->stats.health.additive);
-    ui->nom_txt_item[1] = createStatText("Health Max : ", items[0]->stats.healthMax.additive);
-    ui->nom_txt_item[2] = createStatText("Mana : ", items[0]->stats.mana.additive);
-    ui->nom_txt_item[3] = createStatText("Mana Max : ", items[0]->stats.manaMax.additive);
-    ui->nom_txt_item[4] = createStatText("Attack : ", items[0]->stats.attack.additive);
-    ui->nom_txt_item[5] = createStatText("Defense : ", items[0]->stats.defense.additive);
-    ui->nom_txt_item[6] = createStatText("Speed : ", items[0]->stats.speed.additive);
-
-    ui->nom_txt_player[0] = createStatText("Health : ", c->baseStats.health.additive);
-    ui->nom_txt_player[1] = createStatText("Health Max : ", c->baseStats.healthMax.additive);
-    ui->nom_txt_player[2] = createStatText("Mana : ", c->baseStats.mana.additive);
-    ui->nom_txt_player[3] = createStatText("Mana Max : ", c->baseStats.manaMax.additive);
-    ui->nom_txt_player[4] = createStatText("Attack : ", c->baseStats.attack.additive);
-    ui->nom_txt_player[5] = createStatText("Defense : ", c->baseStats.defense.additive);
-    ui->nom_txt_player[6] = createStatText("Speed : ", c->baseStats.speed.additive);
-
     // Initialisation des références
     ui->character = c;
     ui->items = items;
     ui->input_ref = input;
     ui->nbItems = nbItems;
+
+    // Pour les items
+    ui->nom_txt_item[0] = createStatLine("Health : ", items[0]->stats.health.additive, items[0]->stats.health.multiplicative);
+    ui->nom_txt_item[1] = createStatLine("Health Max : ", items[0]->stats.healthMax.additive, items[0]->stats.healthMax.multiplicative);
+    ui->nom_txt_item[2] = createStatLine("Mana : ", items[0]->stats.mana.additive, items[0]->stats.mana.multiplicative);
+    ui->nom_txt_item[3] = createStatLine("Mana Max : ", items[0]->stats.manaMax.additive, items[0]->stats.manaMax.multiplicative);
+    ui->nom_txt_item[4] = createStatLine("Attack : ", items[0]->stats.attack.additive, items[0]->stats.attack.multiplicative);
+    ui->nom_txt_item[5] = createStatLine("Defense : ", items[0]->stats.defense.additive, items[0]->stats.defense.multiplicative);
+    ui->nom_txt_item[6] = createStatLine("Speed : ", items[0]->stats.speed.additive, items[0]->stats.speed.multiplicative);
+
+    // Pour le joueur (si les stats sont uniquement additives)
+    ui->nom_txt_player[0] = createStatLine("Health : ", c->baseStats.health.additive, 1.0f);
+    ui->nom_txt_player[1] = createStatLine("Health Max : ", c->baseStats.healthMax.additive, 1.0f);
+    ui->nom_txt_player[2] = createStatLine("Mana : ", c->baseStats.mana.additive, 1.0f);
+    ui->nom_txt_player[3] = createStatLine("Mana Max : ", c->baseStats.manaMax.additive, 1.0f);
+    ui->nom_txt_player[4] = createStatLine("Attack : ", c->baseStats.attack.additive, 1.0f);
+    ui->nom_txt_player[5] = createStatLine("Defense : ", c->baseStats.defense.additive, 1.0f);
+    ui->nom_txt_player[6] = createStatLine("Speed : ", c->baseStats.speed.additive, 1.0f);
 
     // Calculs initiaux (votre code original)
     calculCasePlayer(&ui->player_panel.rect, ui->input_ref, "Perso");
@@ -142,26 +253,23 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     caculDescrItem(&ui->statsItem.rect, &ui->descrItem.rect, ui->input_ref);
     calculEquiper(&ui->statsItem.rect, &ui->descrItem.rect, &ui->equiper.rect, ui->input_ref);
 
-    // Initialisation slots (votre code original)
-    ui->inventory_slots = malloc(nbItems * sizeof(UI_Element));
-    for (int i = 0, j = 0; i < nbItems; j++, i++) {
-        calculerItem(&ui->inventory_slots[i].rect, ui->inventory_panel.rect, &ui->inventory_slots[i - 1].rect, i, j, ui->input_ref);
-        ui->inventory_slots[i].texture = items[i]->texture;
-        if (j == 4)
-            j = 0;
-    }
+    ui->selectedItemIndex = -1;
+    ui->inventory_buttons = malloc(nbItems * sizeof(t_button *));
 
-    int totalContentHeight = 0;
-    for (int i = 0; i < ui->nbItems; i++) {
-        int slotBottom = ui->inventory_slots[i].rect.y + ui->inventory_slots[i].rect.h;
-        if (slotBottom > totalContentHeight) {
-            totalContentHeight = slotBottom;
-        }
+    SDL_Color transparent = {0, 0, 0, 0};
+    SDL_Color hoverColor = {255, 255, 255, 50};
+
+    for (int i = 0, j = 0; i < nbItems; j++, i++) {
+        SDL_Rect slotRect;
+        calculerItem(&slotRect, ui->inventory_panel.rect, (i > 0) ? &ui->inventory_buttons[i - 1]->rect : NULL, i, j, ui->input_ref);
+
+        // Créer un bouton invisible pour l'interaction
+        t_text *buttonText = createText(renderer, "", NULL, transparent);
+        t_fonctionParam *onClick = creerFonction((void(*)(t_fonctionParam*))handleItemClick, &(ItemClickData){ui, i}, NULL);
+        ui->inventory_buttons[i] = createButton(buttonText, transparent, hoverColor, slotRect, onClick);
+
+        if (j == 4) j = 0;
     }
-    totalContentHeight -= ui->inventory_panel.rect.y;
-    ui->maxScrollY = totalContentHeight - ui->inventory_panel.rect.h;
-    if (ui->maxScrollY < 0) ui->maxScrollY = 0;
-    ui->scrollY = 0;
 
     // Police
     ui->item_font = TTF_OpenFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->statsPlayer.rect.h * ui->statsPlayer.rect.w * 0.0002);
@@ -286,13 +394,27 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer) {
 
     SDL_RenderDrawRect(renderer, &ui->inventory_panel.rect);
 
+    // Rendu des slots
     SDL_RenderSetClipRect(renderer, &ui->inventory_panel.rect);
     for (int i = 0; i < ui->nbItems; i++) {
-        SDL_Rect dest = ui->inventory_slots[i].rect;
-        dest.y -= ui->scrollY;  // Appliquer le décalage
+        // Rendu de l'item
+        SDL_Rect dest = ui->inventory_buttons[i]->rect;
+        dest.y -= ui->scrollY;
 
-        SDL_RenderCopy(renderer, ui->inventory_slots[i].texture, NULL, &dest);
-        SDL_RenderDrawRect(renderer, &dest);
+        if (ui->items[i]->texture) {
+            SDL_RenderCopy(renderer, ui->items[i]->texture, NULL, &dest);
+        }
+
+        // Rendu du bouton (cadre interactif)
+        renderButton(renderer, ui->inventory_buttons[i]);
+    }
+    SDL_RenderSetClipRect(renderer, NULL);
+
+    // Afficher les stats de l'item sélectionné
+    if (ui->selectedItemIndex >= 0 && ui->selectedItemIndex < ui->nbItems) {
+        updateItemDisplay(ui, ui->items[ui->selectedItemIndex], renderer);
+        afficherStatItem(renderer, ui);
+        afficherDescription(renderer, ui);
     }
     SDL_RenderSetClipRect(renderer, NULL);
 
