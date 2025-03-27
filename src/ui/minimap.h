@@ -9,6 +9,7 @@
 #include <SDL2/SDL.h>
 
 #include "../engine/core/camera.h"
+#include "../engine/entities/enemy.h"
 #include "../engine/entities/player.h"
 #include "../engine/entities/tiles.h"
 #include "../engine/entities/tilesEntity.h"

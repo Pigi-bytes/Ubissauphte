@@ -68,7 +68,7 @@ void updateHUD(t_hud* hud, SDL_Renderer* renderer, t_joueur* player) {
     char healthStr[16];
     snprintf(healthStr, sizeof(healthStr), "%d/%d", player->health.currentHealth, player->health.maxHealth);
     hud->playerIcon = player->entity.texture;
-    hud->targetXpRatio = (float)player->xp / player->xpToNextLevel;
+    hud->targetXpRatio = getPlayerXPProgress(player);
 
     if (player->currentWeapon) {
         hud->currentWeaponIcon = player->currentWeapon->texture;

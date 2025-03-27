@@ -8,8 +8,8 @@
 #include "../../io/input.h"
 #include "components/health/health.h"
 #include "components/physic/physics.h"
-#include "enemy.h"
 #include "entity.h"
+#include "items/weapon.h"
 #include "tiles.h"
 
 // Anticipation > contact > recovery
@@ -30,19 +30,7 @@ typedef struct {
     float timeSlowRemaining;
 } t_attack;
 
-typedef struct {
-    float mass;
-    float damage;
-    float range;
-    float angleAttack;
-    float attackDuration;
-    float attackCooldown;
-
-    SDL_Texture* texture;
-    SDL_Rect displayRect;
-} t_arme;
-
-typedef struct {
+typedef struct s_joueur {
     t_entity entity;
     t_control* control;
 
@@ -69,8 +57,8 @@ void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera);
 void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime, t_sceneController* sceneController);
 void freePlayer(void* object);
 
-void renderWeaponDuringAttack(SDL_Renderer* renderer, t_joueur* player, SDL_FPoint origin, SDL_Point pivotPoint, int scaledWidth, int scaledHeight, SDL_RendererFlip weaponFlip);
+void addPlayerXP(t_joueur* player, int xpAmount);
+float getPlayerXPProgress(t_joueur* player);
+SDL_bool checkAndProcessLevelUp(t_joueur* player);
 
-void addWeaponToPlayer(t_joueur* player, t_arme* weapon);
-void switchToNextWeapon(t_joueur* player);
 #endif

@@ -1,11 +1,16 @@
 #include "enemy.h"
 
+#include "player.h"
+
 void onEnemyDeath(t_context* context, void* entity) {
     t_enemy* enemy = (t_enemy*)entity;
 
     enemy->entity.useCircleCollision = SDL_FALSE;
 
     printf("Ennemi détruit !\n");
+    if (enemy->lastDamagedBy != NULL) {
+        addPlayerXP(enemy->lastDamagedBy, enemy->xpReward);
+    }
 }
 
 void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect, t_scene* scene) {
@@ -27,7 +32,8 @@ void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect, t_scene* 
     base->health.onDeathCallback = onEnemyDeath;
     base->health.healthBareRender = renderStandardHealthBar;
 
-    // Associer la scène
+    base->xpReward = 10;
+    base->lastDamagedBy = NULL;
     base->entity.currentScene = scene;
 }
 
@@ -83,6 +89,8 @@ void freeEnemy(void* object) {
     // freeAnimationController(enemy->entity.animationController);
 }
 
-void takeDamageAndCheckDeath(t_enemy* enemy, int damage, t_context* context) {
+void takeDamageFromPlayer(t_enemy* enemy, int damage, t_joueur* player, t_context* context) {
+    enemy->lastDamagedBy = player;
+
     applyDamage(&enemy->health, damage, enemy, context);
 }
