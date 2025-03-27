@@ -3,7 +3,6 @@
 t_scene *createMainInv(InventoryUI *ui) {
     t_typeRegistry *registre = createTypeRegistry();
     const uint8_t ELEMENT_TYPE = registerType(registre, NULL, "element");
-    const uint8_t EXTERN_TYPE = registerType(registre, NULL, "extern");
     const uint8_t ECRITURE_TYPE = registerType(registre, NULL, "ecriture");
     const uint8_t INVENTORY_TYPE = registerType(registre, NULL, "inventory");
 
@@ -43,14 +42,19 @@ t_scene *createMainInv(InventoryUI *ui) {
         itemListe[i] = item;
     }
 
-    inventoryUI_Init(ui, renderer, c, itemListe, input);
+    // inventoryUI_Init(ui, renderer, c, itemListe, input);
 
     ADD_OBJECT_TO_SCENE(scene, ui->elems, ELEMENT_TYPE);
-    ADD_OBJECT_TO_SCENE(scene, ui->ext, EXTERN_TYPE);
     ADD_OBJECT_TO_SCENE(scene, ui->ecrit, ECRITURE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, ui, INVENTORY_TYPE);
 
-    return NULL;
+    sceneRegisterFunction(scene, INVENTORY_TYPE, HANDLE_INPUT, inventoryUI_InitWrapper, 0, FONCTION_PARAMS(renderer, c, itemListe, input));
+    sceneRegisterFunction(scene, INVENTORY_TYPE, UPDATE, updateWrapper, 1, FONCTION_PARAMS(input));
+    sceneRegisterFunction(scene, ELEMENT_TYPE, UPDATE, updateScrollWrapper, 0, FONCTION_PARAMS(input));
+    sceneRegisterFunction(scene, ELEMENT_TYPE, HANDLE_RESIZE, inventoryUI_UpdateWrapper, 0, FONCTION_PARAMS(renderer, input));
+    sceneRegisterFunction(scene, ECRITURE_TYPE, RENDER_UI, inventoryUI_RenderWrapper, 0, FONCTION_PARAMS(renderer, input));
+    
+    return scene;
 }
 int main() {
     SDL_Window *window = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_SHOWN);
@@ -93,17 +97,14 @@ int main() {
 
     init (ui,) */
 
-
     inventoryUI_Init(&ui, renderer, c, itemListe, input);
 
-    int width = 0, height = 0;
-
     while (!input->quit) {
-        update(input, width, height);
+        update(input, &ui);
 
         updateScroll(&ui, input);
 
-        inventoryUI_Update(&ui, renderer, input, width, height);
+        inventoryUI_Update(&ui, renderer, input);
 
         inventoryUI_Render(&ui, renderer, input);
 

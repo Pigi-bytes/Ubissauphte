@@ -320,9 +320,9 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
     SDL_RenderDrawRect(renderer, &ui->elems->equiper.rect);
 }
 
-void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input, int w, int h) {
+void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
     // Recalcul si la fenêtre est redimensionnée
-    if (input->windowWidth != w || input->windowHeight != h) {
+    if (input->windowWidth != ui->width || input->windowHeight != ui->height) {
         int lastScroll = ui->scrollY;
 
         // Réinitialiser l'UI
@@ -347,12 +347,28 @@ void updateScroll(InventoryUI *ui, t_input *input) {
     }
 }
 
-void update(t_input *input, int w, int h) {
-    w = input->windowWidth;
-    h = input->windowHeight;
+void update(t_input *input, InventoryUI *ui) {
+    ui->width = input->windowWidth;
+    ui->height = input->windowHeight;
     updateInput(input);
 }
 
-// void inventoryUI_InitWrapper(t_fonctionParam *f) {
-//     inventoryUI_Init(GET_PTR(f, 0, *InventoryUI), );
-// }
+void inventoryUI_InitWrapper(t_fonctionParam *f) {
+    inventoryUI_Init(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, SDL_Renderer *), GET_PTR(f, 2, t_character *), GET_PTR(f, 3, t_item **), GET_PTR(f, 4, t_input *));
+}
+
+void updateWrapper(t_fonctionParam *f) {
+    update(GET_PTR(f, 0, t_input *), GET_PTR(f, 1, InventoryUI *));
+}
+
+void updateScrollWrapper(t_fonctionParam *f) {
+    updateScroll(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, t_input *));
+}
+
+void inventoryUI_UpdateWrapper(t_fonctionParam *f) {
+    inventoryUI_Update(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, SDL_Renderer *), GET_PTR(f, 2, t_input *));
+}
+
+void inventoryUI_RenderWrapper(t_fonctionParam *f) {
+    inventoryUI_Render(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, SDL_Renderer *), GET_PTR(f, 2, t_input *));
+}
