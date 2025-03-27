@@ -29,7 +29,7 @@ void updateWizard(t_tileEntity* entity, t_context* context, t_grid* grid, t_obje
             SDL_bool interactKeyIsPressed = keyPressOnce(context->input, player->control->interact);
 
             if (interactKeyIsPressed && !wizard->interactKeyPressed) {
-                jouerSFX("assets/hitWood.wav", SDL_MIX_MAXVOLUME, 0, context->audioManager);
+                jouerSFX("assets/chestOpening.wav", SDL_MIX_MAXVOLUME, 0, context->audioManager);
 
                 // changer scène ici
 
