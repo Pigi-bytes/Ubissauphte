@@ -2,7 +2,7 @@
 #define AFFICHAGE_H
 #include <SDL2/SDL.h>
 
-#include "../engine/entities/systems/equipementsManager.h"
+#include "../engine/entities/components/equipment/equipementsManager.h"
 #include "../io/imageLoader.h"
 #include "../io/input.h"
 #include "button.h"

@@ -7,6 +7,7 @@
 #include "../../../../io/fichierLoader.h"
 #include "../../../../utils/fonctionManager.h"
 #include "../../../../utils/objectManager.h"
+#include "../../../tileset.h"
 
 typedef enum {
     ITEM_FLAG_STACKABLE = 1 << 0,
