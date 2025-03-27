@@ -133,7 +133,6 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     // Initialisation des références
     ui->character = c;
     ui->items = items;
-    ui->input_ref = input;
     ui->nbItems = nbItems;
 
     // Pour les items
@@ -155,24 +154,24 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     ui->nom_txt_player[6] = createStatLine("Speed : ", c->baseStats.speed.additive, 1.0f);
 
     // Calculs initiaux (votre code original)
-    calculCasePlayer(&ui->player_panel.rect, ui->input_ref, "Perso");
+    calculCasePlayer(&ui->player_panel.rect, input, "Perso");
     ui->player_panel.texture = c->texture;
 
-    calculCaseSlots(&ui->player_panel.rect, &ui->caseArme.rect, ui->input_ref, "Perso", "arme");
-    calculCaseSlots(&ui->caseArme.rect, &ui->caseArmure.rect, ui->input_ref, "arme", "armure");
-    calculCaseSlots(&ui->player_panel.rect, &ui->CaseActivable1.rect, ui->input_ref, "Perso", "activable1");
-    calculCaseSlots(&ui->CaseActivable1.rect, &ui->caseActivable2.rect, ui->input_ref, "activable1", "activable2");
+    calculCaseSlots(&ui->player_panel.rect, &ui->caseArme.rect, input, "Perso", "arme");
+    calculCaseSlots(&ui->caseArme.rect, &ui->caseArmure.rect, input, "arme", "armure");
+    calculCaseSlots(&ui->player_panel.rect, &ui->CaseActivable1.rect, input, "Perso", "activable1");
+    calculCaseSlots(&ui->CaseActivable1.rect, &ui->caseActivable2.rect, input, "activable1", "activable2");
 
-    calculDescrStatsPlayer(&ui->caseArme.rect, &ui->CaseActivable1.rect, &ui->player_panel.rect, &ui->statsPlayer.rect, ui->input_ref);
-    calculInventaire(&ui->inventory_panel.rect, &ui->statsPlayer.rect, ui->input_ref);
-    calculStatsItem(&ui->inventory_panel.rect, &ui->statsItem.rect, ui->input_ref);
-    caculDescrItem(&ui->statsItem.rect, &ui->descrItem.rect, ui->input_ref);
-    calculEquiper(&ui->statsItem.rect, &ui->descrItem.rect, &ui->equiper.rect, ui->input_ref);
+    calculDescrStatsPlayer(&ui->caseArme.rect, &ui->CaseActivable1.rect, &ui->player_panel.rect, &ui->statsPlayer.rect, input);
+    calculInventaire(&ui->inventory_panel.rect, &ui->statsPlayer.rect, input);
+    calculStatsItem(&ui->inventory_panel.rect, &ui->statsItem.rect, input);
+    caculDescrItem(&ui->statsItem.rect, &ui->descrItem.rect, input);
+    calculEquiper(&ui->statsItem.rect, &ui->descrItem.rect, &ui->equiper.rect, input);
 
     // Initialisation slots (votre code original)
     ui->inventory_slots = malloc(nbItems * sizeof(UI_Element));
     for (int i = 0, j = 0; i < nbItems; j++, i++) {
-        calculerItem(&ui->inventory_slots[i].rect, ui->inventory_panel.rect, &ui->inventory_slots[i - 1].rect, i, j, ui->input_ref);
+        calculerItem(&ui->inventory_slots[i].rect, ui->inventory_panel.rect, &ui->inventory_slots[i - 1].rect, i, j, input);
         ui->inventory_slots[i].texture = items[i]->texture;
         if (j == 4)
             j = 0;
@@ -189,7 +188,6 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     ui->maxScrollY = totalContentHeight - ui->inventory_panel.rect.h;
     if (ui->maxScrollY < 0) ui->maxScrollY = 0;
     ui->scrollY = 0;
-
 
     // Police
     ui->item_font = TTF_OpenFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->statsPlayer.rect.h * ui->statsPlayer.rect.w * 0.0002);
@@ -216,8 +214,8 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     ui->text_player[6] = createText(renderer, ui->nom_txt_player[6], ui->item_font, ui->color_txt);
 
     // Positionnement et affichage des textes
-    ui->text_player[0]->rect.x = ui->statsPlayer.rect.x + ui->input_ref->windowWidth * 0.01;
-    ui->text_player[0]->rect.y = ui->statsPlayer.rect.y + ui->input_ref->windowHeight * 0.01;
+    ui->text_player[0]->rect.x = ui->statsPlayer.rect.x + input->windowWidth * 0.01;
+    ui->text_player[0]->rect.y = ui->statsPlayer.rect.y + input->windowHeight * 0.01;
 
     // Initialisation des textes statsItem
 
@@ -230,13 +228,13 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     ui->text_item[6] = createText(renderer, ui->nom_txt_item[6], ui->descr_font, ui->color_txt);
 
     // Positionnement et affichage des textes
-    ui->text_item[0]->rect.x = ui->statsItem.rect.x + ui->input_ref->windowWidth * 0.01;
-    ui->text_item[0]->rect.y = ui->statsItem.rect.y + ui->input_ref->windowHeight * 0.01;
+    ui->text_item[0]->rect.x = ui->statsItem.rect.x + input->windowWidth * 0.01;
+    ui->text_item[0]->rect.y = ui->statsItem.rect.y + input->windowHeight * 0.01;
 
     ui->text_descr = createText(renderer, "Description :", ui->descr_font, ui->color_txt);
 
     ui->text_descr->rect.x = ui->descrItem.rect.x + ui->descrItem.rect.x * 0.025;
-    ui->text_descr->rect.y = ui->descrItem.rect.y + ui->input_ref->windowHeight * 0.005;
+    ui->text_descr->rect.y = ui->descrItem.rect.y + input->windowHeight * 0.005;
 
     int i = 0, j, nb = 1;
 
@@ -247,8 +245,8 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
         ui->descr[j] = '\0';
 
         ui->description[nb - 1] = createText(renderer, ui->descr, ui->descr_font, ui->color_txt);
-        ui->description[nb - 1]->rect.x = ui->descrItem.rect.x + ui->input_ref->windowWidth * 0.005;
-        ui->description[nb - 1]->rect.y = ui->text_descr->rect.y + ui->input_ref->windowHeight * 0.03 * nb;
+        ui->description[nb - 1]->rect.x = ui->descrItem.rect.x + input->windowWidth * 0.005;
+        ui->description[nb - 1]->rect.y = ui->text_descr->rect.y + input->windowHeight * 0.03 * nb;
         nb++;
         ui->descr[0] = '\0';
     }
@@ -271,20 +269,20 @@ void afficherStatPlayer(SDL_Renderer *renderer, InventoryUI *ui, t_input *input)
     afficherText(renderer, ui->text_player[5], ui->text_player[6], input);
 }
 
-void afficherStatItem(SDL_Renderer *renderer, InventoryUI *ui) {
+void afficherStatItem(SDL_Renderer *renderer, InventoryUI *ui, t_input *input) {
     renderText(renderer, ui->text_item[0]);
 
-    afficherText(renderer, ui->text_item[0], ui->text_item[1], ui->input_ref);
+    afficherText(renderer, ui->text_item[0], ui->text_item[1], input);
 
-    afficherText(renderer, ui->text_item[1], ui->text_item[2], ui->input_ref);
+    afficherText(renderer, ui->text_item[1], ui->text_item[2], input);
 
-    afficherText(renderer, ui->text_item[2], ui->text_item[3], ui->input_ref);
+    afficherText(renderer, ui->text_item[2], ui->text_item[3], input);
 
-    afficherText(renderer, ui->text_item[3], ui->text_item[4], ui->input_ref);
+    afficherText(renderer, ui->text_item[3], ui->text_item[4], input);
 
-    afficherText(renderer, ui->text_item[4], ui->text_item[5], ui->input_ref);
+    afficherText(renderer, ui->text_item[4], ui->text_item[5], input);
 
-    afficherText(renderer, ui->text_item[5], ui->text_item[6], ui->input_ref);
+    afficherText(renderer, ui->text_item[5], ui->text_item[6], input);
 }
 
 void afficherDescription(SDL_Renderer *renderer, InventoryUI *ui) {
@@ -295,7 +293,7 @@ void afficherDescription(SDL_Renderer *renderer, InventoryUI *ui) {
     }
 }
 
-void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer) {
+void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
@@ -310,7 +308,7 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer) {
     SDL_RenderDrawRect(renderer, &ui->caseActivable2.rect);
 
     SDL_RenderDrawRect(renderer, &ui->statsPlayer.rect);
-    afficherStatPlayer(renderer, ui, ui->input_ref);
+    afficherStatPlayer(renderer, ui, input);
 
     SDL_RenderDrawRect(renderer, &ui->inventory_panel.rect);
 
@@ -325,7 +323,7 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer) {
     SDL_RenderSetClipRect(renderer, NULL);
 
     SDL_RenderDrawRect(renderer, &ui->statsItem.rect);
-    afficherStatItem(renderer, ui);
+    afficherStatItem(renderer, ui,input);
 
     SDL_RenderDrawRect(renderer, &ui->descrItem.rect);
     afficherDescription(renderer, ui);
@@ -344,4 +342,17 @@ void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
     // Restaurer le scroll dans les nouvelles limites
     ui->scrollY = lastScroll;
     if (ui->scrollY > ui->maxScrollY) ui->scrollY = ui->maxScrollY;
+}
+
+void updateScroll(InventoryUI *ui, t_input *input) {
+    if (input->mouseYWheel != 0) {
+        int scrollStep = 40;  // Ajustez cette valeur selon vos besoins
+        ui->scrollY -= input->mouseYWheel * scrollStep;
+
+        // Limiter le défilement
+        if (ui->scrollY < 0)
+            ui->scrollY = 0;
+        else if (ui->scrollY > ui->maxScrollY)
+            ui->scrollY = ui->maxScrollY;
+    }
 }

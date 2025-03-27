@@ -37,6 +37,9 @@ int main() {
     }
 
     InventoryUI ui;
+    /* const uint8 Case_TYpe = (registre,null,"case")
+
+    init (ui,) */
     inventoryUI_Init(&ui, renderer, c, itemListe, input, 40);
 
     while (!input->quit) {
@@ -44,20 +47,12 @@ int main() {
         int height = input->windowHeight;
         updateInput(input);
 
-        if (input->mouseYWheel != 0) {
-            int scrollStep = 40;  // Ajustez cette valeur selon vos besoins
-            ui.scrollY -= input->mouseYWheel * scrollStep;
+        updateScroll(&ui, input);
 
-            // Limiter le défilement
-            if (ui.scrollY < 0)
-                ui.scrollY = 0;
-            else if (ui.scrollY > ui.maxScrollY)
-                ui.scrollY = ui.maxScrollY;
-        }
         if (input->windowWidth != width || input->windowHeight != height) {
             inventoryUI_Update(&ui, renderer, input);
         }
-        inventoryUI_Render(&ui, renderer);
+        inventoryUI_Render(&ui, renderer, input);
 
         SDL_RenderPresent(renderer);
     }
