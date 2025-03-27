@@ -29,6 +29,11 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
     int seed = time(NULL);
     srand(seed);
     printf("Seed : %d\n", seed);
+    
+    if (numberRoom < 3){
+        printf("Besoin d'au moins 3 salles.");
+        return NULL;
+    }
 
     t_salle** roomList = malloc(sizeof(t_salle) * numberRoom);
     roomList[0] = initRoom();
@@ -39,7 +44,7 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
     int coordsX[4] = {1, -1, 0, 0};  // Deplacement horizontaux
     int coordsY[4] = {0, 0, -1, 1};  // Deplacement verticaux
 
-    for (int i = 1; i < numberRoom; i++) {
+    for (int i = 1; i < numberRoom-2; i++) {
         t_salle* newRoom = NULL;
 
         do {
@@ -92,6 +97,89 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
         } while (!newRoom);  // newRoom point sur NULL si on genere pas -> on enleve la variable de control
     }
 
+    // Après la génération des salles normales
+    int marchant = (rand() % 4)+1;
+    int boss = 5;
+
+    // Détermine la direction et les offsets selon le type de marchand
+    int dir_marchant, dir_boss;
+    switch(marchant) {
+        case 1: dir_marchant = 2; break; // Haut -> Bas du marchand
+        case 2: dir_marchant = 0; break; // Droite -> Gauche du marchand
+        case 3: dir_marchant = 3; break; // Bas -> Haut du marchand
+        case 4: dir_marchant = 1; break; // Gauche -> Droite du marchand
+    }
+
+    switch(boss) {
+        case 5: dir_boss = 2; break; // Haut -> Bas du marchand
+    }
+
+
+    
+    // Cherche une salle valide pour la connexion
+    int trouve = 0;
+    while(trouve == 0){
+        int i = rand() % (numberRoom-2);
+        t_salle* salle = roomList[i];
+
+        // Calcule les nouvelles coordonnées
+        int newX = roomCoords[i].x + coordsX[dir_marchant];
+        int newY = roomCoords[i].y + coordsY[dir_marchant];
+
+        // Vérifie les superpositions
+        int collision = 0;
+        for(int j = 0; j < numberRoom-2; j++) {
+            if(roomCoords[j].x == newX && roomCoords[j].y == newY) {
+                collision = 1;
+                break;
+            }
+        }
+
+        if(!collision) {
+            // Crée et connecte la salle marchande
+            t_salle* marchand = initRoom();
+            marchand->ID = -marchant;
+            connectRoom(salle, marchand, dir_marchant);
+            
+            roomCoords[numberRoom-2] = (SDL_Rect){newX, newY, 0, 0};
+            roomList[numberRoom-2] = marchand;
+            trouve = 1;
+            break;
+        }
+    }
+
+    trouve = 0;
+    while(trouve == 0){
+        int i = rand() % (numberRoom-2);
+        t_salle* salle = roomList[i];
+
+        // Calcule les nouvelles coordonnées
+        int newX = roomCoords[i].x + coordsX[dir_boss];
+        int newY = roomCoords[i].y + coordsY[dir_boss];
+
+        // Vérifie les superpositions
+        int collision = 0;
+        for(int j = 0; j < numberRoom-1; j++) {
+            if(roomCoords[j].x == newX && roomCoords[j].y == newY) {
+                collision = 1;
+                break;
+            }
+        }
+
+        if(!collision) {
+            // Crée et connecte la salle du boss
+            t_salle* salleBoss = initRoom();
+            salleBoss->ID = -boss;
+            connectRoom(salle, salleBoss, dir_boss);
+            
+            roomCoords[numberRoom-1] = (SDL_Rect){newX, newY, 0, 0};
+            roomList[numberRoom-1] = salleBoss;
+            trouve = 1;
+            break;
+        }
+    }
+
+    // Debug: affiche toutes les coordonnées
     for (int i = 0; i < numberRoom; i++){
         printf("X[%d] et Y[%d]\n", roomCoords[i].x, roomCoords[i].y);
     }

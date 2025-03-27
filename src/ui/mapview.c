@@ -99,17 +99,23 @@ void generateMap(SDL_Rect *roomCoords, t_salle **listeRoom, int numberRoom, t_ma
 void affichage(SDL_Renderer *renderer, t_mapAffichage *map, t_joueur *player) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     for (int i = 0; i < map->numRooms; i++) {
-        SDL_RenderDrawRect(renderer, &map->rooms[i]);
+        if (map->numRooms - 1 == i){
+            SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+        }else if (map->numRooms - 2 == i){
+            SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+        }else{
+            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+        }
         if (i == player->indexCurrentRoom) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
             int x = map->rooms[i].x + map->rooms[i].w / 2;
             int y = map->rooms[i].y + map->rooms[i].h / 2;
             SDL_Rect rect = {x - 5 / 2, y - 5 / 2, 5, 5};
             SDL_RenderFillRect(renderer, &rect);
-            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
         }
+        SDL_RenderDrawRect(renderer, &map->rooms[i]);
     }
 
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
