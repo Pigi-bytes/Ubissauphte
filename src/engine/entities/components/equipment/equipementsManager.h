@@ -47,6 +47,9 @@ typedef struct {
     t_fonctionParam* onEquip;
     t_fonctionParam* onDeEquip;
     t_fonctionParam* onUse;
+    char description[200];
+    SDL_Texture* texture;
+    int indiceTexture;
 } t_item;
 
 typedef struct {
@@ -71,6 +74,8 @@ typedef struct {
     t_equipementSlotType equipement[TOTAL_EQUIPMENT_SLOTS];
     t_inventaire* inventaire;
 
+    SDL_Texture* texture;
+
     int level;
     int experience;
     int gold;
@@ -89,7 +94,7 @@ void equiperEquipement(t_character** c, int inventoryIndex, equipementSlotType s
 void desequiperEquipement(t_character** c, equipementSlotType slot);
 
 // Gestion personnage
-t_character* createCharactere();
+t_character* createCharactere(t_tileset* tileset, int indice_texture);
 void charactereFree(t_character* c);
 
 // Gestion Interaction
@@ -103,7 +108,7 @@ void inventory_print(t_inventaire* inv);
 void equipment_print(t_character* c);
 
 void item_save(t_item** item, t_fichier* fichier, int count);
-t_item** item_load(t_fichier* fichier);
+t_item** item_load(t_fichier* fichier, t_tileset* tileset);
 void free_item(t_item** items, int count);
 
 void inventory_save(t_inventaire* inv, t_fichier* fichier);

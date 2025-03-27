@@ -24,6 +24,9 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
         data = createPairData("Name", item[i]->name);
         addPairData(block, data);
 
+        data = createPairData("descrition", item[i]->description);
+        addPairData(block, data);
+
         sprintf(value, "%f", item[i]->stats.attack.additive);
         data = createPairData("attack Add Modifier", value);
         addPairData(block, data);
@@ -84,6 +87,10 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
         data = createPairData("flags", value);
         addPairData(block, data);
 
+        sprintf(value, "%d", item[i]->indiceTexture);
+        data = createPairData("texture", value);
+        addPairData(block, data);
+
         if (item[i]->validSlot[0] == SLOT_ARME)
             data = createPairData("type", "arme");
         else if (item[i]->validSlot[0] == SLOT_ARMURE)
@@ -108,7 +115,7 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
     }
 }
 
-t_item** item_load(t_fichier* fichier) {
+t_item** item_load(t_fichier* fichier, t_tileset* tileset) {
     t_item** item = (t_item**)malloc(fichier->blockManager->count * sizeof(t_item*));
     if (item == NULL) {
         fprintf(stderr, "Erreur d'allocation de mémoire");
@@ -117,7 +124,7 @@ t_item** item_load(t_fichier* fichier) {
 
     int resultInt;
     float resultFLOAT;
-    char resultChar[50];
+    char resultChar[200];
     t_block* block;
 
     for (int i = 0; i < fichier->blockManager->count; i++) {
@@ -130,6 +137,9 @@ t_item** item_load(t_fichier* fichier) {
 
         getValue(block, "Name", resultChar, STRING);
         strcpy(item[i]->name, resultChar);
+
+        getValue(block, "description", resultChar, STRING);
+        strcpy(item[i]->description, resultChar);
 
         getValue(block, "attack Add Modifier", &resultFLOAT, FLOAT);
         item[i]->stats.attack.additive = resultFLOAT;
@@ -175,6 +185,10 @@ t_item** item_load(t_fichier* fichier) {
 
         getValue(block, "flags", &resultInt, INT);
         item[i]->flags = resultInt;
+
+        getValue(block, "texture", &resultInt, INT);
+        item[i]->texture = (SDL_Texture*)getObject(tileset->textureTiles, resultInt);
+        item[i]->indiceTexture = resultInt;
 
         getValue(block, "type", &resultChar, STRING);
         if (strcmp(resultChar, "arme") == 0)
@@ -274,7 +288,7 @@ t_inventaire* inventory_load(t_fichier* fichier, t_item** item, int count) {
                 break;
             }
         }
-        free(Stack->definition); 
+        free(Stack->definition);
         free(Stack);
     }
 
@@ -290,8 +304,10 @@ t_inventaire* createInventaire() {
     return inv;
 }
 
-t_character* createCharactere() {
+t_character* createCharactere(t_tileset* tileset, int indice_texture) {
     t_character* charactere = (t_character*)malloc(sizeof(t_character));
+    
+    charactere->texture = (SDL_Texture*)getObject(tileset->textureTiles, indice_texture);
 
     charactere->inventaire = createInventaire();
     charactere->baseStats.health.additive = 10;

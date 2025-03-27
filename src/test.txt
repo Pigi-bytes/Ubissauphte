@@ -19,6 +19,7 @@ flags: 9
 type: arme
 OnEquipe: 0
 OnDeEquipe: 0
+description: ça c'est \n de l'arme
 
 id Item: 56
 Name: Épée de glace
@@ -41,6 +42,7 @@ flags: 8
 type: armure
 OnEquipe: 0
 OnDeEquipe: 0
+description: ça c'est de l'arme
 
 id Item: 56
 Type: 0.0
@@ -64,6 +66,7 @@ flags: 6
 type: arme
 OnEquipe: 0
 OnDeEquipe: 0
+description: ça c'est de l'arme
 
 id Item: 56
 Type: 0.0
@@ -87,6 +90,8 @@ flags: 10
 type: arme
 OnEquipe: 0
 OnDeEquipe: 0
+texture: 98
+description: \nça c'est de \nl'arme
 
 id Item: 56
 Type: 0.0
@@ -110,6 +115,7 @@ flags: 13
 type: activable
 OnEquipe: 0
 OnDeEquipe: 0
+description: ça c'est de l'arme
 
 id Item: 56
 Type: 0.0
@@ -133,6 +139,7 @@ flags: 12
 type: activable
 OnEquipe: 0
 OnDeEquipe: 0
+description: ça c'est de l'arme
 
 id Item: 56
 Type: 0.0
@@ -156,3 +163,4 @@ flags: 11
 type: armure
 OnEquipe: 0
 OnDeEquipe: 0
+v
