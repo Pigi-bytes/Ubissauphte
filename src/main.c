@@ -9,7 +9,7 @@ int main() {
     t_tileset *tileset = initTileset(renderer, 192, 240, 16, "./assets/imgs/tileMapDungeon.bmp");
     t_character *c = createCharactere(tileset, 98);
     t_item *item = malloc(sizeof(t_item));
-    t_item *itemListe[24];
+    t_item *itemListe[40];
     t_inventaire *inv = createInventaire();
 
     strcpy(item->name, "Marteau de thor");
@@ -25,19 +25,28 @@ int main() {
     item->texture = (SDL_Texture *)getObject(tileset->textureTiles, item->indiceTexture);
     strcpy(item->description, "\nça c'est de l'arme \nguts weapon\nbla bla bla\navec ça tu gagnes\nà coup sur");
 
-    for (int i = 0; i < 24; i++) {
+    for (int i = 0; i < 40; i++) {
         itemListe[i] = item;
     }
 
     InventoryUI ui;
-    inventoryUI_Init(&ui, renderer, c, itemListe, input, 10);
+    inventoryUI_Init(&ui, renderer, c, itemListe, input, 40);
 
     while (!input->quit) {
         int width = input->windowWidth;
         int height = input->windowHeight;
         updateInput(input);
 
+        if(input->mouseYWheel != 0) {
+            int scrollStep = 40; // Ajustez cette valeur selon vos besoins
+            ui.scrollY -= input->mouseYWheel * scrollStep;
+            
+            // Limiter le défilement
+            if(ui.scrollY < 0) ui.scrollY = 0;
+            else if(ui.scrollY > ui.maxScrollY) ui.scrollY = ui.maxScrollY;
+        }
         if (input->windowWidth != width || input->windowHeight != height) {
+
             inventoryUI_Update(&ui, renderer, input);
         }
         inventoryUI_Render(&ui, renderer);

@@ -59,6 +59,9 @@ typedef struct
     int count_descr;
     SDL_Color color_txt;
 
+    int scrollY;
+    int maxScrollY;
+
 } InventoryUI;
 
 void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input, int nbItems);

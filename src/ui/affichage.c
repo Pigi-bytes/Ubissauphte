@@ -73,12 +73,12 @@ void calculEquiper(SDL_Rect *statsItem, SDL_Rect *descrItem, SDL_Rect *Equiper, 
 }
 
 char *createStatText(char *statName, float statValue) {
-    char *name = strdup(statName);
-    char *value = malloc(sizeof(char *));
+    char value[32];  // Buffer statique suffisant
     sprintf(value, "%.2f", statValue);
-    strcat(name, value);
-
-    return name;
+    char *result = malloc(strlen(statName) + strlen(value) + 1);
+    strcpy(result, statName);
+    strcat(result, value);
+    return result;
 }
 
 void calculerItem(SDL_Rect *item, SDL_Rect inv, SDL_Rect *comp, int nb, int ind, t_input *input) {
@@ -129,7 +129,6 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
 
     // Calculs initiaux (votre code original)
     calculCasePlayer(&ui->player_panel.rect, ui->input_ref, "Perso");
-    printf("%d \n", ui->player_panel.rect.w);
     ui->player_panel.texture = c->texture;
 
     calculCaseSlots(&ui->player_panel.rect, &ui->caseArme.rect, ui->input_ref, "Perso", "arme");
@@ -151,6 +150,18 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
         if (j == 4)
             j = 0;
     }
+
+    int totalContentHeight = 0;
+    for (int i = 0; i < ui->nbItems; i++) {
+        int slotBottom = ui->inventory_slots[i].rect.y + ui->inventory_slots[i].rect.h;
+        if (slotBottom > totalContentHeight) {
+            totalContentHeight = slotBottom;
+        }
+    }
+    totalContentHeight -= ui->inventory_panel.rect.y;
+    ui->maxScrollY = totalContentHeight - ui->inventory_panel.rect.h;
+    if (ui->maxScrollY < 0) ui->maxScrollY = 0;
+    ui->scrollY = 0;
 
     // Police
     ui->item_font = TTF_OpenFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->statsPlayer.rect.h * ui->statsPlayer.rect.w * 0.0002);
@@ -248,6 +259,13 @@ void afficherStatItem(SDL_Renderer *renderer, InventoryUI *ui) {
     afficherText(renderer, ui->text_item[5], ui->text_item[6], ui->input_ref);
 }
 
+void afficherDescription(SDL_Renderer *renderer, InventoryUI *ui) {
+    renderText(renderer, ui->text_descr);
+
+    for (int i = 0; i < ui->count_descr; i++) {
+        renderText(renderer, ui->description[i]);
+    }
+}
 
 void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer) {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -268,12 +286,15 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer) {
 
     SDL_RenderDrawRect(renderer, &ui->inventory_panel.rect);
 
+    SDL_RenderSetClipRect(renderer, &ui->inventory_panel.rect);
     for (int i = 0; i < ui->nbItems; i++) {
         SDL_Rect dest = ui->inventory_slots[i].rect;
+        dest.y -= ui->scrollY;  // Appliquer le décalage
 
-        SDL_RenderCopy(renderer, ui->inventory_slots[i].texture, NULL, &ui->inventory_slots[i].rect);
-        SDL_RenderDrawRect(renderer, &ui->inventory_slots[i].rect);
+        SDL_RenderCopy(renderer, ui->inventory_slots[i].texture, NULL, &dest);
+        SDL_RenderDrawRect(renderer, &dest);
     }
+    SDL_RenderSetClipRect(renderer, NULL);
 
     SDL_RenderDrawRect(renderer, &ui->statsItem.rect);
     afficherStatItem(renderer, ui);
@@ -286,5 +307,13 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer) {
 
 void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
     // Recalcul si la fenêtre est redimensionnée
+
+    int lastScroll = ui->scrollY;
+
+    // Réinitialiser l'UI
     inventoryUI_Init(ui, renderer, ui->character, ui->items, input, ui->nbItems);
+
+    // Restaurer le scroll dans les nouvelles limites
+    ui->scrollY = lastScroll;
+    if (ui->scrollY > ui->maxScrollY) ui->scrollY = ui->maxScrollY;
 }
