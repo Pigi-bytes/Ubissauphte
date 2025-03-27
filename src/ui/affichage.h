@@ -23,9 +23,34 @@ typedef struct
     int is_visible;
 } UI_Element;
 
+typedef struct {
+    t_character *character;
+    t_item **items;
+    TTF_Font *item_font;
+    TTF_Font *descr_font;
+} t_extern;
+
+typedef struct {
+    t_text *text_player[7];
+    t_text *text_item[7];
+    t_text *text_descr;
+    t_text *description[15];
+
+    char *nom_txt_item[7];
+    char *nom_txt_player[7];
+    char descr[50];
+    int count_descr;
+    SDL_Color color_txt;
+
+} t_ecritures;
+
 typedef struct
 {
     // Éléments de base (votre structure originale)
+
+    int nbItems;
+    SDL_Color color;
+
     UI_Element player_panel;
     UI_Element caseArme;
     UI_Element caseArmure;
@@ -37,16 +62,10 @@ typedef struct
     UI_Element descrItem;
     UI_Element equiper;
     UI_Element *inventory_slots;
-
-    int nbItems;
-    SDL_Color color;
-
     // Références externes
-    t_character *character;
-    t_item **items;
-    t_input *input_ref;
-    TTF_Font *item_font;
-    TTF_Font *descr_font;
+
+    t_extern *ext;
+    t_ecritures *ecrit;
 
     t_text *text_player[7];
     t_text *text_item[7];
@@ -62,14 +81,13 @@ typedef struct
     int scrollY;
     int maxScrollY;
 
-    t_button **slot_buttons;  // Remplace UI_Element* inventory_slots
-    int selected_item_index;
-
 } InventoryUI;
 
 void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input, int nbItems);
-void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input);
+void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input, int w, int h);
 void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input);
+void update(t_input *input, int w, int h);
+void updateScroll(InventoryUI *ui, t_input *input);
 
 void calculCasePlayer(SDL_Rect *casePlayer, t_input *input, char *nom);
 void calculCaseSlots(SDL_Rect *comp, SDL_Rect *slot, t_input *input, char *nom1, char *nom2);
@@ -77,6 +95,5 @@ void calculDescrStatsPlayer(SDL_Rect *slotDroit, SDL_Rect *slotBas, SDL_Rect *ca
 void calculInventaire(SDL_Rect *Inv, SDL_Rect *statsPlayer, t_input *input);
 void calculStatsItem(SDL_Rect *inv, SDL_Rect *statsItem, t_input *input);
 void caculDescrItem(SDL_Rect *statsItem, SDL_Rect *descrItem, t_input *input);
-void updateScroll(InventoryUI *ui, t_input *input);
 
 #endif

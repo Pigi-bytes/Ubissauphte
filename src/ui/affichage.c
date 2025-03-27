@@ -130,28 +130,44 @@ void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *i
 
 void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input, int nbItems) {
     initTextEngine();
+
+    if (ui->ext == NULL) {
+        ui->ext = malloc(sizeof(t_extern));
+        // Initialiser les membres si nécessaire
+        ui->ext->item_font = NULL;
+        ui->ext->descr_font = NULL;
+    }
+
+    // Initialiser 'ecrit' si nécessaire
+    if (ui->ecrit == NULL) {
+        ui->ecrit = malloc(sizeof(t_ecritures));
+        // Initialiser les membres si nécessaire
+        memset(ui->ecrit->nom_txt_item, 0, sizeof(ui->ecrit->nom_txt_item));
+        // etc.
+    }
+
     // Initialisation des références
-    ui->character = c;
-    ui->items = items;
+    ui->ext->character = c;
+    ui->ext->items = items;
     ui->nbItems = nbItems;
 
     // Pour les items
-    ui->nom_txt_item[0] = createStatLine("Health : ", items[0]->stats.health.additive, items[0]->stats.health.multiplicative);
-    ui->nom_txt_item[1] = createStatLine("Health Max : ", items[0]->stats.healthMax.additive, items[0]->stats.healthMax.multiplicative);
-    ui->nom_txt_item[2] = createStatLine("Mana : ", items[0]->stats.mana.additive, items[0]->stats.mana.multiplicative);
-    ui->nom_txt_item[3] = createStatLine("Mana Max : ", items[0]->stats.manaMax.additive, items[0]->stats.manaMax.multiplicative);
-    ui->nom_txt_item[4] = createStatLine("Attack : ", items[0]->stats.attack.additive, items[0]->stats.attack.multiplicative);
-    ui->nom_txt_item[5] = createStatLine("Defense : ", items[0]->stats.defense.additive, items[0]->stats.defense.multiplicative);
-    ui->nom_txt_item[6] = createStatLine("Speed : ", items[0]->stats.speed.additive, items[0]->stats.speed.multiplicative);
+    ui->ecrit->nom_txt_item[0] = createStatLine("Health : ", items[0]->stats.health.additive, items[0]->stats.health.multiplicative);
+    ui->ecrit->nom_txt_item[1] = createStatLine("Health Max : ", items[0]->stats.healthMax.additive, items[0]->stats.healthMax.multiplicative);
+    ui->ecrit->nom_txt_item[2] = createStatLine("Mana : ", items[0]->stats.mana.additive, items[0]->stats.mana.multiplicative);
+    ui->ecrit->nom_txt_item[3] = createStatLine("Mana Max : ", items[0]->stats.manaMax.additive, items[0]->stats.manaMax.multiplicative);
+    ui->ecrit->nom_txt_item[4] = createStatLine("Attack : ", items[0]->stats.attack.additive, items[0]->stats.attack.multiplicative);
+    ui->ecrit->nom_txt_item[5] = createStatLine("Defense : ", items[0]->stats.defense.additive, items[0]->stats.defense.multiplicative);
+    ui->ecrit->nom_txt_item[6] = createStatLine("Speed : ", items[0]->stats.speed.additive, items[0]->stats.speed.multiplicative);
 
     // Pour le joueur (si les stats sont uniquement additives)
-    ui->nom_txt_player[0] = createStatLine("Health : ", c->baseStats.health.additive, 1.0f);
-    ui->nom_txt_player[1] = createStatLine("Health Max : ", c->baseStats.healthMax.additive, 1.0f);
-    ui->nom_txt_player[2] = createStatLine("Mana : ", c->baseStats.mana.additive, 1.0f);
-    ui->nom_txt_player[3] = createStatLine("Mana Max : ", c->baseStats.manaMax.additive, 1.0f);
-    ui->nom_txt_player[4] = createStatLine("Attack : ", c->baseStats.attack.additive, 1.0f);
-    ui->nom_txt_player[5] = createStatLine("Defense : ", c->baseStats.defense.additive, 1.0f);
-    ui->nom_txt_player[6] = createStatLine("Speed : ", c->baseStats.speed.additive, 1.0f);
+    ui->ecrit->nom_txt_player[0] = createStatLine("Health : ", c->baseStats.health.additive, 1.0f);
+    ui->ecrit->nom_txt_player[1] = createStatLine("Health Max : ", c->baseStats.healthMax.additive, 1.0f);
+    ui->ecrit->nom_txt_player[2] = createStatLine("Mana : ", c->baseStats.mana.additive, 1.0f);
+    ui->ecrit->nom_txt_player[3] = createStatLine("Mana Max : ", c->baseStats.manaMax.additive, 1.0f);
+    ui->ecrit->nom_txt_player[4] = createStatLine("Attack : ", c->baseStats.attack.additive, 1.0f);
+    ui->ecrit->nom_txt_player[5] = createStatLine("Defense : ", c->baseStats.defense.additive, 1.0f);
+    ui->ecrit->nom_txt_player[6] = createStatLine("Speed : ", c->baseStats.speed.additive, 1.0f);
 
     // Calculs initiaux (votre code original)
     calculCasePlayer(&ui->player_panel.rect, input, "Perso");
@@ -190,8 +206,8 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     ui->scrollY = 0;
 
     // Police
-    ui->item_font = TTF_OpenFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->statsPlayer.rect.h * ui->statsPlayer.rect.w * 0.0002);
-    ui->descr_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->descrItem.rect.h * ui->descrItem.rect.w * 0.0003);
+    ui->ext->item_font = TTF_OpenFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->statsPlayer.rect.h * ui->statsPlayer.rect.w * 0.0002);
+    ui->ext->descr_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->descrItem.rect.h * ui->descrItem.rect.w * 0.0003);
     ui->color.a = 255;
     ui->color.b = 255;
     ui->color.g = 0;
@@ -199,97 +215,96 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
 
     // affichage des texts
 
-    ui->color_txt.a = 255;
-    ui->color_txt.b = 0;
-    ui->color_txt.g = 128;
-    ui->color_txt.r = 255;
+    ui->ecrit->color_txt.a = 255;
+    ui->ecrit->color_txt.b = 0;
+    ui->ecrit->color_txt.g = 128;
+    ui->ecrit->color_txt.r = 255;
 
     // Initialisation des textes statsPlayer
-    ui->text_player[0] = createText(renderer, ui->nom_txt_player[0], ui->item_font, ui->color_txt);
-    ui->text_player[1] = createText(renderer, ui->nom_txt_player[1], ui->item_font, ui->color_txt);
-    ui->text_player[2] = createText(renderer, ui->nom_txt_player[2], ui->item_font, ui->color_txt);
-    ui->text_player[3] = createText(renderer, ui->nom_txt_player[3], ui->item_font, ui->color_txt);
-    ui->text_player[4] = createText(renderer, ui->nom_txt_player[4], ui->item_font, ui->color_txt);
-    ui->text_player[5] = createText(renderer, ui->nom_txt_player[5], ui->item_font, ui->color_txt);
-    ui->text_player[6] = createText(renderer, ui->nom_txt_player[6], ui->item_font, ui->color_txt);
+    ui->ecrit->text_player[0] = createText(renderer, ui->ecrit->nom_txt_player[0], ui->ext->item_font, ui->ecrit->color_txt);
+    ui->ecrit->text_player[1] = createText(renderer, ui->ecrit->nom_txt_player[1], ui->ext->item_font, ui->ecrit->color_txt);
+    ui->ecrit->text_player[2] = createText(renderer, ui->ecrit->nom_txt_player[2], ui->ext->item_font, ui->ecrit->color_txt);
+    ui->ecrit->text_player[3] = createText(renderer, ui->ecrit->nom_txt_player[3], ui->ext->item_font, ui->ecrit->color_txt);
+    ui->ecrit->text_player[4] = createText(renderer, ui->ecrit->nom_txt_player[4], ui->ext->item_font, ui->ecrit->color_txt);
+    ui->ecrit->text_player[5] = createText(renderer, ui->ecrit->nom_txt_player[5], ui->ext->item_font, ui->ecrit->color_txt);
+    ui->ecrit->text_player[6] = createText(renderer, ui->ecrit->nom_txt_player[6], ui->ext->item_font, ui->ecrit->color_txt);
 
     // Positionnement et affichage des textes
-    ui->text_player[0]->rect.x = ui->statsPlayer.rect.x + input->windowWidth * 0.01;
-    ui->text_player[0]->rect.y = ui->statsPlayer.rect.y + input->windowHeight * 0.01;
+    ui->ecrit->text_player[0]->rect.x = ui->statsPlayer.rect.x + input->windowWidth * 0.01;
+    ui->ecrit->text_player[0]->rect.y = ui->statsPlayer.rect.y + input->windowHeight * 0.01;
 
     // Initialisation des textes statsItem
 
-    ui->text_item[0] = createText(renderer, ui->nom_txt_item[0], ui->descr_font, ui->color_txt);
-    ui->text_item[1] = createText(renderer, ui->nom_txt_item[1], ui->descr_font, ui->color_txt);
-    ui->text_item[2] = createText(renderer, ui->nom_txt_item[2], ui->descr_font, ui->color_txt);
-    ui->text_item[3] = createText(renderer, ui->nom_txt_item[3], ui->descr_font, ui->color_txt);
-    ui->text_item[4] = createText(renderer, ui->nom_txt_item[4], ui->descr_font, ui->color_txt);
-    ui->text_item[5] = createText(renderer, ui->nom_txt_item[5], ui->descr_font, ui->color_txt);
-    ui->text_item[6] = createText(renderer, ui->nom_txt_item[6], ui->descr_font, ui->color_txt);
+    ui->ecrit->text_item[0] = createText(renderer, ui->ecrit->nom_txt_item[0], ui->ext->descr_font, ui->ecrit->color_txt);
+    ui->ecrit->text_item[1] = createText(renderer, ui->ecrit->nom_txt_item[1], ui->ext->descr_font, ui->ecrit->color_txt);
+    ui->ecrit->text_item[2] = createText(renderer, ui->ecrit->nom_txt_item[2], ui->ext->descr_font, ui->ecrit->color_txt);
+    ui->ecrit->text_item[3] = createText(renderer, ui->ecrit->nom_txt_item[3], ui->ext->descr_font, ui->ecrit->color_txt);
+    ui->ecrit->text_item[4] = createText(renderer, ui->ecrit->nom_txt_item[4], ui->ext->descr_font, ui->ecrit->color_txt);
+    ui->ecrit->text_item[5] = createText(renderer, ui->ecrit->nom_txt_item[5], ui->ext->descr_font, ui->ecrit->color_txt);
+    ui->ecrit->text_item[6] = createText(renderer, ui->ecrit->nom_txt_item[6], ui->ext->descr_font, ui->ecrit->color_txt);
 
     // Positionnement et affichage des textes
-    ui->text_item[0]->rect.x = ui->statsItem.rect.x + input->windowWidth * 0.01;
-    ui->text_item[0]->rect.y = ui->statsItem.rect.y + input->windowHeight * 0.01;
+    ui->ecrit->text_item[0]->rect.x = ui->statsItem.rect.x + input->windowWidth * 0.01;
+    ui->ecrit->text_item[0]->rect.y = ui->statsItem.rect.y + input->windowHeight * 0.01;
+    ui->ecrit->text_descr = createText(renderer, "Description :", ui->ext->descr_font, ui->ecrit->color_txt);
 
-    ui->text_descr = createText(renderer, "Description :", ui->descr_font, ui->color_txt);
-
-    ui->text_descr->rect.x = ui->descrItem.rect.x + ui->descrItem.rect.x * 0.025;
-    ui->text_descr->rect.y = ui->descrItem.rect.y + input->windowHeight * 0.005;
+    ui->ecrit->text_descr->rect.x = ui->descrItem.rect.x + ui->descrItem.rect.x * 0.025;
+    ui->ecrit->text_descr->rect.y = ui->descrItem.rect.y + input->windowHeight * 0.005;
 
     int i = 0, j, nb = 1;
 
-    while (ui->items[0]->description[i++] != '\0') {
-        for (j = 0; ui->items[0]->description[i] != '\n' && ui->items[0]->description[i] != '\0'; i++, j++) {
-            ui->descr[j] = ui->items[0]->description[i];
+    while (ui->ext->items[0]->description[i++] != '\0') {
+        for (j = 0; ui->ext->items[0]->description[i] != '\n' && ui->ext->items[0]->description[i] != '\0'; i++, j++) {
+            ui->ecrit->descr[j] = ui->ext->items[0]->description[i];
         }
-        ui->descr[j] = '\0';
+        ui->ecrit->descr[j] = '\0';
 
-        ui->description[nb - 1] = createText(renderer, ui->descr, ui->descr_font, ui->color_txt);
-        ui->description[nb - 1]->rect.x = ui->descrItem.rect.x + input->windowWidth * 0.005;
-        ui->description[nb - 1]->rect.y = ui->text_descr->rect.y + input->windowHeight * 0.03 * nb;
+        ui->ecrit->description[nb - 1] = createText(renderer, ui->ecrit->descr, ui->ext->descr_font, ui->ecrit->color_txt);
+        ui->ecrit->description[nb - 1]->rect.x = ui->descrItem.rect.x + input->windowWidth * 0.005;
+        ui->ecrit->description[nb - 1]->rect.y = ui->ecrit->text_descr->rect.y + input->windowHeight * 0.03 * nb;
         nb++;
-        ui->descr[0] = '\0';
+        ui->ecrit->descr[0] = '\0';
     }
-    ui->count_descr = nb - 1;
+    ui->ecrit->count_descr = nb - 1;
 }
 
 void afficherStatPlayer(SDL_Renderer *renderer, InventoryUI *ui, t_input *input) {
-    renderText(renderer, ui->text_player[0]);
+    renderText(renderer, ui->ecrit->text_player[0]);
 
-    afficherText(renderer, ui->text_player[0], ui->text_player[1], input);
+    afficherText(renderer, ui->ecrit->text_player[0], ui->ecrit->text_player[1], input);
 
-    afficherText(renderer, ui->text_player[1], ui->text_player[2], input);
+    afficherText(renderer, ui->ecrit->text_player[1], ui->ecrit->text_player[2], input);
 
-    afficherText(renderer, ui->text_player[2], ui->text_player[3], input);
+    afficherText(renderer, ui->ecrit->text_player[2], ui->ecrit->text_player[3], input);
 
-    afficherText(renderer, ui->text_player[3], ui->text_player[4], input);
+    afficherText(renderer, ui->ecrit->text_player[3], ui->ecrit->text_player[4], input);
 
-    afficherText(renderer, ui->text_player[4], ui->text_player[5], input);
+    afficherText(renderer, ui->ecrit->text_player[4], ui->ecrit->text_player[5], input);
 
-    afficherText(renderer, ui->text_player[5], ui->text_player[6], input);
+    afficherText(renderer, ui->ecrit->text_player[5], ui->ecrit->text_player[6], input);
 }
 
 void afficherStatItem(SDL_Renderer *renderer, InventoryUI *ui, t_input *input) {
-    renderText(renderer, ui->text_item[0]);
+    renderText(renderer, ui->ecrit->text_item[0]);
 
-    afficherText(renderer, ui->text_item[0], ui->text_item[1], input);
+    afficherText(renderer, ui->ecrit->text_item[0], ui->ecrit->text_item[1], input);
 
-    afficherText(renderer, ui->text_item[1], ui->text_item[2], input);
+    afficherText(renderer, ui->ecrit->text_item[1], ui->ecrit->text_item[2], input);
 
-    afficherText(renderer, ui->text_item[2], ui->text_item[3], input);
+    afficherText(renderer, ui->ecrit->text_item[2], ui->ecrit->text_item[3], input);
 
-    afficherText(renderer, ui->text_item[3], ui->text_item[4], input);
+    afficherText(renderer, ui->ecrit->text_item[3], ui->ecrit->text_item[4], input);
 
-    afficherText(renderer, ui->text_item[4], ui->text_item[5], input);
+    afficherText(renderer, ui->ecrit->text_item[4], ui->ecrit->text_item[5], input);
 
-    afficherText(renderer, ui->text_item[5], ui->text_item[6], input);
+    afficherText(renderer, ui->ecrit->text_item[5], ui->ecrit->text_item[6], input);
 }
 
 void afficherDescription(SDL_Renderer *renderer, InventoryUI *ui) {
-    renderText(renderer, ui->text_descr);
+    renderText(renderer, ui->ecrit->text_descr);
 
-    for (int i = 0; i < ui->count_descr; i++) {
-        renderText(renderer, ui->description[i]);
+    for (int i = 0; i < ui->ecrit->count_descr; i++) {
+        renderText(renderer, ui->ecrit->description[i]);
     }
 }
 
@@ -323,7 +338,7 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
     SDL_RenderSetClipRect(renderer, NULL);
 
     SDL_RenderDrawRect(renderer, &ui->statsItem.rect);
-    afficherStatItem(renderer, ui,input);
+    afficherStatItem(renderer, ui, input);
 
     SDL_RenderDrawRect(renderer, &ui->descrItem.rect);
     afficherDescription(renderer, ui);
@@ -331,17 +346,18 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
     SDL_RenderDrawRect(renderer, &ui->equiper.rect);
 }
 
-void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
+void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input, int w, int h) {
     // Recalcul si la fenêtre est redimensionnée
+    if (input->windowWidth != w || input->windowHeight != h) {
+        int lastScroll = ui->scrollY;
 
-    int lastScroll = ui->scrollY;
+        // Réinitialiser l'UI
+        inventoryUI_Init(ui, renderer, ui->ext->character, ui->ext->items, input, ui->nbItems);
 
-    // Réinitialiser l'UI
-    inventoryUI_Init(ui, renderer, ui->character, ui->items, input, ui->nbItems);
-
-    // Restaurer le scroll dans les nouvelles limites
-    ui->scrollY = lastScroll;
-    if (ui->scrollY > ui->maxScrollY) ui->scrollY = ui->maxScrollY;
+        // Restaurer le scroll dans les nouvelles limites
+        ui->scrollY = lastScroll;
+        if (ui->scrollY > ui->maxScrollY) ui->scrollY = ui->maxScrollY;
+    }
 }
 
 void updateScroll(InventoryUI *ui, t_input *input) {
@@ -355,4 +371,10 @@ void updateScroll(InventoryUI *ui, t_input *input) {
         else if (ui->scrollY > ui->maxScrollY)
             ui->scrollY = ui->maxScrollY;
     }
+}
+
+void update(t_input*input ,int w,int h){
+    w = input->windowWidth;
+    h = input->windowHeight;
+    updateInput(input);
 }
