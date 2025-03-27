@@ -17,10 +17,10 @@ int determineSpikeDirection(t_grid* grid, t_entity* entity) {
 }
 
 void placeNearTeleporter(t_grid* grid, t_entity* entity, t_objectManager* entities, t_entity* teleporter, t_grid* lastGrid) {
-    // 1. Déterminer la direction du spike dans l'ancienne salle
+    // Déterminer la direction du spike dans l'ancienne salle
     int exitDirection = determineSpikeDirection(lastGrid, teleporter);
 
-    // 2. Trouver le spike correspondant dans la nouvelle salle
+    // Trouver le spike correspondant dans la nouvelle salle
     uint8_t spikeTypeId = getTypeIdByName(entities->registry, "SPIKE");
     t_entity* targetSpike = NULL;
 
@@ -43,7 +43,7 @@ void placeNearTeleporter(t_grid* grid, t_entity* entity, t_objectManager* entiti
         }
     }
 
-    // 3. Si on a trouvé un spike correspondant, placer le joueur à côté
+    // Si on a trouvé un spike correspondant, placer le joueur à côté
     if (targetSpike != NULL) {
         float spawnX = targetSpike->collisionCircle.x;
         float spawnY = targetSpike->collisionCircle.y;
@@ -97,8 +97,6 @@ void placeNearTeleporter(t_grid* grid, t_entity* entity, t_objectManager* entiti
             }
         }
     }
-
-    printf("pas trouver");
     // Fallback: placement aléatoire si on n'a pas trouvé de spike correspondant
     placeOnRandomTile(grid, entity, entities);
 }
