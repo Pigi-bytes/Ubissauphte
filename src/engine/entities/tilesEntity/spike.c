@@ -15,24 +15,91 @@ int determineSpikeDirection(t_grid* grid, t_entity* entity) {
         return (dy > 0) ? 2 : 0;  // Bas (2) ou Haut (0)
     }
 }
-void placeNearTeleporter(t_grid* grid, t_entity* entity, t_objectManager* entities, t_entity* teleporter, t_grid* lastGrid) {
-    printf("=== Debug Information ===\n");
-    printf("Grid pointer: %p\n", (void*)grid);
-    printf("LastGrid pointer: %p\n", (void*)lastGrid);
-    printf("Are grids same? %s\n", (grid == lastGrid) ? "YES" : "NO");
-    printf("entrer : %d\n", determineSpikeDirection(lastGrid, teleporter));
 
+void placeNearTeleporter(t_grid* grid, t_entity* entity, t_objectManager* entities, t_entity* teleporter, t_grid* lastGrid) {
+    // 1. Déterminer la direction du spike dans l'ancienne salle
+    int exitDirection = determineSpikeDirection(lastGrid, teleporter);
+
+    // 2. Trouver le spike correspondant dans la nouvelle salle
     uint8_t spikeTypeId = getTypeIdByName(entities->registry, "SPIKE");
+    t_entity* targetSpike = NULL;
+
     for (int i = 0; i < entities->count; i++) {
-        void* entity = getObject(entities, i);
-        if (entity == NULL) continue;
+        void* currentEntity = getObject(entities, i);
+        if (currentEntity == NULL) continue;
 
         if (getObjectTypeId(entities, i) == spikeTypeId) {
-            t_tileEntity* spike = (t_tileEntity*)entity;
-            printf("sortie : %d\n", determineSpikeDirection(grid, &spike->entity));
+            t_entity* spike = (t_entity*)currentEntity;
+            int spikeDir = determineSpikeDirection(grid, spike);
+
+            // Trouver le spike dans la direction opposée
+            if ((exitDirection == 1 && spikeDir == 3) ||  // Sortie droite -> entrée gauche
+                (exitDirection == 3 && spikeDir == 1) ||  // Sortie gauche -> entrée droite
+                (exitDirection == 0 && spikeDir == 2) ||  // Sortie haut -> entrée bas
+                (exitDirection == 2 && spikeDir == 0)) {  // Sortie bas -> entrée haut
+                targetSpike = spike;
+                break;
+            }
         }
     }
 
+    // 3. Si on a trouvé un spike correspondant, placer le joueur à côté
+    if (targetSpike != NULL) {
+        float spawnX = targetSpike->collisionCircle.x;
+        float spawnY = targetSpike->collisionCircle.y;
+        int entryDirection = determineSpikeDirection(grid, targetSpike);
+
+        // Décalage en fonction de la direction d'entrée
+        switch (entryDirection) {
+            case 1:  // Entrée par droite -> spawn à gauche
+                spawnX -= 32;
+                break;
+            case 3:  // Entrée par gauche -> spawn à droite
+                spawnX += 32;
+                break;
+            case 0:  // Entrée par haut -> spawn en bas
+                spawnY += 32;
+                break;
+            case 2:  // Entrée par bas -> spawn en haut
+                spawnY -= 32;
+                break;
+        }
+
+        // Vérifier et appliquer la position
+        int gridX = (int)(spawnX / 16);
+        int gridY = (int)(spawnY / 16);
+
+        t_tile* tile = getTile(grid, gridX, gridY, 0);
+        if (tile && !tile->solide) {
+            // Vérifier les collisions
+            SDL_bool collisionFound = SDL_FALSE;
+            for (int i = 0; i < entities->count; i++) {
+                t_entity* other = getObject(entities, i);
+                if (!other || other == entity) continue;
+
+                float dx = spawnX - other->collisionCircle.x;
+                float dy = spawnY - other->collisionCircle.y;
+                float distanceSq = dx * dx + dy * dy;
+                float minDist = entity->collisionCircle.radius + other->collisionCircle.radius;
+
+                if (distanceSq < minDist * minDist) {
+                    collisionFound = SDL_TRUE;
+                    break;
+                }
+            }
+
+            if (!collisionFound) {
+                entity->collisionCircle.x = spawnX;
+                entity->collisionCircle.y = spawnY;
+                entity->displayRect.x = spawnX - entity->displayRect.w / 2;
+                entity->displayRect.y = spawnY - entity->displayRect.h / 2;
+                return;
+            }
+        }
+    }
+
+    printf("pas trouver");
+    // Fallback: placement aléatoire si on n'a pas trouvé de spike correspondant
     placeOnRandomTile(grid, entity, entities);
 }
 
@@ -103,7 +170,7 @@ void updateSpike(t_tileEntity* entity, t_context* context, t_salle* salle, t_obj
 
             t_joueur* joueur = (t_joueur*)getObject(entities, 0);
             joueur->indexCurrentRoom = context->sceneController->currentScene;
-            placeNearTeleporter(spike->linkedRoom->grille, &joueur->entity, entities, &spike->base.entity, salle->grille);
+            placeNearTeleporter(spike->linkedRoom->grille, &joueur->entity, spike->linkedRoom->entities, &spike->base.entity, salle->grille);
         }
     } else {
         spike->playerTouching = SDL_FALSE;
