@@ -8,6 +8,8 @@
 #include "../utils/fscene.h"
 #include "button.h"
 #include "text.h"
+#include "../context.h"
+
 
 #define window_width 1280
 #define window_height 960

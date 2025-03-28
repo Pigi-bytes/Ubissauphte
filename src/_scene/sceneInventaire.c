@@ -1,6 +1,6 @@
 #include "../ui/affichage.h"
 
-t_scene *createMainInv() {
+t_scene *createMainInv(t_context *context) {
     t_typeRegistry *registre = createTypeRegistry();
     const uint8_t ELEMENT_TYPE = registerType(registre, NULL, "element");
     const uint8_t ECRITURE_TYPE = registerType(registre, NULL, "ecriture");
@@ -8,12 +8,7 @@ t_scene *createMainInv() {
 
     t_scene *scene = createScene(initObjectManager(registre), "mainInv");
 
-    SDL_Window *window = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_SHOWN);
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
-    t_input *input = initInput(window_width, window_height);
-
-    t_tileset *tileset = initTileset(renderer, 192, 240, 16, "./assets/imgs/tileMapDungeon.bmp");
+    t_tileset *tileset = initTileset(context->renderer, 192, 240, 16, "./assets/imgs/tileMapDungeon.bmp");
     t_character *c = createCharactere(tileset, 98);
     t_item *item = malloc(sizeof(t_item));
     t_item *itemListe[40];
@@ -47,12 +42,13 @@ t_scene *createMainInv() {
     ADD_OBJECT_TO_SCENE(scene, ui.elems, ELEMENT_TYPE);
     ADD_OBJECT_TO_SCENE(scene, ui.ecrit, ECRITURE_TYPE);
     ADD_OBJECT_TO_SCENE(scene, &ui, INVENTORY_TYPE);
+    
 
-    sceneRegisterFunction(scene, INVENTORY_TYPE, HANDLE_INPUT, inventoryUI_InitWrapper, 0, FONCTION_PARAMS(renderer, c, itemListe, input));
-    sceneRegisterFunction(scene, INVENTORY_TYPE, UPDATE, updateWrapper, 1, FONCTION_PARAMS(input));
-    sceneRegisterFunction(scene, ELEMENT_TYPE, UPDATE, updateScrollWrapper, 0, FONCTION_PARAMS(input));
-    sceneRegisterFunction(scene, ELEMENT_TYPE, HANDLE_RESIZE, inventoryUI_UpdateWrapper, 0, FONCTION_PARAMS(renderer, input));
-    sceneRegisterFunction(scene, ECRITURE_TYPE, RENDER_UI, inventoryUI_RenderWrapper, 0, FONCTION_PARAMS(renderer, input));
+    sceneRegisterFunction(scene, INVENTORY_TYPE, HANDLE_INPUT, inventoryUI_InitWrapper, 0, FONCTION_PARAMS(context->renderer, c, itemListe, context->input));
+    sceneRegisterFunction(scene, INVENTORY_TYPE, UPDATE, updateWrapper, 1, FONCTION_PARAMS(context->input));
+    sceneRegisterFunction(scene, ELEMENT_TYPE, UPDATE, updateScrollWrapper, 0, FONCTION_PARAMS(context->input));
+    sceneRegisterFunction(scene, ELEMENT_TYPE, HANDLE_RESIZE, inventoryUI_UpdateWrapper, 0, FONCTION_PARAMS(context->renderer, context->renderer));
+    sceneRegisterFunction(scene, ECRITURE_TYPE, RENDER_UI, inventoryUI_RenderWrapper, 0, FONCTION_PARAMS(context->renderer, context->input));
 
     return scene;
 }
