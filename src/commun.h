@@ -2,6 +2,7 @@
 #define COMMUN_H
 
 #include "color.h"
+#include "context.h"
 #include "debug.h"
 #include "engine/core/camera.h"
 #include "engine/core/frame.h"
@@ -10,6 +11,7 @@
 #include "engine/entities/player.h"
 #include "engine/entities/tiles.h"
 #include "engine/world/generationSalle/geneRoom.h"
+#include "engine/world/genmap.h"
 #include "io/audioManager.h"
 #include "io/imageLoader.h"
 #include "io/input.h"
@@ -29,8 +31,8 @@
 
 SDL_Rect creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio);
 void bouttonClickQuit(t_fonctionParam* fonction);
-
 void renderTextWrapper(t_fonctionParam* f);
+void changementAffichage(t_fonctionParam* fonction);
 void renderButtonWrapper(t_fonctionParam* f);
 void renderFPSDisplayWrapper(t_fonctionParam* f);
 void renderGridWrapper(t_fonctionParam* f);
@@ -56,5 +58,6 @@ void renderToucheWrapper(t_fonctionParam* f);
 void handleInputToucheWrapper(t_fonctionParam* f);
 void affichageWrapper(t_fonctionParam* f);
 void handleInputMapWrapper(t_fonctionParam* f);
+void getPrevuisSceneWrapper(t_fonctionParam* f);
 
 #endif

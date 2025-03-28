@@ -30,9 +30,9 @@ void initTileEntityBase(t_tileEntity* base, SDL_Texture* texture, SDL_Rect rect,
     base->entity.currentScene = scene;
 }
 
-void updateTileEntity(t_tileEntity* tileEntity, t_context* context, t_grid* grid, t_objectManager* entities) {
+void updateTileEntity(t_tileEntity* tileEntity, t_context* context, t_salle* salle, t_objectManager* entities) {
     if (tileEntity && tileEntity->update) {
-        tileEntity->update(tileEntity, context, grid, entities);
+        tileEntity->update(tileEntity, context, salle, entities);
     }
 }
 
@@ -139,8 +139,8 @@ void renderTileEntityWrapper(t_fonctionParam* f) {
 void updateTileEntityWrapper(t_fonctionParam* f) {
     t_context* context = GET_PTR(f, 0, t_context*);
     t_tileEntity* entity = GET_PTR(f, 1, t_tileEntity*);
-    t_grid* grid = GET_PTR(f, 2, t_grid*);
+    t_salle* salle = GET_PTR(f, 2, t_salle*);
     t_objectManager* entities = GET_PTR(f, 3, t_objectManager*);
 
-    updateTileEntity(entity, context, grid, entities);
+    updateTileEntity(entity, context, salle, entities);
 }

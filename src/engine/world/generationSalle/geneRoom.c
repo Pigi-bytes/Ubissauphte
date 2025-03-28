@@ -297,7 +297,7 @@ void addComplement(t_grille *g, t_listeBlock **listAllBlock) {
         do {
             x = rand() % g->nbLigne;
             y = rand() % g->nbColonne;
-        } while (g->grille[x][y]->val != SOL);
+        } while (g->grille[x][y]->val != SOL || !EXISTE_VOISIN(g->grille[x][y]->tabVoisin[VOISIN_BAS], g->grille[x][y]->tabVoisin[VOISIN_HAUT], g->grille[x][y]->tabVoisin[VOISIN_GAUCHE], g->grille[x][y]->tabVoisin[VOISIN_DROIT]));
         copierVal(blockByName(listBlock, COMPDECO_COFFRE), &g->grille[x][y]->tiles);
         g->grille[x][y]->val = ELTAJOUTE;
     }
@@ -307,7 +307,7 @@ void addComplement(t_grille *g, t_listeBlock **listAllBlock) {
         do {
             x = rand() % g->nbLigne;
             y = rand() % g->nbColonne;
-        } while (g->grille[x][y]->val != SOL);
+        } while (g->grille[x][y]->val != SOL || !EXISTE_VOISIN(g->grille[x][y]->tabVoisin[VOISIN_BAS], g->grille[x][y]->tabVoisin[VOISIN_HAUT], g->grille[x][y]->tabVoisin[VOISIN_GAUCHE], g->grille[x][y]->tabVoisin[VOISIN_DROIT]));
         copierVal(blockByName(listBlock, COMPDECO_TONNEAU), &g->grille[x][y]->tiles);
         g->grille[x][y]->val = ELTAJOUTE;
     }
@@ -378,7 +378,7 @@ void placerSortie(t_grille **grille, t_salle *salle, t_listeBlock **lab) {
     }
 }
 t_grille *geneRoom(t_salle *salle) {
-    srand(time(NULL));
+    // srand(time(NULL));
 
     int nbLigne = (rand() % 70 + 30) & ~1;
     int nbColonne = (rand() % 2) == 0 ? (nbLigne + rand() % 11) & ~1 : (nbLigne - rand() % 11) & ~1;

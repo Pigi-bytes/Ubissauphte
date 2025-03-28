@@ -76,11 +76,11 @@ void handleInputButtonVolummeWrapper(t_fonctionParam* f) {
 }
 
 void updatePlayerWrapper(t_fonctionParam* f) {
-    updatePlayer(((t_joueur*)(f)->param[0]), ((float*)(f)->param[1]), ((t_grid*)(f)->param[2]), ((t_objectManager*)(f)->param[3]));
+    updatePlayer(((t_joueur*)(f)->param[0]), ((float*)(f)->param[1]), ((t_salle*)(f)->param[2]), ((t_objectManager*)(f)->param[3]));
 }
 
 void updateEnemyWrapper(t_fonctionParam* f) {
-    updateEnemy(((t_enemy*)(f)->param[0]), ((float*)(f)->param[1]), ((t_grid*)(f)->param[2]), ((t_objectManager*)(f)->param[3]));
+    updateEnemy(((t_enemy*)(f)->param[0]), ((float*)(f)->param[1]), ((t_salle*)(f)->param[2]), ((t_objectManager*)(f)->param[3]));
 }
 
 void setSceneWrapper(t_fonctionParam* f) {
@@ -107,8 +107,32 @@ SDL_Rect
 creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio) {
     return (SDL_Rect){WINDOW_WIDTH * x_ratio, WINDOW_HEIGHT * y_ratio, WINDOW_WIDTH * w_ratio, WINDOW_HEIGHT * h_ratio};
 }
+void getPrevuisSceneWrapper(t_fonctionParam* f) {
+    getPrevuisScene((t_sceneController*)f->param[0]);
+}
 
 void bouttonClickQuit(t_fonctionParam* fonction) {
     t_input* input = GET_PTR(fonction, 0, t_input*);
     input->quit = SDL_TRUE;
+}
+
+void changementAffichage(t_fonctionParam* fonction) {
+    SDL_Window* window = GET_PTR(fonction, 0, SDL_Window*);
+    t_option* option = GET_PTR(fonction, 1, t_option*);
+    t_text** text = GET_PTR(fonction, 2, t_text**);
+    SDL_Renderer* renderer = GET_PTR(fonction, 3, SDL_Renderer*);
+    t_input* input = GET_PTR(fonction, 4, t_input*);
+    int sizeOutline = 2;
+    if (option->PleinEcran == SDL_FALSE) {
+        option->PleinEcran = SDL_TRUE;
+        input->resized = SDL_TRUE;
+        updateTextOutline(text, renderer, "Fullscreen", BLACK, WHITE, sizeOutline);
+    } else {
+        option->PleinEcran = SDL_FALSE;
+        input->resized = SDL_FALSE;
+        updateTextOutline(text, renderer, "windowed", BLACK, WHITE, sizeOutline);
+    }
+    Uint32 fullscreenFlag = SDL_WINDOW_FULLSCREEN;
+    int isFullscreen = SDL_GetWindowFlags(window) & fullscreenFlag;
+    SDL_SetWindowFullscreen(window, isFullscreen ? 0 : fullscreenFlag);
 }

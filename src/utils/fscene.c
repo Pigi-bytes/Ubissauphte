@@ -111,6 +111,18 @@ void setScene(t_sceneController* controller, char* name) {
     }
 }
 
+int indiceByscene(t_sceneController* controller, t_scene* scene) {
+    for (int i = 0; i < controller->scene->count; i++) {
+        if (getObject(controller->scene, i) == scene) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void getPrevuisScene(t_sceneController* controller) {
+    controller->currentScene = indiceByscene(controller, controller->lastScene);
+}
 t_scene* getCurrentScene(t_sceneController* controller) {
     return (t_scene*)getObject(controller->scene, controller->currentScene);
 }
