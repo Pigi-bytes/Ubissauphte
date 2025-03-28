@@ -1,9 +1,4 @@
 #include "mapview.h"
-
-#include <SDL2/SDL.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 void XYMinMax(int *zoneAffichage, SDL_Rect *roomCoords, int numberRoom) {
     zoneAffichage[0] = roomCoords[0].x;
     zoneAffichage[1] = roomCoords[0].x;
@@ -99,12 +94,14 @@ void generateMap(SDL_Rect *roomCoords, t_salle **listeRoom, int numberRoom, t_ma
 void affichage(SDL_Renderer *renderer, t_mapAffichage *map, t_joueur *player) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+
     for (int i = 0; i < map->numRooms; i++) {
-        if (map->numRooms - 1 == i){
+        if (map->numRooms - 1 == i) {
             SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
-        }else if (map->numRooms - 2 == i){
+        } else if (map->numRooms - 2 == i) {
             SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-        }else{
+        } else {
             SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         }
         if (i == player->indexCurrentRoom) {
@@ -125,7 +122,7 @@ void affichage(SDL_Renderer *renderer, t_mapAffichage *map, t_joueur *player) {
 }
 void handleInputMap(t_input *input, t_joueur *player, t_sceneController *sceneController) {
     if (input->key[player->control->map]) {
-        setScene(sceneController, "main");
+        getPrevuisScene(sceneController);
         input->key[player->control->map] = SDL_FALSE;
     }
 }

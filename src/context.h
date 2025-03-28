@@ -5,6 +5,7 @@
 #include <SDL2/SDL_ttf.h>
 
 #include "engine/core/frame.h"
+#include "engine/world/genmap.h"
 #include "io/audioManager.h"
 #include "io/input.h"
 #include "ui/fpsDisplay.h"

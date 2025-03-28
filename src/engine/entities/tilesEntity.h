@@ -13,7 +13,7 @@
 typedef struct s_tileEntity {
     t_entity entity;
 
-    void (*update)(struct s_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities);
+    void (*update)(struct s_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities);
     void (*render)(struct s_tileEntity* entity, t_context* context, t_camera* camera);
 
     SDL_bool isDestructible;
@@ -21,7 +21,7 @@ typedef struct s_tileEntity {
 
 void initTileEntityBase(t_tileEntity* base, SDL_Texture* texture, SDL_Rect rect, t_scene* scene);
 
-void updateTileEntity(t_tileEntity* tileEntity, t_context* context, t_grid* grid, t_objectManager* entities);
+void updateTileEntity(t_tileEntity* tileEntity, t_context* context, t_salle* grid, t_objectManager* entities);
 void renderTileEntity(t_tileEntity* tileEntity, t_context* context, t_camera* camera);
 void freeTileEntity(void* object);
 

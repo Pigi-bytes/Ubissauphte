@@ -24,7 +24,7 @@ typedef struct t_enemy {
 void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect, t_scene* scene);
 
 void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera);
-void updateEnemy(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities);
+void updateEnemy(t_enemy* enemy, float* deltaTime, t_salle* grid, t_objectManager* entities);
 void freeEnemy(void* object);
 void takeDamageFromPlayer(t_enemy* enemy, int damage, t_joueur* player, t_context* context);
 

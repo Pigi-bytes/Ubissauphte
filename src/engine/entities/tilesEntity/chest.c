@@ -1,6 +1,6 @@
 #include "chest.h"
 
-void updateChest(t_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities) {
+void updateChest(t_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities) {
     t_chest* chest = (t_chest*)entity;
 
     chest->detectionRange.x = entity->entity.displayRect.x + entity->entity.displayRect.w / 2;
@@ -45,7 +45,7 @@ void updateChest(t_tileEntity* entity, t_context* context, t_grid* grid, t_objec
         }
     }
 
-    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, grid, entities);
+    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, salle->grille, entities);
 }
 
 void renderChest(t_tileEntity* entity, t_context* context, t_camera* camera) {

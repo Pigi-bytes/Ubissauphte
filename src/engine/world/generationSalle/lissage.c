@@ -10,43 +10,84 @@ SDL_bool caseIsSol(t_case* c) {
 SDL_bool caseIsPlafond(t_case* c) {
     return existe(c) && (c->val != SOL);
 }
-SDL_bool ajoutArriere(t_case* c) {
-    return caseIsPlafond(c->tabVoisin[VOISIN_BAS]) && caseIsSol(c->tabVoisin[VOISIN_BAS2]) && caseIsSol(c->tabVoisin[VOISIN_HAUT]);
+
+SDL_bool isIsolatedCase(t_case* c) {
+    return caseIsSol(c->tabVoisin[VOISIN_BAS]) &&
+           caseIsSol(c->tabVoisin[VOISIN_HAUT]) &&
+           caseIsSol(c->tabVoisin[VOISIN_DROIT]) &&
+           caseIsSol(c->tabVoisin[VOISIN_GAUCHE]);
 }
 
-SDL_bool blockDiagHaut(t_case* c) {
-    return caseIsSol(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]) && caseIsSol(c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]) && (caseIsPlafond(c->tabVoisin[VOISIN_DROIT]) || caseIsPlafond(c->tabVoisin[VOISIN_GAUCHE]));
+SDL_bool isHorizontalOrVerticalPath(t_case* c) {
+    return (caseIsSol(c->tabVoisin[VOISIN_DROIT]) && caseIsSol(c->tabVoisin[VOISIN_GAUCHE])) ||
+           (caseIsSol(c->tabVoisin[VOISIN_HAUT]) && caseIsSol(c->tabVoisin[VOISIN_BAS]));
 }
 
-SDL_bool blockDiagCoin(t_case* c) {
-    return caseIsSol(c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]) && caseIsSol(c->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]) && (caseIsPlafond(c->tabVoisin[VOISIN_DROIT]) || caseIsPlafond(c->tabVoisin[VOISIN_GAUCHE]));
+SDL_bool shouldAddBackWall(t_case* c) {
+    return caseIsPlafond(c->tabVoisin[VOISIN_BAS]) &&
+           caseIsSol(c->tabVoisin[VOISIN_BAS2]) &&
+           caseIsSol(c->tabVoisin[VOISIN_HAUT]);
 }
 
-SDL_bool blockDiagBas(t_case* c) {
-    return caseIsSol(c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT]) && caseIsSol(c->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]) && (caseIsPlafond(c->tabVoisin[VOISIN_DROIT]) && caseIsPlafond(c->tabVoisin[VOISIN_GAUCHE]));
+SDL_bool isDiagonalTopPattern(t_case* c) {
+    return caseIsSol(c->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]) &&
+           caseIsSol(c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]) &&
+           (caseIsPlafond(c->tabVoisin[VOISIN_DROIT]) || caseIsPlafond(c->tabVoisin[VOISIN_GAUCHE]));
+}
+
+SDL_bool isDiagonalCornerPattern(t_case* c) {
+    return caseIsSol(c->tabVoisin[VOISIN_DIAG_DROIT_HAUT]) &&
+           caseIsSol(c->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]) &&
+           (caseIsPlafond(c->tabVoisin[VOISIN_DROIT]) || caseIsPlafond(c->tabVoisin[VOISIN_GAUCHE]));
+}
+
+SDL_bool isDiagonalBottomPattern(t_case* c) {
+    return caseIsSol(c->tabVoisin[VOISIN_DIAG_GAUCHE_HAUT]) &&
+           caseIsSol(c->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]) &&
+           caseIsPlafond(c->tabVoisin[VOISIN_DROIT]) &&
+           caseIsPlafond(c->tabVoisin[VOISIN_GAUCHE]);
+}
+
+void handleDiagonalTopPattern(t_grille* grille, int i, int j) {
+    grille->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val = OBSTACLE;
+    if (existe(grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE])) {
+        grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]->val = OBSTACLE;
+    }
+}
+
+void handleDiagonalCornerPattern(t_grille* grille, int i, int j) {
+    grille->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val = OBSTACLE;
+    if (existe(grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE])) {
+        grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]->val = OBSTACLE;
+    }
+}
+
+void handleDiagonalBottomPattern(t_grille* grille, int i, int j) {
+    if (existe(grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_DROIT])) {
+        grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]->val = OBSTACLE;
+    }
 }
 
 void lissage(t_grille* grille) {
     for (int i = 0; i < grille->nbLigne; i++) {
         for (int j = 0; j < grille->nbColonne; j++) {
-            if (grille->grille[i][j]->val == OBSTACLE && !(caseSansVoisins(grille->grille[i][j]))) {
-                if (((caseIsSol(grille->grille[i][j]->tabVoisin[VOISIN_DROIT]) && caseIsSol(grille->grille[i][j]->tabVoisin[VOISIN_GAUCHE])) || (caseIsSol(grille->grille[i][j]->tabVoisin[VOISIN_HAUT]) && caseIsSol(grille->grille[i][j]->tabVoisin[VOISIN_BAS])))) {
-                    grille->grille[i][j]->val = SOL;
-                } else if (ajoutArriere(grille->grille[i][j])) {
-                    grille->grille[i][j]->val = SOL;
-                    grille->grille[i][j]->tabVoisin[VOISIN_BAS]->val = SOL;
-                } else if (blockDiagHaut(grille->grille[i][j])) {
-                    grille->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val = OBSTACLE;
-                    if (existe(grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]))
-                        grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]->val = OBSTACLE;
-                } else if (blockDiagCoin(grille->grille[i][j])) {
-                    grille->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val = OBSTACLE;
-                    if (existe(grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]))
-                        grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]->val = OBSTACLE;
-                } else if (blockDiagBas(grille->grille[i][j])) {
-                    if (existe(grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]))
-                        grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]->val = OBSTACLE;
-                }
+            t_case* current = grille->grille[i][j];
+
+            if (current->val != OBSTACLE || isIsolatedCase(current)) {
+                continue;
+            }
+
+            if (isHorizontalOrVerticalPath(current)) {
+                current->val = SOL;
+            } else if (shouldAddBackWall(current)) {
+                current->val = SOL;
+                current->tabVoisin[VOISIN_BAS]->val = SOL;
+            } else if (isDiagonalTopPattern(current)) {
+                handleDiagonalTopPattern(grille, i, j);
+            } else if (isDiagonalCornerPattern(current)) {
+                handleDiagonalCornerPattern(grille, i, j);
+            } else if (isDiagonalBottomPattern(current)) {
+                handleDiagonalBottomPattern(grille, i, j);
             }
         }
     }
