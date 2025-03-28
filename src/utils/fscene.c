@@ -92,6 +92,9 @@ t_sceneController* initSceneController() {
 
     controller->scene = initObjectManager(registre);
     controller->currentScene = -1;
+    controller->lastMenu = malloc(sizeof(t_history));
+    controller->lastMenu->nb_Menu = -1;
+    controller->lastMenu->historique = malloc(sizeof(t_scene*) * 4);
 
     return controller;
 }
@@ -101,9 +104,17 @@ void addScene(t_sceneController* controller, t_scene* scene) {
 }
 
 void setScene(t_sceneController* controller, char* name) {
+    t_scene* salleDep = (t_scene*)getObject(controller->scene, controller->currentScene);
     for (int i = 0; i < controller->scene->count; i++) {
         t_scene* scene = (t_scene*)getObject(controller->scene, i);
         if (strcmp(scene->name, name) == 0) {
+            if (salleDep && strcmp(salleDep->name, "main")) {
+                controller->lastMenu->historique[++controller->lastMenu->nb_Menu] = (t_scene*)getObject(controller->scene, controller->currentScene);
+                printf("ajouter\n");
+            }
+            if (!strcmp(scene->name, "main")) {
+                controller->lastMenu->nb_Menu = -1;
+            }
             controller->currentScene = i;
             executeSceneFunctions(scene, HANDLE_RESIZE);
             return;
@@ -121,10 +132,32 @@ int indiceByscene(t_sceneController* controller, t_scene* scene) {
 }
 
 void getPrevuisScene(t_sceneController* controller) {
-    controller->currentScene = indiceByscene(controller, controller->lastScene);
+    controller->currentScene = indiceByscene(controller, controller->lastMap);
+}
+
+void getPrevuisMenu(t_sceneController* controller) {
+    printf("retour en arrière");
+    if (controller->lastMenu->nb_Menu >= 0) {
+        controller->currentScene = indiceByscene(controller, controller->lastMenu->historique[controller->lastMenu->nb_Menu]);
+        controller->lastMenu->nb_Menu--;
+    }
 }
 t_scene* getCurrentScene(t_sceneController* controller) {
     return (t_scene*)getObject(controller->scene, controller->currentScene);
+}
+
+void freeSceneController(t_sceneController* controller) {
+    if (!controller) return;
+    if (controller->lastMenu) {
+        free(controller->lastMenu->historique);
+        free(controller->lastMenu);
+    }
+
+    if (controller->scene) {
+        freeObjectManager(controller->scene);
+    }
+
+    free(controller);
 }
 
 int findObjectIndex(t_objectManager* manager, void* object) {
