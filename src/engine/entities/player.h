@@ -47,6 +47,7 @@ typedef struct s_joueur {
     int level;
     int xp;
     int xpToNextLevel;
+    int gold;
 
     // TEMPORAIRE TEST
     t_arme* weapons[10];

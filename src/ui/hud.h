@@ -7,18 +7,12 @@
 #include "../engine/entities/player.h"
 #include "text.h"
 
-#define HUD_PADDING 10
-#define HEALTH_BAR_HEIGHT 24
-#define XP_BAR_HEIGHT 6
-#define BAR_GAP 4
-#define ICON_SIZE 32
-#define BAR_WIDTH 250
-
 typedef struct {
     TTF_Font* font;
     SDL_Texture* player_icon;
     SDL_Texture* weapon_icon;
     SDL_Texture* dash_icon;
+    t_animation* gold_animation;
 
     struct {
         SDL_Rect player;
@@ -26,11 +20,13 @@ typedef struct {
         SDL_Rect xp_bar;
         SDL_Rect weapon;
         SDL_Rect dash;
+        SDL_Rect gold;
     } layout;
 
     struct {
         t_text* health;
         t_text* level;
+        t_text* gold;
     } text;
 
     struct {
@@ -44,7 +40,6 @@ typedef struct {
 
     SDL_Color text_color;
     SDL_Color outline_color;
-    SDL_bool initialized;
 } t_hud;
 
 t_hud* createHUD(SDL_Renderer* renderer, TTF_Font* font, t_tileset* tileset);

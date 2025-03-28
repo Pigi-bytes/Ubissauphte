@@ -6,7 +6,10 @@ void onBarrelDestroy(t_context* context, void* entity) {
 
     jouerSFX("assets/barrel.wav", 100, 0, context->audioManager);
 
-    printf("Barrel destroyed!\n");
+    if (barrel->lastDamagedBy != NULL) {
+        barrel->lastDamagedBy->gold += barrel->goldReward;
+        printf("Barrel destroyed! Player gained %d gold\n", barrel->goldReward);
+    }
 }
 
 void takeDamageBarrel(t_tileEntity* entity, float damage, t_context* context) {
@@ -18,6 +21,7 @@ void takeDamageBarrel(t_tileEntity* entity, float damage, t_context* context) {
 
 void updateBarrel(t_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities) {
     t_barrel* barrel = (t_barrel*)entity;
+    if (barrel->health.isDead) return;
 
     updateHealthSystem(&barrel->health, context->frameData->deltaTime);
 
@@ -29,6 +33,7 @@ void updateBarrel(t_tileEntity* entity, t_context* context, t_grid* grid, t_obje
         SDL_FPoint barrelPos = {entity->entity.collisionCircle.x, entity->entity.collisionCircle.y};
 
         if (cercleInSector(barrelPos, entity->entity.collisionCircle.radius, player->attack.hitBox.origin, currentAngle, player->currentWeapon->range, player->currentWeapon->angleAttack)) {
+            barrel->lastDamagedBy = player;
             takeDamageBarrel(entity, player->currentWeapon->damage, context);
 
             player->attack.nbHits++;
@@ -136,6 +141,8 @@ t_tileEntity* createBarrelEntity(t_tileset* tileset, t_scene* scene) {
     barrel->health.healthBareRender = renderStandardHealthBar;
 
     barrel->isExploding = SDL_FALSE;
+
+    barrel->goldReward = 2 + rand() % 6;
 
     barrel->base.update = updateBarrel;
     barrel->base.render = renderBarrel;

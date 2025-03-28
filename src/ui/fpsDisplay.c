@@ -5,8 +5,8 @@ t_fpsDisplay* initFPSDisplay(SDL_Renderer* renderer, TTF_Font* font) {
 
     SDL_Color white = {255, 255, 255, 255};
     display->fpsText = createText(renderer, "FPS: %00 | Delta: %00.00fms", font, white);
-    display->fpsText->rect.x = 10;
-    display->fpsText->rect.y = 100;
+    display->fpsText->rect.x = 0;
+    display->fpsText->rect.y = 150;
 
     display->showFPS = SDL_TRUE;
     display->lastUpdateTime = 0;  // Initialisé à 0

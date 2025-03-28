@@ -10,11 +10,19 @@
 #define HEALTH_BAR_BORDER 2
 #define HEALTH_HIGHLIGHT_HEIGHT 3
 
+#define HUD_PADDING 10
+#define HEALTH_BAR_HEIGHT 24
+#define XP_BAR_HEIGHT 6
+#define BAR_GAP 4
+#define ICON_SIZE 32
+#define BAR_WIDTH 250
+
 const SDL_Color HEALTH_BG = {40, 40, 40, 255};
 const SDL_Color HEALTH_BORDER = {80, 80, 80, 255};
 const SDL_Color HEALTH_HIGHLIGHT = {255, 255, 255, 100};
 const SDL_Color XP_BG = {15, 20, 50, 200};
 const SDL_Color XP_BORDER = {30, 35, 80, 255};
+const SDL_Color GOLD_COLOR = {255, 215, 0, 255};
 
 void update_text(t_text** text, SDL_Renderer* renderer, char* content, TTF_Font* font, SDL_Color fg, SDL_Color bg, int outline) {
     if (*text == NULL) {
@@ -37,8 +45,12 @@ t_hud* createHUD(SDL_Renderer* renderer, TTF_Font* font, t_tileset* tileset) {
     hud->layout.xp_bar = (SDL_Rect){hud->layout.health_bar.x, hud->layout.health_bar.y + HEALTH_BAR_HEIGHT + BAR_GAP, BAR_WIDTH, XP_BAR_HEIGHT};
     hud->layout.weapon = (SDL_Rect){hud->layout.health_bar.x, hud->layout.xp_bar.y + XP_BAR_HEIGHT + HUD_PADDING, ICON_SIZE, ICON_SIZE};
     hud->layout.dash = (SDL_Rect){hud->layout.weapon.x + ICON_SIZE + HUD_PADDING, hud->layout.weapon.y, ICON_SIZE, ICON_SIZE};
+    hud->layout.gold = (SDL_Rect){hud->layout.player.x, hud->layout.player.y + hud->layout.player.h + 30 + HUD_PADDING, ICON_SIZE, ICON_SIZE};
 
-    hud->dash_icon = getObject(tileset->textureTiles, 139);
+    hud->dash_icon = getObject(tileset->textureTiles, 110);
+    int coin_frames[] = {138, 139, 140, 141};
+    hud->gold_animation = createAnimation(tileset, coin_frames, 4, 150, SDL_TRUE, "spinning");
+    startAnimation(hud->gold_animation);
 
     hud->state.health_ratio = 0.0f;
     hud->state.xp_ratio = 0.0f;
@@ -62,6 +74,12 @@ void updateHUD(t_hud* hud, SDL_Renderer* renderer, t_joueur* player) {
     hud->text.level->rect.x = hud->layout.player.x + (hud->layout.player.w - hud->text.level->rect.w) / 2;
     hud->text.level->rect.y = hud->layout.player.y + hud->layout.player.h + 5;
 
+    char gold_str[16];
+    snprintf(gold_str, sizeof(gold_str), "%d", player->gold);
+    update_text(&hud->text.gold, renderer, gold_str, hud->font, GOLD_COLOR, hud->outline_color, 1);
+    hud->text.gold->rect.x = hud->layout.gold.x + hud->layout.gold.w + 2;
+    hud->text.gold->rect.y = hud->layout.gold.y + (hud->layout.gold.h - hud->text.gold->rect.h) / 2;
+
     hud->state.target_xp_ratio = getPlayerXPProgress(player);
     hud->state.target_health_ratio = (float)player->health.currentHealth / player->health.maxHealth;
 
@@ -71,6 +89,8 @@ void updateHUD(t_hud* hud, SDL_Renderer* renderer, t_joueur* player) {
     Uint32 dash_elapsed = getTicks(player->dash.cooldownTimer);
     hud->state.dash_cooldown = (dash_elapsed < player->dash.cooldownTime) ? 1.0f - (float)dash_elapsed / player->dash.cooldownTime : 0.0f;
     hud->state.weapon_cooldown = player->attack.cooldown > 0 ? player->attack.cooldown / player->currentWeapon->attackCooldown : 0;
+
+    updateAnimation(hud->gold_animation);
 }
 
 void render_cooldown(SDL_Renderer* renderer, SDL_Rect rect, float ratio) {
@@ -164,6 +184,14 @@ void renderHUD(SDL_Renderer* renderer, t_hud* hud) {
         render_cooldown(renderer, hud->layout.dash, hud->state.dash_cooldown);
     }
 
+    if (hud->gold_animation) {
+        SDL_Texture* currentCoinFrame = hud->gold_animation->frames[hud->gold_animation->currentFrame];
+        SDL_SetTextureColorMod(currentCoinFrame, GOLD_COLOR.r, GOLD_COLOR.g, GOLD_COLOR.b);
+        SDL_RenderCopy(renderer, currentCoinFrame, NULL, &hud->layout.gold);
+        SDL_SetTextureColorMod(currentCoinFrame, 255, 255, 255);
+    }
+
+    renderText(renderer, hud->text.gold);
     renderText(renderer, hud->text.health);
     renderText(renderer, hud->text.level);
 }
@@ -174,6 +202,7 @@ void freeHUD(void* object) {
 
     if (hud->text.health) freeText(hud->text.health);
     if (hud->text.level) freeText(hud->text.level);
+    if (hud->text.gold) freeText(hud->text.gold);
 
     free(hud);
 }
