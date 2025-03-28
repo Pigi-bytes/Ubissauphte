@@ -7,32 +7,43 @@
 #include "../engine/entities/player.h"
 #include "text.h"
 
+#define HUD_PADDING 10
+#define HEALTH_BAR_HEIGHT 24
+#define XP_BAR_HEIGHT 6
+#define BAR_GAP 4
+#define ICON_SIZE 32
+#define BAR_WIDTH 250
+
 typedef struct {
     TTF_Font* font;
-    SDL_Color textColor;
-    SDL_Color outlineColor;
+    SDL_Texture* player_icon;
+    SDL_Texture* weapon_icon;
+    SDL_Texture* dash_icon;
 
-    int padding;
-    SDL_Rect playerIconRect;
-    SDL_Rect healthBarRect;
-    SDL_Rect xpBarRect;
-    SDL_Rect weaponIndicatorRect;
+    struct {
+        SDL_Rect player;
+        SDL_Rect health_bar;
+        SDL_Rect xp_bar;
+        SDL_Rect weapon;
+        SDL_Rect dash;
+    } layout;
 
-    t_text* healthText;
-    t_text* levelText;  // Suppression de weaponNameText
-    SDL_Texture* currentWeaponIcon;
-    SDL_Texture* playerIcon;
+    struct {
+        t_text* health;
+        t_text* level;
+    } text;
 
-    SDL_Rect dashIconRect;    // Rectangle pour l'icône de dash
-    SDL_Texture* dashIcon;    // Texture de l'icône de dash
-    float dashCooldownRatio;  // Ratio de cooldown pour le dash
+    struct {
+        float health_ratio;
+        float target_health_ratio;
+        float xp_ratio;
+        float target_xp_ratio;
+        float weapon_cooldown;
+        float dash_cooldown;
+    } state;
 
-    float xpRatio;        // Ratio d'XP actuel pour l'affichage
-    float targetXpRatio;  // Ratio d'XP cible (valeur réelle)
-    float xpAnimSpeed;    // Vitesse d'animation de la barre d'XP
-
-    float weaponCooldownRatio;  // Ratio de cooldown pour l'arme
-
+    SDL_Color text_color;
+    SDL_Color outline_color;
     SDL_bool initialized;
 } t_hud;
 
