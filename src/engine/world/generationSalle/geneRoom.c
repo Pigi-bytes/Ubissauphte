@@ -315,13 +315,13 @@ void addComplement(t_grille *g, t_listeBlock **listAllBlock) {
 
 int estOuvert(t_case *c, int changementLigne, int changementColonne) {
     if (changementLigne == 0 && changementColonne == 1) {
-        return ((existe(c->tabVoisin[VOISIN_DROIT]) && (c->tabVoisin[VOISIN_DROIT]->val == SOL)) || (existe(c->tabVoisin[VOISIN_BAS]) && (c->tabVoisin[VOISIN_BAS]->val == SOL)) || (existe(c->tabVoisin[VOISIN_HAUT]) && (c->tabVoisin[VOISIN_HAUT]->val == SOL)));
+        return ((existe(c->tabVoisin[VOISIN_DROIT]) && (c->tabVoisin[VOISIN_DROIT]->val == SOL)));
     } else if (changementLigne == 0 && changementColonne == -1) {
-        return ((existe(c->tabVoisin[VOISIN_GAUCHE]) && (c->tabVoisin[VOISIN_GAUCHE]->val == SOL)) || (existe(c->tabVoisin[VOISIN_BAS]) && (c->tabVoisin[VOISIN_BAS]->val == SOL)) || (existe(c->tabVoisin[VOISIN_HAUT]) && (c->tabVoisin[VOISIN_HAUT]->val == SOL)));
+        return ((existe(c->tabVoisin[VOISIN_GAUCHE]) && (c->tabVoisin[VOISIN_GAUCHE]->val == SOL)));
     } else if (changementLigne == 1 && changementColonne == 0) {
-        return ((existe(c->tabVoisin[VOISIN_GAUCHE]) && (c->tabVoisin[VOISIN_GAUCHE]->val == SOL)) || (existe(c->tabVoisin[VOISIN_DROIT]) && (c->tabVoisin[VOISIN_DROIT]->val == SOL)) || (existe(c->tabVoisin[VOISIN_BAS]) && (c->tabVoisin[VOISIN_BAS]->val == SOL)));
+        return ((existe(c->tabVoisin[VOISIN_BAS]) && (c->tabVoisin[VOISIN_BAS]->val == SOL)));
     } else {
-        return ((existe(c->tabVoisin[VOISIN_GAUCHE]) && (c->tabVoisin[VOISIN_GAUCHE]->val == SOL)) || (existe(c->tabVoisin[VOISIN_DROIT]) && (c->tabVoisin[VOISIN_DROIT]->val == SOL)) || (existe(c->tabVoisin[VOISIN_HAUT]) && (c->tabVoisin[VOISIN_HAUT]->val == SOL)));
+        return ((existe(c->tabVoisin[VOISIN_HAUT]) && (c->tabVoisin[VOISIN_HAUT]->val == SOL)));
     }
 }
 
