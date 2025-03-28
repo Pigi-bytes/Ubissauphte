@@ -160,13 +160,13 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
 
     ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
     // Pour les items
-    ui->ecrit->nom_txt_item[0] = createStatLine("Health : ", items[0]->stats.health.additive, items[0]->stats.health.multiplicative);
-    ui->ecrit->nom_txt_item[1] = createStatLine("Health Max : ", items[0]->stats.healthMax.additive, items[0]->stats.healthMax.multiplicative);
-    ui->ecrit->nom_txt_item[2] = createStatLine("Mana : ", items[0]->stats.mana.additive, items[0]->stats.mana.multiplicative);
-    ui->ecrit->nom_txt_item[3] = createStatLine("Mana Max : ", items[0]->stats.manaMax.additive, items[0]->stats.manaMax.multiplicative);
-    ui->ecrit->nom_txt_item[4] = createStatLine("Attack : ", items[0]->stats.attack.additive, items[0]->stats.attack.multiplicative);
-    ui->ecrit->nom_txt_item[5] = createStatLine("Defense : ", items[0]->stats.defense.additive, items[0]->stats.defense.multiplicative);
-    ui->ecrit->nom_txt_item[6] = createStatLine("Speed : ", items[0]->stats.speed.additive, items[0]->stats.speed.multiplicative);
+    ui->ecrit->nom_txt_item[0] = createStatLine("Health : ", 0, 0);
+    ui->ecrit->nom_txt_item[1] = createStatLine("Health Max : ", 0, 0);
+    ui->ecrit->nom_txt_item[2] = createStatLine("Mana : ", 0, 0);
+    ui->ecrit->nom_txt_item[3] = createStatLine("Mana Max : ", 0, 0);
+    ui->ecrit->nom_txt_item[4] = createStatLine("Attack : ", 0, 0);
+    ui->ecrit->nom_txt_item[5] = createStatLine("Defense : ", 0, 0);
+    ui->ecrit->nom_txt_item[6] = createStatLine("Speed : ", 0, 0);
 
     // Pour le joueur (si les stats sont uniquement additives)
     ui->ecrit->nom_txt_player[0] = createStatLine("Health : ", c->baseStats.health.additive, 1.0f);
@@ -261,21 +261,6 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     ui->ecrit->text_descr->rect.x = ui->elems->descrItem.rect.x + ui->elems->descrItem.rect.x * 0.025;
     ui->ecrit->text_descr->rect.y = ui->elems->descrItem.rect.y + input->windowHeight * 0.005;
 
-    // int i = 0, j, nb = 1;
-
-    // while (ui->ext->items[0]->description[i++] != '\0') {
-    //     for (j = 0; ui->ext->items[0]->description[i] != '\n' && ui->ext->items[0]->description[i] != '\0'; i++, j++) {
-    //         ui->ecrit->descr[j] = ui->ext->items[0]->description[i];
-    //     }
-    //     ui->ecrit->descr[j] = '\0';
-
-    //     ui->ecrit->description[nb - 1] = createText(renderer, ui->ecrit->descr, ui->ext->descr_font, ui->ecrit->color_txt);
-    //     ui->ecrit->description[nb - 1]->rect.x = ui->elems->descrItem.rect.x + input->windowWidth * 0.005;
-    //     ui->ecrit->description[nb - 1]->rect.y = ui->ecrit->text_descr->rect.y + input->windowHeight * 0.03 * nb;
-    //     nb++;
-    //     ui->ecrit->descr[0] = '\0';
-    // }
-    // ui->ecrit->count_descr = nb - 1;
     ui2 = ui;
 
     return ui;
@@ -368,7 +353,7 @@ void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
 void creerDescr(InventoryUI *ui, t_item *item, SDL_Renderer *renderer, t_input *input) {
     int i = 0, j, nb = 1;
     printf("%p\n", input);
-        char descr[50];
+    char descr[50];
 
     while (item->description[i++] != '\0') {
         for (j = 0; item->description[i] != '\n' && item->description[i] != '\0'; i++, j++) {
@@ -383,6 +368,21 @@ void creerDescr(InventoryUI *ui, t_item *item, SDL_Renderer *renderer, t_input *
         ui->ecrit->descr[0] = '\0';
     }
     ui->ecrit->count_descr = nb - 1;
+
+    ui->ecrit->nom_txt_item[0] = createStatLine("Health : ", item->stats.health.additive, item->stats.health.multiplicative);
+    ui->ecrit->nom_txt_item[1] = createStatLine("Health Max : ", item->stats.healthMax.additive, item->stats.healthMax.multiplicative);
+    ui->ecrit->nom_txt_item[2] = createStatLine("Mana : ", item->stats.mana.additive, item->stats.mana.multiplicative);
+    ui->ecrit->nom_txt_item[3] = createStatLine("Mana Max : ", item->stats.manaMax.additive, item->stats.manaMax.multiplicative);
+    ui->ecrit->nom_txt_item[4] = createStatLine("Attack : ", item->stats.attack.additive, item->stats.attack.multiplicative);
+    ui->ecrit->nom_txt_item[5] = createStatLine("Defense : ", item->stats.defense.additive, item->stats.defense.multiplicative);
+    ui->ecrit->nom_txt_item[6] = createStatLine("Speed : ", item->stats.speed.additive, item->stats.speed.multiplicative);
+
+    for (int i = 0; i < 7; i++) {
+        ui->ecrit->text_item[i] = createText(renderer, ui->ecrit->nom_txt_item[i], ui->ext->descr_font, ui->ecrit->color_txt);
+    }
+
+    ui->ecrit->text_item[0]->rect.x = ui->elems->statsItem.rect.x + input->windowWidth * 0.01;
+    ui->ecrit->text_item[0]->rect.y = ui->elems->statsItem.rect.y + input->windowHeight * 0.01;
 }
 
 void creerDescrWrapper(t_fonctionParam *f) {
