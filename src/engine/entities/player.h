@@ -12,6 +12,8 @@
 #include "items/weapon.h"
 #include "tiles.h"
 
+#define DASH_TRAIL_COUNT 50
+
 // Anticipation > contact > recovery
 // https://www.youtube.com/watch?v=8X4fx-YncqA
 
@@ -36,6 +38,14 @@ typedef struct {
     float speedMultiplier;   // Multiplicateur de vitesse pendant le dash
     t_timer* cooldownTimer;  // Timer pour gérer le cooldown
     Uint32 cooldownTime;     // Temps de cooldown en millisecondes
+    struct {
+        SDL_Point position;      // Position d'une traînée
+        SDL_bool active;         // Indique si cette traînée est active
+        float opacity;           // Opacité de la traînée (0.0 à 1.0)
+    } trails[DASH_TRAIL_COUNT];  // Tableau de traînées fixe
+
+    float trailSpawnInterval;  // Intervalle de temps entre les captures de position
+    float timeSinceLastTrail;  // Temps écoulé depuis la dernière capture
 } t_dash;
 
 typedef struct s_joueur {
