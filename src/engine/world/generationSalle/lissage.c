@@ -48,21 +48,21 @@ SDL_bool isDiagonalBottomPattern(t_case* c) {
            caseIsPlafond(c->tabVoisin[VOISIN_GAUCHE]);
 }
 
-static void handleDiagonalTopPattern(t_grille* grille, int i, int j) {
+void handleDiagonalTopPattern(t_grille* grille, int i, int j) {
     grille->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val = OBSTACLE;
     if (existe(grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE])) {
         grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]->val = OBSTACLE;
     }
 }
 
-static void handleDiagonalCornerPattern(t_grille* grille, int i, int j) {
+void handleDiagonalCornerPattern(t_grille* grille, int i, int j) {
     grille->grille[i][j]->tabVoisin[VOISIN_DIAG_GAUCHE_BAS]->val = OBSTACLE;
     if (existe(grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE])) {
         grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_GAUCHE]->val = OBSTACLE;
     }
 }
 
-static void handleDiagonalBottomPattern(t_grille* grille, int i, int j) {
+void handleDiagonalBottomPattern(t_grille* grille, int i, int j) {
     if (existe(grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_DROIT])) {
         grille->grille[i][j]->tabVoisin[VOISIN_CENTRE_BAS2_DROIT]->val = OBSTACLE;
     }
