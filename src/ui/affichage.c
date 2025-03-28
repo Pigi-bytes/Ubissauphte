@@ -128,9 +128,13 @@ void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *i
     renderText(renderer, txt2);
 }
 
+void coucou() {
+    printf("cocou\n");
+}
+
 InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input) {
     initTextEngine();
-
+    printf("%p\n", input);
     InventoryUI *ui = ui2;  // Utiliser l'instance existante si fournie
 
     if (!ui) {
@@ -154,6 +158,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     ui->ext->items = items;
     ui->nbItems = 40;
 
+    ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
     // Pour les items
     ui->ecrit->nom_txt_item[0] = createStatLine("Health : ", items[0]->stats.health.additive, items[0]->stats.health.multiplicative);
     ui->ecrit->nom_txt_item[1] = createStatLine("Health Max : ", items[0]->stats.healthMax.additive, items[0]->stats.healthMax.multiplicative);
@@ -193,9 +198,12 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     calculerItem(&ui->elems->inventory_slots[0].rect, ui->elems->inventory_panel.rect,
                  &ui->elems->inventory_panel.rect, 0, 0, input);
     ui->elems->inventory_slots[0].texture = items[0]->texture;
+    ui->elems->inventory_slots[0].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[0].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, ui->ext->items[0], renderer, input)));
+
     for (int i = 1, j = 1; i < 40; j++, i++) {
         calculerItem(&ui->elems->inventory_slots[i].rect, ui->elems->inventory_panel.rect, &ui->elems->inventory_slots[i - 1].rect, i, j, input);
         ui->elems->inventory_slots[i].texture = items[i]->texture;
+        ui->elems->inventory_slots[i].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[i].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, ui->ext->items[i], renderer, input)));
         if (j == 4)
             j = 0;
     }
@@ -213,19 +221,22 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     ui->scrollY = 0;
 
     // Police
-    ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
-    ui->ext->descr_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->descrItem.rect.h * ui->elems->descrItem.rect.w * 0.0003);
+
     ui->color.a = 255;
     ui->color.b = 255;
     ui->color.g = 0;
     ui->color.r = 0;
 
     // affichage des texts
-
+    ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
+    ui->ext->descr_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->descrItem.rect.h * ui->elems->descrItem.rect.w * 0.0003);
     ui->ecrit->color_txt.a = 255;
     ui->ecrit->color_txt.b = 0;
     ui->ecrit->color_txt.g = 128;
     ui->ecrit->color_txt.r = 255;
+
+    t_text *t = createText(renderer, "cocou", ui->ext->item_font, (SDL_Color){0, 0, 0});
+    ui->elems->equiper.button = createButton(t, (SDL_Color){0, 128, 255}, (SDL_Color){0, 150, 255}, ui->elems->equiper.rect, creerFonction(coucou, FONCTION_PARAMS(NULL)));
 
     // Initialisation des textes statsPlayer
     for (int i = 0; i < 7; i++) {
@@ -250,21 +261,21 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     ui->ecrit->text_descr->rect.x = ui->elems->descrItem.rect.x + ui->elems->descrItem.rect.x * 0.025;
     ui->ecrit->text_descr->rect.y = ui->elems->descrItem.rect.y + input->windowHeight * 0.005;
 
-    int i = 0, j, nb = 1;
+    // int i = 0, j, nb = 1;
 
-    while (ui->ext->items[0]->description[i++] != '\0') {
-        for (j = 0; ui->ext->items[0]->description[i] != '\n' && ui->ext->items[0]->description[i] != '\0'; i++, j++) {
-            ui->ecrit->descr[j] = ui->ext->items[0]->description[i];
-        }
-        ui->ecrit->descr[j] = '\0';
+    // while (ui->ext->items[0]->description[i++] != '\0') {
+    //     for (j = 0; ui->ext->items[0]->description[i] != '\n' && ui->ext->items[0]->description[i] != '\0'; i++, j++) {
+    //         ui->ecrit->descr[j] = ui->ext->items[0]->description[i];
+    //     }
+    //     ui->ecrit->descr[j] = '\0';
 
-        ui->ecrit->description[nb - 1] = createText(renderer, ui->ecrit->descr, ui->ext->descr_font, ui->ecrit->color_txt);
-        ui->ecrit->description[nb - 1]->rect.x = ui->elems->descrItem.rect.x + input->windowWidth * 0.005;
-        ui->ecrit->description[nb - 1]->rect.y = ui->ecrit->text_descr->rect.y + input->windowHeight * 0.03 * nb;
-        nb++;
-        ui->ecrit->descr[0] = '\0';
-    }
-    ui->ecrit->count_descr = nb - 1;
+    //     ui->ecrit->description[nb - 1] = createText(renderer, ui->ecrit->descr, ui->ext->descr_font, ui->ecrit->color_txt);
+    //     ui->ecrit->description[nb - 1]->rect.x = ui->elems->descrItem.rect.x + input->windowWidth * 0.005;
+    //     ui->ecrit->description[nb - 1]->rect.y = ui->ecrit->text_descr->rect.y + input->windowHeight * 0.03 * nb;
+    //     nb++;
+    //     ui->ecrit->descr[0] = '\0';
+    // }
+    // ui->ecrit->count_descr = nb - 1;
     ui2 = ui;
 
     return ui;
@@ -273,14 +284,14 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
 void afficherStatPlayer(SDL_Renderer *renderer, InventoryUI *ui, t_input *input) {
     renderText(renderer, ui->ecrit->text_player[0]);
 
-    for (int i = 1; i < 6; i++) {
+    for (int i = 1; i < 7; i++) {
         afficherText(renderer, ui->ecrit->text_player[i - 1], ui->ecrit->text_player[i], input);
     }
 }
 
 void afficherStatItem(SDL_Renderer *renderer, InventoryUI *ui, t_input *input) {
     renderText(renderer, ui->ecrit->text_item[0]);
-    for (int i = 1; i < 6; i++) {
+    for (int i = 1; i < 7; i++) {
         afficherText(renderer, ui->ecrit->text_item[i - 1], ui->ecrit->text_item[i], input);
     }
 }
@@ -315,7 +326,10 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
     SDL_RenderSetClipRect(renderer, &ui->elems->inventory_panel.rect);
     for (int i = 0; i < ui->nbItems; i++) {
         SDL_Rect dest = ui->elems->inventory_slots[i].rect;
+
         dest.y -= ui->scrollY;  // Appliquer le décalage
+        ui->elems->inventory_slots[i].button->rect.y = dest.y;
+        renderButton(renderer, ui->elems->inventory_slots[i].button);
 
         SDL_RenderCopy(renderer, ui->elems->inventory_slots[i].texture, NULL, &dest);
         SDL_RenderDrawRect(renderer, &dest);
@@ -329,10 +343,16 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
     afficherDescription(renderer, ui);
 
     SDL_RenderDrawRect(renderer, &ui->elems->equiper.rect);
+    renderButton(renderer, ui->elems->equiper.button);
 }
 
 void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
     // Recalcul si la fenêtre est redimensionnée
+    for (int i = 0; i < ui->nbItems; i++) {
+        handleInputButton(input, ui->elems->inventory_slots[i].button);
+    }
+
+    handleInputButton(input, ui->elems->equiper.button);
     if (input->windowWidth != ui->width || input->windowHeight != ui->height) {
         int lastScroll = ui->scrollY;
 
@@ -345,6 +365,29 @@ void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
     }
 }
 
+void creerDescr(InventoryUI *ui, t_item *item, SDL_Renderer *renderer, t_input *input) {
+    int i = 0, j, nb = 1;
+    printf("%p\n", input);
+        char descr[50];
+
+    while (item->description[i++] != '\0') {
+        for (j = 0; item->description[i] != '\n' && item->description[i] != '\0'; i++, j++) {
+            descr[j] = item->description[i];
+        }
+        descr[j] = '\0';
+
+        ui->ecrit->description[nb - 1] = createText(renderer, descr, ui->ext->descr_font, ui->ecrit->color_txt);
+        ui->ecrit->description[nb - 1]->rect.x = ui->elems->descrItem.rect.x + input->windowWidth * 0.005;
+        ui->ecrit->description[nb - 1]->rect.y = ui->ecrit->text_descr->rect.y + input->windowHeight * 0.03 * nb;
+        nb++;
+        ui->ecrit->descr[0] = '\0';
+    }
+    ui->ecrit->count_descr = nb - 1;
+}
+
+void creerDescrWrapper(t_fonctionParam *f) {
+    creerDescr(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, t_item *), GET_PTR(f, 2, SDL_Renderer *), GET_PTR(f, 3, t_input *));
+}
 void updateScroll(InventoryUI *ui, t_input *input) {
     if (input->mouseYWheel != 0) {
         int scrollStep = ui->nbItems;  // Ajustez cette valeur selon vos besoins

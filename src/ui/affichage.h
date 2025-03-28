@@ -21,8 +21,8 @@ typedef struct
     SDL_Texture *texture;
     TTF_Font *font;
     SDL_Color color;
+    t_button *button;
     char *text;
-    int is_visible;
 } UI_Element;
 
 typedef struct {
@@ -85,6 +85,7 @@ void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
 void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input);
 void update(t_input *input, InventoryUI *ui);
 void updateScroll(InventoryUI *ui, t_input *input);
+void creerDescrWrapper(t_fonctionParam *f);
 
 void calculCasePlayer(SDL_Rect *casePlayer, t_input *input, char *nom);
 void calculCaseSlots(SDL_Rect *comp, SDL_Rect *slot, t_input *input, char *nom1, char *nom2);
