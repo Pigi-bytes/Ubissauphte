@@ -151,8 +151,69 @@ void renderWeaponDuringAttack(SDL_Renderer* renderer, t_joueur* player, SDL_FPoi
 
     // Conversion de l'angle en radians vers degrés pour SDL
     // Ajout de 90° car dans SDL, 0° = droite, alors que dans nos calculs, 0° = est
-
     float rotationDegrees = currentAngle * 180.0f / M_PI + 90;
+
+    // Seulement visible pendant la phase d'attaque principale pour un meilleur effet visuel
+    if ((rawProgress >= 0.25f && rawProgress < 0.6f) || (rawProgress >= 0.3f && rawProgress < 0.7f)) {
+        const int numTrails = 4;
+
+        // Calcul du facteur d'intensité de la traînée
+        // - Maximum au milieu de la phase d'attaque
+        // - Diminue vers le début et la fin de la phase
+        float peakPoint = weapon->mass >= 5.0f ? 0.425f : 0.5f;
+        float trailIntensity = 1.0f - fabsf((rawProgress - peakPoint) * 4.0f);
+        trailIntensity = fmaxf(0.0f, fminf(1.0f, trailIntensity));
+
+        // Configuration du mode de fusion pour les traînées semi-transparentes
+        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+
+        // Dessiner plusieurs copies fantômes de l'arme avec une opacité décroissante
+        for (int i = 1; i <= numTrails; i++) {
+            // Calculer un angle légèrement en arrière par rapport à la position actuelle
+            // Plus on s'éloigne, plus l'angle est en arrière dans la trajectoire d'attaque
+            float trailFactor = (float)i / numTrails;  // 0.33, 0.66, 1.0 pour 3 traînées
+            float trailAngle;
+
+            if (player->attack.hitBox.endAngle > player->attack.hitBox.startAngle) {
+                trailAngle = currentAngle - trailFactor * 0.4f;  // Réduit l'angle (sens anti-horaire)
+            } else {
+                trailAngle = currentAngle + trailFactor * 0.4f;  // Augmente l'angle (sens horaire)
+            }
+
+            float trailRotation = trailAngle * 180.0f / M_PI + 90;
+
+            uint8_t alpha = (uint8_t)(180 * (1.0f - trailFactor) * trailIntensity);
+            SDL_Texture* trailTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, scaledWidth, scaledHeight);
+
+            SDL_SetTextureBlendMode(trailTexture, SDL_BLENDMODE_BLEND);
+
+            SDL_Texture* currentTarget = SDL_GetRenderTarget(renderer);
+
+            SDL_SetRenderTarget(renderer, trailTexture);
+
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+            SDL_RenderClear(renderer);
+
+            SDL_RenderCopyEx(renderer, weapon->texture, NULL, &(SDL_Rect){0, 0, scaledWidth, displayRect.h}, 0, &(SDL_Point){pivotPoint.x, pivotPoint.y}, weaponFlip);
+
+            SDL_SetRenderTarget(renderer, currentTarget);
+
+            SDL_Color trailColor = (SDL_Color){200 - (int)(200 * trailFactor), 200, 255, alpha};
+
+            // Application de la couleur à la texture
+            SDL_SetTextureColorMod(trailTexture, trailColor.r, trailColor.g, trailColor.b);
+            SDL_SetTextureAlphaMod(trailTexture, trailColor.a);
+
+            // Rendu de la trainée
+            SDL_RenderCopyEx(renderer, trailTexture, NULL, &displayRect, trailRotation, &pivotPoint, weaponFlip);
+
+            // Nettoyage de la texture temporaire
+            SDL_DestroyTexture(trailTexture);
+        }
+
+        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
+    }
+
     SDL_RenderCopyEx(renderer, weapon->texture, NULL, &displayRect, rotationDegrees, &pivotPoint, weaponFlip);
 }
 

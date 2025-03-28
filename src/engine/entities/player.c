@@ -25,11 +25,17 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
 
     joueur->dash = (t_dash){
         .isActive = SDL_FALSE,
-        .duration = 300,  // Durée du dash en millisecondes
-        .speedMultiplier = 6.5f,
+        .duration = 150,  // Durée du dash en millisecondes
+        .speedMultiplier = 8.0f,
         .cooldownTimer = initTimer(),
-        .cooldownTime = 4000  // Cooldown de 4 secondes
-    };
+        .cooldownTime = 5000,         // Cooldown de 2 secondes
+        .trailSpawnInterval = 0.01f,  // Créer une traînée toutes les 20ms
+        .timeSinceLastTrail = 0};
+
+    for (int i = 0; i < DASH_TRAIL_COUNT; i++) {
+        joueur->dash.trails[i].active = SDL_FALSE;
+        joueur->dash.trails[i].opacity = 0.0f;
+    }
 
     startTimer(joueur->dash.cooldownTimer);
 
@@ -246,9 +252,9 @@ void updateAttack(t_joueur* player, float* deltaTime, t_objectManager* entities)
 }
 
 void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime, t_sceneController* sceneController) {
-    float forceBase = 350.0f;              // Force de déplacement standard
-    float forceSprint = forceBase * 1.5f;  // Force quand on court (x1.5)
-    float forceDash = forceBase * 3.5f;    // Force du dash (x3.5)
+    float forceBase = 400.0f;              // Force de déplacement standard
+    float forceSprint = forceBase * 1.5f;  // Force quand on court (x1.5f)
+    float forceDash = forceBase * 3.5f;    // Force du dash (x3.5f)
 
     // Force utilisee (course ou marche normale)
     float force = input->key[SDL_SCANCODE_LSHIFT] ? forceSprint : forceBase;
@@ -328,17 +334,36 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
 
     if (input->key[player->control->dash] && !player->dash.isActive && getTicks(player->dash.cooldownTimer) >= player->dash.cooldownTime) {
         player->dash.isActive = SDL_TRUE;
-        startTimer(player->dash.cooldownTimer);  // Redémarre le timer pour le cooldown
+        startTimer(player->dash.cooldownTimer);
+
+        for (int i = 0; i < DASH_TRAIL_COUNT; i++) {
+            player->dash.trails[i].active = SDL_FALSE;
+            player->dash.trails[i].opacity = 0.0f;
+        }
+
+        player->dash.timeSinceLastTrail = player->dash.trailSpawnInterval;  // Force la capture immédiate
+
+        // Ajouter un petit boost initial pour que le dash démarre plus vite
+        player->entity.physics.velocity.x += lastDirX * forceDash * 0.5f * (*deltaTime);
+        player->entity.physics.velocity.y += lastDirY * forceDash * 0.5f * (*deltaTime);
+
+        // Réduire temporairement la friction pour un dash fluide
+        player->entity.physics.friction *= 0.5f;
     }
 
     if (player->dash.isActive) {
-        player->entity.physics.velocity.x += lastDirX * player->dash.speedMultiplier * forceBase * *deltaTime;
-        player->entity.physics.velocity.y += lastDirY * player->dash.speedMultiplier * forceBase * *deltaTime;
+        // Accélération progressive au début du dash
+        float dashProgress = 1.0f - (player->dash.duration / 150.0f);  // 0 au début, 1 à la fin
+        float dashFactor = 0.8f + 0.4f * sinf(dashProgress * M_PI);    // Courbe en cloche (accélération puis décélération)
 
-        player->dash.duration -= *deltaTime * 1000;  // Convertir deltaTime en millisecondes
+        player->entity.physics.velocity.x += lastDirX * player->dash.speedMultiplier * forceBase * dashFactor * (*deltaTime);
+        player->entity.physics.velocity.y += lastDirY * player->dash.speedMultiplier * forceBase * dashFactor * (*deltaTime);
+
+        player->dash.duration -= *deltaTime * 1000;
         if (player->dash.duration <= 0.0f) {
             player->dash.isActive = SDL_FALSE;
-            player->dash.duration = 200;  // Réinitialise la durée du dash
+            player->dash.duration = 150;              // Réinitialiser la durée
+            player->entity.physics.friction *= 2.0f;  // Restaurer la friction normale
         }
     }
 
@@ -374,12 +399,98 @@ void updatePlayer(t_joueur* player, float* deltaTime, t_salle* salle, t_objectMa
         player->attack.cooldown -= *deltaTime;
     }
 
+    if (player->dash.isActive) {
+        player->dash.timeSinceLastTrail += *deltaTime;
+
+        if (player->dash.timeSinceLastTrail >= player->dash.trailSpawnInterval) {
+            for (int i = DASH_TRAIL_COUNT - 1; i > 0; i--) {
+                player->dash.trails[i] = player->dash.trails[i - 1];
+            }
+
+            player->dash.trails[0].position.x = (int)player->entity.collisionCircle.x;
+            player->dash.trails[0].position.y = (int)player->entity.collisionCircle.y;
+            player->dash.trails[0].active = SDL_TRUE;
+            player->dash.trails[0].opacity = 1.0f;
+
+            player->dash.timeSinceLastTrail = 0;
+        }
+    } else {
+        player->dash.timeSinceLastTrail += *deltaTime;
+
+        if (player->dash.timeSinceLastTrail >= player->dash.trailSpawnInterval) {
+            SDL_bool allTrailsInactive = SDL_TRUE;
+
+            for (int i = 0; i < DASH_TRAIL_COUNT; i++) {
+                if (player->dash.trails[i].active) {
+                    player->dash.trails[i].opacity -= 0.1f;
+
+                    if (player->dash.trails[i].opacity <= 0.0f) {
+                        player->dash.trails[i].active = SDL_FALSE;
+                    } else {
+                        allTrailsInactive = SDL_FALSE;
+                    }
+                }
+            }
+
+            if (!allTrailsInactive) {
+                player->dash.timeSinceLastTrail = 0;
+            }
+        }
+    }
+
     updatePhysicEntity(&player->entity, deltaTime, salle->grille, entities);
+}
+
+// Fonction renderDashTrail optimisée
+void renderDashTrail(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
+    // Vérification rapide s'il y a des traînées à afficher
+    SDL_bool hasActiveTrail = SDL_FALSE;
+    for (int i = 0; i < DASH_TRAIL_COUNT; i++) {
+        if (player->dash.trails[i].active) {
+            hasActiveTrail = SDL_TRUE;
+            break;
+        }
+    }
+
+    if (!hasActiveTrail) return;
+
+    // Configuration du mode de fusion
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+
+    uint8_t r, g, b, a;
+    SDL_GetTextureColorMod(player->entity.texture, &r, &g, &b);
+    SDL_GetTextureAlphaMod(player->entity.texture, &a);
+
+    for (int i = 0; i < DASH_TRAIL_COUNT; i++) {
+        if (!player->dash.trails[i].active) continue;
+
+        float distanceFactor = (float)i / DASH_TRAIL_COUNT;
+        float scaleFactor = 0.9f - (0.06f * i);
+        uint8_t alpha = (uint8_t)(150 * player->dash.trails[i].opacity);
+
+        SDL_SetTextureColorMod(player->entity.texture, (uint8_t)(180 * (1.0f - distanceFactor)), (uint8_t)(220 * (1.0f - distanceFactor * 0.3f)), 255);
+        SDL_SetTextureAlphaMod(player->entity.texture, alpha);
+
+        int width = player->entity.displayRect.w;
+        int height = player->entity.displayRect.h;
+        int ghostWidth = (int)(width * scaleFactor);
+        int ghostHeight = (int)(height * scaleFactor);
+
+        SDL_Rect destRect = {player->dash.trails[i].position.x - (ghostWidth / 2), player->dash.trails[i].position.y - (ghostHeight / 2), ghostWidth, ghostHeight};
+
+        SDL_RenderCopyEx(renderer, player->entity.texture, NULL, &destRect, 0, NULL, player->entity.flip);
+    }
+
+    SDL_SetTextureColorMod(player->entity.texture, r, g, b);
+    SDL_SetTextureAlphaMod(player->entity.texture, a);
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
 }
 
 void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
     // Applique un tremblement de caméra si le joueur vient de toucher un ennemi
     applyHitCameraShake(player, camera);
+
+    renderDashTrail(renderer, player, camera);
 
     // Affiche l'indicateur de portée de l'arme quand le joueur ne frappe pas
     if (!player->attack.isActive) {
