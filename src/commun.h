@@ -59,5 +59,6 @@ void handleInputToucheWrapper(t_fonctionParam* f);
 void affichageWrapper(t_fonctionParam* f);
 void handleInputMapWrapper(t_fonctionParam* f);
 void getPrevuisSceneWrapper(t_fonctionParam* f);
+void getPrevuisMenuWrapper(t_fonctionParam* f);
 
 #endif

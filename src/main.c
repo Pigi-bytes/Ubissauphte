@@ -168,7 +168,7 @@ int main(int argc, char* argv[]) {
 
     freeOption(context.option);
     freeFrameData(context.frameData);
-    freeObjectManager(context.sceneController->scene);
+    freeSceneController(context.sceneController);
     free(context.control);
 
     TTF_CloseFont(context.font);

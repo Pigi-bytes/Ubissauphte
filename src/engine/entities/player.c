@@ -297,11 +297,11 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     }
 
     if (input->key[player->control->escape]) {
-        sceneController->lastScene = getObject(sceneController->scene, sceneController->currentScene);
+        sceneController->lastMap = getObject(sceneController->scene, sceneController->currentScene);
         setScene(sceneController, "retourOption");
     }
     if (input->key[player->control->map]) {
-        sceneController->lastScene = getObject(sceneController->scene, sceneController->currentScene);
+        sceneController->lastMap = getObject(sceneController->scene, sceneController->currentScene);
         setScene(sceneController, "carte");
         input->key[player->control->map] = SDL_FALSE;
     }

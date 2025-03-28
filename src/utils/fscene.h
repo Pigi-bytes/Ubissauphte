@@ -30,9 +30,15 @@ typedef struct t_scene {
 } t_scene;
 
 typedef struct {
+    t_scene** historique;
+    int nb_Menu;
+} t_history;
+
+typedef struct {
     t_objectManager* scene;
     int currentScene;
-    t_scene* lastScene;
+    t_scene* lastMap;
+    t_history* lastMenu;
 } t_sceneController;
 
 t_scene* createScene(t_objectManager* objectManager, char* name);
@@ -44,8 +50,7 @@ t_sceneController* initSceneController();
 void addScene(t_sceneController* controller, t_scene* scene);
 void setScene(t_sceneController* controller, char* name);
 t_scene* getCurrentScene(t_sceneController* voidcontroller);
-
-// Ajouter ces déclarations avant la fin du fichier (#endif)
+void freeSceneController(t_sceneController* controller);
 
 // Ajouter un objet à une scène et l'enregistrer automatiquement pour un type de fonction
 void* sceneAddObject(t_scene* scene, void* object, uint8_t typeId);
@@ -63,6 +68,7 @@ int findObjectIndex(t_objectManager* manager, void* object);
 
 // Revenir à la scene précedente
 void getPrevuisScene(t_sceneController* controller);
+void getPrevuisMenu(t_sceneController* controller);
 int indiceByscene(t_sceneController* controller, t_scene* scene);
 
 #endif

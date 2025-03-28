@@ -111,6 +111,10 @@ void getPrevuisSceneWrapper(t_fonctionParam* f) {
     getPrevuisScene((t_sceneController*)f->param[0]);
 }
 
+void getPrevuisMenuWrapper(t_fonctionParam* f) {
+    getPrevuisMenu((t_sceneController*)f->param[0]);
+}
+
 void bouttonClickQuit(t_fonctionParam* fonction) {
     t_input* input = GET_PTR(fonction, 0, t_input*);
     input->quit = SDL_TRUE;
