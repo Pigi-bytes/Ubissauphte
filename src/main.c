@@ -3,6 +3,7 @@
 #include "_scene/mainMenu.h"
 #include "_scene/mainWorld.h"
 #include "_scene/optionMenu.h"
+#include "_scene/sceneInventaire.h"
 #include "context.h"
 
 int main(int argc, char* argv[]) {
@@ -39,18 +40,50 @@ int main(int argc, char* argv[]) {
     context.control->map = SDL_SCANCODE_P;
     context.control->interact = SDL_SCANCODE_E;
 
+    t_tileset* tileset = initTileset(context.renderer, 192, 240, 16, "./assets/imgs/tileMapDungeon.bmp");
+    t_character* c = createCharactere(tileset, 98);
+
+    t_item* item = malloc(sizeof(t_item));
+    t_item** itemListe = malloc(sizeof(t_item*) * 40);
+
+    strcpy(item->name, "Marteau de thor");
+    item->flags = ITEM_FLAG_STACKABLE;
+    item->stats.attack.additive = 0;
+    item->stats.attack.multiplicative = 10;
+    item->stats.defense.additive = 0;
+    item->stats.defense.multiplicative = 1;
+    item->stats.health.additive = 50;
+    item->stats.health.multiplicative = 5;
+    item->stats.healthMax.additive = 500;
+    item->stats.healthMax.multiplicative = -25;
+    item->stats.mana.additive = 15;
+    item->stats.mana.multiplicative = 1.2;
+    item->stats.manaMax.additive = 20;
+    item->stats.manaMax.multiplicative = 3;
+    item->stats.speed.additive = 60;
+    item->stats.speed.multiplicative = 0;
+    item->indiceTexture = 102;
+    item->texture = (SDL_Texture*)getObject(tileset->textureTiles, item->indiceTexture);
+    strcpy(item->description, "\nça c'est de l'arme \nguts weapon\nbla bla bla\navec ça tu gagnes\nà coup sur");
+
+    for (int i = 0; i < 40; i++) {
+        itemListe[i] = item;
+    }
+
     t_scene* scene = createMainMenu(&context);
     t_scene* scene0 = createOptionMenu(&context);
     t_scene* scene1 = createMainWord(&context);
     t_scene* scene2 = createCommandeMenu(&context);
     t_scene* scene3 = createFpsMenu(&context);
+    t_scene* scene4 = createMainInv(&context, c, tileset, itemListe);
 
     addScene(context.sceneController, scene);
     addScene(context.sceneController, scene0);
     addScene(context.sceneController, scene1);
     addScene(context.sceneController, scene2);
     addScene(context.sceneController, scene3);
-    setScene(context.sceneController, "menuPrincipal");
+    addScene(context.sceneController, scene4);
+    setScene(context.sceneController, "mainInv");
 
     while (!context.input->quit) {
         startFrame(context.frameData);

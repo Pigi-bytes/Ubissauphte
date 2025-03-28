@@ -128,21 +128,22 @@ void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *i
     renderText(renderer, txt2);
 }
 
-void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input) {
+InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input) {
     initTextEngine();
 
-    if (ui->ext == NULL) {
+    InventoryUI *ui = malloc(sizeof(InventoryUI));
+
         ui->ext = malloc(sizeof(t_extern));
         ui->ext->item_font = NULL;
         ui->ext->descr_font = NULL;
-    }
+        ui->ext->character = malloc(sizeof(t_character));
+    
 
-    if (ui->ecrit == NULL) {
         ui->ecrit = malloc(sizeof(t_ecritures));
         // Initialiser les membres si nécessaire
         memset(ui->ecrit->nom_txt_item, 0, sizeof(ui->ecrit->nom_txt_item));
         // etc.
-    }
+    
     ui->elems = malloc(sizeof(t_elements));
 
     // Initialisation des références
@@ -185,7 +186,11 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
 
     // Initialisation slots (votre code original)
     ui->elems->inventory_slots = malloc(40 * sizeof(UI_Element));
-    for (int i = 0, j = 0; i < 40; j++, i++) {
+
+    calculerItem(&ui->elems->inventory_slots[0].rect, ui->elems->inventory_panel.rect,
+                 &ui->elems->inventory_panel.rect, 0, 0, input);
+    ui->elems->inventory_slots[0].texture = items[0]->texture;
+    for (int i = 1, j = 1; i < 40; j++, i++) {
         calculerItem(&ui->elems->inventory_slots[i].rect, ui->elems->inventory_panel.rect, &ui->elems->inventory_slots[i - 1].rect, i, j, input);
         ui->elems->inventory_slots[i].texture = items[i]->texture;
         if (j == 4)
@@ -205,7 +210,7 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
     ui->scrollY = 0;
 
     // Police
-    ui->ext->item_font = TTF_OpenFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
+    ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
     ui->ext->descr_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->descrItem.rect.h * ui->elems->descrItem.rect.w * 0.0003);
     ui->color.a = 255;
     ui->color.b = 255;
@@ -257,6 +262,9 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
         ui->ecrit->descr[0] = '\0';
     }
     ui->ecrit->count_descr = nb - 1;
+    ui2 = ui;
+
+    return ui;
 }
 
 void afficherStatPlayer(SDL_Renderer *renderer, InventoryUI *ui, t_input *input) {
@@ -326,7 +334,7 @@ void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
         int lastScroll = ui->scrollY;
 
         // Réinitialiser l'UI
-        inventoryUI_Init(ui, renderer, ui->ext->character, ui->ext->items, input);
+        ui = inventoryUI_Init(ui, renderer, ui->ext->character, ui->ext->items, input);
 
         // Restaurer le scroll dans les nouvelles limites
         ui->scrollY = lastScroll;
@@ -336,7 +344,7 @@ void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
 
 void updateScroll(InventoryUI *ui, t_input *input) {
     if (input->mouseYWheel != 0) {
-        int scrollStep = 40;  // Ajustez cette valeur selon vos besoins
+        int scrollStep = ui->nbItems;  // Ajustez cette valeur selon vos besoins
         ui->scrollY -= input->mouseYWheel * scrollStep;
 
         // Limiter le défilement
@@ -353,22 +361,52 @@ void update(t_input *input, InventoryUI *ui) {
     updateInput(input);
 }
 
-void inventoryUI_InitWrapper(t_fonctionParam *f) {
-    inventoryUI_Init(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, SDL_Renderer *), GET_PTR(f, 2, t_character *), GET_PTR(f, 3, t_item **), GET_PTR(f, 4, t_input *));
-}
+void freeInv(void *elt) {
+    InventoryUI *ui = (InventoryUI *)elt;
+    if (!ui) return;
 
-void updateWrapper(t_fonctionParam *f) {
-    update(GET_PTR(f, 0, t_input *), GET_PTR(f, 1, InventoryUI *));
-}
+    // Libération de la structure externe
+    if (ui->ext) {
+        // Ne pas libérer character ici car il est géré ailleurs
+        /* Liberation des polices */
+        if (ui->ext->item_font) TTF_CloseFont(ui->ext->item_font);
+        if (ui->ext->descr_font) TTF_CloseFont(ui->ext->descr_font);
+        free(ui->ext);
+    }
 
-void updateScrollWrapper(t_fonctionParam *f) {
-    updateScroll(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, t_input *));
-}
+    /* Liberation des elements */
+    if (ui->elems) {
+        /* Liberation des slots d'inventaire */
+        if (ui->elems->inventory_slots) {
+            for (int i = 0; i < ui->nbItems; i++) {
+                if (ui->elems->inventory_slots[i].texture) {
+                    SDL_DestroyTexture(ui->elems->inventory_slots[i].texture);
+                }
+            }
+            free(ui->elems->inventory_slots);
+        }
+        free(ui->elems);
+    }
 
-void inventoryUI_UpdateWrapper(t_fonctionParam *f) {
-    inventoryUI_Update(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, SDL_Renderer *), GET_PTR(f, 2, t_input *));
-}
+    /* Liberation des ecritures */
+    if (ui->ecrit) {
+        /* Liberation des chaines de caractères */
+        for (int i = 0; i < 7; i++) {
+            free(ui->ecrit->nom_txt_item[i]);
+            free(ui->ecrit->nom_txt_player[i]);
+            if (ui->ecrit->text_player[i]) freeText(ui->ecrit->text_player[i]);
+            if (ui->ecrit->text_item[i]) freeText(ui->ecrit->text_item[i]);
+        }
 
-void inventoryUI_RenderWrapper(t_fonctionParam *f) {
-    inventoryUI_Render(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, SDL_Renderer *), GET_PTR(f, 2, t_input *));
+        /* Liberation des descriptions */
+        for (int i = 0; i < ui->ecrit->count_descr; i++) {
+            if (ui->ecrit->description[i]) freeText(ui->ecrit->description[i]);
+        }
+
+        /* Liberation du texte de description */
+        if (ui->ecrit->text_descr) freeText(ui->ecrit->text_descr);
+        free(ui->ecrit);
+    }
+
+    free(ui);
 }

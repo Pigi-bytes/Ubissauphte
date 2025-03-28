@@ -103,6 +103,22 @@ void handleInputMapWrapper(t_fonctionParam* f) {
     handleInputMap((t_input*)f->param[0], (t_joueur*)f->param[1], (t_sceneController*)f->param[2]);
 }
 
+void updateWrapper(t_fonctionParam *f) {
+    update(GET_PTR(f, 0, t_input *), GET_PTR(f, 1, InventoryUI *));
+}
+
+void updateScrollWrapper(t_fonctionParam *f) {
+    updateScroll(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, t_input *));
+}
+
+void inventoryUI_UpdateWrapper(t_fonctionParam *f) {
+    inventoryUI_Update(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, SDL_Renderer *), GET_PTR(f, 2, t_input *));
+}
+
+void inventoryUI_RenderWrapper(t_fonctionParam *f) {
+    inventoryUI_Render(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, SDL_Renderer *), GET_PTR(f, 2, t_input *));
+}
+
 SDL_Rect
 creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio) {
     return (SDL_Rect){WINDOW_WIDTH * x_ratio, WINDOW_HEIGHT * y_ratio, WINDOW_WIDTH * w_ratio, WINDOW_HEIGHT * h_ratio};

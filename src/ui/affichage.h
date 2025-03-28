@@ -2,14 +2,13 @@
 #define AFFICHAGE_H
 #include <SDL2/SDL.h>
 
+#include "../context.h"
 #include "../engine/entities/components/equipment/equipementsManager.h"
 #include "../io/imageLoader.h"
 #include "../io/input.h"
 #include "../utils/fscene.h"
 #include "button.h"
 #include "text.h"
-#include "../context.h"
-
 
 #define window_width 1280
 #define window_height 960
@@ -81,17 +80,11 @@ typedef struct
 
 } InventoryUI;
 
-void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input);
+InventoryUI *inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input);
 void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input);
 void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input);
 void update(t_input *input, InventoryUI *ui);
 void updateScroll(InventoryUI *ui, t_input *input);
-
-void inventoryUI_RenderWrapper(t_fonctionParam *f);
-void inventoryUI_UpdateWrapper(t_fonctionParam *f);
-void updateScrollWrapper(t_fonctionParam *f);
-void updateWrapper(t_fonctionParam *f);
-void inventoryUI_InitWrapper(t_fonctionParam *f);
 
 void calculCasePlayer(SDL_Rect *casePlayer, t_input *input, char *nom);
 void calculCaseSlots(SDL_Rect *comp, SDL_Rect *slot, t_input *input, char *nom1, char *nom2);
@@ -99,5 +92,7 @@ void calculDescrStatsPlayer(SDL_Rect *slotDroit, SDL_Rect *slotBas, SDL_Rect *ca
 void calculInventaire(SDL_Rect *Inv, SDL_Rect *statsPlayer, t_input *input);
 void calculStatsItem(SDL_Rect *inv, SDL_Rect *statsItem, t_input *input);
 void caculDescrItem(SDL_Rect *statsItem, SDL_Rect *descrItem, t_input *input);
+
+void freeInv(void *elt);
 
 #endif
