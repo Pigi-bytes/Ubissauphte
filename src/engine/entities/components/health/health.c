@@ -2,9 +2,15 @@
 
 #include <math.h>
 
+#define HEALTH_ANIMATION_SPEED 0.25f
+#define HEALTH_ANIMATION_EPSILON 0.001f
+
 void initHealthSystem(t_healthSystem* health, int maxHealth) {
     health->currentHealth = maxHealth;
     health->maxHealth = maxHealth;
+
+    health->displayedHealthRatio = 1.0f;
+    health->targetHealthRatio = 1.0f;
 
     health->showHealthBar = SDL_FALSE;
     health->healthBarTimer = initDeltaTimer();
@@ -35,12 +41,13 @@ void applyDamage(t_healthSystem* health, int damage, void* entity, t_context* co
     health->isFlashing = SDL_TRUE;
     resetDeltaTimer(health->flashTimer);
 
-    
     health->currentHealth -= damage;
     if (health->currentHealth <= 0) {
         health->currentHealth = 0;
         health->showHealthBar = SDL_FALSE;
         health->isDead = SDL_TRUE;
+
+        health->targetHealthRatio = 0.0f;
 
         if (health->onDeathCallback) {
             health->onDeathCallback(context, entity);
@@ -48,12 +55,14 @@ void applyDamage(t_healthSystem* health, int damage, void* entity, t_context* co
         return;
     }
 
+    health->targetHealthRatio = (float)health->currentHealth / (float)health->maxHealth;
+
     health->isInvincible = SDL_TRUE;
     resetDeltaTimer(health->invincibilityTimer);
 }
 
 void renderStandardHealthBar(SDL_Renderer* renderer, t_healthSystem* health, SDL_Rect entityRect, t_camera* camera) {
-    float healthRatio = (float)health->currentHealth / (float)health->maxHealth;
+    float healthRatio = health->displayedHealthRatio;
 
     float barWidth = entityRect.w * 0.8f;
     float barHeight = 3.0f;
@@ -102,6 +111,11 @@ void renderStandardHealthBar(SDL_Renderer* renderer, t_healthSystem* health, SDL
 
 void updateHealthSystem(t_healthSystem* health, float deltaTime) {
     if (!health) return;
+
+    health->displayedHealthRatio += (health->targetHealthRatio - health->displayedHealthRatio) * HEALTH_ANIMATION_SPEED;
+    if (fabs(health->displayedHealthRatio - health->targetHealthRatio) < HEALTH_ANIMATION_EPSILON) {
+        health->displayedHealthRatio = health->targetHealthRatio;
+    }
 
     if (health->isFlashing) {
         updateDeltaTimer(health->flashTimer, deltaTime);
