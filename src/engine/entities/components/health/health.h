@@ -11,6 +11,9 @@ typedef struct s_healthSystem {
     int currentHealth;
     int maxHealth;
 
+    float displayedHealthRatio;
+    float targetHealthRatio;
+
     SDL_bool showHealthBar;
     t_deltaTimer* healthBarTimer;
     float healthBarDuration;

@@ -130,6 +130,8 @@ void updateText(t_text** text, SDL_Renderer* renderer, char* newText, SDL_Color 
     int xSave = (*text)->rect.x;
     int ySave = (*text)->rect.y;
 
+    if (strcmp((*text)->text, newText) == 0) return;
+
     // Libère l'ancien texte
     if ((*text)->text) {
         free((*text)->text);
@@ -155,6 +157,8 @@ void updateTextOutline(t_text** text, SDL_Renderer* renderer, char* newText, SDL
     TTF_Font* fontSave = (*text)->font;
     int xSave = (*text)->rect.x;
     int ySave = (*text)->rect.y;
+
+    if (strcmp((*text)->text, newText) == 0) return;
 
     // Libère l'ancien texte
     if ((*text)->text) {

@@ -10,6 +10,8 @@ typedef struct {
     t_tileEntity base;
     t_healthSystem health;
     SDL_bool isExploding;
+    t_joueur* lastDamagedBy;
+    int goldReward;
 } t_barrel;
 
 t_tileEntity* createBarrelEntity(t_tileset* tileset, t_scene* scene);

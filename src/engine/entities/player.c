@@ -37,6 +37,7 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->level = 1;
     joueur->xp = 0;
     joueur->xpToNextLevel = 100;
+    joueur->gold = 0;
 
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, SDL_TRUE, "idle"));
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){3, 4}, 2, 240, SDL_TRUE, "walk"));
