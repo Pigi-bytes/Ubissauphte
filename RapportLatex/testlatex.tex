@@ -6,6 +6,9 @@
 \usepackage{color}
 \usepackage{microtype}
 \usepackage{graphicx}
+\usepackage{booktabs}  % For better tables
+\usepackage{enumitem}  % For better lists
+\usepackage{hyperref}  % For clickable links in PDF
 
 \pagestyle{fancy}
 \setlength{\headheight}{28pt}
@@ -15,75 +18,83 @@
 
 \lhead{\includegraphics[width=2cm]{image.png}}
 \rhead{\includegraphics[width=2cm]{claude.png}}
+
 \begin{document}
 
-
-
-\title{\huge{\textbf{\textcolor{blue}{Lo poti donjon}}}}
-\author{\Large{Ubisaupht}}
+\title{\huge{\textbf{\textcolor{blue}{Lo Poti Donjon}}}}
+\author{\Large{Ubissauphte}}
 \date{\today}
 \maketitle
 \newpage
 \tableofcontents
 \newpage
 
-
 \section{Introduction}
-\subsection{contexte du projet}
+\subsection{Contexte du projet}
 \subsection{Présentation du projet}
 
-\textbf{Lo Poti Dungeon} est un projet ambitieux que nous, \mbox{Ubissauphte}, avons lancé le 13 janvier 2025. Initialement, nous envisagions de créer 
+\textbf{Lo Poti Donjon} est un projet ambitieux que nous, Ubissauphte, avons lancé le 13 janvier 2025. Initialement, nous envisagions de créer 
 un jeu de bataille navale en ligne. Cependant, après plusieurs réunions au sein du groupe, nous avons décidé de revoir notre approche. 
-L'idée de créer un jeu plus complexe avec une patte graphique plus importante, a vraiment stimulé notre créativité.
+
+L'idée de créer un jeu plus complexe avec une patte graphique plus importante a vraiment stimulé notre créativité.
+
 Nous avons donc décidé de créer un jeu roguelike, un sous-genre de jeu de rôle où le joueur explore 
 un donjon rempli de monstres qu'il doit combattre pour gagner de l'expérience et des trésors. Notre jeu présente certains avantages et défauts :
 
-\\
 \begin{center}
-\begin{tabular}{|l|c|}
- \hline \textbf{Avantages} & \textbf{défaut} \\
- \hline facile d'accès & addictif \\ 
- \hline permissif & punitif \\ 
- \hline fluide & \\
- \hline portage sur diverse machine & \\
- \hline évolution constante du personnage & \\
- \hline 
+\begin{tabular}{p{5cm}|p{5cm}}
+\toprule
+\textbf{Avantages} & \textbf{Inconvénients} \\
+\midrule
+Facile d'accès & Potentiellement addictif \\
+Permissif & Aspects punitifs \\
+Fluidité optimisée & \\
+Portage sur diverses machines & \\
+Évolution constante du personnage & \\
+\bottomrule
 \end{tabular}
 \end{center}
-\subsection{conception}
+
+\subsection{Conception}
 \newpage
+
 \section{Organisation du projet}
-\textit{Cette partie traite des moyens organisationnelles mis en oeuvre \mbox{permettant} la réalisation du projet}
+\textit{Cette partie traite des moyens organisationnels mis en œuvre permettant la réalisation du projet.}
 
 \subsection{Répartition des tâches}
 
-    Concernant la répartition des tâches nous nous sommes appuyés sur les qualités de chacun, pour permettre d'avancer rapidement et de manière \mbox{efficace.}\\
-    \textbf{Victore Fombertasse} a réalisé les animations du jeu ainsi que l'audio et la création de la structre d'un niveau.\\
-    \textbf{Souleymane Barry} a créé le système d'inventaires, celui de sauvegarde ainsi que le protoype du système de déplacement du joueur.\\
-    \textbf{Baptiste Carfantan} a conçu les salles généreraient procéduralement ainsi que de la boucle de gameplay pour progresser dans le jeu.\\
-    Enfin, \textbf{Barthelemy Deroualt}, Le chef de projet, s'est chargé de la gestion des systèmes liés aux ennemis, au joueur, aux événements
-    ainsi qu'à la physique du jeu.\\
-    \\
-    Nous avons aussi réalisé des tâches en groupes, que ce soit pour intégrer les codes au programme principal ou des tâches suffisamment ardues qui nécessitent la participation
-    De plusieurs personnes dessus. Nous avons par exemple réalisé des systèmes de simplification de code qu'on a nommés manager, permettant à l'équipe de pouvoir l'utiliser sans 
-    avoir besoins de comprendre à 100\% la partie des autres.
+Concernant la répartition des tâches, nous nous sommes appuyés sur les qualités de chacun pour avancer rapidement et efficacement :
 
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Victore Fombertasse} a réalisé les animations du jeu ainsi que l'audio et la création de la structure d'un niveau.
+  
+  \item \textbf{Souleymane Barry} a créé le système d'inventaires, celui de sauvegarde ainsi que le prototype du système de déplacement du joueur.
+  
+  \item \textbf{Baptiste Carfantan} a conçu les salles générées procéduralement ainsi que la boucle de gameplay pour progresser dans le jeu.
+  
+  \item \textbf{Barthélemy Deroualt}, chef de projet, s'est chargé de la gestion des systèmes liés aux ennemis, au joueur, aux événements ainsi qu'à la physique du jeu.
+\end{itemize}
 
+Nous avons également réalisé des tâches en groupe, que ce soit pour intégrer les codes au programme principal ou pour traiter des problèmes suffisamment complexes nécessitant la participation de plusieurs personnes. Nous avons par exemple développé des systèmes de simplification de code, appelés « managers », permettant à chaque membre de l'équipe d'utiliser les fonctionnalités sans avoir besoin de comprendre entièrement le code des autres.
 
-\subsection{Palnning prévisonnel}
+\subsection{Planning prévisionnel}
 
-\subsection{outil de travail}
+\subsection{Outils de travail}
 
 \section{Développement}
 
-\subsection{Géneration aléatoires du donjon}
+\subsection{Génération aléatoire du donjon}
+
 \subsection{Gestion des items}
+
 \subsection{Le moteur physique}
+
 \subsection{Les ennemis}
-\subsection{Lecycle de jeu}
+
+\subsection{Le cycle de jeu}
+
 \section{Bilan et conclusions}
+
 \section{Annexes}
-
-
 
 \end{document}
