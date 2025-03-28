@@ -6,11 +6,8 @@ t_scene *createMainInv(t_context *context, t_character *c, t_tileset *tileset, t
     const uint8_t INVENTORY_TYPE = registerType(registre, freeInv, "inventory");
 
     t_scene *scene = createScene(initObjectManager(registre), "mainInv");
-    InventoryUI *ui = malloc(sizeof(InventoryUI));
 
-    ui->ext = NULL;
-    ui->ecrit = NULL;
-    ui = inventoryUI_Init(ui, context->renderer, c, itemListe, context->input);
+    InventoryUI *ui = inventoryUI_Init(NULL, context->renderer, c, itemListe, context->input);
 
     ADD_OBJECT_TO_SCENE(scene, ui, INVENTORY_TYPE);
 

@@ -131,19 +131,22 @@ void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *i
 InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input) {
     initTextEngine();
 
-    InventoryUI *ui = malloc(sizeof(InventoryUI));
+    InventoryUI *ui = ui2;  // Utiliser l'instance existante si fournie
 
-        ui->ext = malloc(sizeof(t_extern));
-        ui->ext->item_font = NULL;
-        ui->ext->descr_font = NULL;
-        ui->ext->character = malloc(sizeof(t_character));
-    
+    if (!ui) {
+        ui = malloc(sizeof(InventoryUI));  // Créer une nouvelle instance si NULL
+    }
 
-        ui->ecrit = malloc(sizeof(t_ecritures));
-        // Initialiser les membres si nécessaire
-        memset(ui->ecrit->nom_txt_item, 0, sizeof(ui->ecrit->nom_txt_item));
-        // etc.
-    
+    ui->ext = malloc(sizeof(t_extern));
+    ui->ext->item_font = NULL;
+    ui->ext->descr_font = NULL;
+    ui->ext->character = malloc(sizeof(t_character));
+
+    ui->ecrit = malloc(sizeof(t_ecritures));
+    // Initialiser les membres si nécessaire
+    memset(ui->ecrit->nom_txt_item, 0, sizeof(ui->ecrit->nom_txt_item));
+    // etc.
+
     ui->elems = malloc(sizeof(t_elements));
 
     // Initialisation des références
@@ -334,7 +337,7 @@ void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
         int lastScroll = ui->scrollY;
 
         // Réinitialiser l'UI
-        ui = inventoryUI_Init(ui, renderer, ui->ext->character, ui->ext->items, input);
+        inventoryUI_Init(ui, renderer, ui->ext->character, ui->ext->items, input);
 
         // Restaurer le scroll dans les nouvelles limites
         ui->scrollY = lastScroll;
@@ -358,7 +361,6 @@ void updateScroll(InventoryUI *ui, t_input *input) {
 void update(t_input *input, InventoryUI *ui) {
     ui->width = input->windowWidth;
     ui->height = input->windowHeight;
-    updateInput(input);
 }
 
 void freeInv(void *elt) {
