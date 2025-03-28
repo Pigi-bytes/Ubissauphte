@@ -80,6 +80,9 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     t_camera* camera = createCamera(levelWidth, levelHeight, 300, 300);
     t_viewPort* viewport = createViewport(context->renderer, camera, WINDOW_WIDTH, WINDOW_HEIGHT);
     t_minimap* minimap = createMinimap(context->renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
+    t_hud* playerHUD = createHUD(context->renderer, loadFont("assets/fonts/PressStart2P-vaV7.ttf", 16), tileset);
+
+    ADD_OBJECT_TO_SCENE(scene, playerHUD, HUD_TYPE);
 
     ADD_OBJECT_TO_SCENE(scene, NULL, PLAYER_TYPE);
     ADD_OBJECT_TO_SCENE(scene, *level, GRID_TYPE);
@@ -103,6 +106,7 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     sceneRegisterFunction(scene, MINIMAP_TYPE, UPDATE, updateMinimapWrapper, 0, FONCTION_PARAMS(camera, context->renderer, salle->entities, *level));
     sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&(*player)->entity.displayRect.x, &(*player)->entity.displayRect.y, &context->frameData->deltaTime));
     sceneRegisterFunction(scene, CAMERA_TYPE, UPDATE, centerCameraOnWrapper, 0, FONCTION_PARAMS(&(*player)->entity.displayRect.x, &(*player)->entity.displayRect.y));
+    sceneRegisterFunction(scene, HUD_TYPE, UPDATE, updateHUDWrapper, 0, FONCTION_PARAMS(context->renderer, *player));
 
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_RESIZE, resizeViewportWrapper, 0, FONCTION_PARAMS(&context->input->windowWidth, &context->input->windowHeight));
     sceneRegisterFunction(scene, MINIMAP_TYPE, HANDLE_RESIZE, resizeMinimapWrapper, 1, FONCTION_PARAMS(context->renderer, &context->input->windowWidth, &context->input->windowHeight));
