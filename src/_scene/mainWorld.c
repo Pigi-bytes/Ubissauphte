@@ -136,7 +136,7 @@ t_scene* createMainWord(t_context* context) {
     addObject(entities, &joueur->entity, PLAYER);
     placeOnRandomTile(level, &joueur->entity, entities);
 
-    t_hud* playerHUD = createHUD(context->renderer, context->font, tileset);
+    t_hud* playerHUD = createHUD(context->renderer, loadFont("assets/fonts/PressStart2P-vaV7.ttf", 16), tileset);
     ADD_OBJECT_TO_SCENE(scene, playerHUD, HUD_TYPE);
 
     t_enemy* enemy;

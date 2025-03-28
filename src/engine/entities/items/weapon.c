@@ -157,16 +157,22 @@ void renderWeaponDuringAttack(SDL_Renderer* renderer, t_joueur* player, SDL_FPoi
 }
 
 void renderWeaponIdle(SDL_Renderer* renderer, t_joueur* player, SDL_FPoint origin, SDL_Point pivotPoint, int scaledWidth, int scaledHeight, SDL_RendererFlip weaponFlip) {
+    // Facteur de réduction pour l'arme en état idle seulement
+    const float idleScaleFactor = 0.7f;
+
+    // Réduction de la taille de l'arme en mode idle
+    int reducedHeight = (int)(scaledHeight * idleScaleFactor);
+
     // Constantes de décalage pour positionner l'arme par rapport au joueur
-    const float OFFSET_X = 8.0f;
-    const float offsetY = 4.0f;
+    const float OFFSET_X = 6.0f;
+    const float offsetY = 12.0f;
 
     // Si le joueur est retourné (regarde à gauche), on inverse le décalage
     float offsetX = player->entity.flip == SDL_FLIP_HORIZONTAL ? -OFFSET_X : OFFSET_X;
     // (assure que l'arme pointe dans la même direction que le regard du joueur)
     weaponFlip = player->entity.flip;
 
-    SDL_Rect displayRect = {(origin.x - pivotPoint.x + offsetX), (origin.y - pivotPoint.y + offsetY), scaledWidth, scaledHeight};
+    SDL_Rect displayRect = {(origin.x - pivotPoint.x + offsetX), (origin.y - pivotPoint.y + offsetY), scaledWidth, reducedHeight};
     SDL_RenderCopyEx(renderer, player->currentWeapon->texture, NULL, &displayRect, 0, &pivotPoint, weaponFlip);
 
     SDL_FPoint visualPivot = {displayRect.x + pivotPoint.x, displayRect.y + pivotPoint.y};

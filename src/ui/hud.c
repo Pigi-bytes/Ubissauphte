@@ -70,13 +70,13 @@ void updateHUD(t_hud* hud, SDL_Renderer* renderer, t_joueur* player) {
 
     char level_str[8];
     snprintf(level_str, sizeof(level_str), "%d", player->level);
-    update_text(&hud->text.level, renderer, level_str, hud->font, hud->text_color, hud->outline_color, 1);
+    update_text(&hud->text.level, renderer, level_str, hud->font, hud->text_color, hud->outline_color, 2);
     hud->text.level->rect.x = hud->layout.player.x + (hud->layout.player.w - hud->text.level->rect.w) / 2;
     hud->text.level->rect.y = hud->layout.player.y + hud->layout.player.h + 5;
 
     char gold_str[16];
     snprintf(gold_str, sizeof(gold_str), "%d", player->gold);
-    update_text(&hud->text.gold, renderer, gold_str, hud->font, GOLD_COLOR, hud->outline_color, 1);
+    update_text(&hud->text.gold, renderer, gold_str, hud->font, GOLD_COLOR, hud->outline_color, 2);
     hud->text.gold->rect.x = hud->layout.gold.x + hud->layout.gold.w + 2;
     hud->text.gold->rect.y = hud->layout.gold.y + (hud->layout.gold.h - hud->text.gold->rect.h) / 2;
 
