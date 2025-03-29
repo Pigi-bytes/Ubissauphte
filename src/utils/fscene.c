@@ -117,6 +117,7 @@ void setScene(t_sceneController* controller, char* name) {
             }
             controller->currentScene = i;
             executeSceneFunctions(scene, HANDLE_RESIZE);
+
             return;
         }
     }
@@ -133,6 +134,8 @@ int indiceByscene(t_sceneController* controller, t_scene* scene) {
 
 void getPrevuisScene(t_sceneController* controller) {
     controller->currentScene = indiceByscene(controller, controller->lastMap);
+    t_scene* scene = (t_scene*)getObject(controller->scene, controller->currentScene);
+    executeSceneFunctions(scene, HANDLE_RESIZE);
 }
 
 void getPrevuisMenu(t_sceneController* controller) {
@@ -141,9 +144,13 @@ void getPrevuisMenu(t_sceneController* controller) {
         controller->currentScene = indiceByscene(controller, controller->lastMenu->historique[controller->lastMenu->nb_Menu]);
         controller->lastMenu->nb_Menu--;
     }
+    t_scene* scene = (t_scene*)getObject(controller->scene, controller->currentScene);
+    executeSceneFunctions(scene, HANDLE_RESIZE);
 }
 t_scene* getCurrentScene(t_sceneController* controller) {
-    return (t_scene*)getObject(controller->scene, controller->currentScene);
+    t_scene* scene = (t_scene*)getObject(controller->scene, controller->currentScene);
+    executeSceneFunctions(scene, HANDLE_RESIZE);
+    return scene;
 }
 
 void freeSceneController(t_sceneController* controller) {
