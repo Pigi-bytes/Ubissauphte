@@ -72,6 +72,20 @@ void calculEquiper(SDL_Rect *statsItem, SDL_Rect *descrItem, SDL_Rect *Equiper, 
     Equiper->y = descrItem->y + descrItem->h + input->windowHeight * 0.03;
 }
 
+// Ajouter une fonction de nettoyage des slots
+void freeInventorySlots(InventoryUI *ui) {
+    if (ui->elems && ui->elems->inventory_slots) {
+        for (int i = 0; i < ui->nbItems; i++) {
+            if (ui->elems->inventory_slots[i].button) {
+                freeButton(ui->elems->inventory_slots[i].button);
+                ui->elems->inventory_slots[i].button = NULL;
+            }
+        }
+        free(ui->elems->inventory_slots);
+        ui->elems->inventory_slots = NULL;
+    }
+}
+
 char *createStatLine(const char *statLabel, float additive, float multiplicative) {
     char buffer[256] = {0};
     char addPart[32] = {0};
@@ -132,14 +146,19 @@ void coucou() {
     printf("cocou\n");
 }
 
-InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input) {
+InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_character *c, t_input *input) {
     initTextEngine();
     printf("%p\n", input);
     InventoryUI *ui = ui2;  // Utiliser l'instance existante si fournie
+    t_itemsStack **items = malloc(sizeof(t_itemsStack *) * 40);
+    for (int i = 0; i < c->inventaire->itemsStack->count; i++) {
+        items[i] = (t_itemsStack *)getObject(c->inventaire->itemsStack, i);
+    }
 
     if (!ui) {
         ui = malloc(sizeof(InventoryUI));  // Créer une nouvelle instance si NULL
-    }
+    } else
+        freeInventorySlots(ui);
 
     ui->ext = malloc(sizeof(t_extern));
     ui->ext->item_font = NULL;
@@ -155,7 +174,6 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
 
     // Initialisation des références
     ui->ext->character = c;
-    ui->ext->items = items;
     ui->nbItems = 40;
 
     ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
@@ -193,17 +211,17 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     calculEquiper(&ui->elems->statsItem.rect, &ui->elems->descrItem.rect, &ui->elems->equiper.rect, input);
 
     // Initialisation slots (votre code original)
-    ui->elems->inventory_slots = malloc(40 * sizeof(UI_Element));
-
+    ui->elems->inventory_slots = malloc(ui->nbItems * sizeof(UI_Element));
     calculerItem(&ui->elems->inventory_slots[0].rect, ui->elems->inventory_panel.rect,
                  &ui->elems->inventory_panel.rect, 0, 0, input);
-    ui->elems->inventory_slots[0].texture = items[0]->texture;
-    ui->elems->inventory_slots[0].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[0].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, ui->ext->items[0], renderer, input)));
+    ui->elems->inventory_slots[0].texture = items[0]->definition->texture;
+    ui->elems->inventory_slots[0].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[0].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[0]->definition, renderer, input)));
 
-    for (int i = 1, j = 1; i < 40; j++, i++) {
+    for (int i = 1, j = 1; i < ui->nbItems; j++, i++) {
         calculerItem(&ui->elems->inventory_slots[i].rect, ui->elems->inventory_panel.rect, &ui->elems->inventory_slots[i - 1].rect, i, j, input);
-        ui->elems->inventory_slots[i].texture = items[i]->texture;
-        ui->elems->inventory_slots[i].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[i].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, ui->ext->items[i], renderer, input)));
+        ui->elems->inventory_slots[i].texture = items[i]->definition->texture;
+
+        ui->elems->inventory_slots[i].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[i].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[i]->definition, renderer, input)));
         if (j == 4)
             j = 0;
     }
@@ -236,6 +254,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     ui->ecrit->color_txt.r = 255;
 
     t_text *t = createText(renderer, "cocou", ui->ext->item_font, (SDL_Color){0, 0, 0});
+
     ui->elems->equiper.button = createButton(t, (SDL_Color){0, 128, 255}, (SDL_Color){0, 150, 255}, ui->elems->equiper.rect, creerFonction(coucou, FONCTION_PARAMS(NULL)));
 
     // Initialisation des textes statsPlayer
@@ -342,7 +361,7 @@ void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
         int lastScroll = ui->scrollY;
 
         // Réinitialiser l'UI
-        inventoryUI_Init(ui, renderer, ui->ext->character, ui->ext->items, input);
+        inventoryUI_Init(ui, renderer, ui->ext->character, input);
 
         // Restaurer le scroll dans les nouvelles limites
         ui->scrollY = lastScroll;
@@ -351,17 +370,24 @@ void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
 }
 
 void creerDescr(InventoryUI *ui, t_item *item, SDL_Renderer *renderer, t_input *input) {
+    char processedDesc[256];
+    strcpy(processedDesc, item->description);
+
+    // Remplacer les "\\n" par "\n"
+    char *found;
+    while ((found = strstr(processedDesc, "\\n")) != NULL) {
+        *found = '\n';                                         // Remplacer le premier '\' par '\n'
+        memmove(found + 1, found + 2, strlen(found + 2) + 1);  // Décaler le reste
+    }
+
     int i = 0, j, nb = 1;
-    printf("%p\n", input);
-    char descr[50];
-
-    while (item->description[i++] != '\0') {
-        for (j = 0; item->description[i] != '\n' && item->description[i] != '\0'; i++, j++) {
-            descr[j] = item->description[i];
+    while (processedDesc[i++] != '\0') {
+        for (j = 0; processedDesc[i] != '\n' && processedDesc[i] != '\0'; i++, j++) {
+            processedDesc[j] = processedDesc[i];
         }
-        descr[j] = '\0';
+        processedDesc[j] = '\0';
 
-        ui->ecrit->description[nb - 1] = createText(renderer, descr, ui->ext->descr_font, ui->ecrit->color_txt);
+        ui->ecrit->description[nb - 1] = createText(renderer, processedDesc, ui->ext->descr_font, ui->ecrit->color_txt);
         ui->ecrit->description[nb - 1]->rect.x = ui->elems->descrItem.rect.x + input->windowWidth * 0.005;
         ui->ecrit->description[nb - 1]->rect.y = ui->ecrit->text_descr->rect.y + input->windowHeight * 0.03 * nb;
         nb++;

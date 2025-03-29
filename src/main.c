@@ -40,91 +40,25 @@ int main(int argc, char* argv[]) {
     context.control->map = SDL_SCANCODE_P;
     context.control->interact = SDL_SCANCODE_E;
 
+    t_fichier* fichier = chargerFichier("src/test.txt");
     t_tileset* tileset = initTileset(context.renderer, 192, 240, 16, "./assets/imgs/tileMapDungeon.bmp");
+
+    t_item** itemListe = item_load(fichier, tileset);
+
     t_character* c = createCharactere(tileset, 98);
 
-    t_item* item = malloc(sizeof(t_item));
-    t_item* item1 = malloc(sizeof(t_item));
-    t_item* item2 = malloc(sizeof(t_item));
-
-    t_item** itemListe = malloc(sizeof(t_item*) * 40);
-
-    strcpy(item->name, "Marteau de thor");
-    item->flags = ITEM_FLAG_STACKABLE;
-    item->stats.attack.additive = 0;
-    item->stats.attack.multiplicative = 19;
-    item->stats.defense.additive = 3;
-    item->stats.defense.multiplicative = 1;
-    item->stats.health.additive = 50;
-    item->stats.health.multiplicative = 5;
-    item->stats.healthMax.additive = 5008;
-    item->stats.healthMax.multiplicative = -25;
-    item->stats.mana.additive = 15;
-    item->stats.mana.multiplicative = 1.2;
-    item->stats.manaMax.additive = 20;
-    item->stats.manaMax.multiplicative = 3;
-    item->stats.speed.additive = 60;
-    item->stats.speed.multiplicative = 0;
-    item->indiceTexture = 102;
-    item->texture = (SDL_Texture*)getObject(tileset->textureTiles, item->indiceTexture);
-    strcpy(item->description, "\nça c'est de l'arme \nguts weapon\nbla bla bla\navec ça tu gagnes\nà coup sur");
-
-    strcpy(item1->name, "de thor");
-    item1->flags = ITEM_FLAG_STACKABLE;
-    item1->stats.attack.additive = 0;
-    item1->stats.attack.multiplicative = 10;
-    item1->stats.defense.additive = 0;
-    item1->stats.defense.multiplicative = 1;
-    item1->stats.health.additive = 50;
-    item1->stats.health.multiplicative = 5;
-    item1->stats.healthMax.additive = 500;
-    item1->stats.healthMax.multiplicative = -25;
-    item1->stats.mana.additive = 15;
-    item1->stats.mana.multiplicative = 1.2;
-    item1->stats.manaMax.additive = 20;
-    item1->stats.manaMax.multiplicative = 3;
-    item1->stats.speed.additive = 60;
-    item1->stats.speed.multiplicative = 0;
-    item1->indiceTexture = 103;
-    item1->texture = (SDL_Texture*)getObject(tileset->textureTiles, item1->indiceTexture);
-    strcpy(item1->description, "\nça c'est de l'arme \nazdefddsc sqdqff\nbla bla bla\navec ça tu gagnes\nà coup sur");
-
-    strcpy(item2->name, "Marteau");
-    item2->flags = ITEM_FLAG_STACKABLE;
-    item2->stats.attack.additive = 0;
-    item2->stats.attack.multiplicative = 10;
-    item2->stats.defense.additive = 0;
-    item2->stats.defense.multiplicative = 1;
-    item2->stats.health.additive = 500;
-    item2->stats.health.multiplicative = 5;
-    item2->stats.healthMax.additive = 50;
-    item2->stats.healthMax.multiplicative = -25;
-    item2->stats.mana.additive = 15;
-    item2->stats.mana.multiplicative = 2;
-    item2->stats.manaMax.additive = 20;
-    item2->stats.manaMax.multiplicative = 3;
-    item2->stats.speed.additive = 60;
-    item2->stats.speed.multiplicative = 0;
-    item2->indiceTexture = 101;
-    item2->texture = (SDL_Texture*)getObject(tileset->textureTiles, item2->indiceTexture);
-    strcpy(item2->description, "\nqzzehbtb hj \nguts weapon\nbla bla bla\navec ça tu gagnes\nà coup sur");
-
-    for (int i = 0; i < 15; i++) {
-        itemListe[i] = item;
+    for (int i = 0; i < 40; i++) {
+        inventaireAjoutObjet(c->inventaire, itemListe[i], 1);
     }
-    for (int i = 15; i < 30; i++) {
-        itemListe[i] = item1;
-    }
-    for (int i = 30; i < 40; i++) {
-        itemListe[i] = item2;
-    }
+
+    InventoryUI* ui = inventoryUI_Init(NULL, context.renderer, c, context.input);
 
     t_scene* scene = createMainMenu(&context);
     t_scene* scene0 = createOptionMenu(&context);
     t_scene* scene1 = createMainWord(&context);
     t_scene* scene2 = createCommandeMenu(&context);
     t_scene* scene3 = createFpsMenu(&context);
-    t_scene* scene4 = createMainInv(&context, c, tileset, itemListe);
+    t_scene* scene4 = createMainInv(&context, c, tileset);
 
     addScene(context.sceneController, scene);
     addScene(context.sceneController, scene0);

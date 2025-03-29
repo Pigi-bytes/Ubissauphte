@@ -77,10 +77,11 @@ typedef struct
     int maxScrollY;
 
     int width, height;
+    int peutEquiper;
 
 } InventoryUI;
 
-InventoryUI *inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input);
+InventoryUI *inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_input *input);
 void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input);
 void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input);
 void update(t_input *input, InventoryUI *ui);

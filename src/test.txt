@@ -1,166 +1,879 @@
-id Item: 56
-Name: Épée de feu
-manaMax Add Modifier: 1.05
-manaMax Mult Modifier: 1.5
-speed Modifier: 1.15
-attack Add Modifier: 1.25
-attack Mult Modifier: 1.25
-defense Add Modifier: 1.10
-defense Mult Modifier: 1.10
-health Add Modifier: 41.0
-health Mult Modifier: 20.0
-healthMax Add Modifier: 45.0
-healthMax Mult Modifier: 25.0
-mana Add Modifier: 14.0
-mana Mult Modifier: 1.2
-speed Add Modifier: 5.0
-speed Mult Modifier: 7.0
-flags: 9
-type: arme
-OnEquipe: 0
-OnDeEquipe: 0
-description: ça c'est \n de l'arme
-
-id Item: 56
-Name: Épée de glace
-manaMax Add Modifier: 1.05
-manaMax Mult Modifier: 1.5
-speed Modifier: 1.15
-attack Add Modifier: 1.25
-attack Mult Modifier: 1.25
-defense Add Modifier: 1.10
-defense Mult Modifier: 1.10
-health Add Modifier: 41.0
-health Mult Modifier: 20.0
-healthMax Add Modifier: 45.0
-healthMax Mult Modifier: 25.0
-mana Add Modifier: 14.0
-mana Mult Modifier: 1.2
-speed Add Modifier: 5.0
-speed Mult Modifier: 7.0
-flags: 8
-type: armure
-OnEquipe: 0
-OnDeEquipe: 0
-description: ça c'est de l'arme
-
-id Item: 56
-Type: 0.0
-Name: Épée de feu
-manaMax Add Modifier: 1.05
-manaMax Mult Modifier: 1.5
-speed Modifier: 1.15
-attack Add Modifier: 1.25
-attack Mult Modifier: 1.25
-defense Add Modifier: 1.10
-defense Mult Modifier: 1.10
-health Add Modifier: 41.0
-health Mult Modifier: 20.0
-healthMax Add Modifier: 45.0
-healthMax Mult Modifier: 25.0
-mana Add Modifier: 14.0
-mana Mult Modifier: 1.2
-speed Add Modifier: 5.0
-speed Mult Modifier: 7.0
-flags: 6
-type: arme
-OnEquipe: 0
-OnDeEquipe: 0
-description: ça c'est de l'arme
-
-id Item: 56
-Type: 0.0
-Name: Épée de feu
-manaMax Add Modifier: 1.05
-manaMax Mult Modifier: 1.5
-speed Modifier: 1.15
-attack Add Modifier: 1.25
-attack Mult Modifier: 1.25
-defense Add Modifier: 1.10
-defense Mult Modifier: 1.10
-health Add Modifier: 41.0
-health Mult Modifier: 20.0
-healthMax Add Modifier: 45.0
-healthMax Mult Modifier: 25.0
-mana Add Modifier: 14.0
-mana Mult Modifier: 1.2
-speed Add Modifier: 5.0
-speed Mult Modifier: 7.0
-flags: 10
-type: arme
-OnEquipe: 0
-OnDeEquipe: 0
-texture: 98
-description: \nça c'est de \nl'arme
-
-id Item: 56
-Type: 0.0
-Name: Épée de feu
-manaMax Add Modifier: 1.05
-manaMax Mult Modifier: 1.5
-speed Modifier: 1.15
-attack Add Modifier: 1.25
-attack Mult Modifier: 1.25
-defense Add Modifier: 1.10
-defense Mult Modifier: 1.10
-health Add Modifier: 41.0
-health Mult Modifier: 20.0
-healthMax Add Modifier: 45.0
-healthMax Mult Modifier: 25.0
-mana Add Modifier: 14.0
-mana Mult Modifier: 1.2
-speed Add Modifier: 5.0
-speed Mult Modifier: 7.0
-flags: 13
-type: activable
-OnEquipe: 0
-OnDeEquipe: 0
-description: ça c'est de l'arme
-
-id Item: 56
-Type: 0.0
-Name: potion
-manaMax Add Modifier: 1.05
-manaMax Mult Modifier: 1.5
-speed Modifier: 1.15
-attack Add Modifier: 1.25
-attack Mult Modifier: 1.25
-defense Add Modifier: 1.10
-defense Mult Modifier: 1.10
-health Add Modifier: 41.0
-health Mult Modifier: 20.0
-healthMax Add Modifier: 45.0
-healthMax Mult Modifier: 25.0
-mana Add Modifier: 14.0
-mana Mult Modifier: 1.2
-speed Add Modifier: 5.0
-speed Mult Modifier: 7.0
+id Item: 0
+Name: Lame des Ombres
+manaMax Add Modifier: 1.1
+manaMax Mult Modifier: 1.6
+speed Modifier: 1.2
+attack Add Modifier: 1.3
+attack Mult Modifier: 1.4
+defense Add Modifier: 1.05
+defense Mult Modifier: 1.1
+health Add Modifier: 35.0
+health Mult Modifier: 15.0
+healthMax Add Modifier: 40.0
+healthMax Mult Modifier: 20.0
+mana Add Modifier: 12.0
+mana Mult Modifier: 1.3
+speed Add Modifier: 4.0
+speed Mult Modifier: 6.0
 flags: 12
-type: activable
-OnEquipe: 0
-OnDeEquipe: 0
-description: ça c'est de l'arme
+type: arme
+texture: 100
+description: \nUne lame tranchante \nimprégnée d'obscurité
 
-id Item: 56
-Type: 0.0
-Name: Épée de feu
-manaMax Add Modifier: 1.05
-manaMax Mult Modifier: 1.5
-speed Modifier: 1.15
-attack Add Modifier: 1.25
+id Item: 1
+Name: Arc du Phénix
+manaMax Add Modifier: 1.0
+manaMax Mult Modifier: 1.8
+speed Modifier: 1.25
+attack Add Modifier: 1.4
+attack Mult Modifier: 1.35
+defense Add Modifier: 1.02
+defense Mult Modifier: 1.05
+health Add Modifier: 25.0
+health Mult Modifier: 18.0
+healthMax Add Modifier: 35.0
+healthMax Mult Modifier: 22.0
+mana Add Modifier: 10.0
+mana Mult Modifier: 1.4
+speed Add Modifier: 3.0
+speed Mult Modifier: 5.5
+flags: 4
+type: arme
+texture: 101
+description: \nUn arc enflammé \nrenaissant de ses cendres
+
+id Item: 2
+Name: Marteau du Tonnerre
+manaMax Add Modifier: 1.15
+manaMax Mult Modifier: 2.0
+speed Modifier: 0.95
+attack Add Modifier: 1.5
+attack Mult Modifier: 1.5
+defense Add Modifier: 1.1
+defense Mult Modifier: 1.15
+health Add Modifier: 50.0
+health Mult Modifier: 25.0
+healthMax Add Modifier: 55.0
+healthMax Mult Modifier: 30.0
+mana Add Modifier: 15.0
+mana Mult Modifier: 1.1
+speed Add Modifier: 1.0
+speed Mult Modifier: 3.0
+flags: 13
+type: arme
+texture: 103
+description: \nFrappe avec la fureur \ndes tempêtes
+
+id Item: 3
+Name: Dague Lunaire
+manaMax Add Modifier: 1.02
+manaMax Mult Modifier: 1.3
+speed Modifier: 1.35
+attack Add Modifier: 1.15
 attack Mult Modifier: 1.25
-defense Add Modifier: 1.10
-defense Mult Modifier: 1.10
-health Add Modifier: 41.0
+defense Add Modifier: 1.0
+defense Mult Modifier: 1.0
+health Add Modifier: 20.0
+health Mult Modifier: 12.0
+healthMax Add Modifier: 25.0
+healthMax Mult Modifier: 15.0
+mana Add Modifier: 8.0
+mana Mult Modifier: 1.15
+speed Add Modifier: 6.0
+speed Mult Modifier: 8.0
+flags: 5
+type: arme
+texture: 104
+description: \nBrille avec la lumière \ndes nuits sans lune
+
+id Item: 4
+Name: Bouclier Végétal
+manaMax Add Modifier: 1.2
+manaMax Mult Modifier: 1.4
+speed Modifier: 0.85
+attack Add Modifier: 1.0
+attack Mult Modifier: 1.0
+defense Add Modifier: 1.3
+defense Mult Modifier: 1.4
+health Add Modifier: 60.0
+health Mult Modifier: 30.0
+healthMax Add Modifier: 65.0
+healthMax Mult Modifier: 35.0
+mana Add Modifier: 20.0
+mana Mult Modifier: 1.25
+speed Add Modifier: -2.0
+speed Mult Modifier: 0.9
+flags: 12
+type: arme
+texture: 105
+description: \nUne symbiose entre \nnature et protection
+
+id Item: 5
+Name: Griffes du Vampire
+manaMax Add Modifier: 0.95
+manaMax Mult Modifier: 1.25
+speed Modifier: 1.4
+attack Add Modifier: 1.25
+attack Mult Modifier: 1.3
+defense Add Modifier: 0.9
+defense Mult Modifier: 0.95
+health Add Modifier: -10.0
+health Mult Modifier: 0.8
+healthMax Add Modifier: -15.0
+healthMax Mult Modifier: 0.85
+mana Add Modifier: 25.0
+mana Mult Modifier: 1.5
+speed Add Modifier: 7.0
+speed Mult Modifier: 9.0
+flags: 4
+type: arme
+texture: 106
+description: \nVol de vie \nà chaque coup porté
+
+id Item: 6
+Name: Sceptre Astral
+manaMax Add Modifier: 1.3
+manaMax Mult Modifier: 2.2
+speed Modifier: 1.1
+attack Add Modifier: 1.1
+attack Mult Modifier: 1.2
+defense Add Modifier: 1.15
+defense Mult Modifier: 1.1
+health Add Modifier: 30.0
 health Mult Modifier: 20.0
-healthMax Add Modifier: 45.0
+healthMax Add Modifier: 35.0
 healthMax Mult Modifier: 25.0
-mana Add Modifier: 14.0
-mana Mult Modifier: 1.2
+mana Add Modifier: 30.0
+mana Mult Modifier: 2.0
+speed Add Modifier: 2.0
+speed Mult Modifier: 4.0
+flags: 13
+type: arme
+texture: 107
+description: \nCanalise l'énergie \ndes constellations
+
+id Item: 7
+Name: Faux Spectralle
+manaMax Add Modifier: 0.9
+manaMax Mult Modifier: 1.7
+speed Modifier: 1.3
+attack Add Modifier: 1.35
+attack Mult Modifier: 1.45
+defense Add Modifier: 0.8
+defense Mult Modifier: 0.85
+health Add Modifier: -20.0
+health Mult Modifier: 0.7
+healthMax Add Modifier: -25.0
+healthMax Mult Modifier: 0.75
+mana Add Modifier: 40.0
+mana Mult Modifier: 1.8
+speed Add Modifier: 8.0
+speed Mult Modifier: 10.0
+flags: 12
+type: arme
+texture: 108
+description: \nRécolte des âmes \npour alimenter son pouvoir
+
+id Item: 8
+Name: Trident Abyssal
+manaMax Add Modifier: 1.4
+manaMax Mult Modifier: 1.7
+speed Modifier: 1.1
+attack Add Modifier: 1.6
+attack Mult Modifier: 1.3
+defense Add Modifier: 0.95
+defense Mult Modifier: 0.9
+health Add Modifier: -15.0
+health Mult Modifier: 0.85
+healthMax Add Modifier: -20.0
+healthMax Mult Modifier: 0.8
+mana Add Modifier: 18.0
+mana Mult Modifier: 1.4
 speed Add Modifier: 5.0
-speed Mult Modifier: 7.0
-flags: 11
-type: armure
-OnEquipe: 0
-OnDeEquipe: 0
-v
+speed Mult Modifier: 7.5
+flags: 4
+type: arme
+texture: 109
+description: \nArmée des profondeurs marines \nDraine la force des océans
+
+id Item: 9
+Name: Bâton Tellurique
+manaMax Add Modifier: 1.25
+manaMax Mult Modifier: 2.1
+speed Modifier: 0.9
+attack Add Modifier: 1.2
+attack Mult Modifier: 1.4
+defense Add Modifier: 1.3
+defense Mult Modifier: 1.25
+health Add Modifier: 45.0
+health Mult Modifier: 22.0
+healthMax Add Modifier: 50.0
+healthMax Mult Modifier: 27.0
+mana Add Modifier: 22.0
+mana Mult Modifier: 1.35
+speed Add Modifier: 3.5
+speed Mult Modifier: 4.8
+flags: 13
+type: arme
+texture: 110
+description: \nPuise dans l'énergie tellurique \nRenforce la connexion terrestre
+
+id Item: 10
+Name: Shuriken Vortex
+manaMax Add Modifier: 0.85
+manaMax Mult Modifier: 1.45
+speed Modifier: 1.5
+attack Add Modifier: 1.15
+attack Mult Modifier: 1.35
+defense Add Modifier: 0.85
+defense Mult Modifier: 0.88
+health Add Modifier: -25.0
+health Mult Modifier: 0.75
+healthMax Add Modifier: -30.0
+healthMax Mult Modifier: 0.7
+mana Add Modifier: 28.0
+mana Mult Modifier: 1.6
+speed Add Modifier: 9.0
+speed Mult Modifier: 12.0
+flags: 5
+type: arme
+texture: 111
+description: \nTourbillon de lames aériennes \nDéchire l'espace-temps
+
+id Item: 11
+Name: Manteau Éthéré
+manaMax Add Modifier: 1.05
+manaMax Mult Modifier: 1.9
+speed Modifier: 1.4
+attack Add Modifier: 0.0
+attack Mult Modifier: 0.0
+defense Add Modifier: 1.4
+defense Mult Modifier: 1.35
+health Add Modifier: 10.0
+health Mult Modifier: 1.1
+healthMax Add Modifier: 15.0
+healthMax Mult Modifier: 1.15
+mana Add Modifier: 35.0
+mana Mult Modifier: 1.7
+speed Add Modifier: 10.0
+speed Mult Modifier: 15.0
+flags: 12
+type: arme
+texture: 112
+description: \nEnveloppe le porteur \ndans une brume mystique
+
+id Item: 12
+Name: Grimoire Maudit
+manaMax Add Modifier: 2.0
+manaMax Mult Modifier: 3.0
+speed Modifier: 0.7
+attack Add Modifier: 0.5
+attack Mult Modifier: 0.8
+defense Add Modifier: 0.6
+defense Mult Modifier: 0.7
+health Add Modifier: -50.0
+health Mult Modifier: 0.5
+healthMax Add Modifier: -60.0
+healthMax Mult Modifier: 0.55
+mana Add Modifier: 100.0
+mana Mult Modifier: 3.0
+speed Add Modifier: -10.0
+speed Mult Modifier: 0.3
+flags: 13
+type: arme
+texture: 113
+description: \nSavoir interdit \nCorrompt l'âme de l'utilisateur
+
+id Item: 13
+Name: Serres Draconiques
+manaMax Add Modifier: 1.35
+manaMax Mult Modifier: 1.65
+speed Modifier: 1.25
+attack Add Modifier: 1.7
+attack Mult Modifier: 1.45
+defense Add Modifier: 1.1
+defense Mult Modifier: 1.05
+health Add Modifier: 40.0
+health Mult Modifier: 25.0
+healthMax Add Modifier: 45.0
+healthMax Mult Modifier: 28.0
+mana Add Modifier: 17.0
+mana Mult Modifier: 1.25
+speed Add Modifier: 6.5
+speed Mult Modifier: 8.5
+flags: 4
+type: arme
+texture: 114
+description: \nGriffes imprégnées \nde rage draconique
+
+id Item: 14
+Name: Écu Céleste
+manaMax Add Modifier: 1.18
+manaMax Mult Modifier: 1.55
+speed Modifier: 0.88
+attack Add Modifier: 0.3
+attack Mult Modifier: 0.5
+defense Add Modifier: 1.6
+defense Mult Modifier: 1.5
+health Add Modifier: 75.0
+health Mult Modifier: 35.0
+healthMax Add Modifier: 80.0
+healthMax Mult Modifier: 40.0
+mana Add Modifier: 12.0
+mana Mult Modifier: 1.15
+speed Add Modifier: -3.0
+speed Mult Modifier: 0.8
+flags: 12
+type: arme
+texture: 115
+description: \nBouclier béni par les cieux \nAbsorbe les chocs divins
+
+id Item: 15
+Name: Fléau Venimeux
+manaMax Add Modifier: 0.92
+manaMax Mult Modifier: 1.22
+speed Modifier: 1.32
+attack Add Modifier: 1.25
+attack Mult Modifier: 1.28
+defense Add Modifier: 0.82
+defense Mult Modifier: 0.86
+health Add Modifier: -12.0
+health Mult Modifier: 0.78
+healthMax Add Modifier: -18.0
+healthMax Mult Modifier: 0.72
+mana Add Modifier: 23.0
+mana Mult Modifier: 1.38
+speed Add Modifier: 7.2
+speed Mult Modifier: 9.5
+flags: 5
+type: arme
+texture: 116
+description: \nÉpand un venin paralysant \nCorrode armures et chairs
+
+id Item: 16
+Name: Hache de Cristal
+manaMax Add Modifier: 1.28
+manaMax Mult Modifier: 1.88
+speed Modifier: 1.05
+attack Add Modifier: 1.55
+attack Mult Modifier: 1.4
+defense Add Modifier: 1.08
+defense Mult Modifier: 1.12
+health Add Modifier: 33.0
+health Mult Modifier: 18.0
+healthMax Add Modifier: 38.0
+healthMax Mult Modifier: 22.0
+mana Add Modifier: 19.0
+mana Mult Modifier: 1.28
+speed Add Modifier: 4.2
+speed Mult Modifier: 6.8
+flags: 13
+type: arme
+texture: 117
+description: \nCristaux vivants affûtés \nRéfracte la lumière en lames
+
+id Item: 17
+Name: Dard de Frelon
+manaMax Add Modifier: 0.88
+manaMax Mult Modifier: 1.15
+speed Modifier: 1.6
+attack Add Modifier: 1.18
+attack Mult Modifier: 1.22
+defense Add Modifier: 0.75
+defense Mult Modifier: 0.8
+health Add Modifier: -8.0
+health Mult Modifier: 0.82
+healthMax Add Modifier: -12.0
+healthMax Mult Modifier: 0.78
+mana Add Modifier: 27.0
+mana Mult Modifier: 1.45
+speed Add Modifier: 11.0
+speed Mult Modifier: 14.0
+flags: 4
+type: arme
+texture: 118
+description: \nFrappe rapide et précise \nComme un essaim enragé
+
+id Item: 18
+Name: Gantelets Sismiques
+manaMax Add Modifier: 1.5
+manaMax Mult Modifier: 2.4
+speed Modifier: 0.78
+attack Add Modifier: 1.8
+attack Mult Modifier: 1.6
+defense Add Modifier: 1.25
+defense Mult Modifier: 1.18
+health Add Modifier: 55.0
+health Mult Modifier: 30.0
+healthMax Add Modifier: 60.0
+healthMax Mult Modifier: 35.0
+mana Add Modifier: 24.0
+mana Mult Modifier: 1.4
+speed Add Modifier: 2.5
+speed Mult Modifier: 3.8
+flags: 12
+type: arme
+texture: 119
+description: \nDéchaîne des ondes de choc \nFracasse les défenses
+
+id Item: 19
+Name: Lame Jumelle
+manaMax Add Modifier: 1.12
+manaMax Mult Modifier: 1.35
+speed Modifier: 1.45
+attack Add Modifier: 1.32
+attack Mult Modifier: 1.38
+defense Add Modifier: 0.94
+defense Mult Modifier: 0.96
+health Add Modifier: 18.0
+health Mult Modifier: 14.0
+healthMax Add Modifier: 22.0
+healthMax Mult Modifier: 16.0
+mana Add Modifier: 14.0
+mana Mult Modifier: 1.18
+speed Add Modifier: 8.5
+speed Mult Modifier: 11.0
+flags: 5
+type: arme
+texture: 120
+description: \nDuo de lames synchronisées \nDanse mortelle coordonnée
+
+id Item: 20
+Name: Épée Solaire
+manaMax Add Modifier: 1.6
+manaMax Mult Modifier: 2.2
+speed Modifier: 1.15
+attack Add Modifier: 1.65
+attack Mult Modifier: 1.55
+defense Add Modifier: 0.9
+defense Mult Modifier: 0.85
+health Add Modifier: 40.0
+health Mult Modifier: 25.0
+healthMax Add Modifier: 45.0
+healthMax Mult Modifier: 30.0
+mana Add Modifier: 25.0
+mana Mult Modifier: 1.6
+speed Add Modifier: 6.0
+speed Mult Modifier: 8.5
+flags: 4
+type: arme
+texture: 121
+description: \nBrûle avec la fureur du soleil \nPurifie les ennemis vaincus
+
+id Item: 21
+Name: Arc des Limbes
+manaMax Add Modifier: 0.8
+manaMax Mult Modifier: 1.95
+speed Modifier: 1.28
+attack Add Modifier: 1.42
+attack Mult Modifier: 1.33
+defense Add Modifier: 0.78
+defense Mult Modifier: 0.82
+health Add Modifier: -22.0
+health Mult Modifier: 0.68
+healthMax Add Modifier: -27.0
+healthMax Mult Modifier: 0.65
+mana Add Modifier: 32.0
+mana Mult Modifier: 1.85
+speed Add Modifier: 9.5
+speed Mult Modifier: 12.5
+flags: 5
+type: arme
+texture: 122
+description: \nTir venant des ténèbres \nTransperce les âmes damnées
+
+id Item: 22
+Name: Marteau de Geyser
+manaMax Add Modifier: 1.35
+manaMax Mult Modifier: 2.15
+speed Modifier: 0.82
+attack Add Modifier: 1.75
+attack Mult Modifier: 1.62
+defense Add Modifier: 1.15
+defense Mult Modifier: 1.12
+health Add Modifier: 65.0
+health Mult Modifier: 32.0
+healthMax Add Modifier: 70.0
+healthMax Mult Modifier: 38.0
+mana Add Modifier: 18.0
+mana Mult Modifier: 1.22
+speed Add Modifier: 3.8
+speed Mult Modifier: 5.2
+flags: 12
+type: arme
+texture: 123
+description: \nDéchaîne des explosions aquatiques \nDétruit les fondations
+
+id Item: 23
+Name: Kunai Spectral
+manaMax Add Modifier: 0.92
+manaMax Mult Modifier: 1.28
+speed Modifier: 1.55
+attack Add Modifier: 1.22
+attack Mult Modifier: 1.27
+defense Add Modifier: 0.72
+defense Mult Modifier: 0.78
+health Add Modifier: -18.0
+health Mult Modifier: 0.72
+healthMax Add Modifier: -23.0
+healthMax Mult Modifier: 0.68
+mana Add Modifier: 29.0
+mana Mult Modifier: 1.52
+speed Add Modifier: 11.5
+speed Mult Modifier: 15.0
+flags: 13
+type: arme
+texture: 124
+description: \nLames possédées \nTraverse les protections magiques
+
+id Item: 24
+Name: Bouclier Magnétique
+manaMax Add Modifier: 1.18
+manaMax Mult Modifier: 1.45
+speed Modifier: 0.88
+attack Add Modifier: 0.4
+attack Mult Modifier: 0.6
+defense Add Modifier: 1.65
+defense Mult Modifier: 1.55
+health Add Modifier: 85.0
+health Mult Modifier: 40.0
+healthMax Add Modifier: 90.0
+healthMax Mult Modifier: 45.0
+mana Add Modifier: 14.0
+mana Mult Modifier: 1.18
+speed Add Modifier: -4.5
+speed Mult Modifier: 0.75
+flags: 4
+type: arme
+texture: 125
+description: \nDévie les attaques énergétiques \nGénère un champ de force
+
+id Item: 25
+Name: Crocs de Givre
+manaMax Add Modifier: 1.05
+manaMax Mult Modifier: 1.38
+speed Modifier: 1.32
+attack Add Modifier: 1.28
+attack Mult Modifier: 1.35
+defense Add Modifier: 0.88
+defense Mult Modifier: 0.92
+health Add Modifier: -15.0
+health Mult Modifier: 0.78
+healthMax Add Modifier: -20.0
+healthMax Mult Modifier: 0.74
+mana Add Modifier: 21.0
+mana Mult Modifier: 1.42
+speed Add Modifier: 8.8
+speed Mult Modifier: 11.2
+flags: 5
+type: arme
+texture: 126
+description: \nGèle le sang des adversaires \nEnglace les mouvements
+
+id Item: 26
+Name: Bâton de Gaia
+manaMax Add Modifier: 1.45
+manaMax Mult Modifier: 2.25
+speed Modifier: 0.95
+attack Add Modifier: 1.15
+attack Mult Modifier: 1.25
+defense Add Modifier: 1.35
+defense Mult Modifier: 1.28
+health Add Modifier: 75.0
+health Mult Modifier: 35.0
+healthMax Add Modifier: 80.0
+healthMax Mult Modifier: 40.0
+mana Add Modifier: 27.0
+mana Mult Modifier: 1.55
+speed Add Modifier: 4.0
+speed Mult Modifier: 6.5
+flags: 12
+type: arme
+texture: 127
+description: \nContrôle la flore environnante \nSoigne les alliés
+
+id Item: 27
+Name: Dagues Jumelles
+manaMax Add Modifier: 1.08
+manaMax Mult Modifier: 1.32
+speed Modifier: 1.48
+attack Add Modifier: 1.35
+attack Mult Modifier: 1.4
+defense Add Modifier: 0.92
+defense Mult Modifier: 0.95
+health Add Modifier: 22.0
+health Mult Modifier: 16.0
+healthMax Add Modifier: 26.0
+healthMax Mult Modifier: 18.0
+mana Add Modifier: 16.0
+mana Mult Modifier: 1.2
+speed Add Modifier: 9.2
+speed Mult Modifier: 12.8
+flags: 13
+type: arme
+texture: 128
+description: \nCombo de coups rapides \nEsquive améliorée
+
+id Item: 28
+Name: Morsure de Basilisk
+manaMax Add Modifier: 0.85
+manaMax Mult Modifier: 1.18
+speed Modifier: 1.22
+attack Add Modifier: 1.45
+attack Mult Modifier: 1.38
+defense Add Modifier: 0.82
+defense Mult Modifier: 0.85
+health Add Modifier: -30.0
+health Mult Modifier: 0.65
+healthMax Add Modifier: -35.0
+healthMax Mult Modifier: 0.62
+mana Add Modifier: 34.0
+mana Mult Modifier: 1.72
+speed Add Modifier: 10.5
+speed Mult Modifier: 14.5
+flags: 4
+type: arme
+texture: 129
+description: \nVenin pétrifiant \nParalyse les cibles
+
+id Item: 29
+Name: Éventail Mortel
+manaMax Add Modifier: 1.12
+manaMax Mult Modifier: 1.42
+speed Modifier: 1.35
+attack Add Modifier: 1.18
+attack Mult Modifier: 1.25
+defense Add Modifier: 1.05
+defense Mult Modifier: 1.08
+health Add Modifier: 28.0
+health Mult Modifier: 19.0
+healthMax Add Modifier: 32.0
+healthMax Mult Modifier: 22.0
+mana Add Modifier: 19.0
+mana Mult Modifier: 1.3
+speed Add Modifier: 7.5
+speed Mult Modifier: 10.2
+flags: 5
+type: arme
+texture: 130
+description: \nDécoupe l'air en lames \nAttaque sur 180 degrés
+
+id Item: 30
+Name: Pilum Infernal
+manaMax Add Modifier: 1.65
+manaMax Mult Modifier: 2.35
+speed Modifier: 0.78
+attack Add Modifier: 1.85
+attack Mult Modifier: 1.7
+defense Add Modifier: 1.2
+defense Mult Modifier: 1.15
+health Add Modifier: -25.0
+health Mult Modifier: 0.7
+healthMax Add Modifier: -30.0
+healthMax Mult Modifier: 0.68
+mana Add Modifier: 45.0
+mana Mult Modifier: 2.1
+speed Add Modifier: 5.5
+speed Mult Modifier: 7.8
+flags: 12
+type: arme
+texture: 131
+description: \nJavelot enflammé \nExplose à l'impact
+
+id Item: 31
+Name: Griffes de Wolverine
+manaMax Add Modifier: 1.02
+manaMax Mult Modifier: 1.25
+speed Modifier: 1.45
+attack Add Modifier: 1.32
+attack Mult Modifier: 1.35
+defense Add Modifier: 0.85
+defense Mult Modifier: 0.88
+health Add Modifier: 15.0
+health Mult Modifier: 12.0
+healthMax Add Modifier: 18.0
+healthMax Mult Modifier: 14.0
+mana Add Modifier: 13.0
+mana Mult Modifier: 1.15
+speed Add Modifier: 10.0
+speed Mult Modifier: 13.5
+flags: 13
+type: arme
+texture: 132
+description: \nDéchiquète les chairs \nRégénération accélérée
+
+id Item: 32
+Name: Sarbacane Toxique
+manaMax Add Modifier: 0.95
+manaMax Mult Modifier: 1.15
+speed Modifier: 1.55
+attack Add Modifier: 1.12
+attack Mult Modifier: 1.18
+defense Add Modifier: 0.7
+defense Mult Modifier: 0.75
+health Add Modifier: -12.0
+health Mult Modifier: 0.8
+healthMax Add Modifier: -17.0
+healthMax Mult Modifier: 0.76
+mana Add Modifier: 24.0
+mana Mult Modifier: 1.35
+speed Add Modifier: 12.0
+speed Mult Modifier: 16.0
+flags: 4
+type: arme
+texture: 133
+description: \nDards empoisonnés \nEffet neurotoxique cumulatif
+
+id Item: 33
+Name: Masse Écrasante
+manaMax Add Modifier: 1.55
+manaMax Mult Modifier: 2.45
+speed Modifier: 0.65
+attack Add Modifier: 1.95
+attack Mult Modifier: 1.8
+defense Add Modifier: 1.3
+defense Mult Modifier: 1.25
+health Add Modifier: 90.0
+health Mult Modifier: 45.0
+healthMax Add Modifier: 100.0
+healthMax Mult Modifier: 50.0
+mana Add Modifier: 32.0
+mana Mult Modifier: 1.65
+speed Add Modifier: 2.0
+speed Mult Modifier: 3.0
+flags: 12
+type: arme
+texture: 134
+description: \nPulvérise les armures \nOndes de choc sismiques
+
+id Item: 34
+Name: Katar Vénéneux
+manaMax Add Modifier: 0.98
+manaMax Mult Modifier: 1.22
+speed Modifier: 1.4
+attack Add Modifier: 1.28
+attack Mult Modifier: 1.32
+defense Add Modifier: 0.78
+defense Mult Modifier: 0.82
+health Add Modifier: -20.0
+health Mult Modifier: 0.75
+healthMax Add Modifier: -25.0
+healthMax Mult Modifier: 0.7
+mana Add Modifier: 26.0
+mana Mult Modifier: 1.4
+speed Add Modifier: 9.8
+speed Mult Modifier: 13.2
+flags: 5
+type: arme
+texture: 135
+description: \nInjecte un cocktail toxique \nParalysie musculaire
+
+id Item: 35
+Name: Naginata Céleste
+manaMax Add Modifier: 1.28
+manaMax Mult Modifier: 1.85
+speed Modifier: 1.18
+attack Add Modifier: 1.5
+attack Mult Modifier: 1.45
+defense Add Modifier: 1.12
+defense Mult Modifier: 1.08
+health Add Modifier: 38.0
+health Mult Modifier: 21.0
+healthMax Add Modifier: 42.0
+healthMax Mult Modifier: 24.0
+mana Add Modifier: 22.0
+mana Mult Modifier: 1.38
+speed Add Modifier: 7.0
+speed Mult Modifier: 9.5
+flags: 13
+type: arme
+texture: 136
+description: \nDanse de lames aériennes \nCoups tourbillonnants
+
+id Item: 36
+Name: Fouet Électrique
+manaMax Add Modifier: 1.22
+manaMax Mult Modifier: 1.68
+speed Modifier: 1.3
+attack Add Modifier: 1.35
+attack Mult Modifier: 1.4
+defense Add Modifier: 0.92
+defense Mult Modifier: 0.95
+health Add Modifier: -8.0
+health Mult Modifier: 0.85
+healthMax Add Modifier: -12.0
+healthMax Mult Modifier: 0.82
+mana Add Modifier: 30.0
+mana Mult Modifier: 1.55
+speed Add Modifier: 8.2
+speed Mult Modifier: 11.0
+flags: 4
+type: arme
+texture: 137
+description: \nDécharge électrique cumulative \nChaine entre ennemis
+
+id Item: 37
+Name: Glaive Dimensionnel
+manaMax Add Modifier: 1.75
+manaMax Mult Modifier: 2.6
+speed Modifier: 1.05
+attack Add Modifier: 1.6
+attack Mult Modifier: 1.65
+defense Add Modifier: 1.15
+defense Mult Modifier: 1.1
+health Add Modifier: -40.0
+health Mult Modifier: 0.6
+healthMax Add Modifier: -45.0
+healthMax Mult Modifier: 0.58
+mana Add Modifier: 55.0
+mana Mult Modifier: 2.2
+speed Add Modifier: 6.5
+speed Mult Modifier: 9.0
+flags: 12
+type: arme
+texture: 138
+description: \nFaille spatiale tranchante \nIgnore les défenses physiques
+
+id Item: 38
+Name: Chakram Enflammé
+manaMax Add Modifier: 1.15
+manaMax Mult Modifier: 1.55
+speed Modifier: 1.4
+attack Add Modifier: 1.4
+attack Mult Modifier: 1.45
+defense Add Modifier: 0.88
+defense Mult Modifier: 0.92
+health Add Modifier: 25.0
+health Mult Modifier: 17.0
+healthMax Add Modifier: 30.0
+healthMax Mult Modifier: 20.0
+mana Add Modifier: 20.0
+mana Mult Modifier: 1.3
+speed Add Modifier: 10.5
+speed Mult Modifier: 14.0
+flags: 5
+type: arme
+texture: 139
+description: \nTrajectoire courbe imprévisible \nEnflamme les cibles
+
+id Item: 39
+Name: Corne de Gjallar
+manaMax Add Modifier: 1.75
+manaMax Mult Modifier: 2.8
+speed Modifier: 0.75
+attack Add Modifier: 2.1
+attack Mult Modifier: 1.8
+defense Add Modifier: 1.4
+defense Mult Modifier: 1.35
+health Add Modifier: 100.0
+health Mult Modifier: 50.0
+healthMax Add Modifier: 120.0
+healthMax Mult Modifier: 60.0
+mana Add Modifier: 50.0
+mana Mult Modifier: 2.5
+speed Add Modifier: -5.0
+speed Mult Modifier: 0.5
+flags: 12
+type: arme
+texture: 139
+description: \nSonne le Ragnarök \nRéveille les forces primordiales
