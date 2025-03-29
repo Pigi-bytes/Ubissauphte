@@ -1,13 +1,13 @@
 #include "./sceneInventaire.h"
 
-t_scene *createMainInv(t_context *context, t_character *c, t_tileset *tileset) {
+t_scene *createMainInv(t_context *context, InventoryUI *ui, t_character *c, t_tileset *tileset) {
     t_typeRegistry *registre = createTypeRegistry();
 
     const uint8_t INVENTORY_TYPE = registerType(registre, freeInv, "inventory");
 
     t_scene *scene = createScene(initObjectManager(registre), "mainInv");
 
-    InventoryUI *ui = inventoryUI_Init(NULL, context->renderer, c, context->input);
+    // InventoryUI *ui = inventoryUI_Init(NULL, context->renderer, c, context->input);
 
     ADD_OBJECT_TO_SCENE(scene, ui, INVENTORY_TYPE);
 

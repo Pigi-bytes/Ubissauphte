@@ -3,6 +3,6 @@
 
 #include "../commun.h"
 
-t_scene *createMainInv(t_context *context, t_character *c, t_tileset *tileset);
+t_scene *createMainInv(t_context *context,InventoryUI*ui,t_character *c, t_tileset *tileset);
 
 #endif

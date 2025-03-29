@@ -149,16 +149,18 @@ void coucou() {
 InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_character *c, t_input *input) {
     initTextEngine();
     printf("%p\n", input);
-    InventoryUI *ui = ui2;  // Utiliser l'instance existante si fournie
+    InventoryUI *ui = malloc(sizeof(InventoryUI));
+
+    if (ui2 != NULL) {
+        ui->ext = ui2->ext;
+        ui->elems = ui2->elems;
+        ui->ecrit = ui2->ecrit;
+    }
+
     t_itemsStack **items = malloc(sizeof(t_itemsStack *) * 40);
     for (int i = 0; i < c->inventaire->itemsStack->count; i++) {
         items[i] = (t_itemsStack *)getObject(c->inventaire->itemsStack, i);
     }
-
-    if (!ui) {
-        ui = malloc(sizeof(InventoryUI));  // Créer une nouvelle instance si NULL
-    } else
-        freeInventorySlots(ui);
 
     ui->ext = malloc(sizeof(t_extern));
     ui->ext->item_font = NULL;
@@ -176,7 +178,9 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     ui->ext->character = c;
     ui->nbItems = 40;
 
-    ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
+    int itemFontSize = (int)(ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
+    if (itemFontSize < 1) itemFontSize = 1;
+    ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     // Pour les items
     ui->ecrit->nom_txt_item[0] = createStatLine("Health : ", 0, 0);
     ui->ecrit->nom_txt_item[1] = createStatLine("Health Max : ", 0, 0);
@@ -215,13 +219,21 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     calculerItem(&ui->elems->inventory_slots[0].rect, ui->elems->inventory_panel.rect,
                  &ui->elems->inventory_panel.rect, 0, 0, input);
     ui->elems->inventory_slots[0].texture = items[0]->definition->texture;
-    ui->elems->inventory_slots[0].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[0].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[0]->definition, renderer, input)));
-
+    if (ui2 == NULL)
+        ui->elems->inventory_slots[0].button = createButton(createText(renderer, "azze", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[0].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[0]->definition, renderer, input)));
+    else {
+        ui->elems->inventory_slots[0].button = ui2->elems->inventory_slots[0].button;
+        ui->elems->inventory_slots[0].button->rect = ui->elems->inventory_slots[0].rect;
+    }
     for (int i = 1, j = 1; i < ui->nbItems; j++, i++) {
         calculerItem(&ui->elems->inventory_slots[i].rect, ui->elems->inventory_panel.rect, &ui->elems->inventory_slots[i - 1].rect, i, j, input);
         ui->elems->inventory_slots[i].texture = items[i]->definition->texture;
-
-        ui->elems->inventory_slots[i].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[i].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[i]->definition, renderer, input)));
+        if (ui2 == NULL)
+            ui->elems->inventory_slots[i].button = createButton(createText(renderer, "zeffqsd", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[i].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[i]->definition, renderer, input)));
+        else {
+            ui->elems->inventory_slots[i].button = ui2->elems->inventory_slots[i].button;
+            ui->elems->inventory_slots[i].button->rect = ui->elems->inventory_slots[i].rect;
+        }
         if (j == 4)
             j = 0;
     }
@@ -246,8 +258,12 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     ui->color.r = 0;
 
     // affichage des texts
-    ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
-    ui->ext->descr_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->descrItem.rect.h * ui->elems->descrItem.rect.w * 0.0003);
+
+    int itemFontSize2 = (int)(ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
+    if (itemFontSize2 < 1) itemFontSize2 = 18;
+    int descrFontSize = (int)(ui->elems->descrItem.rect.h * ui->elems->descrItem.rect.w * 0.0003);
+    if (descrFontSize < 1) descrFontSize = 18;
+    ui->ext->descr_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", descrFontSize);
     ui->ecrit->color_txt.a = 255;
     ui->ecrit->color_txt.b = 0;
     ui->ecrit->color_txt.g = 128;
