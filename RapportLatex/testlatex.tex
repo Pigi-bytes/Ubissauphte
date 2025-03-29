@@ -16,8 +16,8 @@
 
 
 
-\lhead{\includegraphics[width=2cm]{image.png}}
-\rhead{\includegraphics[width=2cm]{claude.png}}
+\lhead{\includegraphics[width=2cm]{./img/image.png}}
+\rhead{\includegraphics[width=2cm]{./img/claude.png}}
 
 \begin{document}
 
@@ -96,5 +96,56 @@ Nous avons également réalisé des tâches en groupe, que ce soit pour intégre
 \section{Bilan et conclusions}
 
 \section{Annexes}
+
+\subsection{exemple de débogage}
+\subsubsection{gestion des pointeurs NULL en fonctions du système d'exploitation}
+Nous avons observé une \textbf{erreur de segmentation fault} lors de l'exécution du programme. Fait notable : ce problème n'affectait que certains membres de l'équipe tandis que d'autres pouvaient exécuter l'application normalement.
+
+\begin{itemize}
+    \item Les paramètres entrants étaient valides (non-nuls)
+    \item Le problème semble provenir soit de :
+    \begin{itemize}
+        \item La variable \texttt{salleDep}
+        \item La structure \texttt{scene}
+    \end{itemize}
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./img/gdbsystème.png}
+    \caption{Erreur observée dans GDB}
+    \label{fig:gdb_error}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./img/ExempleMarcheBien.png}
+    \caption{Comportement normal pour référence}
+    \label{fig:working_example}
+\end{figure}
+
+L'inspection de \texttt{salleDep} via GDB révèle :
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./img/ErreurAvecPrint.png}
+    \caption{Résultat de la commande \texttt{print salleDep}}
+    \label{fig:gdb_print}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./img/Erreur2.png}
+  \caption{Résultat de la commande \texttt{print salleDep}}
+  \label{fig:gdb_print2}
+\end{figure}
+
+Ce qui est marrant avec cette valeur \texttt{0x01} (par exemple) c'est quelle change à chaque fois
+
+\subsection*{Conclusion}
+\begin{itemize}
+    \item \texttt{salleDep} présente une valeur non-nulle alors que \texttt{sceneController} devrait être vide (\texttt{NULL})
+    \item \textbf{Cause racine} : Absence de vérification de nullité avant l'assignation à \texttt{t\_scene}
+\end{itemize}
 
 \end{document}
