@@ -104,10 +104,19 @@ void addScene(t_sceneController* controller, t_scene* scene) {
 }
 
 void setScene(t_sceneController* controller, char* name) {
-    t_scene* salleDep = (t_scene*)getObject(controller->scene, controller->currentScene);
     for (int i = 0; i < controller->scene->count; i++) {
         t_scene* scene = (t_scene*)getObject(controller->scene, i);
         if (strcmp(scene->name, name) == 0) {
+            void* elt = NULL;
+            if (controller->currentScene != -1) {
+                elt = getObject(controller->scene, controller->currentScene);
+            }
+            t_scene* salleDep = NULL;
+            if (elt != NULL) {
+                salleDep = (t_scene*)elt;
+            }
+            printf("%d \n", controller->currentScene);
+            printf("%p \n", salleDep);
             if (salleDep && strcmp(salleDep->name, "main")) {
                 controller->lastMenu->historique[++controller->lastMenu->nb_Menu] = (t_scene*)getObject(controller->scene, controller->currentScene);
                 printf("ajouter\n");
