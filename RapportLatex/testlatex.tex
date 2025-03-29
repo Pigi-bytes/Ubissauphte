@@ -9,6 +9,7 @@
 \usepackage{booktabs}  % For better tables
 \usepackage{enumitem}  % For better lists
 \usepackage{hyperref}  % For clickable links in PDF
+\usepackage{amsmath}  % Pour les équations
 
 \pagestyle{fancy}
 \setlength{\headheight}{28pt}
@@ -88,6 +89,47 @@ Nous avons également réalisé des tâches en groupe, que ce soit pour intégre
 \subsection{Gestion des items}
 
 \subsection{Le moteur physique}
+
+\subsubsection{Pourquoi un moteur physique ?}
+\label{sec:moteur_physique}
+Un jeu vidéo impliquant des interactions dynamiques entre de nombreux éléments (personnages, ennemis, objets) pose un défi fondamental~: l'imprévisibilité des combinaisons de collisions. Un système simplifié, où chaque interaction serait codée manuellement, deviendrait rapidement ingérable. 
+
+\subsubsection{Gestion des collisions par colliders} 
+\label{sec:colliders}
+La détection des collisions repose sur une abstraction géométrique des entités. Plutôt que de calculer les intersections \textit{pixel par pixel} -- méthode particulièrement coûteuse en ressources -- chaque élément est associé à un volume primitif. Cette approche répond à trois exigences fondamentales du projet~:
+
+\begin{itemize}
+    \item Maintenir un coût de calcul raisonnable.
+    \item Garantir des comportements physiques prévisibles.
+    \item Faciliter l'extension du système par modularité.
+\end{itemize}
+
+\paragraph{Implémentation technique} 
+Chaque entité se voit attribuer un composant physique optionnel accompagné d'une forme primitive adaptée à sa nature~:
+\begin{itemize}
+    \item \textbf{Cercles} pour les éléments arrondis (tonneaux, ennemis, joueur).
+    \item \textbf{Rectangles} pour les structures angulaires (caisses, murs).
+\end{itemize}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Capture d'écran 2025-03-29 200818}
+    \caption{Visualisation des colliders (en rouge) sur différentes entités}
+    \label{fig:colliders_exemple}
+\end{figure}
+
+\paragraph{Exemple d'utilisation} 
+Le joueur, initialement modélisé par un rectangle de \(16 \times 16\)~px, a été remplacé par un cercle de \(16\)~px de diamètre. Cette modification~:
+\begin{itemize}
+    \item Procure une sensation de mouvement plus naturelle.
+    \item Permet un glissement le long des surfaces.
+    \item Génère des rebonds cohérents dans les coins.
+\end{itemize}
+
+\paragraph{Exemple d'interaction}  
+Lorsqu’un Slime (léger et élastique) est frappé par le joueur, une force orientée selon l’angle de l’attaque lui est appliquée. Projeté contre un Orc (lourd), le moteur calcule automatiquement la réaction : l’Orc subit un léger recul, tandis que le Slime rebondit en changeant de direction. Si le Slime percute ensuite un mur, son élasticité réduit progressivement l’énergie du rebond. Enfin, il peut se cogner contre un autre slime, et lui transmettre encore de l’énergie. Ces interactions en cascade émergent naturellement des lois physiques configurées, sans nécessiter de code spécifique.
+
+\paragraph{Avantages}  
+Ce système réduit significativement la complexité du code. Par exemple, une épée qui repousse un ennemi utilise la même logique qu’un projectile ricochant sur un mur, grâce aux paramètres centralisés. Il offre également une extensibilité aisée : ajouter une entité (comme un projectile) se limite à définir ses constantes physiques.
 
 \subsection{Les ennemis}
 
