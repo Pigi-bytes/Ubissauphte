@@ -158,7 +158,7 @@ t_scene* createMarchantMap(t_context* context, t_salle* salle, t_joueur** player
         case -3:
             chemin = "assets/mapSpecial/mapMarchant/3marchant20x20.txt";
             break;
-        default:
+        case -4:
             chemin = "assets/mapSpecial/mapMarchant/4marchant20x20.txt";
     }
 

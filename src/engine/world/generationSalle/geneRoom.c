@@ -345,18 +345,18 @@ SDL_bool trouerGrille(t_grille **grille, int xdebut, int ydebut, int changementL
         i += changementLigne;
         j += changementColonne;
         if (i >= 0 && i < (*grille)->nbLigne && j >= 0 && j < (*grille)->nbColonne) {
-            (*grille)->grille[i][j]->val = SOL;
+            (*grille)->grille[i][j]->val = SORTIE;
         }
     }
 
-    if (i < 0 || i > (*grille)->nbLigne || j < 0 || j > (*grille)->nbColonne) {
+    if (i < 0 || i >= (*grille)->nbLigne || j < 0 || j >= (*grille)->nbColonne) {
         for (i = xdebut, j = ydebut; i >= 0 && i < (*grille)->nbLigne && j >= 0 && j < (*grille)->nbColonne; i += changementLigne, j += changementColonne) {
             (*grille)->grille[i][j]->val = OBSTACLE;
         }
         return SDL_FALSE;
     }
     if ((*grille)->grille[i + changementLigne][j + changementColonne]->val == OBSTACLE) {
-        (*grille)->grille[i + changementLigne][j + changementColonne]->val = SOL;
+        (*grille)->grille[i + changementLigne][j + changementColonne]->val = SORTIE;
     }
 
     return SDL_TRUE;
@@ -365,16 +365,25 @@ SDL_bool trouerGrille(t_grille **grille, int xdebut, int ydebut, int changementL
 void placerSortie(t_grille **grille, t_salle *salle, t_listeBlock **lab) {
     t_listeBlock *lb = listeByType(lab, DIRECTION_TYPE);
     if (salle->droite != NULL) {
-        while (!(trouerGrille(grille, (rand() % ((*grille)->nbLigne - 3) + 1), (*grille)->nbColonne - 1, 0, -1, lb)));
+        while (!(trouerGrille(grille, (rand() % ((*grille)->nbLigne - 2) + 1), (*grille)->nbColonne - 1, 0, -1, lb)));
     }
     if (salle->gauche != NULL) {
-        while (!(trouerGrille(grille, (rand() % ((*grille)->nbLigne - 3) + 1), 0, 0, 1, lb)));
+        while (!(trouerGrille(grille, (rand() % ((*grille)->nbLigne - 2) + 1), 0, 0, 1, lb)));
     }
     if (salle->haut != NULL) {
-        while (!(trouerGrille(grille, 0, (rand() % ((*grille)->nbColonne - 3) + 1), 1, 0, lb)));
+        while (!(trouerGrille(grille, 0, (rand() % ((*grille)->nbColonne - 2) + 1), 1, 0, lb)));
     }
     if (salle->bas != NULL) {
         while (!(trouerGrille(grille, (*grille)->nbLigne - 1, (rand() % ((*grille)->nbColonne - 2) + 1), -1, 0, lb)));
+    }
+}
+
+void sortieToSol(t_grille *grille) {
+    for (int i = 0; i < grille->nbLigne; i++) {
+        for (int j = 0; j < grille->nbColonne; j++) {
+            if (grille->grille[i][j]->val == SORTIE)
+                grille->grille[i][j]->val = SOL;
+        }
     }
 }
 t_grille *geneRoom(t_salle *salle) {
@@ -407,6 +416,7 @@ t_grille *geneRoom(t_salle *salle) {
 
     placerSortie(&grille, salle, listAllBlock);
     lissage(grille);
+    sortieToSol(grille);
 
     choixTiles(listAllBlock, grille);
 

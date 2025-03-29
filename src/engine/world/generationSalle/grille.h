@@ -29,6 +29,7 @@
 #define OBSTACLE 1
 #define SOL 0
 #define ELTAJOUTE 2
+#define SORTIE 3
 
 typedef struct s_case {
     int i, j;

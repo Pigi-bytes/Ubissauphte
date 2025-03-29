@@ -18,7 +18,6 @@ SDL_bool isDiagonalCornerPattern(t_case* c);
 SDL_bool isDiagonalBottomPattern(t_case* c);
 
 // fonction d'affectation de la case
-void handleDiagonalTopPattern(t_grille* grille, int i, int j);
 void handleDiagonalCornerPattern(t_grille* grille, int i, int j);
 void handleDiagonalBottomPattern(t_grille* grille, int i, int j);
 
