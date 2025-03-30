@@ -40,25 +40,14 @@ int main(int argc, char* argv[]) {
     context.control->map = SDL_SCANCODE_P;
     context.control->interact = SDL_SCANCODE_E;
 
-    t_fichier* fichier = chargerFichier("src/test.txt");
-    t_tileset* tileset = initTileset(context.renderer, 192, 240, 16, "./assets/imgs/tileMapDungeon.bmp");
-
-    t_item** itemListe = item_load(fichier, tileset);
-
-    t_character* c = createCharactere(tileset, 98);
-
-    for (int i = 0; i < 40; i++) {
-        inventaireAjoutObjet(c->inventaire, itemListe[i], 1);
-    }
-
-    InventoryUI* ui = inventoryUI_Init(NULL, context.renderer, c, context.input);
+   
 
     t_scene* scene = createMainMenu(&context);
     t_scene* scene0 = createOptionMenu(&context);
     t_scene* scene1 = createMainWord(&context);
     t_scene* scene2 = createCommandeMenu(&context);
     t_scene* scene3 = createFpsMenu(&context);
-    t_scene* scene4 = createMainInv(&context,ui, c, tileset);
+    t_scene* scene4 = createMainInv(&context);
 
     addScene(context.sceneController, scene);
     addScene(context.sceneController, scene0);

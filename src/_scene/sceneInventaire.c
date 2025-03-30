@@ -1,8 +1,19 @@
 #include "./sceneInventaire.h"
 
-t_scene *createMainInv(t_context *context, InventoryUI *ui, t_character *c, t_tileset *tileset) {
+t_scene *createMainInv(t_context *context) {
     t_typeRegistry *registre = createTypeRegistry();
+    t_fichier *fichier = chargerFichier("src/test.txt");
+    t_tileset *tileset = initTileset(context->renderer, 192, 240, 16, "./assets/imgs/tileMapDungeon.bmp");
 
+    t_item **itemListe = item_load(fichier, tileset);
+
+    t_character *c = createCharactere(tileset, 98);
+
+    for (int i = 0; i < 40; i++) {
+        inventaireAjoutObjet(c->inventaire, itemListe[i], 1);
+    }
+
+    InventoryUI *ui = inventoryUI_Init(NULL, context->renderer, c, context->input);
     const uint8_t INVENTORY_TYPE = registerType(registre, freeInv, "inventory");
 
     t_scene *scene = createScene(initObjectManager(registre), "mainInv");
