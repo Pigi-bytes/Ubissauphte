@@ -105,11 +105,11 @@ void updateScrollWrapper(t_fonctionParam* f) {
 }
 
 void inventoryUI_UpdateWrapper(t_fonctionParam* f) {
-    inventoryUI_Update(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 0, t_context*));
+    inventoryUI_Update(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 1, t_context*));
 }
 
 void inventoryUI_RenderWrapper(t_fonctionParam* f) {
-    inventoryUI_Render(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 0, t_context*));
+    inventoryUI_Render(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 1, t_context*));
 }
 
 void handleInputInventaireWrapper(t_fonctionParam* f) {

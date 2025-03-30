@@ -36,11 +36,11 @@ int main(int argc, char* argv[]) {
     context.control->down = SDL_SCANCODE_S;
     context.control->left = SDL_SCANCODE_A;
     context.control->right = SDL_SCANCODE_D;
-    context.control->inventaire = SDL_SCANCODE_V;
     context.control->dash = SDL_SCANCODE_SPACE;
     context.control->escape = SDL_SCANCODE_ESCAPE;
     context.control->map = SDL_SCANCODE_P;
     context.control->interact = SDL_SCANCODE_E;
+    context.control->inventaire = SDL_SCANCODE_I;
 
     t_tileset* tileset = initTileset(context.renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
     t_tileset* playerTileSet = initTileset(context.renderer, 32, 32, 16, "assets/imgs/chevaliervisiereouverteidle12run34.bmp");
