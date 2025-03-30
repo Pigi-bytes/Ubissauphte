@@ -146,14 +146,35 @@ void coucou() {
     printf("cocou\n");
 }
 
+void equiperSlot(InventoryUI *ui, t_item **item) {
+    if (!ui->peutEquiper || (*item) == NULL || item == NULL)
+        return;
+    if (ui->peutEquiper) {
+        if ((*item)->validSlot[0] == SLOT_ACTIVABLE1) {
+            if (ui->elems->CaseActivable1.texture != NULL && ui->elems->caseActivable2.texture == NULL && (*item)->validSlot[1] == SLOT_ACTIVABLE2)
+                ui->elems->caseActivable2.texture = (*item)->texture;
+            else
+                ui->elems->CaseActivable1.texture = (*item)->texture;
+        }
+        if ((*item)->validSlot[0] == SLOT_ARME) {
+            ui->elems->caseArme.texture = (*item)->texture;
+        }
+        if ((*item)->validSlot[0] == SLOT_ARMURE) {
+            ui->elems->caseArmure.texture = (*item)->texture;
+        }
+    }
+    ui->peutEquiper = 0;
+}
+
+void equiperSlotWrapper(t_fonctionParam *f) {
+    equiperSlot(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, t_item **));
+}
+
 InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_character *c, t_input *input) {
     initTextEngine();
-    printf("%p\n", input);
     InventoryUI *ui = malloc(sizeof(InventoryUI));
-
     if (ui2 != NULL) {
         ui->ext = ui2->ext;
-        ui->elems = ui2->elems;
         ui->ecrit = ui2->ecrit;
     }
 
@@ -171,16 +192,18 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     // Initialiser les membres si nécessaire
     memset(ui->ecrit->nom_txt_item, 0, sizeof(ui->ecrit->nom_txt_item));
     // etc.
+    if (ui2 != NULL)
+        free(ui->elems);
+    else
+        ui->elems = malloc(sizeof(t_elements));
 
-    ui->elems = malloc(sizeof(t_elements));
-
+    if (ui2 == NULL)
+        ui->itemclique = NULL;
     // Initialisation des références
     ui->ext->character = c;
     ui->nbItems = 40;
 
-    int itemFontSize = (int)(ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
-    if (itemFontSize < 1) itemFontSize = 1;
-    ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
+    ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
     // Pour les items
     ui->ecrit->nom_txt_item[0] = createStatLine("Health : ", 0, 0);
     ui->ecrit->nom_txt_item[1] = createStatLine("Health Max : ", 0, 0);
@@ -199,7 +222,13 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     ui->ecrit->nom_txt_player[5] = createStatLine("Defense : ", c->baseStats.defense.additive, 1.0f);
     ui->ecrit->nom_txt_player[6] = createStatLine("Speed : ", c->baseStats.speed.additive, 1.0f);
 
+    ui->elems->CaseActivable1.texture = NULL;
+    ui->elems->caseActivable2.texture = NULL;
+    ui->elems->caseArme.texture = NULL;
+    ui->elems->caseArmure.texture = NULL;
+
     // Calculs initiaux (votre code original)
+
     calculCasePlayer(&ui->elems->player_panel.rect, input, "Perso");
     ui->elems->player_panel.texture = c->texture;
 
@@ -218,26 +247,26 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     ui->elems->inventory_slots = malloc(ui->nbItems * sizeof(UI_Element));
     calculerItem(&ui->elems->inventory_slots[0].rect, ui->elems->inventory_panel.rect,
                  &ui->elems->inventory_panel.rect, 0, 0, input);
-    ui->elems->inventory_slots[0].texture = items[0]->definition->texture;
-    if (ui2 == NULL)
+    if (ui2 == NULL) {
         ui->elems->inventory_slots[0].button = createButton(createText(renderer, "azze", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[0].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[0]->definition, renderer, input)));
-    else {
+        ui->elems->inventory_slots[0].texture = items[0]->definition->texture;
+    } else {
         ui->elems->inventory_slots[0].button = ui2->elems->inventory_slots[0].button;
         ui->elems->inventory_slots[0].button->rect = ui->elems->inventory_slots[0].rect;
     }
+
     for (int i = 1, j = 1; i < ui->nbItems; j++, i++) {
         calculerItem(&ui->elems->inventory_slots[i].rect, ui->elems->inventory_panel.rect, &ui->elems->inventory_slots[i - 1].rect, i, j, input);
-        ui->elems->inventory_slots[i].texture = items[i]->definition->texture;
-        if (ui2 == NULL)
+        if (ui2 == NULL) {
             ui->elems->inventory_slots[i].button = createButton(createText(renderer, "zeffqsd", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[i].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[i]->definition, renderer, input)));
-        else {
+            ui->elems->inventory_slots[i].texture = items[i]->definition->texture;
+        } else {
             ui->elems->inventory_slots[i].button = ui2->elems->inventory_slots[i].button;
             ui->elems->inventory_slots[i].button->rect = ui->elems->inventory_slots[i].rect;
         }
         if (j == 4)
             j = 0;
     }
-
     int totalContentHeight = 0;
     for (int i = 0; i < ui->nbItems; i++) {
         int slotBottom = ui->elems->inventory_slots[i].rect.y + ui->elems->inventory_slots[i].rect.h;
@@ -259,26 +288,27 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
 
     // affichage des texts
 
-    int itemFontSize2 = (int)(ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
-    if (itemFontSize2 < 1) itemFontSize2 = 18;
-    int descrFontSize = (int)(ui->elems->descrItem.rect.h * ui->elems->descrItem.rect.w * 0.0003);
-    if (descrFontSize < 1) descrFontSize = 18;
-    ui->ext->descr_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", descrFontSize);
+    ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
+    ui->ext->descr_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->descrItem.rect.h * ui->elems->descrItem.rect.w * 0.0003);
     ui->ecrit->color_txt.a = 255;
     ui->ecrit->color_txt.b = 0;
     ui->ecrit->color_txt.g = 128;
     ui->ecrit->color_txt.r = 255;
 
-    t_text *t = createText(renderer, "cocou", ui->ext->item_font, (SDL_Color){0, 0, 0});
-
-    ui->elems->equiper.button = createButton(t, (SDL_Color){0, 128, 255}, (SDL_Color){0, 150, 255}, ui->elems->equiper.rect, creerFonction(coucou, FONCTION_PARAMS(NULL)));
-
+    if (ui2 == NULL) {
+        t_text *t = createText(renderer, "cocou", ui->ext->item_font, (SDL_Color){0, 0, 0});
+        ui->elems->equiper.button = createButton(t, (SDL_Color){0, 128, 255}, (SDL_Color){0, 150, 255}, ui->elems->equiper.rect, creerFonction(equiperSlotWrapper, FONCTION_PARAMS(ui, &ui->itemclique)));
+    } else {
+        ui->elems->equiper.button = ui2->elems->equiper.button;
+        ui->elems->equiper.button->rect = ui->elems->equiper.rect;
+    }
     // Initialisation des textes statsPlayer
     for (int i = 0; i < 7; i++) {
         ui->ecrit->text_player[i] = createText(renderer, ui->ecrit->nom_txt_player[i], ui->ext->item_font, ui->ecrit->color_txt);
     }
 
     // Positionnement et affichage des textes
+
     ui->ecrit->text_player[0]->rect.x = ui->elems->statsPlayer.rect.x + input->windowWidth * 0.01;
     ui->ecrit->text_player[0]->rect.y = ui->elems->statsPlayer.rect.y + input->windowHeight * 0.01;
 
@@ -334,9 +364,20 @@ void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input)
     SDL_RenderDrawRect(renderer, &ui->elems->player_panel.rect);
 
     SDL_RenderDrawRect(renderer, &ui->elems->caseArme.rect);
+    if (ui->elems->caseArme.texture != NULL)
+        SDL_RenderCopy(renderer, ui->elems->caseArme.texture, NULL, &ui->elems->caseArme.rect);
+
     SDL_RenderDrawRect(renderer, &ui->elems->caseArmure.rect);
+    if (ui->elems->caseArmure.texture != NULL)
+        SDL_RenderCopy(renderer, ui->elems->caseArmure.texture, NULL, &ui->elems->caseArmure.rect);
+
     SDL_RenderDrawRect(renderer, &ui->elems->CaseActivable1.rect);
+    if (ui->elems->CaseActivable1.texture != NULL)
+        SDL_RenderCopy(renderer, ui->elems->CaseActivable1.texture, NULL, &ui->elems->CaseActivable1.rect);
+
     SDL_RenderDrawRect(renderer, &ui->elems->caseActivable2.rect);
+    if (ui->elems->caseActivable2.texture != NULL)
+        SDL_RenderCopy(renderer, ui->elems->caseActivable2.texture, NULL, &ui->elems->caseActivable2.rect);
 
     SDL_RenderDrawRect(renderer, &ui->elems->statsPlayer.rect);
     afficherStatPlayer(renderer, ui, input);
@@ -425,6 +466,9 @@ void creerDescr(InventoryUI *ui, t_item *item, SDL_Renderer *renderer, t_input *
 
     ui->ecrit->text_item[0]->rect.x = ui->elems->statsItem.rect.x + input->windowWidth * 0.01;
     ui->ecrit->text_item[0]->rect.y = ui->elems->statsItem.rect.y + input->windowHeight * 0.01;
+
+    ui->itemclique = item;
+    ui->peutEquiper = 1;
 }
 
 void creerDescrWrapper(t_fonctionParam *f) {

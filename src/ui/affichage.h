@@ -78,6 +78,9 @@ typedef struct
 
     int width, height;
     int peutEquiper;
+    int onSlot;
+
+    t_item *itemclique;
 
 } InventoryUI;
 

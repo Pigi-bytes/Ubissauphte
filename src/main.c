@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
     t_scene* scene1 = createMainWord(&context);
     t_scene* scene2 = createCommandeMenu(&context);
     t_scene* scene3 = createFpsMenu(&context);
-    t_scene* scene4 = createMainInv(&context, ui, c, tileset);
+    t_scene* scene4 = createMainInv(&context,ui, c, tileset);
 
     addScene(context.sceneController, scene);
     addScene(context.sceneController, scene0);
