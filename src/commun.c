@@ -104,20 +104,20 @@ void handleInputMapWrapper(t_fonctionParam* f) {
     handleInputMap((t_input*)f->param[0], (t_joueur*)f->param[1], (t_sceneController*)f->param[2]);
 }
 
-void updateWrapper(t_fonctionParam *f) {
-    update(GET_PTR(f, 0, t_input *), GET_PTR(f, 1, InventoryUI *));
+void updateWrapper(t_fonctionParam* f) {
+    update(GET_PTR(f, 0, t_input*), GET_PTR(f, 1, InventoryUI*));
 }
 
-void updateScrollWrapper(t_fonctionParam *f) {
-    updateScroll(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, t_input *));
+void updateScrollWrapper(t_fonctionParam* f) {
+    updateScroll(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 1, t_input*));
 }
 
-void inventoryUI_UpdateWrapper(t_fonctionParam *f) {
-    inventoryUI_Update(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, SDL_Renderer *), GET_PTR(f, 2, t_input *));
+void inventoryUI_UpdateWrapper(t_fonctionParam* f) {
+    inventoryUI_Update(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 1, t_context*));
 }
 
-void inventoryUI_RenderWrapper(t_fonctionParam *f) {
-    inventoryUI_Render(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, SDL_Renderer *), GET_PTR(f, 2, t_input *));
+void inventoryUI_RenderWrapper(t_fonctionParam* f) {
+    inventoryUI_Render(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 1, t_context*));
 }
 
 SDL_Rect
