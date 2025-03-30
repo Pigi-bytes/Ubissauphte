@@ -35,6 +35,7 @@ void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect, t_scene* 
     base->xpReward = 10;
     base->lastDamagedBy = NULL;
     base->entity.currentScene = scene;
+    base->render = NULL;
 }
 
 void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
@@ -42,10 +43,13 @@ void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
         return;
     }
 
+    if (enemy->render != NULL) {
+        enemy->render(renderer, enemy, camera);
+        return;
+    }
+
     if (enemy->health.isFlashing) {
-        // Effet blanc pur - tout en blanc sans aucune autre couleur
         SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);
-        // Utiliser le mode additif pour assurer une luminosité maximale
         SDL_SetTextureBlendMode(enemy->entity.texture, SDL_BLENDMODE_ADD);
     } else {
         SDL_SetTextureBlendMode(enemy->entity.texture, SDL_BLENDMODE_BLEND);
