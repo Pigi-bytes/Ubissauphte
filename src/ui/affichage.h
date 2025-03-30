@@ -85,8 +85,8 @@ typedef struct
 } InventoryUI;
 
 InventoryUI *inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_input *input);
-void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input);
-void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input);
+void inventoryUI_Update(InventoryUI *ui, t_context *context);
+void inventoryUI_Render(InventoryUI *ui, t_context *context);
 void update(t_input *input, InventoryUI *ui);
 void updateScroll(InventoryUI *ui, t_input *input);
 void creerDescrWrapper(t_fonctionParam *f);

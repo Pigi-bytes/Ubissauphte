@@ -94,3 +94,10 @@ void takeDamageFromPlayer(t_enemy* enemy, int damage, t_joueur* player, t_contex
 
     applyDamage(&enemy->health, damage, enemy, context);
 }
+
+void renderEnemyWrapper(t_fonctionParam* f) {
+    renderEnemy(((SDL_Renderer*)(f)->param[0]), ((t_enemy*)(f)->param[1]), ((t_camera*)(f)->param[2]));
+}
+void updateEnemyWrapper(t_fonctionParam* f) {
+    updateEnemy(((t_enemy*)(f)->param[0]), ((float*)(f)->param[1]), ((t_salle*)(f)->param[2]), ((t_objectManager*)(f)->param[3]));
+}

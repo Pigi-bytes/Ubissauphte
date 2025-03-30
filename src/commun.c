@@ -105,11 +105,11 @@ void updateScrollWrapper(t_fonctionParam* f) {
 }
 
 void inventoryUI_UpdateWrapper(t_fonctionParam* f) {
-    inventoryUI_Update(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 1, SDL_Renderer*), GET_PTR(f, 2, t_input*));
+    inventoryUI_Update(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 0, t_context*));
 }
 
 void inventoryUI_RenderWrapper(t_fonctionParam* f) {
-    inventoryUI_Render(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 1, SDL_Renderer*), GET_PTR(f, 2, t_input*));
+    inventoryUI_Render(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 0, t_context*));
 }
 
 SDL_Rect

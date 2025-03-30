@@ -350,71 +350,71 @@ void afficherDescription(SDL_Renderer *renderer, InventoryUI *ui) {
     }
 }
 
-void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    SDL_RenderClear(renderer);
+void inventoryUI_Render(InventoryUI *ui, t_context *context) {
+    SDL_SetRenderDrawColor(context->renderer, 0, 0, 0, 255);
+    SDL_RenderClear(context->renderer);
 
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(context->renderer, 0, 0, 0, 255);
 
-    SDL_RenderCopy(renderer, ui->elems->player_panel.texture, NULL, &ui->elems->player_panel.rect);
-    SDL_RenderDrawRect(renderer, &ui->elems->player_panel.rect);
+    SDL_RenderCopy(context->renderer, ui->elems->player_panel.texture, NULL, &ui->elems->player_panel.rect);
+    SDL_RenderDrawRect(context->renderer, &ui->elems->player_panel.rect);
 
-    SDL_RenderDrawRect(renderer, &ui->elems->caseArme.rect);
+    SDL_RenderDrawRect(context->renderer, &ui->elems->caseArme.rect);
     if (ui->elems->caseArme.texture != NULL)
-        SDL_RenderCopy(renderer, ui->elems->caseArme.texture, NULL, &ui->elems->caseArme.rect);
+        SDL_RenderCopy(context->renderer, ui->elems->caseArme.texture, NULL, &ui->elems->caseArme.rect);
 
-    SDL_RenderDrawRect(renderer, &ui->elems->caseArmure.rect);
+    SDL_RenderDrawRect(context->renderer, &ui->elems->caseArmure.rect);
     if (ui->elems->caseArmure.texture != NULL)
-        SDL_RenderCopy(renderer, ui->elems->caseArmure.texture, NULL, &ui->elems->caseArmure.rect);
+        SDL_RenderCopy(context->renderer, ui->elems->caseArmure.texture, NULL, &ui->elems->caseArmure.rect);
 
-    SDL_RenderDrawRect(renderer, &ui->elems->CaseActivable1.rect);
+    SDL_RenderDrawRect(context->renderer, &ui->elems->CaseActivable1.rect);
     if (ui->elems->CaseActivable1.texture != NULL)
-        SDL_RenderCopy(renderer, ui->elems->CaseActivable1.texture, NULL, &ui->elems->CaseActivable1.rect);
+        SDL_RenderCopy(context->renderer, ui->elems->CaseActivable1.texture, NULL, &ui->elems->CaseActivable1.rect);
 
-    SDL_RenderDrawRect(renderer, &ui->elems->caseActivable2.rect);
+    SDL_RenderDrawRect(context->renderer, &ui->elems->caseActivable2.rect);
     if (ui->elems->caseActivable2.texture != NULL)
-        SDL_RenderCopy(renderer, ui->elems->caseActivable2.texture, NULL, &ui->elems->caseActivable2.rect);
+        SDL_RenderCopy(context->renderer, ui->elems->caseActivable2.texture, NULL, &ui->elems->caseActivable2.rect);
 
-    SDL_RenderDrawRect(renderer, &ui->elems->statsPlayer.rect);
-    afficherStatPlayer(renderer, ui, input);
+    SDL_RenderDrawRect(context->renderer, &ui->elems->statsPlayer.rect);
+    afficherStatPlayer(context->renderer, ui, context->input);
 
-    SDL_RenderDrawRect(renderer, &ui->elems->inventory_panel.rect);
+    SDL_RenderDrawRect(context->renderer, &ui->elems->inventory_panel.rect);
 
-    SDL_RenderSetClipRect(renderer, &ui->elems->inventory_panel.rect);
+    SDL_RenderSetClipRect(context->renderer, &ui->elems->inventory_panel.rect);
     for (int i = 0; i < ui->nbItems; i++) {
         SDL_Rect dest = ui->elems->inventory_slots[i].rect;
 
         dest.y -= ui->scrollY;  // Appliquer le décalage
         ui->elems->inventory_slots[i].button->rect.y = dest.y;
-        renderButton(renderer, ui->elems->inventory_slots[i].button);
+        renderButton(context, ui->elems->inventory_slots[i].button);
 
-        SDL_RenderCopy(renderer, ui->elems->inventory_slots[i].texture, NULL, &dest);
-        SDL_RenderDrawRect(renderer, &dest);
+        SDL_RenderCopy(context->renderer, ui->elems->inventory_slots[i].texture, NULL, &dest);
+        SDL_RenderDrawRect(context->renderer, &dest);
     }
-    SDL_RenderSetClipRect(renderer, NULL);
+    SDL_RenderSetClipRect(context->renderer, NULL);
 
-    SDL_RenderDrawRect(renderer, &ui->elems->statsItem.rect);
-    afficherStatItem(renderer, ui, input);
+    SDL_RenderDrawRect(context->renderer, &ui->elems->statsItem.rect);
+    afficherStatItem(context->renderer, ui, context->input);
 
-    SDL_RenderDrawRect(renderer, &ui->elems->descrItem.rect);
-    afficherDescription(renderer, ui);
+    SDL_RenderDrawRect(context->renderer, &ui->elems->descrItem.rect);
+    afficherDescription(context->renderer, ui);
 
-    SDL_RenderDrawRect(renderer, &ui->elems->equiper.rect);
-    renderButton(renderer, ui->elems->equiper.button);
+    SDL_RenderDrawRect(context->renderer, &ui->elems->equiper.rect);
+    renderButton(context, ui->elems->equiper.button);
 }
 
-void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
+void inventoryUI_Update(InventoryUI *ui, t_context *context) {
     // Recalcul si la fenêtre est redimensionnée
     for (int i = 0; i < ui->nbItems; i++) {
-        handleInputButton(input, ui->elems->inventory_slots[i].button);
+        handleInputButton(context, ui->elems->inventory_slots[i].button);
     }
 
-    handleInputButton(input, ui->elems->equiper.button);
-    if (input->windowWidth != ui->width || input->windowHeight != ui->height) {
+    handleInputButton(context, ui->elems->equiper.button);
+    if (context->input->windowWidth != ui->width || context->input->windowHeight != ui->height) {
         int lastScroll = ui->scrollY;
 
         // Réinitialiser l'UI
-        inventoryUI_Init(ui, renderer, ui->ext->character, input);
+        inventoryUI_Init(ui, context->renderer, ui->ext->character, context->input);
 
         // Restaurer le scroll dans les nouvelles limites
         ui->scrollY = lastScroll;

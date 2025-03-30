@@ -24,8 +24,8 @@ t_scene *createMainInv(t_context *context) {
 
     sceneRegisterFunction(scene, INVENTORY_TYPE, HANDLE_INPUT, updateWrapper, 1, FONCTION_PARAMS(context->input));
     sceneRegisterFunction(scene, INVENTORY_TYPE, UPDATE, updateScrollWrapper, 0, FONCTION_PARAMS(context->input));
-    sceneRegisterFunction(scene, INVENTORY_TYPE, UPDATE, inventoryUI_UpdateWrapper, 0, FONCTION_PARAMS(context->renderer, context->input));
-    sceneRegisterFunction(scene, INVENTORY_TYPE, RENDER_UI, inventoryUI_RenderWrapper, 0, FONCTION_PARAMS(context->renderer, context->input));
+    sceneRegisterFunction(scene, INVENTORY_TYPE, UPDATE, inventoryUI_UpdateWrapper, 0, FONCTION_PARAMS(context));
+    sceneRegisterFunction(scene, INVENTORY_TYPE, RENDER_UI, inventoryUI_RenderWrapper, 0, FONCTION_PARAMS(context));
 
     return scene;
 }
