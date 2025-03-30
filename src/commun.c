@@ -105,17 +105,17 @@ void updateScrollWrapper(t_fonctionParam* f) {
 }
 
 void inventoryUI_UpdateWrapper(t_fonctionParam* f) {
-    inventoryUI_Update(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 0, t_context*));
+    inventoryUI_Update(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 1, t_context*));
 }
 
 void inventoryUI_RenderWrapper(t_fonctionParam* f) {
-    inventoryUI_Render(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 0, t_context*));
+    inventoryUI_Render(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 1, t_context*));
 }
 
-SDL_Rect
-creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio) {
-    return (SDL_Rect){WINDOW_WIDTH * x_ratio, WINDOW_HEIGHT * y_ratio, WINDOW_WIDTH * w_ratio, WINDOW_HEIGHT * h_ratio};
+void handleInputInventaireWrapper(t_fonctionParam* f) {
+    handleInputInventaire((t_input*)f->param[0], (t_joueur*)f->param[1], (t_sceneController*)f->param[2]);
 }
+
 void getPrevuisSceneWrapper(t_fonctionParam* f) {
     getPrevuisScene((t_sceneController*)f->param[0]);
 }
@@ -124,6 +124,10 @@ void getPrevuisMenuWrapper(t_fonctionParam* f) {
     getPrevuisMenu((t_sceneController*)f->param[0]);
 }
 
+SDL_Rect
+creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio) {
+    return (SDL_Rect){WINDOW_WIDTH * x_ratio, WINDOW_HEIGHT * y_ratio, WINDOW_WIDTH * w_ratio, WINDOW_HEIGHT * h_ratio};
+}
 void bouttonClickQuit(t_fonctionParam* fonction) {
     t_input* input = GET_PTR(fonction, 0, t_input*);
     input->quit = SDL_TRUE;

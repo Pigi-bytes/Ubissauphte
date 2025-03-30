@@ -3,6 +3,6 @@
 
 #include "../commun.h"
 
-t_scene *createMainInv(t_context *context);
+t_scene *createMainInv(t_context *context, t_joueur *player);
 
 #endif

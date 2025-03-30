@@ -20,6 +20,8 @@ typedef struct {
     SDL_Scancode escape;
     SDL_Scancode map;
     SDL_Scancode interact;
+    SDL_Scancode inventaire;
+
 } t_control;
 
 typedef struct {

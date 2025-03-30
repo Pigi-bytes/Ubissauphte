@@ -63,5 +63,6 @@ void updateScrollWrapper(t_fonctionParam* f);
 void updateWrapper(t_fonctionParam* f);
 void getPrevuisSceneWrapper(t_fonctionParam* f);
 void getPrevuisMenuWrapper(t_fonctionParam* f);
+void handleInputInventaireWrapper(t_fonctionParam* f);
 
 #endif

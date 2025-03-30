@@ -4,6 +4,7 @@
 
 #include "../context.h"
 #include "../engine/entities/components/equipment/equipementsManager.h"
+#include "../engine/entities/player.h"
 #include "../io/imageLoader.h"
 #include "../io/input.h"
 #include "../utils/fscene.h"
@@ -99,5 +100,7 @@ void calculStatsItem(SDL_Rect *inv, SDL_Rect *statsItem, t_input *input);
 void caculDescrItem(SDL_Rect *statsItem, SDL_Rect *descrItem, t_input *input);
 
 void freeInv(void *elt);
+
+void handleInputInventaire(t_input *input, t_joueur *player, t_sceneController *sceneController);
 
 #endif

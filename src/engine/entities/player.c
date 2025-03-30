@@ -311,6 +311,11 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
         setScene(sceneController, "carte");
         input->key[player->control->map] = SDL_FALSE;
     }
+    if (input->key[player->control->inventaire]) {
+        sceneController->lastMap = getObject(sceneController->scene, sceneController->currentScene);
+        setScene(sceneController, "mainInv");
+        input->key[player->control->inventaire] = SDL_FALSE;
+    }
 
     float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
     convertMouseToWorld(vp, input->mouseX, input->mouseY, &mouseWorldX, &mouseWorldY);
