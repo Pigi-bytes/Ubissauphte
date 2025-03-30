@@ -42,28 +42,28 @@ RM       = rm -rf
 all: $(DIRS) $(BINDIR)/$(TARGET)
 
 $(OBJDIR):
-@mkdir -p $(OBJDIR)
-@echo "$(BLUE)Création du répertoire$(RESET) $(BOLD)$(OBJDIR)$(RESET)"
+	@mkdir -p $(OBJDIR)
+	@echo "$(BLUE)Création du répertoire$(RESET) $(BOLD)$(OBJDIR)$(RESET)"
 
 $(BINDIR):
-@mkdir -p $(BINDIR)
-@echo "$(BLUE)Création du répertoire$(RESET) $(BOLD)$(BINDIR)$(RESET)"
+	@mkdir -p $(BINDIR)
+	@echo "$(BLUE)Création du répertoire$(RESET) $(BOLD)$(BINDIR)$(RESET)"
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
-@echo "$(YELLOW)Édition de liens...$(RESET)"
-@$(CC) $(OBJECTS) $(LFLAGS) -o $@
-@echo "$(GREEN)Édition de liens terminée !$(RESET) $(CYAN)[$(TARGET)]$(RESET)"
+	@echo "$(YELLOW)Édition de liens...$(RESET)"
+	@$(CC) $(OBJECTS) $(LFLAGS) -o $@
+	@echo "$(GREEN)Édition de liens terminée !$(RESET) $(CYAN)[$(TARGET)]$(RESET)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-@mkdir -p $(dir $@)
-@echo "$(YELLOW)Compilation de$(RESET) $(BOLD)$<$(RESET)"
-@$(CC) $(CFLAGS) -c $< -o $@
-@echo "$(GREEN)Compilation réussie !$(RESET)"
+	@mkdir -p $(dir $@)
+	@echo "$(YELLOW)Compilation de$(RESET) $(BOLD)$<$(RESET)"
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(GREEN)Compilation réussie !$(RESET)"
 
 clean:
-@echo "$(RED)Nettoyage des fichiers générés...$(RESET)"
-@$(RM) $(OBJECTS) $(OBJDIR) $(BINDIR)
-@echo "$(GREEN)Nettoyage terminé !$(RESET)"
+	@echo "$(RED)Nettoyage des fichiers générés...$(RESET)"
+	@$(RM) $(OBJECTS) $(OBJDIR) $(BINDIR)
+	@echo "$(GREEN)Nettoyage terminé !$(RESET)"
 
 rebuild: clean all
-@echo "$(GREEN)Reconstruction complète terminée !$(RESET)\n"
+	@echo "$(GREEN)Reconstruction complète terminée !$(RESET)\n"
