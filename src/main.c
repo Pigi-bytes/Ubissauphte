@@ -36,6 +36,7 @@ int main(int argc, char* argv[]) {
     context.control->down = SDL_SCANCODE_S;
     context.control->left = SDL_SCANCODE_A;
     context.control->right = SDL_SCANCODE_D;
+    context.control->inventaire = SDL_SCANCODE_V;
     context.control->dash = SDL_SCANCODE_SPACE;
     context.control->escape = SDL_SCANCODE_ESCAPE;
     context.control->map = SDL_SCANCODE_P;
@@ -130,7 +131,7 @@ int main(int argc, char* argv[]) {
     CreateNiveau(&context, 10, &player);
     t_scene* scene2 = createCommandeMenu(&context);
     t_scene* scene3 = createFpsMenu(&context);
-    t_scene* scene4 = createMainInv(&context);
+    t_scene* scene4 = createMainInv(&context, player);
     t_scene* scene5 = createOption2Menu(&context);
 
     addScene(context.sceneController, scene);

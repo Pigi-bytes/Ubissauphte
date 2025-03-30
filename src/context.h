@@ -12,6 +12,7 @@
 #include "utils/fscene.h"
 
 typedef struct {
+    SDL_Scancode inventaire;
     SDL_Scancode up;
     SDL_Scancode down;
     SDL_Scancode left;
@@ -20,6 +21,7 @@ typedef struct {
     SDL_Scancode escape;
     SDL_Scancode map;
     SDL_Scancode interact;
+
 } t_control;
 
 typedef struct {
