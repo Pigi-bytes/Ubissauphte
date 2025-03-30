@@ -167,7 +167,6 @@ void equiperSlotWrapper(t_fonctionParam *f) {
 }
 
 InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_character *c, t_input *input) {
-    initTextEngine();
     InventoryUI *ui = malloc(sizeof(InventoryUI));
     if (ui2 != NULL) {
         ui->ext = ui2->ext;
@@ -293,6 +292,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
 
     if (ui2 == NULL) {
         t_text *t = createText(renderer, "EQUIPER", ui->ext->item_font, (SDL_Color){0, 0, 0});
+        printf("%p\n", t);
         ui->elems->equiper.button = createButton(t, (SDL_Color){255, 128, 0}, (SDL_Color){255, 150, 0}, ui->elems->equiper.rect, creerFonction(equiperSlotWrapper, FONCTION_PARAMS(ui, &ui->itemclique)));
     } else {
         ui->elems->equiper.button = ui2->elems->equiper.button;
@@ -414,7 +414,7 @@ void inventoryUI_Update(InventoryUI *ui, t_context *context) {
         int lastScroll = ui->scrollY;
 
         // Réinitialiser l'UI
-        inventoryUI_Init(ui, context->renderer, ui->ext->character, context->input);
+        // inventoryUI_Init(ui, context->renderer, ui->ext->character, context->input);
 
         // Restaurer le scroll dans les nouvelles limites
         ui->scrollY = lastScroll;

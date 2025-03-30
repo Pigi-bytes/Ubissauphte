@@ -52,16 +52,16 @@ void placeNearTeleporter(t_grid* grid, t_entity* entity, t_objectManager* entiti
         // Décalage en fonction de la direction d'entrée
         switch (entryDirection) {
             case 1:  // Entrée par droite -> spawn à gauche
-                spawnX -= 32;
+                spawnX -= 16;
                 break;
             case 3:  // Entrée par gauche -> spawn à droite
-                spawnX += 32;
+                spawnX += 16;
                 break;
             case 0:  // Entrée par haut -> spawn en bas
-                spawnY += 32;
+                spawnY += 16;
                 break;
             case 2:  // Entrée par bas -> spawn en haut
-                spawnY -= 32;
+                spawnY -= 16;
                 break;
         }
 
