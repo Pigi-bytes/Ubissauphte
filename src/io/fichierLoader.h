@@ -33,7 +33,7 @@ typedef struct {
  */
 typedef struct {
     t_objectManager *pairManager;  ///< Tableau de t_pairData géré par un t_objetManager
-} t_block;
+} t_blockData;
 
 /**
  * @struct t_block
@@ -68,7 +68,7 @@ t_fichier *chargerFichier(char *filename);
  * @param type permet de cast result dans le type de la valeur recherché e
  * @return Renvoie True si la valeur est bien récupéré sinon false
  */
-SDL_bool getValue(t_block *block, char *name, void *result, t_valueType type);
+SDL_bool getValue(t_blockData *block, char *name, void *result, t_valueType type);
 
 /**
  * @brief Sauvegarde des donnees dans un fichier
@@ -80,7 +80,7 @@ void saveFichier(t_fichier *fichier, char *filename);
 /**
  * @brief Crée un nouveau t_block
  */
-t_block *createNewBlock();
+t_blockData *createNewBlock();
 
 /**
  * @brief Création d'un t_pairData
@@ -94,14 +94,14 @@ t_pairData *createPairData(char *key, char *value);
  * @param fichier Fichier dans lequel on ajoute le block
  * @param Block Block ajouté
  */
-void addBlock(t_fichier *fichier, t_block *Block);
+void addBlock(t_fichier *fichier, t_blockData *Block);
 
 /**
  * @brief Ajoute une Pair de data dans un block d'un t_fichier
  * @param block Block dans lequel on ajoute la data
  * @param pair data ajouté
  */
-void addPairData(t_block *block, t_pairData *pair);
+void addPairData(t_blockData *block, t_pairData *pair);
 
 /**
  * @brief Libère la mémoire allouée pour un block

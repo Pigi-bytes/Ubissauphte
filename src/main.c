@@ -4,6 +4,7 @@
 #include "_scene/mainWorld.h"
 #include "_scene/option2.h"
 #include "_scene/optionMenu.h"
+#include "_scene/sceneInventaire.h"
 #include "context.h"
 
 int main(int argc, char* argv[]) {
@@ -129,7 +130,7 @@ int main(int argc, char* argv[]) {
     CreateNiveau(&context, 10, &player);
     t_scene* scene2 = createCommandeMenu(&context);
     t_scene* scene3 = createFpsMenu(&context);
-    t_scene* scene4 = createOption2Menu(&context);
+    t_scene* scene4 = createMainInv(&context);
 
     addScene(context.sceneController, scene);
     addScene(context.sceneController, scene0);

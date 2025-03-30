@@ -15,6 +15,7 @@
 #include "io/audioManager.h"
 #include "io/imageLoader.h"
 #include "io/input.h"
+#include "ui/affichage.h"
 #include "ui/button.h"
 #include "ui/fpsDisplay.h"
 #include "ui/mapview.h"
@@ -58,6 +59,10 @@ void renderToucheWrapper(t_fonctionParam* f);
 void handleInputToucheWrapper(t_fonctionParam* f);
 void affichageWrapper(t_fonctionParam* f);
 void handleInputMapWrapper(t_fonctionParam* f);
+void inventoryUI_RenderWrapper(t_fonctionParam *f);
+void inventoryUI_UpdateWrapper(t_fonctionParam *f);
+void updateScrollWrapper(t_fonctionParam *f);
+void updateWrapper(t_fonctionParam *f);
 void getPrevuisSceneWrapper(t_fonctionParam* f);
 void getPrevuisMenuWrapper(t_fonctionParam* f);
 

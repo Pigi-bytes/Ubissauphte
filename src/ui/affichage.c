@@ -72,6 +72,20 @@ void calculEquiper(SDL_Rect *statsItem, SDL_Rect *descrItem, SDL_Rect *Equiper, 
     Equiper->y = descrItem->y + descrItem->h + input->windowHeight * 0.03;
 }
 
+// Ajouter une fonction de nettoyage des slots
+void freeInventorySlots(InventoryUI *ui) {
+    if (ui->elems && ui->elems->inventory_slots) {
+        for (int i = 0; i < ui->nbItems; i++) {
+            if (ui->elems->inventory_slots[i].button) {
+                freeButton(ui->elems->inventory_slots[i].button);
+                ui->elems->inventory_slots[i].button = NULL;
+            }
+        }
+        free(ui->elems->inventory_slots);
+        ui->elems->inventory_slots = NULL;
+    }
+}
+
 char *createStatLine(const char *statLabel, float additive, float multiplicative) {
     char buffer[256] = {0};
     char addPart[32] = {0};
@@ -128,70 +142,141 @@ void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *i
     renderText(renderer, txt2);
 }
 
-void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_item **items, t_input *input, int nbItems) {
-    initTextEngine();
-    // Initialisation des références
-    ui->character = c;
-    ui->items = items;
-    ui->nbItems = nbItems;
+void equiperSlot(InventoryUI *ui, t_item **item) {
+    if (!ui->peutEquiper || (*item) == NULL || item == NULL)
+        return;
+    if (ui->peutEquiper) {
+        if ((*item)->validSlot[0] == SLOT_ACTIVABLE1) {
+            if (ui->elems->CaseActivable1.texture != NULL && ui->elems->caseActivable2.texture == NULL && (*item)->validSlot[1] == SLOT_ACTIVABLE2)
+                ui->elems->caseActivable2.texture = (*item)->texture;
+            else
+                ui->elems->CaseActivable1.texture = (*item)->texture;
+        }
+        if ((*item)->validSlot[0] == SLOT_ARME) {
+            ui->elems->caseArme.texture = (*item)->texture;
+        }
+        if ((*item)->validSlot[0] == SLOT_ARMURE) {
+            ui->elems->caseArmure.texture = (*item)->texture;
+        }
+    }
+    ui->peutEquiper = 0;
+}
 
+void equiperSlotWrapper(t_fonctionParam *f) {
+    equiperSlot(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, t_item **));
+}
+
+InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_character *c, t_input *input) {
+    initTextEngine();
+    InventoryUI *ui = malloc(sizeof(InventoryUI));
+    if (ui2 != NULL) {
+        ui->ext = ui2->ext;
+        ui->ecrit = ui2->ecrit;
+    }
+
+    t_itemsStack **items = malloc(sizeof(t_itemsStack *) * 40);
+    for (int i = 0; i < c->inventaire->itemsStack->count; i++) {
+        items[i] = (t_itemsStack *)getObject(c->inventaire->itemsStack, i);
+    }
+
+    ui->ext = malloc(sizeof(t_extern));
+    ui->ext->item_font = NULL;
+    ui->ext->descr_font = NULL;
+    ui->ext->character = malloc(sizeof(t_character));
+
+    ui->ecrit = malloc(sizeof(t_ecritures));
+    // Initialiser les membres si nécessaire
+    memset(ui->ecrit->nom_txt_item, 0, sizeof(ui->ecrit->nom_txt_item));
+    // etc.
+    if (ui2 != NULL)
+        free(ui->elems);
+
+    ui->elems = malloc(sizeof(t_elements));
+
+    if (ui2 == NULL)
+        ui->itemclique = NULL;
+    // Initialisation des références
+    ui->ext->character = c;
+    ui->nbItems = 40;
+
+    ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
     // Pour les items
-    ui->nom_txt_item[0] = createStatLine("Health : ", items[0]->stats.health.additive, items[0]->stats.health.multiplicative);
-    ui->nom_txt_item[1] = createStatLine("Health Max : ", items[0]->stats.healthMax.additive, items[0]->stats.healthMax.multiplicative);
-    ui->nom_txt_item[2] = createStatLine("Mana : ", items[0]->stats.mana.additive, items[0]->stats.mana.multiplicative);
-    ui->nom_txt_item[3] = createStatLine("Mana Max : ", items[0]->stats.manaMax.additive, items[0]->stats.manaMax.multiplicative);
-    ui->nom_txt_item[4] = createStatLine("Attack : ", items[0]->stats.attack.additive, items[0]->stats.attack.multiplicative);
-    ui->nom_txt_item[5] = createStatLine("Defense : ", items[0]->stats.defense.additive, items[0]->stats.defense.multiplicative);
-    ui->nom_txt_item[6] = createStatLine("Speed : ", items[0]->stats.speed.additive, items[0]->stats.speed.multiplicative);
+    ui->ecrit->nom_txt_item[0] = createStatLine("Health : ", 0, 0);
+    ui->ecrit->nom_txt_item[1] = createStatLine("Health Max : ", 0, 0);
+    ui->ecrit->nom_txt_item[2] = createStatLine("Mana : ", 0, 0);
+    ui->ecrit->nom_txt_item[3] = createStatLine("Mana Max : ", 0, 0);
+    ui->ecrit->nom_txt_item[4] = createStatLine("Attack : ", 0, 0);
+    ui->ecrit->nom_txt_item[5] = createStatLine("Defense : ", 0, 0);
+    ui->ecrit->nom_txt_item[6] = createStatLine("Speed : ", 0, 0);
 
     // Pour le joueur (si les stats sont uniquement additives)
-    ui->nom_txt_player[0] = createStatLine("Health : ", c->baseStats.health.additive, 1.0f);
-    ui->nom_txt_player[1] = createStatLine("Health Max : ", c->baseStats.healthMax.additive, 1.0f);
-    ui->nom_txt_player[2] = createStatLine("Mana : ", c->baseStats.mana.additive, 1.0f);
-    ui->nom_txt_player[3] = createStatLine("Mana Max : ", c->baseStats.manaMax.additive, 1.0f);
-    ui->nom_txt_player[4] = createStatLine("Attack : ", c->baseStats.attack.additive, 1.0f);
-    ui->nom_txt_player[5] = createStatLine("Defense : ", c->baseStats.defense.additive, 1.0f);
-    ui->nom_txt_player[6] = createStatLine("Speed : ", c->baseStats.speed.additive, 1.0f);
+    ui->ecrit->nom_txt_player[0] = createStatLine("Health : ", c->baseStats.health.additive, 1.0f);
+    ui->ecrit->nom_txt_player[1] = createStatLine("Health Max : ", c->baseStats.healthMax.additive, 1.0f);
+    ui->ecrit->nom_txt_player[2] = createStatLine("Mana : ", c->baseStats.mana.additive, 1.0f);
+    ui->ecrit->nom_txt_player[3] = createStatLine("Mana Max : ", c->baseStats.manaMax.additive, 1.0f);
+    ui->ecrit->nom_txt_player[4] = createStatLine("Attack : ", c->baseStats.attack.additive, 1.0f);
+    ui->ecrit->nom_txt_player[5] = createStatLine("Defense : ", c->baseStats.defense.additive, 1.0f);
+    ui->ecrit->nom_txt_player[6] = createStatLine("Speed : ", c->baseStats.speed.additive, 1.0f);
+
+    ui->elems->CaseActivable1.texture = NULL;
+    ui->elems->caseActivable2.texture = NULL;
+    ui->elems->caseArme.texture = NULL;
+    ui->elems->caseArmure.texture = NULL;
 
     // Calculs initiaux (votre code original)
-    calculCasePlayer(&ui->player_panel.rect, input, "Perso");
-    ui->player_panel.texture = c->texture;
 
-    calculCaseSlots(&ui->player_panel.rect, &ui->caseArme.rect, input, "Perso", "arme");
-    calculCaseSlots(&ui->caseArme.rect, &ui->caseArmure.rect, input, "arme", "armure");
-    calculCaseSlots(&ui->player_panel.rect, &ui->CaseActivable1.rect, input, "Perso", "activable1");
-    calculCaseSlots(&ui->CaseActivable1.rect, &ui->caseActivable2.rect, input, "activable1", "activable2");
+    calculCasePlayer(&ui->elems->player_panel.rect, input, "Perso");
+    ui->elems->player_panel.texture = c->texture;
 
-    calculDescrStatsPlayer(&ui->caseArme.rect, &ui->CaseActivable1.rect, &ui->player_panel.rect, &ui->statsPlayer.rect, input);
-    calculInventaire(&ui->inventory_panel.rect, &ui->statsPlayer.rect, input);
-    calculStatsItem(&ui->inventory_panel.rect, &ui->statsItem.rect, input);
-    caculDescrItem(&ui->statsItem.rect, &ui->descrItem.rect, input);
-    calculEquiper(&ui->statsItem.rect, &ui->descrItem.rect, &ui->equiper.rect, input);
+    calculCaseSlots(&ui->elems->player_panel.rect, &ui->elems->caseArme.rect, input, "Perso", "arme");
+    calculCaseSlots(&ui->elems->caseArme.rect, &ui->elems->caseArmure.rect, input, "arme", "armure");
+    calculCaseSlots(&ui->elems->player_panel.rect, &ui->elems->CaseActivable1.rect, input, "Perso", "activable1");
+    calculCaseSlots(&ui->elems->CaseActivable1.rect, &ui->elems->caseActivable2.rect, input, "activable1", "activable2");
+
+    calculDescrStatsPlayer(&ui->elems->caseArme.rect, &ui->elems->CaseActivable1.rect, &ui->elems->player_panel.rect, &ui->elems->statsPlayer.rect, input);
+    calculInventaire(&ui->elems->inventory_panel.rect, &ui->elems->statsPlayer.rect, input);
+    calculStatsItem(&ui->elems->inventory_panel.rect, &ui->elems->statsItem.rect, input);
+    caculDescrItem(&ui->elems->statsItem.rect, &ui->elems->descrItem.rect, input);
+    calculEquiper(&ui->elems->statsItem.rect, &ui->elems->descrItem.rect, &ui->elems->equiper.rect, input);
 
     // Initialisation slots (votre code original)
-    ui->inventory_slots = malloc(nbItems * sizeof(UI_Element));
-    for (int i = 0, j = 0; i < nbItems; j++, i++) {
-        calculerItem(&ui->inventory_slots[i].rect, ui->inventory_panel.rect, &ui->inventory_slots[i - 1].rect, i, j, input);
-        ui->inventory_slots[i].texture = items[i]->texture;
+    ui->elems->inventory_slots = malloc(ui->nbItems * sizeof(UI_Element));
+    calculerItem(&ui->elems->inventory_slots[0].rect, ui->elems->inventory_panel.rect,
+                 &ui->elems->inventory_panel.rect, 0, 0, input);
+    if (ui2 == NULL) {
+        ui->elems->inventory_slots[0].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[0].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[0]->definition, renderer, input)));
+        ui->elems->inventory_slots[0].texture = items[0]->definition->texture;
+    } else {
+        ui->elems->inventory_slots[0].button = ui2->elems->inventory_slots[0].button;
+        ui->elems->inventory_slots[0].button->rect = ui->elems->inventory_slots[0].rect;
+    }
+
+    for (int i = 1, j = 1; i < ui->nbItems; j++, i++) {
+        calculerItem(&ui->elems->inventory_slots[i].rect, ui->elems->inventory_panel.rect, &ui->elems->inventory_slots[i - 1].rect, i, j, input);
+        if (ui2 == NULL) {
+            ui->elems->inventory_slots[i].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[i].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[i]->definition, renderer, input)));
+            ui->elems->inventory_slots[i].texture = items[i]->definition->texture;
+        } else {
+            ui->elems->inventory_slots[i].button = ui2->elems->inventory_slots[i].button;
+            ui->elems->inventory_slots[i].button->rect = ui->elems->inventory_slots[i].rect;
+        }
         if (j == 4)
             j = 0;
     }
-
     int totalContentHeight = 0;
     for (int i = 0; i < ui->nbItems; i++) {
-        int slotBottom = ui->inventory_slots[i].rect.y + ui->inventory_slots[i].rect.h;
+        int slotBottom = ui->elems->inventory_slots[i].rect.y + ui->elems->inventory_slots[i].rect.h;
         if (slotBottom > totalContentHeight) {
             totalContentHeight = slotBottom;
         }
     }
-    totalContentHeight -= ui->inventory_panel.rect.y;
-    ui->maxScrollY = totalContentHeight - ui->inventory_panel.rect.h;
+    totalContentHeight -= ui->elems->inventory_panel.rect.y;
+    ui->maxScrollY = totalContentHeight - ui->elems->inventory_panel.rect.h;
     if (ui->maxScrollY < 0) ui->maxScrollY = 0;
     ui->scrollY = 0;
 
     // Police
-    ui->item_font = TTF_OpenFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->statsPlayer.rect.h * ui->statsPlayer.rect.w * 0.0002);
-    ui->descr_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->descrItem.rect.h * ui->descrItem.rect.w * 0.0003);
+
     ui->color.a = 255;
     ui->color.b = 255;
     ui->color.g = 0;
@@ -199,154 +284,195 @@ void inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t
 
     // affichage des texts
 
-    ui->color_txt.a = 255;
-    ui->color_txt.b = 0;
-    ui->color_txt.g = 128;
-    ui->color_txt.r = 255;
+    ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
+    ui->ext->descr_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->descrItem.rect.h * ui->elems->descrItem.rect.w * 0.0003);
+    ui->ecrit->color_txt.a = 255;
+    ui->ecrit->color_txt.b = 0;
+    ui->ecrit->color_txt.g = 128;
+    ui->ecrit->color_txt.r = 255;
 
+    if (ui2 == NULL) {
+        t_text *t = createText(renderer, "EQUIPER", ui->ext->item_font, (SDL_Color){0, 0, 0});
+        ui->elems->equiper.button = createButton(t, (SDL_Color){255, 128, 0}, (SDL_Color){255, 150, 0}, ui->elems->equiper.rect, creerFonction(equiperSlotWrapper, FONCTION_PARAMS(ui, &ui->itemclique)));
+    } else {
+        ui->elems->equiper.button = ui2->elems->equiper.button;
+        ui->elems->equiper.button->rect = ui->elems->equiper.rect;
+    }
     // Initialisation des textes statsPlayer
-    ui->text_player[0] = createText(renderer, ui->nom_txt_player[0], ui->item_font, ui->color_txt);
-    ui->text_player[1] = createText(renderer, ui->nom_txt_player[1], ui->item_font, ui->color_txt);
-    ui->text_player[2] = createText(renderer, ui->nom_txt_player[2], ui->item_font, ui->color_txt);
-    ui->text_player[3] = createText(renderer, ui->nom_txt_player[3], ui->item_font, ui->color_txt);
-    ui->text_player[4] = createText(renderer, ui->nom_txt_player[4], ui->item_font, ui->color_txt);
-    ui->text_player[5] = createText(renderer, ui->nom_txt_player[5], ui->item_font, ui->color_txt);
-    ui->text_player[6] = createText(renderer, ui->nom_txt_player[6], ui->item_font, ui->color_txt);
+    for (int i = 0; i < 7; i++) {
+        ui->ecrit->text_player[i] = createText(renderer, ui->ecrit->nom_txt_player[i], ui->ext->item_font, ui->ecrit->color_txt);
+    }
 
     // Positionnement et affichage des textes
-    ui->text_player[0]->rect.x = ui->statsPlayer.rect.x + input->windowWidth * 0.01;
-    ui->text_player[0]->rect.y = ui->statsPlayer.rect.y + input->windowHeight * 0.01;
+
+    ui->ecrit->text_player[0]->rect.x = ui->elems->statsPlayer.rect.x + input->windowWidth * 0.01;
+    ui->ecrit->text_player[0]->rect.y = ui->elems->statsPlayer.rect.y + input->windowHeight * 0.01;
 
     // Initialisation des textes statsItem
 
-    ui->text_item[0] = createText(renderer, ui->nom_txt_item[0], ui->descr_font, ui->color_txt);
-    ui->text_item[1] = createText(renderer, ui->nom_txt_item[1], ui->descr_font, ui->color_txt);
-    ui->text_item[2] = createText(renderer, ui->nom_txt_item[2], ui->descr_font, ui->color_txt);
-    ui->text_item[3] = createText(renderer, ui->nom_txt_item[3], ui->descr_font, ui->color_txt);
-    ui->text_item[4] = createText(renderer, ui->nom_txt_item[4], ui->descr_font, ui->color_txt);
-    ui->text_item[5] = createText(renderer, ui->nom_txt_item[5], ui->descr_font, ui->color_txt);
-    ui->text_item[6] = createText(renderer, ui->nom_txt_item[6], ui->descr_font, ui->color_txt);
+    for (int i = 0; i < 7; i++) {
+        ui->ecrit->text_item[i] = createText(renderer, ui->ecrit->nom_txt_item[i], ui->ext->descr_font, ui->ecrit->color_txt);
+    }
 
     // Positionnement et affichage des textes
-    ui->text_item[0]->rect.x = ui->statsItem.rect.x + input->windowWidth * 0.01;
-    ui->text_item[0]->rect.y = ui->statsItem.rect.y + input->windowHeight * 0.01;
+    ui->ecrit->text_item[0]->rect.x = ui->elems->statsItem.rect.x + input->windowWidth * 0.01;
+    ui->ecrit->text_item[0]->rect.y = ui->elems->statsItem.rect.y + input->windowHeight * 0.01;
+    ui->ecrit->text_descr = createText(renderer, "Description :", ui->ext->descr_font, ui->ecrit->color_txt);
 
-    ui->text_descr = createText(renderer, "Description :", ui->descr_font, ui->color_txt);
+    ui->ecrit->text_descr->rect.x = ui->elems->descrItem.rect.x + ui->elems->descrItem.rect.x * 0.025;
+    ui->ecrit->text_descr->rect.y = ui->elems->descrItem.rect.y + input->windowHeight * 0.005;
 
-    ui->text_descr->rect.x = ui->descrItem.rect.x + ui->descrItem.rect.x * 0.025;
-    ui->text_descr->rect.y = ui->descrItem.rect.y + input->windowHeight * 0.005;
+    ui2 = ui;
 
-    int i = 0, j, nb = 1;
-
-    while (ui->items[0]->description[i++] != '\0') {
-        for (j = 0; ui->items[0]->description[i] != '\n' && ui->items[0]->description[i] != '\0'; i++, j++) {
-            ui->descr[j] = ui->items[0]->description[i];
-        }
-        ui->descr[j] = '\0';
-
-        ui->description[nb - 1] = createText(renderer, ui->descr, ui->descr_font, ui->color_txt);
-        ui->description[nb - 1]->rect.x = ui->descrItem.rect.x + input->windowWidth * 0.005;
-        ui->description[nb - 1]->rect.y = ui->text_descr->rect.y + input->windowHeight * 0.03 * nb;
-        nb++;
-        ui->descr[0] = '\0';
-    }
-    ui->count_descr = nb - 1;
+    return ui;
 }
 
 void afficherStatPlayer(SDL_Renderer *renderer, InventoryUI *ui, t_input *input) {
-    renderText(renderer, ui->text_player[0]);
+    renderText(renderer, ui->ecrit->text_player[0]);
 
-    afficherText(renderer, ui->text_player[0], ui->text_player[1], input);
-
-    afficherText(renderer, ui->text_player[1], ui->text_player[2], input);
-
-    afficherText(renderer, ui->text_player[2], ui->text_player[3], input);
-
-    afficherText(renderer, ui->text_player[3], ui->text_player[4], input);
-
-    afficherText(renderer, ui->text_player[4], ui->text_player[5], input);
-
-    afficherText(renderer, ui->text_player[5], ui->text_player[6], input);
+    for (int i = 1; i < 7; i++) {
+        afficherText(renderer, ui->ecrit->text_player[i - 1], ui->ecrit->text_player[i], input);
+    }
 }
 
 void afficherStatItem(SDL_Renderer *renderer, InventoryUI *ui, t_input *input) {
-    renderText(renderer, ui->text_item[0]);
-
-    afficherText(renderer, ui->text_item[0], ui->text_item[1], input);
-
-    afficherText(renderer, ui->text_item[1], ui->text_item[2], input);
-
-    afficherText(renderer, ui->text_item[2], ui->text_item[3], input);
-
-    afficherText(renderer, ui->text_item[3], ui->text_item[4], input);
-
-    afficherText(renderer, ui->text_item[4], ui->text_item[5], input);
-
-    afficherText(renderer, ui->text_item[5], ui->text_item[6], input);
+    renderText(renderer, ui->ecrit->text_item[0]);
+    for (int i = 1; i < 7; i++) {
+        afficherText(renderer, ui->ecrit->text_item[i - 1], ui->ecrit->text_item[i], input);
+    }
 }
 
 void afficherDescription(SDL_Renderer *renderer, InventoryUI *ui) {
-    renderText(renderer, ui->text_descr);
+    renderText(renderer, ui->ecrit->text_descr);
 
-    for (int i = 0; i < ui->count_descr; i++) {
-        renderText(renderer, ui->description[i]);
+    for (int i = 0; i < ui->ecrit->count_descr; i++) {
+        renderText(renderer, ui->ecrit->description[i]);
     }
 }
 
 void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
-    SDL_RenderCopy(renderer, ui->player_panel.texture, NULL, &ui->player_panel.rect);
-    SDL_RenderDrawRect(renderer, &ui->player_panel.rect);
+    SDL_RenderCopy(renderer, ui->elems->player_panel.texture, NULL, &ui->elems->player_panel.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->player_panel.rect);
 
-    SDL_RenderDrawRect(renderer, &ui->caseArme.rect);
-    SDL_RenderDrawRect(renderer, &ui->caseArmure.rect);
-    SDL_RenderDrawRect(renderer, &ui->CaseActivable1.rect);
-    SDL_RenderDrawRect(renderer, &ui->caseActivable2.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->caseArme.rect);
+    if (ui->elems->caseArme.texture != NULL)
+        SDL_RenderCopy(renderer, ui->elems->caseArme.texture, NULL, &ui->elems->caseArme.rect);
 
-    SDL_RenderDrawRect(renderer, &ui->statsPlayer.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->caseArmure.rect);
+    if (ui->elems->caseArmure.texture != NULL)
+        SDL_RenderCopy(renderer, ui->elems->caseArmure.texture, NULL, &ui->elems->caseArmure.rect);
+
+    SDL_RenderDrawRect(renderer, &ui->elems->CaseActivable1.rect);
+    if (ui->elems->CaseActivable1.texture != NULL)
+        SDL_RenderCopy(renderer, ui->elems->CaseActivable1.texture, NULL, &ui->elems->CaseActivable1.rect);
+
+    SDL_RenderDrawRect(renderer, &ui->elems->caseActivable2.rect);
+    if (ui->elems->caseActivable2.texture != NULL)
+        SDL_RenderCopy(renderer, ui->elems->caseActivable2.texture, NULL, &ui->elems->caseActivable2.rect);
+
+    SDL_RenderDrawRect(renderer, &ui->elems->statsPlayer.rect);
     afficherStatPlayer(renderer, ui, input);
 
-    SDL_RenderDrawRect(renderer, &ui->inventory_panel.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->inventory_panel.rect);
 
-    SDL_RenderSetClipRect(renderer, &ui->inventory_panel.rect);
+    SDL_RenderSetClipRect(renderer, &ui->elems->inventory_panel.rect);
     for (int i = 0; i < ui->nbItems; i++) {
-        SDL_Rect dest = ui->inventory_slots[i].rect;
-        dest.y -= ui->scrollY;  // Appliquer le décalage
+        SDL_Rect dest = ui->elems->inventory_slots[i].rect;
 
-        SDL_RenderCopy(renderer, ui->inventory_slots[i].texture, NULL, &dest);
+        dest.y -= ui->scrollY;  // Appliquer le décalage
+        ui->elems->inventory_slots[i].button->rect.y = dest.y;
+        renderButton(renderer, ui->elems->inventory_slots[i].button);
+
+        SDL_RenderCopy(renderer, ui->elems->inventory_slots[i].texture, NULL, &dest);
         SDL_RenderDrawRect(renderer, &dest);
     }
     SDL_RenderSetClipRect(renderer, NULL);
 
-    SDL_RenderDrawRect(renderer, &ui->statsItem.rect);
-    afficherStatItem(renderer, ui,input);
+    SDL_RenderDrawRect(renderer, &ui->elems->statsItem.rect);
+    afficherStatItem(renderer, ui, input);
 
-    SDL_RenderDrawRect(renderer, &ui->descrItem.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->descrItem.rect);
     afficherDescription(renderer, ui);
 
-    SDL_RenderDrawRect(renderer, &ui->equiper.rect);
+    SDL_RenderDrawRect(renderer, &ui->elems->equiper.rect);
+    renderButton(renderer, ui->elems->equiper.button);
 }
 
 void inventoryUI_Update(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
     // Recalcul si la fenêtre est redimensionnée
+    for (int i = 0; i < ui->nbItems; i++) {
+        handleInputButton(input, ui->elems->inventory_slots[i].button);
+    }
 
-    int lastScroll = ui->scrollY;
+    handleInputButton(input, ui->elems->equiper.button);
+    if (input->windowWidth != ui->width || input->windowHeight != ui->height) {
+        int lastScroll = ui->scrollY;
 
-    // Réinitialiser l'UI
-    inventoryUI_Init(ui, renderer, ui->character, ui->items, input, ui->nbItems);
+        // Réinitialiser l'UI
+        inventoryUI_Init(ui, renderer, ui->ext->character, input);
 
-    // Restaurer le scroll dans les nouvelles limites
-    ui->scrollY = lastScroll;
-    if (ui->scrollY > ui->maxScrollY) ui->scrollY = ui->maxScrollY;
+        // Restaurer le scroll dans les nouvelles limites
+        ui->scrollY = lastScroll;
+        if (ui->scrollY > ui->maxScrollY) ui->scrollY = ui->maxScrollY;
+    }
 }
 
+void creerDescr(InventoryUI *ui, t_item *item, SDL_Renderer *renderer, t_input *input) {
+    char processedDesc[256];
+    strcpy(processedDesc, item->description);
+
+    // Remplacer les "\\n" par "\n"
+    char *found;
+    while ((found = strstr(processedDesc, "\\n")) != NULL) {
+        *found = '\n';                                         // Remplacer le premier '\' par '\n'
+        memmove(found + 1, found + 2, strlen(found + 2) + 1);  // Décaler le reste
+    }
+
+    int i = 0, j, nb = 1;
+    while (processedDesc[i++] != '\0') {
+        for (j = 0; processedDesc[i] != '\n' && processedDesc[i] != '\0'; i++, j++) {
+            processedDesc[j] = processedDesc[i];
+        }
+        processedDesc[j] = '\0';
+
+        ui->ecrit->description[nb - 1] = createText(renderer, processedDesc, ui->ext->descr_font, ui->ecrit->color_txt);
+        ui->ecrit->description[nb - 1]->rect.x = ui->elems->descrItem.rect.x + input->windowWidth * 0.005;
+        ui->ecrit->description[nb - 1]->rect.y = ui->ecrit->text_descr->rect.y + input->windowHeight * 0.03 * nb;
+        nb++;
+        ui->ecrit->descr[0] = '\0';
+    }
+    ui->ecrit->count_descr = nb - 1;
+
+    ui->ecrit->nom_txt_item[0] = createStatLine("Health : ", item->stats.health.additive, item->stats.health.multiplicative);
+    ui->ecrit->nom_txt_item[1] = createStatLine("Health Max : ", item->stats.healthMax.additive, item->stats.healthMax.multiplicative);
+    ui->ecrit->nom_txt_item[2] = createStatLine("Mana : ", item->stats.mana.additive, item->stats.mana.multiplicative);
+    ui->ecrit->nom_txt_item[3] = createStatLine("Mana Max : ", item->stats.manaMax.additive, item->stats.manaMax.multiplicative);
+    ui->ecrit->nom_txt_item[4] = createStatLine("Attack : ", item->stats.attack.additive, item->stats.attack.multiplicative);
+    ui->ecrit->nom_txt_item[5] = createStatLine("Defense : ", item->stats.defense.additive, item->stats.defense.multiplicative);
+    ui->ecrit->nom_txt_item[6] = createStatLine("Speed : ", item->stats.speed.additive, item->stats.speed.multiplicative);
+
+    for (int i = 0; i < 7; i++) {
+        ui->ecrit->text_item[i] = createText(renderer, ui->ecrit->nom_txt_item[i], ui->ext->descr_font, ui->ecrit->color_txt);
+    }
+
+    ui->ecrit->text_item[0]->rect.x = ui->elems->statsItem.rect.x + input->windowWidth * 0.01;
+    ui->ecrit->text_item[0]->rect.y = ui->elems->statsItem.rect.y + input->windowHeight * 0.01;
+
+    ui->itemclique = item;
+    ui->peutEquiper = 1;
+}
+
+void creerDescrWrapper(t_fonctionParam *f) {
+    creerDescr(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, t_item *), GET_PTR(f, 2, SDL_Renderer *), GET_PTR(f, 3, t_input *));
+}
 void updateScroll(InventoryUI *ui, t_input *input) {
     if (input->mouseYWheel != 0) {
-        int scrollStep = 40;  // Ajustez cette valeur selon vos besoins
+        int scrollStep = ui->nbItems;  // Ajustez cette valeur selon vos besoins
         ui->scrollY -= input->mouseYWheel * scrollStep;
 
         // Limiter le défilement
@@ -355,4 +481,59 @@ void updateScroll(InventoryUI *ui, t_input *input) {
         else if (ui->scrollY > ui->maxScrollY)
             ui->scrollY = ui->maxScrollY;
     }
+}
+
+void update(t_input *input, InventoryUI *ui) {
+    ui->width = input->windowWidth;
+    ui->height = input->windowHeight;
+}
+
+void freeInv(void *elt) {
+    InventoryUI *ui = (InventoryUI *)elt;
+    if (!ui) return;
+
+    // Libération de la structure externe
+    if (ui->ext) {
+        // Ne pas libérer character ici car il est géré ailleurs
+        /* Liberation des polices */
+        if (ui->ext->item_font) TTF_CloseFont(ui->ext->item_font);
+        if (ui->ext->descr_font) TTF_CloseFont(ui->ext->descr_font);
+        free(ui->ext);
+    }
+
+    /* Liberation des elements */
+    if (ui->elems) {
+        /* Liberation des slots d'inventaire */
+        if (ui->elems->inventory_slots) {
+            for (int i = 0; i < ui->nbItems; i++) {
+                if (ui->elems->inventory_slots[i].texture) {
+                    SDL_DestroyTexture(ui->elems->inventory_slots[i].texture);
+                }
+            }
+            free(ui->elems->inventory_slots);
+        }
+        free(ui->elems);
+    }
+
+    /* Liberation des ecritures */
+    if (ui->ecrit) {
+        /* Liberation des chaines de caractères */
+        for (int i = 0; i < 7; i++) {
+            free(ui->ecrit->nom_txt_item[i]);
+            free(ui->ecrit->nom_txt_player[i]);
+            if (ui->ecrit->text_player[i]) freeText(ui->ecrit->text_player[i]);
+            if (ui->ecrit->text_item[i]) freeText(ui->ecrit->text_item[i]);
+        }
+
+        /* Liberation des descriptions */
+        for (int i = 0; i < ui->ecrit->count_descr; i++) {
+            if (ui->ecrit->description[i]) freeText(ui->ecrit->description[i]);
+        }
+
+        /* Liberation du texte de description */
+        if (ui->ecrit->text_descr) freeText(ui->ecrit->text_descr);
+        free(ui->ecrit);
+    }
+
+    free(ui);
 }
