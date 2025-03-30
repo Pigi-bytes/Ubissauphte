@@ -131,12 +131,14 @@ int main(int argc, char* argv[]) {
     t_scene* scene2 = createCommandeMenu(&context);
     t_scene* scene3 = createFpsMenu(&context);
     t_scene* scene4 = createMainInv(&context);
+    t_scene* scene5 = createOption2Menu(&context);
 
     addScene(context.sceneController, scene);
     addScene(context.sceneController, scene0);
     addScene(context.sceneController, scene2);
     addScene(context.sceneController, scene3);
     addScene(context.sceneController, scene4);
+    addScene(context.sceneController, scene5);
     setScene(context.sceneController, "menuPrincipal");
 
     while (!context.input->quit) {
