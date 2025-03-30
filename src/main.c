@@ -127,7 +127,7 @@ int main(int argc, char* argv[]) {
 
     t_scene* scene = createMainMenu(&context);
     t_scene* scene0 = createOptionMenu(&context);
-    CreateNiveau(&context, 10, &player);
+    CreateNiveau(&context, 3, &player);
     t_scene* scene2 = createCommandeMenu(&context);
     t_scene* scene3 = createFpsMenu(&context);
     t_scene* scene4 = createMainInv(&context);
