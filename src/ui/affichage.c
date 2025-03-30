@@ -142,10 +142,6 @@ void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *i
     renderText(renderer, txt2);
 }
 
-void coucou() {
-    printf("cocou\n");
-}
-
 void equiperSlot(InventoryUI *ui, t_item **item) {
     if (!ui->peutEquiper || (*item) == NULL || item == NULL)
         return;
@@ -194,8 +190,8 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     // etc.
     if (ui2 != NULL)
         free(ui->elems);
-    else
-        ui->elems = malloc(sizeof(t_elements));
+
+    ui->elems = malloc(sizeof(t_elements));
 
     if (ui2 == NULL)
         ui->itemclique = NULL;
@@ -248,7 +244,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     calculerItem(&ui->elems->inventory_slots[0].rect, ui->elems->inventory_panel.rect,
                  &ui->elems->inventory_panel.rect, 0, 0, input);
     if (ui2 == NULL) {
-        ui->elems->inventory_slots[0].button = createButton(createText(renderer, "azze", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[0].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[0]->definition, renderer, input)));
+        ui->elems->inventory_slots[0].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[0].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[0]->definition, renderer, input)));
         ui->elems->inventory_slots[0].texture = items[0]->definition->texture;
     } else {
         ui->elems->inventory_slots[0].button = ui2->elems->inventory_slots[0].button;
@@ -258,7 +254,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     for (int i = 1, j = 1; i < ui->nbItems; j++, i++) {
         calculerItem(&ui->elems->inventory_slots[i].rect, ui->elems->inventory_panel.rect, &ui->elems->inventory_slots[i - 1].rect, i, j, input);
         if (ui2 == NULL) {
-            ui->elems->inventory_slots[i].button = createButton(createText(renderer, "zeffqsd", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[i].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[i]->definition, renderer, input)));
+            ui->elems->inventory_slots[i].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[i].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[i]->definition, renderer, input)));
             ui->elems->inventory_slots[i].texture = items[i]->definition->texture;
         } else {
             ui->elems->inventory_slots[i].button = ui2->elems->inventory_slots[i].button;
@@ -296,8 +292,8 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     ui->ecrit->color_txt.r = 255;
 
     if (ui2 == NULL) {
-        t_text *t = createText(renderer, "cocou", ui->ext->item_font, (SDL_Color){0, 0, 0});
-        ui->elems->equiper.button = createButton(t, (SDL_Color){0, 128, 255}, (SDL_Color){0, 150, 255}, ui->elems->equiper.rect, creerFonction(equiperSlotWrapper, FONCTION_PARAMS(ui, &ui->itemclique)));
+        t_text *t = createText(renderer, "EQUIPER", ui->ext->item_font, (SDL_Color){0, 0, 0});
+        ui->elems->equiper.button = createButton(t, (SDL_Color){255, 128, 0}, (SDL_Color){255, 150, 0}, ui->elems->equiper.rect, creerFonction(equiperSlotWrapper, FONCTION_PARAMS(ui, &ui->itemclique)));
     } else {
         ui->elems->equiper.button = ui2->elems->equiper.button;
         ui->elems->equiper.button->rect = ui->elems->equiper.rect;
@@ -355,7 +351,7 @@ void afficherDescription(SDL_Renderer *renderer, InventoryUI *ui) {
 }
 
 void inventoryUI_Render(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
