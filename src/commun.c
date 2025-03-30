@@ -3,8 +3,9 @@
 void renderTextWrapper(t_fonctionParam* f) {
     renderText(((SDL_Renderer*)(f)->param[0]), ((t_text*)(f)->param[1]));
 }
+
 void renderButtonWrapper(t_fonctionParam* f) {
-    renderButton(((SDL_Renderer*)(f)->param[0]), ((t_button*)(f)->param[1]));
+    renderButton(GET_PTR(f, 0, t_context*), ((t_button*)(f)->param[1]));
 }
 
 void renderFPSDisplayWrapper(t_fonctionParam* f) {
@@ -44,7 +45,7 @@ void cameraHandleZoomWrapper(t_fonctionParam* f) {
 }
 
 void handleInputButtonWrapper(t_fonctionParam* f) {
-    handleInputButton(((t_input*)(f)->param[0]), ((t_button*)(f)->param[1]));
+    handleInputButton(GET_PTR(f, 0, t_context*), ((t_button*)(f)->param[1]));
 }
 
 void handleInputPlayerWrapper(t_fonctionParam* f) {
@@ -88,11 +89,11 @@ void setSceneWrapper(t_fonctionParam* f) {
 }
 
 void renderToucheWrapper(t_fonctionParam* f) {
-    renderTouche(((SDL_Renderer*)f->param[0]), (t_touche*)f->param[1]);
+    renderTouche(GET_PTR(f, 0, t_context*), (t_touche*)f->param[1]);
 }
 
 void handleInputToucheWrapper(t_fonctionParam* f) {
-    handleInputTouche((t_input*)f->param[0], (t_touche*)f->param[1], (SDL_Renderer*)f->param[2]);
+    handleInputTouche(GET_PTR(f, 0, t_context*), (t_touche*)f->param[1]);
 }
 
 void affichageWrapper(t_fonctionParam* f) {

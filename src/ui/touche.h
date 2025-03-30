@@ -19,8 +19,8 @@ typedef struct {
     char nom[10];
 } t_touche;
 
-void renderTouche(SDL_Renderer* renderer, t_touche* touche);
-void handleInputTouche(t_input* input, t_touche* touche, SDL_Renderer* renderer);
+void renderTouche(t_context* ctx, t_touche* touche);
+void handleInputTouche(t_context* ctx, t_touche* touche);
 t_touche* createTouche(t_text* text, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, t_fonctionParam* OnClick, SDL_Scancode* scancode, char* nom);
 void miseAjourCommande(t_fonctionParam* fonction);
 void freeTouche(void* elt);

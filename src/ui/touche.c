@@ -1,22 +1,22 @@
 
 #include "touche.h"
-void renderTouche(SDL_Renderer* renderer, t_touche* touche) {
-    renderButton(renderer, touche->button);
+void renderTouche(t_context* ctx, t_touche* touche) {
+    renderButton(ctx, touche->button);
 }
 
-void handleInputTouche(t_input* input, t_touche* touche, SDL_Renderer* renderer) {
+void handleInputTouche(t_context* ctx, t_touche* touche) {
     int newWidth = touche->button->rectDefault.w * SCALE_FACTOR;
     int newHeight = touche->button->rectDefault.h * SCALE_FACTOR;
     int deltaX = (newWidth - touche->button->rectDefault.w) / 2;
     int deltaY = (newHeight - touche->button->rectDefault.h) / 2;
 
-    if (isMouseInsideRect(input->mouseX, input->mouseY, &touche->button->rect)) {
+    if (isMouseInsideRect(ctx->input->mouseX, ctx->input->mouseY, &touche->button->rect)) {
         touche->button->rect.w = newWidth;
         touche->button->rect.h = newHeight;
         touche->button->rect.x = touche->button->rectDefault.x - deltaX;
         touche->button->rect.y = touche->button->rectDefault.y - deltaY;
 
-        if (input->mouseButtons[SDL_BUTTON_LEFT]) {
+        if (ctx->input->mouseButtons[SDL_BUTTON_LEFT]) {
             if (!touche->button->isClicked) {
                 touche->button->isClicked = SDL_TRUE;
                 touche->button->color = touche->button->colorOnClick;
@@ -34,18 +34,18 @@ void handleInputTouche(t_input* input, t_touche* touche, SDL_Renderer* renderer)
             touche->flagCommande = SDL_FALSE;
             char newtouche[50];
             sprintf(newtouche, "Commande %s : %s", touche->nom, SDL_GetKeyName(SDL_GetKeyFromScancode(*touche->scancode)));
-            updateTextOutline(&(touche->button->label), renderer, newtouche, BLACK, WHITE, 2);
+            updateTextOutline(&(touche->button->label), ctx->renderer, newtouche, BLACK, WHITE, 2);
         }
         if (touche->button->isClicked) {
             touche->button->isClicked = SDL_FALSE;
             touche->button->color = touche->button->colorDefault;
         }
     }
-    if (touche->flagCommande && indiceToucheCliquer(input) != -1) {
+    if (touche->flagCommande && indiceToucheCliquer(ctx->input) != -1) {
         char newtouche[50];
-        sprintf(newtouche, "Commande %s : %s", touche->nom, SDL_GetKeyName(SDL_GetKeyFromScancode(indiceToucheCliquer(input))));
-        updateTextOutline(&(touche->button->label), renderer, newtouche, BLACK, WHITE, 2);
-        *touche->scancode = ((SDL_Scancode)indiceToucheCliquer(input));
+        sprintf(newtouche, "Commande %s : %s", touche->nom, SDL_GetKeyName(SDL_GetKeyFromScancode(indiceToucheCliquer(ctx->input))));
+        updateTextOutline(&(touche->button->label), ctx->renderer, newtouche, BLACK, WHITE, 2);
+        *touche->scancode = ((SDL_Scancode)indiceToucheCliquer(ctx->input));
         touche->flagCommande = SDL_FALSE;
     }
 }

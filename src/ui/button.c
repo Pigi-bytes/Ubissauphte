@@ -13,6 +13,7 @@ t_button* createButton(t_text* text, SDL_Color color, SDL_Color colorOnClick, SD
     button->colorDefault = color;
     button->colorOnClick = colorOnClick;
     button->isClicked = SDL_FALSE;
+    button->isHovered = SDL_FALSE;
     button->OnClick = OnClick;
     button->label = text;
 
@@ -22,14 +23,14 @@ t_button* createButton(t_text* text, SDL_Color color, SDL_Color colorOnClick, SD
     return button;
 }
 
-void renderButton(SDL_Renderer* renderer, t_button* button) {
-    SDL_SetRenderDrawColor(renderer, button->color.r, button->color.g, button->color.b, button->color.a);
-    SDL_RenderFillRect(renderer, &button->rect);
-    renderText(renderer, button->label);
+void renderButton(t_context* ctx, t_button* button) {
+    SDL_SetRenderDrawColor(ctx->renderer, button->color.r, button->color.g, button->color.b, button->color.a);
+    SDL_RenderFillRect(ctx->renderer, &button->rect);
+    renderText(ctx->renderer, button->label);
 
     Debug_PushRect(&button->rect, 3, COLORDEFAULT);
 
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 255);
 }
 
 SDL_bool isMouseInsideRect(int mouseX, int mouseY, SDL_Rect* rect) {
@@ -40,19 +41,24 @@ SDL_bool isMouseInsideRect(int mouseX, int mouseY, SDL_Rect* rect) {
     return SDL_FALSE;
 }
 
-void handleInputButton(t_input* input, t_button* button) {
+void handleInputButton(t_context* ctx, t_button* button) {
     int newWidth = button->rectDefault.w * SCALE_FACTOR;
     int newHeight = button->rectDefault.h * SCALE_FACTOR;
     int deltaX = (newWidth - button->rectDefault.w) / 2;
     int deltaY = (newHeight - button->rectDefault.h) / 2;
 
-    if (isMouseInsideRect(input->mouseX, input->mouseY, &button->rect)) {
+    if (isMouseInsideRect(ctx->input->mouseX, ctx->input->mouseY, &button->rect)) {
+        if (!button->isHovered) {
+            button->isHovered = SDL_TRUE;                                          // Marquer comme survolé
+            jouerSFX("assets/sound/onHoverButton.wav", 25, 0, ctx->audioManager);  // Jouer le son de survol
+        }
+
         button->rect.w = newWidth;
         button->rect.h = newHeight;
         button->rect.x = button->rectDefault.x - deltaX;
         button->rect.y = button->rectDefault.y - deltaY;
 
-        if (input->mouseButtons[SDL_BUTTON_LEFT]) {
+        if (ctx->input->mouseButtons[SDL_BUTTON_LEFT]) {
             if (!button->isClicked) {
                 button->isClicked = SDL_TRUE;
                 button->color = button->colorOnClick;
@@ -61,10 +67,13 @@ void handleInputButton(t_input* input, t_button* button) {
             button->isClicked = SDL_FALSE;
             button->color = button->colorDefault;
             if (button->OnClick) {
+                jouerSFX("assets/sound/clickButton.wav", 100, 0, ctx->audioManager);
                 callFonction(button->OnClick);
             }
         }
     } else {
+        button->isHovered = SDL_FALSE;
+
         button->rect = button->rectDefault;
         if (button->isClicked) {
             button->isClicked = SDL_FALSE;
