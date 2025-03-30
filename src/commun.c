@@ -28,10 +28,6 @@ void renderPlayerWrapper(t_fonctionParam* f) {
     renderPlayer(((SDL_Renderer*)(f)->param[0]), ((t_joueur*)(f)->param[1]), ((t_camera*)(f)->param[2]));
 }
 
-void renderEnemyWrapper(t_fonctionParam* f) {
-    renderEnemy(((SDL_Renderer*)(f)->param[0]), ((t_enemy*)(f)->param[1]), ((t_camera*)(f)->param[2]));
-}
-
 void updateFPSDisplayWrapper(t_fonctionParam* f) {
     updateFPSDisplay(((t_fpsDisplay*)(f)->param[0]), ((t_frameData*)(f)->param[1]), ((SDL_Renderer*)(f)->param[2]));
 }
@@ -80,10 +76,6 @@ void updatePlayerWrapper(t_fonctionParam* f) {
     updatePlayer(((t_joueur*)(f)->param[0]), ((float*)(f)->param[1]), ((t_salle*)(f)->param[2]), ((t_objectManager*)(f)->param[3]));
 }
 
-void updateEnemyWrapper(t_fonctionParam* f) {
-    updateEnemy(((t_enemy*)(f)->param[0]), ((float*)(f)->param[1]), ((t_salle*)(f)->param[2]), ((t_objectManager*)(f)->param[3]));
-}
-
 void setSceneWrapper(t_fonctionParam* f) {
     setScene(((t_sceneController*)(f)->param[0]), ((char*)(f)->param[1]));
 }
@@ -113,11 +105,11 @@ void updateScrollWrapper(t_fonctionParam* f) {
 }
 
 void inventoryUI_UpdateWrapper(t_fonctionParam* f) {
-    inventoryUI_Update(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 1, t_context*));
+    inventoryUI_Update(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 0, t_context*));
 }
 
 void inventoryUI_RenderWrapper(t_fonctionParam* f) {
-    inventoryUI_Render(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 1, t_context*));
+    inventoryUI_Render(GET_PTR(f, 0, InventoryUI*), GET_PTR(f, 0, t_context*));
 }
 
 void handleInputInventaireWrapper(t_fonctionParam* f) {

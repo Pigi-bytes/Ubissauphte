@@ -23,9 +23,39 @@ t_button* createButton(t_text* text, SDL_Color color, SDL_Color colorOnClick, SD
     return button;
 }
 
+#include <math.h>
+
+void renderRoundedRect(SDL_Renderer* renderer, SDL_Rect* rect, int radius, SDL_Color color) {
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+
+    SDL_Rect innerRect = {rect->x + radius, rect->y + radius, rect->w - 2 * radius, rect->h - 2 * radius};
+    SDL_RenderFillRect(renderer, &innerRect);
+
+    // Dessiner les côtés
+    SDL_Rect topRect = {rect->x + radius, rect->y, rect->w - 2 * radius, radius};
+    SDL_Rect bottomRect = {rect->x + radius, rect->y + rect->h - radius, rect->w - 2 * radius, radius};
+    SDL_Rect leftRect = {rect->x, rect->y + radius, radius, rect->h - 2 * radius};
+    SDL_Rect rightRect = {rect->x + rect->w - radius, rect->y + radius, radius, rect->h - 2 * radius};
+    SDL_RenderFillRect(renderer, &topRect);
+    SDL_RenderFillRect(renderer, &bottomRect);
+    SDL_RenderFillRect(renderer, &leftRect);
+    SDL_RenderFillRect(renderer, &rightRect);
+
+    for (int w = 0; w < radius; w++) {
+        for (int h = 0; h < radius; h++) {
+            if ((w * w + h * h) <= (radius * radius)) {
+                SDL_RenderDrawPoint(renderer, rect->x + radius - w, rect->y + radius - h);                      // Coin supérieur gauche
+                SDL_RenderDrawPoint(renderer, rect->x + rect->w - radius + w, rect->y + radius - h);            // Coin supérieur droit
+                SDL_RenderDrawPoint(renderer, rect->x + radius - w, rect->y + rect->h - radius + h);            // Coin inférieur gauche
+                SDL_RenderDrawPoint(renderer, rect->x + rect->w - radius + w, rect->y + rect->h - radius + h);  // Coin inférieur droit
+            }
+        }
+    }
+}
+
 void renderButton(t_context* ctx, t_button* button) {
-    SDL_SetRenderDrawColor(ctx->renderer, button->color.r, button->color.g, button->color.b, button->color.a);
-    SDL_RenderFillRect(ctx->renderer, &button->rect);
+    int cornerRadius = 10;  // Rayon des coins arrondis
+    renderRoundedRect(ctx->renderer, &button->rect, cornerRadius, button->color);
     renderText(ctx->renderer, button->label);
 
     Debug_PushRect(&button->rect, 3, COLORDEFAULT);
