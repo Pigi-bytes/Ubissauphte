@@ -6,6 +6,7 @@
 #include "../../context.h"
 #include "../../debug.h"
 #include "../../io/input.h"
+#include "components/equipment/equipementsManager.h"
 #include "components/health/health.h"
 #include "components/physic/physics.h"
 #include "entity.h"
@@ -53,6 +54,12 @@ typedef struct s_joueur {
     t_control* control;
     t_dash dash;
     t_healthSystem health;
+
+    t_stats baseStats;
+    t_stats calculatedStats;
+
+    t_equipementSlotType equipement[TOTAL_EQUIPMENT_SLOTS];
+    t_inventaire* inventaire;
 
     int level;
     int xp;

@@ -49,6 +49,59 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){3, 4}, 2, 240, SDL_TRUE, "walk"));
     setAnimation(joueur->entity.animationController, "idle");
 
+
+    joueur->inventaire = createInventaire();
+    joueur->baseStats.health.additive = 10;
+    joueur->baseStats.health.multiplicative = 1;
+
+    joueur->baseStats.healthMax.additive = 10;
+    joueur->baseStats.healthMax.multiplicative = 1;
+
+    joueur->baseStats.mana.additive = 10;
+    joueur->baseStats.mana.multiplicative = 1;
+
+    joueur->baseStats.manaMax.additive = 10;
+    joueur->baseStats.manaMax.multiplicative = 1;
+
+    joueur->baseStats.attack.additive = 10;
+    joueur->baseStats.attack.multiplicative = 1;
+
+    joueur->baseStats.defense.additive = 10;
+    joueur->baseStats.defense.multiplicative = 1;
+
+    joueur->baseStats.speed.additive = 10;
+    joueur->baseStats.speed.multiplicative = 1;
+
+    joueur->calculatedStats.health.additive = 0;
+    joueur->calculatedStats.health.multiplicative = 1;
+
+    joueur->calculatedStats.healthMax.additive = 0;
+    joueur->calculatedStats.healthMax.multiplicative = 1;
+
+    joueur->calculatedStats.mana.additive = 0;
+    joueur->calculatedStats.mana.multiplicative = 1;
+
+    joueur->calculatedStats.manaMax.additive = 0;
+    joueur->calculatedStats.manaMax.multiplicative = 1;
+
+    joueur->calculatedStats.attack.additive = 0;
+    joueur->calculatedStats.attack.multiplicative = 1;
+
+    joueur->calculatedStats.defense.additive = 0;
+    joueur->calculatedStats.defense.multiplicative = 1;
+
+    joueur->calculatedStats.speed.additive = 0;
+    joueur->calculatedStats.speed.multiplicative = 1;
+
+    joueur->level = 1;
+    joueur->gold = 5000;
+    joueur->xp = 0;
+
+    joueur->equipement[SLOT_ARME].stack = NULL;
+    joueur->equipement[SLOT_ARMURE].stack = NULL;
+    joueur->equipement[SLOT_ACTIVABLE1].stack = NULL;
+    joueur->equipement[SLOT_ACTIVABLE2].stack = NULL;
+
     return joueur;
 }
 

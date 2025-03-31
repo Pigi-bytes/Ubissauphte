@@ -166,7 +166,7 @@ void equiperSlotWrapper(t_fonctionParam *f) {
     equiperSlot(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, t_item **));
 }
 
-InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_character *c, t_input *input) {
+InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_joueur *c, t_input *input) {
     InventoryUI *ui = malloc(sizeof(InventoryUI));
     if (ui2 != NULL) {
         ui->ext = ui2->ext;
@@ -181,7 +181,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     ui->ext = malloc(sizeof(t_extern));
     ui->ext->item_font = NULL;
     ui->ext->descr_font = NULL;
-    ui->ext->character = malloc(sizeof(t_character));
+    ui->ext->character = malloc(sizeof(t_joueur));
 
     ui->ecrit = malloc(sizeof(t_ecritures));
     // Initialiser les membres si nécessaire
@@ -225,7 +225,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_charac
     // Calculs initiaux (votre code original)
 
     calculCasePlayer(&ui->elems->player_panel.rect, input, "Perso");
-    ui->elems->player_panel.texture = c->texture;
+    ui->elems->player_panel.texture = c->entity.texture;
 
     calculCaseSlots(&ui->elems->player_panel.rect, &ui->elems->caseArme.rect, input, "Perso", "arme");
     calculCaseSlots(&ui->elems->caseArme.rect, &ui->elems->caseArmure.rect, input, "arme", "armure");

@@ -27,7 +27,7 @@ typedef struct
 } UI_Element;
 
 typedef struct {
-    t_character *character;
+    t_joueur *character;
     t_item **items;
     TTF_Font *item_font;
     TTF_Font *descr_font;
@@ -85,7 +85,7 @@ typedef struct
 
 } InventoryUI;
 
-InventoryUI *inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_character *c, t_input *input);
+InventoryUI *inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, t_joueur *c, t_input *input);
 void inventoryUI_Update(InventoryUI *ui, t_context *context);
 void inventoryUI_Render(InventoryUI *ui, t_context *context);
 void update(t_input *input, InventoryUI *ui);
