@@ -3,6 +3,7 @@
 
 #include "../../../_scene/mainWorld.h"
 #include "../../../debug.h"
+#include "../../../ui/text.h"
 #include "../enemy.h"
 
 typedef enum {
@@ -48,7 +49,28 @@ typedef struct {
     t_deltaTimer* phaseTransitionTimer;
 } t_boss_slime;
 
+typedef struct {
+    SDL_bool isActive;
+    TTF_Font* font;
+    t_enemy* boss;
+    char* bossName;
+    float displayedHealthRatio;
+    float targetHealthRatio;
+    SDL_Color phaseColors[3];
+    int currentPhase;
+    t_deltaTimer* phaseTransitionTimer;
+    float lastDamageTime;
+    t_text* nameText;
+} t_bossHealthBar;
+
 void updateBossSlime(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities);
 t_enemy* createBossSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, t_scene* scene);
+
+t_bossHealthBar* createBossHealthBar(TTF_Font* font, t_enemy* boss);
+void updateBossHealthBar(t_bossHealthBar* bar, float deltaTime);
+void renderBossHealthBar(SDL_Renderer* renderer, t_bossHealthBar* bar, int windowWidth, int windowHeight);
+void freeBossHealthBar(void* obj);
+void updateBossHealthBarWrapper(t_fonctionParam* f);
+void renderBossHealthBarWrapper(t_fonctionParam* f);
 
 #endif

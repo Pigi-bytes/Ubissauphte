@@ -294,6 +294,7 @@ t_scene* createBossMap(t_context* context, t_salle* salle, t_joueur** player, t_
     const uint8_t TILE_ENTITY = registerType(registre, freeTileEntity, "tile_entity");
     const uint8_t HUD_TYPE = registerType(registre, freeHUD, "hud");
     const uint8_t ENEMY_TYPE = registerType(registre, freeEnemy, "enemy");
+    const uint8_t BOSS_HUD_TYPE = registerType(registre, freeBossHealthBar, "boss_hud");
 
     t_scene* scene = createScene(initObjectManager(registre), "main");
     t_tileset* tileset = initTileset(context->renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
@@ -323,6 +324,13 @@ t_scene* createBossMap(t_context* context, t_salle* salle, t_joueur** player, t_
     enemy->entity.physics.mass = 200;
     enemy->health.currentHealth = 100000;
     enemy->health.maxHealth = 100000;
+
+    t_bossHealthBar* bossHealthBar = createBossHealthBar(loadFont("assets/fonts/PressStart2P-vaV7.ttf", 25), enemy);
+
+    ADD_OBJECT_TO_SCENE(scene, bossHealthBar, BOSS_HUD_TYPE);
+
+    sceneRegisterFunction(scene, BOSS_HUD_TYPE, UPDATE, updateBossHealthBarWrapper, 0, FONCTION_PARAMS(&context->frameData->deltaTime));
+    sceneRegisterFunction(scene, BOSS_HUD_TYPE, RENDER_UI, renderBossHealthBarWrapper, 1, FONCTION_PARAMS(context->renderer, &context->input->windowWidth, &context->input->windowHeight));
 
     addObject(salle->entities, &enemy->entity, ENEMY);
     placeOnRandomTile(*level, &enemy->entity, salle->entities);

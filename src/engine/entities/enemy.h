@@ -19,6 +19,7 @@ typedef struct t_enemy {
     t_joueur* lastDamagedBy;
 
     void (*update)(struct t_enemy*, float*, t_grid*, t_objectManager*);
+    void (*render)(SDL_Renderer*, struct t_enemy*, t_camera*);
 } t_enemy;
 
 void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect, t_scene* scene);

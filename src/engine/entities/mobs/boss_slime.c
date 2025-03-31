@@ -1,5 +1,8 @@
 #include "boss_slime.h"
 
+#include <math.h>
+#include <stdio.h>
+
 #include "../player.h"
 
 #define BOSS_JUMP_FORCE 250.0f
@@ -7,7 +10,7 @@
 #define BOSS_TIME_UNTIL_MOVE 3.0f
 #define BOSS_DETECTION_RADIUS 250.0f
 #define BOSS_PATROL_MOVES 8
-#define BOSS_HEALTH 500
+#define BOSS_HEALTH 100000
 #define BOSS_GROUND_POUND_FORCE 350.0f
 #define BOSS_CHARGE_FORCE 400.0f
 #define BOSS_SPECIAL_ATTACK_COOLDOWN 5.0f
@@ -16,7 +19,9 @@
 #define CHASE_JUMP_POWER 0.8f
 #define PHASE2_HEALTH_THRESHOLD 0.6f
 #define PHASE3_HEALTH_THRESHOLD 0.3f
-#define PHASE_TRANSITION_DURATION 2.0f
+#define PHASE_TRANSITION_DURATION 4.0f
+#define HEALTH_ANIMATION_SPEED 3.5f
+#define HEALTH_ANIMATION_EPSILON 0.001f
 
 float randomWithPercentageVariationBoss(float x, float percentage) {
     float min = x * (1.0f - percentage), max = x * (1.0f + percentage);
@@ -46,8 +51,9 @@ t_enemy* createBossSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset
     bossSlime->base.health.maxHealth = bossSlime->base.health.currentHealth = BOSS_HEALTH;
     bossSlime->base.health.invincibilityDuration = 0.7f;
     bossSlime->base.health.onDeathCallback = onBossSlimeDeath;
+    bossSlime->base.health.healthBareRender = NULL;
     bossSlime->base.xpReward = 100;
-    bossSlime->base.entity.physics = (t_physics){.velocity = {0, 0}, .mass = 4.0f, .friction = 0.01f, .restitution = 0.8f};
+    bossSlime->base.entity.physics = (t_physics){.velocity = {0, 0}, .mass = 200.0f, .friction = 0.01f, .restitution = 0.8f};
 
     addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 600, SDL_TRUE, "idle"));
     addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2, 1, 3}, 4, 250, SDL_TRUE, "walk"));
@@ -479,4 +485,170 @@ void updateBossSlime(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectMan
     SDL_Color detectionColor = bossSlime->isPhaseTransition ? SDL_COLOR_YELLOW : (bossSlime->currentPhase == 3 ? SDL_COLOR_RED : (bossSlime->currentPhase == 2 ? SDL_COLOR_ORANGE : COLORDEFAULT));
     Debug_PushCircle(bossSlime->detectionRange.x, bossSlime->detectionRange.y, bossSlime->detectionRange.radius, detectionColor);
     updatePhysicEntity(&enemy->entity, deltaTime, grid, entities);
+}
+
+t_bossHealthBar* createBossHealthBar(TTF_Font* font, t_enemy* boss) {
+    t_bossHealthBar* bar = malloc(sizeof(t_bossHealthBar));
+    if (!bar) return NULL;
+
+    bar->isActive = SDL_TRUE;
+    bar->font = font;
+    bar->boss = boss;
+    bar->bossName = "ROI SLIME: PABLO";
+    bar->displayedHealthRatio = bar->targetHealthRatio = 1.0f;
+    bar->currentPhase = 1;
+    bar->lastDamageTime = 0;
+
+    bar->phaseColors[0] = (SDL_Color){0, 200, 255, 255};  // Bleu
+    bar->phaseColors[1] = (SDL_Color){255, 150, 0, 255};  // Orange
+    bar->phaseColors[2] = (SDL_Color){255, 20, 20, 255};  // Rouge
+
+    bar->phaseTransitionTimer = initDeltaTimer();
+    startDeltaTimer(bar->phaseTransitionTimer);
+
+    // Ne pas créer les textures ici -> a faire au premier rendu
+    bar->nameText = NULL;
+
+    return bar;
+}
+
+void updateBossHealthBar(t_bossHealthBar* bar, float deltaTime) {
+    t_boss_slime* bossSlime = (t_boss_slime*)bar->boss;
+
+    bar->targetHealthRatio = (float)bar->boss->health.currentHealth / bar->boss->health.maxHealth;
+    float diff = bar->targetHealthRatio - bar->displayedHealthRatio;
+    bar->displayedHealthRatio += diff * HEALTH_ANIMATION_SPEED * deltaTime;
+    if (fabs(diff) < HEALTH_ANIMATION_EPSILON)
+        bar->displayedHealthRatio = bar->targetHealthRatio;
+
+    if (bossSlime->currentPhase != bar->currentPhase) {
+        bar->currentPhase = bossSlime->currentPhase;
+        resetDeltaTimer(bar->phaseTransitionTimer);
+        startDeltaTimer(bar->phaseTransitionTimer);
+    }
+
+    if (bar->targetHealthRatio < bar->displayedHealthRatio + 0.02f)
+        bar->lastDamageTime = 0.5f;
+    else
+        bar->lastDamageTime = fmaxf(0, bar->lastDamageTime - deltaTime);
+
+    updateDeltaTimer(bar->phaseTransitionTimer, deltaTime);
+}
+
+void renderBossHealthBar(SDL_Renderer* renderer, t_bossHealthBar* bar, int windowWidth, int windowHeight) {
+    if (!bar || !bar->isActive || !bar->boss) return;
+
+    if (bar->nameText == NULL && renderer != NULL) {
+        bar->nameText = createTextOutline(renderer, bar->bossName, bar->font, (SDL_Color){220, 220, 220, 255}, (SDL_Color){20, 20, 20, 255}, 1);
+    }
+
+    int barHeight = 24;
+    int margin = 150;
+    int barWidth = windowWidth - (margin * 2);
+    int barY = windowHeight - 60;
+    int borderSize = 3;
+
+    t_boss_slime* bossSlime = (t_boss_slime*)bar->boss;
+    int phaseIndex = bossSlime->currentPhase - 1;
+    if (phaseIndex < 0) phaseIndex = 0;
+    if (phaseIndex > 2) phaseIndex = 2;
+
+    SDL_Color baseColor = bar->phaseColors[phaseIndex];
+    int fillWidth = (int)(barWidth * bar->displayedHealthRatio);
+
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 100);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){margin - borderSize + 3, barY - borderSize + 3, barWidth + borderSize * 2, barHeight + borderSize * 2});
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
+
+    // Bordure et fond
+    SDL_SetRenderDrawColor(renderer, 40, 40, 40, 255);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){margin - borderSize, barY - borderSize, barWidth + borderSize * 2, barHeight + borderSize * 2});
+
+    // Effet relief
+    SDL_SetRenderDrawColor(renderer, 70, 70, 70, 255);
+    SDL_RenderDrawRect(renderer, &(SDL_Rect){margin - borderSize + 1, barY - borderSize + 1, barWidth + borderSize * 2 - 2, barHeight + borderSize * 2 - 2});
+
+    // Fond de la barre
+    SDL_SetRenderDrawColor(renderer, 15, 15, 15, 255);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){margin, barY, barWidth, barHeight});
+
+    // Barre de vie
+    SDL_SetRenderDrawColor(renderer, baseColor.r, baseColor.g, baseColor.b, 255);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){margin, barY, fillWidth, barHeight});
+
+    // Effet de brillance sur le haut de la barre
+    SDL_SetRenderDrawColor(renderer, (Uint8)fminf(255, baseColor.r * 1.3f), (Uint8)fminf(255, baseColor.g * 1.3f), (Uint8)fminf(255, baseColor.b * 1.3f), 200);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){margin, barY, fillWidth, 2});
+
+    // Effet d'ombre sur le bas de la barre
+    SDL_SetRenderDrawColor(renderer, (Uint8)(baseColor.r * 0.7f), (Uint8)(baseColor.g * 0.7f), (Uint8)(baseColor.b * 0.7f), 200);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){margin, barY + barHeight - 2, fillWidth, 2});
+
+    // Segments (10)
+    int segmentWidth = barWidth / 10;
+    for (int i = 1; i < 10; i++) {
+        int segX = margin + i * segmentWidth;
+        SDL_SetRenderDrawColor(renderer, segX < margin + fillWidth ? 0 : 100, segX < margin + fillWidth ? 0 : 100, segX < margin + fillWidth ? 0 : 100, 150);
+        SDL_RenderFillRect(renderer, &(SDL_Rect){segX - 2, barY - 2, 4, barHeight + 4});
+
+        // Contour des segments pour plus de visibilité
+        SDL_SetRenderDrawColor(renderer, 50, 50, 50, 200);
+        SDL_RenderDrawRect(renderer, &(SDL_Rect){segX - 2, barY - 2, 4, barHeight + 4});
+    }
+
+    // Marqueurs de phase
+    int phase2X = margin + (int)(barWidth * bossSlime->phase2HealthThreshold);
+    int phase3X = margin + (int)(barWidth * bossSlime->phase3HealthThreshold);
+
+    // Phase 2 avec ombre
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 120);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){phase2X - 4 + 2, barY - 5 + 2, 8, barHeight + 10});
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 200);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){phase2X - 4, barY - 5, 8, barHeight + 10});
+
+    SDL_SetRenderDrawColor(renderer, bar->phaseColors[1].r, bar->phaseColors[1].g, bar->phaseColors[1].b, 220);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){phase2X - 3, barY - 4, 6, barHeight + 8});
+
+    // Phase 3 avec ombre
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 120);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){phase3X - 4 + 2, barY - 5 + 2, 8, barHeight + 10});
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 200);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){phase3X - 4, barY - 5, 8, barHeight + 10});
+
+    SDL_SetRenderDrawColor(renderer, bar->phaseColors[2].r, bar->phaseColors[2].g, bar->phaseColors[2].b, 220);
+    SDL_RenderFillRect(renderer, &(SDL_Rect){phase3X - 3, barY - 4, 6, barHeight + 8});
+
+    // Nom du boss avec ombre
+    if (bar->nameText) {
+        bar->nameText->rect.x = windowWidth / 2 - bar->nameText->rect.w / 2;
+        bar->nameText->rect.y = barY - 35;
+        renderText(renderer, bar->nameText);
+    }
+}
+
+void freeBossHealthBar(void* obj) {
+    t_bossHealthBar* bar = (t_bossHealthBar*)obj;
+    if (!bar) return;
+
+    // Libérer les textes pré-rendus
+    if (bar->nameText) {
+        if (bar->nameText->text) free(bar->nameText->text);
+        if (bar->nameText->texture) SDL_DestroyTexture(bar->nameText->texture);
+        free(bar->nameText);
+    }
+
+    if (bar->phaseTransitionTimer) free(bar->phaseTransitionTimer);
+    free(bar);
+}
+
+void updateBossHealthBarWrapper(t_fonctionParam* f) {
+    updateBossHealthBar(GET_PTR(f, 0, t_bossHealthBar*), *GET_PTR(f, 1, float*));
+}
+
+void renderBossHealthBarWrapper(t_fonctionParam* f) {
+    renderBossHealthBar(GET_PTR(f, 0, SDL_Renderer*), GET_PTR(f, 1, t_bossHealthBar*),
+                        *GET_PTR(f, 2, int*), *GET_PTR(f, 3, int*));
 }

@@ -7,13 +7,11 @@ t_scene *createMainInv(t_context *context, t_joueur *player) {
 
     t_item **itemListe = item_load(fichier, tileset);
 
-    t_character *c = createCharactere(tileset, 98);
-
     for (int i = 0; i < 40; i++) {
-        inventaireAjoutObjet(c->inventaire, itemListe[i], 1);
+        inventaireAjoutObjet(player->inventaire, itemListe[i], 1);
     }
 
-    InventoryUI *ui = inventoryUI_Init(NULL, context->renderer, c, context->input);
+    InventoryUI *ui = inventoryUI_Init(NULL, context->renderer, player, context->input);
     const uint8_t INVENTORY_TYPE = registerType(registre, freeInv, "inventory");
 
     t_scene *scene = createScene(initObjectManager(registre), "mainInv");

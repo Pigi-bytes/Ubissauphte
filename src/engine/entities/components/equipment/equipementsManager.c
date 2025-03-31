@@ -1,5 +1,7 @@
 #include "equipementsManager.h"
 
+#include "../../player.h"
+
 int hasFlag(int itemFlags, itemsFlags flag) {
     return (itemFlags & flag) != 0;  // Vérifie si le bit correspondant est activé
 }
@@ -304,65 +306,6 @@ t_inventaire* createInventaire() {
     return inv;
 }
 
-t_character* createCharactere(t_tileset* tileset, int indice_texture) {
-    t_character* charactere = (t_character*)malloc(sizeof(t_character));
-    
-    charactere->texture = (SDL_Texture*)getObject(tileset->textureTiles, indice_texture);
-
-    charactere->inventaire = createInventaire();
-    charactere->baseStats.health.additive = 10;
-    charactere->baseStats.health.multiplicative = 1;
-
-    charactere->baseStats.healthMax.additive = 10;
-    charactere->baseStats.healthMax.multiplicative = 1;
-
-    charactere->baseStats.mana.additive = 10;
-    charactere->baseStats.mana.multiplicative = 1;
-
-    charactere->baseStats.manaMax.additive = 10;
-    charactere->baseStats.manaMax.multiplicative = 1;
-
-    charactere->baseStats.attack.additive = 10;
-    charactere->baseStats.attack.multiplicative = 1;
-
-    charactere->baseStats.defense.additive = 10;
-    charactere->baseStats.defense.multiplicative = 1;
-
-    charactere->baseStats.speed.additive = 10;
-    charactere->baseStats.speed.multiplicative = 1;
-
-    charactere->calculatedStats.health.additive = 0;
-    charactere->calculatedStats.health.multiplicative = 1;
-
-    charactere->calculatedStats.healthMax.additive = 0;
-    charactere->calculatedStats.healthMax.multiplicative = 1;
-
-    charactere->calculatedStats.mana.additive = 0;
-    charactere->calculatedStats.mana.multiplicative = 1;
-
-    charactere->calculatedStats.manaMax.additive = 0;
-    charactere->calculatedStats.manaMax.multiplicative = 1;
-
-    charactere->calculatedStats.attack.additive = 0;
-    charactere->calculatedStats.attack.multiplicative = 1;
-
-    charactere->calculatedStats.defense.additive = 0;
-    charactere->calculatedStats.defense.multiplicative = 1;
-
-    charactere->calculatedStats.speed.additive = 0;
-    charactere->calculatedStats.speed.multiplicative = 1;
-
-    charactere->level = 1;
-    charactere->gold = 5000;
-    charactere->experience = 0;
-
-    charactere->equipement[SLOT_ARME].stack = NULL;
-    charactere->equipement[SLOT_ARMURE].stack = NULL;
-    charactere->equipement[SLOT_ACTIVABLE1].stack = NULL;
-    charactere->equipement[SLOT_ACTIVABLE2].stack = NULL;
-
-    return charactere;
-}
 
 void inventaireAjoutObjet(t_inventaire* inv, t_item* item, int quantite) {
     t_itemsStack* itemStack = inventaireFindStack(inv, item);
@@ -391,7 +334,7 @@ t_itemsStack* inventaireFindStack(t_inventaire* inv, t_item* item) {
     return NULL;
 }
 
-void equipementRecalculerStats(t_character* c) {
+void equipementRecalculerStats(t_joueur* c) {
     // Initialisation des valeurs finales
     t_stats finalStats = {{0, 1}, {0, 1}, {0, 1}, {0, 1}, {0, 1}, {0, 1}, {0, 1}};
 
@@ -428,7 +371,7 @@ void equipementRecalculerStats(t_character* c) {
     c->calculatedStats.speed.additive = (c->baseStats.speed.additive + finalStats.speed.additive) * finalStats.speed.multiplicative;
 }
 
-void equiperEquipement(t_character** c, int inventoryIndex, equipementSlotType slot) {
+void equiperEquipement(t_joueur** c, int inventoryIndex, equipementSlotType slot) {
     int i;
 
     t_itemsStack* itemStack = (t_itemsStack*)getObject((*c)->inventaire->itemsStack, inventoryIndex);
@@ -450,14 +393,14 @@ void equiperEquipement(t_character** c, int inventoryIndex, equipementSlotType s
     equipementRecalculerStats(*c);
 }
 
-void desequiperEquipement(t_character** c, equipementSlotType slot) {
+void desequiperEquipement(t_joueur** c, equipementSlotType slot) {
     (*c)->equipement[slot].stack = NULL;
     if ((*c)->equipement[slot].stack->definition->onDeEquip != NULL)
         callFonction((*c)->equipement[slot].stack->definition->onDeEquip);
     equipementRecalculerStats(*c);
 }
 
-void equipementUse(t_character* c, equipementSlotType slot) {
+void equipementUse(t_joueur* c, equipementSlotType slot) {
     if (c->equipement[slot].stack->definition->onUse != NULL)
         callFonction(c->equipement[slot].stack->definition->onUse);
 }
@@ -483,11 +426,6 @@ void itemFreeFunc(void* data) {
     t_itemsStack* inv = (t_itemsStack*)data;
     if (inv)
         free(inv);
-}
-
-void charactereFree(t_character* c) {
-    itemFree(c->inventaire);
-    free(c);
 }
 
 void inventory_print(t_inventaire* inv) {
@@ -523,7 +461,7 @@ void inventory_print(t_inventaire* inv) {
     }
 }
 
-void equipment_print(t_character* c) {
+void equipment_print(t_joueur* c) {
     // Affichage des statistiques de base (baseStats)
     printf("Base Stats - Health additive : %.2f\n", c->baseStats.health.additive);
     printf("Base Stats - Health multiplicative : %.2f\n", c->baseStats.health.multiplicative);
@@ -577,7 +515,7 @@ void equipment_print(t_character* c) {
     printf("Level : %d\n", c->level);
 
     // Affichage de l'expérience du personnage
-    printf("Experience : %d\n", c->experience);
+    printf("Experience : %d\n", c->xp);
 
     // Affichage de l'or du personnage
     printf("Gold : %d\n", c->gold);

@@ -9,6 +9,8 @@
 #include "../../../../utils/objectManager.h"
 #include "../../../tileset.h"
 
+struct s_joueur;
+
 typedef enum {
     ITEM_FLAG_STACKABLE = 1 << 0,
     ITEM_FLAG_CONSUMABLE = 1 << 1,
@@ -80,7 +82,7 @@ typedef struct {
     int level;
     int experience;
     int gold;
-} t_character;
+} t_charactere;
 
 // Gestion Inventaire
 t_inventaire* createInventaire();
@@ -91,22 +93,19 @@ void itemFreeFunc(void* data);
 int hasFlag(int itemFlags, itemsFlags flag);
 
 // Gestion equipement
-void equiperEquipement(t_character** c, int inventoryIndex, equipementSlotType slot);
-void desequiperEquipement(t_character** c, equipementSlotType slot);
+void equiperEquipement(struct s_joueur** c, int inventoryIndex, equipementSlotType slot);
+void desequiperEquipement(struct s_joueur** c, equipementSlotType slot);
 
-// Gestion personnage
-t_character* createCharactere(t_tileset* tileset, int indice_texture);
-void charactereFree(t_character* c);
 
 // Gestion Interaction
-void equipementRecalculerStats(t_character* c);
+void equipementRecalculerStats(struct s_joueur* c);
 
 // fonction use
-void equipementUse(t_character* c, equipementSlotType slot);
+void equipementUse(struct s_joueur* c, equipementSlotType slot);
 
 // Debug
 void inventory_print(t_inventaire* inv);
-void equipment_print(t_character* c);
+void equipment_print(struct s_joueur* c);
 
 void item_save(t_item** item, t_fichier* fichier, int count);
 t_item** item_load(t_fichier* fichier, t_tileset* tileset);
