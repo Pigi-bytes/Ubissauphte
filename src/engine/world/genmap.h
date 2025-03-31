@@ -22,8 +22,17 @@ typedef struct t_salle {
     t_objectManager *entities;
 } t_salle;
 
-t_salle *initRoom();
+typedef struct {
+    t_salle **salles;
+    int nbSalles;
+    SDL_Rect *rectcord;
+
+} t_level;
+
+t_salle *
+initRoom();
 void connectRoom(t_salle *origineRoom, t_salle *destinationRoom, int dir);
 t_salle **genMap(int numberRoom, SDL_Rect *roomCoords);
+void freeSalle(t_salle *salle);
 
 #endif

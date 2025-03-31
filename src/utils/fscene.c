@@ -131,6 +131,14 @@ void setScene(t_sceneController* controller, char* name) {
         }
     }
 }
+t_scene* GetSceneByName(t_sceneController* controller, char* name) {
+    for (int i = 0; i < controller->scene->count; i++) {
+        t_scene* scene = (t_scene*)getObject(controller->scene, i);
+        if (strcmp(scene->name, name) == 0) {
+            return scene;
+        }
+    }
+}
 
 int indiceByscene(t_sceneController* controller, t_scene* scene) {
     for (int i = 0; i < controller->scene->count; i++) {
@@ -162,18 +170,37 @@ t_scene* getCurrentScene(t_sceneController* controller) {
     return scene;
 }
 
-void freeSceneController(t_sceneController* controller) {
-    if (!controller) return;
-    if (controller->lastMenu) {
-        free(controller->lastMenu->historique);
-        free(controller->lastMenu);
+void freeSceneByName(t_sceneController** controller, char* name) {
+    if (controller == NULL || (*controller) == NULL) {
+        printf("errur");
+        exit(EXIT_FAILURE);
     }
+    for (int i = 0; i < (*controller)->scene->count; i++) {
+        t_scene* scene = (t_scene*)getObject((*controller)->scene, i);
 
-    if (controller->scene) {
-        freeObjectManager(controller->scene);
+        if (scene && strcmp(scene->name, name) == 0) {
+            // Supprime proprement la scène
+            printf("supprimer\n");
+            deleteObject((*controller)->scene, i);
+
+            // Réajuste l'index courant si nécessaire
+            if ((*controller)->currentScene >= i) {
+                (*controller)->currentScene--;
+            }
+        }
     }
+}
 
-    free(controller);
+void freeSceneController(t_sceneController** controller) {
+    if (!controller || !*controller) return;
+
+    // Parcours récursif pour libérer toutes les ressources
+    freeObjectManager((*controller)->scene);
+    if ((*controller)->lastMenu) {
+        free((*controller)->lastMenu->historique);
+        free((*controller)->lastMenu);
+    }
+    *controller = NULL;
 }
 
 int findObjectIndex(t_objectManager* manager, void* object) {

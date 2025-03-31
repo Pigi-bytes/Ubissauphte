@@ -1,5 +1,13 @@
 #include "mainWorld.h"
 
+#include "commandeMenu.h"
+#include "fpsMenu.h"
+#include "mainMenu.h"
+#include "mainWorld.h"
+#include "option2.h"
+#include "optionMenu.h"
+#include "sceneInventaire.h"
+
 void generateSalle(t_salle** salle, int numSalle, t_context* context, t_joueur** joueur) {
     for (int i = 0; i < numSalle; i++) {
         if (salle[i]->ID >= -4 && salle[i]->ID <= -1)
@@ -10,22 +18,75 @@ void generateSalle(t_salle** salle, int numSalle, t_context* context, t_joueur**
             salle[i]->scene = createMainWord(context, salle[i], joueur, &(salle[i]->grille));
         }
         addScene(context->sceneController, salle[i]->scene);
+        printf("ajouter\n");
     }
-
-    placeOnRandomTile(salle[0]->grille, &(*joueur)->entity, salle[0]->entities);
 }
 
 void CreateNiveau(t_context* context, int nbSalle, t_joueur** joueur) {
-    SDL_Rect* rectcord = malloc(sizeof(SDL_Rect) * nbSalle);
-    for (int i = 0; i < nbSalle; i++) {
-        rectcord[i].x = 1;
-        rectcord[i].y = 1;
-        rectcord[i].w = 1;
-        rectcord[i].h = 1;
+    // Sauvegarde des propriétés essentielles
+    SDL_Texture* playerTex = (*joueur)->entity.texture;
+    SDL_Rect playerRect = (*joueur)->entity.displayRect;
+    t_circle physique = (*joueur)->entity.collisionCircle;
+    int weaponCount = (*joueur)->weaponCount;
+
+    (*joueur)->entity.collisionCircle.x = playerRect.x + playerRect.w / 2;
+    (*joueur)->entity.collisionCircle.y = playerRect.y + playerRect.h / 2;
+
+    (*joueur)->entity.collisionCircle.radius = fminf(playerRect.w, playerRect.h) / 2;
+
+    t_arme* weapons_backup[10];
+    int weaponCount_backup = (*joueur)->weaponCount;
+    for (int i = 0; i < (*joueur)->weaponCount; i++) {
+        weapons_backup[i] = (*joueur)->weapons[i];
     }
-    t_salle** salle = genMap(nbSalle, rectcord);
-    generateSalle(salle, nbSalle, context, joueur);
-    addScene(context->sceneController, createMapWord(context, salle, rectcord, *joueur, nbSalle));
+
+    // Nettoyage de l'ancien niveau
+    if (context->currentLevel) {
+        for (int i = 0; i < context->currentLevel->nbSalles; i++) {
+            if (context->currentLevel->salles[i]->scene) {
+                freeSceneByName(&context->sceneController,
+                                context->currentLevel->salles[i]->scene->name);
+            }
+        }
+        free(context->currentLevel->salles);
+        free(context->currentLevel->rectcord);
+        free(context->currentLevel);
+    }
+
+    // Création du nouveau niveau
+    context->currentLevel = malloc(sizeof(t_level));
+    context->currentLevel->rectcord = malloc(sizeof(SDL_Rect) * nbSalle);
+    for (int i = 0; i < nbSalle; i++) {
+        context->currentLevel->rectcord[i] = (SDL_Rect){1, 1, 1, 1};
+    }
+
+    // Génération des salles
+    context->currentLevel->salles = genMap(nbSalle, context->currentLevel->rectcord);
+    context->currentLevel->nbSalles = nbSalle;
+
+    // Génération des scènes
+    generateSalle(context->currentLevel->salles, nbSalle, context, joueur);
+
+    // RESTAURATION DU JOUEUR
+    (*joueur)->entity.texture = playerTex;
+    (*joueur)->entity.displayRect = playerRect;
+    for (int i = 0; i < weaponCount_backup; i++) {
+        (*joueur)->weapons[i] = weapons_backup[i];
+    }
+    (*joueur)->weaponCount = weaponCount;
+    (*joueur)->indexCurrentRoom = 1;
+    (*joueur)->entity.collisionCircle = physique;
+
+    placeOnRandomTile(context->currentLevel->salles[1]->grille, &(*joueur)->entity, context->currentLevel->salles[1]->entities);
+
+    // Création de la carte
+    addScene(context->sceneController,
+             createMapWord(context, context->currentLevel->salles,
+                           context->currentLevel->rectcord, *joueur, nbSalle));
+}
+void recrerWrapper(t_fonctionParam* f) {
+    t_context* context = (t_context*)f->param[0];
+    context->regeneration = SDL_TRUE;
 }
 
 t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t_grid** level) {
@@ -65,7 +126,7 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     addObject(salle->entities, &(*player)->entity, PLAYER);
 
     t_enemy* enemy;
-    for (int i = 0; i < 0; i++) {
+    for (int i = 0; i < 1; i++) {
         enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, scene);
         addObject(salle->entities, &enemy->entity, ENEMY);
         placeOnRandomTile(*level, &enemy->entity, salle->entities);
@@ -102,7 +163,7 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, -1, FONCTION_PARAMS(context->input, *player, *level, viewport, &context->frameData->deltaTime, context->sceneController));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&context->input->mouseYWheel));
 
-    sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, -1, FONCTION_PARAMS((*player), &context->frameData->deltaTime, salle, salle->entities));
+    sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, -1, FONCTION_PARAMS((*player), &context->frameData->deltaTime, salle, salle->entities, context));
     sceneRegisterFunction(scene, ENEMY_TYPE, UPDATE, updateEnemyWrapper, 0, FONCTION_PARAMS(&context->frameData->deltaTime, salle, salle->entities));
     sceneRegisterFunction(scene, TILE_ENTITY, UPDATE, updateTileEntityWrapper, 1, FONCTION_PARAMS(context, salle, salle->entities));
 
@@ -194,7 +255,7 @@ t_scene* createMarchantMap(t_context* context, t_salle* salle, t_joueur** player
     sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, -1, FONCTION_PARAMS(context->input, *player, *level, viewport, &context->frameData->deltaTime, context->sceneController));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&context->input->mouseYWheel));
 
-    sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, -1, FONCTION_PARAMS((*player), &context->frameData->deltaTime, salle, salle->entities));
+    sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, -1, FONCTION_PARAMS((*player), &context->frameData->deltaTime, salle, salle->entities, context));
     sceneRegisterFunction(scene, TILE_ENTITY, UPDATE, updateTileEntityWrapper, 1, FONCTION_PARAMS(context, salle, salle->entities));
 
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, UPDATE, updateFPSDisplayWrapper, -1, FONCTION_PARAMS(context->fpsDisplay, context->frameData, context->renderer));
@@ -278,7 +339,7 @@ t_scene* createBossMap(t_context* context, t_salle* salle, t_joueur** player, t_
     sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, -1, FONCTION_PARAMS(context->input, *player, *level, viewport, &context->frameData->deltaTime, context->sceneController));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&context->input->mouseYWheel));
 
-    sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, -1, FONCTION_PARAMS((*player), &context->frameData->deltaTime, salle, salle->entities));
+    sceneRegisterFunction(scene, PLAYER_TYPE, UPDATE, updatePlayerWrapper, -1, FONCTION_PARAMS((*player), &context->frameData->deltaTime, salle, salle->entities, context));
     sceneRegisterFunction(scene, ENEMY_TYPE, UPDATE, updateEnemyWrapper, 0, FONCTION_PARAMS(&context->frameData->deltaTime, salle, salle->entities));
     sceneRegisterFunction(scene, TILE_ENTITY, UPDATE, updateTileEntityWrapper, 1, FONCTION_PARAMS(context, salle, salle->entities));
 
@@ -322,6 +383,27 @@ t_scene* createMapWord(t_context* context, t_salle** salle, SDL_Rect* rectcord, 
 
     sceneRegisterFunction(scene, MAP_TYPE, RENDER_UI, affichageWrapper, 1, FONCTION_PARAMS(context->renderer, player));
     sceneRegisterFunction(scene, MAP_TYPE, HANDLE_INPUT, handleInputMapWrapper, -1, FONCTION_PARAMS(context->input, player, context->sceneController));
+
+    return scene;
+}
+
+t_scene* attente(t_context* context) {
+    t_typeRegistry* registre = createTypeRegistry();
+    const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
+    const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
+    const uint8_t LOAD_TYPE = registerType(registre, NULL, "load");
+
+    t_text* text = createText(context->renderer, "Attente", context->font, WHITE);
+    text->rect = creerRect((1 - 0.8f) / 2, 0.1f, 0.8f, 0.2f);
+
+    t_scene* scene = createScene(initObjectManager(registre), "attente");
+    ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "Regénerer", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.35f, 0.3f, 0.1f), creerFonction(recrerWrapper, FONCTION_PARAMS(context))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, NULL, LOAD_TYPE);
+
+    sceneRegisterFunction(scene, TEXTE_TYPE, RENDER_UI, renderTextWrapper, 1, FONCTION_PARAMS(context->renderer));
+    sceneRegisterFunction(scene, BUTTON_TYPE, HANDLE_INPUT, handleInputButtonWrapper, 1, FONCTION_PARAMS(context));
+    sceneRegisterFunction(scene, BUTTON_TYPE, RENDER_UI, renderButtonWrapper, 1, FONCTION_PARAMS(context));
 
     return scene;
 }

@@ -1,4 +1,5 @@
 #include "boss_slime.h"
+
 #include "../player.h"
 
 #define BOSS_JUMP_FORCE 250.0f
@@ -32,7 +33,9 @@ void onBossSlimeDeath(t_context* context, void* entity) {
     enemy->entity.useCircleCollision = SDL_FALSE;
     if (enemy->lastDamagedBy != NULL) {
         t_joueur* player = (t_joueur*)enemy->lastDamagedBy;  // Cast pour accéder au joueur
-        addPlayerXP(player, enemy->xpReward);                // Ajout de l'XP au joueur
+        addPlayerXP(player, enemy->xpReward);
+        setScene(context->sceneController, "attente");
+        //   Ajout de l'XP au joueur
     }
 }
 

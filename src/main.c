@@ -6,7 +6,6 @@
 #include "_scene/optionMenu.h"
 #include "_scene/sceneInventaire.h"
 #include "context.h"
-
 int main(int argc, char* argv[]) {
     if (initAudioSystem() != 0) {
         return 1;  // Arrêter si l'initialisation échoue
@@ -14,6 +13,7 @@ int main(int argc, char* argv[]) {
 
     SDL_Init(SDL_INIT_VIDEO);
     initTextEngine();
+    srand(time(NULL));
 
     t_context context;
 
@@ -30,6 +30,8 @@ int main(int argc, char* argv[]) {
     context.sceneController = initSceneController();
     context.audioManager = initAudioManager();
     context.fpsDisplay = initFPSDisplay(context.renderer, context.font);
+    context.regeneration = SDL_FALSE;
+    context.currentLevel = NULL;
 
     context.control = malloc(sizeof(t_control));
     context.control->up = SDL_SCANCODE_W;
@@ -78,7 +80,7 @@ int main(int argc, char* argv[]) {
     t_arme* hache = malloc(sizeof(t_arme));
     *hache = (t_arme){
         .mass = 15.0f,            // Lourde
-        .damage = 5000.0f,        // Dégâts élevés
+        .damage = 50000.0f,       // Dégâts élevés
         .range = 28.0f,           // Portée moyenne
         .angleAttack = 2 * M_PI,  // Large arc d'attaque (120°)
         .attackDuration = 0.45f,  // Animation lente
@@ -125,6 +127,7 @@ int main(int argc, char* argv[]) {
     player->currentWeapon = player->weapons[player->currentWeaponIndex];
 
     player->indexCurrentRoom = 0;
+    int nb = 4;
 
     t_scene* scene = createMainMenu(&context);
     t_scene* scene0 = createOptionMenu(&context);
@@ -133,6 +136,7 @@ int main(int argc, char* argv[]) {
     t_scene* scene3 = createFpsMenu(&context);
     t_scene* scene4 = createMainInv(&context, player);
     t_scene* scene5 = createOption2Menu(&context);
+    t_scene* scene6 = attente(&context);
 
     addScene(context.sceneController, scene);
     addScene(context.sceneController, scene0);
@@ -140,10 +144,62 @@ int main(int argc, char* argv[]) {
     addScene(context.sceneController, scene3);
     addScene(context.sceneController, scene4);
     addScene(context.sceneController, scene5);
+    addScene(context.sceneController, scene6);
     setScene(context.sceneController, "menuPrincipal");
 
     while (!context.input->quit) {
         startFrame(context.frameData);
+        if (context.regeneration) {
+            printf("=== REGENERATION START ===\n");
+
+            SDL_Texture* playerTex = player->entity.texture;
+            SDL_Rect playerRect = player->entity.displayRect;
+
+            // 2. Réinitialisation complète du renderer
+            SDL_RenderClear(context.renderer);
+            SDL_SetRenderDrawColor(context.renderer, 0, 0, 0, 255);
+            SDL_RenderPresent(context.renderer);
+
+            // 3. Recréation du niveau
+            CreateNiveau(&context, nb, &player);
+
+            // 4. Réassignation des propriétés du joueur
+            player->entity.texture = playerTex;
+            player->entity.displayRect = playerRect;
+
+            // 5. Vérification des tilesets
+            if (tileset == NULL || tileset->textureTiles == NULL) {
+                printf("Rechargement des tilesets...\n");
+                tileset = initTileset(context.renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
+            }
+
+            printf("=== REGENERATION COMPLETE ===\n");
+            context.regeneration = SDL_FALSE;
+
+            // Recréation de toutes les scènes nécessaires
+            t_scene* scene = createMainMenu(&context);
+            t_scene* scene0 = createOptionMenu(&context);
+            t_scene* scene1 = createCommandeMenu(&context);
+            t_scene* scene2 = createFpsMenu(&context);
+            t_scene* scene3 = createMainInv(&context, player);
+            t_scene* scene4 = createOption2Menu(&context);
+            t_scene* scene5 = attente(&context);
+
+            addScene(context.sceneController, scene);
+            addScene(context.sceneController, scene0);
+            addScene(context.sceneController, scene1);
+            addScene(context.sceneController, scene2);
+            addScene(context.sceneController, scene3);
+            addScene(context.sceneController, scene4);
+            addScene(context.sceneController, scene5);
+
+            setScene(context.sceneController, "menuPrincipal");
+            t_scene* currentScene = getCurrentScene(context.sceneController);
+            executeSceneFunctions(currentScene, UPDATE);
+            executeSceneFunctions(currentScene, RENDER_GAME);
+
+            context.regeneration = SDL_FALSE;
+        }
         t_scene* currentScene = getCurrentScene(context.sceneController);
 
         executeSceneFunctions(currentScene, HANDLE_INPUT);
@@ -172,7 +228,7 @@ int main(int argc, char* argv[]) {
 
     freeOption(context.option);
     freeFrameData(context.frameData);
-    freeSceneController(context.sceneController);
+    freeSceneController(&context.sceneController);
     free(context.control);
 
     TTF_CloseFont(context.font);

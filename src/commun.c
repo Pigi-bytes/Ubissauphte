@@ -73,7 +73,7 @@ void handleInputButtonVolummeWrapper(t_fonctionParam* f) {
 }
 
 void updatePlayerWrapper(t_fonctionParam* f) {
-    updatePlayer(((t_joueur*)(f)->param[0]), ((float*)(f)->param[1]), ((t_salle*)(f)->param[2]), ((t_objectManager*)(f)->param[3]));
+    updatePlayer(((t_joueur*)(f)->param[0]), ((float*)(f)->param[1]), ((t_salle*)(f)->param[2]), ((t_objectManager*)(f)->param[3]), ((t_context*)(f)->param[4]));
 }
 
 void setSceneWrapper(t_fonctionParam* f) {

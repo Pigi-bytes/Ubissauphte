@@ -1,3 +1,7 @@
+#ifndef BOSS_SLIME_H
+#define BOSS_SLIME_H
+
+#include "../../../_scene/mainWorld.h"
 #include "../../../debug.h"
 #include "../enemy.h"
 
@@ -46,3 +50,5 @@ typedef struct {
 
 void updateBossSlime(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities);
 t_enemy* createBossSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, t_scene* scene);
+
+#endif

@@ -149,7 +149,7 @@ void startAttack(t_joueur* player) {
     player->attack.hitBox.origin = (SDL_FPoint){player->entity.collisionCircle.x, player->entity.collisionCircle.y};
 }
 
-void updateAttack(t_joueur* player, float* deltaTime, t_objectManager* entities) {
+void updateAttack(t_joueur* player, float* deltaTime, t_objectManager* entities, t_context* context) {
     if (!player->attack.isActive) return;
 
     t_arme* weapon = player->currentWeapon;
@@ -178,7 +178,7 @@ void updateAttack(t_joueur* player, float* deltaTime, t_objectManager* entities)
 
         // Vérification si l'ennemi est dans le secteur d'attaque actuel
         if (cercleInSector(enemyPos, enemy->collisionCircle.radius, player->attack.hitBox.origin, currentAngle, weapon->range, weapon->angleAttack)) {
-            takeDamageFromPlayer((t_enemy*)enemy, weapon->damage, player, NULL);
+            takeDamageFromPlayer((t_enemy*)enemy, weapon->damage, player, context);
 
             // Vecteur direction depuis l'origine de l'attaque vers l'ennemi
             float dx = enemyPos.x - player->attack.hitBox.origin.x;
@@ -385,7 +385,7 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     }
 }
 
-void updatePlayer(t_joueur* player, float* deltaTime, t_salle* salle, t_objectManager* entities) {
+void updatePlayer(t_joueur* player, float* deltaTime, t_salle* salle, t_objectManager* entities, t_context* context) {
     // On conserve le deltaTime original pour certains calculs qui ne doivent pas être affecté par le ralentissement
     float originalDeltaTime = *deltaTime;
 
@@ -397,7 +397,7 @@ void updatePlayer(t_joueur* player, float* deltaTime, t_salle* salle, t_objectMa
     player->attack.nbHits = 0;
 
     if (player->attack.isActive) {
-        updateAttack(player, deltaTime, entities);
+        updateAttack(player, deltaTime, entities, context);
     }
 
     if (player->attack.cooldown > 0) {

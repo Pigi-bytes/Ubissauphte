@@ -50,6 +50,7 @@ void applyDamage(t_healthSystem* health, int damage, void* entity, t_context* co
         health->targetHealthRatio = 0.0f;
 
         if (health->onDeathCallback) {
+            printf("%p", context->sceneController);
             health->onDeathCallback(context, entity);
         }
         return;
