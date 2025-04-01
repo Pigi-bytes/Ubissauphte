@@ -3,7 +3,7 @@
 #include "blacksmith.h"
 
 
-void updateBlacksmith(t_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities){
+void updateBlacksmith(t_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities){
     t_blacksmith* blacksmith = (t_blacksmith*)entity;
 
     blacksmith->detectionRange.x = entity->entity.displayRect.x + entity->entity.displayRect.w / 2;
@@ -48,7 +48,7 @@ void updateBlacksmith(t_tileEntity* entity, t_context* context, t_grid* grid, t_
         }
     }
 
-    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, grid, entities);
+    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, salle->grille, entities);
 }
 
 void renderBlacksmith(t_tileEntity* entity, t_context* context, t_camera* camera) {
