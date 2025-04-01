@@ -112,7 +112,7 @@ Chaque entité se voit attribuer un composant physique optionnel accompagné d'u
 \end{itemize}
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.75\linewidth]{./img/Capture d'écran 2025-03-29 200818}
+    \includegraphics[width=0.75\linewidth]{./img/debugCollider.png}
     \caption{Visualisation des colliders (en rouge) sur différentes entités}
     \label{fig:colliders_exemple}
 \end{figure}
@@ -152,14 +152,14 @@ Nous avons observé une \textbf{erreur de segmentation fault} lors de l'exécuti
     \end{itemize}
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{./img/gdbsystème.png}
+    \includegraphics[width=0.8\textwidth]{./img/gdbSystem.png}
     \caption{Erreur observée dans GDB}
     \label{fig:gdb_error}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{./img/ExempleMarcheBien.png}
     \caption{Comportement normal pour référence}
@@ -168,14 +168,14 @@ Nous avons observé une \textbf{erreur de segmentation fault} lors de l'exécuti
 
 L'inspection de \texttt{salleDep} via GDB révèle :
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{./img/ErreurAvecPrint.png}
     \caption{Résultat de la commande \texttt{print salleDep}}
     \label{fig:gdb_print}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{./img/Erreur2.png}
   \caption{Résultat de la commande \texttt{print salleDep}}
