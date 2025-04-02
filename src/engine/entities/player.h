@@ -68,10 +68,6 @@ typedef struct s_joueur {
     int xpToNextLevel;
     int gold;
 
-    // TEMPORAIRE TEST
-    t_arme* weapons[10];
-    int weaponCount;
-    int currentWeaponIndex;
     t_arme* currentWeapon;
     int indexCurrentRoom;
 

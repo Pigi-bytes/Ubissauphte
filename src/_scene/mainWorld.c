@@ -27,18 +27,18 @@ void CreateNiveau(t_context* context, int nbSalle, t_joueur** joueur) {
     SDL_Texture* playerTex = (*joueur)->entity.texture;
     SDL_Rect playerRect = (*joueur)->entity.displayRect;
     t_circle physique = (*joueur)->entity.collisionCircle;
-    int weaponCount = (*joueur)->weaponCount;
+    // int weaponCount = (*joueur)->weaponCount;
 
     (*joueur)->entity.collisionCircle.x = playerRect.x + playerRect.w / 2;
     (*joueur)->entity.collisionCircle.y = playerRect.y + playerRect.h / 2;
 
     (*joueur)->entity.collisionCircle.radius = fminf(playerRect.w, playerRect.h) / 2;
 
-    t_arme* weapons_backup[10];
-    int weaponCount_backup = (*joueur)->weaponCount;
-    for (int i = 0; i < (*joueur)->weaponCount; i++) {
-        weapons_backup[i] = (*joueur)->weapons[i];
-    }
+    // t_arme* weapons_backup[10];
+    // int weaponCount_backup = (*joueur)->weaponCount;
+    // for (int i = 0; i < (*joueur)->weaponCount; i++) {
+    //     weapons_backup[i] = (*joueur)->weapons[i];
+    // }
 
     // Nettoyage de l'ancien niveau
     if (context->currentLevel) {
@@ -70,10 +70,7 @@ void CreateNiveau(t_context* context, int nbSalle, t_joueur** joueur) {
     // RESTAURATION DU JOUEUR
     (*joueur)->entity.texture = playerTex;
     (*joueur)->entity.displayRect = playerRect;
-    for (int i = 0; i < weaponCount_backup; i++) {
-        (*joueur)->weapons[i] = weapons_backup[i];
-    }
-    (*joueur)->weaponCount = weaponCount;
+
     (*joueur)->indexCurrentRoom = 1;
     (*joueur)->entity.collisionCircle = physique;
 

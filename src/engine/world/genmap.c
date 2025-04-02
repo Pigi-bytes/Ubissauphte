@@ -99,34 +99,17 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
     }
 
     // Après la génération des salles normales
-    int marchant = (rand() % 4) + 1;
-    int boss = 5;
-
-    // Détermine la direction et les offsets selon le type de marchand
-    int dir_marchant, dir_boss;
-    switch (marchant) {
-        case 1:
-            dir_marchant = 2;
-            break;  // Haut -> Bas du marchand
-        case 2:
-            dir_marchant = 0;
-            break;  // Droite -> Gauche du marchand
-        case 3:
-            dir_marchant = 3;
-            break;  // Bas -> Haut du marchand
-        case 4:
-            dir_marchant = 1;
-            break;  // Gauche -> Droite du marchand
-    }
-
-    switch (boss) {
-        case 5:
-            dir_boss = 2;
-            break;  // Haut -> Bas du Boss
-    }
-
+    // Ajout de la salle du boss
     int trouve = 0;
     while (trouve == 0) {
+        int boss = 5;
+        // Détermine la direction et les offsets selon le type de boss
+        int dir_boss;
+        switch (boss) {
+            case 5:
+                dir_boss = 2;
+                break;  // Haut -> Bas du Boss
+        }
         int i = rand() % (numberRoom - 2);
         t_salle* salle = roomList[i];
 
@@ -154,9 +137,27 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
             break;
         }
     }
-    // Cherche une salle valide pour la connexion
+
+    // Ajout salle du marchant
     trouve = 0;
     while (trouve == 0) {
+        int marchant = (rand() % 4) + 1;
+        // Détermine la direction et les offsets selon le type de marchant
+        int dir_marchant;
+        switch (marchant) {
+            case 1:
+                dir_marchant = 2;
+                break;  // Haut -> Bas du marchand
+            case 2:
+                dir_marchant = 0;
+                break;  // Droite -> Gauche du marchand
+            case 3:
+                dir_marchant = 3;
+                break;  // Bas -> Haut du marchand
+            case 4:
+                dir_marchant = 1;
+                break;  // Gauche -> Droite du marchand
+        }
         printf("Feur\n");
         int i = rand() % (numberRoom - 2);
         t_salle* salle = roomList[i];

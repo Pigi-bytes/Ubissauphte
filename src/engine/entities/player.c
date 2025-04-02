@@ -348,9 +348,7 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
         }
     }
 
-    if (keyPressOnce(input, SDL_SCANCODE_T)) {
-        switchToNextWeapon(player);
-    }
+ 
 
     if (keyPressOnce(input, SDL_SCANCODE_N)) {
         applyDamage(&player->health, 10, &player->entity, NULL);

@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 
 #include "../../../debug.h"
+#include "../../../utils/fonctionManager.h"
 #include "../entity.h"
 
 typedef struct {
@@ -13,7 +14,8 @@ typedef struct {
     float angleAttack;
     float attackDuration;
     float attackCooldown;
-
+    t_fonctionParam* onEquipe;
+    int indice;
     SDL_Texture* texture;
     SDL_Rect displayRect;
 } t_arme;
