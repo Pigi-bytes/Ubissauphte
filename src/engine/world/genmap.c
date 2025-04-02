@@ -122,7 +122,7 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
     switch (boss) {
         case 5:
             dir_boss = 2;
-            break;  // Haut -> Bas du marchand
+            break;  // Haut -> Bas du Boss
     }
 
     int trouve = 0;
@@ -136,7 +136,7 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
 
         // Vérifie les superpositions
         int collision = 0;
-        for (int j = 0; j < numberRoom - 1; j++) {
+        for (int j = 0; j < numberRoom - 2; j++) {
             if (roomCoords[j].x == newX && roomCoords[j].y == newY) {
                 collision = 1;
                 break;
@@ -148,8 +148,8 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
             salleBoss->ID = -boss;
             connectRoom(salle, salleBoss, dir_boss);
 
-            roomCoords[numberRoom - 1] = (SDL_Rect){newX, newY, 0, 0};
-            roomList[numberRoom - 1] = salleBoss;
+            roomCoords[numberRoom - 2] = (SDL_Rect){newX, newY, 0, 0};
+            roomList[numberRoom - 2] = salleBoss;
             trouve = 1;
             break;
         }
@@ -157,6 +157,7 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
     // Cherche une salle valide pour la connexion
     trouve = 0;
     while (trouve == 0) {
+        printf("Feur\n");
         int i = rand() % (numberRoom - 2);
         t_salle* salle = roomList[i];
 
@@ -166,7 +167,7 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
 
         // Vérifie les superpositions
         int collision = 0;
-        for (int j = 0; j < numberRoom - 2; j++) {
+        for (int j = 0; j < numberRoom - 1; j++) {
             if (roomCoords[j].x == newX && roomCoords[j].y == newY) {
                 collision = 1;
                 break;
@@ -179,14 +180,15 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
             marchand->ID = -marchant;
             connectRoom(salle, marchand, dir_marchant);
 
-            roomCoords[numberRoom - 2] = (SDL_Rect){newX, newY, 0, 0};
-            roomList[numberRoom - 2] = marchand;
+            roomCoords[numberRoom - 1] = (SDL_Rect){newX, newY, 0, 0};
+            roomList[numberRoom - 1] = marchand;
             trouve = 1;
             break;
         }
     }
 
         // Debug: affiche toutes les coordonnées
+    printf("Nb salles : %d\n", numberRoom);
     for (int i = 0; i < numberRoom; i++) {
         printf("X[%d] et Y[%d] et ID : %d\n", roomCoords[i].x, roomCoords[i].y, roomList[i]->ID);
     }
