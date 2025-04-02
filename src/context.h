@@ -42,8 +42,8 @@ typedef struct {
     t_frameData* frameData;
     t_option* option;
     t_fpsDisplay* fpsDisplay;
-    SDL_bool regeneration;
     t_level* currentLevel;
+    int* nbLevel;
 } t_context;
 
 t_option* creeOption();

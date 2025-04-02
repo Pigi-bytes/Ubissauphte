@@ -25,13 +25,15 @@ int main(int argc, char* argv[]) {
     context.font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     context.gameFont = loadFont("assets/fonts/PressStart2P-vaV7.ttf", 7);
 
+    int nb = 3;
+
     context.frameData = initFrameData(0);
     context.option = creeOption();
     context.sceneController = initSceneController();
     context.audioManager = initAudioManager();
     context.fpsDisplay = initFPSDisplay(context.renderer, context.font);
-    context.regeneration = SDL_FALSE;
     context.currentLevel = NULL;
+    context.nbLevel = &nb;
 
     context.control = malloc(sizeof(t_control));
     context.control->up = SDL_SCANCODE_W;
@@ -101,11 +103,9 @@ int main(int argc, char* argv[]) {
     player->currentWeapon = dague;
 
     player->indexCurrentRoom = 0;
-    int nb = 4;
 
-    t_scene* scene = createMainMenu(&context);
+    t_scene* scene = createMainMenu(&context, &player);
     t_scene* scene0 = createOptionMenu(&context);
-    CreateNiveau(&context, 3, &player);
     t_scene* scene2 = createCommandeMenu(&context);
     t_scene* scene3 = createFpsMenu(&context);
     t_scene* scene4 = createMainInv(&context, player);
@@ -123,57 +123,6 @@ int main(int argc, char* argv[]) {
 
     while (!context.input->quit) {
         startFrame(context.frameData);
-        if (context.regeneration) {
-            printf("=== REGENERATION START ===\n");
-
-            SDL_Texture* playerTex = player->entity.texture;
-            SDL_Rect playerRect = player->entity.displayRect;
-
-            // 2. Réinitialisation complète du renderer
-            SDL_RenderClear(context.renderer);
-            SDL_SetRenderDrawColor(context.renderer, 0, 0, 0, 255);
-            SDL_RenderPresent(context.renderer);
-
-            // 3. Recréation du niveau
-            CreateNiveau(&context, nb, &player);
-
-            // 4. Réassignation des propriétés du joueur
-            player->entity.texture = playerTex;
-            player->entity.displayRect = playerRect;
-
-            // 5. Vérification des tilesets
-            if (tileset == NULL || tileset->textureTiles == NULL) {
-                printf("Rechargement des tilesets...\n");
-                tileset = initTileset(context.renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
-            }
-
-            printf("=== REGENERATION COMPLETE ===\n");
-            context.regeneration = SDL_FALSE;
-
-            // Recréation de toutes les scènes nécessaires
-            t_scene* scene = createMainMenu(&context);
-            t_scene* scene0 = createOptionMenu(&context);
-            t_scene* scene1 = createCommandeMenu(&context);
-            t_scene* scene2 = createFpsMenu(&context);
-            t_scene* scene3 = createMainInv(&context, player);
-            t_scene* scene4 = createOption2Menu(&context);
-            t_scene* scene5 = attente(&context);
-
-            addScene(context.sceneController, scene);
-            addScene(context.sceneController, scene0);
-            addScene(context.sceneController, scene1);
-            addScene(context.sceneController, scene2);
-            addScene(context.sceneController, scene3);
-            addScene(context.sceneController, scene4);
-            addScene(context.sceneController, scene5);
-
-            setScene(context.sceneController, "menuPrincipal");
-            t_scene* currentScene = getCurrentScene(context.sceneController);
-            executeSceneFunctions(currentScene, UPDATE);
-            executeSceneFunctions(currentScene, RENDER_GAME);
-
-            context.regeneration = SDL_FALSE;
-        }
         t_scene* currentScene = getCurrentScene(context.sceneController);
 
         executeSceneFunctions(currentScene, HANDLE_INPUT);
@@ -204,6 +153,7 @@ int main(int argc, char* argv[]) {
     freeFrameData(context.frameData);
     freeSceneController(&context.sceneController);
     free(context.control);
+    freeLevel(context.currentLevel);
 
     TTF_CloseFont(context.font);
     freeInput(context.input);

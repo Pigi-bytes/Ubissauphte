@@ -188,7 +188,7 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
         }
     }
 
-        // Debug: affiche toutes les coordonnées
+    // Debug: affiche toutes les coordonnées
     printf("Nb salles : %d\n", numberRoom);
     for (int i = 0; i < numberRoom; i++) {
         printf("X[%d] et Y[%d] et ID : %d\n", roomCoords[i].x, roomCoords[i].y, roomList[i]->ID);
@@ -197,4 +197,13 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
     printf("Aff\n\n\n");
 
     return roomList;
+}
+
+void freeLevel(t_level* level) {
+    for (int i = 0; i < level->nbSalles; i++) {
+        free(level->salles[i]);
+    }
+    free(level->salles);
+    free(level->rectcord);
+    free(level);
 }

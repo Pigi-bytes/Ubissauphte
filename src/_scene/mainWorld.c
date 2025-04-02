@@ -1,13 +1,5 @@
 #include "mainWorld.h"
 
-#include "commandeMenu.h"
-#include "fpsMenu.h"
-#include "mainMenu.h"
-#include "mainWorld.h"
-#include "option2.h"
-#include "optionMenu.h"
-#include "sceneInventaire.h"
-
 void generateSalle(t_salle** salle, int numSalle, t_context* context, t_joueur** joueur) {
     for (int i = 0; i < numSalle; i++) {
         if (salle[i]->ID >= -4 && salle[i]->ID <= -1)
@@ -18,72 +10,34 @@ void generateSalle(t_salle** salle, int numSalle, t_context* context, t_joueur**
             salle[i]->scene = createMainWord(context, salle[i], joueur, &(salle[i]->grille));
         }
         addScene(context->sceneController, salle[i]->scene);
-        printf("ajouter\n");
     }
 }
 
-void CreateNiveau(t_context* context, int nbSalle, t_joueur** joueur) {
-    // Sauvegarde des propriétés essentielles
-    SDL_Texture* playerTex = (*joueur)->entity.texture;
-    SDL_Rect playerRect = (*joueur)->entity.displayRect;
-    t_circle physique = (*joueur)->entity.collisionCircle;
-    // int weaponCount = (*joueur)->weaponCount;
-
-    (*joueur)->entity.collisionCircle.x = playerRect.x + playerRect.w / 2;
-    (*joueur)->entity.collisionCircle.y = playerRect.y + playerRect.h / 2;
-
-    (*joueur)->entity.collisionCircle.radius = fminf(playerRect.w, playerRect.h) / 2;
-
-    // t_arme* weapons_backup[10];
-    // int weaponCount_backup = (*joueur)->weaponCount;
-    // for (int i = 0; i < (*joueur)->weaponCount; i++) {
-    //     weapons_backup[i] = (*joueur)->weapons[i];
-    // }
-
-    // Nettoyage de l'ancien niveau
-    if (context->currentLevel) {
-        for (int i = 0; i < context->currentLevel->nbSalles; i++) {
-            if (context->currentLevel->salles[i]->scene) {
-                freeSceneByName(&context->sceneController,
-                                context->currentLevel->salles[i]->scene->name);
-            }
-        }
-        free(context->currentLevel->salles);
-        free(context->currentLevel->rectcord);
-        free(context->currentLevel);
-    }
-
+void CreateNiveau(t_context* context, int* nbSalle, t_joueur** joueur) {
     // Création du nouveau niveau
     context->currentLevel = malloc(sizeof(t_level));
-    context->currentLevel->rectcord = malloc(sizeof(SDL_Rect) * nbSalle);
-    for (int i = 0; i < nbSalle; i++) {
+    context->currentLevel->rectcord = malloc(sizeof(SDL_Rect) * (*nbSalle));
+    for (int i = 0; i < *nbSalle; i++) {
         context->currentLevel->rectcord[i] = (SDL_Rect){1, 1, 1, 1};
     }
 
     // Génération des salles
-    context->currentLevel->salles = genMap(nbSalle, context->currentLevel->rectcord);
-    context->currentLevel->nbSalles = nbSalle;
+    context->currentLevel->salles = genMap(*nbSalle, context->currentLevel->rectcord);
+    context->currentLevel->nbSalles = *nbSalle;
 
-    // Génération des scènes
-    generateSalle(context->currentLevel->salles, nbSalle, context, joueur);
+    // Génération des scèness
+    generateSalle(context->currentLevel->salles, *nbSalle, context, joueur);
 
-    // RESTAURATION DU JOUEUR
-    (*joueur)->entity.texture = playerTex;
-    (*joueur)->entity.displayRect = playerRect;
+    placeOnRandomTile(context->currentLevel->salles[0]->grille, &(*joueur)->entity, context->currentLevel->salles[0]->entities);
 
-    (*joueur)->indexCurrentRoom = 1;
-    (*joueur)->entity.collisionCircle = physique;
+    SDL_RenderClear(context->renderer);
+    addScene(context->sceneController, createMapWord(context, context->currentLevel->salles, context->currentLevel->rectcord, *joueur, *nbSalle));
 
-    placeOnRandomTile(context->currentLevel->salles[1]->grille, &(*joueur)->entity, context->currentLevel->salles[1]->entities);
-
-    // Création de la carte
-    addScene(context->sceneController,
-             createMapWord(context, context->currentLevel->salles,
-                           context->currentLevel->rectcord, *joueur, nbSalle));
+    setScene(context->sceneController, "main");
 }
-void recrerWrapper(t_fonctionParam* f) {
-    t_context* context = (t_context*)f->param[0];
-    context->regeneration = SDL_TRUE;
+
+void CreateNiveauWrapper(t_fonctionParam* f) {
+    CreateNiveau((t_context*)f->param[0], (int*)f->param[1], (t_joueur**)f->param[2]);
 }
 
 t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t_grid** level) {
@@ -340,7 +294,7 @@ t_scene* createBossMap(t_context* context, t_salle* salle, t_joueur** player, t_
     ADD_OBJECT_TO_SCENE(scene, viewport, VIEWPORT_TYPE);
     ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
     ADD_OBJECT_TO_SCENE(scene, NULL, FRAME_DISPLAY_TYPE);
-    
+
     processSpecialTiles(*level, tileset, salle->entities, TILE_ENTITY, scene);
 
     sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, -1, FONCTION_PARAMS(context->input, *player, *level, viewport, &context->frameData->deltaTime, context->sceneController));
@@ -405,7 +359,7 @@ t_scene* attente(t_context* context) {
 
     t_scene* scene = createScene(initObjectManager(registre), "attente");
     ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
-    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "Regénerer", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.35f, 0.3f, 0.1f), creerFonction(recrerWrapper, FONCTION_PARAMS(context))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "quitter", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.35f, 0.35f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(context->input))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, NULL, LOAD_TYPE);
 
     sceneRegisterFunction(scene, TEXTE_TYPE, RENDER_UI, renderTextWrapper, 1, FONCTION_PARAMS(context->renderer));

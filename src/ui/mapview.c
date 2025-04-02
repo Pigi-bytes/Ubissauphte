@@ -95,6 +95,7 @@ void affichage(SDL_Renderer *renderer, t_mapAffichage *map, t_joueur *player) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    printf("%d\n", map->numRooms);
 
     for (int i = 0; i < map->numRooms; i++) {
         if (map->numRooms - 2 == i) {
@@ -104,6 +105,7 @@ void affichage(SDL_Renderer *renderer, t_mapAffichage *map, t_joueur *player) {
         } else {
             SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         }
+        /*
         if (i == player->indexCurrentRoom) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
             int x = map->rooms[i].x + map->rooms[i].w / 2;
@@ -112,6 +114,7 @@ void affichage(SDL_Renderer *renderer, t_mapAffichage *map, t_joueur *player) {
             SDL_RenderFillRect(renderer, &rect);
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
         }
+            */
         SDL_RenderDrawRect(renderer, &map->rooms[i]);
     }
 
@@ -119,6 +122,7 @@ void affichage(SDL_Renderer *renderer, t_mapAffichage *map, t_joueur *player) {
     for (int i = 0; i < map->numLines; i++) {
         SDL_RenderDrawLine(renderer, map->lines[i].x1, map->lines[i].y1, map->lines[i].x2, map->lines[i].y2);
     }
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
 void handleInputMap(t_input *input, t_joueur *player, t_sceneController *sceneController) {
     if (input->key[player->control->map]) {
