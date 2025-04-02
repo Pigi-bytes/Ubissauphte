@@ -1,4 +1,5 @@
 \documentclass[a4paper,11pt]{article}
+
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -11,10 +12,22 @@
 \usepackage{hyperref}  % For clickable links in PDF
 \usepackage{amsmath}  % Pour les équations
 
+\usepackage{listings}
+
+\lstset{
+    language=C,
+    basicstyle=\ttfamily\small,           
+    frame=single,
+    breaklines=true,                       
+}
+
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=red,citecolor=green}
+
+
 \pagestyle{fancy}
-\setlength{\headheight}{28pt}
+\setlength{\headheight}{29pt}
 
-
+\usepackage{titlesec}
 
 
 \lhead{\includegraphics[width=2cm]{./img/image.png}}
@@ -92,7 +105,11 @@ Nous avons également réalisé des tâches en groupe, que ce soit pour intégre
 
 \subsubsection{Pourquoi un moteur physique ?}
 \label{sec:moteur_physique}
-Un jeu vidéo impliquant des interactions dynamiques entre de nombreux éléments (personnages, ennemis, objets) pose un défi fondamental~: l'imprévisibilité des combinaisons de collisions. Un système simplifié, où chaque interaction serait codée manuellement, deviendrait rapidement ingérable. 
+
+Dans un jeu vidéo, et particulièrement dans un \textbf{rogue-like}, les interactions entre éléments (personnages, ennemis, objets) posent un défi de taille~: l'imprévisibilité des combinaisons de collisions. 
+
+Les mouvements, les collisions, les rebonds et autres effets physiques doivent être simulés de manière réaliste pour ne pas gâcher l’expérience du joueur. Cependant, un système simplifié, où chaque interaction serait codée manuellement, devient rapidement ingérable, la solution que nous avons donc trouver est celle d'un \textbf{moteur physique}, permettant de gérer de manière automatisée toutes ces interactions.
+
 
 \subsubsection{Gestion des collisions par colliders} 
 \label{sec:colliders}
@@ -125,6 +142,8 @@ Le joueur, initialement modélisé par un rectangle de \(16 \times 16\)~px, a é
     \item Génère des rebonds cohérents dans les coins.
 \end{itemize}
 
+
+
 \paragraph{Exemple d'interaction}  
 Lorsqu’un Slime (léger et élastique) est frappé par le joueur, une force orientée selon l’angle de l’attaque lui est appliquée. Projeté contre un Orc (lourd), le moteur calcule automatiquement la réaction : l’Orc subit un léger recul, tandis que le Slime rebondit en changeant de direction. Si le Slime percute ensuite un mur, son élasticité réduit progressivement l’énergie du rebond. Enfin, il peut se cogner contre un autre slime, et lui transmettre encore de l’énergie. Ces interactions en cascade émergent naturellement des lois physiques configurées, sans nécessiter de code spécifique.
 
@@ -139,55 +158,63 @@ Ce système réduit significativement la complexité du code. Par exemple, une �
 
 \section{Annexes}
 
-\subsection{exemple de débogage}
-\subsubsection{gestion des pointeurs NULL en fonctions du système d'exploitation}
-Nous avons observé une \textbf{erreur de segmentation fault} lors de l'exécution du programme. Fait notable : ce problème n'affectait que certains membres de l'équipe tandis que d'autres pouvaient exécuter l'application normalement.
+\subsection{Exemple de débogage : Gestion des pointeurs \texttt{NULL} selon le système d'exploitation}
+\subsubsection{Contexte du problème}
+Lors de l'exécution du programme, une \textbf{erreur de segmentation} a été observée. Curieusement, ce comportement ne se manifestait que sur certaines machines de l'équipe, tandis que d'autres pouvaient exécuter le jeux sans problème. 
+L'origine du bug etait dans la tentative de conversion d'un pointeur \texttt{NULL}, retourné par la fonction \texttt{getObject} pour un index invalide, en un pointeur d'un autre type
 
-\begin{itemize}
-    \item Les paramètres entrants étaient valides (non-nuls)
-    \item Le problème semble provenir soit de :
-    \begin{itemize}
-        \item La variable \texttt{salleDep}
-        \item La structure \texttt{scene}
-    \end{itemize}
+\subsubsection{Investigation initiale}
+A force de test nous sommes arrivé à la conclusion que :
+\begin{itemize} 
+    \item Les paramètres d'entrée étaient vérifier, et non égale à \texttt{NULL}. 
+    \item Deux éléments étaient suspectés d'être en cause : 
+    \begin{itemize} \item La variable \texttt{salleDep} dans le contrôleur de scène 
+    \item La structure de données \texttt{scene} 
+    \end{itemize} 
 \end{itemize}
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./img/gdbSystem.png}
-    \caption{Erreur observée dans GDB}
-    \label{fig:gdb_error}
+\centering
+\includegraphics[width=0.8\textwidth]{./img/gdbSIGEGV.png}
+\caption{Trace d'exécution dans GDB montrant le point de crash}
+\label{fig:gdbSIGEGV}
 \end{figure}
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./img/ExempleMarcheBien.png}
-    \caption{Comportement normal pour référence}
-    \label{fig:working_example}
-\end{figure}
-
-L'inspection de \texttt{salleDep} via GDB révèle :
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./img/ErreurAvecPrint.png}
-    \caption{Résultat de la commande \texttt{print salleDep}}
-    \label{fig:gdb_print}
-\end{figure}
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.8\textwidth]{./img/Erreur2.png}
-  \caption{Résultat de la commande \texttt{print salleDep}}
-  \label{fig:gdb_print2}
-\end{figure}
-
-Ce qui est marrant avec cette valeur \texttt{0x01} (par exemple) c'est quelle change à chaque fois
-
-\subsection*{Conclusion}
-\begin{itemize}
-    \item \texttt{salleDep} présente une valeur non-nulle alors que \texttt{sceneController} devrait être vide (\texttt{NULL})
-    \item \textbf{Cause racine} : Absence de vérification de nullité avant l'assignation à \texttt{t\_scene}
+\newpage
+L'analyse à l'aide de GDB a permis d'observer : 
+\begin{itemize} 
+    \item Une adresse mémoire non nulle (ex. \texttt{0x01}) pour \texttt{salleDep}, même dans le cas où \texttt{getObject} devait renvoyer \texttt{NULL}. 
+    \item Une variation aléatoire de la valeur de \texttt{salleDep} entre différentes exécutions et machine (\textit{voir Fig. \ref{fig:gdb0x1}})
 \end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./img/gdb0xf0.png}
+\caption{Sortie de \texttt{print salleDep} montrant une adresse invalide}
+\label{fig:gdb0xf0}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./img/gdb0x1.png}
+\caption{Variation de la valeur de \texttt{salleDep} entre deux exécutions}
+\label{fig:gdb0x1}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./img/gdbNoError.png}
+\caption{Comportement normal lorsque tout marche}
+\label{fig:gdbNoError}
+\end{figure}
+
+\subsubsection{Origine du problème et correction du code}
+
+\begin{lstlisting}[caption={Ligne fautive}, label=code:fautive]
+t_scene* salleDep = (t_scene*)getObject(controller->scene, controller->currentScene);
+\end{lstlisting}
+
+Le problème venait de la tentative de conversion d'un pointeur \texttt{NULL}, retourné par la fonction \texttt{getObject} lorsqu'un indice invalide (Dans notre cas, \texttt{-1}) était utilisé.
+Nous avons théorisé que en raison des différences d'initialisation de la mémoire entre systèmes d'exploitation, certains environnements interprétaient correctement ce retour comme étant \texttt{NULL}, tandis que d'autres ne le faisaient pas, générant ainsi des valeurs indéterminées (par exemple : \texttt{0x01}, \texttt{0xf0}), pouvant inclure \texttt{NULL}, ne facilitant pas le debuggage.
 
 \end{document}
