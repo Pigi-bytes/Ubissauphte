@@ -89,6 +89,30 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
         data = createPairData("flags", value);
         addPairData(block, data);
 
+        sprintf(value,"%f",item[i]->arme->mass);
+        data = createPairData("mass",value);
+        addPairData(block, data);
+        
+        sprintf(value,"%f",item[i]->arme->damage);
+        data = createPairData("damage",value);
+        addPairData(block, data);
+        
+        sprintf(value,"%f",item[i]->arme->range);
+        data = createPairData("range",value);
+        addPairData(block, data);
+
+        sprintf(value,"%f",item[i]->arme->angleAttack);
+        data = createPairData("angleAttack",value);
+        addPairData(block, data);
+
+        sprintf(value,"%f",item[i]->arme->attackDuration);
+        data = createPairData("attackDuration",value);
+        addPairData(block, data);
+
+        sprintf(value,"%f",item[i]->arme->attackCooldown);
+        data = createPairData("attackCooldown",value);
+        addPairData(block, data);
+
         sprintf(value, "%d", item[i]->indiceTexture);
         data = createPairData("texture", value);
         addPairData(block, data);
@@ -195,7 +219,7 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
         item[i]->indiceTexture = resultInt;
         item[i]->arme->texture = item[i]->texture;
         item[i]->arme->displayRect = (SDL_Rect){0, 0, 16, 16};
-        
+
         getValue(block, "mass", &resultFLOAT, FLOAT);
         item[i]->arme->mass = resultFLOAT;
 
@@ -205,8 +229,8 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
         getValue(block, "range", &resultFLOAT, FLOAT);
         item[i]->arme->range = resultFLOAT;
 
-        getValue(block, "angleAttack", &resultFLOAT, FLOAT);
-        item[i]->arme->angleAttack = resultFLOAT;
+        getValue(block, "angleAttackDiv", &resultFLOAT, FLOAT);
+        item[i]->arme->angleAttack = M_PI * resultFLOAT;
 
         getValue(block, "attackDuration", &resultFLOAT, FLOAT);
         item[i]->arme->attackDuration = resultFLOAT;
@@ -215,9 +239,15 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
         item[i]->arme->attackCooldown = resultFLOAT;
 
         getValue(block, "type", &resultChar, STRING);
-        if (strcmp(resultChar, "arme") == 0)
+        if (strcmp(resultChar, "arme") == 0) {
             item[i]->validSlot[0] = SLOT_ARME;
-        else if (strcmp(resultChar, "armure") == 0)
+            getValue(block, "OnEquipe", &resultInt, INT);
+            if (resultInt == 0)
+                item[i]->arme->onEquipe = NULL;
+            else {
+                item[i]->arme->onEquipe = creerFonction(peutEquiperWrapper, FONCTION_PARAMS(&player->currentWeapon, item[i]->arme));
+            }
+        } else if (strcmp(resultChar, "armure") == 0)
             item[i]
                 ->validSlot[0] = SLOT_ARMURE;
         else if (strcmp(resultChar, "activable") == 0) {
@@ -227,12 +257,6 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
 
         item[i]->arme->indice = i;
 
-        getValue(block, "OnEquipe", &resultInt, INT);
-        if (resultInt == 0)
-            item[i]->arme->onEquipe = NULL;
-        else {
-            item[i]->arme->onEquipe = creerFonction(peutEquiperWrapper, FONCTION_PARAMS(&player->currentWeapon, item[i]->arme));
-        }
         getValue(block, "OnDeEquipe", &resultInt, INT);
         if (resultInt == 0)
             item[i]->onDeEquip = NULL;

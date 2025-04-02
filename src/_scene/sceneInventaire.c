@@ -7,7 +7,7 @@ t_scene *createMainInv(t_context *context, t_joueur *player) {
 
     t_item **itemListe = item_load(fichier, tileset, player);
 
-    for (int i = 0; i < 40; i++) {
+    for (int i = 0; i < 20; i++) {
         inventaireAjoutObjet(player->inventaire, itemListe[i], 1);
     }
 
