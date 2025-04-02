@@ -138,6 +138,7 @@ t_scene* GetSceneByName(t_sceneController* controller, char* name) {
             return scene;
         }
     }
+    return NULL; // sinon ya un warning
 }
 
 int indiceByscene(t_sceneController* controller, t_scene* scene) {
