@@ -97,9 +97,9 @@ void affichage(SDL_Renderer *renderer, t_mapAffichage *map, t_joueur *player) {
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 
     for (int i = 0; i < map->numRooms; i++) {
-        if (map->numRooms - 1 == i) {
+        if (map->numRooms - 2 == i) {
             SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
-        } else if (map->numRooms - 2 == i) {
+        } else if (map->numRooms - 1 == i) {
             SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
         } else {
             SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
