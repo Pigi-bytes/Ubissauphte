@@ -241,28 +241,3 @@ void renderWeaponIdle(SDL_Renderer* renderer, t_joueur* player, SDL_FPoint origi
     Debug_PushLine(visualPivot.x, visualPivot.y - 3, visualPivot.x, visualPivot.y + 3, 2, SDL_COLOR_RED);
 }
 
-void addWeaponToPlayer(t_joueur* player, t_arme* weapon) {
-    if (!player || !weapon || player->weaponCount >= 10) return;
-
-    // Ajouter l'arme au tableau
-    player->weapons[player->weaponCount] = weapon;
-    player->weaponCount++;
-
-    // Si c'est la première arme, l'équiper automatiquement
-    if (player->weaponCount == 1) {
-        player->currentWeaponIndex = 0;
-        player->currentWeapon = weapon;
-    }
-}
-
-void switchToNextWeapon(t_joueur* player) {
-    printf("switch \n");
-    if (!player || player->weaponCount <= 1) return;
-
-    // Passer à l'arme suivante (avec retour au début si nécessaire)
-    player->currentWeaponIndex = (player->currentWeaponIndex + 1) % player->weaponCount;
-    player->currentWeapon = player->weapons[player->currentWeaponIndex];
-
-    // Reset du cooldown d'attaque pour éviter de spammer les attaques
-    player->attack.cooldown = 0.2f;
-}

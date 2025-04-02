@@ -49,9 +49,6 @@ int main(int argc, char* argv[]) {
 
     t_joueur* player = createPlayer(context.control, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerTileSet);
 
-    player->weaponCount = 0;
-    player->currentWeaponIndex = 0;
-
     // Création des armes avec statistiques équilibrées
     t_arme* dague = malloc(sizeof(t_arme));
     *dague = (t_arme){
@@ -64,18 +61,6 @@ int main(int argc, char* argv[]) {
     };
     dague->texture = getObject(tileset->textureTiles, 104);
     dague->displayRect = (SDL_Rect){0, 0, 16, 16};
-
-    t_arme* epee = malloc(sizeof(t_arme));
-    *epee = (t_arme){
-        .mass = 3.0f,             // Masse moyenne
-        .damage = 20.0f,          // Dégâts moyens
-        .range = 30.0f,           // Portée moyenne
-        .angleAttack = M_PI / 2,  // Arc d'attaque de 90°
-        .attackDuration = 0.28f,  // Animation moyenne
-        .attackCooldown = 0.7f    // Récupération moyenne
-    };
-    epee->texture = getObject(tileset->textureTiles, 105);
-    epee->displayRect = (SDL_Rect){0, 0, 16, 16};
 
     t_arme* hache = malloc(sizeof(t_arme));
     *hache = (t_arme){
@@ -113,18 +98,7 @@ int main(int argc, char* argv[]) {
     marteau->texture = getObject(tileset->textureTiles, 132);
     marteau->displayRect = (SDL_Rect){0, 0, 16, 16};
 
-    // Ajouter les armes à l'inventaire du joueur
-    player->weapons[0] = epee;     // Première arme (indice 0)
-    player->weapons[1] = dague;    // Deuxième arme (indice 1)
-    player->weapons[2] = hache;    // Troisième arme (indice 2)
-    player->weapons[3] = lance;    // Quatrième arme (indice 3)
-    player->weapons[4] = marteau;  // Cinquième arme (indice 4)
-
-    player->weaponCount = 5;  // Nombre total d'armes
-
-    // Définir l'arme actuelle
-    player->currentWeaponIndex = 0;
-    player->currentWeapon = player->weapons[player->currentWeaponIndex];
+    player->currentWeapon = dague;
 
     player->indexCurrentRoom = 0;
     int nb = 4;

@@ -101,7 +101,7 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
             data = createPairData("type", "activable");
         addPairData(block, data);
 
-        if (item[i]->onEquip == NULL)
+        if (item[i]->arme->onEquipe == NULL)
             data = createPairData("onEquipe", "0");
         else
             data = createPairData("onEquipe", "1");
@@ -117,7 +117,7 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
     }
 }
 
-t_item** item_load(t_fichier* fichier, t_tileset* tileset) {
+t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
     t_item** item = (t_item**)malloc(fichier->blockManager->count * sizeof(t_item*));
     if (item == NULL) {
         fprintf(stderr, "Erreur d'allocation de mémoire");
@@ -131,6 +131,8 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset) {
 
     for (int i = 0; i < fichier->blockManager->count; i++) {
         item[i] = (t_item*)malloc(sizeof(t_item));
+
+        item[i]->arme = malloc(sizeof(t_arme));
 
         block = (t_blockData*)getObject(fichier->blockManager, i);
 
@@ -191,6 +193,26 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset) {
         getValue(block, "texture", &resultInt, INT);
         item[i]->texture = (SDL_Texture*)getObject(tileset->textureTiles, resultInt);
         item[i]->indiceTexture = resultInt;
+        item[i]->arme->texture = item[i]->texture;
+        item[i]->arme->displayRect = (SDL_Rect){0, 0, 16, 16};
+        
+        getValue(block, "mass", &resultFLOAT, FLOAT);
+        item[i]->arme->mass = resultFLOAT;
+
+        getValue(block, "damage", &resultFLOAT, FLOAT);
+        item[i]->arme->damage = resultFLOAT;
+
+        getValue(block, "range", &resultFLOAT, FLOAT);
+        item[i]->arme->range = resultFLOAT;
+
+        getValue(block, "angleAttack", &resultFLOAT, FLOAT);
+        item[i]->arme->angleAttack = resultFLOAT;
+
+        getValue(block, "attackDuration", &resultFLOAT, FLOAT);
+        item[i]->arme->attackDuration = resultFLOAT;
+
+        getValue(block, "attackCooldown", &resultFLOAT, FLOAT);
+        item[i]->arme->attackCooldown = resultFLOAT;
 
         getValue(block, "type", &resultChar, STRING);
         if (strcmp(resultChar, "arme") == 0)
@@ -203,9 +225,14 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset) {
             item[i]->validSlot[1] = SLOT_ACTIVABLE2;
         }
 
+        item[i]->arme->indice = i;
+
         getValue(block, "OnEquipe", &resultInt, INT);
         if (resultInt == 0)
-            item[i]->onEquip = NULL;
+            item[i]->arme->onEquipe = NULL;
+        else {
+            item[i]->arme->onEquipe = creerFonction(peutEquiperWrapper, FONCTION_PARAMS(&player->currentWeapon, item[i]->arme));
+        }
         getValue(block, "OnDeEquipe", &resultInt, INT);
         if (resultInt == 0)
             item[i]->onDeEquip = NULL;
@@ -306,7 +333,6 @@ t_inventaire* createInventaire() {
     return inv;
 }
 
-
 void inventaireAjoutObjet(t_inventaire* inv, t_item* item, int quantite) {
     t_itemsStack* itemStack = inventaireFindStack(inv, item);
 
@@ -388,9 +414,16 @@ void equiperEquipement(t_joueur** c, int inventoryIndex, equipementSlotType slot
         (*c)->equipement[slot].stack = itemStack;
     else
         printf("Slot invalide\n");
-    if ((*c)->equipement[slot].stack->definition->onEquip != NULL)
-        callFonction((*c)->equipement[slot].stack->definition->onEquip);
+    if ((*c)->equipement[slot].stack->definition->arme->onEquipe != NULL)
+        callFonction((*c)->equipement[slot].stack->definition->arme->onEquipe);
     equipementRecalculerStats(*c);
+}
+
+void peutEquiper(t_arme** arme, t_arme* armeAjout) {
+    arme[0] = armeAjout;
+}
+void peutEquiperWrapper(t_fonctionParam* f) {
+    peutEquiper(GET_PTR(f, 0, t_arme**), GET_PTR(f, 1, t_arme*));
 }
 
 void desequiperEquipement(t_joueur** c, equipementSlotType slot) {

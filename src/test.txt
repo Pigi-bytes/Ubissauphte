@@ -18,6 +18,13 @@ speed Mult Modifier: 6.0
 flags: 12
 type: arme
 texture: 100
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nUne lame tranchante \nimprégnée d'obscurité
 
 id Item: 1
@@ -40,6 +47,13 @@ speed Mult Modifier: 5.5
 flags: 4
 type: arme
 texture: 101
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nUn arc enflammé \nrenaissant de ses cendres
 
 id Item: 2
@@ -62,6 +76,13 @@ speed Mult Modifier: 3.0
 flags: 13
 type: arme
 texture: 103
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nFrappe avec la fureur \ndes tempêtes
 
 id Item: 3
@@ -84,6 +105,13 @@ speed Mult Modifier: 8.0
 flags: 5
 type: arme
 texture: 104
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nBrille avec la lumière \ndes nuits sans lune
 
 id Item: 4
@@ -106,6 +134,13 @@ speed Mult Modifier: 0.9
 flags: 12
 type: arme
 texture: 105
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nUne symbiose entre \nnature et protection
 
 id Item: 5
@@ -128,6 +163,13 @@ speed Mult Modifier: 9.0
 flags: 4
 type: arme
 texture: 106
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nVol de vie \nà chaque coup porté
 
 id Item: 6
@@ -150,6 +192,13 @@ speed Mult Modifier: 4.0
 flags: 13
 type: arme
 texture: 107
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nCanalise l'énergie \ndes constellations
 
 id Item: 7
@@ -172,6 +221,13 @@ speed Mult Modifier: 10.0
 flags: 12
 type: arme
 texture: 108
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nRécolte des âmes \npour alimenter son pouvoir
 
 id Item: 8
@@ -194,6 +250,13 @@ speed Mult Modifier: 7.5
 flags: 4
 type: armure
 texture: 109
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nArmée des profondeurs marines \nDraine la force des océans
 
 id Item: 9
@@ -216,6 +279,13 @@ speed Mult Modifier: 4.8
 flags: 13
 type: armure
 texture: 110
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nPuise dans l'énergie tellurique \nRenforce la connexion terrestre
 
 id Item: 10
@@ -238,6 +308,13 @@ speed Mult Modifier: 12.0
 flags: 5
 type: armure
 texture: 111
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nTourbillon de lames aériennes \nDéchire l'espace-temps
 
 id Item: 11
@@ -260,6 +337,13 @@ speed Mult Modifier: 15.0
 flags: 12
 type: armure
 texture: 112
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nEnveloppe le porteur \ndans une brume mystique
 
 id Item: 12
@@ -282,6 +366,13 @@ speed Mult Modifier: 0.3
 flags: 13
 type: armure
 texture: 113
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nSavoir interdit \nCorrompt l'âme de l'utilisateur
 
 id Item: 13
@@ -304,6 +395,13 @@ speed Mult Modifier: 8.5
 flags: 4
 type: armure
 texture: 114
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nGriffes imprégnées \nde rage draconique
 
 id Item: 14
@@ -326,6 +424,13 @@ speed Mult Modifier: 0.8
 flags: 12
 type: armure
 texture: 115
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nBouclier béni par les cieux \nAbsorbe les chocs divins
 
 id Item: 15
@@ -348,6 +453,13 @@ speed Mult Modifier: 9.5
 flags: 5
 type: armure
 texture: 116
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nÉpand un venin paralysant \nCorrode armures et chairs
 
 id Item: 16
@@ -370,6 +482,13 @@ speed Mult Modifier: 6.8
 flags: 13
 type: armure
 texture: 117
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nCristaux vivants affûtés \nRéfracte la lumière en lames
 
 id Item: 17
@@ -392,6 +511,13 @@ speed Mult Modifier: 14.0
 flags: 4
 type: activable
 texture: 118
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nFrappe rapide et précise \nComme un essaim enragé
 
 id Item: 18
@@ -414,6 +540,13 @@ speed Mult Modifier: 3.8
 flags: 12
 type: activable
 texture: 119
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nDéchaîne des ondes de choc \nFracasse les défenses
 
 id Item: 19
@@ -436,6 +569,13 @@ speed Mult Modifier: 11.0
 flags: 5
 type: activable
 texture: 120
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nDuo de lames synchronisées \nDanse mortelle coordonnée
 
 id Item: 20
@@ -458,6 +598,13 @@ speed Mult Modifier: 8.5
 flags: 4
 type: activable
 texture: 121
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nBrûle avec la fureur du soleil \nPurifie les ennemis vaincus
 
 id Item: 21
@@ -480,6 +627,13 @@ speed Mult Modifier: 12.5
 flags: 5
 type: activable
 texture: 122
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nTir venant des ténèbres \nTransperce les âmes damnées
 
 id Item: 22
@@ -502,6 +656,13 @@ speed Mult Modifier: 5.2
 flags: 12
 type: activable
 texture: 123
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nDéchaîne des explosions aquatiques \nDétruit les fondations
 
 id Item: 23
@@ -524,6 +685,13 @@ speed Mult Modifier: 15.0
 flags: 13
 type: activable
 texture: 124
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nLames possédées \nTraverse les protections magiques
 
 id Item: 24
@@ -546,6 +714,13 @@ speed Mult Modifier: 0.75
 flags: 4
 type: activable
 texture: 125
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nDévie les attaques énergétiques \nGénère un champ de force
 
 id Item: 25
@@ -568,6 +743,13 @@ speed Mult Modifier: 11.2
 flags: 5
 type: armure
 texture: 126
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nGèle le sang des adversaires \nEnglace les mouvements
 
 id Item: 26
@@ -590,6 +772,13 @@ speed Mult Modifier: 6.5
 flags: 12
 type: armure
 texture: 127
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nContrôle la flore environnante \nSoigne les alliés
 
 id Item: 27
@@ -612,6 +801,13 @@ speed Mult Modifier: 12.8
 flags: 13
 type: armure
 texture: 128
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nCombo de coups rapides \nEsquive améliorée
 
 id Item: 28
@@ -634,6 +830,13 @@ speed Mult Modifier: 14.5
 flags: 4
 type: armure
 texture: 129
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nVenin pétrifiant \nParalyse les cibles
 
 id Item: 29
@@ -656,6 +859,13 @@ speed Mult Modifier: 10.2
 flags: 5
 type: armure
 texture: 130
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nDécoupe l'air en lames \nAttaque sur 180 degrés
 
 id Item: 30
@@ -678,6 +888,13 @@ speed Mult Modifier: 7.8
 flags: 12
 type: armure
 texture: 131
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nJavelot enflammé \nExplose à l'impact
 
 id Item: 31
@@ -700,6 +917,13 @@ speed Mult Modifier: 13.5
 flags: 13
 type: armure
 texture: 132
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nDéchiquète les chairs \nRégénération accélérée
 
 id Item: 32
@@ -722,6 +946,13 @@ speed Mult Modifier: 16.0
 flags: 4
 type: armure
 texture: 133
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nDards empoisonnés \nEffet neurotoxique cumulatif
 
 id Item: 33
@@ -744,6 +975,13 @@ speed Mult Modifier: 3.0
 flags: 12
 type: armure
 texture: 134
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nPulvérise les armures \nOndes de choc sismiques
 
 id Item: 34
@@ -766,6 +1004,13 @@ speed Mult Modifier: 13.2
 flags: 5
 type: armure
 texture: 135
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe: 1
 description: \nInjecte un cocktail toxique \nParalysie musculaire
 
 id Item: 35
@@ -788,6 +1033,13 @@ speed Mult Modifier: 9.5
 flags: 13
 type: arme
 texture: 136
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nDanse de lames aériennes \nCoups tourbillonnants
 
 id Item: 36
@@ -810,6 +1062,13 @@ speed Mult Modifier: 11.0
 flags: 4
 type: arme
 texture: 137
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nDécharge électrique cumulative \nChaine entre ennemis
 
 id Item: 37
@@ -832,6 +1091,13 @@ speed Mult Modifier: 9.0
 flags: 12
 type: arme
 texture: 138
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nFaille spatiale tranchante \nIgnore les défenses physiques
 
 id Item: 38
@@ -854,6 +1120,13 @@ speed Mult Modifier: 14.0
 flags: 5
 type: arme
 texture: 139
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nTrajectoire courbe imprévisible \nEnflamme les cibles
 
 id Item: 39
@@ -876,4 +1149,11 @@ speed Mult Modifier: 0.5
 flags: 12
 type: arme
 texture: 139
+mass: 3
+damage: 5000
+range: 30
+angleAttack: 2
+attackDuration: 0.28
+attackCooldown: 0.7
+onEquipe:: 0
 description: \nSonne le Ragnarök \nRéveille les forces primordiales
