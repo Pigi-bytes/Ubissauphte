@@ -100,7 +100,7 @@ void peutEquiper(t_arme** arme, t_arme* armeAjout);
 void peutEquiperWrapper(t_fonctionParam* f);
 
 // Gestion Interaction
-void equipementRecalculerStats(struct s_joueur* c);
+void equipementRecalculerStats(struct s_joueur** c);
 
 // fonction use
 void equipementUse(struct s_joueur* c, equipementSlotType slot);
