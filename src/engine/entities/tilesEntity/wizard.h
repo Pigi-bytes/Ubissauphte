@@ -14,7 +14,7 @@ typedef struct {
 } t_wizard;
 
 
-void updateWizard(t_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities);
+void updateWizard(t_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities);
 void renderWizard(t_tileEntity* entity, t_context* context, t_camera* camera);
 t_tileEntity* createWizardEntity(t_tileset* tileset, t_scene* scene);
 

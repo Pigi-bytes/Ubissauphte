@@ -36,15 +36,16 @@ void initEnemyBase(t_enemy* base, SDL_Texture* texture, SDL_Rect rect, t_scene* 
     base->lastDamagedBy = NULL;
     base->entity.currentScene = scene;
     base->render = NULL;
+    base->takeDamage = NULL;
 }
 
 void renderEnemy(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
-    if (enemy->health.isDead) {
+    if (enemy->render != NULL) {
+        enemy->render(renderer, enemy, camera);
         return;
     }
 
-    if (enemy->render != NULL) {
-        enemy->render(renderer, enemy, camera);
+    if (enemy->health.isDead) {
         return;
     }
 
@@ -93,10 +94,14 @@ void freeEnemy(void* object) {
     // freeAnimationController(enemy->entity.animationController);
 }
 
-void takeDamageFromPlayer(t_enemy* enemy, int damage, t_joueur* player, t_context* context) {
+void takeDamageFromPlayer(t_enemy* enemy, int damage, t_joueur* player, t_context* context, SDL_FPoint hitDirection) {
     enemy->lastDamagedBy = player;
 
-    applyDamage(&enemy->health, damage, enemy, context);
+    if (enemy->takeDamage != NULL) {
+        enemy->takeDamage(enemy, damage, player, context, hitDirection);
+    } else {
+        applyDamage(&enemy->health, damage, &enemy->entity, context);
+    }
 }
 
 void renderEnemyWrapper(t_fonctionParam* f) {

@@ -1,7 +1,7 @@
 #include "merchant.h"
 
 
-void updateMerchant(t_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities){
+void updateMerchant(t_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities){
     t_merchant* merchant = (t_merchant*)entity;
 
     merchant->detectionRange.x = entity->entity.displayRect.x + entity->entity.displayRect.w / 2;
@@ -46,7 +46,7 @@ void updateMerchant(t_tileEntity* entity, t_context* context, t_grid* grid, t_ob
         }
     }
 
-    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, grid, entities);
+    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, salle->grille, entities);
 }
 
 void renderMerchant(t_tileEntity* entity, t_context* context, t_camera* camera) {

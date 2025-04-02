@@ -189,8 +189,10 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
 
     // Debug: affiche toutes les coordonnées
     for (int i = 0; i < numberRoom; i++) {
-        printf("X[%d] et Y[%d]\n", roomCoords[i].x, roomCoords[i].y);
+        printf("X[%d] et Y[%d] et ID : %d\n", roomCoords[i].x, roomCoords[i].y, roomList[i]->ID);
     }
+
+    printf("Aff\n\n\n");
 
     return roomList;
 }

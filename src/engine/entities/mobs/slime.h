@@ -1,4 +1,5 @@
 #include "../../../debug.h"
+#include "../components/particules/particules.h"
 #include "../enemy.h"
 
 typedef enum {
@@ -26,7 +27,11 @@ typedef struct {
     int patrolMovesLeft;
     t_deltaTimer* idleTimer;
     t_deltaTimer* jumpCooldownTimer;
+
+    t_particleEmitter* particles;
+    SDL_Color particleColor;
 } t_slime;
 
 void updateSlime(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities);
 t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, t_scene* scene);
+void onSlimeDeath(t_context* context, void* entity);

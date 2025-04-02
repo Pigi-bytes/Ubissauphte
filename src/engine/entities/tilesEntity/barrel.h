@@ -4,6 +4,7 @@
 #include "../../../context.h"
 #include "../../../utils/timer.h"
 #include "../components/health/health.h"
+#include "../components/particules/particules.h"
 #include "../tilesEntity.h"
 
 typedef struct {
@@ -12,6 +13,7 @@ typedef struct {
     SDL_bool isExploding;
     t_joueur* lastDamagedBy;
     int goldReward;
+    t_particleEmitter* particleEmitter;
 } t_barrel;
 
 t_tileEntity* createBarrelEntity(t_tileset* tileset, t_scene* scene);

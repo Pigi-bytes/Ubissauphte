@@ -1,7 +1,7 @@
 #include "wizard.h"
 
 
-void updateWizard(t_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities){
+void updateWizard(t_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities){
     t_wizard* wizard = (t_wizard*)entity;
 
     wizard->detectionRange.x = entity->entity.displayRect.x + entity->entity.displayRect.w / 2;
@@ -46,7 +46,7 @@ void updateWizard(t_tileEntity* entity, t_context* context, t_grid* grid, t_obje
         }
     }
 
-    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, grid, entities);
+    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, salle->grille, entities);
 }
 
 void renderWizard(t_tileEntity* entity, t_context* context, t_camera* camera) {
