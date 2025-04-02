@@ -36,6 +36,7 @@
 
 \lhead{\includegraphics[width=2cm]{./img/image.png}}
 \rhead{\includegraphics[width=2cm]{./img/claude.png}}
+\chead{Lo Poti Donjon}
 
 \begin{document}
 
@@ -146,12 +147,12 @@ Optimisation:
 
 
 \subsubsection{La géneration aléatoire des salles}
-Lorsqu'on parle d'aléatoire en infromatique on à deux façons de voir la chose. Soit du \guillemotleft pur\guillemotright \ aléatoire appelé \textbf{noise}, c'est-à-dire qu'on met une probabilité fixe, si elle arrive, on met un mur sinon on met un sol. Le problème avec cette méthode est qu'elle n'est pas adapté pour un rogue-like car elle ne garantit pas que le niveau soit jouable (pouvoir accéder à toutes les salles). 
-La deuxième façon de faire de l'aléatoire est de faire de l'aléatoire contrôlé appelé gradient noise, c'est à dire de créer une continuité dans l'aléatoire pour que ça fasse plus naturelle.\\\\
+Lorsqu'on parle d'aléatoire en informatique on à deux façons de voir la chose. Soit du \guillemotleft pur\guillemotright \ aléatoire appelé \textbf{noise}, c'est-à-dire qu'on met une probabilité fixe, si elle arrive, on met un mur sinon on met un sol. Le problème avec cette méthode est qu'elle n'est pas adaptée pour un rogue-like car elle ne garantit pas que le niveau soit jouable (pouvoir accéder à toutes les salles). 
+La deuxième façon de faire de l'aléatoire est de faire de l'aléatoire contrôlé appelé gradient noise, c'est à dire de créer une continuité dans l'aléatoire pour obtenir un résultat plus naturel.\\\\
 
-Nous avons donc choisi cette deuxième option en utilisant l'algorithme de perlin noise (ou bruit de Perlin en français ) qui est une texture procédurale  utilisée pour générer l'environnement de jeux, par exemple Minecraft utilise du Perlin noise.\\
-Le Perlin noise repose sur trois étapes reposant sur des principes mathématiques et physiques. Tout d'abord il faut générer une matrice de dimension n. Pour chaque case de cette matrice, on va attribuer un champ de vecteurs normaux aléatoire.\\
-Puis nous devons ensuite calculer le produit scalaire pour chaque case entre le vecteur normal et le vecteur distance qui est un vecteur représentant le facteur aléatoire, identique pour chaque case changent à chaque génération de salle.\\
+Nous avons donc choisi cette deuxième option en utilisant l'algorithme de Perlin noise (ou bruit de Perlin en français ) qui est une texture procédurale  utilisée pour générer un environnement de jeux, . nous pouvons citer comme exemple le jeu Minecraft qui utilise cet algorithme.\\
+Le Perlin noise est constitué de trois étapes reposant sur des principes mathématiques et physiques. Tout d'abord il faut générer une matrice de dimension n. Pour chaque case de cette matrice, on va attribuer un champ de vecteurs normaux aléatoires.\\
+Puis nous devons calculer,pour chaque case, le produit scalaire entre le vecteur normal et le vecteur distance qui est un vecteur représentant le facteur aléatoire, identique pour chaque case, changant à chaque génération de salle.\\
 Enfin, nous devons calculer l'interpolation entre les vecteurs calculés dans la case. Cette étape sert à adoucir la transition entre les valeurs aléatoires générées. Sans elle, le résultat serait trop brut.\\
 \[
 f(x) = a_{0} + \text{smoothstep}(x) \cdot (a_{1} - a_{0}), \quad \text{pour } 0 \leq x \leq 1
@@ -165,7 +166,7 @@ S_1(x) =
 1, & x \geq 1
 \end{cases}
 \end{equation*}
-Après toutes c'est étapes, nous obtenons une matrice de bruit de perlin qui quand on l'affiche en modifiant certains paramètres comme la limite on obtient:\
+Après toutes ces étapes, nous obtenons une matrice de bruit de Perlin pour laquelle on obtient l'affichage suivant en modifiant certains paramètres comme la limite:\
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.4\textwidth]{./img/perlin.jpg}
@@ -173,15 +174,17 @@ Après toutes c'est étapes, nous obtenons une matrice de bruit de perlin qui qu
 \label{fig:affichage perlin}
 \end{figure}
 \\\\
-Si on lisse le perlin noise et qu'on rajoute des tiles pour les valeurs et en mettant des bordures sur le côté pour empêcher le joueur de sortir de la carte on obtient ceci:\\
+\newpage
+Si on lisse le Perlin noise et qu'on rajoute des tiles pour les valeurs et en mettant des bordures sur le côté pour empêcher le joueur de sortir de la carte on obtient ceci:\\
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.4\textwidth]{./img/perlinLisser.png}
-\caption{affichage du perlin noise lisser}
+\caption{affichage du Perlin noise lissé}
 \label{fig:affichage perlin lisser}
 \end{figure}
-\\
- On remarque que la salle a quelques problèmes. Le premier problème est que l'on peut voir en haut à droite de la \autoref{fig:affichage perlin lisser} un trou inaccessibles qui peut s'avérer être problématique si il y a un coffre dedans, de plus la salle n'est pas très belle et nous ne pouvons pas sortir de la salle.
+\bigskip
+On remarque que la salle a quelques problèmes. Le premier problème est que l'on peut voir en haut à droite de la \autoref{fig:affichage perlin lisser} un trou inaccessibles qui peut s'avérer être problématique s'il y a un coffre dedans, de plus la salle n'est pas très belle et nous ne pouvons pas en sortir.
 \\\\
 
  Pour régler le problème de trou : 
@@ -196,7 +199,7 @@ principe de l'algorithme d'écoulemenent par bloc:
 \begin{itemize}
     \item On prend une case, on lui assigne une valeur et tant que ses voisines sont vides, on met la valeur de ces cases à la même valeur que la case initiale et on recommence tant qu'on peut propager la valeur.
     \item On cherche le bloc avec le plus grand nombre de case
-    \item Quand on a identifié le plus grand bloc, il nous reste plus qu'à combler les autres.
+    \item Quand on a identifié le plus grand bloc, il ne nous reste plus qu'à combler les autres.
 \end{itemize}
 \bigskip
 
@@ -205,8 +208,8 @@ principe de l'algorithme d'écoulemenent par bloc:
 
 \bigskip
 
-Pour rendre la salle plus jolie il suffit de faire des règles de génerations pour assigner un tiles en fonction de la situation de la case. Par exemple si les voisins direcst de la case (gauche,haut,droit,et bas) sont vides, alors l'algorithme place un élément de décoration.\\
-Si on fait seulement cela, on est sûr d'avoir des problèmes sur une case respectant deux situations et donc avoir deux tiles. Dans cette situation il ne prend qu'un tiles ce qui fait que ça crée des bugs visuelles. On va donc utiliser un algorithme de lissage permettant de régler ce problème à 95%.
+Pour rendre la salle plus jolie il suffit de faire des règles de géneration pour assigner un tiles en fonction de la situation de la case. Par exemple si les voisins directs de la case (gauche,haut,droit,et bas) sont vides, alors l'algorithme place un élément de décoration.\\
+Si on fait seulement cela, on est sûr d'avoir des problèmes sur une case respectant deux situations et donc avoir deux tiles. Dans cette situation elle ne prend qu'un tiles ce qui fait que ça crée des bugs visuels. On va donc utiliser un algorithme de lissage permettant de régler ce problème à 95\%.
 \newpage
 Enfin, pour créer des sorties de la salle:
 \begin{figure}[h]
@@ -219,9 +222,9 @@ Enfin, pour créer des sorties de la salle:
 Principe de fonctionnement:
 \begin{itemize}
     \item Regarder si cette salle est liée à une autre salle et si oui dans quelle direction ?
-    \item On prend une case aléatoirement sur la première ou dernière ligne ou colonne suivant la salle liée à la salle qu'on crée. 
-    \item On \guillemotleft casse \guillemotright \ la case puis on recommence sur les cases dans le même alignement que la case d'origine tant qu'on n'a pas accès au terrain de jeux du joueur.
-    \item On place un téleporteur sur la case d'origine pour pouvoir changer de salle.
+    \item Prendre une case aléatoirement sur la première ou dernière ligne ou colonne suivant la salle liée à la salle qu'on crée. 
+    \item \guillemotleft Casser \guillemotright \ la case puis recommencer sur les cases dans le même alignement que la case d'origine tant qu'il n'y a pas d'accès au terrain de jeu du joueur.
+    \item Placer un téleporteur sur la case d'origine pour pouvoir changer de salle.
 \end{itemize}
 
 \bigskip
@@ -230,7 +233,7 @@ Quand tous ces changement sont appliqués, on insère un facteur aléatoire dans
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.4\textwidth]{./img/SalleFinal.png}
-\caption{affichage d'une salle génerer de façon procédural}
+\caption{affichage d'une salle génerée de façon procédurale}
 \label{fig:affichage de la salle final}
 \end{figure}
 
@@ -339,9 +342,9 @@ trouver des équipements grâce aux coffres et au marchand pour aller se battre 
     \item le joueur tue le boss, alors il est transporté sur un nouveau niveau où les ennemis seront plus puissants et où le nombre de salles augmente.
     \item Si le joueur meurt sous les coups du boss ou des monstres présents dans les salles, alors le jeu prend fin et le joueur perd tout ce qu'il a obtenu. S'il relance une partie, alors il sera remplacé sur une carte avec des ennemis faibles.
 \end{itemize}
-Le joueur commence son aventure avec un simple couteau, mais il sera possible pour lui de changer d'arme et de peaufiner son inventaire pour pouvoir jouer comme il le veut. Puisque les salles, boss et items sont aléatoires, alors une partie est unique
+Le joueur commence son aventure avec un simple couteau, mais il sera possible pour lui de changer d'arme et d'améliorer son inventaire pour pouvoir jouer comme il le veut. Puisque les salles, boss et items sont aléatoires, une partie est unique
 \\\\
-pour résumer : 
+Pour résumer : 
 \begin{figure}[ht] 
     \centering 
     \includegraphics[width=0.4\linewidth]{./img/scchemaCycleJeu.png} 
