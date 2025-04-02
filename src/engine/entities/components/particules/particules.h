@@ -38,6 +38,9 @@ void emitLandingParticles(t_particleEmitter* emitter, SDL_FPoint position, float
 void emitImpactParticles(t_particleEmitter* emitter, SDL_FPoint position, SDL_FPoint hitDirection, float radius, SDL_Color baseColor);
 void emitDeathParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor);
 
+void emitBarrelHitParticles(t_particleEmitter* emitter, SDL_FPoint position, SDL_FPoint hitDirection, float radius);
+void emitBarrelExplosionParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius);
+
 float randomRangeF(float min, float max);
 
 #endif

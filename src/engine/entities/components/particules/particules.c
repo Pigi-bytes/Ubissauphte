@@ -199,6 +199,121 @@ void emitDeathParticles(t_particleEmitter* emitter, SDL_FPoint position, float r
     emitParticles(emitter, position.x, position.y, coreColor, 5, 5.0f, 8.0f, 2.0f, 5.0f, 0.8f, 1.5f);
 }
 
+void emitBarrelHitParticles(t_particleEmitter* emitter, SDL_FPoint position, SDL_FPoint hitDirection, float radius) {
+    if (!emitter) return;
+
+    SDL_FPoint impactPos = {position.x + hitDirection.x * radius * 0.8f, position.y + hitDirection.y * radius * 0.8f};
+    float oppositeAngle = atan2f(hitDirection.y, hitDirection.x) + M_PI;
+    float coneAngle = M_PI * 0.65f;
+
+    SDL_Color woodColor = {139, 69, 19, 220};        // Brun foncé
+    SDL_Color splinterColor = {205, 170, 125, 180};  // Bois clair
+    SDL_Color dustColor = {210, 180, 140, 150};      // Poussière
+
+    emitParticles(emitter, impactPos.x, impactPos.y, woodColor, 5, 1.5f, 3.5f, 50.0f, 90.0f, 0.1f, 0.25f);
+    emitParticles(emitter, impactPos.x, impactPos.y, splinterColor, 3, 1.0f, 2.5f, 60.0f, 120.0f, 0.2f, 0.4f);
+    emitParticles(emitter, impactPos.x, impactPos.y, dustColor, 4, 2.0f, 4.0f, 30.0f, 60.0f, 0.3f, 0.6f);
+
+    int startIdx = emitter->firstFree > 12 ? emitter->firstFree - 12 : 0;
+    for (int i = startIdx; i < MAX_ENTITY_PARTICLES && i < startIdx + 12; i++) {
+        t_entityParticle* p = &emitter->particles[i];
+        if (!p->active) continue;
+
+        float angleOffset = randomRangeF(-coneAngle / 2, coneAngle / 2);
+        float angle = oppositeAngle + angleOffset;
+
+        float centerFactor = 1.0f - fabsf(angleOffset) / (coneAngle * 0.5f) * 0.7f;
+        float speed = randomRangeF(30.0f, 90.0f) * centerFactor;
+
+        p->velocity.x = cosf(angle) * speed;
+        p->velocity.y = sinf(angle) * speed;
+
+        float colorVar = randomRangeF(-15.0f, 15.0f);
+        p->color.r = fmin(255, p->color.r + colorVar);
+        p->color.g = fmin(255, p->color.g + colorVar);
+        p->color.b = fmin(255, p->color.b + colorVar);
+    }
+}
+void emitBarrelExplosionParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius) {
+    if (!emitter) return;
+
+    // Couleurs du bois
+    SDL_Color woodColor1 = {139, 69, 19, 255};   // Brun foncé
+    SDL_Color woodColor2 = {160, 82, 45, 255};   // Brun moyen
+    SDL_Color woodColor3 = {181, 101, 29, 220};  // Brun clair
+    SDL_Color dustColor = {210, 180, 140, 150};  // Poussière
+
+    for (int i = 0; i < 6; i++) {
+        float angle = (float)i / 6.0f * M_PI * 2.0f;
+        float distance = randomRangeF(radius * 1.0f, radius * 2.5f);
+
+        // Couleur selon l'indice
+        SDL_Color color = (i % 3 == 0) ? woodColor1 : (i % 3 == 1) ? woodColor2
+                                                                   : woodColor3;
+        color.a = 140 + rand() % 60;
+
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (p) {
+            p->position.x = position.x + cosf(angle) * distance;
+            p->position.y = position.y + sinf(angle) * distance;
+            p->velocity = (SDL_FPoint){0, 0};
+            p->lifetime = p->maxLifetime = randomRangeF(15.0f, 30.0f);
+            p->size = randomRangeF(3.5f, 6.5f);
+            p->color = color;
+        }
+    }
+
+    for (int i = 0; i < 8; i++) {
+        float angle = (float)i / 8.0f * M_PI * 2.0f;
+        float particleDistance = randomRangeF(radius * 0.3f, radius * 0.8f);
+        SDL_Color color = (i % 3 == 0) ? woodColor1 : (i % 3 == 1) ? woodColor2
+                                                                   : woodColor3;
+        color.a = 180 + rand() % 75;
+
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (p) {
+            p->position.x = position.x + cosf(angle) * particleDistance;
+            p->position.y = position.y + sinf(angle) * particleDistance;
+            p->velocity = (SDL_FPoint){0, 0};
+            p->lifetime = p->maxLifetime = randomRangeF(0.5f, 1.0f);
+            p->size = randomRangeF(2.0f, 5.0f);
+            p->color = color;
+        }
+    }
+
+    for (int i = 0; i < 6; i++) {
+        float angle = (float)i / 6.0f * M_PI * 2.0f;
+        float dustDistance = randomRangeF(radius * 0.4f, radius * 1.0f);
+
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (p) {
+            p->position.x = position.x + cosf(angle) * dustDistance;
+            p->position.y = position.y + sinf(angle) * dustDistance;
+            p->velocity = (SDL_FPoint){0, 0};
+            p->lifetime = p->maxLifetime = randomRangeF(0.7f, 1.2f);
+            p->size = randomRangeF(3.0f, 6.0f);
+            p->color = dustColor;
+        }
+    }
+
+    for (int i = 0; i < 3; i++) {
+        float angle = randomRangeF(0, 2.0f * M_PI);
+        float chunkDistance = randomRangeF(radius * 0.5f, radius * 1.5f);
+        SDL_Color chunkColor = woodColor1;
+        chunkColor.a = 200 + rand() % 55;
+
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (p) {
+            p->position.x = position.x + cosf(angle) * chunkDistance;
+            p->position.y = position.y + sinf(angle) * chunkDistance;
+            p->velocity = (SDL_FPoint){0, 0};
+            p->lifetime = p->maxLifetime = randomRangeF(10.0f, 20.0f);
+            p->size = randomRangeF(6.0f, 9.0f);
+            p->color = chunkColor;
+        }
+    }
+}
+
 void updateEntityParticles(t_particleEmitter* emitter, float deltaTime) {
     if (!emitter) return;
 
