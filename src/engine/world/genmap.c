@@ -142,38 +142,6 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
                 break;
             }
         }
-        // Cherche une salle valide pour la connexion
-        trouve = 0;
-        while (trouve == 0) {
-            int i = rand() % (numberRoom - 2);
-            t_salle* salle = roomList[i];
-
-            // Calcule les nouvelles coordonnées
-            int newX = roomCoords[i].x + coordsX[dir_marchant];
-            int newY = roomCoords[i].y + coordsY[dir_marchant];
-
-            // Vérifie les superpositions
-            int collision = 0;
-            for (int j = 0; j < numberRoom - 2; j++) {
-                if (roomCoords[j].x == newX && roomCoords[j].y == newY) {
-                    collision = 1;
-                    break;
-                }
-            }
-
-            if (!collision) {
-                // Crée et connecte la salle marchande
-                t_salle* marchand = initRoom();
-                marchand->ID = -marchant;
-                connectRoom(salle, marchand, dir_marchant);
-
-                roomCoords[numberRoom - 2] = (SDL_Rect){newX, newY, 0, 0};
-                roomList[numberRoom - 2] = marchand;
-                trouve = 1;
-                break;
-            }
-        }
-
         if (!collision) {
             // Crée et connecte la salle du boss
             t_salle* salleBoss = initRoom();
@@ -186,8 +154,39 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
             break;
         }
     }
+    // Cherche une salle valide pour la connexion
+    trouve = 0;
+    while (trouve == 0) {
+        int i = rand() % (numberRoom - 2);
+        t_salle* salle = roomList[i];
 
-    // Debug: affiche toutes les coordonnées
+        // Calcule les nouvelles coordonnées
+        int newX = roomCoords[i].x + coordsX[dir_marchant];
+        int newY = roomCoords[i].y + coordsY[dir_marchant];
+
+        // Vérifie les superpositions
+        int collision = 0;
+        for (int j = 0; j < numberRoom - 2; j++) {
+            if (roomCoords[j].x == newX && roomCoords[j].y == newY) {
+                collision = 1;
+                break;
+            }
+        }
+
+        if (!collision) {
+            // Crée et connecte la salle marchande
+            t_salle* marchand = initRoom();
+            marchand->ID = -marchant;
+            connectRoom(salle, marchand, dir_marchant);
+
+            roomCoords[numberRoom - 2] = (SDL_Rect){newX, newY, 0, 0};
+            roomList[numberRoom - 2] = marchand;
+            trouve = 1;
+            break;
+        }
+    }
+
+        // Debug: affiche toutes les coordonnées
     for (int i = 0; i < numberRoom; i++) {
         printf("X[%d] et Y[%d] et ID : %d\n", roomCoords[i].x, roomCoords[i].y, roomList[i]->ID);
     }
