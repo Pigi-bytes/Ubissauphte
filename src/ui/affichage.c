@@ -160,6 +160,8 @@ void equiperSlot(InventoryUI *ui, t_item **item) {
         }
     }
     ui->peutEquiper = 0;
+
+    equiperEquipement(&ui->ext->character, (*item)->arme->indice, (*item)->validSlot[0]);
 }
 
 void equiperSlotWrapper(t_fonctionParam *f) {

@@ -24,7 +24,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nUne lame tranchante \nimprégnée d'obscurité
 
 id Item: 1
@@ -53,7 +53,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nUn arc enflammé \nrenaissant de ses cendres
 
 id Item: 2
@@ -82,7 +82,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nFrappe avec la fureur \ndes tempêtes
 
 id Item: 3
@@ -111,7 +111,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nBrille avec la lumière \ndes nuits sans lune
 
 id Item: 4
@@ -140,7 +140,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nUne symbiose entre \nnature et protection
 
 id Item: 5
@@ -169,7 +169,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nVol de vie \nà chaque coup porté
 
 id Item: 6
@@ -198,7 +198,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nCanalise l'énergie \ndes constellations
 
 id Item: 7
@@ -227,7 +227,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nRécolte des âmes \npour alimenter son pouvoir
 
 id Item: 8
@@ -256,7 +256,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nArmée des profondeurs marines \nDraine la force des océans
 
 id Item: 9
@@ -285,7 +285,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nPuise dans l'énergie tellurique \nRenforce la connexion terrestre
 
 id Item: 10
@@ -314,7 +314,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nTourbillon de lames aériennes \nDéchire l'espace-temps
 
 id Item: 11
@@ -343,7 +343,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nEnveloppe le porteur \ndans une brume mystique
 
 id Item: 12
@@ -372,7 +372,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nSavoir interdit \nCorrompt l'âme de l'utilisateur
 
 id Item: 13
@@ -401,7 +401,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nGriffes imprégnées \nde rage draconique
 
 id Item: 14
@@ -430,7 +430,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nBouclier béni par les cieux \nAbsorbe les chocs divins
 
 id Item: 15
@@ -459,7 +459,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nÉpand un venin paralysant \nCorrode armures et chairs
 
 id Item: 16
@@ -488,7 +488,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nCristaux vivants affûtés \nRéfracte la lumière en lames
 
 id Item: 17
@@ -517,7 +517,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nFrappe rapide et précise \nComme un essaim enragé
 
 id Item: 18
@@ -546,7 +546,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nDéchaîne des ondes de choc \nFracasse les défenses
 
 id Item: 19
@@ -575,7 +575,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nDuo de lames synchronisées \nDanse mortelle coordonnée
 
 id Item: 20
@@ -604,7 +604,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nBrûle avec la fureur du soleil \nPurifie les ennemis vaincus
 
 id Item: 21
@@ -633,7 +633,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nTir venant des ténèbres \nTransperce les âmes damnées
 
 id Item: 22
@@ -662,7 +662,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nDéchaîne des explosions aquatiques \nDétruit les fondations
 
 id Item: 23
@@ -691,7 +691,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nLames possédées \nTraverse les protections magiques
 
 id Item: 24
@@ -720,7 +720,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nDévie les attaques énergétiques \nGénère un champ de force
 
 id Item: 25
@@ -749,7 +749,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nGèle le sang des adversaires \nEnglace les mouvements
 
 id Item: 26
@@ -778,7 +778,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nContrôle la flore environnante \nSoigne les alliés
 
 id Item: 27
@@ -807,7 +807,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nCombo de coups rapides \nEsquive améliorée
 
 id Item: 28
@@ -836,7 +836,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nVenin pétrifiant \nParalyse les cibles
 
 id Item: 29
@@ -865,7 +865,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nDécoupe l'air en lames \nAttaque sur 180 degrés
 
 id Item: 30
@@ -894,7 +894,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nJavelot enflammé \nExplose à l'impact
 
 id Item: 31
@@ -923,7 +923,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nDéchiquète les chairs \nRégénération accélérée
 
 id Item: 32
@@ -952,7 +952,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nDards empoisonnés \nEffet neurotoxique cumulatif
 
 id Item: 33
@@ -981,7 +981,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nPulvérise les armures \nOndes de choc sismiques
 
 id Item: 34
@@ -1039,7 +1039,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nDanse de lames aériennes \nCoups tourbillonnants
 
 id Item: 36
@@ -1068,7 +1068,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nDécharge électrique cumulative \nChaine entre ennemis
 
 id Item: 37
@@ -1097,7 +1097,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nFaille spatiale tranchante \nIgnore les défenses physiques
 
 id Item: 38
@@ -1126,7 +1126,7 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nTrajectoire courbe imprévisible \nEnflamme les cibles
 
 id Item: 39
@@ -1155,5 +1155,5 @@ range: 30
 angleAttack: 2
 attackDuration: 0.28
 attackCooldown: 0.7
-onEquipe:: 0
+onEquipe: 1
 description: \nSonne le Ragnarök \nRéveille les forces primordiales
