@@ -109,14 +109,50 @@ Nous avons également réalisé des tâches en groupe, que ce soit pour intégre
 \textit{Cette partie traite de la géneration procédurale d'un niveau du jeu.}
 \subsubsection{La géneration aléatoire de la structure du donjon}
 
+Le donjon est généré sous forme de graphe où chaque nœud représente une salle. L'algorithme garantit :
+
+    Une connectivité entre toutes les salles
+
+    La possibilité d'avoir plusieurs salles reliées à une seule
+
+    L'ajout de salles spéciales (marchand, boss) déjà prédéfini 
+\\\\
+\textbf{Processus de génération}
+\begin{itemize}
+    \item Initialisation : Création d'une salle racine (point de départ)
+    \item Expansion aléatoire : Ajout itératif de salles dans des directions libres (haut/bas/gauche/droite)
+    \item Contrôle des collisions : Vérification des superpositions via u système de coordonnées en grille
+    \item Post-traitement : Insertion des salles spéciales à partir du graphe principal
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.4\linewidth]{./img/map_generation.png}
+\caption{Exemple de sortie du générateur avec visualisation des connexions}
+\label{fig:map_gen32}
+\end{figure}
+\bigskip
+Transformer le graphe en représentation jouable :
+\begin{itemize}
+    \item Redimensionnement de l'affichage par rapport  au nombre de salles (grandeur des carrés affiché, centralisation vers la partie gauche de l'écran)
+    \item  Placement automatique des icônes spéciales (boss en violet, marchand en vert, joueur en jaune)
+\end{itemize}
+\bigskip
+Optimisation:
+\begin{itemize}
+\item \textbf{Challenge technique} : Certaines salles pouvaient se générer au même endroit, ce qui les faisait se superposer
+\item \textbf{Solution} : On empêche les salles de se superposer en testant leur position avec les autres avant de les ajouter
+\end{itemize}
+
+
 \subsubsection{La géneration aléatoire des salles}
 Lorsqu'on parle d'aléatoire en infromatique on à deux façons de voir la chose. Soit du \guillemotleft pur\guillemotright \ aléatoire appelé \textbf{noise}, c'est-à-dire qu'on met une probabilité fixe, si elle arrive, on met un mur sinon on met un sol. Le problème avec cette méthode est qu'elle n'est pas adapté pour un rogue-like car elle ne garantit pas que le niveau soit jouable (pouvoir accéder à toutes les salles). 
 La deuxième façon de faire de l'aléatoire est de faire de l'aléatoire contrôlé appelé gradient noise, c'est à dire de créer une continuité dans l'aléatoire pour que ça fasse plus naturelle.\\\\
 
-Nous avons donc choisi cette deuxième option en utilisant l'algorithme de perlin noise (ou bruit de Perlin en français ) qui est une texture procédurale primitive utilisée pour augmenter le réalisme de l'environnement de jeux par exemple Minecraft utilise du Perlin noise.\\
+Nous avons donc choisi cette deuxième option en utilisant l'algorithme de perlin noise (ou bruit de Perlin en français ) qui est une texture procédurale  utilisée pour générer l'environnement de jeux, par exemple Minecraft utilise du Perlin noise.\\
 Le Perlin noise repose sur trois étapes reposant sur des principes mathématiques et physiques. Tout d'abord il faut générer une matrice de dimension n. Pour chaque case de cette matrice, on va attribuer un champ de vecteurs normaux aléatoire.\\
-Puis nous devons ensuite calculer le produit scalaire pour chaque case entre le vecteur normal et le vecteur distance qui est un vecteur représentant la side identique pour chaque case changent à chaque génération de salle.\\
-Enfin, nous devons calculer l'interpolation entre les vecteurs calculés dans la case, qui, renvoie 0 si le noeud est évalué sur lui-même. Cette étape sert à adoucir la transition entre les valeurs aléatoires générées. Sans elle, le résultat serait trop brut.\\
+Puis nous devons ensuite calculer le produit scalaire pour chaque case entre le vecteur normal et le vecteur distance qui est un vecteur représentant le facteur aléatoire, identique pour chaque case changent à chaque génération de salle.\\
+Enfin, nous devons calculer l'interpolation entre les vecteurs calculés dans la case. Cette étape sert à adoucir la transition entre les valeurs aléatoires générées. Sans elle, le résultat serait trop brut.\\
 \[
 f(x) = a_{0} + \text{smoothstep}(x) \cdot (a_{1} - a_{0}), \quad \text{pour } 0 \leq x \leq 1
 \]
@@ -147,20 +183,48 @@ Si on lisse le perlin noise et qu'on rajoute des tiles pour les valeurs et en me
 \\
  On remarque que la salle a quelques problèmes. Le premier problème est que l'on peut voir en haut à droite de la \autoref{fig:affichage perlin lisser} un trou inaccessibles qui peut s'avérer être problématique si il y a un coffre dedans, de plus la salle n'est pas très belle et nous ne pouvons pas sortir de la salle.
 \\\\
- Pour régler le problème du trou nous avons utilisé un algorithme d'écoulemenent par bloc, c'est à dire qu'on prend une case qui est vide on lui assigne une valeur et tant que ses voisines sont vides, on met la valeur de ces cases à la même valeur que la case initiale et on recommence tant qu'on peut propager la valeur. 
- On répète ainsi l'opération tant qu'il reste une case vide en augmentant la valeur de +1. 
- Quand tous les blocs sont assignés on compte le nombre de cases contenu dans le bloc et puisque la génération ne crée pas de petit couloir tous indépendants, si on prend le plus grand bloc alors nous sommes sûrs d'avoir un terrain ouvert où le joueur peut se déplacer. 
- Quand on a identifié le plus grand bloc, il nous reste plus qu'à combler les autres. 
- Ainsi, tous les espaces de la salle sont atteignables par le joueur.
- \\\\
-Pour créer des sorties de la salle il suffit de prendre la structure de celle-ci générée lors de la création du niveau, regarder si cette salle est liée à une autre salle et si oui dans quelle direction ? 
-Quand on a pris l'information, on prend une case aléatoirement sur la première ou dernière ligne ou colonne suivant la salle liée à la salle qu'on crée. 
-Puis on se place sur une extrémité choisie aléatoirement de la ligne ou de la colonne et on \guillemotleft casse \guillemotright \ la case puis on recommence sur les cases dans le même alignement que la case d'origine tant qu'on n'a pas accès au terrain de jeux du joueur.
-Enfin on place un téleporteur sur la case d'origine pour pouvoir changer de salle.
-\\\\
-Enfin, pour rendre la salle plus jolie il suffit de faire des règles de génerations pour assigner un tiles en fonction de la situation de la case. Par exemple si les voisins direcst de la case (gauche,haut,droit,et bas) sont vides, alors l'algorithme place un élément de décoration.\\
+
+ Pour régler le problème de trou : 
+ \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./img/ecoulementBloc.png}
+    \caption{écoulemenent par bloc}
+    \label{fig:exemple ecoulement}
+\end{figure}
+
+principe de l'algorithme d'écoulemenent par bloc: 
+\begin{itemize}
+    \item On prend une case, on lui assigne une valeur et tant que ses voisines sont vides, on met la valeur de ces cases à la même valeur que la case initiale et on recommence tant qu'on peut propager la valeur.
+    \item On cherche le bloc avec le plus grand nombre de case
+    \item Quand on a identifié le plus grand bloc, il nous reste plus qu'à combler les autres.
+\end{itemize}
+\bigskip
+
+
+
+
+\bigskip
+
+Pour rendre la salle plus jolie il suffit de faire des règles de génerations pour assigner un tiles en fonction de la situation de la case. Par exemple si les voisins direcst de la case (gauche,haut,droit,et bas) sont vides, alors l'algorithme place un élément de décoration.\\
 Si on fait seulement cela, on est sûr d'avoir des problèmes sur une case respectant deux situations et donc avoir deux tiles. Dans cette situation il ne prend qu'un tiles ce qui fait que ça crée des bugs visuelles. On va donc utiliser un algorithme de lissage permettant de régler ce problème à 95%.
-\\\\
+\newpage
+Enfin, pour créer des sorties de la salle:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./img/placementSortie.png}
+    \caption{placement de sortie}
+    \label{fig:exemple placement de sorties}
+\end{figure}
+
+Principe de fonctionnement:
+\begin{itemize}
+    \item Regarder si cette salle est liée à une autre salle et si oui dans quelle direction ?
+    \item On prend une case aléatoirement sur la première ou dernière ligne ou colonne suivant la salle liée à la salle qu'on crée. 
+    \item On \guillemotleft casse \guillemotright \ la case puis on recommence sur les cases dans le même alignement que la case d'origine tant qu'on n'a pas accès au terrain de jeux du joueur.
+    \item On place un téleporteur sur la case d'origine pour pouvoir changer de salle.
+\end{itemize}
+
+\bigskip
 Quand tous ces changement sont appliqués, on insère un facteur aléatoire dans la génération de la carte (le vecteur de direction) pour que chaque salle soit différente les unes des autres et on obtient : 
 
 \begin{figure}[h]
@@ -169,6 +233,8 @@ Quand tous ces changement sont appliqués, on insère un facteur aléatoire dans
 \caption{affichage d'une salle génerer de façon procédural}
 \label{fig:affichage de la salle final}
 \end{figure}
+
+
 \newpage
 
 \subsection{Gestion des items}
@@ -187,6 +253,7 @@ Comment cela fonctionne-t-il ?
     \label{fig:sauvegarde} 
 \end{figure}
  
+
 Nous avons créé une interface d'inventaire permettant d'accéder aux différents objets collectés au cours de la partie. Elle s'adapte automatiquement à la taille de l'écran, offrant ainsi un affichage agréable pour les joueurs.
 
 \begin{figure}[ht] 
@@ -264,6 +331,22 @@ Ce système réduit significativement la complexité du code. Par exemple, une �
 \subsection{Les ennemis}
 
 \subsection{Le cycle de jeu}
+
+Lorsqu'on lance le jeu, le programme génère un niveau et les salles de celui-ci. 
+Une fois les cartes générées, il est placé aléatoirement sur la première. Le but du joueur : tuer les monstres des différentes salles pour pouvoir passer à la prochaine, 
+trouver des équipements grâce aux coffres et au marchand pour aller se battre contre le boss du niveau. Deux possibilités s'offrent alors à lui :
+\begin{itemize}
+    \item le joueur tue le boss, alors il est transporté sur un nouveau niveau où les ennemis seront plus puissants et où le nombre de salles augmente.
+    \item Si le joueur meurt sous les coups du boss ou des monstres présents dans les salles, alors le jeu prend fin et le joueur perd tout ce qu'il a obtenu. S'il relance une partie, alors il sera remplacé sur une carte avec des ennemis faibles.
+\end{itemize}
+Le joueur commence son aventure avec un simple couteau, mais il sera possible pour lui de changer d'arme et de peaufiner son inventaire pour pouvoir jouer comme il le veut. Puisque les salles, boss et items sont aléatoires, alors une partie est unique
+\\\\
+pour résumer : 
+\begin{figure}[ht] 
+    \centering 
+    \includegraphics[width=0.4\linewidth]{./img/scchemaCycleJeu.png} 
+    \caption{Inventaire} 
+\end{figure} 
 
 \section{Bilan et conclusions}
 
