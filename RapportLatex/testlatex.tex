@@ -72,6 +72,8 @@ Portage sur diverses machines & \\
 \bottomrule
 \end{tabular}
 \end{center}
+Ce qui rend ce jeu unique, c'est son aspect imprévisible, grâce à une génération totalement aléatoire. Le design des cartes et le nombre d'ennemis que l'on rencontre sont impossible à anticiper. Chaque carte représente un environnement dans lequel le joueur évolue, et toutes les cartes sont générées aléatoirement sous forme de donjons, eux-mêmes générant un nombre aléatoire de cartes. Une fois que tous les ennemis ont été éliminés, le joueur débloque une nouvelle carte, différente de la précédente, qui le conduira jusqu'au boss final.
+
 
 \subsection{Conception}
 \newpage
@@ -167,10 +169,46 @@ Quand tous ces changement sont appliqués, on insère un facteur aléatoire dans
 \caption{affichage d'une salle génerer de façon procédural}
 \label{fig:affichage de la salle final}
 \end{figure}
-
- 
+\newpage
 
 \subsection{Gestion des items}
+
+
+Nous avons choisi d'utiliser un système de sauvegarde et de chargement de fichiers contenant des blocs, chacun composé d'une liste de clés et de valeurs. Ces clés et valeurs sont ensuite stockées dans des structures grâce au programme de chargement, ce qui nous permet d'enregistrer les inventaires des joueurs.\
+
+\begin{center} 
+Comment cela fonctionne-t-il ? 
+\end{center} Tout d'abord, les données relatives aux objets sont enregistrées dans un fichier texte, puis ces données sont injectées dans les structures correspondantes. Une fois les données utilisées et modifiées, nous pouvons les récupérer en les sauvegardant dans un nouveau fichier texte.
+
+\begin{figure}[ht]
+    \centering 
+    \includegraphics[width=1\linewidth]{./img/systemeSauvegarde.png} 
+    \caption{Système de sauvegarde} 
+    \label{fig:sauvegarde} 
+\end{figure}
+ 
+Nous avons créé une interface d'inventaire permettant d'accéder aux différents objets collectés au cours de la partie. Elle s'adapte automatiquement à la taille de l'écran, offrant ainsi un affichage agréable pour les joueurs.
+
+\begin{figure}[ht] 
+    \centering 
+    \includegraphics[width=0.4\linewidth]{./img/inventaire.png} 
+    \caption{Inventaire} 
+\end{figure} Grâce à l'intégration de boutons, l'interface possède plusieurs fonctionnalités :
+
+   - Placement des objets dans les slots en fonction de leur type.
+
+\begin{figure}[ht]
+    \centering 
+    \includegraphics[width=0.2\linewidth]{./img/itemslot.png} 
+    \caption{Inventaire : slot d'objet} 
+\end{figure}
+
+   - Affichage des statistiques et de la description en fonction de l'objet sur lequel on clique (voir \autoref{fig:inventaire}).
+
+
+
+
+\newpage
 
 \subsection{Le moteur physique}
 
@@ -228,6 +266,8 @@ Ce système réduit significativement la complexité du code. Par exemple, une �
 \subsection{Le cycle de jeu}
 
 \section{Bilan et conclusions}
+
+Lo Poti Donjon reflète notre vision d'un jeu dynamique, où chaque partie offre une expérience différente et imprévisible, tout en maintenant un bon équilibre entre facilité et challenge. Nous sommes curieux de voir comment le projet va évoluer et quel impact il pourra avoir sur les joueurs.
 
 \section{Annexes}
 
@@ -289,5 +329,17 @@ t_scene* salleDep = (t_scene*)getObject(controller->scene, controller->currentSc
 
 Le problème venait de la tentative de conversion d'un pointeur \texttt{NULL}, retourné par la fonction \texttt{getObject} lorsqu'un indice invalide (Dans notre cas, \texttt{-1}) était utilisé.
 Nous avons théorisé que en raison des différences d'initialisation de la mémoire entre systèmes d'exploitation, certains environnements interprétaient correctement ce retour comme étant \texttt{NULL}, tandis que d'autres ne le faisaient pas, générant ainsi des valeurs indéterminées (par exemple : \texttt{0x01}, \texttt{0xf0}), pouvant inclure \texttt{NULL}, ne facilitant pas le debuggage.
+
+\newpage
+
+\subsection{Inventaire}
+
+\begin{figure}[ht]
+    \centering 
+    \includegraphics[width=0.75\linewidth]{./img/affichageStats.png} 
+    \caption{ affichage stats-description} 
+    \label{fig:inventaire}
+\end{figure}
+
 
 \end{document}
