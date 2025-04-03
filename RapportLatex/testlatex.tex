@@ -2,6 +2,7 @@
 
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage[utf8]{inputenc}
 \usepackage{fancyhdr}
 \usepackage{color}
@@ -88,22 +89,19 @@ Ce qui rend ce jeu unique, c'est son aspect imprévisible, grâce à une génér
 
 
 \subsection{Conception}
-\newpage
 
 \section{Organisation du projet}
 \textit{Cette partie traite des moyens organisationnels mis en œuvre permettant la réalisation du projet.}
 
 \subsection{Répartition des tâches}
 
+
 Concernant la répartition des tâches, nous nous sommes appuyés sur les qualités de chacun pour avancer rapidement et efficacement :
 
 \begin{itemize}[leftmargin=*]
   \item \textbf{Victore Fombertasse} a réalisé les animations du jeu ainsi que l'audio et la création de la structure d'un niveau.
-  
   \item \textbf{Souleymane Barry} a créé le système d'inventaires, celui de sauvegarde ainsi que le prototype du système de déplacement du joueur.
-  
   \item \textbf{Baptiste Carfantan} a conçu les salles générées procéduralement ainsi que la boucle de gameplay pour progresser dans le jeu.
-  
   \item \textbf{Barthélemy Deroualt}, chef de projet, s'est chargé de la gestion des systèmes liés aux ennemis, au joueur, aux événements ainsi qu'à la physique du jeu.
 \end{itemize}
 
@@ -501,6 +499,89 @@ Le problème venait de la tentative de conversion d'un pointeur \texttt{NULL}, r
 Nous avons théorisé que en raison des différences d'initialisation de la mémoire entre systèmes d'exploitation, certains environnements interprétaient correctement ce retour comme étant \texttt{NULL}, tandis que d'autres ne le faisaient pas, générant ainsi des valeurs indéterminées (par exemple : \texttt{0x01}, \texttt{0xf0}), pouvant inclure \texttt{NULL}, ne facilitant pas le debuggage.
 
 \newpage
+\subsection{Jeux de test}
+\textit{cette partie traite des jeux de test effecuter pour le projet}
+
+\subsubsection{Programme teste}
+Nous ne pouvons pas tester chaque bout de code car certain sont fait pour exclusivment marché qvec d'autre nous avons choisi trois programme pouvant fonctionné de façon autonome : objectManager, fscene et genMap.
+
+\subsubsection{Les test d'object Manager}
+Puisque l'object manager est centralisé pour fonctionner avec les autres alors il nous semble naturelle de comencé les teste par lui.
+Nous allons donc testé c'est fonction de création, d'ajout, de supression, de récuperation ainsi que de destruction\\
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Nom de la fonction de test} & \textbf{Objectif du test}\\
+\hline
+test\_createTypeRegistry() & tester la création d'un registre de type \\
+\hline
+test\_registerType() & tester l'ajout d'un type dans le registre \\
+\hline
+test\_initObjectManager()& tester la création et l'initialisation d'un objectManager \\
+\hline
+test\_addObject()& tester l'ajout d'un élement dans l'objectManager \\
+\hline
+test\_addObjects\_SameType() & tester l'ajout de plusieurs élements de même type dans l'objectManager \\
+\hline
+test\_addObject\_DifferentsType() &  tester l'ajout de plusieurs élements de  types différents\\& dans l'objectManager\\
+\hline
+test\_deleteObject() & tester la supression d'un object de l'objectManager\\
+\hline
+test\_freeObjectManager() & teste de destruction de l'objectManager\\
+\hline
+
+\end{tabular}
+\end{table}
+\vspace{-5mm}
+\bigskip
+\subsubsection{Les tests de fscene}
+Les tests sur fscne nous permettens de faire un test d'integration avec l'object manager voici les fonction de test utilisée.\\
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Nom de la fonction de test} & \textbf{Objectif du test}\\
+\hline
+test\_createScene() & tester la création d'une scène \\
+\hline
+test\_sceneAddObject() & tester l'ajout d'un object dans la scène \\
+\hline
+test\_sceneRemoveObject()& tester la supression d'un objet de la scène\\
+\hline
+test\_sceneRegisterFunction() & tester l'ajout d'une fonction dans la scène \\
+\hline
+test\_setScene()  & tester le changment de scène\\
+\hline
+
+\end{tabular}
+\end{table}
+
+
+\subsubsection{Les tests de GenMap}
+Les tests sur GenMap nous permettens de faire un test unitaire pour la création d'un niveau, une partie essentiel au jeux.\\
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Nom de la fonction de test} & \textbf{Objectif du test}\\
+\hline
+test\_initRoom() & tester l'initialisation d'une salle\\
+\hline
+test\_connectRoom()  & tester la connexion de plusieurs salle entre elles\\
+\hline
+test\_genMap()& tester la géneration d'une map (plusieurs salles connecté entre elles)\\
+\hline
+test\_freeLevel() & tester la supression d'un niveau\\
+\hline
+test\_setScene()  & tester le changment de scène\\
+\hline
+
+\end{tabular}
+\end{table}
+
 
 \subsection{Inventaire}
 

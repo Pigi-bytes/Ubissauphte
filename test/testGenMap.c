@@ -9,7 +9,6 @@
  *  -> test de connexion de deux salles : test_connectRoom()
  *  -> test de génération d'une carte (plusieurs salles reliées les unes aux autres) : test_genMap()
  *  -> test de suppression d'un niveau : test_freeLevel()
- *  -> test de changement de scène : test_setScene()
  */
 
 // fonction de test de création de salle
