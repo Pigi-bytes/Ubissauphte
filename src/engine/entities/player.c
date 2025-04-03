@@ -49,6 +49,7 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){3, 4}, 2, 240, SDL_TRUE, "walk"));
     setAnimation(joueur->entity.animationController, "idle");
 
+    joueur->particleEmitter = createParticleEmitter();
 
     joueur->inventaire = createInventaire();
     joueur->baseStats.health.additive = 10;
@@ -231,8 +232,6 @@ void updateAttack(t_joueur* player, float* deltaTime, t_objectManager* entities,
 
         // Vérification si l'ennemi est dans le secteur d'attaque actuel
         if (cercleInSector(enemyPos, enemy->collisionCircle.radius, player->attack.hitBox.origin, currentAngle, weapon->range, weapon->angleAttack)) {
-            takeDamageFromPlayer((t_enemy*)enemy, weapon->damage, player, context);
-
             // Vecteur direction depuis l'origine de l'attaque vers l'ennemi
             float dx = enemyPos.x - player->attack.hitBox.origin.x;
             float dy = enemyPos.y - player->attack.hitBox.origin.y;
@@ -242,6 +241,8 @@ void updateAttack(t_joueur* player, float* deltaTime, t_objectManager* entities,
             if (length > 0) {
                 dx /= length;
                 dy /= length;
+
+                takeDamageFromPlayer((t_enemy*)enemy, weapon->damage, player, context, (SDL_FPoint){dx, dy});
 
                 // Force de base du recul : 750.0f = multiplicateur de base pour une sensation de jeu satisfaisante
                 // Plus l'arme est lourde, plus le recul est puissant : Exemple: masse 2.0 → knockbackBase = 1500
@@ -347,9 +348,7 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
         }
     }
 
-    if (keyPressOnce(input, SDL_SCANCODE_T)) {
-        switchToNextWeapon(player);
-    }
+ 
 
     if (keyPressOnce(input, SDL_SCANCODE_N)) {
         applyDamage(&player->health, 10, &player->entity, NULL);
@@ -496,6 +495,20 @@ void updatePlayer(t_joueur* player, float* deltaTime, t_salle* salle, t_objectMa
         }
     }
 
+    SDL_FPoint velocity = player->entity.physics.velocity;
+    float speedSq = velocity.x * velocity.x + velocity.y * velocity.y;
+
+    if (speedSq > 2.0f) {
+        static float stepTimer = 0;
+        stepTimer += *deltaTime;
+
+        if (stepTimer > 0.25f) {
+            emitMovementParticles(player->particleEmitter, player->entity.collisionCircle.x, player->entity.collisionCircle.y + player->entity.collisionCircle.radius, SDL_COLOR_BLACK);
+            stepTimer = 0;
+        }
+    }
+
+    updateEntityParticles(player->particleEmitter, *deltaTime);
     updatePhysicEntity(&player->entity, deltaTime, salle->grille, entities);
 }
 
@@ -568,6 +581,8 @@ void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
     int scaledHeight = (player->currentWeapon->displayRect.h * scaleY);
 
     SDL_Point pivotPoint = {(scaledWidth * 0.5f), (scaledHeight * 0.8f)};
+
+    renderEntityParticles(renderer, player->particleEmitter);
 
     if (player->attack.isActive) {
         renderWeaponDuringAttack(renderer, player, origin, pivotPoint, scaledWidth, scaledHeight, player->entity.flip);

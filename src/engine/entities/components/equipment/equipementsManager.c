@@ -89,6 +89,30 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
         data = createPairData("flags", value);
         addPairData(block, data);
 
+        sprintf(value,"%f",item[i]->arme->mass);
+        data = createPairData("mass",value);
+        addPairData(block, data);
+        
+        sprintf(value,"%f",item[i]->arme->damage);
+        data = createPairData("damage",value);
+        addPairData(block, data);
+        
+        sprintf(value,"%f",item[i]->arme->range);
+        data = createPairData("range",value);
+        addPairData(block, data);
+
+        sprintf(value,"%f",item[i]->arme->angleAttack);
+        data = createPairData("angleAttack",value);
+        addPairData(block, data);
+
+        sprintf(value,"%f",item[i]->arme->attackDuration);
+        data = createPairData("attackDuration",value);
+        addPairData(block, data);
+
+        sprintf(value,"%f",item[i]->arme->attackCooldown);
+        data = createPairData("attackCooldown",value);
+        addPairData(block, data);
+
         sprintf(value, "%d", item[i]->indiceTexture);
         data = createPairData("texture", value);
         addPairData(block, data);
@@ -101,7 +125,7 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
             data = createPairData("type", "activable");
         addPairData(block, data);
 
-        if (item[i]->onEquip == NULL)
+        if (item[i]->arme->onEquipe == NULL)
             data = createPairData("onEquipe", "0");
         else
             data = createPairData("onEquipe", "1");
@@ -117,7 +141,7 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
     }
 }
 
-t_item** item_load(t_fichier* fichier, t_tileset* tileset) {
+t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
     t_item** item = (t_item**)malloc(fichier->blockManager->count * sizeof(t_item*));
     if (item == NULL) {
         fprintf(stderr, "Erreur d'allocation de mémoire");
@@ -131,6 +155,8 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset) {
 
     for (int i = 0; i < fichier->blockManager->count; i++) {
         item[i] = (t_item*)malloc(sizeof(t_item));
+
+        item[i]->arme = malloc(sizeof(t_arme));
 
         block = (t_blockData*)getObject(fichier->blockManager, i);
 
@@ -191,11 +217,37 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset) {
         getValue(block, "texture", &resultInt, INT);
         item[i]->texture = (SDL_Texture*)getObject(tileset->textureTiles, resultInt);
         item[i]->indiceTexture = resultInt;
+        item[i]->arme->texture = item[i]->texture;
+        item[i]->arme->displayRect = (SDL_Rect){0, 0, 16, 16};
+
+        getValue(block, "mass", &resultFLOAT, FLOAT);
+        item[i]->arme->mass = resultFLOAT;
+
+        getValue(block, "damage", &resultFLOAT, FLOAT);
+        item[i]->arme->damage = resultFLOAT;
+
+        getValue(block, "range", &resultFLOAT, FLOAT);
+        item[i]->arme->range = resultFLOAT;
+
+        getValue(block, "angleAttackDiv", &resultFLOAT, FLOAT);
+        item[i]->arme->angleAttack = M_PI * resultFLOAT;
+
+        getValue(block, "attackDuration", &resultFLOAT, FLOAT);
+        item[i]->arme->attackDuration = resultFLOAT;
+
+        getValue(block, "attackCooldown", &resultFLOAT, FLOAT);
+        item[i]->arme->attackCooldown = resultFLOAT;
 
         getValue(block, "type", &resultChar, STRING);
-        if (strcmp(resultChar, "arme") == 0)
+        if (strcmp(resultChar, "arme") == 0) {
             item[i]->validSlot[0] = SLOT_ARME;
-        else if (strcmp(resultChar, "armure") == 0)
+            getValue(block, "OnEquipe", &resultInt, INT);
+            if (resultInt == 0)
+                item[i]->arme->onEquipe = NULL;
+            else {
+                item[i]->arme->onEquipe = creerFonction(peutEquiperWrapper, FONCTION_PARAMS(&player->currentWeapon, item[i]->arme));
+            }
+        } else if (strcmp(resultChar, "armure") == 0)
             item[i]
                 ->validSlot[0] = SLOT_ARMURE;
         else if (strcmp(resultChar, "activable") == 0) {
@@ -203,13 +255,13 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset) {
             item[i]->validSlot[1] = SLOT_ACTIVABLE2;
         }
 
-        getValue(block, "OnEquipe", &resultInt, INT);
-        if (resultInt == 0)
-            item[i]->onEquip = NULL;
+        item[i]->arme->indice = i;
+
         getValue(block, "OnDeEquipe", &resultInt, INT);
         if (resultInt == 0)
             item[i]->onDeEquip = NULL;
     }
+    
 
     return item;
 }
@@ -306,7 +358,6 @@ t_inventaire* createInventaire() {
     return inv;
 }
 
-
 void inventaireAjoutObjet(t_inventaire* inv, t_item* item, int quantite) {
     t_itemsStack* itemStack = inventaireFindStack(inv, item);
 
@@ -334,41 +385,41 @@ t_itemsStack* inventaireFindStack(t_inventaire* inv, t_item* item) {
     return NULL;
 }
 
-void equipementRecalculerStats(t_joueur* c) {
+void equipementRecalculerStats(t_joueur** c) {
     // Initialisation des valeurs finales
     t_stats finalStats = {{0, 1}, {0, 1}, {0, 1}, {0, 1}, {0, 1}, {0, 1}, {0, 1}};
 
     // Parcours de tous les slots d'équipement
     for (int i = 0; i < TOTAL_EQUIPMENT_SLOTS; i++) {
-        if (c->equipement[i].stack != NULL) {
+        if ((*c)->equipement[i].stack != NULL) {
             // Ajouter les valeurs additive
-            finalStats.health.additive += c->equipement[i].stack->definition->stats.health.additive;
-            finalStats.healthMax.additive += c->equipement[i].stack->definition->stats.healthMax.additive;
-            finalStats.mana.additive += c->equipement[i].stack->definition->stats.mana.additive;
-            finalStats.manaMax.additive += c->equipement[i].stack->definition->stats.manaMax.additive;
-            finalStats.attack.additive += c->equipement[i].stack->definition->stats.attack.additive;
-            finalStats.defense.additive += c->equipement[i].stack->definition->stats.defense.additive;
-            finalStats.speed.additive += c->equipement[i].stack->definition->stats.speed.additive;
+            finalStats.health.additive += (*c)->equipement[i].stack->definition->stats.health.additive;
+            finalStats.healthMax.additive += (*c)->equipement[i].stack->definition->stats.healthMax.additive;
+            finalStats.mana.additive += (*c)->equipement[i].stack->definition->stats.mana.additive;
+            finalStats.manaMax.additive += (*c)->equipement[i].stack->definition->stats.manaMax.additive;
+            finalStats.attack.additive += (*c)->equipement[i].stack->definition->stats.attack.additive;
+            finalStats.defense.additive += (*c)->equipement[i].stack->definition->stats.defense.additive;
+            finalStats.speed.additive += (*c)->equipement[i].stack->definition->stats.speed.additive;
 
             // Appliquer les multiplicateurs
-            finalStats.health.multiplicative *= c->equipement[i].stack->definition->stats.health.multiplicative;
-            finalStats.healthMax.multiplicative *= c->equipement[i].stack->definition->stats.healthMax.multiplicative;
-            finalStats.mana.multiplicative *= c->equipement[i].stack->definition->stats.mana.multiplicative;
-            finalStats.manaMax.multiplicative *= c->equipement[i].stack->definition->stats.manaMax.multiplicative;
-            finalStats.attack.multiplicative *= c->equipement[i].stack->definition->stats.attack.multiplicative;
-            finalStats.defense.multiplicative *= c->equipement[i].stack->definition->stats.defense.multiplicative;
-            finalStats.speed.multiplicative *= c->equipement[i].stack->definition->stats.speed.multiplicative;
+            finalStats.health.multiplicative *= (*c)->equipement[i].stack->definition->stats.health.multiplicative;
+            finalStats.healthMax.multiplicative *= (*c)->equipement[i].stack->definition->stats.healthMax.multiplicative;
+            finalStats.mana.multiplicative *= (*c)->equipement[i].stack->definition->stats.mana.multiplicative;
+            finalStats.manaMax.multiplicative *= (*c)->equipement[i].stack->definition->stats.manaMax.multiplicative;
+            finalStats.attack.multiplicative *= (*c)->equipement[i].stack->definition->stats.attack.multiplicative;
+            finalStats.defense.multiplicative *= (*c)->equipement[i].stack->definition->stats.defense.multiplicative;
+            finalStats.speed.multiplicative *= (*c)->equipement[i].stack->definition->stats.speed.multiplicative;
         }
     }
 
     // Appliquer les multiplicatifs sur les valeurs additives pour calculer les calculatedStats
-    c->calculatedStats.health.additive = (c->baseStats.health.additive + finalStats.health.additive) * finalStats.health.multiplicative;
-    c->calculatedStats.healthMax.additive = (c->baseStats.healthMax.additive + finalStats.healthMax.additive) * finalStats.healthMax.multiplicative;
-    c->calculatedStats.mana.additive = (c->baseStats.mana.additive + finalStats.mana.additive) * finalStats.mana.multiplicative;
-    c->calculatedStats.manaMax.additive = (c->baseStats.manaMax.additive + finalStats.manaMax.additive) * finalStats.manaMax.multiplicative;
-    c->calculatedStats.attack.additive = (c->baseStats.attack.additive + finalStats.attack.additive) * finalStats.attack.multiplicative;
-    c->calculatedStats.defense.additive = (c->baseStats.defense.additive + finalStats.defense.additive) * finalStats.defense.multiplicative;
-    c->calculatedStats.speed.additive = (c->baseStats.speed.additive + finalStats.speed.additive) * finalStats.speed.multiplicative;
+    (*c)->calculatedStats.health.additive = ((*c)->baseStats.health.additive + finalStats.health.additive) * finalStats.health.multiplicative;
+    (*c)->calculatedStats.healthMax.additive = ((*c)->baseStats.healthMax.additive + finalStats.healthMax.additive) * finalStats.healthMax.multiplicative;
+    (*c)->calculatedStats.mana.additive = ((*c)->baseStats.mana.additive + finalStats.mana.additive) * finalStats.mana.multiplicative;
+    (*c)->calculatedStats.manaMax.additive = ((*c)->baseStats.manaMax.additive + finalStats.manaMax.additive) * finalStats.manaMax.multiplicative;
+    (*c)->calculatedStats.attack.additive = ((*c)->baseStats.attack.additive + finalStats.attack.additive) * finalStats.attack.multiplicative;
+    (*c)->calculatedStats.defense.additive = ((*c)->baseStats.defense.additive + finalStats.defense.additive) * finalStats.defense.multiplicative;
+    (*c)->calculatedStats.speed.additive = ((*c)->baseStats.speed.additive + finalStats.speed.additive) * finalStats.speed.multiplicative;
 }
 
 void equiperEquipement(t_joueur** c, int inventoryIndex, equipementSlotType slot) {
@@ -388,16 +439,23 @@ void equiperEquipement(t_joueur** c, int inventoryIndex, equipementSlotType slot
         (*c)->equipement[slot].stack = itemStack;
     else
         printf("Slot invalide\n");
-    if ((*c)->equipement[slot].stack->definition->onEquip != NULL)
-        callFonction((*c)->equipement[slot].stack->definition->onEquip);
-    equipementRecalculerStats(*c);
+    if ((*c)->equipement[slot].stack->definition->arme->onEquipe != NULL)
+        callFonction((*c)->equipement[slot].stack->definition->arme->onEquipe);
+    equipementRecalculerStats(c);
+}
+
+void peutEquiper(t_arme** arme, t_arme* armeAjout) {
+    arme[0] = armeAjout;
+}
+void peutEquiperWrapper(t_fonctionParam* f) {
+    peutEquiper(GET_PTR(f, 0, t_arme**), GET_PTR(f, 1, t_arme*));
 }
 
 void desequiperEquipement(t_joueur** c, equipementSlotType slot) {
     (*c)->equipement[slot].stack = NULL;
     if ((*c)->equipement[slot].stack->definition->onDeEquip != NULL)
         callFonction((*c)->equipement[slot].stack->definition->onDeEquip);
-    equipementRecalculerStats(*c);
+    equipementRecalculerStats(c);
 }
 
 void equipementUse(t_joueur* c, equipementSlotType slot) {

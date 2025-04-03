@@ -50,7 +50,7 @@ t_sceneController* initSceneController();
 void addScene(t_sceneController* controller, t_scene* scene);
 void setScene(t_sceneController* controller, char* name);
 t_scene* getCurrentScene(t_sceneController* voidcontroller);
-void freeSceneController(t_sceneController* controller);
+void freeSceneController(t_sceneController** controller);
 
 // Ajouter un objet à une scène et l'enregistrer automatiquement pour un type de fonction
 void* sceneAddObject(t_scene* scene, void* object, uint8_t typeId);
@@ -70,5 +70,7 @@ int findObjectIndex(t_objectManager* manager, void* object);
 void getPrevuisScene(t_sceneController* controller);
 void getPrevuisMenu(t_sceneController* controller);
 int indiceByscene(t_sceneController* controller, t_scene* scene);
+void freeSceneByName(t_sceneController** controller, char* name);
+t_scene* GetSceneByName(t_sceneController* controller, char* name);
 
 #endif

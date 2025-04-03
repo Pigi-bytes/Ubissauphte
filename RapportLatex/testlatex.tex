@@ -1,4 +1,5 @@
 \documentclass[a4paper,11pt]{article}
+
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -10,15 +11,32 @@
 \usepackage{enumitem}  % For better lists
 \usepackage{hyperref}  % For clickable links in PDF
 \usepackage{amsmath}  % Pour les équations
+\usepackage[margin=2cm]{geometry}
+\usepackage[skip=2pt]{caption}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+
+\usepackage{listings}
+
+\lstset{
+    language=C,
+    basicstyle=\ttfamily\small,           
+    frame=single,
+    breaklines=true,                       
+}
+
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=red,citecolor=green}
+
 
 \pagestyle{fancy}
-\setlength{\headheight}{28pt}
+\setlength{\headheight}{29pt}
 
-
+\usepackage{titlesec}
 
 
 \lhead{\includegraphics[width=2cm]{./img/image.png}}
 \rhead{\includegraphics[width=2cm]{./img/claude.png}}
+\chead{Lo Poti Donjon}
 
 \begin{document}
 
@@ -55,6 +73,8 @@ Portage sur diverses machines & \\
 \bottomrule
 \end{tabular}
 \end{center}
+Ce qui rend ce jeu unique, c'est son aspect imprévisible, grâce à une génération totalement aléatoire. Le design des cartes et le nombre d'ennemis que l'on rencontre sont impossible à anticiper. Chaque carte représente un environnement dans lequel le joueur évolue, et toutes les cartes sont générées aléatoirement sous forme de donjons, eux-mêmes générant un nombre aléatoire de cartes. Une fois que tous les ennemis ont été éliminés, le joueur débloque une nouvelle carte, différente de la précédente, qui le conduira jusqu'au boss final.
+
 
 \subsection{Conception}
 \newpage
@@ -80,114 +100,409 @@ Nous avons également réalisé des tâches en groupe, que ce soit pour intégre
 
 \subsection{Planning prévisionnel}
 
-\subsection{Outils de travail}
 
+\newpage
 \section{Développement}
 
 \subsection{Génération aléatoire du donjon}
+\textit{Cette partie traite de la géneration procédurale d'un niveau du jeu.}
+\subsubsection{La géneration aléatoire de la structure du donjon}
+
+Le donjon est généré sous forme de graphe où chaque nœud représente une salle. L'algorithme garantit :
+
+    Une connectivité entre toutes les salles
+
+    La possibilité d'avoir plusieurs salles reliées à une seule
+
+    L'ajout de salles spéciales (marchand, boss) déjà prédéfini 
+\\\\
+\textbf{Processus de génération}
+\begin{itemize}
+    \item Initialisation : Création d'une salle racine (point de départ)
+    \item Expansion aléatoire : Ajout itératif de salles dans des directions libres (haut/bas/gauche/droite)
+    \item Contrôle des collisions : Vérification des superpositions via u système de coordonnées en grille
+    \item Post-traitement : Insertion des salles spéciales à partir du graphe principal
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.4\linewidth]{./img/map_generation.png}
+\caption{Exemple de sortie du générateur avec visualisation des connexions}
+\label{fig:map_gen32}
+\end{figure}
+\bigskip
+Transformer le graphe en représentation jouable :
+\begin{itemize}
+    \item Redimensionnement de l'affichage par rapport  au nombre de salles (grandeur des carrés affiché, centralisation vers la partie gauche de l'écran)
+    \item  Placement automatique des icônes spéciales (boss en violet, marchand en vert, joueur en jaune)
+\end{itemize}
+\bigskip
+Optimisation:
+\begin{itemize}
+\item \textbf{Challenge technique} : Certaines salles pouvaient se générer au même endroit, ce qui les faisait se superposer
+\item \textbf{Solution} : On empêche les salles de se superposer en testant leur position avec les autres avant de les ajouter
+\end{itemize}
+
+
+\subsubsection{La géneration aléatoire des salles}
+Lorsqu'on parle d'aléatoire en informatique on à deux façons de voir la chose. Soit du \guillemotleft pur\guillemotright \ aléatoire appelé \textbf{noise}, c'est-à-dire qu'on met une probabilité fixe, si elle arrive, on met un mur sinon on met un sol. Le problème avec cette méthode est qu'elle n'est pas adaptée pour un rogue-like car elle ne garantit pas que le niveau soit jouable (pouvoir accéder à toutes les salles). 
+La deuxième façon de faire de l'aléatoire est de faire de l'aléatoire contrôlé appelé gradient noise, c'est à dire de créer une continuité dans l'aléatoire pour obtenir un résultat plus naturel.\\\\
+
+Nous avons donc choisi cette deuxième option en utilisant l'algorithme de Perlin noise (ou bruit de Perlin en français ) qui est une texture procédurale  utilisée pour générer un environnement de jeux, . nous pouvons citer comme exemple le jeu Minecraft qui utilise cet algorithme.\\
+Le Perlin noise est constitué de trois étapes reposant sur des principes mathématiques et physiques. Tout d'abord il faut générer une matrice de dimension n. Pour chaque case de cette matrice, on va attribuer un champ de vecteurs normaux aléatoires.\\
+Puis nous devons calculer,pour chaque case, le produit scalaire entre le vecteur normal et le vecteur distance qui est un vecteur représentant le facteur aléatoire, identique pour chaque case, changant à chaque génération de salle.\\
+Enfin, nous devons calculer l'interpolation entre les vecteurs calculés dans la case. Cette étape sert à adoucir la transition entre les valeurs aléatoires générées. Sans elle, le résultat serait trop brut.\\
+\[
+f(x) = a_{0} + \text{smoothstep}(x) \cdot (a_{1} - a_{0}), \quad \text{pour } 0 \leq x \leq 1
+\]
+\begin{equation*}
+\text{smoothstep}(x) =
+S_1(x) =
+\begin{cases} 
+0, & x \leq 0 \\ 
+3x^2 - 2x^3, & 0 < x < 1 \\ 
+1, & x \geq 1
+\end{cases}
+\end{equation*}
+Après toutes ces étapes, nous obtenons une matrice de bruit de Perlin pour laquelle on obtient l'affichage suivant en modifiant certains paramètres comme la limite:\
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.4\textwidth]{./img/perlin.jpg}
+\caption{affichage du perlin noise}
+\label{fig:affichage perlin}
+\end{figure}
+\\\\
+\newpage
+Si on lisse le Perlin noise et qu'on rajoute des tiles pour les valeurs et en mettant des bordures sur le côté pour empêcher le joueur de sortir de la carte on obtient ceci:\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\textwidth]{./img/perlinLisser.png}
+\caption{affichage du Perlin noise lissé}
+\label{fig:affichage perlin lisser}
+\end{figure}
+\bigskip
+On remarque que la salle a quelques problèmes. Le premier problème est que l'on peut voir en haut à droite de la \autoref{fig:affichage perlin lisser} un trou inaccessibles qui peut s'avérer être problématique s'il y a un coffre dedans, de plus la salle n'est pas très belle et nous ne pouvons pas en sortir.
+\\\\
+
+ Pour régler le problème de trou : 
+ \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./img/ecoulementBloc.png}
+    \caption{écoulemenent par bloc}
+    \label{fig:exemple ecoulement}
+\end{figure}
+
+principe de l'algorithme d'écoulemenent par bloc: 
+\begin{itemize}
+    \item On prend une case, on lui assigne une valeur et tant que ses voisines sont vides, on met la valeur de ces cases à la même valeur que la case initiale et on recommence tant qu'on peut propager la valeur.
+    \item On cherche le bloc avec le plus grand nombre de case
+    \item Quand on a identifié le plus grand bloc, il ne nous reste plus qu'à combler les autres.
+\end{itemize}
+\bigskip
+
+
+
+
+\bigskip
+
+Pour rendre la salle plus jolie il suffit de faire des règles de géneration pour assigner un tiles en fonction de la situation de la case. Par exemple si les voisins directs de la case (gauche,haut,droit,et bas) sont vides, alors l'algorithme place un élément de décoration.\\
+Si on fait seulement cela, on est sûr d'avoir des problèmes sur une case respectant deux situations et donc avoir deux tiles. Dans cette situation elle ne prend qu'un tiles ce qui fait que ça crée des bugs visuels. On va donc utiliser un algorithme de lissage permettant de régler ce problème à 95\%.
+\newpage
+Enfin, pour créer des sorties de la salle:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./img/placementSortie.png}
+    \caption{placement de sortie}
+    \label{fig:exemple placement de sorties}
+\end{figure}
+
+Principe de fonctionnement:
+\begin{itemize}
+    \item Regarder si cette salle est liée à une autre salle et si oui dans quelle direction ?
+    \item Prendre une case aléatoirement sur la première ou dernière ligne ou colonne suivant la salle liée à la salle qu'on crée. 
+    \item \guillemotleft Casser \guillemotright \ la case puis recommencer sur les cases dans le même alignement que la case d'origine tant qu'il n'y a pas d'accès au terrain de jeu du joueur.
+    \item Placer un téleporteur sur la case d'origine pour pouvoir changer de salle.
+\end{itemize}
+
+\bigskip
+Quand tous ces changement sont appliqués, on insère un facteur aléatoire dans la génération de la carte (le vecteur de direction) pour que chaque salle soit différente les unes des autres et on obtient : 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\textwidth]{./img/SalleFinal.png}
+\caption{affichage d'une salle génerée de façon procédurale}
+\label{fig:affichage de la salle final}
+\end{figure}
+
+
+\newpage
 
 \subsection{Gestion des items}
+
+
+Nous avons choisi d'utiliser un système de sauvegarde et de chargement de fichiers contenant des blocs, chacun composé d'une liste de clés et de valeurs. Ces clés et valeurs sont ensuite stockées dans des structures grâce au programme de chargement, ce qui nous permet d'enregistrer les inventaires des joueurs.\
+
+\begin{center} 
+Comment cela fonctionne-t-il ? 
+\end{center} Tout d'abord, les données relatives aux objets sont enregistrées dans un fichier texte, puis ces données sont injectées dans les structures correspondantes. Une fois les données utilisées et modifiées, nous pouvons les récupérer en les sauvegardant dans un nouveau fichier texte.
+
+\begin{figure}[ht]
+    \centering 
+    \includegraphics[width=1\linewidth]{./img/systemeSauvegarde.png} 
+    \caption{Système de sauvegarde} 
+    \label{fig:sauvegarde} 
+\end{figure}
+ 
+
+Nous avons créé une interface d'inventaire permettant d'accéder aux différents objets collectés au cours de la partie. Elle s'adapte automatiquement à la taille de l'écran, offrant ainsi un affichage agréable pour les joueurs.
+
+\begin{figure}[ht] 
+    \centering 
+    \includegraphics[width=0.4\linewidth]{./img/inventaire.png} 
+    \caption{Inventaire} 
+\end{figure} Grâce à l'intégration de boutons, l'interface possède plusieurs fonctionnalités :
+
+   - Placement des objets dans les slots en fonction de leur type.
+
+\begin{figure}[ht]
+    \centering 
+    \includegraphics[width=0.2\linewidth]{./img/itemslot.png} 
+    \caption{Inventaire : slot d'objet} 
+\end{figure}
+
+   - Affichage des statistiques et de la description en fonction de l'objet sur lequel on clique (voir \autoref{fig:inventaire}).
+
+
+
+
+\newpage
+
+\subsection{Le moteur physique}
+
+
 
 \subsection{Le moteur physique}
 
 \subsubsection{Pourquoi un moteur physique ?}
 \label{sec:moteur_physique}
-Un jeu vidéo impliquant des interactions dynamiques entre de nombreux éléments (personnages, ennemis, objets) pose un défi fondamental~: l'imprévisibilité des combinaisons de collisions. Un système simplifié, où chaque interaction serait codée manuellement, deviendrait rapidement ingérable. 
 
-\subsubsection{Gestion des collisions par colliders} 
-\label{sec:colliders}
-La détection des collisions repose sur une abstraction géométrique des entités. Plutôt que de calculer les intersections \textit{pixel par pixel} -- méthode particulièrement coûteuse en ressources -- chaque élément est associé à un volume primitif. Cette approche répond à trois exigences fondamentales du projet~:
+Dans un jeu vidéo, et particulièrement dans un \textbf{rogue-like}, les interactions entre éléments (personnages, ennemis, objets) posent un défi de taille~: l'imprévisibilité des combinaisons de collisions. \\
+Les mouvements, les collisions, les rebonds et autres effets physiques doivent être simulés de manière réaliste pour ne pas gâcher l’expérience du joueur. Cependant, un système simplifié, où chaque interaction serait codée manuellement, devient rapidement ingérable, la solution que nous avons donc trouver est celle d'un \textbf{moteur physique}, permettant de gérer de manière automatisée toutes ces interactions.
 
+\subsubsection{Composant Physique}
+\label{sec:structure_donnees}
+Dans notre moteur de jeu, chaque entité est doté de \textbf{composant}, le composant \texttt{physic} permet de doter (ou non) une entité de propriétés influençant ses interactions avec d’autres objets :
 \begin{itemize}
-    \item Maintenir un coût de calcul raisonnable.
-    \item Garantir des comportements physiques prévisibles.
-    \item Faciliter l'extension du système par modularité.
+    \item \texttt{velocity} : Vecteur de vitesse en pixels/seconde
+    \item \texttt{mass} : Masse
+    \item \texttt{friction} : Coefficient de frottement
+    \item \texttt{restitution} : Élasticité des collisions
 \end{itemize}
 
-\paragraph{Implémentation technique} 
-Chaque entité se voit attribuer un composant physique optionnel accompagné d'une forme primitive adaptée à sa nature~:
+Ces propriétés physiques suffisent à générer des situations émergentes sans nécessiter de règles spécifiques :
+
+\paragraph{Slime qui subit une attaque}
+Lorsqu’un joueur frappe un Slime, la force appliquée le projette en arrière. Léger et élastique, il rebondit sur le sol et glisse légèrement si la friction est faible. S’il percute un mur, il rebondit en perdant de l’énergie à chaque impact. En heurtant un autre Slime, ils absorbent et redistribuent leur énergie, créant une réaction en chaîne.
+
+\paragraph{Orc qui subit une attaque}
+Face à un Orc, bien plus massif et peu élastique, l’impact le fait à peine reculer, tandis que le joueur subit lui un léger recul.
+
+\paragraph{Avantages}  
+Ce système réduit significativement la complexité du code. Par exemple, une épée qui repousse un ennemi utilise la même logique qu’un projectile ricochant sur un mur, grâce aux paramètres centralisés. Ajouter une entité (comme un projectile) se limite à définir ses constantes physiques.
+
+\subsubsection{Colliders}
+\label{sec:colliders}
+
+Sans détection des collisions, aucune interaction n'est possible. Pour rebondir, glisser ou transférer de l’énergie, les contacts doivent être détectés et traités. \\
+
+C’est ici qu’intervient le système de \textbf{colliders}, qui permet d’optimiser la détection des interactions en simplifiant la géométrie des objets. Plutôt que d’effectuer des calculs coûteux, chaque entité est associée à un volume primitive (cercle ou rectangle), c'est un compromis entre coût de calcul et précision: \\
 \begin{itemize}
     \item \textbf{Cercles} pour les éléments arrondis (tonneaux, ennemis, joueur).
-    \item \textbf{Rectangles} pour les structures angulaires (caisses, murs).
+    \item \textbf{Rectangles} pour les structures angulaire (caisses, murs).
 \end{itemize}
+
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.75\linewidth]{./img/Capture d'écran 2025-03-29 200818}
+    \includegraphics[width=0.5\linewidth]{./img/debugCollider.png}
     \caption{Visualisation des colliders (en rouge) sur différentes entités}
     \label{fig:colliders_exemple}
 \end{figure}
 
-\paragraph{Exemple d'utilisation} 
-Le joueur, initialement modélisé par un rectangle de \(16 \times 16\)~px, a été remplacé par un cercle de \(16\)~px de diamètre. Cette modification~:
+\paragraph{Modélisation du joueur} 
+Le joueur, initialement modélisé par un rectangle de \(16 \times 16\)~px, a été remplacé par un cercle de \(16\)~px de diamètre. Cette modification~: Procure une sensation de mouvement plus naturelle au joueur.
+
+\subsubsection{Algorithme de collisions}
+Pour détectée les contact entre deux \textbf{colliders}, nous avons accès à deux algorithmes (cercle-rectangle et cercle-cercle). Ces derniers nous renvoies certaines valeurs nécessaires pour la gérer les collisions:
 \begin{itemize}
-    \item Procure une sensation de mouvement plus naturelle.
-    \item Permet un glissement le long des surfaces.
-    \item Génère des rebonds cohérents dans les coins.
+\item \textbf{Profondeur de pénétration} (\textit{depth}) : mesure la distance de chevauchement entre les objets.
+\item \textbf{Normale de collision (\(\vec{n}\))} : définit la direction dans laquelle appliquer la correction pour les séparer.
 \end{itemize}
 
-\paragraph{Exemple d'interaction}  
-Lorsqu’un Slime (léger et élastique) est frappé par le joueur, une force orientée selon l’angle de l’attaque lui est appliquée. Projeté contre un Orc (lourd), le moteur calcule automatiquement la réaction : l’Orc subit un léger recul, tandis que le Slime rebondit en changeant de direction. Si le Slime percute ensuite un mur, son élasticité réduit progressivement l’énergie du rebond. Enfin, il peut se cogner contre un autre slime, et lui transmettre encore de l’énergie. Ces interactions en cascade émergent naturellement des lois physiques configurées, sans nécessiter de code spécifique.
+Soit un cercle de centre \((x_c, y_c)\) et de rayon \(r_c\), et un rectangle défini par son coin inférieur gauche \((x_r, y_r)\), sa largeur \(w_r\) et sa hauteur \(h_r\).  
 
-\paragraph{Avantages}  
-Ce système réduit significativement la complexité du code. Par exemple, une épée qui repousse un ennemi utilise la même logique qu’un projectile ricochant sur un mur, grâce aux paramètres centralisés. Il offre également une extensibilité aisée : ajouter une entité (comme un projectile) se limite à définir ses constantes physiques.
+\paragraph{Algorithmes de Collision Implémenter} \hfill
+
+% Cercle-Rectangle
+\noindent\begin{minipage}[t]{0.48\textwidth}
+\subparagraph*{\underline{\small\textbf{Cercle-Rectangle}}}  
+\begin{enumerate}[leftmargin=*,topsep=2pt,itemsep=2pt]
+    \item Trouver le point du rectangle le plus proche du centre du cercle : 
+    \[
+    \begin{cases} 
+        x_p = \max(x_r, \min(x_c, x_r + w_r)), \\[2pt]
+        y_p = \max(y_r, \min(y_c, y_r + h_r)).
+    \end{cases}
+    \]
+    \item Mesurer la distance\(^2\) entre le cercle et le point proche :  
+    \[
+    d^2 = (x_c - x_p)^2 + (y_c - y_p)^2
+    \]
+    \item La collision à lieu si  :  
+    \[
+    d^2 < r_c^2
+    \]
+    \item Valeur de résolution :  
+    \[
+    \boxed{
+        \begin{aligned}
+            \text{depth} &= r_c - d, \\[2pt]
+            \vec{n} &= \dfrac{(x_c - x_p,\ y_c - y_p)}{d}
+        \end{aligned}
+    }
+    \]
+\end{enumerate}
+\end{minipage}
+\hfill
+% Cercle-Cercle
+\begin{minipage}[t]{0.48\textwidth}
+\subparagraph*{\underline{\small\textbf{Cercle-Cercle}}}  
+\begin{enumerate}[leftmargin=*,topsep=2pt,itemsep=2pt]
+    \item Mesurer la distance\(^2\) entre les centres des deux cercles :  
+    \[
+    d^2 = (x_2 - x_1)^2 + (y_2 - y_1)^2
+    \]
+    \item La collision à lieu si :  
+    \[
+    d^2 < (r_1 + r_2)^2
+    \]
+    \item Valeur de résolution : 
+    \[
+    \boxed{
+        \begin{aligned}
+            \text{depth} &= (r_1 + r_2) - d, \\[2pt]
+            \vec{n} &= \dfrac{(x_2 - x_1,\ y_2 - y_1)}{d}
+        \end{aligned}
+    }
+    \]
+\end{enumerate}
+\end{minipage}
+
+\paragraph{Optimisation avec les distances au carré}
+\label{sec:optimisation}
+Pour accélérer la détection des collisions, nous comparons les distances au carré afin d'éviter l'utilisation coûteuse de \texttt{sqrt}. La distance entre deux points \((x_1,y_1)\) et \((x_2,y_2)\) est normalement :
+\[d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}\]
+On calcule plutôt :
+\[d^2 = (x_2-x_1)^2 + (y_2-y_1)^2\]
+et on compare directement \(d^2\) à la valeur seuil au carré. La condition \(d^2 < r^2\) est équivalente à \(d < r\), mais évite le calcul de la racine carrée.
+
+\subsubsection{Resolution des collisions}
 
 \subsection{Les ennemis}
 
 \subsection{Le cycle de jeu}
 
+Lorsqu'on lance le jeu, le programme génère un niveau et les salles de celui-ci. 
+Une fois les cartes générées, il est placé aléatoirement sur la première. Le but du joueur : tuer les monstres des différentes salles pour pouvoir passer à la prochaine, 
+trouver des équipements grâce aux coffres et au marchand pour aller se battre contre le boss du niveau. Deux possibilités s'offrent alors à lui :
+\begin{itemize}
+    \item le joueur tue le boss, alors il est transporté sur un nouveau niveau où les ennemis seront plus puissants et où le nombre de salles augmente.
+    \item Si le joueur meurt sous les coups du boss ou des monstres présents dans les salles, alors le jeu prend fin et le joueur perd tout ce qu'il a obtenu. S'il relance une partie, alors il sera remplacé sur une carte avec des ennemis faibles.
+\end{itemize}
+Le joueur commence son aventure avec un simple couteau, mais il sera possible pour lui de changer d'arme et d'améliorer son inventaire pour pouvoir jouer comme il le veut. Puisque les salles, boss et items sont aléatoires, une partie est unique
+\\\\
+Pour résumer : 
+\begin{figure}[ht] 
+    \centering 
+    \includegraphics[width=0.4\linewidth]{./img/scchemaCycleJeu.png} 
+    \caption{Inventaire} 
+\end{figure} 
+
 \section{Bilan et conclusions}
+
+Lo Poti Donjon reflète notre vision d'un jeu dynamique, où chaque partie offre une expérience différente et imprévisible, tout en maintenant un bon équilibre entre facilité et challenge. Nous sommes curieux de voir comment le projet va évoluer et quel impact il pourra avoir sur les joueurs.
 
 \section{Annexes}
 
-\subsection{exemple de débogage}
-\subsubsection{gestion des pointeurs NULL en fonctions du système d'exploitation}
-Nous avons observé une \textbf{erreur de segmentation fault} lors de l'exécution du programme. Fait notable : ce problème n'affectait que certains membres de l'équipe tandis que d'autres pouvaient exécuter l'application normalement.
+\subsection{Exemple de débogage : Gestion des pointeurs \texttt{NULL} selon le système d'exploitation}
+\subsubsection{Contexte du problème}
+Lors de l'exécution du programme, une \textbf{erreur de segmentation} a été observée. Curieusement, ce comportement ne se manifestait que sur certaines machines de l'équipe, tandis que d'autres pouvaient exécuter le jeux sans problème. 
+L'origine du bug etait dans la tentative de conversion d'un pointeur \texttt{NULL}, retourné par la fonction \texttt{getObject} pour un index invalide, en un pointeur d'un autre type
 
-\begin{itemize}
-    \item Les paramètres entrants étaient valides (non-nuls)
-    \item Le problème semble provenir soit de :
-    \begin{itemize}
-        \item La variable \texttt{salleDep}
-        \item La structure \texttt{scene}
-    \end{itemize}
+\subsubsection{Investigation initiale}
+A force de test nous sommes arrivé à la conclusion que :
+\begin{itemize} 
+    \item Les paramètres d'entrée étaient vérifier, et non égale à \texttt{NULL}. 
+    \item Deux éléments étaient suspectés d'être en cause : 
+    \begin{itemize} \item La variable \texttt{salleDep} dans le contrôleur de scène 
+    \item La structure de données \texttt{scene} 
+    \end{itemize} 
 \end{itemize}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./img/gdbsystème.png}
-    \caption{Erreur observée dans GDB}
-    \label{fig:gdb_error}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./img/gdbSIGEGV.png}
+\caption{Trace d'exécution dans GDB montrant le point de crash}
+\label{fig:gdbSIGEGV}
 \end{figure}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./img/ExempleMarcheBien.png}
-    \caption{Comportement normal pour référence}
-    \label{fig:working_example}
-\end{figure}
-
-L'inspection de \texttt{salleDep} via GDB révèle :
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./img/ErreurAvecPrint.png}
-    \caption{Résultat de la commande \texttt{print salleDep}}
-    \label{fig:gdb_print}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.8\textwidth]{./img/Erreur2.png}
-  \caption{Résultat de la commande \texttt{print salleDep}}
-  \label{fig:gdb_print2}
-\end{figure}
-
-Ce qui est marrant avec cette valeur \texttt{0x01} (par exemple) c'est quelle change à chaque fois
-
-\subsection*{Conclusion}
-\begin{itemize}
-    \item \texttt{salleDep} présente une valeur non-nulle alors que \texttt{sceneController} devrait être vide (\texttt{NULL})
-    \item \textbf{Cause racine} : Absence de vérification de nullité avant l'assignation à \texttt{t\_scene}
+\newpage
+L'analyse à l'aide de GDB a permis d'observer : 
+\begin{itemize} 
+    \item Une adresse mémoire non nulle (ex. \texttt{0x01}) pour \texttt{salleDep}, même dans le cas où \texttt{getObject} devait renvoyer \texttt{NULL}. 
+    \item Une variation aléatoire de la valeur de \texttt{salleDep} entre différentes exécutions et machine (\textit{voir Fig. \ref{fig:gdb0x1}})
 \end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./img/gdb0xf0.png}
+\caption{Sortie de \texttt{print salleDep} montrant une adresse invalide}
+\label{fig:gdb0xf0}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./img/gdb0x1.png}
+\caption{Variation de la valeur de \texttt{salleDep} entre deux exécutions}
+\label{fig:gdb0x1}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./img/gdbNoError.png}
+\caption{Comportement normal lorsque tout marche}
+\label{fig:gdbNoError}
+\end{figure}
+
+\subsubsection{Origine du problème et correction du code}
+
+\begin{lstlisting}[caption={Ligne fautive}, label=code:fautive]
+t_scene* salleDep = (t_scene*)getObject(controller->scene, controller->currentScene);
+\end{lstlisting}
+
+Le problème venait de la tentative de conversion d'un pointeur \texttt{NULL}, retourné par la fonction \texttt{getObject} lorsqu'un indice invalide (Dans notre cas, \texttt{-1}) était utilisé.
+Nous avons théorisé que en raison des différences d'initialisation de la mémoire entre systèmes d'exploitation, certains environnements interprétaient correctement ce retour comme étant \texttt{NULL}, tandis que d'autres ne le faisaient pas, générant ainsi des valeurs indéterminées (par exemple : \texttt{0x01}, \texttt{0xf0}), pouvant inclure \texttt{NULL}, ne facilitant pas le debuggage.
+
+\newpage
+
+\subsection{Inventaire}
+
+\begin{figure}[ht]
+    \centering 
+    \includegraphics[width=0.75\linewidth]{./img/affichageStats.png} 
+    \caption{ affichage stats-description} 
+    \label{fig:inventaire}
+\end{figure}
+
 
 \end{document}

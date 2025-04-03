@@ -5,13 +5,13 @@ t_scene *createMainInv(t_context *context, t_joueur *player) {
     t_fichier *fichier = chargerFichier("src/test.txt");
     t_tileset *tileset = initTileset(context->renderer, 192, 240, 16, "./assets/imgs/tileMapDungeon.bmp");
 
-    t_item **itemListe = item_load(fichier, tileset);
+    t_item **itemListe = item_load(fichier, tileset, player);
 
-    for (int i = 0; i < 40; i++) {
+    for (int i = 0; i < fichier->blockManager->count; i++) {
         inventaireAjoutObjet(player->inventaire, itemListe[i], 1);
     }
 
-    InventoryUI *ui = inventoryUI_Init(NULL, context->renderer, player, context->input);
+    InventoryUI *ui = inventoryUI_Init(NULL, context->renderer,fichier->blockManager->count, player, context->input);
     const uint8_t INVENTORY_TYPE = registerType(registre, freeInv, "inventory");
 
     t_scene *scene = createScene(initObjectManager(registre), "mainInv");

@@ -14,7 +14,7 @@ typedef struct {
 } t_merchant;
 
 
-void updateMerchant(t_tileEntity* entity, t_context* context, t_grid* grid, t_objectManager* entities);
+void updateMerchant(t_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities);
 void renderMerchant(t_tileEntity* entity, t_context* context, t_camera* camera);
 t_tileEntity* createMerchantEntity(t_tileset* tileset, t_scene* scene);
 

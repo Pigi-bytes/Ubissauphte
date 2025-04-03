@@ -160,20 +160,22 @@ void equiperSlot(InventoryUI *ui, t_item **item) {
         }
     }
     ui->peutEquiper = 0;
+
+    equiperEquipement(&ui->ext->character, (*item)->arme->indice, (*item)->validSlot[0]);
 }
 
 void equiperSlotWrapper(t_fonctionParam *f) {
     equiperSlot(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, t_item **));
 }
 
-InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_joueur *c, t_input *input) {
+InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, int nb, t_joueur *c, t_input *input) {
     InventoryUI *ui = malloc(sizeof(InventoryUI));
     if (ui2 != NULL) {
         ui->ext = ui2->ext;
         ui->ecrit = ui2->ecrit;
     }
 
-    t_itemsStack **items = malloc(sizeof(t_itemsStack *) * 40);
+    t_itemsStack **items = malloc(sizeof(t_itemsStack *) * nb);
     for (int i = 0; i < c->inventaire->itemsStack->count; i++) {
         items[i] = (t_itemsStack *)getObject(c->inventaire->itemsStack, i);
     }
@@ -196,7 +198,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, t_joueur
         ui->itemclique = NULL;
     // Initialisation des références
     ui->ext->character = c;
-    ui->nbItems = 40;
+    ui->nbItems = nb;
 
     ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
     // Pour les items

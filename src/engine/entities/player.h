@@ -8,6 +8,7 @@
 #include "../../io/input.h"
 #include "components/equipment/equipementsManager.h"
 #include "components/health/health.h"
+#include "components/particules/particules.h"
 #include "components/physic/physics.h"
 #include "entity.h"
 #include "items/weapon.h"
@@ -54,6 +55,7 @@ typedef struct s_joueur {
     t_control* control;
     t_dash dash;
     t_healthSystem health;
+    t_particleEmitter* particleEmitter;
 
     t_stats baseStats;
     t_stats calculatedStats;
@@ -66,10 +68,6 @@ typedef struct s_joueur {
     int xpToNextLevel;
     int gold;
 
-    // TEMPORAIRE TEST
-    t_arme* weapons[10];
-    int weaponCount;
-    int currentWeaponIndex;
     t_arme* currentWeapon;
     int indexCurrentRoom;
 

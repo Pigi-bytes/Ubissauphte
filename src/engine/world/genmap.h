@@ -33,6 +33,6 @@ t_salle *
 initRoom();
 void connectRoom(t_salle *origineRoom, t_salle *destinationRoom, int dir);
 t_salle **genMap(int numberRoom, SDL_Rect *roomCoords);
-void freeSalle(t_salle *salle);
+void freeLevel(t_level *level);
 
 #endif

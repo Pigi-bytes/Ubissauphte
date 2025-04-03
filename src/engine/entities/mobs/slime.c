@@ -1,5 +1,7 @@
 #include "slime.h"
 
+#include "../player.h"
+
 #define JUMP_FORCE 150.0f
 #define TIME_UNTIL_JUMP 0.75f
 #define TIME_UNTIL_PATROL 5.0f
@@ -16,14 +18,66 @@ float randomWithPercentageVariation(float x, float percentage) {
     return min + (float)rand() / (float)(RAND_MAX / (max - min));
 }
 
+void onSlimeDeath(t_context* context, void* entity) {
+    t_enemy* enemy = (t_enemy*)entity;
+    t_slime* slime = (t_slime*)enemy;
+
+    enemy->entity.useCircleCollision = SDL_FALSE;
+    resetParticleEmitter(slime->particles);
+
+    SDL_FPoint position = {slime->base.entity.collisionCircle.x, slime->base.entity.collisionCircle.y};
+    float radius = slime->base.entity.collisionCircle.radius;
+
+    emitDeathParticles(slime->particles, position, radius, slime->particleColor);
+
+    printf("Slime détruit !\n");
+    if (enemy->lastDamagedBy != NULL) {
+        addPlayerXP(enemy->lastDamagedBy, enemy->xpReward);
+    }
+}
+
+void slimeTakeDamage(t_enemy* enemy, int damage, t_joueur* player, t_context* context, SDL_FPoint hitDirection) {
+    t_slime* slime = (t_slime*)enemy;
+
+    SDL_FPoint position = {slime->base.entity.collisionCircle.x, slime->base.entity.collisionCircle.y};
+    float radius = slime->base.entity.collisionCircle.radius;
+    emitImpactParticles(slime->particles, position, hitDirection, radius, slime->particleColor);
+
+    applyDamage(&enemy->health, damage, &enemy->entity, context);
+}
+
+void renderSlime(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
+    renderEntityParticles(renderer, ((t_slime*)enemy)->particles);
+    if (enemy->health.isDead) return;
+
+    if (enemy->health.isFlashing) {
+        SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);
+        SDL_SetTextureBlendMode(enemy->entity.texture, SDL_BLENDMODE_ADD);
+    } else {
+        SDL_SetTextureBlendMode(enemy->entity.texture, SDL_BLENDMODE_BLEND);
+        SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);
+    }
+
+    if (!(enemy->health.isInvincible && fmodf(getDeltaTimer(enemy->health.invincibilityTimer), 0.1) < 0.05)) {
+        renderEntity(renderer, &enemy->entity, camera);
+    }
+
+    if (enemy->health.showHealthBar && enemy->health.healthBareRender) {
+        enemy->health.healthBareRender(renderer, &enemy->health, enemy->entity.displayRect, camera);
+    }
+}
+
 t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, t_scene* scene) {
     t_slime* slime = malloc(sizeof(t_slime));
     initEnemyBase(&slime->base, texture, rect, scene);
     slime->base.update = updateSlime;
+    slime->base.render = renderSlime;
+    slime->base.takeDamage = slimeTakeDamage;
 
     slime->base.health.maxHealth = 100;
     slime->base.health.currentHealth = 100;
     slime->base.health.invincibilityDuration = 0.5f;
+    slime->base.health.onDeathCallback = onSlimeDeath;
 
     slime->base.entity.physics = (t_physics){.velocity = {0, 0}, .mass = 2.0f, .friction = 0.02f, .restitution = 1.0f};
     addAnimation(slime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 480, SDL_TRUE, "idle"));
@@ -46,6 +100,8 @@ t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, t_
     startDeltaTimer(slime->jumpCooldownTimer);
     startDeltaTimer(slime->idleTimer);
 
+    slime->particles = createParticleEmitter();
+    slime->particleColor = (SDL_Color){67, 225, 179, 200};
     return (t_enemy*)slime;
 }
 
@@ -55,6 +111,9 @@ void initiateSlimeJump(t_slime* slime, SDL_FPoint direction, float powerJump) {
         direction.x /= length;
         direction.y /= length;
     }
+
+    SDL_FPoint position = {slime->base.entity.collisionCircle.x, slime->base.entity.collisionCircle.y};
+    emitLandingParticles(slime->particles, position, slime->base.entity.collisionCircle.radius, slime->particleColor);
 
     slime->base.entity.physics.velocity.x += (direction.x * (slime->jumpForce * powerJump));
     slime->base.entity.physics.velocity.y += (direction.y * (slime->jumpForce * powerJump));
@@ -185,6 +244,7 @@ void updateSlime(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager
             break;
     }
 
+    updateEntityParticles(slime->particles, *deltaTime);
     Debug_PushCircle(slime->detectionRange.x, slime->detectionRange.y, slime->detectionRange.radius, COLORDEFAULT);
     updatePhysicEntity(&enemy->entity, deltaTime, grid, entities);
 }

@@ -25,13 +25,15 @@ int main(int argc, char* argv[]) {
     context.font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     context.gameFont = loadFont("assets/fonts/PressStart2P-vaV7.ttf", 7);
 
+    int nb = 3;
+
     context.frameData = initFrameData(0);
     context.option = creeOption();
     context.sceneController = initSceneController();
     context.audioManager = initAudioManager();
     context.fpsDisplay = initFPSDisplay(context.renderer, context.font);
-    context.regeneration = SDL_FALSE;
     context.currentLevel = NULL;
+    context.nbLevel = &nb;
 
     context.control = malloc(sizeof(t_control));
     context.control->up = SDL_SCANCODE_W;
@@ -49,9 +51,6 @@ int main(int argc, char* argv[]) {
 
     t_joueur* player = createPlayer(context.control, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerTileSet);
 
-    player->weaponCount = 0;
-    player->currentWeaponIndex = 0;
-
     // Création des armes avec statistiques équilibrées
     t_arme* dague = malloc(sizeof(t_arme));
     *dague = (t_arme){
@@ -64,18 +63,6 @@ int main(int argc, char* argv[]) {
     };
     dague->texture = getObject(tileset->textureTiles, 104);
     dague->displayRect = (SDL_Rect){0, 0, 16, 16};
-
-    t_arme* epee = malloc(sizeof(t_arme));
-    *epee = (t_arme){
-        .mass = 3.0f,             // Masse moyenne
-        .damage = 20.0f,          // Dégâts moyens
-        .range = 30.0f,           // Portée moyenne
-        .angleAttack = M_PI / 2,  // Arc d'attaque de 90°
-        .attackDuration = 0.28f,  // Animation moyenne
-        .attackCooldown = 0.7f    // Récupération moyenne
-    };
-    epee->texture = getObject(tileset->textureTiles, 105);
-    epee->displayRect = (SDL_Rect){0, 0, 16, 16};
 
     t_arme* hache = malloc(sizeof(t_arme));
     *hache = (t_arme){
@@ -113,25 +100,12 @@ int main(int argc, char* argv[]) {
     marteau->texture = getObject(tileset->textureTiles, 132);
     marteau->displayRect = (SDL_Rect){0, 0, 16, 16};
 
-    // Ajouter les armes à l'inventaire du joueur
-    player->weapons[0] = epee;     // Première arme (indice 0)
-    player->weapons[1] = dague;    // Deuxième arme (indice 1)
-    player->weapons[2] = hache;    // Troisième arme (indice 2)
-    player->weapons[3] = lance;    // Quatrième arme (indice 3)
-    player->weapons[4] = marteau;  // Cinquième arme (indice 4)
-
-    player->weaponCount = 5;  // Nombre total d'armes
-
-    // Définir l'arme actuelle
-    player->currentWeaponIndex = 0;
-    player->currentWeapon = player->weapons[player->currentWeaponIndex];
+    player->currentWeapon = dague;
 
     player->indexCurrentRoom = 0;
-    int nb = 4;
 
-    t_scene* scene = createMainMenu(&context);
+    t_scene* scene = createMainMenu(&context, &player);
     t_scene* scene0 = createOptionMenu(&context);
-    CreateNiveau(&context, 3, &player);
     t_scene* scene2 = createCommandeMenu(&context);
     t_scene* scene3 = createFpsMenu(&context);
     t_scene* scene4 = createMainInv(&context, player);
@@ -149,57 +123,6 @@ int main(int argc, char* argv[]) {
 
     while (!context.input->quit) {
         startFrame(context.frameData);
-        if (context.regeneration) {
-            printf("=== REGENERATION START ===\n");
-
-            SDL_Texture* playerTex = player->entity.texture;
-            SDL_Rect playerRect = player->entity.displayRect;
-
-            // 2. Réinitialisation complète du renderer
-            SDL_RenderClear(context.renderer);
-            SDL_SetRenderDrawColor(context.renderer, 0, 0, 0, 255);
-            SDL_RenderPresent(context.renderer);
-
-            // 3. Recréation du niveau
-            CreateNiveau(&context, nb, &player);
-
-            // 4. Réassignation des propriétés du joueur
-            player->entity.texture = playerTex;
-            player->entity.displayRect = playerRect;
-
-            // 5. Vérification des tilesets
-            if (tileset == NULL || tileset->textureTiles == NULL) {
-                printf("Rechargement des tilesets...\n");
-                tileset = initTileset(context.renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
-            }
-
-            printf("=== REGENERATION COMPLETE ===\n");
-            context.regeneration = SDL_FALSE;
-
-            // Recréation de toutes les scènes nécessaires
-            t_scene* scene = createMainMenu(&context);
-            t_scene* scene0 = createOptionMenu(&context);
-            t_scene* scene1 = createCommandeMenu(&context);
-            t_scene* scene2 = createFpsMenu(&context);
-            t_scene* scene3 = createMainInv(&context, player);
-            t_scene* scene4 = createOption2Menu(&context);
-            t_scene* scene5 = attente(&context);
-
-            addScene(context.sceneController, scene);
-            addScene(context.sceneController, scene0);
-            addScene(context.sceneController, scene1);
-            addScene(context.sceneController, scene2);
-            addScene(context.sceneController, scene3);
-            addScene(context.sceneController, scene4);
-            addScene(context.sceneController, scene5);
-
-            setScene(context.sceneController, "menuPrincipal");
-            t_scene* currentScene = getCurrentScene(context.sceneController);
-            executeSceneFunctions(currentScene, UPDATE);
-            executeSceneFunctions(currentScene, RENDER_GAME);
-
-            context.regeneration = SDL_FALSE;
-        }
         t_scene* currentScene = getCurrentScene(context.sceneController);
 
         executeSceneFunctions(currentScene, HANDLE_INPUT);
@@ -230,6 +153,7 @@ int main(int argc, char* argv[]) {
     freeFrameData(context.frameData);
     freeSceneController(&context.sceneController);
     free(context.control);
+    freeLevel(context.currentLevel);
 
     TTF_CloseFont(context.font);
     freeInput(context.input);

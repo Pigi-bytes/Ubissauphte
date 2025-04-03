@@ -8,6 +8,7 @@
 #include "../../../../utils/fonctionManager.h"
 #include "../../../../utils/objectManager.h"
 #include "../../../tileset.h"
+#include "../../items/weapon.h"
 
 struct s_joueur;
 
@@ -47,7 +48,7 @@ typedef struct {
     int id;
     unsigned int flags;  // Propriete
     int validSlot[2];    // Ou il va
-    t_fonctionParam* onEquip;
+    t_arme* arme;
     t_fonctionParam* onDeEquip;
     t_fonctionParam* onUse;
     char description[200];
@@ -95,10 +96,11 @@ int hasFlag(int itemFlags, itemsFlags flag);
 // Gestion equipement
 void equiperEquipement(struct s_joueur** c, int inventoryIndex, equipementSlotType slot);
 void desequiperEquipement(struct s_joueur** c, equipementSlotType slot);
-
+void peutEquiper(t_arme** arme, t_arme* armeAjout);
+void peutEquiperWrapper(t_fonctionParam* f);
 
 // Gestion Interaction
-void equipementRecalculerStats(struct s_joueur* c);
+void equipementRecalculerStats(struct s_joueur** c);
 
 // fonction use
 void equipementUse(struct s_joueur* c, equipementSlotType slot);
@@ -108,7 +110,7 @@ void inventory_print(t_inventaire* inv);
 void equipment_print(struct s_joueur* c);
 
 void item_save(t_item** item, t_fichier* fichier, int count);
-t_item** item_load(t_fichier* fichier, t_tileset* tileset);
+t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player);
 void free_item(t_item** items, int count);
 
 void inventory_save(t_inventaire* inv, t_fichier* fichier);
