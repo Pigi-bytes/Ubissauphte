@@ -47,6 +47,9 @@ typedef struct {
     t_deltaTimer* jumpCooldownTimer;
     t_deltaTimer* specialAttackTimer;
     t_deltaTimer* phaseTransitionTimer;
+
+    t_particleEmitter* particles;
+    SDL_Color particleColor;
 } t_boss_slime;
 
 typedef struct {

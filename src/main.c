@@ -52,8 +52,6 @@ int main(int argc, char* argv[]) {
     context.font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     context.gameFont = loadFont("assets/fonts/PressStart2P-vaV7.ttf", 7);
 
-    int nb = 3;
-
     context.frameData = initFrameData(0);
     context.option = creeOption();
     context.sceneController = initSceneController();
@@ -102,6 +100,7 @@ int main(int argc, char* argv[]) {
     nouv->id = 8;
     inventaireAjoutObjet(player->inventaire, nouv, 1);
     player->currentWeapon = dague;
+    equipementRecalculerStats(&player);
 
     player->indexCurrentRoom = 0;
 

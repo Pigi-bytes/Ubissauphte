@@ -152,7 +152,7 @@ flags: 4
 type: arme
 texture: 132
 mass: 5
-damage: 18
+damage: 10000
 range: 40
 angleAttack: 0.62831853071
 attackDuration: 0.3

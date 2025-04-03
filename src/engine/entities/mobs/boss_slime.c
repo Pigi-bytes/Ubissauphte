@@ -28,6 +28,26 @@ float randomWithPercentageVariationBoss(float x, float percentage) {
     return min + (float)rand() / (float)(RAND_MAX / (max - min));
 }
 
+void renderBossSlime(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
+    t_boss_slime* bossSlime = (t_boss_slime*)enemy;
+
+    renderEntityParticles(renderer, bossSlime->particles);
+
+    if (enemy->health.isFlashing) {
+        SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);
+        SDL_SetTextureBlendMode(enemy->entity.texture, SDL_BLENDMODE_ADD);
+    } else {
+        SDL_SetTextureBlendMode(enemy->entity.texture, SDL_BLENDMODE_BLEND);
+        SDL_SetTextureColorMod(enemy->entity.texture, 255, 255, 255);
+    }
+
+    renderEntity(renderer, &enemy->entity, camera);
+
+    if (enemy->health.showHealthBar && enemy->health.healthBareRender) {
+        enemy->health.healthBareRender(renderer, &enemy->health, enemy->entity.displayRect, camera);
+    }
+}
+
 void onBossSlimeDeath(t_context* context, void* entity) {
     t_enemy* enemy = (t_enemy*)entity;
     printf("BOSS SLIME: LE ROI EST MORT!\n");
@@ -47,8 +67,13 @@ void onBossSlimeDeath(t_context* context, void* entity) {
 t_enemy* createBossSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, t_scene* scene) {
     t_boss_slime* bossSlime = malloc(sizeof(t_boss_slime));
     initEnemyBase(&bossSlime->base, texture, rect, scene);
+    initHealthSystem(&bossSlime->base.health, BOSS_HEALTH);
+
     bossSlime->base.update = updateBossSlime;
-    bossSlime->base.health.maxHealth = bossSlime->base.health.currentHealth = BOSS_HEALTH;
+    bossSlime->base.render = renderBossSlime;
+
+    bossSlime->base.health.maxHealth = BOSS_HEALTH;
+    bossSlime->base.health.currentHealth = BOSS_HEALTH;
     bossSlime->base.health.invincibilityDuration = 0.7f;
     bossSlime->base.health.onDeathCallback = onBossSlimeDeath;
     bossSlime->base.health.healthBareRender = NULL;
@@ -60,30 +85,50 @@ t_enemy* createBossSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset
     addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){1, 3, 3, 2}, 4, 150, SDL_TRUE, "attack"));
     addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){3, 1, 3, 1}, 4, 100, SDL_TRUE, "enraged"));
 
+    // Initialisation des états
     bossSlime->state = BOSS_SLIME_IDLE;
     bossSlime->base.entity.debug = SDL_TRUE;
-    bossSlime->detectionRange = (t_circle){.x = rect.x + rect.w / 2, .y = rect.y + rect.h / 2, .radius = randomWithPercentageVariationBoss(BOSS_DETECTION_RADIUS, 0.1)};
+
+    // Initialisation des propriétés spécifiques au Boss Slime
+    bossSlime->detectionRange = (t_circle){
+        .x = rect.x + rect.w / 2,
+        .y = rect.y + rect.h / 2,
+        .radius = randomWithPercentageVariationBoss(BOSS_DETECTION_RADIUS, 0.1)};
     bossSlime->baseDetectionRange = bossSlime->detectionRange.radius;
+
     bossSlime->jumpCooldownDuration = randomWithPercentageVariationBoss(BOSS_TIME_UNTIL_JUMP, 0.2);
     bossSlime->idleDurationBeforeMove = randomWithPercentageVariationBoss(BOSS_TIME_UNTIL_MOVE, 0.3);
     bossSlime->jumpForce = randomWithPercentageVariationBoss(BOSS_JUMP_FORCE, 0.2);
     bossSlime->movesBaseValue = randomWithPercentageVariationBoss(BOSS_PATROL_MOVES, 0.3);
+
     bossSlime->groundPoundForce = BOSS_GROUND_POUND_FORCE;
     bossSlime->chargeForce = BOSS_CHARGE_FORCE;
     bossSlime->specialAttackCooldown = BOSS_SPECIAL_ATTACK_COOLDOWN;
+
+    bossSlime->playerInDetection = SDL_FALSE;
+    bossSlime->playerInSight = SDL_FALSE;
+    bossSlime->lastKnownPlayerPos = (SDL_FPoint){0, 0};
+
+    bossSlime->movesLeft = 0;
     bossSlime->currentPhase = 1;
     bossSlime->phase2HealthThreshold = PHASE2_HEALTH_THRESHOLD;
     bossSlime->phase3HealthThreshold = PHASE3_HEALTH_THRESHOLD;
     bossSlime->invulnerabilityPhaseDuration = PHASE_TRANSITION_DURATION;
     bossSlime->isPhaseTransition = SDL_FALSE;
 
-    bossSlime->jumpCooldownTimer = initDeltaTimer();
+    // Initialisation des timers
     bossSlime->idleTimer = initDeltaTimer();
+    bossSlime->jumpCooldownTimer = initDeltaTimer();
     bossSlime->specialAttackTimer = initDeltaTimer();
     bossSlime->phaseTransitionTimer = initDeltaTimer();
-    startDeltaTimer(bossSlime->jumpCooldownTimer);
     startDeltaTimer(bossSlime->idleTimer);
+    startDeltaTimer(bossSlime->jumpCooldownTimer);
     startDeltaTimer(bossSlime->specialAttackTimer);
+
+    // Initialisation des particules
+    bossSlime->particleColor = (SDL_Color){67, 225, 179, 200};
+    bossSlime->particles = createParticleEmitter();
+
     return (t_enemy*)bossSlime;
 }
 
@@ -92,7 +137,14 @@ void initiateBossJump(t_boss_slime* bossSlime, SDL_FPoint direction, float power
     if (length > 0) {
         direction.x /= length;
         direction.y /= length;
+    } else {
+        direction.x = 0;
+        direction.y = 0;
     }
+
+    SDL_FPoint position = {bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y};
+    emitBossMovementParticles(bossSlime->particles, position, bossSlime->base.entity.collisionCircle.radius, SDL_COLOR_WHITE);
+
     bossSlime->base.entity.physics.velocity.x += (direction.x * (bossSlime->jumpForce * powerJump));
     bossSlime->base.entity.physics.velocity.y += (direction.y * (bossSlime->jumpForce * powerJump));
     resetDeltaTimer(bossSlime->jumpCooldownTimer);
@@ -482,6 +534,7 @@ void updateBossSlime(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectMan
         }
     }
 
+    updateEntityParticles(bossSlime->particles, *deltaTime);
     SDL_Color detectionColor = bossSlime->isPhaseTransition ? SDL_COLOR_YELLOW : (bossSlime->currentPhase == 3 ? SDL_COLOR_RED : (bossSlime->currentPhase == 2 ? SDL_COLOR_ORANGE : COLORDEFAULT));
     Debug_PushCircle(bossSlime->detectionRange.x, bossSlime->detectionRange.y, bossSlime->detectionRange.radius, detectionColor);
     updatePhysicEntity(&enemy->entity, deltaTime, grid, entities);
