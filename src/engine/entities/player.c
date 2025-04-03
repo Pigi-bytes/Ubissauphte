@@ -2,6 +2,8 @@
 
 #include "enemy.h"
 
+// setScene(context->sceneController, "gameOver");
+
 t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
     t_joueur* joueur = (t_joueur*)malloc(sizeof(t_joueur));
 

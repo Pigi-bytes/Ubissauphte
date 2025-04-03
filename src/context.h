@@ -3,6 +3,8 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <dirent.h>
+#include <stdio.h>
 
 #include "engine/core/frame.h"
 #include "engine/world/genmap.h"
@@ -10,6 +12,14 @@
 #include "io/input.h"
 #include "ui/fpsDisplay.h"
 #include "utils/fscene.h"
+
+typedef enum {
+    EASY,
+    NORMAL,
+    HARD,
+    DEMONIC,
+    LEGEND,
+} difficulty;
 
 typedef struct {
     SDL_Scancode up;
@@ -44,6 +54,7 @@ typedef struct {
     t_fpsDisplay* fpsDisplay;
     t_level* currentLevel;
     int* nbLevel;
+    difficulty difficulty;
 } t_context;
 
 t_option* creeOption();
