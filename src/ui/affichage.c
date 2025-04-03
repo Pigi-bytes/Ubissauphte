@@ -310,7 +310,6 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, int nb, 
 
     if (ui2 == NULL) {
         t_text *t = createText(renderer, "EQUIPER", ui->ext->item_font, (SDL_Color){0, 0, 0});
-        printf("%p\n", t);
         ui->elems->equiper.button = createButton(t, (SDL_Color){255, 128, 0}, (SDL_Color){255, 150, 0}, ui->elems->equiper.rect, creerFonction(equiperSlotWrapper, FONCTION_PARAMS(ui, &ui->itemclique, renderer, input)));
     } else {
         ui->elems->equiper.button = ui2->elems->equiper.button;
@@ -560,7 +559,10 @@ void freeInv(void *elt) {
 }
 
 void handleInputInventaire(t_input *input, t_joueur *player, t_sceneController *sceneController) {
-    if (input->key[player->control->escape]) {
+    if (input->key[player->control->inventaire]) {
+        getPrevuisScene(sceneController);
+        input->key[player->control->inventaire] = SDL_FALSE;
+    } else if (input->key[player->control->escape]) {
         getPrevuisScene(sceneController);
         input->key[player->control->escape] = SDL_FALSE;
     }
