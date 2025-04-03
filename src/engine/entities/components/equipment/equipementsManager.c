@@ -261,6 +261,7 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
         if (resultInt == 0)
             item[i]->onDeEquip = NULL;
     }
+    
 
     return item;
 }
