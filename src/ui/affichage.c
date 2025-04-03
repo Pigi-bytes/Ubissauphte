@@ -147,10 +147,10 @@ void equiperSlot(InventoryUI *ui, t_item **item, SDL_Renderer *renderer, t_input
         return;
     if (ui->peutEquiper) {
         if ((*item)->validSlot[0] == SLOT_ACTIVABLE1) {
-            if (ui->elems->CaseActivable1.texture != NULL && ui->elems->caseActivable2.texture == NULL && (*item)->validSlot[1] == SLOT_ACTIVABLE2)
-                ui->elems->caseActivable2.texture = (*item)->texture;
-            else
-                ui->elems->CaseActivable1.texture = (*item)->texture;
+            ui->elems->CaseActivable1.texture = (*item)->texture;
+        }
+        if ((*item)->validSlot[0] == SLOT_TALISMENT) {
+            ui->elems->caseActivable2.texture = (*item)->texture;
         }
         if ((*item)->validSlot[0] == SLOT_ARME) {
             ui->elems->caseArme.texture = (*item)->texture;
