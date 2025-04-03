@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
     context.font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     context.gameFont = loadFont("assets/fonts/PressStart2P-vaV7.ttf", 7);
 
-    int nb = 100;
+    int nb = 3;
 
     context.frameData = initFrameData(0);
     context.option = creeOption();

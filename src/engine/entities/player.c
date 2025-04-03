@@ -2,8 +2,6 @@
 
 #include "enemy.h"
 
-// setScene(context->sceneController, "gameOver");
-
 t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
     t_joueur* joueur = (t_joueur*)malloc(sizeof(t_joueur));
 
@@ -54,17 +52,9 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->particleEmitter = createParticleEmitter();
 
     joueur->inventaire = createInventaire();
-    joueur->baseStats.health.additive = 10;
-    joueur->baseStats.health.multiplicative = 1;
 
-    joueur->baseStats.healthMax.additive = 10;
+    joueur->baseStats.healthMax.additive = 100;
     joueur->baseStats.healthMax.multiplicative = 1;
-
-    joueur->baseStats.mana.additive = 10;
-    joueur->baseStats.mana.multiplicative = 1;
-
-    joueur->baseStats.manaMax.additive = 10;
-    joueur->baseStats.manaMax.multiplicative = 1;
 
     joueur->baseStats.attack.additive = 10;
     joueur->baseStats.attack.multiplicative = 1;
@@ -72,20 +62,11 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->baseStats.defense.additive = 10;
     joueur->baseStats.defense.multiplicative = 1;
 
-    joueur->baseStats.speed.additive = 10;
+    joueur->baseStats.speed.additive = 400;
     joueur->baseStats.speed.multiplicative = 1;
-
-    joueur->calculatedStats.health.additive = 0;
-    joueur->calculatedStats.health.multiplicative = 1;
 
     joueur->calculatedStats.healthMax.additive = 0;
     joueur->calculatedStats.healthMax.multiplicative = 1;
-
-    joueur->calculatedStats.mana.additive = 0;
-    joueur->calculatedStats.mana.multiplicative = 1;
-
-    joueur->calculatedStats.manaMax.additive = 0;
-    joueur->calculatedStats.manaMax.multiplicative = 1;
 
     joueur->calculatedStats.attack.additive = 0;
     joueur->calculatedStats.attack.multiplicative = 1;
@@ -95,6 +76,8 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
 
     joueur->calculatedStats.speed.additive = 0;
     joueur->calculatedStats.speed.multiplicative = 1;
+
+    equipementRecalculerStats(&joueur);
 
     joueur->level = 1;
     joueur->gold = 5000;
@@ -244,7 +227,7 @@ void updateAttack(t_joueur* player, float* deltaTime, t_objectManager* entities,
                 dx /= length;
                 dy /= length;
 
-                takeDamageFromPlayer((t_enemy*)enemy, weapon->damage, player, context, (SDL_FPoint){dx, dy});
+                takeDamageFromPlayer((t_enemy*)enemy, weapon->damage + player->calculatedStats.attack.additive, player, context, (SDL_FPoint){dx, dy});
 
                 // Force de base du recul : 750.0f = multiplicateur de base pour une sensation de jeu satisfaisante
                 // Plus l'arme est lourde, plus le recul est puissant : Exemple: masse 2.0 → knockbackBase = 1500
@@ -308,11 +291,12 @@ void updateAttack(t_joueur* player, float* deltaTime, t_objectManager* entities,
 }
 
 void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPort* vp, float* deltaTime, t_sceneController* sceneController) {
-    float forceBase = 400.0f;              // Force de déplacement standard
-    float forceSprint = forceBase * 1.5f;  // Force quand on court (x1.5f)
-    float forceDash = forceBase * 3.5f;    // Force du dash (x3.5f)
+    float forceBase = player->calculatedStats.speed.additive;  // Force de déplacement standard
+    float forceSprint = forceBase * 1.5f;                      // Force quand on court (x1.5f)
+    float forceDash = forceBase * 3.5f;                        // Force du dash (x3.5f)
 
-    // Force utilisee (course ou marche normale)
+    // printf("%d \n", player->calculatedStats.speed.additive);
+    //  Force utilisee (course ou marche normale)
     float force = input->key[SDL_SCANCODE_LSHIFT] ? forceSprint : forceBase;
 
     float lastDirX = 0.0f;     // Derniere direction horizontale
@@ -441,6 +425,7 @@ void updatePlayer(t_joueur* player, float* deltaTime, t_salle* salle, t_objectMa
     // On conserve le deltaTime original pour certains calculs qui ne doivent pas être affecté par le ralentissement
     float originalDeltaTime = *deltaTime;
 
+    player->health.maxHealth = player->calculatedStats.healthMax.additive;
     updateHealthSystem(&player->health, *deltaTime);
 
     // Gestion du ralentissement temporel (effet bullet-time apres une attaque reussie)
@@ -563,14 +548,6 @@ void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
 
     renderDashTrail(renderer, player, camera);
 
-    if (player->health.isFlashing) {
-        SDL_SetTextureColorMod(player->entity.texture, 255, 255, 255);       // Couleur blanche
-        SDL_SetTextureBlendMode(player->entity.texture, SDL_BLENDMODE_ADD);  // Mode de fusion ADD
-    } else {
-        SDL_SetTextureBlendMode(player->entity.texture, SDL_BLENDMODE_BLEND);  // Mode de fusion normal
-        SDL_SetTextureColorMod(player->entity.texture, 255, 255, 255);         // Couleur normale
-    }
-
     // Affiche l'indicateur de portée de l'arme quand le joueur ne frappe pas
     if (!player->attack.isActive) {
         renderWeaponRangeUI(renderer, player);
@@ -594,13 +571,9 @@ void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
 
     if (player->attack.isActive) {
         renderWeaponDuringAttack(renderer, player, origin, pivotPoint, scaledWidth, scaledHeight, player->entity.flip);
-        if (!(player->health.isInvincible && fmodf(getDeltaTimer(player->health.invincibilityTimer), 0.1) < 0.05)) {
-            renderEntity(renderer, &player->entity, camera);
-        }
+        renderEntity(renderer, &player->entity, camera);
     } else {
-        if (!(player->health.isInvincible && fmodf(getDeltaTimer(player->health.invincibilityTimer), 0.1) < 0.05)) {
-            renderEntity(renderer, &player->entity, camera);
-        }
+        renderEntity(renderer, &player->entity, camera);
         renderWeaponIdle(renderer, player, origin, pivotPoint, scaledWidth, scaledHeight, player->entity.flip);
     }
 }
