@@ -100,7 +100,7 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
         else if (item[i]->validSlot[0] == SLOT_ACTIVABLE1)
             data = createPairData("type", "activable");
         else if (item[i]->validSlot[0] == SLOT_TALISMENT)
-            data = createPairData("types", "talisment");
+            data = createPairData("type", "talisment");
         addPairData(block, data);
 
         if (item[i]->arme->onEquipe == NULL)
@@ -333,6 +333,7 @@ void inventaireAjoutObjet(t_inventaire* inv, t_item* item, int quantite) {
             itemStackNew->quantite = 1;
         addObject(inv->itemsStack, itemStackNew, getTypeIdByName(inv->itemsStack->registry, "ITEMSTACK_TYPE"));
     }
+
 }
 
 t_itemsStack* inventaireFindStack(t_inventaire* inv, t_item* item) {

@@ -158,7 +158,6 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
                 dir_marchant = 1;
                 break;  // Gauche -> Droite du marchand
         }
-        printf("Feur\n");
         int i = rand() % (numberRoom - 2);
         t_salle* salle = roomList[i];
 
@@ -194,8 +193,6 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
         printf("X[%d] et Y[%d] et ID : %d\n", roomCoords[i].x, roomCoords[i].y, roomList[i]->ID);
     }
 
-    printf("Aff\n\n\n");
-
     return roomList;
 }
 
@@ -205,7 +202,8 @@ void freeLevel(t_level* level) {
             free(level->salles[i]);
         }
         free(level->salles);
-        free(level->rectcord);
+        if (level->rectcord)
+            free(level->rectcord);
         free(level);
     }
 }

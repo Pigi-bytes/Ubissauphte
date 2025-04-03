@@ -178,7 +178,7 @@ void test_freeObjectManager() {
     CU_ASSERT_TRUE(1);  // Nous utilisons ce test comme validation de la libération des ressources
 }
 
-// Fonction pour enregistrer les tests dans CUnit
+// fonction pour enregistrer les tests dans CUnit
 int addTests() {
     CU_pSuite suite = NULL;
 
@@ -217,7 +217,6 @@ int main() {
     CU_basic_set_mode(CU_BRM_VERBOSE);
     CU_basic_run_tests();
 
-    // Libération des ressources de CUnit
     CU_cleanup_registry();
     return 0;
 }
