@@ -47,7 +47,7 @@ t_hud* createHUD(SDL_Renderer* renderer, TTF_Font* font, t_tileset* tileset) {
     hud->layout.dash = (SDL_Rect){hud->layout.weapon.x + ICON_SIZE + HUD_PADDING, hud->layout.weapon.y, ICON_SIZE, ICON_SIZE};
     hud->layout.gold = (SDL_Rect){hud->layout.player.x, hud->layout.player.y + hud->layout.player.h + 30 + HUD_PADDING, ICON_SIZE, ICON_SIZE};
 
-    hud->dash_icon = getObject(tileset->textureTiles, 110);
+    hud->dash_icon = getObject(tileset->textureTiles, 142);
     int coin_frames[] = {138, 139, 140, 141};
     hud->gold_animation = createAnimation(tileset, coin_frames, 4, 150, SDL_TRUE, "spinning");
     startAnimation(hud->gold_animation);
