@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
     context.font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     context.gameFont = loadFont("assets/fonts/PressStart2P-vaV7.ttf", 7);
 
-    int nb = 100;
+    int nb = 3;
 
     context.frameData = initFrameData(0);
     context.option = creeOption();
@@ -60,7 +60,8 @@ int main(int argc, char* argv[]) {
     context.audioManager = initAudioManager();
     context.fpsDisplay = initFPSDisplay(context.renderer, context.font);
     context.currentLevel = NULL;
-    context.nbLevel = &nb;
+    context.nbLevel = 7;
+    context.difficulty = EASY;
 
     context.control = malloc(sizeof(t_control));
     context.control->up = SDL_SCANCODE_W;

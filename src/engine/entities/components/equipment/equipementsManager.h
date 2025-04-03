@@ -23,7 +23,7 @@ typedef enum {
     SLOT_ARME,
     SLOT_ARMURE,
     SLOT_ACTIVABLE1,
-    SLOT_ACTIVABLE2,
+    SLOT_TALISMENT,
     TOTAL_EQUIPMENT_SLOTS
 } equipementSlotType;
 
@@ -33,10 +33,7 @@ typedef struct {
 } t_statModifier;
 
 typedef struct {
-    t_statModifier health;
     t_statModifier healthMax;
-    t_statModifier mana;
-    t_statModifier manaMax;
     t_statModifier attack;
     t_statModifier defense;
     t_statModifier speed;

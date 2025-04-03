@@ -6,4 +6,6 @@
 
 t_scene* createMainMenu(t_context* context, t_joueur** player);
 
+char* indiceFromDifficulty(difficulty d);
+
 #endif

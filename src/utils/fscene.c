@@ -115,8 +115,6 @@ void setScene(t_sceneController* controller, char* name) {
             if (elt != NULL) {
                 salleDep = (t_scene*)elt;
             }
-            printf("%d \n", controller->currentScene);
-            printf("%p \n", salleDep);
             if (salleDep && strcmp(salleDep->name, "main")) {
                 controller->lastMenu->historique[++controller->lastMenu->nb_Menu] = (t_scene*)getObject(controller->scene, controller->currentScene);
                 printf("ajouter\n");
@@ -138,7 +136,7 @@ t_scene* GetSceneByName(t_sceneController* controller, char* name) {
             return scene;
         }
     }
-    return NULL; // sinon ya un warning
+    return NULL;  // sinon ya un warning
 }
 
 int indiceByscene(t_sceneController* controller, t_scene* scene) {

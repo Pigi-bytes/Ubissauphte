@@ -53,7 +53,7 @@ typedef struct {
     t_option* option;
     t_fpsDisplay* fpsDisplay;
     t_level* currentLevel;
-    int* nbLevel;
+    int nbLevel;
     difficulty difficulty;
 } t_context;
 
