@@ -210,7 +210,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, int nb, 
         ui->itemclique = NULL;
     // Initialisation des références
     ui->ext->character = c;
-    ui->nbItems = nb;
+    ui->nbItems = ui->ext->character->inventaire->itemsStack->count;
 
     ui->ext->item_font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", ui->elems->statsPlayer.rect.h * ui->elems->statsPlayer.rect.w * 0.0002);
     // Pour les items
@@ -257,8 +257,8 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, int nb, 
         ui->elems->inventory_slots[0].button = ui2->elems->inventory_slots[0].button;
         ui->elems->inventory_slots[0].button->rect = ui->elems->inventory_slots[0].rect;
     }
-
-    for (int i = 1, j = 1; i < ui->nbItems; j++, i++) {
+    int i, j;
+    for (i = 1, j = 1; i < ui->nbItems; j++, i++) {
         calculerItem(&ui->elems->inventory_slots[i].rect, ui->elems->inventory_panel.rect, &ui->elems->inventory_slots[i - 1].rect, i, j, input);
         if (ui2 == NULL) {
             ui->elems->inventory_slots[i].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[i].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[i]->definition, renderer, input)));
@@ -270,6 +270,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, int nb, 
         if (j == 4)
             j = 0;
     }
+    ui->j = j;
     ui->elems->caseArme.texture = c->currentWeapon->texture;
     int totalContentHeight = 0;
     for (int i = 0; i < ui->nbItems; i++) {
@@ -358,6 +359,24 @@ void afficherDescription(SDL_Renderer *renderer, InventoryUI *ui) {
     }
 }
 
+void updateAjoutObjet(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
+    if (ui->nbItems < ui->ext->character->inventaire->itemsStack->count) {
+        int newIndex = ui->nbItems;  // Index du nouvel item AVANT incrément
+        ui->nbItems++;
+
+        ui->elems->inventory_slots = realloc(ui->elems->inventory_slots, ui->nbItems * sizeof(UI_Element));
+
+        // Utiliser newIndex pour le nouveau slot
+        calculerItem(&ui->elems->inventory_slots[newIndex].rect, ui->elems->inventory_panel.rect,
+                     (newIndex == 0) ? &ui->elems->inventory_panel.rect : &ui->elems->inventory_slots[newIndex - 1].rect,
+                     newIndex, ui->j, input);
+
+        t_itemsStack *stack = (t_itemsStack *)getObject(ui->ext->character->inventaire->itemsStack, newIndex);
+        ui->elems->inventory_slots[newIndex].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[newIndex].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, stack->definition, renderer, input)));
+        ui->elems->inventory_slots[newIndex].texture = stack->definition->texture;
+    }
+}
+
 void inventoryUI_Render(InventoryUI *ui, t_context *context) {
     SDL_SetRenderDrawColor(context->renderer, 0, 0, 0, 255);
     SDL_RenderClear(context->renderer);
@@ -417,7 +436,7 @@ void inventoryUI_Update(InventoryUI *ui, t_context *context) {
     for (int i = 0; i < ui->nbItems; i++) {
         handleInputButton(context, ui->elems->inventory_slots[i].button);
     }
-
+    updateAjoutObjet(ui, context->renderer, context->input);
     handleInputButton(context, ui->elems->equiper.button);
     if (context->input->windowWidth != ui->width || context->input->windowHeight != ui->height) {
         int lastScroll = ui->scrollY;

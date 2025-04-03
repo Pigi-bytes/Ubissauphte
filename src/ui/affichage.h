@@ -80,12 +80,13 @@ typedef struct
     int width, height;
     int peutEquiper;
     int onSlot;
+    int j;
 
     t_item *itemclique;
 
 } InventoryUI;
 
-InventoryUI *inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer,int nb, t_joueur *c, t_input *input);
+InventoryUI *inventoryUI_Init(InventoryUI *ui, SDL_Renderer *renderer, int nb, t_joueur *c, t_input *input);
 void inventoryUI_Update(InventoryUI *ui, t_context *context);
 void inventoryUI_Render(InventoryUI *ui, t_context *context);
 void update(t_input *input, InventoryUI *ui);

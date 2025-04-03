@@ -92,6 +92,15 @@ int main(int argc, char* argv[]) {
     dague->texture = getObject(tileset->textureTiles, 104);
     dague->displayRect = (SDL_Rect){0, 0, 16, 16};
 
+    t_item* nouv = malloc(sizeof(t_item));
+    strcpy(nouv->name, "nouv");
+    nouv->arme = malloc(sizeof(t_arme));
+    nouv->arme = dague;
+    nouv->texture = dague->texture;
+    nouv->validSlot[0] = SLOT_ARME;
+    nouv->flags = 6;
+    nouv->id = 8;
+    inventaireAjoutObjet(player->inventaire, nouv, 1);
     player->currentWeapon = dague;
 
     player->indexCurrentRoom = 0;
