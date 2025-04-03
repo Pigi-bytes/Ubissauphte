@@ -142,7 +142,7 @@ void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *i
     renderText(renderer, txt2);
 }
 
-void equiperSlot(InventoryUI *ui, t_item **item) {
+void equiperSlot(InventoryUI *ui, t_item **item, SDL_Renderer *renderer, t_input *input) {
     if (!ui->peutEquiper || (*item) == NULL || item == NULL)
         return;
     if (ui->peutEquiper) {
@@ -162,10 +162,25 @@ void equiperSlot(InventoryUI *ui, t_item **item) {
     ui->peutEquiper = 0;
 
     equiperEquipement(&ui->ext->character, (*item)->arme->indice, (*item)->validSlot[0]);
+
+    // Remplacer les références à baseStats par calculatedStats
+    ui->ecrit->nom_txt_player[0] = createStatLine("Health : ", ui->ext->character->calculatedStats.health.additive, ui->ext->character->calculatedStats.health.multiplicative);
+    ui->ecrit->nom_txt_player[1] = createStatLine("Health Max : ", ui->ext->character->calculatedStats.healthMax.additive, ui->ext->character->calculatedStats.healthMax.multiplicative);
+    ui->ecrit->nom_txt_player[2] = createStatLine("Mana : ", ui->ext->character->calculatedStats.mana.additive, ui->ext->character->calculatedStats.mana.multiplicative);
+    ui->ecrit->nom_txt_player[3] = createStatLine("Mana Max : ", ui->ext->character->calculatedStats.manaMax.additive, ui->ext->character->calculatedStats.manaMax.multiplicative);
+    ui->ecrit->nom_txt_player[4] = createStatLine("Attack : ", ui->ext->character->calculatedStats.attack.additive, ui->ext->character->calculatedStats.attack.multiplicative);
+    ui->ecrit->nom_txt_player[5] = createStatLine("Defense : ", ui->ext->character->calculatedStats.defense.additive, ui->ext->character->calculatedStats.defense.multiplicative);
+    ui->ecrit->nom_txt_player[6] = createStatLine("Speed : ", ui->ext->character->calculatedStats.speed.additive, ui->ext->character->calculatedStats.speed.multiplicative);
+
+    for (int i = 0; i < 7; i++) {
+        ui->ecrit->text_player[i] = createText(renderer, ui->ecrit->nom_txt_player[i], ui->ext->item_font, ui->ecrit->color_txt);
+    }
+    ui->ecrit->text_player[0]->rect.x = ui->elems->statsPlayer.rect.x + input->windowWidth * 0.01;
+    ui->ecrit->text_player[0]->rect.y = ui->elems->statsPlayer.rect.y + input->windowHeight * 0.01;
 }
 
 void equiperSlotWrapper(t_fonctionParam *f) {
-    equiperSlot(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, t_item **));
+    equiperSlot(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, t_item **), GET_PTR(f, 2, SDL_Renderer *), GET_PTR(f, 3, t_input *));
 }
 
 InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, int nb, t_joueur *c, t_input *input) {
@@ -295,7 +310,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, int nb, 
     if (ui2 == NULL) {
         t_text *t = createText(renderer, "EQUIPER", ui->ext->item_font, (SDL_Color){0, 0, 0});
         printf("%p\n", t);
-        ui->elems->equiper.button = createButton(t, (SDL_Color){255, 128, 0}, (SDL_Color){255, 150, 0}, ui->elems->equiper.rect, creerFonction(equiperSlotWrapper, FONCTION_PARAMS(ui, &ui->itemclique)));
+        ui->elems->equiper.button = createButton(t, (SDL_Color){255, 128, 0}, (SDL_Color){255, 150, 0}, ui->elems->equiper.rect, creerFonction(equiperSlotWrapper, FONCTION_PARAMS(ui, &ui->itemclique, renderer, input)));
     } else {
         ui->elems->equiper.button = ui2->elems->equiper.button;
         ui->elems->equiper.button->rect = ui->elems->equiper.rect;
@@ -460,8 +475,11 @@ void creerDescr(InventoryUI *ui, t_item *item, SDL_Renderer *renderer, t_input *
 
     for (int i = 0; i < 7; i++) {
         ui->ecrit->text_item[i] = createText(renderer, ui->ecrit->nom_txt_item[i], ui->ext->descr_font, ui->ecrit->color_txt);
+        ui->ecrit->text_player[i] = createText(renderer, ui->ecrit->nom_txt_player[i], ui->ext->item_font, ui->ecrit->color_txt);
     }
 
+    ui->ecrit->text_player[0]->rect.x = ui->elems->statsPlayer.rect.x + input->windowWidth * 0.01;
+    ui->ecrit->text_player[0]->rect.y = ui->elems->statsPlayer.rect.y + input->windowHeight * 0.01;
     ui->ecrit->text_item[0]->rect.x = ui->elems->statsItem.rect.x + input->windowWidth * 0.01;
     ui->ecrit->text_item[0]->rect.y = ui->elems->statsItem.rect.y + input->windowHeight * 0.01;
 

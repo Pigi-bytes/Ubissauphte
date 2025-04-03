@@ -89,28 +89,28 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
         data = createPairData("flags", value);
         addPairData(block, data);
 
-        sprintf(value,"%f",item[i]->arme->mass);
-        data = createPairData("mass",value);
-        addPairData(block, data);
-        
-        sprintf(value,"%f",item[i]->arme->damage);
-        data = createPairData("damage",value);
-        addPairData(block, data);
-        
-        sprintf(value,"%f",item[i]->arme->range);
-        data = createPairData("range",value);
+        sprintf(value, "%f", item[i]->arme->mass);
+        data = createPairData("mass", value);
         addPairData(block, data);
 
-        sprintf(value,"%f",item[i]->arme->angleAttack);
-        data = createPairData("angleAttack",value);
+        sprintf(value, "%f", item[i]->arme->damage);
+        data = createPairData("damage", value);
         addPairData(block, data);
 
-        sprintf(value,"%f",item[i]->arme->attackDuration);
-        data = createPairData("attackDuration",value);
+        sprintf(value, "%f", item[i]->arme->range);
+        data = createPairData("range", value);
         addPairData(block, data);
 
-        sprintf(value,"%f",item[i]->arme->attackCooldown);
-        data = createPairData("attackCooldown",value);
+        sprintf(value, "%f", item[i]->arme->angleAttack);
+        data = createPairData("angleAttack", value);
+        addPairData(block, data);
+
+        sprintf(value, "%f", item[i]->arme->attackDuration);
+        data = createPairData("attackDuration", value);
+        addPairData(block, data);
+
+        sprintf(value, "%f", item[i]->arme->attackCooldown);
+        data = createPairData("attackCooldown", value);
         addPairData(block, data);
 
         sprintf(value, "%d", item[i]->indiceTexture);
@@ -229,8 +229,8 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
         getValue(block, "range", &resultFLOAT, FLOAT);
         item[i]->arme->range = resultFLOAT;
 
-        getValue(block, "angleAttackDiv", &resultFLOAT, FLOAT);
-        item[i]->arme->angleAttack = M_PI * resultFLOAT;
+        getValue(block, "angleAttack", &resultFLOAT, FLOAT);
+        item[i]->arme->angleAttack = resultFLOAT;
 
         getValue(block, "attackDuration", &resultFLOAT, FLOAT);
         item[i]->arme->attackDuration = resultFLOAT;
@@ -261,7 +261,6 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
         if (resultInt == 0)
             item[i]->onDeEquip = NULL;
     }
-    
 
     return item;
 }
