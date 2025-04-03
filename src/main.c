@@ -64,42 +64,6 @@ int main(int argc, char* argv[]) {
     dague->texture = getObject(tileset->textureTiles, 104);
     dague->displayRect = (SDL_Rect){0, 0, 16, 16};
 
-    t_arme* hache = malloc(sizeof(t_arme));
-    *hache = (t_arme){
-        .mass = 15.0f,            // Lourde
-        .damage = 50000.0f,       // Dégâts élevés
-        .range = 28.0f,           // Portée moyenne
-        .angleAttack = 2 * M_PI,  // Large arc d'attaque (120°)
-        .attackDuration = 0.45f,  // Animation lente
-        .attackCooldown = 1.2f    // Longue récupération
-    };
-    hache->texture = getObject(tileset->textureTiles, 119);
-    hache->displayRect = (SDL_Rect){0, 0, 16, 16};
-
-    t_arme* lance = malloc(sizeof(t_arme));
-    *lance = (t_arme){
-        .mass = 5.0f,             // Masse moyenne-légère
-        .damage = 18.0f,          // Dégâts moyens-faibles
-        .range = 40.0f,           // Longue portée
-        .angleAttack = M_PI / 5,  // Arc d'attaque très étroit (36°)
-        .attackDuration = 0.3f,   // Animation moyenne
-        .attackCooldown = 0.65f   // Récupération moyenne
-    };
-    lance->texture = getObject(tileset->textureTiles, 106);
-    lance->displayRect = (SDL_Rect){0, 0, 16, 16};
-
-    t_arme* marteau = malloc(sizeof(t_arme));
-    *marteau = (t_arme){
-        .mass = 8.0f,               // Très lourd
-        .damage = 40.0f,            // Dégâts très élevés
-        .range = 40.0f,             // Portée moyenne-courte
-        .angleAttack = M_PI / 1.5,  // Arc d'attaque de 90°
-        .attackDuration = 0.3f,     // Animation très lente
-        .attackCooldown = 1.5f      // Récupération très lente
-    };
-    marteau->texture = getObject(tileset->textureTiles, 132);
-    marteau->displayRect = (SDL_Rect){0, 0, 16, 16};
-
     player->currentWeapon = dague;
 
     player->indexCurrentRoom = 0;

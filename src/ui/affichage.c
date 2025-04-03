@@ -279,6 +279,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, int nb, 
         if (j == 4)
             j = 0;
     }
+    ui->elems->caseArme.texture = c->currentWeapon->texture;
     int totalContentHeight = 0;
     for (int i = 0; i < ui->nbItems; i++) {
         int slotBottom = ui->elems->inventory_slots[i].rect.y + ui->elems->inventory_slots[i].rect.h;
