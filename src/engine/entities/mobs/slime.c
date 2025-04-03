@@ -36,6 +36,17 @@ void onSlimeDeath(t_context* context, void* entity) {
     }
 }
 
+void slimeDealDamageToPlayer(t_slime* slime, t_joueur* player, t_context* context) {
+    if (!player || player->health.isInvincible || player->health.isDead) return;
+
+    int damage = 10; 
+    applyDamage(&player->health, damage, &player->entity, context);
+
+    SDL_FPoint position = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
+    emitImpactParticles(slime->particles, position, (SDL_FPoint){0, 0}, player->entity.collisionCircle.radius, slime->particleColor);
+    printf("Le slime inflige %d dégâts au joueur !\n", damage);
+}
+
 void slimeTakeDamage(t_enemy* enemy, int damage, t_joueur* player, t_context* context, SDL_FPoint hitDirection) {
     t_slime* slime = (t_slime*)enemy;
 
@@ -225,6 +236,14 @@ void updateSlime(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager
 
     updateDeltaTimer(slime->jumpCooldownTimer, *deltaTime);
     updateSlimeInfo(slime, player, grid);
+
+    t_circle extendedCollisionCircle = slime->base.entity.collisionCircle;
+    extendedCollisionCircle.radius += 1.0f;
+    Debug_PushCircle(extendedCollisionCircle.x, extendedCollisionCircle.y, extendedCollisionCircle.radius, SDL_COLOR_PINK);
+
+    if (checkCircleCircleCollision(&extendedCollisionCircle, &player->collisionCircle, NULL)) {
+        slimeDealDamageToPlayer(slime, (t_joueur*)player, NULL);
+    }
 
     switch (slime->state) {
         case SLIME_IDLE:

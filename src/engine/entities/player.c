@@ -348,8 +348,6 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
         }
     }
 
- 
-
     if (keyPressOnce(input, SDL_SCANCODE_N)) {
         applyDamage(&player->health, 10, &player->entity, NULL);
     }
@@ -563,6 +561,14 @@ void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
 
     renderDashTrail(renderer, player, camera);
 
+    if (player->health.isFlashing) {
+        SDL_SetTextureColorMod(player->entity.texture, 255, 255, 255);       // Couleur blanche
+        SDL_SetTextureBlendMode(player->entity.texture, SDL_BLENDMODE_ADD);  // Mode de fusion ADD
+    } else {
+        SDL_SetTextureBlendMode(player->entity.texture, SDL_BLENDMODE_BLEND);  // Mode de fusion normal
+        SDL_SetTextureColorMod(player->entity.texture, 255, 255, 255);         // Couleur normale
+    }
+
     // Affiche l'indicateur de portée de l'arme quand le joueur ne frappe pas
     if (!player->attack.isActive) {
         renderWeaponRangeUI(renderer, player);
@@ -586,9 +592,13 @@ void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
 
     if (player->attack.isActive) {
         renderWeaponDuringAttack(renderer, player, origin, pivotPoint, scaledWidth, scaledHeight, player->entity.flip);
-        renderEntity(renderer, &player->entity, camera);
+        if (!(player->health.isInvincible && fmodf(getDeltaTimer(player->health.invincibilityTimer), 0.1) < 0.05)) {
+            renderEntity(renderer, &player->entity, camera);
+        }
     } else {
-        renderEntity(renderer, &player->entity, camera);
+        if (!(player->health.isInvincible && fmodf(getDeltaTimer(player->health.invincibilityTimer), 0.1) < 0.05)) {
+            renderEntity(renderer, &player->entity, camera);
+        }
         renderWeaponIdle(renderer, player, origin, pivotPoint, scaledWidth, scaledHeight, player->entity.flip);
     }
 }
