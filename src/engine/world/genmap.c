@@ -200,10 +200,12 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
 }
 
 void freeLevel(t_level* level) {
-    for (int i = 0; i < level->nbSalles; i++) {
-        free(level->salles[i]);
+    if (level) {
+        for (int i = 0; i < level->nbSalles; i++) {
+            free(level->salles[i]);
+        }
+        free(level->salles);
+        free(level->rectcord);
+        free(level);
     }
-    free(level->salles);
-    free(level->rectcord);
-    free(level);
 }

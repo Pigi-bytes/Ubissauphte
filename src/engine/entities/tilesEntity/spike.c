@@ -167,7 +167,7 @@ void updateSpike(t_tileEntity* entity, t_context* context, t_salle* salle, t_obj
                 indiceByscene(context->sceneController, spike->linkedRoom->scene);
 
             t_joueur* joueur = (t_joueur*)getObject(entities, 0);
-            joueur->indexCurrentRoom = context->sceneController->currentScene;
+            joueur->indexCurrentRoom = spike->linkedRoom->ID;
             placeNearTeleporter(spike->linkedRoom->grille, &joueur->entity, spike->linkedRoom->entities, &spike->base.entity, salle->grille);
         }
     } else {

@@ -104,8 +104,9 @@ void affichage(SDL_Renderer *renderer, t_mapAffichage *map, t_joueur *player) {
         } else {
             SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         }
+        printf("%d\n", player->indexCurrentRoom);
 
-        if (i == player->indexCurrentRoom) {
+        if (i == player->indexCurrentRoom || (((map->numRooms - 2 == i) && (player->indexCurrentRoom == -5)) || ((map->numRooms - 1 == i) && ((player->indexCurrentRoom <= -1) && (player->indexCurrentRoom >= -4))))) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
             int x = map->rooms[i].x + map->rooms[i].w / 2;
             int y = map->rooms[i].y + map->rooms[i].h / 2;
