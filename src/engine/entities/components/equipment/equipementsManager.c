@@ -45,36 +45,12 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
         data = createPairData("defense Mult Modifier", value);
         addPairData(block, data);
 
-        sprintf(value, "%f", item[i]->stats.health.additive);
-        data = createPairData("health Add Modifier", value);
-        addPairData(block, data);
-
-        sprintf(value, "%f", item[i]->stats.health.multiplicative);
-        data = createPairData("health Mult Modifier", value);
-        addPairData(block, data);
-
         sprintf(value, "%f", item[i]->stats.healthMax.additive);
         data = createPairData("healthMax Add Modifier", value);
         addPairData(block, data);
 
         sprintf(value, "%f", item[i]->stats.healthMax.multiplicative);
         data = createPairData("healthMax Mult Modifier", value);
-        addPairData(block, data);
-
-        sprintf(value, "%f", item[i]->stats.mana.additive);
-        data = createPairData("mana Add Modifier", value);
-        addPairData(block, data);
-
-        sprintf(value, "%f", item[i]->stats.mana.multiplicative);
-        data = createPairData("mana Mult Modifier", value);
-        addPairData(block, data);
-
-        sprintf(value, "%f", item[i]->stats.manaMax.additive);
-        data = createPairData("manaMax Add Modifier", value);
-        addPairData(block, data);
-
-        sprintf(value, "%f", item[i]->stats.manaMax.multiplicative);
-        data = createPairData("manaMax Mult Modifier", value);
         addPairData(block, data);
 
         sprintf(value, "%f", item[i]->stats.speed.additive);
@@ -183,29 +159,11 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
         getValue(block, "defense Mult Modifier", &resultFLOAT, FLOAT);
         item[i]->stats.defense.multiplicative = resultFLOAT;
 
-        getValue(block, "health Add Modifier", &resultFLOAT, FLOAT);
-        item[i]->stats.health.additive = resultFLOAT;
-
-        getValue(block, "health Mult Modifier", &resultFLOAT, FLOAT);
-        item[i]->stats.health.multiplicative = resultFLOAT;
-
         getValue(block, "healthMax Add Modifier", &resultFLOAT, FLOAT);
         item[i]->stats.healthMax.additive = resultFLOAT;
 
         getValue(block, "healthMax Mult Modifier", &resultFLOAT, FLOAT);
         item[i]->stats.healthMax.multiplicative = resultFLOAT;
-
-        getValue(block, "mana Add Modifier", &resultFLOAT, FLOAT);
-        item[i]->stats.mana.additive = resultFLOAT;
-
-        getValue(block, "mana Mult Modifier", &resultFLOAT, FLOAT);
-        item[i]->stats.mana.multiplicative = resultFLOAT;
-
-        getValue(block, "manaMax Add Modifier", &resultFLOAT, FLOAT);
-        item[i]->stats.manaMax.additive = resultFLOAT;
-
-        getValue(block, "manaMax Mult Modifier", &resultFLOAT, FLOAT);
-        item[i]->stats.manaMax.multiplicative = resultFLOAT;
 
         getValue(block, "speed Add Modifier", &resultFLOAT, FLOAT);
         item[i]->stats.speed.additive = resultFLOAT;
@@ -388,25 +346,19 @@ t_itemsStack* inventaireFindStack(t_inventaire* inv, t_item* item) {
 
 void equipementRecalculerStats(t_joueur** c) {
     // Initialisation des valeurs finales
-    t_stats finalStats = {{0, 1}, {0, 1}, {0, 1}, {0, 1}, {0, 1}, {0, 1}, {0, 1}};
+    t_stats finalStats = {{0, 1}, {0, 1}, {0, 1}, {0, 1}};
 
     // Parcours de tous les slots d'équipement
     for (int i = 0; i < TOTAL_EQUIPMENT_SLOTS; i++) {
         if ((*c)->equipement[i].stack != NULL) {
             // Ajouter les valeurs additive
-            finalStats.health.additive += (*c)->equipement[i].stack->definition->stats.health.additive;
             finalStats.healthMax.additive += (*c)->equipement[i].stack->definition->stats.healthMax.additive;
-            finalStats.mana.additive += (*c)->equipement[i].stack->definition->stats.mana.additive;
-            finalStats.manaMax.additive += (*c)->equipement[i].stack->definition->stats.manaMax.additive;
             finalStats.attack.additive += (*c)->equipement[i].stack->definition->stats.attack.additive;
             finalStats.defense.additive += (*c)->equipement[i].stack->definition->stats.defense.additive;
             finalStats.speed.additive += (*c)->equipement[i].stack->definition->stats.speed.additive;
 
             // Appliquer les multiplicateurs
-            finalStats.health.multiplicative *= (*c)->equipement[i].stack->definition->stats.health.multiplicative;
             finalStats.healthMax.multiplicative *= (*c)->equipement[i].stack->definition->stats.healthMax.multiplicative;
-            finalStats.mana.multiplicative *= (*c)->equipement[i].stack->definition->stats.mana.multiplicative;
-            finalStats.manaMax.multiplicative *= (*c)->equipement[i].stack->definition->stats.manaMax.multiplicative;
             finalStats.attack.multiplicative *= (*c)->equipement[i].stack->definition->stats.attack.multiplicative;
             finalStats.defense.multiplicative *= (*c)->equipement[i].stack->definition->stats.defense.multiplicative;
             finalStats.speed.multiplicative *= (*c)->equipement[i].stack->definition->stats.speed.multiplicative;
@@ -414,11 +366,8 @@ void equipementRecalculerStats(t_joueur** c) {
     }
 
     // Appliquer les multiplicatifs sur les valeurs additives pour calculer les calculatedStats
-    (*c)->calculatedStats.health.additive = ((*c)->baseStats.health.additive + finalStats.health.additive) * finalStats.health.multiplicative;
     (*c)->calculatedStats.healthMax.additive = ((*c)->baseStats.healthMax.additive + finalStats.healthMax.additive) * finalStats.healthMax.multiplicative;
-    (*c)->calculatedStats.mana.additive = ((*c)->baseStats.mana.additive + finalStats.mana.additive) * finalStats.mana.multiplicative;
-    (*c)->calculatedStats.manaMax.additive = ((*c)->baseStats.manaMax.additive + finalStats.manaMax.additive) * finalStats.manaMax.multiplicative;
-    (*c)->calculatedStats.attack.additive = ((*c)->baseStats.attack.additive + finalStats.attack.additive) * finalStats.attack.multiplicative;
+     (*c)->calculatedStats.attack.additive = ((*c)->baseStats.attack.additive + finalStats.attack.additive) * finalStats.attack.multiplicative;
     (*c)->calculatedStats.defense.additive = ((*c)->baseStats.defense.additive + finalStats.defense.additive) * finalStats.defense.multiplicative;
     (*c)->calculatedStats.speed.additive = ((*c)->baseStats.speed.additive + finalStats.speed.additive) * finalStats.speed.multiplicative;
 }
@@ -497,17 +446,8 @@ void inventory_print(t_inventaire* inv) {
 
         printf("Name : %s\n", Satck->definition->name);
 
-        printf("Health additive : %.2f\n", Satck->definition->stats.health.additive);
-        printf("Health multiplicative : %.2f\n", Satck->definition->stats.health.multiplicative);
-
         printf("Health Max additive : %.2f\n", Satck->definition->stats.healthMax.additive);
         printf("Health Max multiplicative : %.2f\n", Satck->definition->stats.healthMax.multiplicative);
-
-        printf("Mana additive : %.2f\n", Satck->definition->stats.mana.additive);
-        printf("Mana multiplicative : %.2f\n", Satck->definition->stats.mana.multiplicative);
-
-        printf("Mana Max additive : %.2f\n", Satck->definition->stats.manaMax.additive);
-        printf("Mana Max multiplicative : %.2f\n", Satck->definition->stats.manaMax.multiplicative);
 
         printf("Attack additive : %.2f\n", Satck->definition->stats.attack.additive);
         printf("Attack multiplicative : %.2f\n", Satck->definition->stats.attack.multiplicative);
@@ -522,17 +462,9 @@ void inventory_print(t_inventaire* inv) {
 
 void equipment_print(t_joueur* c) {
     // Affichage des statistiques de base (baseStats)
-    printf("Base Stats - Health additive : %.2f\n", c->baseStats.health.additive);
-    printf("Base Stats - Health multiplicative : %.2f\n", c->baseStats.health.multiplicative);
 
     printf("Base Stats - Health Max additive : %.2f\n", c->baseStats.healthMax.additive);
     printf("Base Stats - Health Max multiplicative : %.2f\n", c->baseStats.healthMax.multiplicative);
-
-    printf("Base Stats - Mana additive : %.2f\n", c->baseStats.mana.additive);
-    printf("Base Stats - Mana multiplicative : %.2f\n", c->baseStats.mana.multiplicative);
-
-    printf("Base Stats - Mana Max additive : %.2f\n", c->baseStats.manaMax.additive);
-    printf("Base Stats - Mana Max multiplicative : %.2f\n", c->baseStats.manaMax.multiplicative);
 
     printf("Base Stats - Attack additive : %.2f\n", c->baseStats.attack.additive);
     printf("Base Stats - Attack multiplicative : %.2f\n", c->baseStats.attack.multiplicative);
@@ -544,17 +476,9 @@ void equipment_print(t_joueur* c) {
     printf("Base Stats - Speed multiplicative : %.2f\n", c->baseStats.speed.multiplicative);
 
     // Affichage des statistiques calculées (calculatedStats)
-    printf("Calculated Stats - Health additive : %.2f\n", c->calculatedStats.health.additive);
-    printf("Calculated Stats - Health multiplicative : %.2f\n", c->calculatedStats.health.multiplicative);
 
     printf("Calculated Stats - Health Max additive : %.2f\n", c->calculatedStats.healthMax.additive);
     printf("Calculated Stats - Health Max multiplicative : %.2f\n", c->calculatedStats.healthMax.multiplicative);
-
-    printf("Calculated Stats - Mana additive : %.2f\n", c->calculatedStats.mana.additive);
-    printf("Calculated Stats - Mana multiplicative : %.2f\n", c->calculatedStats.mana.multiplicative);
-
-    printf("Calculated Stats - Mana Max additive : %.2f\n", c->calculatedStats.manaMax.additive);
-    printf("Calculated Stats - Mana Max multiplicative : %.2f\n", c->calculatedStats.manaMax.multiplicative);
 
     printf("Calculated Stats - Attack additive : %.2f\n", c->calculatedStats.attack.additive);
     printf("Calculated Stats - Attack multiplicative : %.2f\n", c->calculatedStats.attack.multiplicative);
