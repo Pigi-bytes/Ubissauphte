@@ -3,14 +3,18 @@
 
 #include "../../../ui/text.h"
 #include "../tilesEntity.h"
+#include "../../../ui/affichage.h"
 
 typedef struct {
     t_tileEntity base;
+    SDL_Texture *vend;
+    char* nomItem;
+    int prix;
     t_circle detectionRange;
     SDL_bool playerInRange;
     SDL_bool interactKeyPressed;
     SDL_Keycode lastInteractKey;
-    t_text* interactText;
+    t_text *interactText, *item;
 } t_blacksmith;
 
 

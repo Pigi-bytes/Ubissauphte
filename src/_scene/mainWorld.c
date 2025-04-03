@@ -13,10 +13,16 @@ void generateSalle(t_salle** salle, int numSalle, t_context* context, t_joueur**
     }
 }
 
+void recreateLevel(t_context* context, t_joueur** joueur) {
+    freeSceneByName(&context->sceneController, "main");
+    freeLevel(context->currentLevel);
+    setScene(context->sceneController, "menPrincipal");
+}
+
 void CreateNiveau(t_context* context, int* nbSalle, t_joueur** joueur) {
     // Création du nouveau niveau
     context->currentLevel = malloc(sizeof(t_level));
-    context->currentLevel->rectcord = malloc(sizeof(SDL_Rect) * (*nbSalle));
+    context->currentLevel->rectcord = malloc(sizeof(SDL_Rect) * *nbSalle);
     for (int i = 0; i < *nbSalle; i++) {
         context->currentLevel->rectcord[i] = (SDL_Rect){1, 1, 1, 1};
     }
@@ -76,8 +82,27 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
 
     addObject(salle->entities, &(*player)->entity, PLAYER);
 
+    int nbEnemis;
+    switch (context->difficulty) {
+        case EASY:
+            nbEnemis = 5;
+            break;
+        case NORMAL:
+            nbEnemis = 10;
+            break;
+        case HARD:
+            nbEnemis = 20;
+            break;
+        case DEMONIC:
+            nbEnemis = 35;
+            break;
+        case LEGEND:
+            nbEnemis = 55;
+            break;
+    }
+
     t_enemy* enemy;
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < nbEnemis; i++) {
         enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, scene);
         addObject(salle->entities, &enemy->entity, ENEMY);
         placeOnRandomTile(*level, &enemy->entity, salle->entities);

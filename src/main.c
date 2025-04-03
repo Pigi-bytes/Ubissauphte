@@ -60,7 +60,8 @@ int main(int argc, char* argv[]) {
     context.audioManager = initAudioManager();
     context.fpsDisplay = initFPSDisplay(context.renderer, context.font);
     context.currentLevel = NULL;
-    context.nbLevel = &nb;
+    context.nbLevel = 7;
+    context.difficulty = EASY;
 
     context.control = malloc(sizeof(t_control));
     context.control->up = SDL_SCANCODE_W;
