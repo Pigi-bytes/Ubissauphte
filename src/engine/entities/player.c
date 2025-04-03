@@ -77,8 +77,6 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->calculatedStats.speed.additive = 0;
     joueur->calculatedStats.speed.multiplicative = 1;
 
-    equipementRecalculerStats(&joueur);
-
     joueur->level = 1;
     joueur->gold = 5000;
     joueur->xp = 0;
@@ -338,7 +336,7 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
         applyDamage(&player->health, 10, &player->entity, NULL);
     }
 
-    if (input->key[player->control->escape]) {
+    if ((strcmp(((t_scene*)getObject(sceneController->scene, sceneController->currentScene))->name, "main") == 0) && input->key[player->control->escape]) {
         sceneController->lastMap = getObject(sceneController->scene, sceneController->currentScene);
         setScene(sceneController, "retourOption");
     }
@@ -350,7 +348,6 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
     if (input->key[player->control->inventaire]) {
         sceneController->lastMap = getObject(sceneController->scene, sceneController->currentScene);
         setScene(sceneController, "mainInv");
-        input->key[player->control->inventaire] = SDL_FALSE;
     }
 
     float mouseWorldX = 0.0f, mouseWorldY = 0.0f;
