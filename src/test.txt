@@ -201,3 +201,32 @@ attackDuration: 0.3
 attackCooldown: 0.65
 onEquipe: 1
 description: \nArme d'estoc redoutable\n avec une portée impressionnante
+
+id Item: 7
+Name: Potion de mort
+manaMax Add Modifier: 0.0
+manaMax Mult Modifier: 1.0
+speed Modifier: 1.0
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 0.0
+attack Mult Modifier: 1.0
+defense Add Modifier: 0.0
+defense Mult Modifier: 1.0
+health Add Modifier: 100.0
+health Mult Modifier: 1.25
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+mana Add Modifier: 0.0
+mana Mult Modifier: 1.0
+flags: 3
+type: talisment
+texture: 127
+mass: 0
+damage: 0
+range: 0
+angleAttack: 0
+attackDuration: 0.0
+attackCooldown: 0.0
+onEquipe: 0
+description: \nUn breuvage rougeoyant qui\n pulse d'énergie vitale

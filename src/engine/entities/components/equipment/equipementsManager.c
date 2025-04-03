@@ -121,8 +121,10 @@ void item_save(t_item** item, t_fichier* fichier, int count) {
             data = createPairData("type", "arme");
         else if (item[i]->validSlot[0] == SLOT_ARMURE)
             data = createPairData("type", "armure");
-        else if (item[i]->validSlot[0] == SLOT_ACTIVABLE1 || item[i]->validSlot[0] == SLOT_ACTIVABLE2)
+        else if (item[i]->validSlot[0] == SLOT_ACTIVABLE1)
             data = createPairData("type", "activable");
+        else if (item[i]->validSlot[0] == SLOT_TALISMENT)
+            data = createPairData("types", "talisment");
         addPairData(block, data);
 
         if (item[i]->arme->onEquipe == NULL)
@@ -250,10 +252,10 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
         } else if (strcmp(resultChar, "armure") == 0)
             item[i]
                 ->validSlot[0] = SLOT_ARMURE;
-        else if (strcmp(resultChar, "activable") == 0) {
+        else if (strcmp(resultChar, "activable") == 0)
             item[i]->validSlot[0] = SLOT_ACTIVABLE1;
-            item[i]->validSlot[1] = SLOT_ACTIVABLE2;
-        }
+        else if (strcmp(resultChar, "talisment") == 0) 
+            item[i]->validSlot[0] = SLOT_TALISMENT;
 
         item[i]->arme->indice = i;
 

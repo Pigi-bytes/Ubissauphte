@@ -23,7 +23,7 @@ typedef enum {
     SLOT_ARME,
     SLOT_ARMURE,
     SLOT_ACTIVABLE1,
-    SLOT_ACTIVABLE2,
+    SLOT_TALISMENT,
     TOTAL_EQUIPMENT_SLOTS
 } equipementSlotType;
 

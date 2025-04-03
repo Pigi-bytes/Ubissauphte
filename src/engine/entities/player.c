@@ -101,7 +101,7 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->equipement[SLOT_ARME].stack = NULL;
     joueur->equipement[SLOT_ARMURE].stack = NULL;
     joueur->equipement[SLOT_ACTIVABLE1].stack = NULL;
-    joueur->equipement[SLOT_ACTIVABLE2].stack = NULL;
+    joueur->equipement[SLOT_TALISMENT].stack = NULL;
 
     return joueur;
 }
