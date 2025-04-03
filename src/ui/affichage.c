@@ -560,8 +560,8 @@ void freeInv(void *elt) {
 }
 
 void handleInputInventaire(t_input *input, t_joueur *player, t_sceneController *sceneController) {
-    if (input->key[player->control->inventaire]) {
+    if (input->key[player->control->escape]) {
         getPrevuisScene(sceneController);
-        input->key[player->control->inventaire] = SDL_FALSE;
+        input->key[player->control->escape] = SDL_FALSE;
     }
 }

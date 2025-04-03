@@ -34,4 +34,5 @@ typedef struct {
 
 void updateSlime(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager* entities);
 t_enemy* createSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, t_scene* scene);
+void slimeDealDamageToPlayer(t_slime* slime, t_joueur* player, t_context* context);
 void onSlimeDeath(t_context* context, void* entity);
