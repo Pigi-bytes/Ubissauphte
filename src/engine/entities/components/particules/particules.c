@@ -74,30 +74,607 @@ void emitMovementParticles(t_particleEmitter* emitter, float x, float y, SDL_Col
     emitParticles(emitter, x, y, dustColor, 2 + rand() % 2, 3.0f, 5.0f, 12.0f, 20.0f, 0.4f, 0.8f);
 }
 
+void emitPhaseChangeParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor) {
+    if (!emitter) return;
+
+    // Explosion principale - Particules qui partent du centre
+    for (int i = 0; i < 25 + rand() % 10; i++) {
+        float angle = randomRangeF(0, 2.0f * M_PI);
+        float speed = randomRangeF(50.0f, 120.0f);
+
+        SDL_Color particleColor = baseColor;
+        particleColor.a = randomRangeF(200.0f, 255.0f);
+
+        // Variation de couleur pour effet dynamique
+        float intensity = randomRangeF(0.7f, 1.3f);
+        particleColor.r = fmin(255, particleColor.r * intensity);
+        particleColor.g = fmin(255, particleColor.g * intensity);
+        particleColor.b = fmin(255, particleColor.b * intensity);
+
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (!p) continue;
+
+        p->position = (SDL_FPoint){
+            position.x + cosf(angle) * radius * 0.3f,
+            position.y + sinf(angle) * radius * 0.3f};
+
+        p->velocity = (SDL_FPoint){
+            cosf(angle) * speed,
+            sinf(angle) * speed};
+
+        p->lifetime = p->maxLifetime = randomRangeF(0.8f, 1.5f);
+        p->size = randomRangeF(6.0f, 14.0f);
+        p->color = particleColor;
+        p->shape = rand() % 4 == 0 ? 0 : 1;  // Mélange de carrés et ronds avec prédominance ronde
+    }
+
+    // Effet d'onde de choc (cercles concentriques)
+    for (int i = 0; i < 3; i++) {
+        SDL_Color waveColor = baseColor;
+        waveColor.a = 180;
+
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (!p) continue;
+
+        p->position = position;
+        p->velocity = (SDL_FPoint){0, 0};  // Reste fixe
+        p->lifetime = p->maxLifetime = randomRangeF(0.6f, 1.0f);
+        p->size = radius * (0.4f + i * 0.3f);  // Différentes tailles pour créer des cercles concentriques
+        p->color = waveColor;
+        p->shape = 1;  // Cercle
+    }
+
+    // Petits éclats pixelisés (effet rétro)
+    for (int i = 0; i < 15 + rand() % 10; i++) {
+        float angle = randomRangeF(0, 2.0f * M_PI);
+        float distance = radius * randomRangeF(0.1f, 0.4f);
+        float speed = randomRangeF(80.0f, 150.0f);
+
+        SDL_Color sparkColor = {
+            fmin(255, baseColor.r + randomRangeF(30.0f, 80.0f)),
+            fmin(255, baseColor.g + randomRangeF(30.0f, 80.0f)),
+            fmin(255, baseColor.b + randomRangeF(30.0f, 80.0f)),
+            randomRangeF(180.0f, 230.0f)};
+
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (!p) continue;
+
+        p->position = (SDL_FPoint){
+            position.x + cosf(angle) * distance,
+            position.y + sinf(angle) * distance};
+
+        p->velocity = (SDL_FPoint){
+            cosf(angle) * speed,
+            sinf(angle) * speed};
+
+        p->lifetime = p->maxLifetime = randomRangeF(0.2f, 0.5f);
+        p->size = randomRangeF(2.0f, 4.0f);
+        p->color = sparkColor;
+        p->shape = 0;  // Carré pour effet rétro pixelisé
+    }
+
+    // Effet de "fumée" ou d'énergie qui monte (pour l'effet dramatique)
+    for (int i = 0; i < 10; i++) {
+        SDL_Color smokeColor = baseColor;
+        smokeColor.r = fmin(255, smokeColor.r * 0.7f);
+        smokeColor.g = fmin(255, smokeColor.g * 0.7f);
+        smokeColor.b = fmin(255, smokeColor.b * 0.7f);
+        smokeColor.a = randomRangeF(100.0f, 160.0f);
+
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (!p) continue;
+
+        float angle = randomRangeF(0, 2.0f * M_PI);
+        float distance = radius * randomRangeF(0.5f, 0.9f);
+
+        p->position = (SDL_FPoint){
+            position.x + cosf(angle) * distance,
+            position.y + sinf(angle) * distance};
+
+        p->velocity = (SDL_FPoint){
+            cosf(angle) * randomRangeF(5.0f, 15.0f),
+            sinf(angle) * randomRangeF(5.0f, 15.0f) - randomRangeF(20.0f, 40.0f)  // Tendance à monter
+        };
+
+        p->lifetime = p->maxLifetime = randomRangeF(0.8f, 1.2f);
+        p->size = randomRangeF(8.0f, 16.0f);
+        p->color = smokeColor;
+        p->shape = 1;  // Rond pour effet nuageux
+    }
+}
+
+void emitChargeAttackParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor, float phaseProgress, SDL_FPoint chargeDirection) {
+    if (!emitter) return;
+
+    // Définition des couleurs constantes - facilement modifiables
+    const SDL_Color CHARGE_PREPARE_COLOR = {{0, 238, 194, 100}};  // Orange vif pour préparation
+    const SDL_Color CHARGE_GLOW_COLOR = {255, 69, 0, 150};        // Rouge-orangé pour l'aura
+    const SDL_Color CHARGE_TRAIL_COLOR = {30, 144, 255, 170};     // Bleu vif pour la traînée
+    const SDL_Color CHARGE_SPARK_COLOR = {255, 215, 0, 220};      // Or pour les étincelles
+    const SDL_Color CHARGE_EXHAUST_COLOR = {176, 196, 222, 160};  // Bleu clair pour l'épuisement
+
+    // Limiter le nombre de particules pour éviter la surcharge
+    int particleLimit = 20;
+
+    // Phase de préparation (0.0 - 0.8)
+    if (phaseProgress < 0.8f) {
+        // Phase d'accumulation d'énergie
+        float prepProgress = phaseProgress / 0.8f;  // 0 à 1 pour cette phase
+
+        // Pulsation d'énergie autour du boss
+        if ((int)(phaseProgress * 20) % 3 == 0) {
+            t_entityParticle* p = getNextFreeParticle(emitter);
+            if (p) {
+                float pulseSize = 0.8f + 0.3f * sinf(phaseProgress * 15.0f);
+
+                p->position = position;
+                p->velocity = (SDL_FPoint){0, 0};
+                p->lifetime = p->maxLifetime = 0.12f;
+                p->size = radius * pulseSize;
+                p->color = CHARGE_GLOW_COLOR;
+                p->shape = 1;  // Cercle
+            }
+        }
+
+        // Particules qui convergent vers le boss depuis la direction cible
+        if ((int)(phaseProgress * 15) % 2 == 0) {
+            for (int i = 0; i < 3 && i < particleLimit; i++) {
+                t_entityParticle* p = getNextFreeParticle(emitter);
+                if (!p) continue;
+
+                float distanceAhead = radius * (2.0f + prepProgress * 4.0f);  // Distance qui augmente avec le temps
+                float spread = radius * 1.5f * (1.0f - prepProgress * 0.5f);  // Éventail qui se resserre
+
+                // Position devant le boss dans la direction de la charge
+                p->position = (SDL_FPoint){
+                    position.x + chargeDirection.x * distanceAhead + randomRangeF(-spread, spread),
+                    position.y + chargeDirection.y * distanceAhead + randomRangeF(-spread, spread)};
+
+                // Vitesse qui converge vers le boss
+                p->velocity = (SDL_FPoint){
+                    (position.x - p->position.x) * randomRangeF(4.0f, 8.0f) * prepProgress,
+                    (position.y - p->position.y) * randomRangeF(4.0f, 8.0f) * prepProgress};
+
+                p->lifetime = p->maxLifetime = randomRangeF(0.2f, 0.4f);
+                p->size = randomRangeF(2.0f, 4.0f);
+                p->color = CHARGE_PREPARE_COLOR;
+                p->shape = rand() % 2;  // Mélange de carrés et cercles
+            }
+        }
+
+        // Étincelles d'énergie autour du boss à mesure que la charge se prépare
+        if (prepProgress > 0.5f && (int)(phaseProgress * 30) % 2 == 0) {
+            for (int i = 0; i < 2 && i < particleLimit; i++) {
+                t_entityParticle* p = getNextFreeParticle(emitter);
+                if (!p) continue;
+
+                float angle = randomRangeF(0, 2.0f * M_PI);
+                float dist = radius * randomRangeF(0.8f, 1.1f);
+
+                p->position = (SDL_FPoint){
+                    position.x + cosf(angle) * dist,
+                    position.y + sinf(angle) * dist};
+
+                // Étincelles qui s'éloignent légèrement
+                p->velocity = (SDL_FPoint){
+                    cosf(angle) * randomRangeF(10.0f, 40.0f) * prepProgress,
+                    sinf(angle) * randomRangeF(10.0f, 40.0f) * prepProgress};
+
+                p->lifetime = p->maxLifetime = randomRangeF(0.05f, 0.2f);
+                p->size = randomRangeF(1.0f, 3.0f);
+                p->color = CHARGE_SPARK_COLOR;
+                p->shape = 0;  // Carré pour effet pixelisé
+            }
+        }
+    }
+    // Phase d'initiation du dash (0.8 - 1.0)
+    else if (phaseProgress < 1.0f) {
+        float initiateProgress = (phaseProgress - 0.8f) / 0.2f;  // 0 à 1 pour cette phase
+
+        // Flash lumineux au début de la charge
+        if (initiateProgress < 0.3f) {
+            t_entityParticle* p = getNextFreeParticle(emitter);
+            if (p) {
+                p->position = position;
+                p->velocity = (SDL_FPoint){0, 0};
+                p->lifetime = p->maxLifetime = 0.15f;
+                p->size = radius * (1.5f + initiateProgress * 1.0f);
+
+                SDL_Color flashColor = CHARGE_PREPARE_COLOR;
+                flashColor.a = (Uint8)(220 * (1.0f - initiateProgress * 3.0f));
+                p->color = flashColor;
+                p->shape = 1;  // Cercle
+            }
+        }
+
+        // Particules d'énergie projetées dans la direction du dash
+        for (int i = 0; i < 5 && i < particleLimit; i++) {
+            t_entityParticle* p = getNextFreeParticle(emitter);
+            if (!p) continue;
+
+            float angleVar = randomRangeF(-0.5f, 0.5f);  // Légère variation d'angle
+
+            // Calcul de la direction avec variation
+            float dirX = chargeDirection.x * cosf(angleVar) - chargeDirection.y * sinf(angleVar);
+            float dirY = chargeDirection.x * sinf(angleVar) + chargeDirection.y * cosf(angleVar);
+
+            // Position autour du boss
+            p->position = (SDL_FPoint){
+                position.x + randomRangeF(-radius * 0.5f, radius * 0.5f),
+                position.y + randomRangeF(-radius * 0.5f, radius * 0.5f)};
+
+            // Vitesse vers l'arrière pour effet de propulsion
+            p->velocity = (SDL_FPoint){
+                -dirX * randomRangeF(60.0f, 100.0f) * initiateProgress,
+                -dirY * randomRangeF(60.0f, 100.0f) * initiateProgress};
+
+            p->lifetime = p->maxLifetime = randomRangeF(0.1f, 0.2f);
+            p->size = randomRangeF(3.0f, 6.0f);
+
+            // Variation de couleur entre préparation et impact
+            if (rand() % 3 == 0) {
+                p->color = CHARGE_SPARK_COLOR;
+            } else {
+                p->color = CHARGE_PREPARE_COLOR;
+            }
+
+            p->shape = rand() % 2;
+        }
+    }
+    // Phase de dash actif (1.0 - 1.5)
+    else if (phaseProgress < 1.5f) {
+        float dashProgress = (phaseProgress - 1.0f) / 0.5f;  // 0 à 1 pour cette phase
+
+        // Traînée derrière le boss pendant le dash
+        for (int i = 0; i < 4 && i < particleLimit; i++) {
+            t_entityParticle* p = getNextFreeParticle(emitter);
+            if (!p) continue;
+
+            float trailDistance = randomRangeF(0.1f, 1.0f) * radius * 2.0f;
+            float spreadFactor = trailDistance * 0.2f;
+
+            // Position à l'arrière du boss
+            p->position = (SDL_FPoint){
+                position.x - chargeDirection.x * trailDistance + randomRangeF(-spreadFactor, spreadFactor),
+                position.y - chargeDirection.y * trailDistance + randomRangeF(-spreadFactor, spreadFactor)};
+
+            // Particules quasi-statiques pour la traînée
+            p->velocity = (SDL_FPoint){
+                randomRangeF(-10.0f, 10.0f),
+                randomRangeF(-10.0f, 10.0f)};
+
+            p->lifetime = p->maxLifetime = randomRangeF(0.1f, 0.25f);
+            p->size = randomRangeF(4.0f, 8.0f) * (1.0f - trailDistance / (radius * 2.0f));
+
+            // Mélange de couleurs pour la traînée
+            if (rand() % 3 == 0) {
+                p->color = CHARGE_TRAIL_COLOR;
+            } else {
+                p->color = CHARGE_PREPARE_COLOR;
+                p->color.a = 150;
+            }
+
+            p->shape = 1;  // Cercle pour effet fluide
+        }
+
+        // Petites particules d'étincelles sur les côtés pendant le dash
+        if ((int)(phaseProgress * 20) % 2 == 0) {
+            float sideAngle = atan2f(chargeDirection.y, chargeDirection.x) + (M_PI * 2);  // 90 degrés par rapport à la direction
+
+            for (int side = -1; side <= 1; side += 2) {  // -1 puis +1 pour les deux côtés
+                t_entityParticle* p = getNextFreeParticle(emitter);
+                if (!p) continue;
+
+                float currentSideAngle = sideAngle + side * randomRangeF(-0.2f, 0.2f);
+
+                p->position = (SDL_FPoint){
+                    position.x + cosf(currentSideAngle) * radius * randomRangeF(0.6f, 1.0f),
+                    position.y + sinf(currentSideAngle) * radius * randomRangeF(0.6f, 1.0f)};
+
+                // Projection vers l'extérieur et légèrement en arrière
+                p->velocity = (SDL_FPoint){
+                    cosf(currentSideAngle) * randomRangeF(20.0f, 40.0f) - chargeDirection.x * randomRangeF(10.0f, 20.0f),
+                    sinf(currentSideAngle) * randomRangeF(20.0f, 40.0f) - chargeDirection.y * randomRangeF(10.0f, 20.0f)};
+
+                p->lifetime = p->maxLifetime = randomRangeF(0.1f, 0.2f);
+                p->size = randomRangeF(2.0f, 4.0f);
+                p->color = CHARGE_SPARK_COLOR;
+                p->shape = rand() % 2;
+            }
+        }
+    }
+    // Phase de récupération (1.5 - 2.0)
+    else if (phaseProgress < 2.0f) {
+        float recoveryProgress = (phaseProgress - 1.5f) / 0.5f;  // 0 à 1 pour cette phase
+
+        // Particules d'épuisement - "fumée" qui monte
+        if ((int)(phaseProgress * 12) % 2 == 0) {
+            for (int i = 0; i < 3 && i < particleLimit; i++) {
+                t_entityParticle* p = getNextFreeParticle(emitter);
+                if (!p) continue;
+
+                float angle = randomRangeF(0, 2.0f * M_PI);
+                float dist = radius * randomRangeF(0.5f, 0.9f);
+
+                p->position = (SDL_FPoint){
+                    position.x + cosf(angle) * dist,
+                    position.y + sinf(angle) * dist};
+
+                // Vitesse principalement vers le haut
+                p->velocity = (SDL_FPoint){
+                    randomRangeF(-5.0f, 5.0f),
+                    randomRangeF(-25.0f, -15.0f)};
+
+                p->lifetime = p->maxLifetime = randomRangeF(0.3f, 0.6f);
+                p->size = randomRangeF(3.0f, 7.0f);
+                p->color = CHARGE_EXHAUST_COLOR;
+                p->shape = 1;  // Rond pour effet nuageux/fumée
+            }
+        }
+
+        // Petites étoiles d'épuisement
+        if (recoveryProgress > 0.3f && (int)(phaseProgress * 8) % 2 == 0) {
+            t_entityParticle* p = getNextFreeParticle(emitter);
+            if (p) {
+                float angle = randomRangeF(0, 2.0f * M_PI);
+                float dist = radius * 0.7f;
+
+                p->position = (SDL_FPoint){
+                    position.x + cosf(angle) * dist,
+                    position.y + sinf(angle) * dist};
+
+                p->velocity = (SDL_FPoint){
+                    randomRangeF(-2.0f, 2.0f),
+                    randomRangeF(-10.0f, -2.0f)};
+
+                p->lifetime = p->maxLifetime = randomRangeF(0.4f, 0.7f);
+                p->size = randomRangeF(1.0f, 3.0f);
+                p->color = CHARGE_EXHAUST_COLOR;
+                p->color.a = 120;
+                p->shape = 0;  // Carré pour effet pixelisé
+            }
+        }
+    }
+}
+
+void emitGroundPoundParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor, float phaseProgress) {
+    if (!emitter) return;
+
+    // Définition des couleurs constantes - facilement modifiables
+    const SDL_Color PULSE_CIRCLE_COLOR = {0, 238, 194, 100};   // Cercle de pulsation
+    const SDL_Color PREP_DROPS_COLOR = {255, 51, 54, 200};     // Gouttes de préparation
+    const SDL_Color CONVERGE_COLOR = {255, 51, 54, 200};       // Particules qui convergent
+    const SDL_Color WAVE_COLOR = {173, 255, 239, 200};         // Onde de choc
+    const SDL_Color DEBRIS_COLOR = {0, 238, 194, 180};         // Débris suivant l'onde
+    const SDL_Color CENTER_DEBRIS_COLOR = {0, 238, 194, 200};  // Débris du centre
+
+    // Limiter le nombre de particules pour éviter la surcharge
+    int particleLimit = 20;
+
+    // phaseProgress détermine la phase de l'attaque
+    if (phaseProgress < 0.8f) {
+        // Phase de préparation
+
+        // Créer seulement quelques particules pour la pulsation
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (p) {
+            float pulseSize = 0.5f + 0.5f * sinf(phaseProgress * 10.0f);
+
+            p->position = position;
+            p->velocity = (SDL_FPoint){0, 0};
+            p->lifetime = p->maxLifetime = 0.1f;
+            p->size = radius * 1.5f * pulseSize;
+            p->color = PULSE_CIRCLE_COLOR;
+            p->shape = 1;  // Cercle
+        }
+
+        // Quelques gouttelettes qui tombent
+        for (int i = 0; i < 3 && i < particleLimit; i++) {
+            t_entityParticle* p = getNextFreeParticle(emitter);
+            if (!p) continue;
+
+            float angle = randomRangeF(0, 2.0f * M_PI);
+            float dist = radius * 0.8f;
+
+            p->position = (SDL_FPoint){
+                position.x + cosf(angle) * dist,
+                position.y + sinf(angle) * dist};
+
+            p->velocity = (SDL_FPoint){
+                randomRangeF(-10.0f, 10.0f),
+                randomRangeF(15.0f, 25.0f)};
+
+            p->lifetime = p->maxLifetime = randomRangeF(0.2f, 0.4f);
+            p->size = randomRangeF(3.0f, 5.0f);
+            p->color = PREP_DROPS_COLOR;
+            p->shape = rand() % 2;
+        }
+    } else if (phaseProgress < 1.0f) {
+        // Phase de compression
+        for (int i = 0; i < 5 && i < particleLimit; i++) {
+            t_entityParticle* p = getNextFreeParticle(emitter);
+            if (!p) continue;
+
+            float angle = randomRangeF(0, 2.0f * M_PI);
+            float dist = radius * randomRangeF(0.5f, 1.2f);
+
+            p->position = (SDL_FPoint){
+                position.x + cosf(angle) * dist,
+                position.y + sinf(angle) * dist};
+
+            // Converger vers le centre
+            p->velocity = (SDL_FPoint){
+                -cosf(angle) * randomRangeF(30.0f, 50.0f),
+                -sinf(angle) * randomRangeF(30.0f, 50.0f)};
+
+            p->lifetime = p->maxLifetime = randomRangeF(0.1f, 0.2f);
+            p->size = randomRangeF(2.0f, 4.0f);
+
+            p->color = CONVERGE_COLOR;
+            p->shape = rand() % 2;
+        }
+    } else {
+        // Phase d'explosion - après 1.0
+        float timeInPhase = phaseProgress - 1.0f;
+
+        if (timeInPhase < 0.7f) {
+            // Onde de choc qui s'étend
+            float waveRadius = radius * 5.0f * (timeInPhase / 0.7f);
+
+            // Un seul cercle d'onde de choc pour éviter la surcharge
+            t_entityParticle* p = getNextFreeParticle(emitter);
+            if (p) {
+                p->position = position;
+                p->velocity = (SDL_FPoint){0, 0};
+                p->lifetime = p->maxLifetime = 0.15f;
+                p->size = waveRadius;
+
+                // Ajustement de l'alpha en fonction du temps
+                SDL_Color adjustedWaveColor = WAVE_COLOR;
+                adjustedWaveColor.a = (Uint8)(WAVE_COLOR.a - timeInPhase * 100);
+                p->color = adjustedWaveColor;
+
+                p->shape = 1;  // Cercle
+            }
+
+            // Quelques débris qui suivent l'onde
+            for (int i = 0; i < 3 && i < particleLimit; i++) {
+                t_entityParticle* p = getNextFreeParticle(emitter);
+                if (!p) continue;
+
+                float angle = randomRangeF(0, 2.0f * M_PI);
+
+                p->position = (SDL_FPoint){
+                    position.x + cosf(angle) * waveRadius * randomRangeF(0.9f, 1.0f),
+                    position.y + sinf(angle) * waveRadius * randomRangeF(0.9f, 1.0f)};
+
+                float speed = waveRadius / (0.15f * randomRangeF(0.9f, 1.1f));
+                p->velocity = (SDL_FPoint){
+                    cosf(angle) * speed,
+                    sinf(angle) * speed};
+
+                p->lifetime = p->maxLifetime = randomRangeF(0.1f, 0.2f);
+                p->size = randomRangeF(3.0f, 5.0f);
+
+                p->color = DEBRIS_COLOR;
+                p->shape = rand() % 2;
+            }
+
+            // Quelques particules de débris à proximité du centre
+            if ((int)(timeInPhase * 15) % 3 == 0 && timeInPhase < 0.3f) {
+                for (int i = 0; i < 4 && i < particleLimit; i++) {
+                    t_entityParticle* p = getNextFreeParticle(emitter);
+                    if (!p) continue;
+
+                    float angle = randomRangeF(0, 2.0f * M_PI);
+                    float dist = radius * randomRangeF(0.2f, 0.8f);
+
+                    p->position = (SDL_FPoint){
+                        position.x + cosf(angle) * dist,
+                        position.y + sinf(angle) * dist};
+
+                    p->velocity = (SDL_FPoint){
+                        cosf(angle) * randomRangeF(20.0f, 60.0f),
+                        sinf(angle) * randomRangeF(20.0f, 60.0f) - randomRangeF(0.0f, 30.0f)};
+
+                    p->lifetime = p->maxLifetime = randomRangeF(0.3f, 0.5f);
+                    p->size = randomRangeF(2.0f, 4.0f);
+
+                    p->color = CENTER_DEBRIS_COLOR;
+                    p->shape = rand() % 2;
+                }
+            }
+        }
+    }
+}
+
 void emitBossMovementParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor) {
     if (!emitter) return;
 
-    for (int i = 0; i < 8 + rand() % 4; i++) {                    // Générer 8 à 12 particules
-        float angle = (float)i / (8 + rand() % 4) * 2.0f * M_PI;  // Répartir en cercle
-        float speed = randomRangeF(10.0f, 30.0f);                 // Vitesse lente pour simuler le poids
+    // Particules de "bave" sous le slime (effet glissant)
+    for (int i = 0; i < 5 + rand() % 3; i++) {
+        float angle = randomRangeF(0, 2.0f * M_PI);  // Position aléatoire sous le slime
+        float distance = randomRangeF(0.3f, 0.8f) * radius;
 
-        SDL_Color particleColor = baseColor;
-        particleColor.a = randomRangeF(180.0f, 230.0f);  // Transparence variable
+        SDL_Color slimeColor = baseColor;
+        slimeColor.a = randomRangeF(160.0f, 200.0f);
 
         t_entityParticle* p = getNextFreeParticle(emitter);
-        if (!p) return;
+        if (!p) continue;
 
         p->position = (SDL_FPoint){
-            position.x + cosf(angle) * radius * 0.2f,  // Position initiale proche du centre
-            position.y + sinf(angle) * radius * 0.2f};
-        p->velocity = (SDL_FPoint){
-            cosf(angle) * speed,        // Mouvement radial
-            sinf(angle) * speed * 0.5f  // Mouvement vertical réduit
+            position.x + cosf(angle) * distance,
+            position.y + sinf(angle) * distance + radius * 0.1f  // Légèrement en dessous
         };
-        p->lifetime = p->maxLifetime = randomRangeF(1.0f, 2.0f);  // Durée de vie moyenne
-        p->size = randomRangeF(16.0f, 32.0f);                     // Particules grandes
-        p->color = particleColor;
+
+        // Particule qui reste en place (vitesse faible)
+        p->velocity = (SDL_FPoint){
+            randomRangeF(-3.0f, 3.0f),
+            randomRangeF(-1.0f, 1.0f)};
+
+        p->lifetime = p->maxLifetime = randomRangeF(0.8f, 1.5f);
+        p->size = randomRangeF(4.0f, 10.0f);
+        p->color = slimeColor;
         p->shape = 1;  // Particules rondes
+    }
+
+    // Éclaboussures rétro pixelisées (quand le slime se déplace)
+    float movementDirection = randomRangeF(0, 2.0f * M_PI);  // Direction du mouvement
+    for (int i = 0; i < 3 + rand() % 2; i++) {
+        float offsetAngle = movementDirection + randomRangeF(-0.8f, 0.8f);
+        float speed = randomRangeF(15.0f, 35.0f);
+
+        SDL_Color splashColor = baseColor;
+        splashColor.r = fmin(255, splashColor.r + randomRangeF(-20.0f, 20.0f));
+        splashColor.g = fmin(255, splashColor.g + randomRangeF(-20.0f, 20.0f));
+        splashColor.b = fmin(255, splashColor.b + randomRangeF(-20.0f, 20.0f));
+        splashColor.a = randomRangeF(180.0f, 220.0f);
+
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (!p) continue;
+
+        // Position sur le bord du slime
+        p->position = (SDL_FPoint){
+            position.x + cosf(offsetAngle + M_PI) * radius * 0.8f,
+            position.y + sinf(offsetAngle + M_PI) * radius * 0.8f};
+
+        // Éjection dans la direction opposée au mouvement
+        p->velocity = (SDL_FPoint){
+            cosf(offsetAngle) * speed,
+            sinf(offsetAngle) * speed};
+
+        p->lifetime = p->maxLifetime = randomRangeF(0.3f, 0.7f);
+        p->size = randomRangeF(3.0f, 6.0f);
+        p->color = splashColor;
+        p->shape = randomRangeF(0, 1) > 0.5f ? 1 : 0;  // Mélange de formes carrées et rondes pour effet rétro
+    }
+
+    // Petits "yeux" ou bulles qui apparaissent dans le slime (effet visqueux)
+    if (rand() % 6 == 0) {  // Occasionnellement
+        SDL_Color bubbleColor = {
+            fmin(255, baseColor.r + 70),
+            fmin(255, baseColor.g + 70),
+            fmin(255, baseColor.b + 70),
+            220};
+
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (p) {
+            float innerAngle = randomRangeF(0, 2.0f * M_PI);
+            float innerRadius = radius * randomRangeF(0.2f, 0.6f);
+
+            p->position = (SDL_FPoint){
+                position.x + cosf(innerAngle) * innerRadius,
+                position.y + sinf(innerAngle) * innerRadius};
+
+            p->velocity = (SDL_FPoint){
+                cosf(innerAngle) * randomRangeF(1.0f, 5.0f),
+                sinf(innerAngle) * randomRangeF(1.0f, 5.0f)};
+
+            p->lifetime = p->maxLifetime = randomRangeF(0.4f, 0.8f);
+            p->size = randomRangeF(2.0f, 4.0f);
+            p->color = bubbleColor;
+            p->shape = 1;  // Bulle ronde
+        }
     }
 }
 

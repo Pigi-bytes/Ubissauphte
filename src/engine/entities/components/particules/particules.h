@@ -5,7 +5,7 @@
 
 #include "../core.h"
 
-#define MAX_ENTITY_PARTICLES 100  // Particules maximales par entité
+#define MAX_ENTITY_PARTICLES 500  // Particules maximales par entité
 
 typedef struct s_entityParticle {
     SDL_bool active;
@@ -28,6 +28,10 @@ t_particleEmitter* createParticleEmitter();
 void resetParticleEmitter(t_particleEmitter* emitter);
 void freeParticleEmitter(t_particleEmitter* emitter);
 t_entityParticle* getNextFreeParticle(t_particleEmitter* emitter);
+
+void emitPhaseChangeParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor);
+void emitGroundPoundParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor, float phaseProgress);
+void emitChargeAttackParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor, float phaseProgress, SDL_FPoint chargeDirection);
 
 void emitParticles(t_particleEmitter* emitter, float x, float y, SDL_Color color, int count, float sizeMin, float sizeMax, float speedMin, float speedMax, float lifetimeMin, float lifetimeMax);
 void emitMovementParticles(t_particleEmitter* emitter, float x, float y, SDL_Color color);

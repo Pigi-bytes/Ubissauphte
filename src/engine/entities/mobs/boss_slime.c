@@ -152,10 +152,17 @@ void initiateBossJump(t_boss_slime* bossSlime, SDL_FPoint direction, float power
 
 void checkPhaseTransitions(t_boss_slime* bossSlime) {
     float healthPercentage = (float)bossSlime->base.health.currentHealth / (float)bossSlime->base.health.maxHealth;
+
+    SDL_FPoint position = {bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y};
+
     if (healthPercentage <= bossSlime->phase2HealthThreshold && bossSlime->currentPhase == 1) {
         printf("BOSS SLIME: ENTERING ENRAGED PHASE! WATCH OUT!\n");
         bossSlime->currentPhase = 2;
         bossSlime->isPhaseTransition = SDL_TRUE;
+
+        // Particules de colère pour le changement de phase
+        emitPhaseChangeParticles(bossSlime->particles, position, bossSlime->base.entity.collisionCircle.radius, (SDL_Color){255, 100, 0, 255});  // Orange vif
+
         resetDeltaTimer(bossSlime->phaseTransitionTimer);
         startDeltaTimer(bossSlime->phaseTransitionTimer);
         bossSlime->jumpForce *= 1.2f;
@@ -164,11 +171,16 @@ void checkPhaseTransitions(t_boss_slime* bossSlime) {
         printf("BOSS SLIME: ENTERING DESPERATE PHASE! NOWHERE TO HIDE!\n");
         bossSlime->currentPhase = 3;
         bossSlime->isPhaseTransition = SDL_TRUE;
+
+        // Particules de colère pour le changement de phase
+        emitPhaseChangeParticles(bossSlime->particles, position, bossSlime->base.entity.collisionCircle.radius, (SDL_Color){255, 0, 0, 255});  // Rouge vif
+
         resetDeltaTimer(bossSlime->phaseTransitionTimer);
         startDeltaTimer(bossSlime->phaseTransitionTimer);
         bossSlime->jumpForce *= 1.3f;
         bossSlime->jumpCooldownDuration *= 0.7f;
     }
+
     if (bossSlime->isPhaseTransition && getDeltaTimer(bossSlime->phaseTransitionTimer) >= bossSlime->invulnerabilityPhaseDuration) {
         bossSlime->isPhaseTransition = SDL_FALSE;
     }
@@ -176,40 +188,68 @@ void checkPhaseTransitions(t_boss_slime* bossSlime) {
 
 void performGroundPound(t_boss_slime* bossSlime, t_entity* player, t_grid* grid) {
     float elapsedTime = getDeltaTimer(bossSlime->specialAttackTimer);
+
     if (elapsedTime < 0.1f) {
         printf("BOSS SLIME: GROUND POUND INCOMING!\n");
     }
+
+    SDL_FPoint position = {bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y};
+    float radius = bossSlime->base.entity.collisionCircle.radius;
+
     if (elapsedTime < 0.8f) {
         setAnimation(bossSlime->base.entity.animationController, "idle");
         bossSlime->base.entity.physics.velocity.x *= 0.7f;
         bossSlime->base.entity.physics.velocity.y *= 0.7f;
+
+        // Réduire la fréquence d'émission pour éviter la surcharge
+        if ((int)(elapsedTime * 10) % 2 == 0) {
+            emitGroundPoundParticles(bossSlime->particles, position, radius,
+                                     (SDL_Color){255, 100, 0, 255}, elapsedTime);
+        }
+
+        // Cercles de debug pour référence visuelle
         float pulseSize = 0.5f + 0.5f * sinf(elapsedTime * 10.0f);
         float baseRadius = bossSlime->detectionRange.radius * 0.3f;
-        Debug_PushCircle(bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y, baseRadius * pulseSize, SDL_COLOR_RED);
-        Debug_PushCircle(bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y, baseRadius * 0.7f * pulseSize, SDL_COLOR_ORANGE);
-        Debug_PushCircle(bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y, baseRadius * 0.4f * pulseSize, SDL_COLOR_YELLOW);
+        Debug_PushCircle(position.x, position.y, baseRadius * pulseSize, SDL_COLOR_RED);
+        Debug_PushCircle(position.x, position.y, baseRadius * 0.7f * pulseSize, SDL_COLOR_ORANGE);
+        Debug_PushCircle(position.x, position.y, baseRadius * 0.4f * pulseSize, SDL_COLOR_YELLOW);
     } else if (elapsedTime < 1.0f) {
         setAnimation(bossSlime->base.entity.animationController, "attack");
         bossSlime->base.entity.physics.velocity.x *= 0.1f;
         bossSlime->base.entity.physics.velocity.y *= 0.1f;
+
+        // Émission moins fréquente pour éviter la surcharge
+        if ((int)(elapsedTime * 15) % 2 == 0) {
+            emitGroundPoundParticles(bossSlime->particles, position, radius,
+                                     (SDL_Color){255, 80, 0, 255}, elapsedTime);
+        }
+
         float growFactor = (elapsedTime - 0.8f) / 0.2f;
         float impactRadius = bossSlime->detectionRange.radius * 0.5f * growFactor;
-        Debug_PushCircle(bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y, impactRadius, SDL_COLOR_RED);
+        Debug_PushCircle(position.x, position.y, impactRadius, SDL_COLOR_RED);
         printf("BOSS SLIME: PREPARING GROUND SLAM!\n");
     } else if (elapsedTime < 1.7f) {
         float timeInPhase = elapsedTime - 1.0f;
         float maxRadius = bossSlime->detectionRange.radius * 0.5f;
         float waveRadius = maxRadius * (timeInPhase / 0.7f);
-        Debug_PushCircle(bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y, waveRadius, SDL_COLOR_RED);
-        Debug_PushCircle(bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y, waveRadius * 0.8f, SDL_COLOR_ORANGE);
-        Debug_PushCircle(bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y, waveRadius * 0.6f, SDL_COLOR_YELLOW);
-        if (timeInPhase < 0.1f) printf("BOSS SLIME: BOOM!\n");
+
+        // Réduire encore la fréquence d'émission pour la phase d'onde de choc
+        if ((int)(timeInPhase * 10) % 2 == 0) {
+            emitGroundPoundParticles(bossSlime->particles, position, radius,
+                                     (SDL_Color){255, 50, 0, 255}, elapsedTime);
+        }
+
+        Debug_PushCircle(position.x, position.y, waveRadius, SDL_COLOR_RED);
+        Debug_PushCircle(position.x, position.y, waveRadius * 0.8f, SDL_COLOR_ORANGE);
+        Debug_PushCircle(position.x, position.y, waveRadius * 0.6f, SDL_COLOR_YELLOW);
+
+        // Le reste inchangé...
         if (timeInPhase < 0.15f) {
-            float distToPlayer = sqrtf(powf(player->collisionCircle.x - bossSlime->base.entity.collisionCircle.x, 2) +
-                                       powf(player->collisionCircle.y - bossSlime->base.entity.collisionCircle.y, 2));
+            float distToPlayer = sqrtf(powf(player->collisionCircle.x - position.x, 2) +
+                                       powf(player->collisionCircle.y - position.y, 2));
             if (distToPlayer < waveRadius) {
-                SDL_FPoint knockbackDir = {player->collisionCircle.x - bossSlime->base.entity.collisionCircle.x,
-                                           player->collisionCircle.y - bossSlime->base.entity.collisionCircle.y};
+                SDL_FPoint knockbackDir = {player->collisionCircle.x - position.x,
+                                           player->collisionCircle.y - position.y};
                 float knockbackLength = sqrtf(knockbackDir.x * knockbackDir.x + knockbackDir.y * knockbackDir.y);
                 if (knockbackLength > 0) {
                     knockbackDir.x /= knockbackLength;
@@ -227,8 +267,22 @@ void performGroundPound(t_boss_slime* bossSlime, t_entity* player, t_grid* grid)
         printf("BOSS SLIME: RECOVERING FROM GROUND POUND...\n");
         bossSlime->base.entity.physics.velocity.x *= 0.9f;
         bossSlime->base.entity.physics.velocity.y *= 0.9f;
+
+        // Émission de petites particules de récupération
+        if ((int)(elapsedTime * 8) % 2 == 0) {
+            SDL_Color recoverColor = {100, 150, 255, 180};
+            emitParticles(bossSlime->particles,
+                          position.x + randomRangeF(-radius * 0.5f, radius * 0.5f),
+                          position.y + randomRangeF(-radius * 0.3f, radius * 0.3f),
+                          recoverColor,
+                          2,
+                          2.0f, 5.0f,
+                          5.0f, 15.0f,
+                          0.2f, 0.5f);
+        }
+
         if ((int)(elapsedTime * 5) % 2 == 0) {
-            Debug_PushCircle(bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y - 10, 4, SDL_COLOR_BLUE);
+            Debug_PushCircle(position.x, position.y - 10, 4, SDL_COLOR_BLUE);
         }
     } else {
         if (bossSlime->currentPhase == 2)
@@ -239,71 +293,152 @@ void performGroundPound(t_boss_slime* bossSlime, t_entity* player, t_grid* grid)
             bossSlime->state = BOSS_SLIME_CHASE_PLAYER;
     }
 }
-
 void performChargeAttack(t_boss_slime* bossSlime, t_entity* player, t_grid* grid) {
     float elapsedTime = getDeltaTimer(bossSlime->specialAttackTimer);
     static SDL_FPoint fixedChargeDir = {0, 0};
     static int hasFixedDirection = 0;
 
+    SDL_FPoint position = {bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y};
+    float radius = bossSlime->base.entity.collisionCircle.radius;
+
+    // Constantes de timing pour l'attaque
+    const float CHARGE_PREP_TIME = 1.2f;      // Temps de préparation augmenté
+    const float CHARGE_INITIATE_TIME = 1.5f;  // Temps avant le dash augmenté
+    const float CHARGE_DASH_TIME = 2.0f;      // Temps de dash augmenté
+    const float CHARGE_RECOVERY_TIME = 2.8f;  // Temps de récupération augmenté
+
     if (elapsedTime < 0.1f) {
         printf("BOSS SLIME: PREPARING CHARGE ATTACK!\n");
         hasFixedDirection = 0;
     }
-    if (elapsedTime < 0.8f) {
+
+    // Calculer la direction de charge vers le joueur
+    SDL_FPoint chargeDir = {player->collisionCircle.x - position.x,
+                            player->collisionCircle.y - position.y};
+    float length = sqrtf(chargeDir.x * chargeDir.x + chargeDir.y * chargeDir.y);
+    if (length > 0) {
+        chargeDir.x /= length;
+        chargeDir.y /= length;
+    } else {
+        chargeDir.x = 1.0f;
+        chargeDir.y = 0.0f;
+    }
+
+    // Phase de préparation
+    if (elapsedTime < CHARGE_PREP_TIME) {
         setAnimation(bossSlime->base.entity.animationController, "idle");
-        bossSlime->base.entity.physics.velocity.x *= 0.6f;
-        bossSlime->base.entity.physics.velocity.y *= 0.6f;
-        SDL_FPoint chargeDir = {player->collisionCircle.x - bossSlime->base.entity.collisionCircle.x,
-                                player->collisionCircle.y - bossSlime->base.entity.collisionCircle.y};
-        float length = sqrtf(chargeDir.x * chargeDir.x + chargeDir.y * chargeDir.y);
-        if (length > 0) {
-            chargeDir.x /= length;
-            chargeDir.y /= length;
-            float intensityFactor = elapsedTime / 0.8f;
-            Debug_PushLine(bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y,
-                           bossSlime->base.entity.collisionCircle.x + chargeDir.x * 150 * intensityFactor,
-                           bossSlime->base.entity.collisionCircle.y + chargeDir.y * 150 * intensityFactor, 5, SDL_COLOR_ORANGE);
+
+        // Animation de vibration via des impulsions de vélocité
+        if ((int)(elapsedTime * 20) % 2 == 0) {
+            float vibrationIntensity = 2.0f * elapsedTime / CHARGE_PREP_TIME;
+            // Ajouter de petites impulsions de vélocité aléatoires
+            bossSlime->base.entity.physics.velocity.x += randomRangeF(-vibrationIntensity, vibrationIntensity);
+            bossSlime->base.entity.physics.velocity.y += randomRangeF(-vibrationIntensity, vibrationIntensity);
         }
-        float pulseSize = 0.8f + 0.2f * sinf(elapsedTime * 15.0f);
-        Debug_PushCircle(bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y,
-                         bossSlime->base.entity.collisionCircle.radius * pulseSize, SDL_COLOR_ORANGE);
-    } else if (elapsedTime < 1.0f) {
+
+        // Ralentissement général pendant la préparation
+        bossSlime->base.entity.physics.velocity.x *= 0.5f;
+        bossSlime->base.entity.physics.velocity.y *= 0.5f;
+
+        // Émission de particules pour la préparation
+        if ((int)(elapsedTime * 15) % 2 == 0) {
+            emitChargeAttackParticles(bossSlime->particles, position, radius,
+                                      (SDL_Color){255, 100, 0, 255},
+                                      elapsedTime / CHARGE_PREP_TIME * 0.8f, chargeDir);
+        }
+
+        // Indication visuelle de la direction de charge
+        float intensityFactor = elapsedTime / CHARGE_PREP_TIME;
+        Debug_PushLine(position.x, position.y,
+                       position.x + chargeDir.x * 200 * intensityFactor,
+                       position.y + chargeDir.y * 200 * intensityFactor, 5, SDL_COLOR_ORANGE);
+
+        // Pulse visuel autour du boss
+        float pulseSize = 0.8f + 0.4f * sinf(elapsedTime * 15.0f);
+        Debug_PushCircle(position.x, position.y,
+                         radius * pulseSize, SDL_COLOR_ORANGE);
+
+    }
+    // Phase d'initiation du dash
+    else if (elapsedTime < CHARGE_INITIATE_TIME) {
+        // Animation "prêt à bondir"
+        setAnimation(bossSlime->base.entity.animationController, "attack");
         printf("BOSS SLIME: CHAAARGE!\n");
-        SDL_FPoint chargeDir = {player->collisionCircle.x - bossSlime->base.entity.collisionCircle.x,
-                                player->collisionCircle.y - bossSlime->base.entity.collisionCircle.y};
-        float length = sqrtf(chargeDir.x * chargeDir.x + chargeDir.y * chargeDir.y);
-        if (length > 0) {
-            chargeDir.x /= length;
-            chargeDir.y /= length;
-            Debug_PushLine(bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y,
-                           bossSlime->base.entity.collisionCircle.x + chargeDir.x * 200,
-                           bossSlime->base.entity.collisionCircle.y + chargeDir.y * 200, 7, SDL_COLOR_RED);
-        }
-    } else if (elapsedTime < 1.5f) {
+
+        // Blocage complet du mouvement pendant l'initiation
+        bossSlime->base.entity.physics.velocity.x = 0;
+        bossSlime->base.entity.physics.velocity.y = 0;
+
+        // Émission intense de particules pour l'initiation
+        emitChargeAttackParticles(bossSlime->particles, position, radius,
+                                  (SDL_Color){255, 100, 0, 255},
+                                  0.8f + (elapsedTime - CHARGE_PREP_TIME) / (CHARGE_INITIATE_TIME - CHARGE_PREP_TIME) * 0.2f,
+                                  chargeDir);
+
+        // Flash de lumière qui s'intensifie
+        float flashIntensity = (elapsedTime - CHARGE_PREP_TIME) / (CHARGE_INITIATE_TIME - CHARGE_PREP_TIME);
+        SDL_Color flashColor = {
+            255,
+            (Uint8)(100 + 155 * flashIntensity),
+            0,
+            (Uint8)(100 + 155 * flashIntensity)};
+        Debug_PushCircle(position.x, position.y, radius * (1.0f + flashIntensity * 0.5f), flashColor);
+
+        // Ligne directionnelle plus prononcée
+        Debug_PushLine(position.x, position.y,
+                       position.x + chargeDir.x * 250,
+                       position.y + chargeDir.y * 250, 8, SDL_COLOR_RED);
+
+    }
+    // Phase de dash actif
+    else if (elapsedTime < CHARGE_DASH_TIME) {
+        // Animation dash
         setAnimation(bossSlime->base.entity.animationController, "enraged");
+
         if (!hasFixedDirection) {
-            fixedChargeDir.x = player->collisionCircle.x - bossSlime->base.entity.collisionCircle.x;
-            fixedChargeDir.y = player->collisionCircle.y - bossSlime->base.entity.collisionCircle.y;
-            float length = sqrtf(fixedChargeDir.x * fixedChargeDir.x + fixedChargeDir.y * fixedChargeDir.y);
-            if (length > 0) {
-                fixedChargeDir.x /= length;
-                fixedChargeDir.y /= length;
-            }
+            fixedChargeDir = chargeDir;
             hasFixedDirection = 1;
+
+            // Effet additionnel pour indiquer le début du dash
+            SDL_Color burstColor = {255, 200, 50, 220};
+            for (int i = 0; i < 12; i++) {
+                float angle = (float)i * M_PI / 6.0f;
+                float burstDist = radius * 1.5f;
+                Debug_PushCircle(
+                    position.x + cosf(angle) * burstDist,
+                    position.y + sinf(angle) * burstDist,
+                    radius * 0.2f, burstColor);
+            }
         }
+
+        // Émission continue de particules pendant le dash
+        if ((int)(elapsedTime * 20) % 2 == 0) {
+            emitChargeAttackParticles(bossSlime->particles, position, radius,
+                                      (SDL_Color){255, 100, 0, 255},
+                                      1.0f + (elapsedTime - CHARGE_INITIATE_TIME) / (CHARGE_DASH_TIME - CHARGE_INITIATE_TIME) * 0.5f,
+                                      fixedChargeDir);
+        }
+
+        // Vitesse maximale dans la direction fixée
         bossSlime->base.entity.physics.velocity.x = fixedChargeDir.x * bossSlime->chargeForce;
         bossSlime->base.entity.physics.velocity.y = fixedChargeDir.y * bossSlime->chargeForce;
+
+        // Traînée visuelle derrière le boss
         for (int i = 1; i <= 5; i++) {
-            float distance = i * 15.0f;
-            Debug_PushCircle(bossSlime->base.entity.collisionCircle.x - fixedChargeDir.x * distance,
-                             bossSlime->base.entity.collisionCircle.y - fixedChargeDir.y * distance,
-                             bossSlime->base.entity.collisionCircle.radius * (1.0f - i * 0.15f), SDL_COLOR_YELLOW);
+            float distance = i * 20.0f;
+            float alphaFactor = 1.0f - (float)i / 6.0f;
+            SDL_Color trailColor = {255, 165, 0, (Uint8)(200 * alphaFactor)};
+            Debug_PushCircle(position.x - fixedChargeDir.x * distance,
+                             position.y - fixedChargeDir.y * distance,
+                             radius * (1.0f - i * 0.15f), trailColor);
         }
-        float distToPlayer = sqrtf(powf(player->collisionCircle.x - bossSlime->base.entity.collisionCircle.x, 2) +
-                                   powf(player->collisionCircle.y - bossSlime->base.entity.collisionCircle.y, 2));
-        if (distToPlayer < bossSlime->base.entity.collisionCircle.radius + player->collisionCircle.radius) {
-            SDL_FPoint knockbackDir = {player->collisionCircle.x - bossSlime->base.entity.collisionCircle.x,
-                                       player->collisionCircle.y - bossSlime->base.entity.collisionCircle.y};
+
+        // Détection de collision avec le joueur
+        float distToPlayer = sqrtf(powf(player->collisionCircle.x - position.x, 2) +
+                                   powf(player->collisionCircle.y - position.y, 2));
+        if (distToPlayer < radius + player->collisionCircle.radius) {
+            SDL_FPoint knockbackDir = {player->collisionCircle.x - position.x,
+                                       player->collisionCircle.y - position.y};
             float knockbackLength = sqrtf(knockbackDir.x * knockbackDir.x + knockbackDir.y * knockbackDir.y);
             if (knockbackLength > 0) {
                 knockbackDir.x /= knockbackLength;
@@ -311,20 +446,60 @@ void performChargeAttack(t_boss_slime* bossSlime, t_entity* player, t_grid* grid
                 player->physics.velocity.x += knockbackDir.x * bossSlime->chargeForce * 0.6f;
                 player->physics.velocity.y += knockbackDir.y * bossSlime->chargeForce * 0.6f;
                 printf("BOSS SLIME: CHARGE HIT PLAYER!\n");
+
+                // Effet visuel d'impact - si la fonction existe
+                // Si emitImpactParticles n'existe pas, vous pouvez remplacer par une autre fonction de particules
+                if ((int)(elapsedTime * 30) % 2 == 0) {
+                    SDL_Color impactColor = {255, 50, 0, 255};
+                    emitParticles(
+                        bossSlime->particles,
+                        player->collisionCircle.x,
+                        player->collisionCircle.y,
+                        impactColor,
+                        8,             // count
+                        5.0f, 10.0f,   // size
+                        10.0f, 30.0f,  // speed
+                        0.2f, 0.4f     // lifetime
+                    );
+                }
             }
         }
-    } else if (elapsedTime < 2.0f) {
+    }
+    // Phase de récupération
+    else if (elapsedTime < CHARGE_RECOVERY_TIME) {
         printf("BOSS SLIME: TIRED AFTER CHARGE...\n");
-        bossSlime->base.entity.physics.velocity.x *= 0.85f;
-        bossSlime->base.entity.physics.velocity.y *= 0.85f;
+
+        // Animation d'épuisement
         setAnimation(bossSlime->base.entity.animationController, "idle");
-        float angle = (float)(rand() % 360) * (M_PI / 180.0f);
-        float distance = (float)(rand() % 10) + 5.0f;
-        Debug_PushCircle(bossSlime->base.entity.collisionCircle.x + cosf(angle) * distance,
-                         bossSlime->base.entity.collisionCircle.y + sinf(angle) * distance,
-                         2 + (float)(rand() % 3), SDL_COLOR_BLUE);
-    } else if (elapsedTime >= 2.0f) {
+
+        // Ralentissement très prononcé via la vélocité
+        bossSlime->base.entity.physics.velocity.x *= 0.7f;
+        bossSlime->base.entity.physics.velocity.y *= 0.7f;
+
+        // Émission de particules d'épuisement
+        float recoveryProgress = (elapsedTime - CHARGE_DASH_TIME) / (CHARGE_RECOVERY_TIME - CHARGE_DASH_TIME);
+        if ((int)(elapsedTime * 8) % 2 == 0) {
+            emitChargeAttackParticles(bossSlime->particles, position, radius,
+                                      (SDL_Color){255, 100, 0, 255},
+                                      1.5f + recoveryProgress * 0.5f,
+                                      fixedChargeDir);
+        }
+
+        // Effet de "vacillement" pendant la récupération
+        if ((int)(elapsedTime * 12) % 3 == 0) {
+            // Ajouter de petites impulsions de vélocité qui s'opposent
+            float swayMagnitude = 3.0f * (1.0f - recoveryProgress);
+            bossSlime->base.entity.physics.velocity.x += randomRangeF(-swayMagnitude, swayMagnitude);
+            bossSlime->base.entity.physics.velocity.y += randomRangeF(-swayMagnitude, swayMagnitude);
+        }
+
+
+    }
+    // Fin de l'attaque
+    else if (elapsedTime >= CHARGE_RECOVERY_TIME) {
         printf("BOSS SLIME: RECOVERED FROM CHARGE\n");
+
+        // Retour à l'état approprié selon la phase
         if (bossSlime->currentPhase == 2)
             bossSlime->state = BOSS_SLIME_ENRAGED;
         else if (bossSlime->currentPhase == 3)
