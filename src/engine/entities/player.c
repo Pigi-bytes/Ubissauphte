@@ -2,6 +2,8 @@
 
 #include "enemy.h"
 
+// setScene(context->sceneController, "gameOver");
+
 t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
     t_joueur* joueur = (t_joueur*)malloc(sizeof(t_joueur));
 
@@ -347,8 +349,6 @@ void handleInputPlayer(t_input* input, t_joueur* player, t_grid* grid, t_viewPor
             lastDirY /= length;
         }
     }
-
- 
 
     if (keyPressOnce(input, SDL_SCANCODE_N)) {
         applyDamage(&player->health, 10, &player->entity, NULL);

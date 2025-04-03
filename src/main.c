@@ -1,12 +1,39 @@
 #include "_scene/commandeMenu.h"
 #include "_scene/fpsMenu.h"
+#include "_scene/gameOver.h"
 #include "_scene/mainMenu.h"
 #include "_scene/mainWorld.h"
 #include "_scene/option2.h"
 #include "_scene/optionMenu.h"
 #include "_scene/sceneInventaire.h"
 #include "context.h"
+
+void supprimerAllfichier() {
+    DIR* d;
+    struct dirent* dir;
+    char path[1024];
+
+    d = opendir("./assets/map/");
+    if (d) {
+        while ((dir = readdir(d)) != NULL) {
+            if (strstr(dir->d_name, ".txt") != NULL) {
+                snprintf(path, sizeof(path), "./assets/map/%s", dir->d_name);
+
+                if (remove(path) == 0) {
+                    printf("Fichier supprimé: %s\n", path);
+                } else {
+                    perror("Erreur lors de la suppression du fichier");
+                }
+            }
+        }
+        closedir(d);
+    } else {
+        perror("Erreur lors de l'ouverture du répertoire");
+    }
+}
+
 int main(int argc, char* argv[]) {
+    supprimerAllfichier();
     if (initAudioSystem() != 0) {
         return 1;  // Arrêter si l'initialisation échoue
     }
@@ -25,7 +52,7 @@ int main(int argc, char* argv[]) {
     context.font = loadFont("assets/fonts/JetBrainsMono-Regular.ttf", 24);
     context.gameFont = loadFont("assets/fonts/PressStart2P-vaV7.ttf", 7);
 
-    int nb = 3;
+    int nb = 100;
 
     context.frameData = initFrameData(0);
     context.option = creeOption();
@@ -111,6 +138,7 @@ int main(int argc, char* argv[]) {
     t_scene* scene4 = createMainInv(&context, player);
     t_scene* scene5 = createOption2Menu(&context);
     t_scene* scene6 = attente(&context);
+    t_scene* scene7 = CreateGameOver(&context);
 
     addScene(context.sceneController, scene);
     addScene(context.sceneController, scene0);
@@ -119,6 +147,7 @@ int main(int argc, char* argv[]) {
     addScene(context.sceneController, scene4);
     addScene(context.sceneController, scene5);
     addScene(context.sceneController, scene6);
+    addScene(context.sceneController, scene7);
     setScene(context.sceneController, "menuPrincipal");
 
     while (!context.input->quit) {
