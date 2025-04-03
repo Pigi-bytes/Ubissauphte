@@ -47,12 +47,12 @@ mana Mult Modifier: 1.0
 flags: 12
 type: arme
 texture: 119
-mass: 6
-damage: 6800
-range: 35
-angleAttack: 1.5
-attackDuration: 0.35
-attackCooldown: 1.1
+mass: 15
+damage: 50000
+range: 28
+angleAttack: 6.28318530718
+attackDuration: 0.45
+attackCooldown: 1.2
 onEquipe: 1
 description: \nUne hache lourde imprégnée\n d'une puissance primitive
 
@@ -76,17 +76,17 @@ mana Mult Modifier: 1.0
 flags: 4
 type: arme
 texture: 104
-mass: 1
-damage: 3200
-range: 25
-angleAttack: 0.334
-attackDuration: 0.18
-attackCooldown: 0.4
+mass: 1.5
+damage: 12
+range: 20
+angleAttack: 0.785398163
+attackDuration: 0.45
+attackCooldown: 1.2
 onEquipe: 1
 description: \nLame furtive qui traverse\n les défenses comme un spectre
 
 id Item: 3
-Name: Épée Céleste
+Name: Épée Nice
 manaMax Add Modifier: 0.0
 manaMax Mult Modifier: 1.0
 speed Modifier: 1.1
@@ -106,11 +106,11 @@ flags: 4
 type: arme
 texture: 105
 mass: 3
-damage: 4800
-range: 28
-angleAttack: 0.5
-attackDuration: 0.25
-attackCooldown: 0.6
+damage: 20
+range: 30
+angleAttack: 1.57079632679
+attackDuration: 0.28
+attackCooldown: 0.7
 onEquipe: 1
 description: \nUne lame brillante imprégnée\n de la lumière des étoiles
 
@@ -143,94 +143,8 @@ attackCooldown: 0.0
 onEquipe: 0
 description: \nUn breuvage rougeoyant qui\n pulse d'énergie vitale
 
+
 id Item: 5
-Name: Bâton Arcanique
-manaMax Add Modifier: 0.0
-manaMax Mult Modifier: 2.0
-speed Modifier: 1.0
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 1.5
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-health Add Modifier: 0.0
-health Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
-healthMax Mult Modifier: 1.0
-mana Add Modifier: 25.0
-mana Mult Modifier: 1.0
-flags: 4
-type: arme
-texture: 130
-mass: 2
-damage: 2800
-range: 40
-angleAttack: 2.0
-attackDuration: 0.3
-attackCooldown: 0.8
-onEquipe: 1
-description: \nUn bâton gravé de runes\n anciennes irradiant de magie
-
-id Item: 6
-Name: Plastron Fer
-manaMax Add Modifier: 0.0
-manaMax Mult Modifier: 1.0
-speed Modifier: 0.7
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 1.0
-defense Add Modifier: 2.5
-defense Mult Modifier: 1.4
-health Add Modifier: 0.0
-health Mult Modifier: 1.0
-healthMax Add Modifier: 50.0
-healthMax Mult Modifier: 1.0
-mana Add Modifier: 0.0
-mana Mult Modifier: 1.0
-flags: 4
-type: armure
-texture: 103
-mass: 8
-damage: 0
-range: 0
-angleAttack: 0
-attackDuration: 0.0
-attackCooldown: 0.0
-onEquipe: 1
-description: \nArmure lourde forgée dans\n un alliage de fer noir
-
-id Item: 7
-Name: Sort de Flamme
-manaMax Add Modifier: 0.0
-manaMax Mult Modifier: 1.0
-speed Modifier: 1.0
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 3.0
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-health Add Modifier: 0.0
-health Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
-healthMax Mult Modifier: 1.0
-mana Add Modifier: -20.0
-mana Mult Modifier: 1.0
-flags: 3
-type: activable
-texture: 128
-mass: 0
-damage: 0
-range: 0
-angleAttack: 0
-attackDuration: 0.0
-attackCooldown: 0.0
-onEquipe: 0
-description: \nParchemin brûlant contenant\n l'incantation du Feu Infernal
-
-id Item: 8
 Name: Marteau de Forge
 manaMax Add Modifier: 0.0
 manaMax Mult Modifier: 1.0
@@ -250,190 +164,16 @@ mana Mult Modifier: 1.0
 flags: 4
 type: arme
 texture: 118
-mass: 9
-damage: 7500
-range: 20
-angleAttack: 3.0
-attackDuration: 0.4
-attackCooldown: 1.4
+mass: 8
+damage: 40
+range: 40
+angleAttack: 2.09439510239
+attackDuration: 0.3
+attackCooldown: 1.5
 onEquipe: 1
 description: \nUn outil de forge transformé\n en arme dévastatrice
 
-id Item: 9
-Name: Épée de Bronze
-manaMax Add Modifier: 0.0
-manaMax Mult Modifier: 1.0
-speed Modifier: 1.0
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 2.3
-attack Mult Modifier: 1.6
-defense Add Modifier: 1.1
-defense Mult Modifier: 1.0
-health Add Modifier: 0.0
-health Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
-healthMax Mult Modifier: 1.0
-mana Add Modifier: 0.0
-mana Mult Modifier: 1.0
-flags: 4
-type: arme
-texture: 108
-mass: 5
-damage: 5200
-range: 32
-angleAttack: 0.5
-attackDuration: 0.27
-attackCooldown: 0.75
-onEquipe: 1
-description: \nLame ancienne au tranchant\n dentelé couvert de patine
-
-id Item: 10
-Name: Potion d'Éther
-manaMax Add Modifier: 0.0
-manaMax Mult Modifier: 1.0
-speed Modifier: 1.0
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 1.0
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-health Add Modifier: 0.0
-health Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
-healthMax Mult Modifier: 1.0
-mana Add Modifier: 80.0
-mana Mult Modifier: 1.4
-flags: 3
-type: activable
-texture: 117
-mass: 0
-damage: 0
-range: 0
-angleAttack: 0
-attackDuration: 0.0
-attackCooldown: 0.0
-onEquipe: 0
-description: \nFluide bleuté qui scintille\n avec l'essence du mana
-
-id Item: 11
-Name: Dague Lourde
-manaMax Add Modifier: 0.0
-manaMax Mult Modifier: 1.0
-speed Modifier: 1.0
-speed Add Modifier: 3.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 2.0
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-health Add Modifier: 0.0
-health Mult Modifier: 1.0
-healthMax Add Modifier: 20.0
-healthMax Mult Modifier: 1.0
-mana Add Modifier: 0.0
-mana Mult Modifier: 1.0
-flags: 4
-type: arme
-texture: 106
-mass: 2
-damage: 3800
-range: 22
-angleAttack: 0.25
-attackDuration: 0.22
-attackCooldown: 0.5
-onEquipe: 1
-description: \nLame épaisse conçue pour\n transpercer les armures
-
-id Item: 12
-Name: Sort de Protection
-manaMax Add Modifier: 0.0
-manaMax Mult Modifier: 1.0
-speed Modifier: 1.0
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 1.0
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.8
-health Add Modifier: 0.0
-health Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
-healthMax Mult Modifier: 1.0
-mana Add Modifier: -15.0
-mana Mult Modifier: 1.0
-flags: 3
-type: activable
-texture: 126
-mass: 0
-damage: 0
-range: 0
-angleAttack: 0
-attackDuration: 0.0
-attackCooldown: 0.0
-onEquipe: 0
-description: \nParchemin grisâtre émettant\n une aura défensive
-
-id Item: 13
-Name: Hache Double
-manaMax Add Modifier: 0.0
-manaMax Mult Modifier: 1.0
-speed Modifier: 0.85
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 3.2
-attack Mult Modifier: 1.0
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-health Add Modifier: 0.0
-health Mult Modifier: 1.2
-healthMax Add Modifier: 0.0
-healthMax Mult Modifier: 1.0
-mana Add Modifier: 0.0
-mana Mult Modifier: 1.0
-flags: 4
-type: arme
-texture: 120
-mass: 7
-damage: 6300
-range: 28
-angleAttack: 2.2
-attackDuration: 0.33
-attackCooldown: 1.0
-onEquipe: 1
-description: \nHache asymétrique avec une\n double tête tranchante
-
-id Item: 14
-Name: Bâton Élémentaire
-manaMax Add Modifier: 15.0
-manaMax Mult Modifier: 1.0
-speed Modifier: 1.0
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 1.0
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-health Add Modifier: 0.0
-health Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
-healthMax Mult Modifier: 1.0
-mana Add Modifier: 0.0
-mana Mult Modifier: 2.1
-flags: 4
-type: arme
-texture: 131
-mass: 2
-damage: 3100
-range: 45
-angleAttack: 1.8
-attackDuration: 0.31
-attackCooldown: 0.9
-onEquipe: 1
-description: \nBranche naturelle canalisant\n les forces élémentaires
-
-id Item: 15
+id Item: 6
 Name: Lance Perçante
 manaMax Add Modifier: 0.0
 manaMax Mult Modifier: 1.0
@@ -453,156 +193,11 @@ mana Mult Modifier: 1.0
 flags: 4
 type: arme
 texture: 132
-mass: 4
-damage: 5700
-range: 50
-angleAttack: 1
-attackDuration: 0.29
-attackCooldown: 0.85
+mass: 5
+damage: 18
+range: 40
+angleAttack: 0.62831853071
+attackDuration: 0.3
+attackCooldown: 0.65
 onEquipe: 1
 description: \nArme d'estoc redoutable\n avec une portée impressionnante
-
-id Item: 16
-Name: Potion de Venin
-manaMax Add Modifier: 0.0
-manaMax Mult Modifier: 1.0
-speed Modifier: 1.0
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 1.0
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-health Add Modifier: -30.0
-health Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
-healthMax Mult Modifier: 1.0
-mana Add Modifier: 40.0
-mana Mult Modifier: 1.0
-flags: 3
-type: activable
-texture: 114
-mass: 0
-damage: 0
-range: 0
-angleAttack: 0
-attackDuration: 0.0
-attackCooldown: 0.0
-onEquipe: 0
-description: \nSubstance grise toxique\n aux effets imprévisibles
-
-id Item: 17
-Name: Épée Lourde
-manaMax Add Modifier: 0.0
-manaMax Mult Modifier: 1.0
-speed Modifier: 0.75
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 4.0
-attack Mult Modifier: 1.0
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-health Add Modifier: 0.0
-health Mult Modifier: 1.0
-healthMax Add Modifier: 60.0
-healthMax Mult Modifier: 1.0
-mana Add Modifier: 0.0
-mana Mult Modifier: 1.0
-flags: 4
-type: arme
-texture: 107
-mass: 7
-damage: 7100
-range: 30
-angleAttack: 2.5
-attackDuration: 0.37
-attackCooldown: 1.3
-onEquipe: 1
-description: \nLame massive nécessitant\n une force colossale
-
-id Item: 18
-Name: Sort de Soin
-manaMax Add Modifier: 0.0
-manaMax Mult Modifier: 1.0
-speed Modifier: 1.0
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 1.0
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-health Add Modifier: 150.0
-health Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
-healthMax Mult Modifier: 1.0
-mana Add Modifier: -25.0
-mana Mult Modifier: 1.0
-flags: 3
-type: activable
-texture: 127
-mass: 0
-damage: 0
-range: 0
-angleAttack: 0
-attackDuration: 0.0
-attackCooldown: 0.0
-onEquipe: 0
-description: \nParchemin vert émettant\n une douce aura régénérante
-
-id Item: 19
-Name: Sort de Tempête
-manaMax Add Modifier: 0.0
-manaMax Mult Modifier: 1.0
-speed Modifier: 1.0
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 2.8
-defense Add Modifier: 0.0
-defense Mult Modifier: 0.7
-health Add Modifier: -40.0
-health Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
-healthMax Mult Modifier: 1.0
-mana Add Modifier: -35.0
-mana Mult Modifier: 1.0
-flags: 3
-type: activable
-texture: 129
-mass: 0
-damage: 0
-range: 0
-angleAttack: 0
-attackDuration: 0.0
-attackCooldown: 0.0
-onEquipe: 0
-description: \nParchemin bleu électrique\n invoquant des éclairs
-
-id Item: 20
-Name: Potion de Mutation
-manaMax Add Modifier: 0.0
-manaMax Mult Modifier: 1.0
-speed Modifier: 1.0
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 0.8
-defense Add Modifier: 0.0
-defense Mult Modifier: 0.8
-health Add Modifier: -50.0
-health Mult Modifier: 1.5
-healthMax Add Modifier: 0.0
-healthMax Mult Modifier: 1.0
-mana Add Modifier: 60.0
-mana Mult Modifier: 1.8
-flags: 3
-type: activable
-texture: 115
-mass: 0
-damage: 0
-range: 0
-angleAttack: 0
-attackDuration: 0.0
-attackCooldown: 0.0
-onEquipe: 0
-description: \nFluide vert trouble aux\n effets chaotiques imprévisibles
