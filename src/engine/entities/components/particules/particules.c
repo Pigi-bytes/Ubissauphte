@@ -74,6 +74,33 @@ void emitMovementParticles(t_particleEmitter* emitter, float x, float y, SDL_Col
     emitParticles(emitter, x, y, dustColor, 2 + rand() % 2, 3.0f, 5.0f, 12.0f, 20.0f, 0.4f, 0.8f);
 }
 
+void emitBossMovementParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor) {
+    if (!emitter) return;
+
+    for (int i = 0; i < 8 + rand() % 4; i++) {                    // Générer 8 à 12 particules
+        float angle = (float)i / (8 + rand() % 4) * 2.0f * M_PI;  // Répartir en cercle
+        float speed = randomRangeF(10.0f, 30.0f);                 // Vitesse lente pour simuler le poids
+
+        SDL_Color particleColor = baseColor;
+        particleColor.a = randomRangeF(180.0f, 230.0f);  // Transparence variable
+
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (!p) return;
+
+        p->position = (SDL_FPoint){
+            position.x + cosf(angle) * radius * 0.2f,  // Position initiale proche du centre
+            position.y + sinf(angle) * radius * 0.2f};
+        p->velocity = (SDL_FPoint){
+            cosf(angle) * speed,        // Mouvement radial
+            sinf(angle) * speed * 0.5f  // Mouvement vertical réduit
+        };
+        p->lifetime = p->maxLifetime = randomRangeF(1.0f, 2.0f);  // Durée de vie moyenne
+        p->size = randomRangeF(16.0f, 32.0f);                     // Particules grandes
+        p->color = particleColor;
+        p->shape = 1;  // Particules rondes
+    }
+}
+
 void emitLandingParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor) {
     if (!emitter) return;
 
@@ -94,6 +121,7 @@ void emitLandingParticles(t_particleEmitter* emitter, SDL_FPoint position, float
 
         t_entityParticle* p = getNextFreeParticle(emitter);
         if (!p) return;
+        p->shape = 0;
 
         p->position = (SDL_FPoint){particleX, particleY};
         p->velocity = (SDL_FPoint){cosf(angle) * randomRangeF(8.0f, 20.0f), sinf(angle) * randomRangeF(4.0f, 10.0f) - randomRangeF(3.0f, 10.0f)};
@@ -108,7 +136,7 @@ void emitLandingParticles(t_particleEmitter* emitter, SDL_FPoint position, float
     for (int i = 0; i < 2 + rand() % 3; i++) {
         t_entityParticle* p = getNextFreeParticle(emitter);
         if (!p) return;
-
+        p->shape = 0;
         p->position = (SDL_FPoint){position.x + randomRangeF(-5.0f, 5.0f), position.y + randomRangeF(-2.0f, 2.0f)};
         p->velocity = (SDL_FPoint){randomRangeF(-8.0f, 8.0f), randomRangeF(-25.0f, -10.0f)};
         p->lifetime = p->maxLifetime = randomRangeF(0.4f, 0.6f);
@@ -143,7 +171,7 @@ void emitImpactParticles(t_particleEmitter* emitter, SDL_FPoint position, SDL_FP
     for (int i = startIdx; i < MAX_ENTITY_PARTICLES && i < startIdx + 8; i++) {
         t_entityParticle* p = &emitter->particles[i];
         if (!p->active || p->color.r != brightColor.r) continue;
-
+        p->shape = 0;
         float angleOffset = randomRangeF(-coneAngle / 2, coneAngle / 2);
         float angle = oppositeAngle + angleOffset;
         float speed = randomRangeF(50.0f, 100.0f);
@@ -161,7 +189,7 @@ void emitImpactParticles(t_particleEmitter* emitter, SDL_FPoint position, SDL_FP
     for (int i = startIdx; i < MAX_ENTITY_PARTICLES && i < startIdx + 6; i++) {
         t_entityParticle* p = &emitter->particles[i];
         if (!p->active || p->color.r != dropColor.r) continue;
-
+        p->shape = 0;
         float angleOffset = randomRangeF(-coneAngle * 0.7f, coneAngle * 0.7f);
         float angle = oppositeAngle + angleOffset;
         float centerFactor = 1.0f - (fabsf(angleOffset) / (coneAngle * 0.7f)) * 0.7f;
@@ -260,6 +288,7 @@ void emitBarrelExplosionParticles(t_particleEmitter* emitter, SDL_FPoint positio
             p->lifetime = p->maxLifetime = randomRangeF(15.0f, 30.0f);
             p->size = randomRangeF(3.5f, 6.5f);
             p->color = color;
+            p->shape = 0;
         }
     }
 
@@ -272,6 +301,7 @@ void emitBarrelExplosionParticles(t_particleEmitter* emitter, SDL_FPoint positio
 
         t_entityParticle* p = getNextFreeParticle(emitter);
         if (p) {
+            p->shape = 0;
             p->position.x = position.x + cosf(angle) * particleDistance;
             p->position.y = position.y + sinf(angle) * particleDistance;
             p->velocity = (SDL_FPoint){0, 0};
@@ -293,6 +323,7 @@ void emitBarrelExplosionParticles(t_particleEmitter* emitter, SDL_FPoint positio
             p->lifetime = p->maxLifetime = randomRangeF(0.7f, 1.2f);
             p->size = randomRangeF(3.0f, 6.0f);
             p->color = dustColor;
+            p->shape = 0;
         }
     }
 
@@ -310,6 +341,7 @@ void emitBarrelExplosionParticles(t_particleEmitter* emitter, SDL_FPoint positio
             p->lifetime = p->maxLifetime = randomRangeF(10.0f, 20.0f);
             p->size = randomRangeF(6.0f, 9.0f);
             p->color = chunkColor;
+            p->shape = 0;
         }
     }
 }
@@ -320,7 +352,6 @@ void updateEntityParticles(t_particleEmitter* emitter, float deltaTime) {
     for (int i = 0; i < MAX_ENTITY_PARTICLES; i++) {
         t_entityParticle* p = &emitter->particles[i];
         if (!p->active) continue;
-
         // Vérifier si la particule est expirée
         if ((p->lifetime -= deltaTime) <= 0) {
             p->active = SDL_FALSE;
@@ -357,12 +388,24 @@ void renderEntityParticles(SDL_Renderer* renderer, t_particleEmitter* emitter) {
 
         SDL_SetRenderDrawColor(renderer, p->color.r, p->color.g, p->color.b, (Uint8)(p->color.a * alpha));
 
-        SDL_Rect rect = {x, y, size, size};
-        SDL_RenderFillRect(renderer, &rect);
+        if (p->shape == 1) {
+            // Dessiner un cercle
+            for (int w = 0; w < size; w++) {
+                for (int h = 0; h < size; h++) {
+                    int dx = size / 2 - w;  // Distance du centre en x
+                    int dy = size / 2 - h;  // Distance du centre en y
+                    if ((dx * dx + dy * dy) <= (size / 2) * (size / 2)) {
+                        SDL_RenderDrawPoint(renderer, x + w, y + h);
+                    }
+                }
+            }
+        } else {
+            SDL_Rect rect = {x, y, size, size};
+            SDL_RenderFillRect(renderer, &rect);
 
-        // Contour plus foncé
-        SDL_SetRenderDrawColor(renderer, p->color.r * 0.7f, p->color.g * 0.7f, p->color.b * 0.7f, (Uint8)(p->color.a * alpha));
-        SDL_RenderDrawRect(renderer, &rect);
+            SDL_SetRenderDrawColor(renderer, p->color.r * 0.7f, p->color.g * 0.7f, p->color.b * 0.7f, (Uint8)(p->color.a * alpha));
+            SDL_RenderDrawRect(renderer, &rect);
+        }
     }
 
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);

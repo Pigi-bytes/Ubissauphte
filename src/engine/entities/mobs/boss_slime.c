@@ -142,8 +142,8 @@ void initiateBossJump(t_boss_slime* bossSlime, SDL_FPoint direction, float power
         direction.y = 0;
     }
 
-    // SDL_FPoint position = {bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y};
-    // emitBossMovementParticles(bossSlime->particles, position, bossSlime->particleColor);
+    SDL_FPoint position = {bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y};
+    emitBossMovementParticles(bossSlime->particles, position, bossSlime->base.entity.collisionCircle.radius, SDL_COLOR_WHITE);
 
     bossSlime->base.entity.physics.velocity.x += (direction.x * (bossSlime->jumpForce * powerJump));
     bossSlime->base.entity.physics.velocity.y += (direction.y * (bossSlime->jumpForce * powerJump));

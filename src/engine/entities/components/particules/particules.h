@@ -15,6 +15,7 @@ typedef struct s_entityParticle {
     float size;
     SDL_Color color;
     int nextFree;
+    int shape;  // 0 = carré, 1 = rond
 } t_entityParticle;
 
 typedef struct s_particleEmitter {
@@ -30,6 +31,7 @@ t_entityParticle* getNextFreeParticle(t_particleEmitter* emitter);
 
 void emitParticles(t_particleEmitter* emitter, float x, float y, SDL_Color color, int count, float sizeMin, float sizeMax, float speedMin, float speedMax, float lifetimeMin, float lifetimeMax);
 void emitMovementParticles(t_particleEmitter* emitter, float x, float y, SDL_Color color);
+void emitBossMovementParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor);
 
 void updateEntityParticles(t_particleEmitter* emitter, float deltaTime);
 void renderEntityParticles(SDL_Renderer* renderer, t_particleEmitter* emitter);
