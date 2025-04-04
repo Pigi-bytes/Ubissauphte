@@ -8,6 +8,15 @@
 #include "_scene/sceneInventaire.h"
 #include "context.h"
 
+#ifdef _WIN32
+#include <direct.h>  // Windows : _mkdir()
+#define CREATE_DIR(path) _mkdir(path)
+#else
+#include <sys/stat.h>  // Linux/macOS : mkdir()
+#include <sys/types.h>
+#define CREATE_DIR(path) mkdir(path, 0777)
+#endif
+
 void supprimerAllfichier() {
     DIR* d;
     struct dirent* dir;
@@ -28,7 +37,8 @@ void supprimerAllfichier() {
         }
         closedir(d);
     } else {
-        perror("Erreur lors de l'ouverture du répertoire");
+        CREATE_DIR("./assets/map/");
+        perror("création du répertoire map");
     }
 }
 
@@ -60,7 +70,6 @@ int main(int argc, char* argv[]) {
     context.currentLevel = NULL;
     context.nbLevel = 3;
     context.difficulty = EASY;
-    
 
     context.control = malloc(sizeof(t_control));
     context.control->up = SDL_SCANCODE_W;
