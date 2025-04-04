@@ -22,7 +22,8 @@ typedef struct {
     SDL_bool isOpen;              ///< Indique si le coffre a déjà été ouvert
     t_item* containedItem;        ///< Objet contenu dans le coffre
     t_text* interactText;         ///< Texte d'interface utilisateur
-    int goldReward;               ///< Quantité d'or contenue dans le coffre
+    int goldReward;
+    SDL_bool dropGiven;  ///< Quantité d'or contenue dans le coffre
 } t_chest;
 
 /**
@@ -49,6 +50,6 @@ void renderChest(t_tileEntity* entity, t_context* context, t_camera* camera);
  * @param context Contexte du jeu pour accéder aux ressources
  * @return Pointeur vers l'entité créée
  */
-t_tileEntity* createChestEntity(t_tileset* tileset, t_scene* scene, t_context* context);
+t_tileEntity* createChestEntity(t_tileset* tileset, t_scene* scene);
 
 #endif
