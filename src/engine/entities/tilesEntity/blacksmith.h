@@ -1,7 +1,6 @@
 #ifndef BLACKSMITH_H
 #define BLACKSMITH_H
 
-#include "../../../ui/affichage.h"
 #include "../../../ui/text.h"
 #include "../tilesEntity.h"
 

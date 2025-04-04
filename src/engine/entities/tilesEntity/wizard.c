@@ -15,13 +15,21 @@ void updateWizard(t_tileEntity* entity, t_context* context, t_salle* salle, t_ob
         if (wizard->lastInteractKey != player->control->interact) {
             wizard->lastInteractKey = player->control->interact;
 
-            char interactPrompt[32];
-            sprintf(interactPrompt, "[%s] to speak", SDL_GetKeyName(SDL_GetKeyFromScancode(wizard->lastInteractKey)));
+            char interactPrompt[64];
+            char interactPrompt2[64];
+            sprintf(interactPrompt, "%s", wizard->randomItem->name);
+            sprintf(interactPrompt2, "[%s] to buy for %d coins", SDL_GetKeyName(SDL_GetKeyFromScancode(wizard->lastInteractKey)), wizard->prix);
 
             if (wizard->interactText) {
-                updateText(&wizard->interactText, context->renderer, interactPrompt, (SDL_Color){255, 255, 255, 255});
+                updateText(&wizard->interactText, context->renderer, interactPrompt, (SDL_Color){255, 255, 0, 255});
             } else {
-                wizard->interactText = createText(context->renderer, interactPrompt, context->gameFont, (SDL_Color){255, 255, 255, 255});
+                wizard->interactText = createText(context->renderer, interactPrompt, context->gameFont, (SDL_Color){255, 255, 0, 255});
+            }
+
+            if (wizard->item) {
+                updateText(&wizard->item, context->renderer, interactPrompt2, (SDL_Color){50, 150, 255, 255});
+            } else {
+                wizard->item = createText(context->renderer, interactPrompt2, context->gameFont, (SDL_Color){50, 150, 255, 255});
             }
         }
 
@@ -29,11 +37,20 @@ void updateWizard(t_tileEntity* entity, t_context* context, t_salle* salle, t_ob
             SDL_bool interactKeyIsPressed = keyPressOnce(context->input, player->control->interact);
 
             if (interactKeyIsPressed && !wizard->interactKeyPressed) {
-                jouerSFX("assets/chestOpening.wav", SDL_MIX_MAXVOLUME, 0, context->audioManager);
+                printf("*Parle au forgeron*\n");
+                if (player->gold >= wizard->prix) {
+                    jouerSFX("assets/barrel.wav", SDL_MIX_MAXVOLUME, 0, context->audioManager);
+                    player->gold -= wizard->prix;
+                    if (wizard->randomItem) {
+                        inventaireAjoutObjet(player->inventaire, wizard->randomItem, 1);
+                        printf("Le sorcier vous offre : %s\n", wizard->randomItem->name);
+                    } 
+                    equipementRecalculerStats(&player);
+                }else{
+                    printf("Vous n'avez pas les sous\n");
+                }
 
                 // changer scène ici
-
-                printf("Parle au marchant\n");
             }
 
             wizard->interactKeyPressed = interactKeyIsPressed;
@@ -45,8 +62,6 @@ void updateWizard(t_tileEntity* entity, t_context* context, t_salle* salle, t_ob
             Debug_PushCircle(wizard->detectionRange.x, wizard->detectionRange.y, wizard->detectionRange.radius, wizard->playerInRange ? SDL_COLOR_GREEN : SDL_COLOR_BLUE);
         }
     }
-
-    updatePhysicEntity(&entity->entity, &context->frameData->deltaTime, salle->grille, entities);
 }
 
 void renderWizard(t_tileEntity* entity, t_context* context, t_camera* camera) {
@@ -60,12 +75,18 @@ void renderWizard(t_tileEntity* entity, t_context* context, t_camera* camera) {
 
         renderText(context->renderer, wizard->interactText);
     }
+
+    if (wizard->playerInRange && wizard->item) {
+        wizard->item->rect.x = entity->entity.displayRect.x + (entity->entity.displayRect.w / 2) - (wizard->item->rect.w / 2);
+        wizard->item->rect.y = entity->entity.displayRect.y - wizard->item->rect.h * 2 - 5;
+
+        renderText(context->renderer, wizard->item);
+    }
 }
 
-t_tileEntity* createWizardEntity(t_tileset* tileset, t_scene* scene) {
+t_tileEntity* createWizardEntity(t_tileset* tileset, t_scene* scene, t_context* context) {
     t_wizard* wizard = malloc(sizeof(t_wizard));
     memset(wizard, 0, sizeof(t_wizard));
-
     initTileEntityBase(&wizard->base, getObject(tileset->textureTiles, 85), (SDL_Rect){0, 0, 16, 16}, scene);
 
     addAnimation(wizard->base.entity.animationController, createAnimation(tileset, (int[]){85}, 1, 240, SDL_TRUE, "idle"));
@@ -78,10 +99,15 @@ t_tileEntity* createWizardEntity(t_tileset* tileset, t_scene* scene) {
 
     wizard->interactKeyPressed = SDL_FALSE;
     wizard->lastInteractKey = 0;
+
+    wizard->randomItem = getItemByRarity(context->itemListe, context->nbItem, RARITY_EPIC);
+
     wizard->interactText = NULL;
+    wizard->prix = 1000;
 
     wizard->base.update = updateWizard;
     wizard->base.render = renderWizard;
+
 
     return (t_tileEntity*)wizard;
 }

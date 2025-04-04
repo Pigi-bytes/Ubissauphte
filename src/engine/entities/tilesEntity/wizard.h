@@ -10,12 +10,14 @@ typedef struct {
     SDL_bool playerInRange;
     SDL_bool interactKeyPressed;
     SDL_Keycode lastInteractKey;
-    t_text* interactText;
+    t_item *randomItem;
+    t_text *interactText, *item;
+    int prix;
 } t_wizard;
 
 
 void updateWizard(t_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities);
 void renderWizard(t_tileEntity* entity, t_context* context, t_camera* camera);
-t_tileEntity* createWizardEntity(t_tileset* tileset, t_scene* scene);
+t_tileEntity* createWizardEntity(t_tileset* tileset, t_scene* scene, t_context* context);
 
 #endif

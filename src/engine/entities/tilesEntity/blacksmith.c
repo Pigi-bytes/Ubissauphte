@@ -46,7 +46,7 @@ void updateBlacksmith(t_tileEntity* entity, t_context* context, t_salle* salle, 
                     player->gold -= blacksmith->prix;
                     if (blacksmith->randomItem) {
                         inventaireAjoutObjet(player->inventaire, blacksmith->randomItem, 1);
-                        printf("Le marchand vous offre : %s\n", blacksmith->randomItem->name);
+                        printf("Le forgeron vous offre : %s\n", blacksmith->randomItem->name);
                     } 
                     equipementRecalculerStats(&player);
                 }else{
@@ -87,7 +87,7 @@ void renderBlacksmith(t_tileEntity* entity, t_context* context, t_camera* camera
     }
 }
 
-t_tileEntity* createBlacksmithEntity(t_tileset* tileset, t_scene* scene, t_context* context) {
+t_tileEntity* createBlacksmithEntity(t_tileset* tileset, t_scene* scene, t_context* context){
     t_blacksmith* blacksmith = malloc(sizeof(t_blacksmith));
     memset(blacksmith, 0, sizeof(t_blacksmith));
     initTileEntityBase(&blacksmith->base, getObject(tileset->textureTiles, 87), (SDL_Rect){0, 0, 16, 16}, scene);

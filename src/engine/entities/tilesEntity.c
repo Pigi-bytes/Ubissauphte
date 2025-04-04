@@ -109,7 +109,7 @@ void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* enti
                         ADD_OBJECT_TO_SCENE(scene, barrelEntity, entityTypeId);
                         barrelCount++;
                     } else if (tileTexture == merchantTexture) {
-                        t_tileEntity* merchantEntity = createMerchantEntity(tileset, scene);
+                        t_tileEntity* merchantEntity = createMerchantEntity(tileset, scene, context);
                         replaceTileWithEntity(tile, x, y, merchantEntity, entities, getTypeIdByName(entities->registry, "MERCHANT"), floorTexture);
                         ADD_OBJECT_TO_SCENE(scene, merchantEntity, entityTypeId);
                     } else if (tileTexture == blacksmithTexture) {
@@ -117,7 +117,7 @@ void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* enti
                         replaceTileWithEntity(tile, x, y, blacksmithEntity, entities, getTypeIdByName(entities->registry, "BLACKSMITH"), floorTexture);
                         ADD_OBJECT_TO_SCENE(scene, blacksmithEntity, entityTypeId);
                     } else if (tileTexture == wizardTexture) {
-                        t_tileEntity* wizardEntity = createWizardEntity(tileset, scene);
+                        t_tileEntity* wizardEntity = createWizardEntity(tileset, scene, context);
                         replaceTileWithEntity(tile, x, y, wizardEntity, entities, getTypeIdByName(entities->registry, "WIZARD"), floorTexture);
                         ADD_OBJECT_TO_SCENE(scene, wizardEntity, entityTypeId);
                     }
