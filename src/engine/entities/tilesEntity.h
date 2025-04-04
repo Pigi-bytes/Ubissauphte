@@ -26,7 +26,7 @@ void renderTileEntity(t_tileEntity* tileEntity, t_context* context, t_camera* ca
 void freeTileEntity(void* object);
 
 void replaceTileWithEntity(t_tile* tile, int x, int y, t_tileEntity* entity, t_objectManager* entities, uint8_t entityTypeId, SDL_Texture* floorTexture);
-void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* entities, uint8_t entityTypeId, t_scene* scene);
+void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* entities, uint8_t entityTypeId, t_scene* scene, t_context* context);
 
 void renderTileEntityWrapper(t_fonctionParam* f);
 void updateTileEntityWrapper(t_fonctionParam* f);

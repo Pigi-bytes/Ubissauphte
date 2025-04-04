@@ -285,7 +285,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, int nb, 
             j = 0;
     }
     ui->j = j;
-    // ui->elems->caseArme.texture = c->currentWeapon->texture;
+    ui->elems->caseArme.texture = c->currentWeapon->texture;
     int totalContentHeight = 0;
     for (int i = 0; i < ui->nbItems; i++) {
         int slotBottom = ui->elems->inventory_slots[i].rect.y + ui->elems->inventory_slots[i].rect.h;
@@ -410,7 +410,7 @@ void updateAjoutObjet(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
         ui->elems->inventory_slots[newIndex].texture = stack->definition->texture;
 
         ui->j++;
-        if (ui->j == 4) ui->j = 0;
+        // if (ui->j == 4) ui->j = 0;
 
         int totalContentHeight = 0;
         for (int i = 0; i < ui->nbItems; i++) {

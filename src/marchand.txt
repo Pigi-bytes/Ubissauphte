@@ -1,0 +1,114 @@
+id Item: 0
+Name: Épée de Feu
+speed Modifier: 1.2
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 3.0
+attack Mult Modifier: 2.0
+defense Add Modifier: 0.0
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 110
+mass: 4
+damage: 25
+range: 30
+angleAttack: 1.57079632679
+attackDuration: 0.3
+attackCooldown: 0.8
+onEquipe: 1
+description: \nUne épée flamboyante qui brûle\n tout sur son passage
+
+id Item: 1
+Name: Arc de Glace
+speed Modifier: 1.0
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 2.5
+attack Mult Modifier: 1.5
+defense Add Modifier: 0.0
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 111
+mass: 3
+damage: 15
+range: 50
+angleAttack: 0.785398163
+attackDuration: 0.5
+attackCooldown: 1.0
+onEquipe: 1
+description: \nUn arc magique qui tire\n des flèches glacées
+
+id Item: 2
+Name: Marteau Tonnerre
+speed Modifier: 0.8
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 5.0
+attack Mult Modifier: 2.5
+defense Add Modifier: 0.0
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 112
+mass: 10
+damage: 50
+range: 20
+angleAttack: 2.09439510239
+attackDuration: 0.4
+attackCooldown: 1.5
+onEquipe: 1
+description: \nUn marteau lourd chargé\n de la puissance des éclairs
+
+id Item: 3
+Name: Lance Divine
+speed Modifier: 1.1
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 4.0
+attack Mult Modifier: 2.2
+defense Add Modifier: 0.5
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 113
+mass: 6
+damage: 35
+range: 40
+angleAttack: 0.62831853071
+attackDuration: 0.35
+attackCooldown: 1.0
+onEquipe: 1
+description: \nUne lance bénie par les dieux\n pour terrasser les ennemis
+
+id Item: 4
+Name: Dague des Ombres
+speed Modifier: 1.5
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.2
+attack Add Modifier: 2.0
+attack Mult Modifier: 1.8
+defense Add Modifier: 0.0
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 114
+mass: 1.5
+damage: 12
+range: 15
+angleAttack: 0.785398163
+attackDuration: 0.25
+attackCooldown: 0.6
+onEquipe: 1
+description: \nUne dague rapide et mortelle\n utilisée par les assassins

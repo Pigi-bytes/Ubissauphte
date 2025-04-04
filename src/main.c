@@ -60,7 +60,6 @@ int main(int argc, char* argv[]) {
     context.currentLevel = NULL;
     context.nbLevel = 3;
     context.difficulty = EASY;
-    
 
     context.control = malloc(sizeof(t_control));
     context.control->up = SDL_SCANCODE_W;
@@ -73,41 +72,17 @@ int main(int argc, char* argv[]) {
     context.control->interact = SDL_SCANCODE_E;
     context.control->inventaire = SDL_SCANCODE_I;
     context.control->activable1 = SDL_SCANCODE_1;
+
     t_tileset* tileset = initTileset(context.renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
     t_tileset* playerTileSet = initTileset(context.renderer, 32, 32, 16, "assets/imgs/chevaliervisiereouverteidle12run34.bmp");
 
     t_joueur* player = createPlayer(context.control, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerTileSet);
 
-    t_item* epee = malloc(sizeof(t_item));
-    epee->arme = malloc(sizeof(t_arme));
-    strcpy(epee->name, "HOMARD");
-    epee->arme->mass = 3.0f;             // Masse moyenne
-    epee->arme->damage = 20.0f;          // Dégâts moyens
-    epee->arme->range = 30.0f;           // Portée moyenne
-    epee->arme->angleAttack = M_PI / 2;  // Arc d'attaque de 90°
-    epee->arme->attackDuration = 0.28f;  // Animation moyenne
-    epee->arme->attackCooldown = 0.7f;   // Récupération moyenne
-    strcpy(epee->description, "\nazdezdef\nsssqs");
-    epee->stats.attack.additive = 5;
-    epee->stats.attack.multiplicative = 1;
-    epee->stats.defense.additive = 581;
-    epee->stats.defense.multiplicative = 1;
-    epee->stats.healthMax.additive = 8162;
-    epee->stats.healthMax.multiplicative = 1;
-    epee->stats.speed.additive = 645;
-    epee->stats.speed.multiplicative = 1;
+    t_fichier* fichier = chargerFichier("src/test.txt");
 
-    epee->arme->texture = getObject(tileset->textureTiles, 111);
-    epee->texture = getObject(tileset->textureTiles, 111);
-
-    epee->arme->displayRect = (SDL_Rect){0, 0, 16, 16};
-    epee->arme->displayRect = (SDL_Rect){0, 0, 16, 16};
-    epee->validSlot[0] = SLOT_ARME;
-    epee->flags = 6;
-    epee->id = 9;
-    epee->arme->indice = 10;
-    epee->arme->onEquipe = creerFonction(peutEquiperWrapper, FONCTION_PARAMS(&player->currentWeapon, epee->arme));
-
+    context.itemListe = item_load(fichier, tileset, player);
+    context.nbItem = fichier->blockManager->count;
+    
     equipementRecalculerStats(&player);
 
     player->indexCurrentRoom = 0;
@@ -138,11 +113,6 @@ int main(int argc, char* argv[]) {
         executeSceneFunctions(currentScene, HANDLE_INPUT);
         updateInput(context.input);
 
-        if (keyPressOnce(context.input, SDL_SCANCODE_U)) {
-            printf("Ajout Objet \n");
-            inventaireAjoutObjet(player->inventaire, epee, 1);
-        }
-
         executeSceneFunctions(currentScene, UPDATE);
 
         updateFPS(context.frameData);
@@ -169,6 +139,7 @@ int main(int argc, char* argv[]) {
     freeSceneController(&context.sceneController);
     free(context.control);
     freeLevel(context.currentLevel);
+    free_item(context.itemListe, fichier->blockManager->count);
 
     TTF_CloseFont(context.font);
     freeInput(context.input);

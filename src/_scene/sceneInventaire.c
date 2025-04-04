@@ -2,23 +2,20 @@
 
 t_scene *createMainInv(t_context *context, t_joueur *player) {
     t_typeRegistry *registre = createTypeRegistry();
-    t_fichier *fichier = chargerFichier("src/test.txt");
     t_tileset *tileset = initTileset(context->renderer, 192, 240, 16, "./assets/imgs/tileMapDungeon.bmp");
 
-    t_item **itemListe = item_load(fichier, tileset, player);
+    // for (int i = 0; i < fichier->blockManager->count; i++) {
+    //     inventaireAjoutObjet(player->inventaire, itemListe[i], 1);
+    // }
 
-    for (int i = 0; i < fichier->blockManager->count; i++) {
-        inventaireAjoutObjet(player->inventaire, itemListe[i], 1);
-    }
+    inventaireAjoutObjet(player->inventaire, context->itemListe[2], 1);
+    equiperEquipement(&player, 0, SLOT_ARME);
 
-    InventoryUI *ui = inventoryUI_Init(NULL, context->renderer, fichier->blockManager->count, player, context->input);
+    InventoryUI *ui = inventoryUI_Init(NULL, context->renderer, context->nbItem, player, context->input);
     const uint8_t INVENTORY_TYPE = registerType(registre, freeInv, "inventory");
 
     t_scene *scene = createScene(initObjectManager(registre), "mainInv");
 
-    equiperEquipement(&player, 2, SLOT_ARME);
-
-    // InventoryUI *ui = inventoryUI_Init(NULL, context->renderer, c, context->input);
 
     ADD_OBJECT_TO_SCENE(scene, ui, INVENTORY_TYPE);
 

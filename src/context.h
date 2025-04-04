@@ -7,6 +7,7 @@
 #include <stdio.h>
 
 #include "engine/core/frame.h"
+#include "engine/entities/components/equipment/equipementsManager.h"
 #include "engine/world/genmap.h"
 #include "io/audioManager.h"
 #include "io/input.h"
@@ -55,6 +56,8 @@ typedef struct {
     t_level* currentLevel;
     int nbLevel;
     difficulty difficulty;
+    t_item** itemListe;
+    int nbItem;
 } t_context;
 
 t_option* creeOption();

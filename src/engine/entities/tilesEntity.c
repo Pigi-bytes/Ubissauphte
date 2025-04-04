@@ -68,7 +68,7 @@ void replaceTileWithEntity(t_tile* tile, int x, int y, t_tileEntity* entity, t_o
     addObject(entities, entity, entityTypeId);
 }
 
-void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* entities, uint8_t entityTypeId, t_scene* scene) {
+void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* entities, uint8_t entityTypeId, t_scene* scene, t_context* context) {
     SDL_Texture* floorTexture = getObject(tileset->textureTiles, 49);
     int spikeCount = 0, chestCount = 0, barrelCount = 0;
 
@@ -113,7 +113,7 @@ void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* enti
                         replaceTileWithEntity(tile, x, y, merchantEntity, entities, getTypeIdByName(entities->registry, "MERCHANT"), floorTexture);
                         ADD_OBJECT_TO_SCENE(scene, merchantEntity, entityTypeId);
                     } else if (tileTexture == blacksmithTexture) {
-                        t_tileEntity* blacksmithEntity = createBlacksmithEntity(tileset, scene);
+                        t_tileEntity* blacksmithEntity = createBlacksmithEntity(tileset, scene, context);
                         replaceTileWithEntity(tile, x, y, blacksmithEntity, entities, getTypeIdByName(entities->registry, "BLACKSMITH"), floorTexture);
                         ADD_OBJECT_TO_SCENE(scene, blacksmithEntity, entityTypeId);
                     } else if (tileTexture == wizardTexture) {

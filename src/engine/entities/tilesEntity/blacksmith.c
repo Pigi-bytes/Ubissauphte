@@ -34,6 +34,8 @@ void updateBlacksmith(t_tileEntity* entity, t_context* context, t_salle* salle, 
             }
         }
 
+        t_item** liste = context->itemListe;
+
         if (blacksmith->playerInRange) {
             SDL_bool interactKeyIsPressed = keyPressOnce(context->input, player->control->interact);
 
@@ -43,8 +45,12 @@ void updateBlacksmith(t_tileEntity* entity, t_context* context, t_salle* salle, 
                     jouerSFX("assets/barrel.wav", SDL_MIX_MAXVOLUME, 0, context->audioManager);
                     player->gold -= 100;
 
-                    blacksmith->objet->arme->onEquipe = creerFonction(peutEquiperWrapper, FONCTION_PARAMS(&player->currentWeapon, blacksmith->objet));
-                    inventaireAjoutObjet(player->inventaire, blacksmith->objet, 1);
+                    for (int i = 0; i < context->nbItem; i++) {
+                        if (i != 2)
+                            inventaireAjoutObjet(player->inventaire, liste[i], 1);
+                    }
+
+                    equipementRecalculerStats(&player);
                 }
 
                 // changer scène ici
@@ -81,10 +87,9 @@ void renderBlacksmith(t_tileEntity* entity, t_context* context, t_camera* camera
     }
 }
 
-t_tileEntity* createBlacksmithEntity(t_tileset* tileset, t_scene* scene) {
+t_tileEntity* createBlacksmithEntity(t_tileset* tileset, t_scene* scene, t_context* context) {
     t_blacksmith* blacksmith = malloc(sizeof(t_blacksmith));
     memset(blacksmith, 0, sizeof(t_blacksmith));
-
     initTileEntityBase(&blacksmith->base, getObject(tileset->textureTiles, 87), (SDL_Rect){0, 0, 16, 16}, scene);
 
     addAnimation(blacksmith->base.entity.animationController, createAnimation(tileset, (int[]){87}, 1, 240, SDL_TRUE, "idle"));
@@ -95,31 +100,8 @@ t_tileEntity* createBlacksmithEntity(t_tileset* tileset, t_scene* scene) {
     blacksmith->detectionRange.y = 10;
     blacksmith->playerInRange = SDL_FALSE;
 
-    blacksmith->vend = getObject(tileset->textureTiles, 119);
-    t_item* epee = malloc(sizeof(t_item));
-    epee->arme = malloc(sizeof(t_arme));
-    strcpy(epee->name, "epeeNouv");
-    epee->arme->mass = 3.0f;                                 // Masse moyenne
-    epee->arme->damage = 20.0f;                              // Dégâts moyens
-    epee->arme->range = 30.0f;                               // Portée moyenne
-    epee->arme->angleAttack = M_PI / 2;                      // Arc d'attaque de 90°
-    epee->arme->attackDuration = 0.28f;                      // Animation moyenne
-    epee->arme->attackCooldown = 0.7f;                       // Récupération moyenne
-    epee->arme->texture = epee->texture = blacksmith->vend;  // Texture de l'arme
-    epee->arme->displayRect = (SDL_Rect){0, 0, 16, 16};
-    epee->validSlot[0] = SLOT_ARME;
-    epee->stats.attack.additive = 5;
-    epee->stats.defense.additive = 581;
-    epee->stats.healthMax.additive = 8162;
-    epee->stats.speed.additive = 645;
-    epee->flags = 6;
-    epee->id = 8;
-    epee->arme->indice = 9;
+    blacksmith->objet = context->itemListe[3];
 
-    strcpy(epee->description, "\nazdezdef\nsssqs");
-
-    printf("adresse %p\n", blacksmith->vend);
-    blacksmith->objet = epee;
     blacksmith->interactKeyPressed = SDL_FALSE;
     blacksmith->lastInteractKey = 0;
     blacksmith->interactText = NULL;
