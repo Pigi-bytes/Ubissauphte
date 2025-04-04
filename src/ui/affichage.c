@@ -227,14 +227,14 @@ void equiperSlotWrapper(t_fonctionParam *f) {
     equiperSlot(GET_PTR(f, 0, InventoryUI *), GET_PTR(f, 1, t_item **), GET_PTR(f, 2, SDL_Renderer *), GET_PTR(f, 3, t_input *));
 }
 
-InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, int nb, t_joueur *c, t_input *input) {
+InventoryUI *inventoryUI_Init(InventoryUI *ui2, t_joueur *c, t_context *context) {
     InventoryUI *ui = malloc(sizeof(InventoryUI));
     if (ui2 != NULL) {
         ui->ext = ui2->ext;
         ui->ecrit = ui2->ecrit;
     }
 
-    t_itemsStack **items = malloc(sizeof(t_itemsStack *) * nb);
+    t_itemsStack **items = malloc(sizeof(t_itemsStack *) * context->nbItem);
     for (int i = 0; i < c->inventaire->itemsStack->count; i++) {
         items[i] = (t_itemsStack *)getObject(c->inventaire->itemsStack, i);
     }
@@ -279,26 +279,26 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, int nb, 
 
     // Calculs initiaux (votre code original)
 
-    calculCasePlayer(&ui->elems->player_panel.rect, input, "Perso");
+    calculCasePlayer(&ui->elems->player_panel.rect, context->input, "Perso");
     ui->elems->player_panel.texture = c->entity.texture;
 
-    calculCaseSlots(&ui->elems->player_panel.rect, &ui->elems->caseArme.rect, input, "Perso", "arme");
-    calculCaseSlots(&ui->elems->caseArme.rect, &ui->elems->caseArmure.rect, input, "arme", "armure");
-    calculCaseSlots(&ui->elems->player_panel.rect, &ui->elems->CaseActivable1.rect, input, "Perso", "activable1");
-    calculCaseSlots(&ui->elems->CaseActivable1.rect, &ui->elems->caseActivable2.rect, input, "activable1", "activable2");
+    calculCaseSlots(&ui->elems->player_panel.rect, &ui->elems->caseArme.rect, context->input, "Perso", "arme");
+    calculCaseSlots(&ui->elems->caseArme.rect, &ui->elems->caseArmure.rect, context->input, "arme", "armure");
+    calculCaseSlots(&ui->elems->player_panel.rect, &ui->elems->CaseActivable1.rect, context->input, "Perso", "activable1");
+    calculCaseSlots(&ui->elems->CaseActivable1.rect, &ui->elems->caseActivable2.rect, context->input, "activable1", "activable2");
 
-    calculDescrStatsPlayer(&ui->elems->caseArme.rect, &ui->elems->CaseActivable1.rect, &ui->elems->player_panel.rect, &ui->elems->statsPlayer.rect, input);
-    calculInventaire(&ui->elems->inventory_panel.rect, &ui->elems->statsPlayer.rect, input);
-    calculStatsItem(&ui->elems->inventory_panel.rect, &ui->elems->statsItem.rect, input);
-    caculDescrItem(&ui->elems->statsItem.rect, &ui->elems->descrItem.rect, input);
-    calculEquiper(&ui->elems->statsItem.rect, &ui->elems->descrItem.rect, &ui->elems->equiper.rect, input);
+    calculDescrStatsPlayer(&ui->elems->caseArme.rect, &ui->elems->CaseActivable1.rect, &ui->elems->player_panel.rect, &ui->elems->statsPlayer.rect, context->input);
+    calculInventaire(&ui->elems->inventory_panel.rect, &ui->elems->statsPlayer.rect, context->input);
+    calculStatsItem(&ui->elems->inventory_panel.rect, &ui->elems->statsItem.rect, context->input);
+    caculDescrItem(&ui->elems->statsItem.rect, &ui->elems->descrItem.rect, context->input);
+    calculEquiper(&ui->elems->statsItem.rect, &ui->elems->descrItem.rect, &ui->elems->equiper.rect, context->input);
 
     // Initialisation slots (votre code original)
     ui->elems->inventory_slots = malloc(ui->nbItems * sizeof(UI_Element));
     calculerItem(&ui->elems->inventory_slots[0].rect, ui->elems->inventory_panel.rect,
-                 &ui->elems->inventory_panel.rect, 0, 0, input);
+                 &ui->elems->inventory_panel.rect, 0, 0, context->input);
     if (ui2 == NULL) {
-        ui->elems->inventory_slots[0].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[0].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[0]->definition, renderer, input)));
+        ui->elems->inventory_slots[0].button = createButton(createText(context->renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[0].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[0]->definition, context->renderer, context->input)));
         ui->elems->inventory_slots[0].texture = items[0]->definition->texture;
     } else {
         ui->elems->inventory_slots[0].button = ui2->elems->inventory_slots[0].button;
@@ -306,9 +306,9 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, int nb, 
     }
     int i, j;
     for (i = 1, j = 1; i < ui->nbItems; j++, i++) {
-        calculerItem(&ui->elems->inventory_slots[i].rect, ui->elems->inventory_panel.rect, &ui->elems->inventory_slots[i - 1].rect, i, j, input);
+        calculerItem(&ui->elems->inventory_slots[i].rect, ui->elems->inventory_panel.rect, &ui->elems->inventory_slots[i - 1].rect, i, j, context->input);
         if (ui2 == NULL) {
-            ui->elems->inventory_slots[i].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[i].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[i]->definition, renderer, input)));
+            ui->elems->inventory_slots[i].button = createButton(createText(context->renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[i].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[i]->definition, context->renderer, context->input)));
             ui->elems->inventory_slots[i].texture = items[i]->definition->texture;
         } else {
             ui->elems->inventory_slots[i].button = ui2->elems->inventory_slots[i].button;
@@ -348,35 +348,35 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, int nb, 
     ui->ecrit->color_txt.r = 255;
 
     if (ui2 == NULL) {
-        t_text *t = createText(renderer, "EQUIPER", ui->ext->item_font, (SDL_Color){0, 0, 0});
-        ui->elems->equiper.button = createButton(t, (SDL_Color){255, 128, 0}, (SDL_Color){255, 150, 0}, ui->elems->equiper.rect, creerFonction(equiperSlotWrapper, FONCTION_PARAMS(ui, &ui->itemclique, renderer, input)));
+        t_text *t = createText(context->renderer, "EQUIPER", ui->ext->item_font, (SDL_Color){0, 0, 0});
+        ui->elems->equiper.button = createButton(t, (SDL_Color){255, 128, 0}, (SDL_Color){255, 150, 0}, ui->elems->equiper.rect, creerFonction(equiperSlotWrapper, FONCTION_PARAMS(ui, &ui->itemclique, context->renderer, context->input)));
     } else {
         ui->elems->equiper.button = ui2->elems->equiper.button;
         ui->elems->equiper.button->rect = ui->elems->equiper.rect;
     }
     // Initialisation des textes statsPlayer
     for (int i = 0; i < 4; i++) {
-        ui->ecrit->text_player[i] = createText(renderer, ui->ecrit->nom_txt_player[i], ui->ext->item_font, ui->ecrit->color_txt);
+        ui->ecrit->text_player[i] = createText(context->renderer, ui->ecrit->nom_txt_player[i], ui->ext->item_font, ui->ecrit->color_txt);
     }
 
     // Positionnement et affichage des textes
 
-    ui->ecrit->text_player[0]->rect.x = ui->elems->statsPlayer.rect.x + input->windowWidth * 0.01;
-    ui->ecrit->text_player[0]->rect.y = ui->elems->statsPlayer.rect.y + input->windowHeight * 0.01;
+    ui->ecrit->text_player[0]->rect.x = ui->elems->statsPlayer.rect.x + context->input->windowWidth * 0.01;
+    ui->ecrit->text_player[0]->rect.y = ui->elems->statsPlayer.rect.y + context->input->windowHeight * 0.01;
 
     // Initialisation des textes statsItem
 
     for (int i = 0; i < 4; i++) {
-        ui->ecrit->text_item[i] = createText(renderer, ui->ecrit->nom_txt_item[i], ui->ext->descr_font, ui->ecrit->color_txt);
+        ui->ecrit->text_item[i] = createText(context->renderer, ui->ecrit->nom_txt_item[i], ui->ext->descr_font, ui->ecrit->color_txt);
     }
 
     // Positionnement et affichage des textes
-    ui->ecrit->text_item[0]->rect.x = ui->elems->statsItem.rect.x + input->windowWidth * 0.01;
-    ui->ecrit->text_item[0]->rect.y = ui->elems->statsItem.rect.y + input->windowHeight * 0.01;
-    ui->ecrit->text_descr = createText(renderer, "Description :", ui->ext->descr_font, ui->ecrit->color_txt);
+    ui->ecrit->text_item[0]->rect.x = ui->elems->statsItem.rect.x + context->input->windowWidth * 0.01;
+    ui->ecrit->text_item[0]->rect.y = ui->elems->statsItem.rect.y + context->input->windowHeight * 0.01;
+    ui->ecrit->text_descr = createText(context->renderer, "Description :", ui->ext->descr_font, ui->ecrit->color_txt);
 
     ui->ecrit->text_descr->rect.x = ui->elems->descrItem.rect.x + ui->elems->descrItem.rect.x * 0.025;
-    ui->ecrit->text_descr->rect.y = ui->elems->descrItem.rect.y + input->windowHeight * 0.005;
+    ui->ecrit->text_descr->rect.y = ui->elems->descrItem.rect.y + context->input->windowHeight * 0.005;
 
     ui2 = ui;
 
@@ -443,7 +443,7 @@ void updateAjoutObjet(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
         ui->elems->inventory_slots[newIndex].texture = stack->definition->texture;
 
         ui->j++;
-        
+
         int totalContentHeight = 0;
         for (int i = 0; i < ui->nbItems; i++) {
             int slotBottom = ui->elems->inventory_slots[i].rect.y + ui->elems->inventory_slots[i].rect.h;
@@ -500,7 +500,7 @@ void inventoryUI_Render(InventoryUI *ui, t_context *context) {
 
         // Récupérer la quantité de l'item
         t_itemsStack *stack = getObject(ui->ext->character->inventaire->itemsStack, i);
-            renderStackCount(context->renderer, ui->ext->item_font, stack->quantite, dest);
+        renderStackCount(context->renderer, ui->ext->item_font, stack->quantite, dest);
     }
     SDL_RenderSetClipRect(context->renderer, NULL);
 
@@ -526,7 +526,7 @@ void inventoryUI_Update(InventoryUI *ui, t_context *context) {
         int lastScroll = ui->scrollY;
 
         // Réinitialiser l'UI
-        inventoryUI_Init(ui, context->renderer, ui->nbItems, ui->ext->character, context->input);
+        inventoryUI_Init(ui, ui->ext->character, context);
 
         // Restaurer le scroll dans les nouvelles limites
         ui->scrollY = lastScroll;

@@ -122,6 +122,22 @@ typedef struct {
     t_item* itemclique;  ///< Item actuellement sélectionné
 } InventoryUI;
 
+void inventoryUI_Update(InventoryUI *ui, t_context *context);
+void inventoryUI_Render(InventoryUI *ui, t_context *context);
+void update(t_input *input, InventoryUI *ui);
+void updateScroll(InventoryUI *ui, t_input *input);
+void creerDescrWrapper(t_fonctionParam *f);
+
+void calculCasePlayer(SDL_Rect *casePlayer, t_input *input, char *nom);
+void calculCaseSlots(SDL_Rect *comp, SDL_Rect *slot, t_input *input, char *nom1, char *nom2);
+void calculDescrStatsPlayer(SDL_Rect *slotDroit, SDL_Rect *slotBas, SDL_Rect *casePlayer, SDL_Rect *caseStatsPlayer, t_input *input);
+void calculInventaire(SDL_Rect *Inv, SDL_Rect *statsPlayer, t_input *input);
+void calculStatsItem(SDL_Rect *inv, SDL_Rect *statsItem, t_input *input);
+void caculDescrItem(SDL_Rect *statsItem, SDL_Rect *descrItem, t_input *input);
+
+void freeInv(void *elt);
+
+void handleInputInventaire(t_input *input, t_joueur *player, t_sceneController *sceneController);
 // Fonctions d'initialisation et de mise à jour
 /**
  * @brief Initialise l'interface d'inventaire
@@ -132,7 +148,7 @@ typedef struct {
  * @param input Gestionnaire d'entrées
  * @return Nouvelle interface initialisée
  */
-InventoryUI* inventoryUI_Init(InventoryUI* ui2, SDL_Renderer* renderer, int nb, t_joueur* c, t_input* input);
+InventoryUI* inventoryUI_Init(InventoryUI* ui2, int nb, t_joueur* c,t_context*);
 
 /**
  * @brief Met à jour l'interface
