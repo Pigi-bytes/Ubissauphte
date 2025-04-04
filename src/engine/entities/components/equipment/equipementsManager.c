@@ -390,7 +390,6 @@ void ajoutVie(t_fonctionParam* f) {
         }
     } else {
         fprintf(stderr, "Erreur: Quantité de potion insuffisante.\n");
-        printf("potion vide zebi");
         return;
     }
 }
@@ -452,8 +451,6 @@ void equipementRecalculerStats(t_joueur** c) {
 
 void equiperEquipement(t_joueur** c, int inventoryIndex, equipementSlotType slot) {
     int i;
-
-    printf("SLOT : %d \n", slot);
 
     t_itemsStack* itemStack = (t_itemsStack*)getObject((*c)->inventaire->itemsStack, inventoryIndex);
     if (itemStack == NULL || itemStack->definition == NULL) {
@@ -521,7 +518,7 @@ void itemFreeFunc(void* data) {
 }
 
 void inventory_print(t_inventaire* inv) {
-    printf("Inventory \n");
+
     for (int i = 0; i < inv->itemsStack->count; i++) {
         t_itemsStack* Satck = (t_itemsStack*)getObject(inv->itemsStack, i);
         printf("Quantité : %d\n", Satck->quantite);

@@ -63,7 +63,6 @@ void replaceTileWithEntity(t_tile* tile, int x, int y, t_tileEntity* entity, t_o
     entity->entity.displayRect.x = tileX;
     entity->entity.displayRect.y = tileY;
 
-    printf("Placing entity at tile (%d,%d) => coords (%d,%d) with circle collision\n", x, y, tileX, tileY);
 
     addObject(entities, entity, entityTypeId);
 }
@@ -125,7 +124,6 @@ void processSpecialTiles(t_grid* grid, t_tileset* tileset, t_objectManager* enti
             }
         }
     }
-    printf("Summary: Placed %d spikes, %d chests, and %d barrels\n", spikeCount, chestCount, barrelCount);
 }
 
 void renderTileEntityWrapper(t_fonctionParam* f) {

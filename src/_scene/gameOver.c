@@ -15,7 +15,6 @@ t_scene* CreateGameOver(t_context* context) {
 
     srand((unsigned int)time(NULL));
     int indexAleatoire = rand() % nombrePhrases;
-    printf("%s\n", phrases[indexAleatoire]);
 
     t_text* text = createText(context->renderer, "GameOver", context->font, RED);
     text->rect = creerRect(0.1f, 0.25f, 0.8f, 0.2f);

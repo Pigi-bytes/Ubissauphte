@@ -73,8 +73,8 @@ t_grid* loadMap(char* filename, t_tileset* tileset) {
         return NULL;
     }
 
-    char line[MAX_LINE_LENGTH];
-    fgets(line, MAX_LINE_LENGTH, file);
+    char line[MAX_LINE_LENGTH_TILES];
+    fgets(line, MAX_LINE_LENGTH_TILES, file);
 
     int width, height, depth;
     if (sscanf(line, "%dx%dx%d", &width, &height, &depth) != 3) {
@@ -88,7 +88,7 @@ t_grid* loadMap(char* filename, t_tileset* tileset) {
     int coucheActuelle = 0;
     int y = 0;
 
-    while (fgets(line, MAX_LINE_LENGTH, file) && coucheActuelle < depth) {
+    while (fgets(line, MAX_LINE_LENGTH_TILES, file) && coucheActuelle < depth) {
         // Nettoyer la ligne
         line[strcspn(line, "\n")] = '\0';
 

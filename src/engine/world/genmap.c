@@ -28,7 +28,6 @@ void connectRoom(t_salle* origineRoom, t_salle* destinationRoom, int dir) {
 t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
     int seed = time(NULL);
     srand(seed);
-    printf("Seed : %d\n", seed);
 
     if (numberRoom < 3) {
         printf("Besoin d'au moins 3 salles.");
@@ -188,10 +187,7 @@ t_salle** genMap(int numberRoom, SDL_Rect* roomCoords) {
     }
 
     // Debug: affiche toutes les coordonnées
-    printf("Nb salles : %d\n", numberRoom);
-    for (int i = 0; i < numberRoom; i++) {
-        printf("X[%d] et Y[%d] et ID : %d\n", roomCoords[i].x, roomCoords[i].y, roomList[i]->ID);
-    }
+
 
     return roomList;
 }

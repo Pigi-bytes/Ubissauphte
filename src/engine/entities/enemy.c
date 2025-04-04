@@ -7,7 +7,7 @@ void onEnemyDeath(t_context* context, void* entity) {
 
     enemy->entity.useCircleCollision = SDL_FALSE;
 
-    printf("Ennemi détruit !\n");
+
     if (enemy->lastDamagedBy != NULL) {
         addPlayerXP(enemy->lastDamagedBy, enemy->xpReward);
     }

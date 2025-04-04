@@ -37,17 +37,14 @@ void updateMerchant(t_tileEntity* entity, t_context* context, t_salle* salle, t_
             SDL_bool interactKeyIsPressed = keyPressOnce(context->input, player->control->interact);
 
             if (interactKeyIsPressed && !merchant->interactKeyPressed) {
-                printf("*Parle au forgeron*\n");
                 if (player->gold >= merchant->prix) {
                     jouerSFX("assets/barrel.wav", SDL_MIX_MAXVOLUME, 0, context->audioManager);
                     player->gold -= merchant->prix;
                     if (merchant->randomItem) {
                         inventaireAjoutObjet(player->inventaire, merchant->randomItem, 1);
-                        printf("Le marchand vous offre : %s\n", merchant->randomItem->name);
                     } 
                     equipementRecalculerStats(&player);
                 }else{
-                    printf("Vous n'avez pas les sous\n");
                 }
 
                 // changer scène ici

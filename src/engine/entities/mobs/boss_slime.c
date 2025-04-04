@@ -38,7 +38,6 @@ void bossSlimeDealDamageToPlayer(t_boss_slime* bossSlime, t_joueur* player, t_co
     SDL_FPoint position = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
     emitImpactParticles(bossSlime->particles, position, (SDL_FPoint){0, 0}, player->entity.collisionCircle.radius, bossSlime->particleColor);
 
-    printf("BOSS SLIME: CONTACT ATTACK DEALS %d DAMAGE TO PLAYER!\n", damage);
 }
 
 void renderBossSlime(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
@@ -63,7 +62,6 @@ void renderBossSlime(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
 
 void onBossSlimeDeath(t_context* context, void* entity) {
     t_enemy* enemy = (t_enemy*)entity;
-    printf("BOSS SLIME: LE ROI EST MORT!\n");
     t_boss_slime* bossSlime = (t_boss_slime*)enemy;
     float finalBlastRadius = bossSlime->detectionRange.radius;
     Debug_PushCircle(enemy->entity.collisionCircle.x, enemy->entity.collisionCircle.y, finalBlastRadius, SDL_COLOR_RED);
@@ -184,7 +182,6 @@ void checkPhaseTransitions(t_boss_slime* bossSlime) {
     SDL_FPoint position = {bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y};
 
     if (healthPercentage <= bossSlime->phase2HealthThreshold && bossSlime->currentPhase == 1) {
-        printf("BOSS SLIME: ENTERING ENRAGED PHASE! WATCH OUT!\n");
         bossSlime->currentPhase = 2;
         bossSlime->isPhaseTransition = SDL_TRUE;
 
@@ -196,7 +193,6 @@ void checkPhaseTransitions(t_boss_slime* bossSlime) {
         bossSlime->jumpForce *= 1.2f;
         bossSlime->jumpCooldownDuration *= 0.8f;
     } else if (healthPercentage <= bossSlime->phase3HealthThreshold && bossSlime->currentPhase == 2) {
-        printf("BOSS SLIME: ENTERING DESPERATE PHASE! NOWHERE TO HIDE!\n");
         bossSlime->currentPhase = 3;
         bossSlime->isPhaseTransition = SDL_TRUE;
 
@@ -223,10 +219,6 @@ void performGroundPound(t_boss_slime* bossSlime, t_entity* player, t_grid* grid)
     const float GROUND_POUND_RECOVERY_TIME = 2.2f;   // Temps de récupération
 
     float elapsedTime = getDeltaTimer(bossSlime->specialAttackTimer);
-
-    if (elapsedTime < 0.1f) {
-        printf("BOSS SLIME: GROUND POUND INCOMING!\n");
-    }
 
     SDL_FPoint position = {bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y};
     float radius = bossSlime->base.entity.collisionCircle.radius;
@@ -462,7 +454,6 @@ void performGroundPound(t_boss_slime* bossSlime, t_entity* player, t_grid* grid)
         float growFactor = (elapsedTime - GROUND_POUND_AIR_TIME) / (GROUND_POUND_IMPACT_TIME - GROUND_POUND_AIR_TIME);
         float impactRadius = bossSlime->detectionRange.radius * 0.5f * growFactor;
         Debug_PushCircle(position.x, position.y, impactRadius, SDL_COLOR_RED);
-        printf("BOSS SLIME: PREPARING GROUND SLAM!\n");
     }
     // Phase de l'onde de choc - reste aplati pendant l'émission de l'onde
     else if (elapsedTime < GROUND_POUND_SHOCKWAVE_TIME) {
@@ -507,7 +498,6 @@ void performGroundPound(t_boss_slime* bossSlime, t_entity* player, t_grid* grid)
         // Animation de retour à l'état normal
         setAnimation(bossSlime->base.entity.animationController, "idle");
 
-        printf("BOSS SLIME: RECOVERING FROM GROUND POUND...\n");
 
         // Effet de rebond léger après l'attaque
         float recoveryTime = elapsedTime - GROUND_POUND_SHOCKWAVE_TIME;
@@ -563,7 +553,6 @@ void performChargeAttack(t_boss_slime* bossSlime, t_entity* player, t_grid* grid
     const float CHARGE_RECOVERY_TIME = 2.8f;  // Temps de récupération
 
     if (elapsedTime < 0.1f) {
-        printf("BOSS SLIME: PREPARING CHARGE ATTACK!\n");
         hasFixedDirection = 0;
     }
 
@@ -639,7 +628,7 @@ void performChargeAttack(t_boss_slime* bossSlime, t_entity* player, t_grid* grid
         // Animation en l'air: étirement (frame 3) pour se préparer à la charge
         setAnimation(bossSlime->base.entity.animationController, "midAire");
 
-        printf("BOSS SLIME: CHAAARGE!\n");
+
 
         // Donner un effet de saut en l'air avant la charge
         if (elapsedTime < (CHARGE_PREP_TIME + 0.15f)) {
@@ -690,7 +679,6 @@ void performChargeAttack(t_boss_slime* bossSlime, t_entity* player, t_grid* grid
         // Animation landing - montre le boss qui s'aplatit à l'impact puis se reforme
         setAnimation(bossSlime->base.entity.animationController, "landing");
 
-        printf("BOSS SLIME: TIRED AFTER CHARGE...\n");
 
         // Ralentissement prononcé via la vélocité
         bossSlime->base.entity.physics.velocity.x *= 0.7f;
@@ -701,7 +689,6 @@ void performChargeAttack(t_boss_slime* bossSlime, t_entity* player, t_grid* grid
     }
     // Fin de l'attaque
     else if (elapsedTime >= CHARGE_RECOVERY_TIME) {
-        printf("BOSS SLIME: RECOVERED FROM CHARGE\n");
 
         // Retour à l'état approprié selon la phase
         if (bossSlime->currentPhase == 2)
@@ -742,13 +729,11 @@ void handleBossChasePlayerState(t_boss_slime* bossSlime, t_entity* player, t_gri
     if (getDeltaTimer(bossSlime->specialAttackTimer) >= bossSlime->specialAttackCooldown) {
         int attackChoice = rand() % 10;
         if (bossSlime->currentPhase >= 2 && attackChoice < 4) {
-            printf("BOSS SLIME: PREPARING GROUND POUND ATTACK!\n");
             bossSlime->state = BOSS_SLIME_GROUND_POUND;
             resetDeltaTimer(bossSlime->specialAttackTimer);
             startDeltaTimer(bossSlime->specialAttackTimer);
             return;
         } else if (bossSlime->currentPhase >= 3 && attackChoice < 7) {
-            printf("BOSS SLIME: PREPARING CHARGE ATTACK!\n");
             bossSlime->state = BOSS_SLIME_CHARGE_ATTACK;
             resetDeltaTimer(bossSlime->specialAttackTimer);
             startDeltaTimer(bossSlime->specialAttackTimer);

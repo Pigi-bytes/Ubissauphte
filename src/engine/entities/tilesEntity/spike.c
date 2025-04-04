@@ -145,7 +145,6 @@ void updateSpike(t_tileEntity* entity, t_context* context, t_salle* salle, t_obj
         if (!enemiesRemaining) {
             spike->isActive = SDL_FALSE;
             entity->entity.useCircleCollision = SDL_FALSE;
-            printf("Les pièges se désactivent, Vous pouvez passer à travers.\n");
             setAnimation(spike->base.entity.animationController, "bas");
         }
     }
@@ -156,10 +155,8 @@ void updateSpike(t_tileEntity* entity, t_context* context, t_salle* salle, t_obj
 
     if (playerTouchingNow) {
         if (spike->isActive) {
-            printf("Spike damaged player for %.1f points\n", spike->damage);
             applyDamage(&player->health, 10, &player->entity, NULL);
         } else if (!spike->messageShown) {
-            printf("*WHOOSH* Teleportation \n");
             spike->messageShown = SDL_TRUE;
 
             // Téléportation vers la salle liée

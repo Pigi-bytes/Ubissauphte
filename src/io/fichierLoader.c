@@ -47,10 +47,10 @@ t_fichier *chargerFichier(char *filename) {
     fichier->blockManager = initObjectManager(registre);
 
     t_blockData *currentBlock = NULL;
-    char line[MAX_LINE_LENGTH];
+    char line[MAX_LINE_LENGTH_FILE];
 
     // Lecture du fichier
-    while (fgets(line, MAX_LINE_LENGTH, file)) {
+    while (fgets(line, MAX_LINE_LENGTH_FILE, file)) {
         line[strcspn(line, "\n")] = 0;
         // Fin du block en cas de ligne vide puis stockage dans la zone prévu pour
         if (strlen(line) == 0) {

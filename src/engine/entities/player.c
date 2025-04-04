@@ -589,7 +589,6 @@ void freePlayer(void* object) {
 void addPlayerXP(t_joueur* player, int xpAmount) {
     player->xp += xpAmount;
     checkAndProcessLevelUp(player);
-    printf("Joueur: +%d XP (Total: %d/%d)\n", xpAmount, player->xp, player->xpToNextLevel);
 }
 
 float getPlayerXPProgress(t_joueur* player) {
@@ -608,7 +607,6 @@ SDL_bool checkAndProcessLevelUp(t_joueur* player) {
 
     player->xpToNextLevel = (int)(player->xpToNextLevel * 1.2f);
 
-    printf("Player leveled up to level %d!\n", player->level);
 
     if (player->xp >= player->xpToNextLevel) {
         return checkAndProcessLevelUp(player);  // Récursion pour gérer plusieurs level up d'un coup

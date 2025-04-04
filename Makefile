@@ -4,7 +4,7 @@ TARGET   = Ubissauphte
 # Configuration du compilateur
 #------------------------------------------------------------------------------
 CC       = gcc
-CFLAGS   = -Wall -g 
+CFLAGS   = -Wall -g -Wno-unused-variable
 LFLAGS   = -Wall -lSDL2 -lSDL2_ttf -lSDL2_mixer -lm
 
 #------------------------------------------------------------------------------

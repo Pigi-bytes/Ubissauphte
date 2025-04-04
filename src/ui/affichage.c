@@ -179,14 +179,11 @@ void equiperSlot(InventoryUI *ui, t_item **item, SDL_Renderer *renderer, t_input
     if (!ui->peutEquiper || (*item) == NULL || item == NULL)
         return;
 
-    printf("DEBUG: Trying to equip item: %s (ID: %d)\n", (*item)->name, (*item)->id);
 
     // Find the actual inventory index
     int actualIndex = findItemInventoryIndex(ui->ext->character->inventaire, *item);
-    printf("DEBUG: Item ID: %d, actual inventory index: %d\n", (*item)->id, actualIndex);
 
     if (actualIndex < 0) {
-        printf("ERROR: Item not found in inventory!\n");
         return;
     }
     if (ui->peutEquiper) {
@@ -205,10 +202,9 @@ void equiperSlot(InventoryUI *ui, t_item **item, SDL_Renderer *renderer, t_input
     }
     ui->peutEquiper = 0;
 
-    printf("DEBUG: Using actual inventory index: %d\n", actualIndex);
-    printf("DEBUG: Using arme->indice (previus): %d\n", (*ui).ext->character->currentWeapon->indice);
+
     equiperEquipement(&ui->ext->character, actualIndex, (*item)->validSlot[0]);
-    printf("DEBUG: Using arme->indice (now): %d\n", (*ui).ext->character->currentWeapon->indice);
+
 
     // Remplacer les références à baseStats par calculatedStats
     ui->ecrit->nom_txt_player[0] = createStatLine("Health Max : ", ui->ext->character->calculatedStats.healthMax.additive, ui->ext->character->calculatedStats.healthMax.multiplicative);
@@ -535,7 +531,6 @@ void inventoryUI_Update(InventoryUI *ui, t_context *context) {
 }
 
 void creerDescr(InventoryUI *ui, t_item *item, SDL_Renderer *renderer, t_input *input) {
-    printf("DEBUG: Selected item: %s (ID: %d)\n", item->name, item->id);
 
     char processedDesc[256];
     strcpy(processedDesc, item->description);

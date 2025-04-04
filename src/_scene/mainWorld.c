@@ -85,7 +85,7 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     int nbEnemis;
     switch (context->difficulty) {
         case EASY:
-            nbEnemis = 0;
+            nbEnemis = 7;
             break;
         case NORMAL:
             nbEnemis = 10;
@@ -103,18 +103,11 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
 
     t_enemy* enemy;
     for (int i = 0; i < nbEnemis; i++) {
-        enemy = createGhost((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, fantomTileSet, scene);
-        addObject(salle->entities, &enemy->entity, ENEMY);
-        placeOnRandomTile(*level, &enemy->entity, salle->entities);
-        ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);
-    }
-
-    for (int i = 0; i < 0; i++) {
-        enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 32, 32}, slimeTileSet, scene);
-        enemy->entity.physics.mass = 10;
-        enemy->health.currentHealth = 300;
-        enemy->health.maxHealth = 300;
-
+        if (rand() % 2 == 0) {
+            enemy = createGhost((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, fantomTileSet, scene);
+        } else {
+            enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, scene);
+        }
         addObject(salle->entities, &enemy->entity, ENEMY);
         placeOnRandomTile(*level, &enemy->entity, salle->entities);
         ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);

@@ -13,7 +13,6 @@ void onBarrelDestroy(t_context* context, void* entity) {
 
     if (barrel->lastDamagedBy != NULL) {
         barrel->lastDamagedBy->gold += barrel->goldReward;
-        printf("Barrel destroyed! Player gained %d gold\n", barrel->goldReward);
     }
 }
 

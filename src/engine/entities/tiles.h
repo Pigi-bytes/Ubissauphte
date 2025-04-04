@@ -20,7 +20,7 @@
  * @def MAX_LINE_LENGTH
  * @brief Longueur maximale d'une ligne lors de la lecture de fichiers de carte
  */
-#define MAX_LINE_LENGTH 2048
+#define MAX_LINE_LENGTH_TILES 2048
 
 /**
  * @struct t_tile

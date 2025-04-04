@@ -13,10 +13,10 @@
 #include "../utils/objectManager.h"
 
 /**
- * @def MAX_LINE_LENGTH
+ * @def MAX_LINE_LENGTH_FILE
  * @brief Taille maximal pour une ligne
  */
-#define MAX_LINE_LENGTH 100
+#define MAX_LINE_LENGTH_FILE 100
 
 /**
  * @struct t_pairData

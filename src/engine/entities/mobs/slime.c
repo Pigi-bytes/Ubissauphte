@@ -30,7 +30,7 @@ void onSlimeDeath(t_context* context, void* entity) {
 
     emitDeathParticles(slime->particles, position, radius, slime->particleColor);
 
-    printf("Slime détruit !\n");
+
     if (enemy->lastDamagedBy != NULL) {
         addPlayerXP(enemy->lastDamagedBy, enemy->xpReward);
     }
@@ -44,7 +44,6 @@ void slimeDealDamageToPlayer(t_slime* slime, t_joueur* player, t_context* contex
 
     SDL_FPoint position = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
     emitImpactParticles(slime->particles, position, (SDL_FPoint){0, 0}, player->entity.collisionCircle.radius, slime->particleColor);
-    printf("Le slime inflige %d dégâts au joueur !\n", damage);
 }
 
 void slimeTakeDamage(t_enemy* enemy, int damage, t_joueur* player, t_context* context, SDL_FPoint hitDirection) {

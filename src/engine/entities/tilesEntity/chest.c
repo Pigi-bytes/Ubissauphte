@@ -28,7 +28,6 @@ void updateChest(t_tileEntity* entity, t_context* context, t_salle* salle, t_obj
                 chest->isOpen = SDL_TRUE;
                 jouerSFX("assets/chestOpening.wav", SDL_MIX_MAXVOLUME, 0, context->audioManager);
                 setAnimation(chest->base.entity.animationController, "open");
-                printf("Coffre ouvert ! Vous avez trouvé un trésor aléatoire !\n");
             }
             chest->interactKeyPressed = interactKeyIsPressed;
         } else {
@@ -41,9 +40,7 @@ void updateChest(t_tileEntity* entity, t_context* context, t_salle* salle, t_obj
             t_item* randomItem = getItemByRarity(context->itemListe, context->nbItem, rarity);
             if (randomItem) {
                 inventaireAjoutObjet(player->inventaire, randomItem, 1);
-                printf("Vous avez obtenu: %s\n", randomItem->name);
             } else {
-                printf("Aucun objet trouvé dans le coffre.\n");
             }
             chest->dropGiven = SDL_TRUE;
         }

@@ -37,17 +37,14 @@ void updateWizard(t_tileEntity* entity, t_context* context, t_salle* salle, t_ob
             SDL_bool interactKeyIsPressed = keyPressOnce(context->input, player->control->interact);
 
             if (interactKeyIsPressed && !wizard->interactKeyPressed) {
-                printf("*Parle au forgeron*\n");
                 if (player->gold >= wizard->prix) {
                     jouerSFX("assets/barrel.wav", SDL_MIX_MAXVOLUME, 0, context->audioManager);
                     player->gold -= wizard->prix;
                     if (wizard->randomItem) {
                         inventaireAjoutObjet(player->inventaire, wizard->randomItem, 1);
-                        printf("Le sorcier vous offre : %s\n", wizard->randomItem->name);
                     } 
                     equipementRecalculerStats(&player);
                 }else{
-                    printf("Vous n'avez pas les sous\n");
                 }
 
                 // changer scène ici
