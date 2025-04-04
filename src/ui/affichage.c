@@ -157,16 +157,22 @@ char *createStatLine(const char *statLabel, float additive, float multiplicative
 void calculerItem(SDL_Rect *item, SDL_Rect inv, SDL_Rect *comp, int nb, int ind, t_input *input) {
     item->h = inv.h / 6;
     item->w = item->h;
-    if (ind != 0 && ind != 4)
-        item->x = comp->x + comp->w + input->windowWidth * 0.02;
-    else
+    
+    // Calcul de la ligne et de la colonne
+    int ligne = ind / 4;    // Division entière pour obtenir la ligne
+    int colonne = ind % 4;  // Modulo pour obtenir la colonne
+    
+    // Position X
+    if (colonne == 0)
         item->x = inv.x + input->windowWidth * 0.02;
-    if (ind == 0)
-        item->y = inv.y + input->windowHeight * 0.016;
-    else if (ind == 4)
-        item->y = comp->y + comp->h + input->windowHeight * 0.02;
     else
-        item->y = comp->y;
+        item->x = comp->x + comp->w + input->windowWidth * 0.02;
+    
+    // Position Y
+    if (ligne == 0)
+        item->y = inv.y + input->windowHeight * 0.016;
+    else
+        item->y = inv.y + input->windowHeight * 0.016 + ligne * (item->h + input->windowHeight * 0.02);
 }
 
 void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *input) {
@@ -178,7 +184,6 @@ void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *i
 void equiperSlot(InventoryUI *ui, t_item **item, SDL_Renderer *renderer, t_input *input) {
     if (!ui->peutEquiper || (*item) == NULL || item == NULL)
         return;
-
 
     // Find the actual inventory index
     int actualIndex = findItemInventoryIndex(ui->ext->character->inventaire, *item);
@@ -202,9 +207,7 @@ void equiperSlot(InventoryUI *ui, t_item **item, SDL_Renderer *renderer, t_input
     }
     ui->peutEquiper = 0;
 
-
     equiperEquipement(&ui->ext->character, actualIndex, (*item)->validSlot[0]);
-
 
     // Remplacer les références à baseStats par calculatedStats
     ui->ecrit->nom_txt_player[0] = createStatLine("Health Max : ", ui->ext->character->calculatedStats.healthMax.additive, ui->ext->character->calculatedStats.healthMax.multiplicative);
@@ -439,7 +442,7 @@ void updateAjoutObjet(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
         ui->elems->inventory_slots[newIndex].texture = stack->definition->texture;
 
         ui->j++;
-
+       
         int totalContentHeight = 0;
         for (int i = 0; i < ui->nbItems; i++) {
             int slotBottom = ui->elems->inventory_slots[i].rect.y + ui->elems->inventory_slots[i].rect.h;
@@ -531,7 +534,6 @@ void inventoryUI_Update(InventoryUI *ui, t_context *context) {
 }
 
 void creerDescr(InventoryUI *ui, t_item *item, SDL_Renderer *renderer, t_input *input) {
-
     char processedDesc[256];
     strcpy(processedDesc, item->description);
 
