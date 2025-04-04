@@ -1,7 +1,7 @@
 #include "mainMenu.h"
 
 void freeTexture(void* elt) {
-    free((SDL_Texture*)elt);
+    SDL_DestroyTexture((SDL_Texture*)elt);
 }
 
 void afficheImage(t_fonctionParam* fp) {
