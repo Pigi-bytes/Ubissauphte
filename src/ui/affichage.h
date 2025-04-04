@@ -4,6 +4,9 @@
 /**
  * @file affichage.h
  * @brief Gestionnaire de l'interface d'inventaire et d'équipement
+ *
+ * Ce module gère l'affichage et l'interaction avec l'inventaire du joueur.
+ * Il permet de visualiser, équiper et gérer les items ainsi que leurs statistiques.
  */
 
 #include <SDL2/SDL.h>
@@ -18,19 +21,14 @@
 #include "text.h"
 
 /**
- * @file affichage.h
- * @brief Gestionnaire de l'interface d'inventaire et d'équipement
- */
-
-/**
  * @def window_width
- * @brief Largeur par défaut de la fenêtre
+ * @brief Largeur par défaut de la fenêtre en pixels
  */
 #define window_width 1280
 
 /**
  * @def window_height
- * @brief Hauteur par défaut de la fenêtre
+ * @brief Hauteur par défaut de la fenêtre en pixels
  */
 #define window_height 960
 
@@ -40,25 +38,29 @@
  * @param x Valeur à contraindre
  * @param min Valeur minimale
  * @param max Valeur maximale
+ * @return Valeur contrainte entre min et max
  */
-#define CLAMP(x, min, max) ((x) < (min) ? (min) : ((x) > (max) ? (max) : (x)))
 
 /**
  * @struct UI_Element
  * @brief Élément de base de l'interface utilisateur
+ *
+ * Structure générique pour tout élément graphique de l'interface
  */
 typedef struct {
     SDL_Rect rect;         ///< Rectangle définissant la position et taille
     SDL_Texture* texture;  ///< Texture de l'élément
     TTF_Font* font;        ///< Police utilisée
     SDL_Color color;       ///< Couleur de l'élément
-    t_button* button;      ///< Bouton associé
+    t_button* button;      ///< Bouton associé si interactif
     char* text;            ///< Texte à afficher
 } UI_Element;
 
 /**
  * @struct t_extern
  * @brief Données externes nécessaires à l'interface
+ *
+ * Regroupe les références aux données du jeu et ressources partagées
  */
 typedef struct {
     t_joueur* character;   ///< Référence au joueur
@@ -69,96 +71,84 @@ typedef struct {
 
 /**
  * @struct t_ecritures
- * @brief Gestion des textes de l'interface
+ * @brief Gestionnaire des textes de l'interface
+ *
+ * Centralise tous les textes affichés dans l'interface
  */
 typedef struct {
-    t_text* text_player[7];   ///< Textes du joueur
-    t_text* text_item[7];     ///< Textes des items
-    t_text* text_descr;       ///< Texte de description
-    t_text* description[15];  ///< Lignes de description
+    t_text* text_player[7];   ///< Textes des statistiques du joueur
+    t_text* text_item[7];     ///< Textes des statistiques de l'item
+    t_text* text_descr;       ///< Titre de la description
+    t_text* description[15];  ///< Lignes de description de l'item
 
-    char* nom_txt_item[7];    ///< Noms des stats d'items
-    char* nom_txt_player[7];  ///< Noms des stats du joueur
-    char descr[50];           ///< Description temporaire
+    char* nom_txt_item[7];    ///< Labels des stats d'items
+    char* nom_txt_player[7];  ///< Labels des stats du joueur
+    char descr[50];           ///< Buffer de description temporaire
     int count_descr;          ///< Nombre de lignes de description
     SDL_Color color_txt;      ///< Couleur du texte
 } t_ecritures;
 
 /**
  * @struct t_elements
- * @brief Éléments graphiques de l'interface
+ * @brief Collection des éléments graphiques de l'interface
+ *
+ * Regroupe tous les éléments visuels composant l'interface
  */
 typedef struct {
-    UI_Element player_panel;      ///< Panneau du joueur
-    UI_Element caseArme;          ///< Slot d'arme
-    UI_Element caseArmure;        ///< Slot d'armure
-    UI_Element CaseActivable1;    ///< Premier slot activable
-    UI_Element caseActivable2;    ///< Second slot activable
-    UI_Element statsPlayer;       ///< Stats du joueur
-    UI_Element inventory_panel;   ///< Panneau d'inventaire
-    UI_Element statsItem;         ///< Stats de l'item
-    UI_Element descrItem;         ///< Description de l'item
-    UI_Element equiper;           ///< Bouton équiper
-    UI_Element* inventory_slots;  ///< Slots d'inventaire
+    UI_Element player_panel;      ///< Panneau d'informations du joueur
+    UI_Element caseArme;          ///< Emplacement d'arme
+    UI_Element caseArmure;        ///< Emplacement d'armure
+    UI_Element CaseActivable1;    ///< Premier emplacement d'objet activable
+    UI_Element caseActivable2;    ///< Second emplacement d'objet activable
+    UI_Element statsPlayer;       ///< Panneau des statistiques du joueur
+    UI_Element inventory_panel;   ///< Grille d'inventaire
+    UI_Element statsItem;         ///< Panneau des statistiques de l'item
+    UI_Element descrItem;         ///< Zone de description de l'item
+    UI_Element equiper;           ///< Bouton pour équiper l'item
+    UI_Element* inventory_slots;  ///< Tableau des emplacements d'inventaire
 } t_elements;
 
 /**
  * @struct InventoryUI
- * @brief Interface complète de l'inventaire
+ * @brief Structure principale de l'interface d'inventaire
+ *
+ * Coordonne tous les aspects de l'interface : affichage, état et interactions
  */
 typedef struct {
-    int nbItems;         ///< Nombre d'items
-    SDL_Color color;     ///< Couleur de l'interface
+    int nbItems;         ///< Nombre d'items dans l'inventaire
+    SDL_Color color;     ///< Couleur de base de l'interface
     t_elements* elems;   ///< Éléments graphiques
     t_extern* ext;       ///< Données externes
-    t_ecritures* ecrit;  ///< Textes et descriptions
+    t_ecritures* ecrit;  ///< Gestionnaire de textes
     int scrollY;         ///< Position de défilement vertical
-    int maxScrollY;      ///< Défilement maximum possible
-    int width;           ///< Largeur de l'interface
-    int height;          ///< Hauteur de l'interface
-    int peutEquiper;     ///< Flag d'équipement possible
-    int onSlot;          ///< Slot actuellement sélectionné
-    int j;               ///< Compteur temporaire
+    int maxScrollY;      ///< Limite de défilement
+    int width;           ///< Largeur actuelle de l'interface
+    int height;          ///< Hauteur actuelle de l'interface
+    int peutEquiper;     ///< Flag indiquant si l'équipement est possible
+    int onSlot;          ///< Index du slot sélectionné
+    int j;               ///< Index temporaire pour le calcul de position
     t_item* itemclique;  ///< Item actuellement sélectionné
 } InventoryUI;
 
-void inventoryUI_Update(InventoryUI* ui, t_context* context);
-void inventoryUI_Render(InventoryUI* ui, t_context* context);
-void update(t_input* input, InventoryUI* ui);
-void updateScroll(InventoryUI* ui, t_input* input);
-void creerDescrWrapper(t_fonctionParam* f);
-
-void calculCasePlayer(SDL_Rect* casePlayer, t_input* input, char* nom);
-void calculCaseSlots(SDL_Rect* comp, SDL_Rect* slot, t_input* input, char* nom1, char* nom2);
-void calculDescrStatsPlayer(SDL_Rect* slotDroit, SDL_Rect* slotBas, SDL_Rect* casePlayer, SDL_Rect* caseStatsPlayer, t_input* input);
-void calculInventaire(SDL_Rect* Inv, SDL_Rect* statsPlayer, t_input* input);
-void calculStatsItem(SDL_Rect* inv, SDL_Rect* statsItem, t_input* input);
-void caculDescrItem(SDL_Rect* statsItem, SDL_Rect* descrItem, t_input* input);
-
-void freeInv(void* elt);
-
-void handleInputInventaire(t_input* input, t_joueur* player, t_sceneController* sceneController);
-// Fonctions d'initialisation et de mise à jour
+// Fonctions d'initialisation et cycle de vie
 /**
- * @brief Initialise l'interface d'inventaire
+ * @brief Initialise ou met à jour l'interface d'inventaire
  * @param ui2 Interface existante à mettre à jour (NULL pour nouvelle)
- * @param renderer Renderer SDL
- * @param nb Nombre d'items
- * @param c Joueur
- * @param input Gestionnaire d'entrées
- * @return Nouvelle interface initialisée
+ * @param c Joueur propriétaire de l'inventaire
+ * @param context Contexte global du jeu
+ * @return Interface initialisée ou mise à jour
  */
 InventoryUI* inventoryUI_Init(InventoryUI* ui2, t_joueur* c, t_context* context);
 
 /**
- * @brief Met à jour l'interface
+ * @brief Met à jour la logique de l'interface
  * @param ui Interface à mettre à jour
  * @param context Contexte du jeu
  */
 void inventoryUI_Update(InventoryUI* ui, t_context* context);
 
 /**
- * @brief Affiche l'interface
+ * @brief Effectue le rendu de l'interface
  * @param ui Interface à afficher
  * @param context Contexte du jeu
  */
