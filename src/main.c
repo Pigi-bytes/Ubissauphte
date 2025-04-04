@@ -60,6 +60,7 @@ int main(int argc, char* argv[]) {
     context.currentLevel = NULL;
     context.nbLevel = 3;
     context.difficulty = EASY;
+    
 
     context.control = malloc(sizeof(t_control));
     context.control->up = SDL_SCANCODE_W;
@@ -71,7 +72,7 @@ int main(int argc, char* argv[]) {
     context.control->map = SDL_SCANCODE_P;
     context.control->interact = SDL_SCANCODE_E;
     context.control->inventaire = SDL_SCANCODE_I;
-
+    context.control->activable1 = SDL_SCANCODE_1;
     t_tileset* tileset = initTileset(context.renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
     t_tileset* playerTileSet = initTileset(context.renderer, 32, 32, 16, "assets/imgs/chevaliervisiereouverteidle12run34.bmp");
 

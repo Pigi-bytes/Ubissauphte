@@ -31,7 +31,7 @@ typedef struct {
     SDL_Scancode map;
     SDL_Scancode interact;
     SDL_Scancode inventaire;
-
+    SDL_Scancode activable1;
 } t_control;
 
 typedef struct {
