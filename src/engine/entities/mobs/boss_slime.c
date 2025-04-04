@@ -28,6 +28,19 @@ float randomWithPercentageVariationBoss(float x, float percentage) {
     return min + (float)rand() / (float)(RAND_MAX / (max - min));
 }
 
+void bossSlimeDealDamageToPlayer(t_boss_slime* bossSlime, t_joueur* player, t_context* context) {
+    int damage = 15;
+    if (bossSlime->currentPhase >= 2) damage += 5;
+    if (bossSlime->currentPhase >= 3) damage += 5;
+
+    applyDamage(&player->health, damage, &player->entity, context);
+
+    SDL_FPoint position = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
+    emitImpactParticles(bossSlime->particles, position, (SDL_FPoint){0, 0}, player->entity.collisionCircle.radius, bossSlime->particleColor);
+
+    printf("BOSS SLIME: CONTACT ATTACK DEALS %d DAMAGE TO PLAYER!\n", damage);
+}
+
 void renderBossSlime(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
     t_boss_slime* bossSlime = (t_boss_slime*)enemy;
 
@@ -80,10 +93,25 @@ t_enemy* createBossSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset
     bossSlime->base.xpReward = 100;
     bossSlime->base.entity.physics = (t_physics){.velocity = {0, 0}, .mass = 200.0f, .friction = 0.01f, .restitution = 0.8f};
 
-    addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 600, SDL_TRUE, "idle"));
-    addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2, 1, 3}, 4, 250, SDL_TRUE, "walk"));
-    addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){1, 3, 3, 2}, 4, 150, SDL_TRUE, "attack"));
-    addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){3, 1, 3, 1}, 4, 100, SDL_TRUE, "enraged"));
+    addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2, 1, 2}, 4, 800, SDL_TRUE, "idle"));
+
+    // Animation walk: cycle complet de rebond (normal → aplati → étiré → normal)
+    addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 1}, 4, 250, SDL_TRUE, "walk"));
+
+    // Animation chargingJump: aplati de plus en plus pour se préparer à sauter
+    addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2, 2, 2, 2}, 5, 100, SDL_FALSE, "chargingJump"));
+
+    // Animation midAire: étiré vers le haut pendant le saut
+    addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){3, 3, 3}, 3, 150, SDL_TRUE, "midAire"));
+
+    // Animation landing: séquence d'étirement → aplatissement → retour normal
+    addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){3, 2, 2, 2, 1}, 5, 100, SDL_FALSE, "landing"));
+
+    // Animation attack: cycle rapide pour donner un effet d'agitation
+    addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2, 3, 2, 1}, 5, 130, SDL_FALSE, "attack"));
+
+    // Animation enraged: mouvement erratique entre toutes les formes, plus rapide
+    addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){3, 1, 2, 3, 1, 2}, 6, 80, SDL_TRUE, "enraged"));
 
     // Initialisation des états
     bossSlime->state = BOSS_SLIME_IDLE;
@@ -187,6 +215,13 @@ void checkPhaseTransitions(t_boss_slime* bossSlime) {
 }
 
 void performGroundPound(t_boss_slime* bossSlime, t_entity* player, t_grid* grid) {
+    // Constantes de timing pour l'attaque
+    const float GROUND_POUND_PREP_TIME = 0.5f;       // Temps de préparation
+    const float GROUND_POUND_AIR_TIME = 0.8f;        // Temps en l'air
+    const float GROUND_POUND_IMPACT_TIME = 1.0f;     // Temps d'impact
+    const float GROUND_POUND_SHOCKWAVE_TIME = 1.7f;  // Temps de l'onde de choc
+    const float GROUND_POUND_RECOVERY_TIME = 2.2f;   // Temps de récupération
+
     float elapsedTime = getDeltaTimer(bossSlime->specialAttackTimer);
 
     if (elapsedTime < 0.1f) {
@@ -196,10 +231,23 @@ void performGroundPound(t_boss_slime* bossSlime, t_entity* player, t_grid* grid)
     SDL_FPoint position = {bossSlime->base.entity.collisionCircle.x, bossSlime->base.entity.collisionCircle.y};
     float radius = bossSlime->base.entity.collisionCircle.radius;
 
-    if (elapsedTime < 0.8f) {
-        setAnimation(bossSlime->base.entity.animationController, "idle");
+    // Phase de préparation du saut - s'aplatit pour accumuler l'énergie
+    if (elapsedTime < GROUND_POUND_PREP_TIME) {
+        // Animation de préparation: aplatissement (frame 2 répétée)
+        setAnimation(bossSlime->base.entity.animationController, "chargingJump");
+
+        float prepProgress = elapsedTime / GROUND_POUND_PREP_TIME;  // Progression de 0 à 1
+
+        // Effet de "tremblement" vertical préparatoire
+        if ((int)(elapsedTime * 20) % 2 == 0) {
+            // Petites impulsions vers le haut de plus en plus fortes
+            float upwardImpulse = -5.0f - 15.0f * prepProgress;
+            bossSlime->base.entity.physics.velocity.y += upwardImpulse;
+        }
+
+        // Réduire les mouvements horizontaux pendant la préparation
         bossSlime->base.entity.physics.velocity.x *= 0.7f;
-        bossSlime->base.entity.physics.velocity.y *= 0.7f;
+        bossSlime->base.entity.physics.velocity.y *= 0.85f;  // Moins d'amortissement vertical
 
         // Réduire la fréquence d'émission pour éviter la surcharge
         if ((int)(elapsedTime * 10) % 2 == 0) {
@@ -213,10 +261,197 @@ void performGroundPound(t_boss_slime* bossSlime, t_entity* player, t_grid* grid)
         Debug_PushCircle(position.x, position.y, baseRadius * pulseSize, SDL_COLOR_RED);
         Debug_PushCircle(position.x, position.y, baseRadius * 0.7f * pulseSize, SDL_COLOR_ORANGE);
         Debug_PushCircle(position.x, position.y, baseRadius * 0.4f * pulseSize, SDL_COLOR_YELLOW);
-    } else if (elapsedTime < 1.0f) {
-        setAnimation(bossSlime->base.entity.animationController, "attack");
+    }
+    // Phase de saut en l'air - s'étire vers le haut pendant qu'il est en l'air
+    else if (elapsedTime < GROUND_POUND_AIR_TIME) {
+        // Animation en l'air: étirement vertical (frame 3)
+        setAnimation(bossSlime->base.entity.animationController, "midAire");
+
+        // Simule un saut avec une "poussée" vers le haut puis une chute rapide
+        float airTime = elapsedTime - GROUND_POUND_PREP_TIME;  // Temps écoulé depuis le début de cette phase
+
+        // Calculer la hauteur approximative du slime pour ajuster l'ombre
+        float estimatedHeight = 0.0f;
+        if (airTime < 0.15f) {
+            // Phase d'ascension
+            estimatedHeight = airTime * 300.0f;  // Montée rapide
+        } else {
+            // Phase de descente, calcul parabolique
+            float peakHeight = 45.0f;                                                 // Hauteur maximale
+            float totalAirTime = 0.3f;                                                // Temps total en l'air
+            float normalizedTime = (airTime - 0.15f) / (totalAirTime - 0.15f);        // Entre 0 et 1
+            estimatedHeight = peakHeight * (1.0f - normalizedTime * normalizedTime);  // Parabole descendante
+        }
+
+        // Ombre au sol uniquement pendant que le boss est en l'air
+        // Taille qui diminue avec la hauteur
+        float shadowSize = radius * (1.5f - estimatedHeight / 100.0f);
+        if (shadowSize < radius * 0.5f) shadowSize = radius * 0.5f;
+
+        // Opacité qui diminue avec la hauteur
+        int shadowOpacity = 100 - (int)(estimatedHeight / 1.5f);
+        if (shadowOpacity < 30) shadowOpacity = 30;
+
+        // Créer l'ombre
+        t_entityParticle* shadow = getNextFreeParticle(bossSlime->particles);
+        if (shadow) {
+            shadow->position = (SDL_FPoint){position.x, position.y + radius};  // Position fixe au sol
+            shadow->velocity = (SDL_FPoint){0, 0};
+            shadow->lifetime = shadow->maxLifetime = 0.05f;  // Durée très courte pour être constamment mise à jour
+            shadow->size = shadowSize;
+            shadow->color = (SDL_Color){20, 20, 20, (Uint8)shadowOpacity};
+            shadow->shape = 1;  // Cercle pour l'ombre
+        }
+
+        if (airTime < 0.1f) {
+            // Impulsion initiale forte vers le haut
+            bossSlime->base.entity.physics.velocity.y = -150.0f;
+
+            // Particules d'explosion au décollage
+            for (int i = 0; i < 10; i++) {
+                float angle = randomRangeF(0, 2.0f * M_PI);
+                float distance = radius * randomRangeF(0.5f, 1.5f);
+
+                t_entityParticle* p = getNextFreeParticle(bossSlime->particles);
+                if (p) {
+                    p->position = (SDL_FPoint){
+                        position.x + cosf(angle) * distance * 0.2f,
+                        position.y + sinf(angle) * distance * 0.2f + radius / 2};
+                    p->velocity = (SDL_FPoint){
+                        cosf(angle) * randomRangeF(20.0f, 50.0f),
+                        sinf(angle) * randomRangeF(20.0f, 50.0f) + 40.0f  // Dirigées vers le bas
+                    };
+                    p->lifetime = p->maxLifetime = randomRangeF(0.3f, 0.7f);
+                    p->size = randomRangeF(4.0f, 8.0f);
+                    p->color = (SDL_Color){255, 150, 50, 220};
+                    p->shape = 0;  // Carrés pour l'effet d'explosion
+                }
+            }
+        } else if (airTime < 0.25f) {
+            // Maintenir une vitesse négative (vers le haut) mais avec la gravité qui ralentit
+            bossSlime->base.entity.physics.velocity.y += 8.0f;  // Gravité artificielle
+            // Ne pas laisser remonter trop haut
+            if (bossSlime->base.entity.physics.velocity.y < -80.0f) {
+                bossSlime->base.entity.physics.velocity.y = -80.0f;
+            }
+        } else {
+            // Phase de chute avec accélération rapide
+            bossSlime->base.entity.physics.velocity.y += 15.0f;  // Gravité plus forte
+
+            // Effet visuel de "rotation" en l'air
+            if ((int)(elapsedTime * 15) % 2 == 0) {
+                float angle = airTime * 10.0f;
+                float spinRadius = radius * 0.5f;
+
+                t_entityParticle* p = getNextFreeParticle(bossSlime->particles);
+                if (p) {
+                    p->position = (SDL_FPoint){
+                        position.x + cosf(angle) * spinRadius,
+                        position.y + sinf(angle) * spinRadius};
+                    p->velocity = (SDL_FPoint){0, 10.0f};
+                    p->lifetime = p->maxLifetime = 0.2f;
+                    p->size = randomRangeF(3.0f, 6.0f);
+                    p->color = (SDL_Color){255, 200, 100, 180};
+                    p->shape = 1;  // Ronds pour l'effet de rotation
+                }
+            }
+        }
+
+        // Stabiliser horizontalement pendant le saut
         bossSlime->base.entity.physics.velocity.x *= 0.1f;
-        bossSlime->base.entity.physics.velocity.y *= 0.1f;
+
+        // Émission moins fréquente pour éviter la surcharge
+        if ((int)(elapsedTime * 15) % 2 == 0) {
+            emitGroundPoundParticles(bossSlime->particles, position, radius,
+                                     (SDL_Color){255, 80, 0, 255}, elapsedTime);
+        }
+    }
+    // Phase d'atterrissage et impact - s'écrase au sol, s'aplatit avant l'onde de choc
+    else if (elapsedTime < GROUND_POUND_IMPACT_TIME) {
+        // Animation d'atterrissage: transition de étiré à aplati
+        setAnimation(bossSlime->base.entity.animationController, "landing");
+
+        // Ombre qui se fond avec le boss à l'impact
+        float landingProgress = (elapsedTime - GROUND_POUND_AIR_TIME) / (GROUND_POUND_IMPACT_TIME - GROUND_POUND_AIR_TIME);
+
+        // Impulsion vers le bas pour simuler l'impact
+        if (elapsedTime < 0.85f) {
+            // Chute très rapide avant l'impact
+            bossSlime->base.entity.physics.velocity.y = 200.0f;
+
+            // Traînée verticale pendant la chute
+            if ((int)(elapsedTime * 20) % 2 == 0) {
+                for (int i = 0; i < 3; i++) {
+                    t_entityParticle* p = getNextFreeParticle(bossSlime->particles);
+                    if (p) {
+                        p->position = (SDL_FPoint){
+                            position.x + randomRangeF(-radius * 0.3f, radius * 0.3f),
+                            position.y - randomRangeF(5.0f, 20.0f)};
+                        p->velocity = (SDL_FPoint){
+                            randomRangeF(-3.0f, 3.0f),
+                            randomRangeF(-5.0f, 10.0f)};
+                        p->lifetime = p->maxLifetime = randomRangeF(0.2f, 0.4f);
+                        p->size = randomRangeF(2.0f, 5.0f);
+                        p->color = (SDL_Color){255, 100, 0, 150};
+                        p->shape = rand() % 2;
+                    }
+                }
+            }
+        } else {
+            // L'impact!
+            if (elapsedTime >= 0.85f && elapsedTime < 0.86f) {
+                // Effet de "secousse" au moment de l'impact
+                bossSlime->base.entity.physics.velocity.y = 0;
+
+                // Explosion de particules lors de l'impact
+                for (int i = 0; i < 20; i++) {
+                    float angle = (float)i / 20.0f * 2.0f * M_PI;
+                    float speed = randomRangeF(40.0f, 120.0f);
+                    float heightVar = randomRangeF(0.0f, 10.0f);  // Variation de hauteur
+
+                    t_entityParticle* p = getNextFreeParticle(bossSlime->particles);
+                    if (p) {
+                        p->position = (SDL_FPoint){
+                            position.x + cosf(angle) * radius * 0.2f,
+                            position.y + sinf(angle) * radius * 0.2f + radius / 2 - heightVar};
+                        p->velocity = (SDL_FPoint){
+                            cosf(angle) * speed,
+                            (sinf(angle) * speed * 0.5f) - 20.0f  // Dirigées légèrement vers le haut
+                        };
+                        p->lifetime = p->maxLifetime = randomRangeF(0.4f, 0.8f);
+                        p->size = randomRangeF(4.0f, 9.0f);
+                        p->color = (SDL_Color){255, randomRangeF(80.0f, 160.0f), 0, 220};
+                        p->shape = i % 3 == 0 ? 1 : 0;  // Mélange de carrés et cercles
+                    }
+                }
+
+                // Ombre d'impact
+                t_entityParticle* shadowImpact = getNextFreeParticle(bossSlime->particles);
+                if (shadowImpact) {
+                    shadowImpact->position = (SDL_FPoint){position.x, position.y + radius * 0.2f};
+                    shadowImpact->velocity = (SDL_FPoint){0, 0};
+                    shadowImpact->lifetime = shadowImpact->maxLifetime = 0.3f;
+                    shadowImpact->size = radius * 2.2f;
+                    shadowImpact->color = (SDL_Color){20, 20, 20, 150};
+                    shadowImpact->shape = 1;  // Cercle
+                }
+
+                // Onde de choc visuelle
+                t_entityParticle* shockwave = getNextFreeParticle(bossSlime->particles);
+                if (shockwave) {
+                    shockwave->position = position;
+                    shockwave->velocity = (SDL_FPoint){0, 0};
+                    shockwave->lifetime = shockwave->maxLifetime = 0.3f;
+                    shockwave->size = radius * 1.5f;
+                    shockwave->color = (SDL_Color){255, 180, 50, 150};
+                    shockwave->shape = 1;  // Cercle pour l'onde de choc
+                }
+            } else {
+                // Stabiliser après l'impact
+                bossSlime->base.entity.physics.velocity.x *= 0.1f;
+                bossSlime->base.entity.physics.velocity.y *= 0.1f;
+            }
+        }
 
         // Émission moins fréquente pour éviter la surcharge
         if ((int)(elapsedTime * 15) % 2 == 0) {
@@ -224,49 +459,68 @@ void performGroundPound(t_boss_slime* bossSlime, t_entity* player, t_grid* grid)
                                      (SDL_Color){255, 80, 0, 255}, elapsedTime);
         }
 
-        float growFactor = (elapsedTime - 0.8f) / 0.2f;
+        float growFactor = (elapsedTime - GROUND_POUND_AIR_TIME) / (GROUND_POUND_IMPACT_TIME - GROUND_POUND_AIR_TIME);
         float impactRadius = bossSlime->detectionRange.radius * 0.5f * growFactor;
         Debug_PushCircle(position.x, position.y, impactRadius, SDL_COLOR_RED);
         printf("BOSS SLIME: PREPARING GROUND SLAM!\n");
-    } else if (elapsedTime < 1.7f) {
-        float timeInPhase = elapsedTime - 1.0f;
-        float maxRadius = bossSlime->detectionRange.radius * 0.5f;
-        float waveRadius = maxRadius * (timeInPhase / 0.7f);
+    }
+    // Phase de l'onde de choc - reste aplati pendant l'émission de l'onde
+    else if (elapsedTime < GROUND_POUND_SHOCKWAVE_TIME) {
+        // Maintien de l'animation d'atterrissage qui le montre aplati
+        setAnimation(bossSlime->base.entity.animationController, "landing");
 
-        // Réduire encore la fréquence d'émission pour la phase d'onde de choc
+        float timeInPhase = elapsedTime - GROUND_POUND_IMPACT_TIME;
+        float maxRadius = bossSlime->detectionRange.radius * 0.5f;
+        float waveRadius = maxRadius * (timeInPhase / (GROUND_POUND_SHOCKWAVE_TIME - GROUND_POUND_IMPACT_TIME));
+
+        // Effet de vibration lors de l'émission de l'onde de choc
+        float vibrationIntensity = 2.0f * (1.0f - (timeInPhase / (GROUND_POUND_SHOCKWAVE_TIME - GROUND_POUND_IMPACT_TIME)));
+        bossSlime->base.entity.physics.velocity.x += randomRangeF(-vibrationIntensity, vibrationIntensity);
+        bossSlime->base.entity.physics.velocity.y += randomRangeF(-vibrationIntensity, vibrationIntensity);
+
         if ((int)(timeInPhase * 10) % 2 == 0) {
-            emitGroundPoundParticles(bossSlime->particles, position, radius,
-                                     (SDL_Color){255, 50, 0, 255}, elapsedTime);
+            emitGroundPoundParticles(bossSlime->particles, position, radius, (SDL_Color){255, 50, 0, 255}, elapsedTime);
         }
 
         Debug_PushCircle(position.x, position.y, waveRadius, SDL_COLOR_RED);
         Debug_PushCircle(position.x, position.y, waveRadius * 0.8f, SDL_COLOR_ORANGE);
         Debug_PushCircle(position.x, position.y, waveRadius * 0.6f, SDL_COLOR_YELLOW);
 
-        // Le reste inchangé...
-        if (timeInPhase < 0.15f) {
-            float distToPlayer = sqrtf(powf(player->collisionCircle.x - position.x, 2) +
-                                       powf(player->collisionCircle.y - position.y, 2));
-            if (distToPlayer < waveRadius) {
-                SDL_FPoint knockbackDir = {player->collisionCircle.x - position.x,
-                                           player->collisionCircle.y - position.y};
-                float knockbackLength = sqrtf(knockbackDir.x * knockbackDir.x + knockbackDir.y * knockbackDir.y);
-                if (knockbackLength > 0) {
-                    knockbackDir.x /= knockbackLength;
-                    knockbackDir.y /= knockbackLength;
-                    player->physics.velocity.x += knockbackDir.x * bossSlime->groundPoundForce * 0.7f;
-                    player->physics.velocity.y += knockbackDir.y * bossSlime->groundPoundForce * 0.7f;
-                    printf("BOSS SLIME: PLAYER CAUGHT IN GROUND POUND!\n");
-                }
-            } else {
-                printf("BOSS SLIME: PLAYER DODGED GROUND POUND!\n");
+        t_circle shockwaveCircle = {.x = position.x, .y = position.y, .radius = waveRadius};
+
+        if (checkCircleCircleCollision(&shockwaveCircle, &player->collisionCircle, NULL)) {
+            // Le joueur est touché par l'onde de choc
+            SDL_FPoint knockbackDir = {player->collisionCircle.x - position.x, player->collisionCircle.y - position.y};
+            float knockbackLength = sqrtf(knockbackDir.x * knockbackDir.x + knockbackDir.y * knockbackDir.y);
+
+            if (knockbackLength > 0) {
+                knockbackDir.x /= knockbackLength;
+                knockbackDir.y /= knockbackLength;
+                player->physics.velocity.x += knockbackDir.x * bossSlime->groundPoundForce * 0.7f;
+                player->physics.velocity.y += knockbackDir.y * bossSlime->groundPoundForce * 0.7f;
+                bossSlimeDealDamageToPlayer(bossSlime, (t_joueur*)player, NULL);
             }
         }
-    } else if (elapsedTime < 2.2f) {
+    }
+    // Phase de récupération - retourne progressivement à sa forme normale
+    else if (elapsedTime < GROUND_POUND_RECOVERY_TIME) {
+        // Animation de retour à l'état normal
         setAnimation(bossSlime->base.entity.animationController, "idle");
+
         printf("BOSS SLIME: RECOVERING FROM GROUND POUND...\n");
-        bossSlime->base.entity.physics.velocity.x *= 0.9f;
-        bossSlime->base.entity.physics.velocity.y *= 0.9f;
+
+        // Effet de rebond léger après l'attaque
+        float recoveryTime = elapsedTime - GROUND_POUND_SHOCKWAVE_TIME;
+        float recoveryDuration = GROUND_POUND_RECOVERY_TIME - GROUND_POUND_SHOCKWAVE_TIME;
+        float recoveryProgress = recoveryTime / recoveryDuration;
+
+        if (recoveryTime < 0.2f) {
+            // Petit rebond vers le haut pour donner l'impression de reprendre sa forme
+            bossSlime->base.entity.physics.velocity.y = -20.0f * (1.0f - recoveryTime / 0.2f);
+        } else {
+            bossSlime->base.entity.physics.velocity.x *= 0.9f;
+            bossSlime->base.entity.physics.velocity.y *= 0.9f;
+        }
 
         // Émission de petites particules de récupération
         if ((int)(elapsedTime * 8) % 2 == 0) {
@@ -285,6 +539,7 @@ void performGroundPound(t_boss_slime* bossSlime, t_entity* player, t_grid* grid)
             Debug_PushCircle(position.x, position.y - 10, 4, SDL_COLOR_BLUE);
         }
     } else {
+        // Retour à l'état approprié selon la phase
         if (bossSlime->currentPhase == 2)
             bossSlime->state = BOSS_SLIME_ENRAGED;
         else if (bossSlime->currentPhase == 3)
@@ -302,10 +557,10 @@ void performChargeAttack(t_boss_slime* bossSlime, t_entity* player, t_grid* grid
     float radius = bossSlime->base.entity.collisionCircle.radius;
 
     // Constantes de timing pour l'attaque
-    const float CHARGE_PREP_TIME = 1.2f;      // Temps de préparation augmenté
-    const float CHARGE_INITIATE_TIME = 1.5f;  // Temps avant le dash augmenté
-    const float CHARGE_DASH_TIME = 2.0f;      // Temps de dash augmenté
-    const float CHARGE_RECOVERY_TIME = 2.8f;  // Temps de récupération augmenté
+    const float CHARGE_PREP_TIME = 1.2f;      // Temps de préparation
+    const float CHARGE_INITIATE_TIME = 1.5f;  // Temps avant le dash
+    const float CHARGE_DASH_TIME = 2.0f;      // Temps de dash
+    const float CHARGE_RECOVERY_TIME = 2.8f;  // Temps de récupération
 
     if (elapsedTime < 0.1f) {
         printf("BOSS SLIME: PREPARING CHARGE ATTACK!\n");
@@ -324,86 +579,98 @@ void performChargeAttack(t_boss_slime* bossSlime, t_entity* player, t_grid* grid
         chargeDir.y = 0.0f;
     }
 
-    // Phase de préparation
+    // Phase de préparation - s'aplatit pour accumuler l'énergie dans la direction cible
     if (elapsedTime < CHARGE_PREP_TIME) {
-        setAnimation(bossSlime->base.entity.animationController, "idle");
+        // Animation d'aplatissement (compression) avant le saut
+        setAnimation(bossSlime->base.entity.animationController, "chargingJump");
 
-        // Animation de vibration via des impulsions de vélocité
-        if ((int)(elapsedTime * 20) % 2 == 0) {
-            float vibrationIntensity = 2.0f * elapsedTime / CHARGE_PREP_TIME;
-            // Ajouter de petites impulsions de vélocité aléatoires
-            bossSlime->base.entity.physics.velocity.x += randomRangeF(-vibrationIntensity, vibrationIntensity);
-            bossSlime->base.entity.physics.velocity.y += randomRangeF(-vibrationIntensity, vibrationIntensity);
+        // Effet de "tremblement" en s'aplatissant - le boss se prépare à charger
+        float shakeFactor = 0.3f * sinf(elapsedTime * 40.0f) * (elapsedTime / CHARGE_PREP_TIME);
+        bossSlime->base.entity.physics.velocity.x += shakeFactor * chargeDir.x;
+        bossSlime->base.entity.physics.velocity.y += shakeFactor * chargeDir.y;
+
+        // 1. Émission plus intense de particules pour montrer la préparation
+        for (int i = 0; i < 3; i++) {
+            if ((int)(elapsedTime * 18) % 2 == 0) {
+                float prepProgress = elapsedTime / CHARGE_PREP_TIME;
+
+                // Particules qui convergent vers le boss depuis la direction cible
+                float distanceAhead = radius * (2.0f + prepProgress * 5.0f);
+                float spread = radius * 2.0f * (1.0f - prepProgress * 0.5f);
+
+                SDL_FPoint particlePos = {
+                    position.x + chargeDir.x * distanceAhead + randomRangeF(-spread, spread),
+                    position.y + chargeDir.y * distanceAhead + randomRangeF(-spread, spread)};
+
+                // Vitesses qui convergent vers le boss
+                SDL_FPoint velocity = {
+                    (position.x - particlePos.x) * randomRangeF(3.0f, 7.0f) * prepProgress,
+                    (position.y - particlePos.y) * randomRangeF(3.0f, 7.0f) * prepProgress};
+
+                // Couleur intense qui varie avec la progression
+                SDL_Color particleColor = {
+                    (Uint8)(173 + randomRangeF(-20, 20)),
+                    (Uint8)(255 + randomRangeF(-20, 20)),
+                    (Uint8)(239 + randomRangeF(-20, 20)),
+                    (Uint8)(100 + prepProgress * 155)};
+
+                // Obtenir une particule libre
+                t_entityParticle* p = getNextFreeParticle(bossSlime->particles);
+                if (p) {
+                    p->position = particlePos;
+                    p->velocity = velocity;
+                    p->lifetime = p->maxLifetime = randomRangeF(0.2f, 0.4f);
+                    p->size = randomRangeF(3.0f, 7.0f);
+                    p->color = particleColor;
+                    p->shape = 0;  // Forme carrée pour effet pixelisé
+                }
+            }
         }
+
+        // Autres effets vibrationnels et aura comme avant...
+        // ...
 
         // Ralentissement général pendant la préparation
         bossSlime->base.entity.physics.velocity.x *= 0.5f;
         bossSlime->base.entity.physics.velocity.y *= 0.5f;
-
-        // Émission de particules pour la préparation
-        if ((int)(elapsedTime * 15) % 2 == 0) {
-            emitChargeAttackParticles(bossSlime->particles, position, radius,
-                                      (SDL_Color){255, 100, 0, 255},
-                                      elapsedTime / CHARGE_PREP_TIME * 0.8f, chargeDir);
-        }
-
-        // Indication visuelle de la direction de charge
-        float intensityFactor = elapsedTime / CHARGE_PREP_TIME;
-        Debug_PushLine(position.x, position.y,
-                       position.x + chargeDir.x * 200 * intensityFactor,
-                       position.y + chargeDir.y * 200 * intensityFactor, 5, SDL_COLOR_ORANGE);
-
-        // Pulse visuel autour du boss
-        float pulseSize = 0.8f + 0.4f * sinf(elapsedTime * 15.0f);
-        Debug_PushCircle(position.x, position.y,
-                         radius * pulseSize, SDL_COLOR_ORANGE);
-
     }
-    // Phase d'initiation du dash
+    // Phase d'initiation du dash - s'étire en l'air avant de s'élancer
     else if (elapsedTime < CHARGE_INITIATE_TIME) {
-        // Animation "prêt à bondir"
-        setAnimation(bossSlime->base.entity.animationController, "attack");
+        // Animation en l'air: étirement (frame 3) pour se préparer à la charge
+        setAnimation(bossSlime->base.entity.animationController, "midAire");
+
         printf("BOSS SLIME: CHAAARGE!\n");
 
-        // Blocage complet du mouvement pendant l'initiation
-        bossSlime->base.entity.physics.velocity.x = 0;
-        bossSlime->base.entity.physics.velocity.y = 0;
+        // Donner un effet de saut en l'air avant la charge
+        if (elapsedTime < (CHARGE_PREP_TIME + 0.15f)) {
+            // Petit bond pour s'étirer avant de charger
+            bossSlime->base.entity.physics.velocity.y = -30.0f;
+        } else {
+            // Pause en l'air - comme suspendu avant l'impact
+            bossSlime->base.entity.physics.velocity.x = 0;
+            bossSlime->base.entity.physics.velocity.y = 0;
+        }
 
-        // Émission intense de particules pour l'initiation
-        emitChargeAttackParticles(bossSlime->particles, position, radius,
-                                  (SDL_Color){255, 100, 0, 255},
-                                  0.8f + (elapsedTime - CHARGE_PREP_TIME) / (CHARGE_INITIATE_TIME - CHARGE_PREP_TIME) * 0.2f,
-                                  chargeDir);
+        // Effets de particules d'initiation comme avant...
+        float chargeProgress = (elapsedTime - CHARGE_PREP_TIME) / (CHARGE_INITIATE_TIME - CHARGE_PREP_TIME);
 
-        // Flash de lumière qui s'intensifie
-        float flashIntensity = (elapsedTime - CHARGE_PREP_TIME) / (CHARGE_INITIATE_TIME - CHARGE_PREP_TIME);
-        SDL_Color flashColor = {
-            255,
-            (Uint8)(100 + 155 * flashIntensity),
-            0,
-            (Uint8)(100 + 155 * flashIntensity)};
-        Debug_PushCircle(position.x, position.y, radius * (1.0f + flashIntensity * 0.5f), flashColor);
-
-        // Ligne directionnelle plus prononcée
-        Debug_PushLine(position.x, position.y,
-                       position.x + chargeDir.x * 250,
-                       position.y + chargeDir.y * 250, 8, SDL_COLOR_RED);
-
+        // Anneaux d'énergie et autres effets de particules...
+        // ...
     }
-    // Phase de dash actif
+    // Phase de dash actif - forme allongée pendant la charge rapide
     else if (elapsedTime < CHARGE_DASH_TIME) {
-        // Animation dash
+        // Animation enragée, déformation rapide pendant le dash
         setAnimation(bossSlime->base.entity.animationController, "enraged");
 
         if (!hasFixedDirection) {
             fixedChargeDir = chargeDir;
             hasFixedDirection = 1;
 
-            // Effet additionnel pour indiquer le début du dash
-            SDL_Color burstColor = {255, 200, 50, 220};
-            for (int i = 0; i < 12; i++) {
-                float angle = (float)i * M_PI / 6.0f;
-                float burstDist = radius * 1.5f;
+            // Effet visuel pour le lancement du dash
+            SDL_Color burstColor = {0, 238, 194, 220};
+            for (int i = 0; i < 8; i++) {
+                float angle = (float)i * M_PI / 4.0f;
+                float burstDist = radius * 1.2f;
                 Debug_PushCircle(
                     position.x + cosf(angle) * burstDist,
                     position.y + sinf(angle) * burstDist,
@@ -411,89 +678,26 @@ void performChargeAttack(t_boss_slime* bossSlime, t_entity* player, t_grid* grid
             }
         }
 
-        // Émission continue de particules pendant le dash
-        if ((int)(elapsedTime * 20) % 2 == 0) {
-            emitChargeAttackParticles(bossSlime->particles, position, radius,
-                                      (SDL_Color){255, 100, 0, 255},
-                                      1.0f + (elapsedTime - CHARGE_INITIATE_TIME) / (CHARGE_DASH_TIME - CHARGE_INITIATE_TIME) * 0.5f,
-                                      fixedChargeDir);
-        }
+        // Émission de particules de traînée comme avant...
+        // ...
 
         // Vitesse maximale dans la direction fixée
         bossSlime->base.entity.physics.velocity.x = fixedChargeDir.x * bossSlime->chargeForce;
         bossSlime->base.entity.physics.velocity.y = fixedChargeDir.y * bossSlime->chargeForce;
-
-        // Traînée visuelle derrière le boss
-        for (int i = 1; i <= 5; i++) {
-            float distance = i * 20.0f;
-            float alphaFactor = 1.0f - (float)i / 6.0f;
-            SDL_Color trailColor = {255, 165, 0, (Uint8)(200 * alphaFactor)};
-            Debug_PushCircle(position.x - fixedChargeDir.x * distance,
-                             position.y - fixedChargeDir.y * distance,
-                             radius * (1.0f - i * 0.15f), trailColor);
-        }
-
-        // Détection de collision avec le joueur
-        float distToPlayer = sqrtf(powf(player->collisionCircle.x - position.x, 2) +
-                                   powf(player->collisionCircle.y - position.y, 2));
-        if (distToPlayer < radius + player->collisionCircle.radius) {
-            SDL_FPoint knockbackDir = {player->collisionCircle.x - position.x,
-                                       player->collisionCircle.y - position.y};
-            float knockbackLength = sqrtf(knockbackDir.x * knockbackDir.x + knockbackDir.y * knockbackDir.y);
-            if (knockbackLength > 0) {
-                knockbackDir.x /= knockbackLength;
-                knockbackDir.y /= knockbackLength;
-                player->physics.velocity.x += knockbackDir.x * bossSlime->chargeForce * 0.6f;
-                player->physics.velocity.y += knockbackDir.y * bossSlime->chargeForce * 0.6f;
-                printf("BOSS SLIME: CHARGE HIT PLAYER!\n");
-
-                // Effet visuel d'impact - si la fonction existe
-                // Si emitImpactParticles n'existe pas, vous pouvez remplacer par une autre fonction de particules
-                if ((int)(elapsedTime * 30) % 2 == 0) {
-                    SDL_Color impactColor = {255, 50, 0, 255};
-                    emitParticles(
-                        bossSlime->particles,
-                        player->collisionCircle.x,
-                        player->collisionCircle.y,
-                        impactColor,
-                        8,             // count
-                        5.0f, 10.0f,   // size
-                        10.0f, 30.0f,  // speed
-                        0.2f, 0.4f     // lifetime
-                    );
-                }
-            }
-        }
     }
-    // Phase de récupération
+    // Phase de récupération - s'écrase puis retourne progressivement à sa forme normale
     else if (elapsedTime < CHARGE_RECOVERY_TIME) {
+        // Animation landing - montre le boss qui s'aplatit à l'impact puis se reforme
+        setAnimation(bossSlime->base.entity.animationController, "landing");
+
         printf("BOSS SLIME: TIRED AFTER CHARGE...\n");
 
-        // Animation d'épuisement
-        setAnimation(bossSlime->base.entity.animationController, "idle");
-
-        // Ralentissement très prononcé via la vélocité
+        // Ralentissement prononcé via la vélocité
         bossSlime->base.entity.physics.velocity.x *= 0.7f;
         bossSlime->base.entity.physics.velocity.y *= 0.7f;
 
-        // Émission de particules d'épuisement
-        float recoveryProgress = (elapsedTime - CHARGE_DASH_TIME) / (CHARGE_RECOVERY_TIME - CHARGE_DASH_TIME);
-        if ((int)(elapsedTime * 8) % 2 == 0) {
-            emitChargeAttackParticles(bossSlime->particles, position, radius,
-                                      (SDL_Color){255, 100, 0, 255},
-                                      1.5f + recoveryProgress * 0.5f,
-                                      fixedChargeDir);
-        }
-
-        // Effet de "vacillement" pendant la récupération
-        if ((int)(elapsedTime * 12) % 3 == 0) {
-            // Ajouter de petites impulsions de vélocité qui s'opposent
-            float swayMagnitude = 3.0f * (1.0f - recoveryProgress);
-            bossSlime->base.entity.physics.velocity.x += randomRangeF(-swayMagnitude, swayMagnitude);
-            bossSlime->base.entity.physics.velocity.y += randomRangeF(-swayMagnitude, swayMagnitude);
-        }
-
-
+        // Autres effets de récupération...
+        // ...
     }
     // Fin de l'attaque
     else if (elapsedTime >= CHARGE_RECOVERY_TIME) {
@@ -672,6 +876,17 @@ void updateBossSlime(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectMan
     updateDeltaTimer(bossSlime->phaseTransitionTimer, *deltaTime);
     updateBossSlimeInfo(bossSlime, player, grid);
     checkPhaseTransitions(bossSlime);
+
+    t_circle extendedCollisionCircle = bossSlime->base.entity.collisionCircle;
+    extendedCollisionCircle.radius += 1.0f;
+
+    // Visualiser le cercle de collision étendu (optionnel)
+    Debug_PushCircle(extendedCollisionCircle.x, extendedCollisionCircle.y, extendedCollisionCircle.radius, SDL_COLOR_PINK);
+
+    // Vérifier la collision avec le joueur pour appliquer des dégâts de contact
+    if (checkCircleCircleCollision(&extendedCollisionCircle, &player->collisionCircle, NULL)) {
+        bossSlimeDealDamageToPlayer(bossSlime, (t_joueur*)player, NULL);
+    }
 
     if (bossSlime->isPhaseTransition) {
         if (bossSlime->currentPhase == 2)

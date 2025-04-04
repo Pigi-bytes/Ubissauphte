@@ -187,7 +187,7 @@ void emitChargeAttackParticles(t_particleEmitter* emitter, SDL_FPoint position, 
     if (!emitter) return;
 
     // Définition des couleurs constantes - facilement modifiables
-    const SDL_Color CHARGE_PREPARE_COLOR = {{0, 238, 194, 100}};  // Orange vif pour préparation
+    const SDL_Color CHARGE_PREPARE_COLOR = {0, 238, 194, 100};  // Orange vif pour préparation
     const SDL_Color CHARGE_GLOW_COLOR = {255, 69, 0, 150};        // Rouge-orangé pour l'aura
     const SDL_Color CHARGE_TRAIL_COLOR = {30, 144, 255, 170};     // Bleu vif pour la traînée
     const SDL_Color CHARGE_SPARK_COLOR = {255, 215, 0, 220};      // Or pour les étincelles
