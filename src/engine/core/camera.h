@@ -146,9 +146,42 @@ void freeCamera(void* object);
  */
 SDL_bool isRectOnCamera(SDL_Rect* rect, t_camera* camera);
 
+/**
+ * @brief Convertit des coordonnées souris (écran) en coordonnées monde (niveau)
+ * @param vp Viewport contenant la caméra de référence
+ * @param mouseX Position X de la souris en pixels écran
+ * @param mouseY Position Y de la souris en pixels écran
+ * @param worldX Pointeur pour stocker la coordonnée X monde résultante
+ * @param worldY Pointeur pour stocker la coordonnée Y monde résultante
+ *
+ * @details
+ * - Prend en compte le zoom et la position de la caméra
+ * - Utilise les proportions du viewport pour la conversion
+ */
 void convertMouseToWorld(t_viewPort* vp, int mouseX, int mouseY, float* worldX, float* worldY);
 
+/**
+ * @brief Ajoute un effet de tremblement à la caméra
+ * @param cam Caméra à faire trembler
+ * @param intensity Intensité du tremblement (pixels de déplacement max)
+ * @param duration Durée du tremblement en secondes
+ *
+ * @details
+ * - L'intensité diminue progressivement jusqu'à zéro
+ * - Le tremblement est aléatoire sur les axes X et Y
+ */
 void cameraAddShake(t_camera* cam, float intensity, float duration);
+
+/**
+ * @brief Met à jour l'effet de tremblement de la caméra
+ * @param cam Caméra à mettre à jour
+ * @param deltaTime Temps écoulé depuis la dernière mise à jour en secondes
+ *
+ * @details
+ * - Génère de nouveaux déplacements aléatoires
+ * - Diminue l'intensité en fonction du temps écoulé
+ * - Désactive le tremblement quand l'intensité atteint zéro
+ */
 void cameraUpdateShake(t_camera* cam, float* deltaTime);
 
 #endif

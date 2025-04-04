@@ -122,12 +122,22 @@ t_objectManager* initObjectManager(t_typeRegistry* registre);
 void addObject(t_objectManager* manager, void* data, uint8_t typeId);
 
 /**
- * @warning CHANGE LES POSITIONS AU INDEX !!!! INVERSION DU DERNIER ELEMENT AVEC LE SUPPRIM2
+ * @brief Supprime un objet du gestionnaire à l'index spécifié
+ * @param manager Pointeur vers le gestionnaire d'objets
+ * @param index Index de l'objet à supprimer
+ *
+ * @warning CHANGE LES POSITIONS AU INDEX !!!! INVERSION DU DERNIER ELEMENT AVEC LE SUPPRIMÉ
  *          POUR RESTER SANS "TROUE" -> SI ON UTILISE SUPPRIMER IL FAUT ETRE SUR QUE ON STOCK
  *          PAS LES INDICES !!!!
  */
 void deleteObject(t_objectManager* manager, int index);
 
+/**
+ * @brief Récupère l'identifiant de type d'un objet à partir de son index
+ * @param manager Pointeur vers le gestionnaire d'objets
+ * @param index Index de l'objet dont on veut connaître le type
+ * @return Identifiant du type (typeId) de l'objet spécifié
+ */
 uint8_t getObjectTypeId(t_objectManager* manager, int index);
 
 /**
