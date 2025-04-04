@@ -78,7 +78,7 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->calculatedStats.speed.multiplicative = 1;
 
     joueur->level = 1;
-    joueur->gold = 5000;
+    joueur->gold = 0;
     joueur->xp = 0;
 
     joueur->equipement[SLOT_ARME].stack = NULL;
@@ -609,6 +609,7 @@ SDL_bool checkAndProcessLevelUp(t_joueur* player) {
 
 
     if (player->xp >= player->xpToNextLevel) {
+        player->health.currentHealth = player->health.maxHealth;
         return checkAndProcessLevelUp(player);  // Récursion pour gérer plusieurs level up d'un coup
     }
 
