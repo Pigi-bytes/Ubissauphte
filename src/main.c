@@ -6,6 +6,7 @@
 #include "_scene/option2.h"
 #include "_scene/optionMenu.h"
 #include "_scene/sceneInventaire.h"
+#include "_scene/win.h"
 #include "context.h"
 
 #ifdef _WIN32
@@ -103,7 +104,7 @@ int main(int argc, char* argv[]) {
     t_scene* scene3 = createFpsMenu(&context);
     t_scene* scene4 = createMainInv(&context, player);
     t_scene* scene5 = createOption2Menu(&context);
-    t_scene* scene6 = attente(&context);
+    t_scene* scene6 = CreateWin(&context);
     t_scene* scene7 = CreateGameOver(&context);
 
     addScene(context.sceneController, scene);
@@ -114,6 +115,7 @@ int main(int argc, char* argv[]) {
     addScene(context.sceneController, scene5);
     addScene(context.sceneController, scene6);
     addScene(context.sceneController, scene7);
+
     setScene(context.sceneController, "menuPrincipal");
 
     while (!context.input->quit) {

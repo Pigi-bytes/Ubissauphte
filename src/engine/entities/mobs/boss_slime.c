@@ -72,7 +72,7 @@ void onBossSlimeDeath(t_context* context, void* entity) {
     if (enemy->lastDamagedBy != NULL) {
         t_joueur* player = (t_joueur*)enemy->lastDamagedBy;  // Cast pour accéder au joueur
         addPlayerXP(player, enemy->xpReward);
-        setScene(context->sceneController, "attente");
+        setScene(context->sceneController, "win");
         //   Ajout de l'XP au joueur
     }
 }

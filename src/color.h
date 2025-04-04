@@ -8,5 +8,6 @@
 #define MAGENTA ((SDL_Color){255, 0, 255})
 #define BLUE ((SDL_Color){0, 0, 255})
 #define GREEN ((SDL_Color){0, 255, 0})
+#define RED ((SDL_Color){255, 0, 0})
 
 #endif
