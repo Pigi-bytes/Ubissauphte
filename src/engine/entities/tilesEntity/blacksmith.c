@@ -16,10 +16,10 @@ void updateBlacksmith(t_tileEntity* entity, t_context* context, t_salle* salle, 
         if (blacksmith->lastInteractKey != player->control->interact) {
             blacksmith->lastInteractKey = player->control->interact;
 
-            char interactPrompt[32];
-            char interactPrompt2[32];
-            sprintf(interactPrompt, "*%s* for %d coins", "Golden Axe", 100);
-            sprintf(interactPrompt2, "[%s] to buy", SDL_GetKeyName(SDL_GetKeyFromScancode(blacksmith->lastInteractKey)));
+            char interactPrompt[64];
+            char interactPrompt2[64];
+            sprintf(interactPrompt, "%s", blacksmith->randomItem->name);
+            sprintf(interactPrompt2, "[%s] to buy for %d coins", SDL_GetKeyName(SDL_GetKeyFromScancode(blacksmith->lastInteractKey)), blacksmith->prix);
 
             if (blacksmith->interactText) {
                 updateText(&blacksmith->interactText, context->renderer, interactPrompt, (SDL_Color){255, 255, 0, 255});
@@ -41,16 +41,16 @@ void updateBlacksmith(t_tileEntity* entity, t_context* context, t_salle* salle, 
 
             if (interactKeyIsPressed && !blacksmith->interactKeyPressed) {
                 printf("*Parle au forgeron*\n");
-                if (player->gold >= 5000) {
+                if (player->gold >= blacksmith->prix) {
                     jouerSFX("assets/barrel.wav", SDL_MIX_MAXVOLUME, 0, context->audioManager);
-                    player->gold -= 100;
-
-                    for (int i = 0; i < context->nbItem; i++) {
-                        if (i != 2)
-                            inventaireAjoutObjet(player->inventaire, liste[i], 1);
-                    }
-
+                    player->gold -= blacksmith->prix;
+                    if (blacksmith->randomItem) {
+                        inventaireAjoutObjet(player->inventaire, blacksmith->randomItem, 1);
+                        printf("Le marchand vous offre : %s\n", blacksmith->randomItem->name);
+                    } 
                     equipementRecalculerStats(&player);
+                }else{
+                    printf("Vous n'avez pas les sous\n");
                 }
 
                 // changer scène ici
@@ -100,15 +100,17 @@ t_tileEntity* createBlacksmithEntity(t_tileset* tileset, t_scene* scene, t_conte
     blacksmith->detectionRange.y = 10;
     blacksmith->playerInRange = SDL_FALSE;
 
-    blacksmith->objet = context->itemListe[3];
-
     blacksmith->interactKeyPressed = SDL_FALSE;
     blacksmith->lastInteractKey = 0;
+
+    blacksmith->randomItem = getItemByRarity(context->itemListe, context->nbItem, RARITY_RARE);
+
     blacksmith->interactText = NULL;
-    blacksmith->item = NULL;
+    blacksmith->prix = 500;
 
     blacksmith->base.update = updateBlacksmith;
     blacksmith->base.render = renderBlacksmith;
+
 
     return (t_tileEntity*)blacksmith;
 }

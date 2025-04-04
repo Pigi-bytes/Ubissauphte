@@ -7,15 +7,13 @@
 
 typedef struct {
     t_tileEntity base;
-    SDL_Texture* vend;
-    char* nomItem;
-    int prix;
     t_circle detectionRange;
     SDL_bool playerInRange;
     SDL_bool interactKeyPressed;
     SDL_Keycode lastInteractKey;
+    t_item *randomItem;
     t_text *interactText, *item;
-    t_item* objet;
+    int prix;
 } t_blacksmith;
 
 void updateBlacksmith(t_tileEntity* entity, t_context* context, t_salle* salle, t_objectManager* entities);
