@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
     context.audioManager = initAudioManager();
     context.fpsDisplay = initFPSDisplay(context.renderer, context.font);
     context.currentLevel = NULL;
-    context.nbLevel = 7;
+    context.nbLevel = 3;
     context.difficulty = EASY;
 
     context.control = malloc(sizeof(t_control));
@@ -77,29 +77,36 @@ int main(int argc, char* argv[]) {
 
     t_joueur* player = createPlayer(context.control, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, playerTileSet);
 
-    // Création des armes avec statistiques équilibrées
-    t_arme* dague = malloc(sizeof(t_arme));
-    *dague = (t_arme){
-        .mass = 1.5f,             // Très légère pour des coups rapides
-        .damage = 12.0f,          // Dégâts modérés
-        .range = 20.0f,           // Courte portée
-        .angleAttack = M_PI / 4,  // Arc d'attaque étroit (45°)
-        .attackDuration = 0.15f,  // Animation très rapide
-        .attackCooldown = 0.35f   // Récupération très rapide
-    };
-    dague->texture = getObject(tileset->textureTiles, 104);
-    dague->displayRect = (SDL_Rect){0, 0, 16, 16};
+    t_item* epee = malloc(sizeof(t_item));
+    epee->arme = malloc(sizeof(t_arme));
+    strcpy(epee->name, "HOMARD");
+    epee->arme->mass = 3.0f;             // Masse moyenne
+    epee->arme->damage = 20.0f;          // Dégâts moyens
+    epee->arme->range = 30.0f;           // Portée moyenne
+    epee->arme->angleAttack = M_PI / 2;  // Arc d'attaque de 90°
+    epee->arme->attackDuration = 0.28f;  // Animation moyenne
+    epee->arme->attackCooldown = 0.7f;   // Récupération moyenne
+    strcpy(epee->description, "\nazdezdef\nsssqs");
+    epee->stats.attack.additive = 5;
+    epee->stats.attack.multiplicative = 1;
+    epee->stats.defense.additive = 581;
+    epee->stats.defense.multiplicative = 1;
+    epee->stats.healthMax.additive = 8162;
+    epee->stats.healthMax.multiplicative = 1;
+    epee->stats.speed.additive = 645;
+    epee->stats.speed.multiplicative = 1;
 
-    t_item* nouv = malloc(sizeof(t_item));
-    strcpy(nouv->name, "nouv");
-    nouv->arme = malloc(sizeof(t_arme));
-    nouv->arme = dague;
-    nouv->texture = dague->texture;
-    nouv->validSlot[0] = SLOT_ARME;
-    nouv->flags = 6;
-    nouv->id = 8;
-    inventaireAjoutObjet(player->inventaire, nouv, 1);
-    player->currentWeapon = dague;
+    epee->arme->texture = getObject(tileset->textureTiles, 111);
+    epee->texture = getObject(tileset->textureTiles, 111);
+
+    epee->arme->displayRect = (SDL_Rect){0, 0, 16, 16};
+    epee->arme->displayRect = (SDL_Rect){0, 0, 16, 16};
+    epee->validSlot[0] = SLOT_ARME;
+    epee->flags = 6;
+    epee->id = 9;
+    epee->arme->indice = 10;
+    epee->arme->onEquipe = creerFonction(peutEquiperWrapper, FONCTION_PARAMS(&player->currentWeapon, epee->arme));
+
     equipementRecalculerStats(&player);
 
     player->indexCurrentRoom = 0;
@@ -129,6 +136,11 @@ int main(int argc, char* argv[]) {
 
         executeSceneFunctions(currentScene, HANDLE_INPUT);
         updateInput(context.input);
+
+        if (keyPressOnce(context.input, SDL_SCANCODE_U)) {
+            printf("Ajout Objet \n");
+            inventaireAjoutObjet(player->inventaire, epee, 1);
+        }
 
         executeSceneFunctions(currentScene, UPDATE);
 

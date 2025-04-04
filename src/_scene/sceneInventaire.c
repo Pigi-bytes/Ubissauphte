@@ -11,10 +11,12 @@ t_scene *createMainInv(t_context *context, t_joueur *player) {
         inventaireAjoutObjet(player->inventaire, itemListe[i], 1);
     }
 
-    InventoryUI *ui = inventoryUI_Init(NULL, context->renderer,fichier->blockManager->count, player, context->input);
+    InventoryUI *ui = inventoryUI_Init(NULL, context->renderer, fichier->blockManager->count, player, context->input);
     const uint8_t INVENTORY_TYPE = registerType(registre, freeInv, "inventory");
 
     t_scene *scene = createScene(initObjectManager(registre), "mainInv");
+
+    equiperEquipement(&player, 2, SLOT_ARME);
 
     // InventoryUI *ui = inventoryUI_Init(NULL, context->renderer, c, context->input);
 

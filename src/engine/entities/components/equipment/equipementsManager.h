@@ -105,6 +105,7 @@ void equipementUse(struct s_joueur* c, equipementSlotType slot);
 // Debug
 void inventory_print(t_inventaire* inv);
 void equipment_print(struct s_joueur* c);
+int findItemInventoryIndex(t_inventaire* inv, t_item* item);
 
 void item_save(t_item** item, t_fichier* fichier, int count);
 t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player);

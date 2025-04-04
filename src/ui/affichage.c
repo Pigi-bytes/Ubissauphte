@@ -145,6 +145,17 @@ void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *i
 void equiperSlot(InventoryUI *ui, t_item **item, SDL_Renderer *renderer, t_input *input) {
     if (!ui->peutEquiper || (*item) == NULL || item == NULL)
         return;
+
+    printf("DEBUG: Trying to equip item: %s (ID: %d)\n", (*item)->name, (*item)->id);
+
+    // Find the actual inventory index
+    int actualIndex = findItemInventoryIndex(ui->ext->character->inventaire, *item);
+    printf("DEBUG: Item ID: %d, actual inventory index: %d\n", (*item)->id, actualIndex);
+
+    if (actualIndex < 0) {
+        printf("ERROR: Item not found in inventory!\n");
+        return;
+    }
     if (ui->peutEquiper) {
         if ((*item)->validSlot[0] == SLOT_ACTIVABLE1) {
             ui->elems->CaseActivable1.texture = (*item)->texture;
@@ -161,7 +172,10 @@ void equiperSlot(InventoryUI *ui, t_item **item, SDL_Renderer *renderer, t_input
     }
     ui->peutEquiper = 0;
 
-    equiperEquipement(&ui->ext->character, (*item)->arme->indice, (*item)->validSlot[0]);
+    printf("DEBUG: Using actual inventory index: %d\n", actualIndex);
+    printf("DEBUG: Using arme->indice (previus): %d\n", (*ui).ext->character->currentWeapon->indice);
+    equiperEquipement(&ui->ext->character, actualIndex, (*item)->validSlot[0]);
+    printf("DEBUG: Using arme->indice (now): %d\n", (*ui).ext->character->currentWeapon->indice);
 
     // Remplacer les références à baseStats par calculatedStats
     ui->ecrit->nom_txt_player[0] = createStatLine("Health Max : ", ui->ext->character->calculatedStats.healthMax.additive, ui->ext->character->calculatedStats.healthMax.multiplicative);
@@ -271,7 +285,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, SDL_Renderer *renderer, int nb, 
             j = 0;
     }
     ui->j = j;
-    ui->elems->caseArme.texture = c->currentWeapon->texture;
+    // ui->elems->caseArme.texture = c->currentWeapon->texture;
     int totalContentHeight = 0;
     for (int i = 0; i < ui->nbItems; i++) {
         int slotBottom = ui->elems->inventory_slots[i].rect.y + ui->elems->inventory_slots[i].rect.h;
@@ -364,16 +378,51 @@ void updateAjoutObjet(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
         int newIndex = ui->nbItems;  // Index du nouvel item AVANT incrément
         ui->nbItems++;
 
-        ui->elems->inventory_slots = realloc(ui->elems->inventory_slots, ui->nbItems * sizeof(UI_Element));
+        // Reallocate the inventory slots array safely
+        UI_Element *newSlots = realloc(ui->elems->inventory_slots, ui->nbItems * sizeof(UI_Element));
+        if (newSlots == NULL) {
+            // Handle allocation failure
+            ui->nbItems--;  // Roll back the counter
+            return;
+        }
+        ui->elems->inventory_slots = newSlots;
 
-        // Utiliser newIndex pour le nouveau slot
-        calculerItem(&ui->elems->inventory_slots[newIndex].rect, ui->elems->inventory_panel.rect,
-                     (newIndex == 0) ? &ui->elems->inventory_panel.rect : &ui->elems->inventory_slots[newIndex - 1].rect,
-                     newIndex, ui->j, input);
+        // Calculate item position based on previous item or starting point
+        SDL_Rect *refRect = (newIndex == 0) ? &ui->elems->inventory_panel.rect : &ui->elems->inventory_slots[newIndex - 1].rect;
 
+        calculerItem(&ui->elems->inventory_slots[newIndex].rect,
+                     ui->elems->inventory_panel.rect,
+                     refRect, newIndex, ui->j, input);
+
+        // Get the item stack and validate it
         t_itemsStack *stack = (t_itemsStack *)getObject(ui->ext->character->inventaire->itemsStack, newIndex);
-        ui->elems->inventory_slots[newIndex].button = createButton(createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[newIndex].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, stack->definition, renderer, input)));
+        if (stack == NULL || stack->definition == NULL) {
+            ui->nbItems--;  // Roll back on error
+            return;
+        }
+
+        ui->elems->inventory_slots[newIndex].button = createButton(
+            createText(renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}),
+            (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0},
+            ui->elems->inventory_slots[newIndex].rect,
+            creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, stack->definition, renderer, input)));
+
         ui->elems->inventory_slots[newIndex].texture = stack->definition->texture;
+
+        ui->j++;
+        if (ui->j == 4) ui->j = 0;
+
+        int totalContentHeight = 0;
+        for (int i = 0; i < ui->nbItems; i++) {
+            int slotBottom = ui->elems->inventory_slots[i].rect.y + ui->elems->inventory_slots[i].rect.h;
+            if (slotBottom > totalContentHeight) {
+                totalContentHeight = slotBottom;
+            }
+        }
+        
+        totalContentHeight -= ui->elems->inventory_panel.rect.y;
+        ui->maxScrollY = totalContentHeight - ui->elems->inventory_panel.rect.h;
+        if (ui->maxScrollY < 0) ui->maxScrollY = 0;
     }
 }
 
@@ -451,6 +500,8 @@ void inventoryUI_Update(InventoryUI *ui, t_context *context) {
 }
 
 void creerDescr(InventoryUI *ui, t_item *item, SDL_Renderer *renderer, t_input *input) {
+    printf("DEBUG: Selected item: %s (ID: %d)\n", item->name, item->id);
+
     char processedDesc[256];
     strcpy(processedDesc, item->description);
 

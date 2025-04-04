@@ -198,6 +198,8 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
         getValue(block, "attackCooldown", &resultFLOAT, FLOAT);
         item[i]->arme->attackCooldown = resultFLOAT;
 
+        item[i]->arme->onEquipe = NULL;
+
         getValue(block, "type", &resultChar, STRING);
         if (strcmp(resultChar, "arme") == 0) {
             item[i]->validSlot[0] = SLOT_ARME;
@@ -208,11 +210,10 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
                 item[i]->arme->onEquipe = creerFonction(peutEquiperWrapper, FONCTION_PARAMS(&player->currentWeapon, item[i]->arme));
             }
         } else if (strcmp(resultChar, "armure") == 0)
-            item[i]
-                ->validSlot[0] = SLOT_ARMURE;
+            item[i]->validSlot[0] = SLOT_ARMURE;
         else if (strcmp(resultChar, "activable") == 0)
             item[i]->validSlot[0] = SLOT_ACTIVABLE1;
-        else if (strcmp(resultChar, "talisment") == 0) 
+        else if (strcmp(resultChar, "talisment") == 0)
             item[i]->validSlot[0] = SLOT_TALISMENT;
 
         item[i]->arme->indice = i;
@@ -333,7 +334,6 @@ void inventaireAjoutObjet(t_inventaire* inv, t_item* item, int quantite) {
             itemStackNew->quantite = 1;
         addObject(inv->itemsStack, itemStackNew, getTypeIdByName(inv->itemsStack->registry, "ITEMSTACK_TYPE"));
     }
-
 }
 
 t_itemsStack* inventaireFindStack(t_inventaire* inv, t_item* item) {
@@ -368,7 +368,7 @@ void equipementRecalculerStats(t_joueur** c) {
 
     // Appliquer les multiplicatifs sur les valeurs additives pour calculer les calculatedStats
     (*c)->calculatedStats.healthMax.additive = ((*c)->baseStats.healthMax.additive + finalStats.healthMax.additive) * finalStats.healthMax.multiplicative;
-     (*c)->calculatedStats.attack.additive = ((*c)->baseStats.attack.additive + finalStats.attack.additive) * finalStats.attack.multiplicative;
+    (*c)->calculatedStats.attack.additive = ((*c)->baseStats.attack.additive + finalStats.attack.additive) * finalStats.attack.multiplicative;
     (*c)->calculatedStats.defense.additive = ((*c)->baseStats.defense.additive + finalStats.defense.additive) * finalStats.defense.multiplicative;
     (*c)->calculatedStats.speed.additive = ((*c)->baseStats.speed.additive + finalStats.speed.additive) * finalStats.speed.multiplicative;
 }
@@ -376,22 +376,28 @@ void equipementRecalculerStats(t_joueur** c) {
 void equiperEquipement(t_joueur** c, int inventoryIndex, equipementSlotType slot) {
     int i;
 
+    printf("SLOT : %d \n", slot);
+
     t_itemsStack* itemStack = (t_itemsStack*)getObject((*c)->inventaire->itemsStack, inventoryIndex);
     if (itemStack == NULL || itemStack->definition == NULL) {
         fprintf(stderr, "Erreur: ItemStack ou definition invalide.\n");
         return;
     }
     for (i = 0; i < 2; i++) {
-        printf("%d\n", itemStack->definition->validSlot[i]);
         if (slot == itemStack->definition->validSlot[i])
             break;
     }
-    if (slot == itemStack->definition->validSlot[i])
+    if (slot == itemStack->definition->validSlot[i]) {
         (*c)->equipement[slot].stack = itemStack;
-    else
+
+    } else {
         printf("Slot invalide\n");
-    if ((*c)->equipement[slot].stack->definition->arme->onEquipe != NULL)
+    }
+
+    if ((*c)->equipement[slot].stack->definition->arme->onEquipe != NULL) {
         callFonction((*c)->equipement[slot].stack->definition->arme->onEquipe);
+    }
+
     equipementRecalculerStats(c);
 }
 
@@ -503,4 +509,14 @@ void equipment_print(t_joueur* c) {
 
     // Affichage de l'or du personnage
     printf("Gold : %d\n", c->gold);
+}
+
+int findItemInventoryIndex(t_inventaire* inv, t_item* item) {
+    for (int i = 0; i < inv->itemsStack->count; i++) {
+        t_itemsStack* stack = (t_itemsStack*)getObject(inv->itemsStack, i);
+        if (stack && stack->definition == item) {
+            return i;
+        }
+    }
+    return -1;  // Item not found
 }
