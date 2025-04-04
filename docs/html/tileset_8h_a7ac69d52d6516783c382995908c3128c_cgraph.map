@@ -1,4 +1,0 @@
-<map id="freeTileset" name="freeTileset">
-<area shape="rect" id="node1" title="Libère la mémoire utilisée par un tileset." alt="" coords="5,5,97,32"/>
-<area shape="rect" id="node2" href="$object_manager_8c.html#aa17aa9d46c431f4b91114108468b73f3" title="Libere toute la memoire du gestionnaire et ses objets." alt="" coords="145,5,292,32"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="initTileset" name="initTileset">
-<area shape="rect" id="node1" title="Initialise un nouveau tileset à partir d&#39;une image." alt="" coords="5,132,92,159"/>
-<area shape="rect" id="node2" href="$object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="200,5,288,32"/>
-<area shape="rect" id="node3" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="171,56,317,83"/>
-<area shape="rect" id="node4" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="173,107,315,133"/>
-<area shape="rect" id="node5" href="$image_loader_8c.html#ad024f7b25128f491abc766b2831a828c" title="Charge une image depuis un fichier dans une texture SDL." alt="" coords="199,157,289,184"/>
-<area shape="rect" id="node6" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="193,208,295,235"/>
-<area shape="rect" id="node7" href="$tileset_8c.html#a923ccae68363da002082e3119cb5544c" title="Wrapper pour SDL_DestroyTexture (compatible avec objectManager)" alt="" coords="140,259,348,285"/>
-</map>

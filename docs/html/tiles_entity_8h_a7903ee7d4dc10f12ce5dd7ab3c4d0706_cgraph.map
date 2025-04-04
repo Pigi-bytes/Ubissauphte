@@ -1,4 +1,0 @@
-<map id="renderTileEntityWrapper" name="renderTileEntityWrapper">
-<area shape="rect" id="node1" title="Wrapper pour le rendu d&#39;entité de tuile (compatible avec fonctionManager)" alt="" coords="5,5,187,32"/>
-<area shape="rect" id="node2" href="$tiles_entity_8c.html#ab31c21bf012499d0d2e65835187d9ec2" title="Affiche une entité de tuile." alt="" coords="235,5,361,32"/>
-</map>

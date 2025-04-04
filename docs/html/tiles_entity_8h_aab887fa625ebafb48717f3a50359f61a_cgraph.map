@@ -1,7 +1,0 @@
-<map id="initTileEntityBase" name="initTileEntityBase">
-<area shape="rect" id="node1" title="Initialise les propriétés de base d&#39;une entité de tuile." alt="" coords="5,56,143,83"/>
-<area shape="rect" id="node2" href="$animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="191,56,365,83"/>
-<area shape="rect" id="node3" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="413,5,560,32"/>
-<area shape="rect" id="node4" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="415,56,558,83"/>
-<area shape="rect" id="node5" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="435,107,538,133"/>
-</map>

@@ -1,4 +1,0 @@
-<map id="t_mapAffichage" name="t_mapAffichage">
-<area shape="rect" id="node1" title="Structure contenant les éléments d&#39;affichage de la carte." alt="" coords="5,95,129,121"/>
-<area shape="rect" id="node2" href="$struct_line.html" title="Représente une ligne connectant deux salles sur la carte." alt="" coords="43,5,92,32"/>
-</map>

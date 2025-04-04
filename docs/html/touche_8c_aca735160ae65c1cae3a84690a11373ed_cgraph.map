@@ -1,6 +1,0 @@
-<map id="renderTouche" name="renderTouche">
-<area shape="rect" id="node1" title="Affiche une touche à l&#39;écran." alt="" coords="5,31,115,57"/>
-<area shape="rect" id="node2" href="$button_8c.html#a57726e67186d9103bd5627f07a2557d4" title="Affiche un bouton à l&#39;écran." alt="" coords="163,31,269,57"/>
-<area shape="rect" id="node3" href="$button_8c.html#a289805f0c618adfd4a051e912198f3f7" title=" " alt="" coords="317,5,468,32"/>
-<area shape="rect" id="node4" href="$text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="347,56,438,83"/>
-</map>

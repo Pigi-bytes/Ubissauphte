@@ -1,0 +1,43 @@
+<map id="registerType" name="registerType">
+<area shape="rect" id="node1" title="Enregistre un nouveau type dans le registre." alt="" coords="1959,897,2061,924"/>
+<area shape="rect" id="node2" href="$fichier_loader_8c.html#ae867be5f0e2327d83dfc93cb1ac8e8b3" title="Récupère des donnees dans un fichier." alt="" coords="1562,1150,1677,1177"/>
+<area shape="rect" id="node4" href="$main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="944,656,1067,682"/>
+<area shape="rect" id="node8" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="111,897,242,924"/>
+<area shape="rect" id="node9" href="$commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="508,36,683,62"/>
+<area shape="rect" id="node10" href="$fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="315,86,438,113"/>
+<area shape="rect" id="node11" href="$game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="109,137,244,164"/>
+<area shape="rect" id="node12" href="$equipements_manager_8c.html#a43fd9bc1e73271ce69490fd2600dd3d1" title="Crée un nouvel inventaire vide." alt="" coords="1759,238,1888,265"/>
+<area shape="rect" id="node15" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="948,1024,1063,1050"/>
+<area shape="rect" id="node16" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="941,568,1069,594"/>
+<area shape="rect" id="node17" href="$main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="744,441,868,468"/>
+<area shape="rect" id="node18" href="$main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="929,706,1081,733"/>
+<area shape="rect" id="node19" href="$fichier_loader_8c.html#a900eddaf20bfe9e80ba50f1a8805b65c" title="Crée un nouveau t_block." alt="" coords="1759,1049,1887,1076"/>
+<area shape="rect" id="node20" href="$equipements_manager_8c.html#a8eab5d8d34e6c28f585bfd9b827fc553" title="Sauvegarde un inventaire dans un fichier." alt="" coords="1558,960,1681,986"/>
+<area shape="rect" id="node21" href="$equipements_manager_8c.html#a0f64357d2718b2c06b478b80d1ba5757" title="Sauvegarde des items dans un fichier." alt="" coords="1574,1024,1665,1050"/>
+<area shape="rect" id="node22" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="731,1201,881,1228"/>
+<area shape="rect" id="node23" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="524,1252,667,1278"/>
+<area shape="rect" id="node24" href="$win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="331,1302,422,1329"/>
+<area shape="rect" id="node25" href="$animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="1736,517,1911,544"/>
+<area shape="rect" id="node39" href="$audio_manager_8c.html#aa9ae2bd109191bf7c025bb3bce5c4d29" title=" " alt="" coords="108,1353,245,1380"/>
+<area shape="rect" id="node40" href="$fscene_8c.html#ae4a7b0eb8dc4ab3d4461975955cba83d" title="Initialise un nouveau contrôleur de scènes." alt="" coords="733,1404,879,1430"/>
+<area shape="rect" id="node41" href="$tileset_8c.html#ab041e3b90591cb42626107fb85289c09" title="Initialise un nouveau tileset à partir d&#39;une image." alt="" coords="1161,796,1248,822"/>
+<area shape="rect" id="node3" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,1024,60,1050"/>
+<area shape="rect" id="node5" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="750,656,862,682"/>
+<area shape="rect" id="node6" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="540,656,651,682"/>
+<area shape="rect" id="node7" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="293,846,460,873"/>
+<area shape="rect" id="node13" href="$player_8c.html#a25a5b9b1991ba50388e6c3b0eab41d6c" title="Crée un nouveau joueur." alt="" coords="1567,238,1671,265"/>
+<area shape="rect" id="node14" href="$equipements_manager_8c.html#aca8ce83f7015926bf430cb136bb605f3" title="Charge un inventaire depuis un fichier." alt="" coords="1560,188,1679,214"/>
+<area shape="rect" id="node26" href="$enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="1355,340,1475,366"/>
+<area shape="rect" id="node30" href="$tiles_entity_8c.html#aab887fa625ebafb48717f3a50359f61a" title="Initialise les propriétés de base d&#39;une entité de tuile." alt="" coords="1551,517,1688,544"/>
+<area shape="rect" id="node38" href="$tiles_8c.html#a3db0e74a557bf693010a787414fb2c84" title="Charge une carte depuis un fichier." alt="" coords="1165,674,1244,701"/>
+<area shape="rect" id="node27" href="$boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1139,480,1270,506"/>
+<area shape="rect" id="node28" href="$ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1154,350,1255,377"/>
+<area shape="rect" id="node29" href="$slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1155,410,1255,437"/>
+<area shape="rect" id="node31" href="$barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1345,542,1485,569"/>
+<area shape="rect" id="node33" href="$blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1328,593,1503,620"/>
+<area shape="rect" id="node34" href="$chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1346,644,1485,670"/>
+<area shape="rect" id="node35" href="$merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1334,390,1497,417"/>
+<area shape="rect" id="node36" href="$spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1347,441,1483,468"/>
+<area shape="rect" id="node37" href="$wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1342,492,1489,518"/>
+<area shape="rect" id="node32" href="$tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1129,568,1280,594"/>
+</map>

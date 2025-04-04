@@ -1,4 +1,0 @@
-<map id="renderWeaponDuringAttack" name="renderWeaponDuringAttack">
-<area shape="rect" id="node1" title="Affiche l&#39;arme pendant une attaque." alt="" coords="5,5,207,32"/>
-<area shape="rect" id="node2" href="$core_8c.html#af285790c31a2afabd9332560b8249f5e" title="Interpole linéairement entre deux angles." alt="" coords="255,5,339,32"/>
-</map>

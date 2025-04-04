@@ -1,4 +1,0 @@
-<map id="t_camera" name="t_camera">
-<area shape="rect" id="node1" title="Représente une caméra 2D pour naviguer dans un niveau." alt="" coords="17,95,99,121"/>
-<area shape="rect" id="node2" href="$structt__delta_timer.html" title="Timer accumulant un temps delta." alt="" coords="5,5,111,32"/>
-</map>

@@ -1,0 +1,11 @@
+<map id="src/ui/hud.h" name="src/ui/hud.h">
+<area shape="rect" id="node1" title="Gestion de l&#39;interface utilisateur en jeu (HUD)" alt="" coords="405,5,503,32"/>
+<area shape="rect" id="node2" href="$main_world_8h.html" title=" " alt="" coords="286,80,462,107"/>
+<area shape="rect" id="node9" href="$hud_8c.html" title=" " alt="" coords="486,80,582,107"/>
+<area shape="rect" id="node3" href="$main_menu_8h.html" title=" " alt="" coords="36,162,211,189"/>
+<area shape="rect" id="node5" href="$main_8c.html" title=" " alt="" coords="204,251,293,278"/>
+<area shape="rect" id="node6" href="$main_world_8c.html" title=" " alt="" coords="287,162,461,189"/>
+<area shape="rect" id="node7" href="$boss__slime_8h.html" title="Définition et comportement du boss slime." alt="" coords="485,155,636,196"/>
+<area shape="rect" id="node4" href="$main_menu_8c.html" title=" " alt="" coords="5,251,180,278"/>
+<area shape="rect" id="node8" href="$boss__slime_8c.html" title=" " alt="" coords="485,244,636,285"/>
+</map>

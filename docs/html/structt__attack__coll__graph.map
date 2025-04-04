@@ -1,4 +1,0 @@
-<map id="t_attack" name="t_attack">
-<area shape="rect" id="node1" title="Gère l&#39;état et les propriétés d&#39;une attaque du joueur." alt="" coords="5,95,80,121"/>
-<area shape="rect" id="node2" href="$structt__sector.html" title="Représente un secteur angulaire pour les détections dans un cône." alt="" coords="5,5,80,32"/>
-</map>

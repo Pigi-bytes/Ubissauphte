@@ -1,0 +1,52 @@
+<map id="getObjectTypeId" name="getObjectTypeId">
+<area shape="rect" id="node1" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="1591,385,1717,412"/>
+<area shape="rect" id="node2" href="$audio_manager_8c.html#a0e16a111c05fb5ec00fd8abd413251e9" title=" " alt="" coords="1417,487,1515,513"/>
+<area shape="rect" id="node31" href="$object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9" title="Supprime un objet du gestionnaire à l&#39;index spécifié" alt="" coords="1233,816,1339,843"/>
+<area shape="rect" id="node40" href="$spike_8c.html#a3eadb51e32976557a9807e204d5d62e2" title=" " alt="" coords="1389,385,1543,412"/>
+<area shape="rect" id="node41" href="$spike_8c.html#a797af6559aa4443cd399e4fa810613c4" title="Met à jour l&#39;état et le comportement du piège à pointes." alt="" coords="1235,385,1337,412"/>
+<area shape="rect" id="node43" href="$fscene_8c.html#accbd14eb8c93d348b61a8cb09bbbf489" title="Enregistre une fonction pour une scène." alt="" coords="573,259,742,285"/>
+<area shape="rect" id="node46" href="$player_8c.html#aea2580dd56e7113d24936f6b09a66192" title=" " alt="" coords="1411,335,1521,361"/>
+<area shape="rect" id="node49" href="$minimap_8c.html#af89eb2c1015a83f78a092dc9f7acb521" title="Met a jour le contenu de la minimap." alt="" coords="1404,284,1528,311"/>
+<area shape="rect" id="node3" href="$audio_manager_8c.html#a7b6932905968b87fed6821c65e59ac2a" title=" " alt="" coords="1231,487,1341,513"/>
+<area shape="rect" id="node4" href="$audio_manager_8c.html#a9f819b827499e9c2eadb4f276dea5e29" title=" " alt="" coords="1246,537,1326,564"/>
+<area shape="rect" id="node5" href="$button_8c.html#a0b17babfe6275495728adc3e4ce2cb18" title="Traite les entrées utilisateur pour un bouton." alt="" coords="820,436,963,463"/>
+<area shape="rect" id="node16" href="$barrel_8c.html#ae3782096e95475fc398e60919d5447f4" title="Fonction appelée lors de la destruction du baril." alt="" coords="1041,689,1169,716"/>
+<area shape="rect" id="node24" href="$blacksmith_8c.html#ad0f86fd1caafea8c947e960f2d8d3b5a" title="Met à jour l&#39;état et le comportement du forgeron." alt="" coords="1035,588,1175,615"/>
+<area shape="rect" id="node26" href="$chest_8c.html#a1a123992315c67f40cd6b50322b319fd" title="Met à jour l&#39;état et le comportement du coffre." alt="" coords="1053,639,1157,665"/>
+<area shape="rect" id="node28" href="$merchant_8c.html#a2327237b68bc5eb3a06b5c1d4ba522ad" title="Met à jour l&#39;état et le comportement du marchand." alt="" coords="1041,537,1169,564"/>
+<area shape="rect" id="node30" href="$wizard_8c.html#a33e12f0b600e2edcbd5b3db83f9c86ae" title="Met à jour l&#39;état et le comportement du sorcier." alt="" coords="1049,487,1161,513"/>
+<area shape="rect" id="node6" href="$commun_8c.html#a9f60e865d0db40e46255669456e7ecd8" title="Wrapper pour la gestion des entrées boutons." alt="" coords="559,183,756,209"/>
+<area shape="rect" id="node15" href="$affichage_8c.html#acac6e41a22a08962af5736bb23e8026e" title="Met à jour la logique de l&#39;interface." alt="" coords="581,512,733,539"/>
+<area shape="rect" id="node7" href="$commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="336,208,511,235"/>
+<area shape="rect" id="node9" href="$fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="362,259,485,285"/>
+<area shape="rect" id="node10" href="$game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="356,309,491,336"/>
+<area shape="rect" id="node11" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="358,5,489,32"/>
+<area shape="rect" id="node12" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="348,56,499,83"/>
+<area shape="rect" id="node13" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="352,107,495,133"/>
+<area shape="rect" id="node14" href="$win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="378,157,469,184"/>
+<area shape="rect" id="node8" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="199,183,253,209"/>
+<area shape="rect" id="node17" href="$barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="821,689,961,716"/>
+<area shape="rect" id="node18" href="$tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="582,563,733,589"/>
+<area shape="rect" id="node19" href="$main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="362,512,485,539"/>
+<area shape="rect" id="node22" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="359,563,487,589"/>
+<area shape="rect" id="node23" href="$main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="347,461,499,488"/>
+<area shape="rect" id="node20" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="170,487,282,513"/>
+<area shape="rect" id="node21" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="5,461,116,488"/>
+<area shape="rect" id="node25" href="$blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="804,588,979,615"/>
+<area shape="rect" id="node27" href="$chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="822,639,961,665"/>
+<area shape="rect" id="node29" href="$merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="810,537,973,564"/>
+<area shape="rect" id="node32" href="$fscene_8c.html#aaf87e3d204392bd39aa8e399744406eb" title="Libère une scène par son nom." alt="" coords="1033,791,1176,817"/>
+<area shape="rect" id="node34" href="$fscene_8c.html#afd15beab139da97e2891821e59f2bb02" title="Supprime un objet d&#39;une scène." alt="" coords="1027,841,1183,868"/>
+<area shape="rect" id="node35" href="$barrel_8c.html#a8cdf392d002fe08f4e7b8fab7da3a803" title="Met à jour l&#39;état et le comportement du baril." alt="" coords="1051,740,1158,767"/>
+<area shape="rect" id="node36" href="$enemy_8c.html#a025690b31b4fe58df00af903db6a9368" title="Met à jour l&#39;état d&#39;un ennemi." alt="" coords="835,853,947,880"/>
+<area shape="rect" id="node38" href="$ghost_8c.html#a61c160b5d8cfc720b9f43b95d847bfa2" title="Met à jour l&#39;état et le comportement du fantôme." alt="" coords="1052,943,1157,969"/>
+<area shape="rect" id="node33" href="$main_world_8c.html#a450f0cf0cb1b7658e24da51e56db4122" title=" " alt="" coords="836,791,947,817"/>
+<area shape="rect" id="node37" href="$enemy_8c.html#a1984c1627c588895da06920e804c6d63" title="Wrapper pour la mise à jour d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="574,613,741,640"/>
+<area shape="rect" id="node39" href="$ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="607,828,708,855"/>
+<area shape="rect" id="node42" href="$spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1037,385,1173,412"/>
+<area shape="rect" id="node44" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="366,360,481,387"/>
+<area shape="rect" id="node45" href="$main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="164,411,288,437"/>
+<area shape="rect" id="node47" href="$player_8c.html#a19c9b26bd5ea417615cd19e9ce4c46f4" title="Met à jour l&#39;état et le comportement du joueur." alt="" coords="1232,335,1340,361"/>
+<area shape="rect" id="node48" href="$commun_8c.html#a32d90a8046d05096f3ea9453c8c56797" title="Wrapper pour la mise à jour du joueur." alt="" coords="576,461,739,488"/>
+<area shape="rect" id="node50" href="$commun_8c.html#ad528a6e4bc07397f718d5f9c153939fc" title="Wrapper pour la mise à jour de la minimap." alt="" coords="568,411,747,437"/>
+</map>

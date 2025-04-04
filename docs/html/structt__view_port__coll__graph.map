@@ -1,5 +1,0 @@
-<map id="t_viewPort" name="t_viewPort">
-<area shape="rect" id="node1" title="Lie une caméra à une texture de rendu et une zone d&#39;affichage écran." alt="" coords="13,184,103,211"/>
-<area shape="rect" id="node2" href="$structt__camera.html" title="Représente une caméra 2D pour naviguer dans un niveau." alt="" coords="17,95,99,121"/>
-<area shape="rect" id="node3" href="$structt__delta_timer.html" title="Timer accumulant un temps delta." alt="" coords="5,5,111,32"/>
-</map>

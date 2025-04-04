@@ -1,6 +1,0 @@
-var searchData=
-[
-  ['takedamagebarrel_2002',['takeDamageBarrel',['../barrel_8c.html#afd043e40ae36567695fb2a4c8cc692fa',1,'takeDamageBarrel(t_tileEntity *entity, float damage, t_context *context):&#160;barrel.c'],['../barrel_8h.html#afd043e40ae36567695fb2a4c8cc692fa',1,'takeDamageBarrel(t_tileEntity *entity, float damage, t_context *context):&#160;barrel.c']]],
-  ['takedamagefromplayer_2003',['takeDamageFromPlayer',['../enemy_8c.html#ae756d207dddebceef48dfd1ad481cf4e',1,'takeDamageFromPlayer(t_enemy *enemy, int damage, t_joueur *player, t_context *context, SDL_FPoint hitDirection):&#160;enemy.c'],['../enemy_8h.html#ae756d207dddebceef48dfd1ad481cf4e',1,'takeDamageFromPlayer(t_enemy *enemy, int damage, t_joueur *player, t_context *context, SDL_FPoint hitDirection):&#160;enemy.c']]],
-  ['trouergrille_2004',['trouerGrille',['../gene_room_8c.html#ade4f891d88036489d3477f266cdbac81',1,'trouerGrille(t_grille **grille, int xdebut, int ydebut, int changementLigne, int changementColonne, t_listeBlock *lb):&#160;geneRoom.c'],['../gene_room_8h.html#ade4f891d88036489d3477f266cdbac81',1,'trouerGrille(t_grille **grille, int xdebut, int ydebut, int changementLigne, int changementColonne, t_listeBlock *lb):&#160;geneRoom.c']]]
-];

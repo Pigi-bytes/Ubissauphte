@@ -1,0 +1,5 @@
+<map id="src/engine/entities/tilesEntity/barrel.h" name="src/engine/entities/tilesEntity/barrel.h">
+<area shape="rect" id="node1" title="Définition et comportement du baril destructible." alt="" coords="89,5,235,47"/>
+<area shape="rect" id="node2" href="$barrel_8c.html" title=" " alt="" coords="5,95,151,136"/>
+<area shape="rect" id="node3" href="$tiles_entity_8c.html" title=" " alt="" coords="175,95,317,136"/>
+</map>

@@ -1,0 +1,52 @@
+<map id="src/io/input.h" name="src/io/input.h">
+<area shape="rect" id="node1" title="Implémentation de la gestion des entrées." alt="" coords="2303,5,2410,32"/>
+<area shape="rect" id="node2" href="$commun_8h.html" title="Gestion du contenu utile pour le fonctionnement des différentes scènes." alt="" coords="1998,676,2113,703"/>
+<area shape="rect" id="node22" href="$context_8h.html" title="Gestion du contexte global du jeu." alt="" coords="893,229,999,256"/>
+<area shape="rect" id="node29" href="$player_8h.html" title="Définition et comportement du joueur principal." alt="" coords="1016,393,1159,435"/>
+<area shape="rect" id="node37" href="$affichage_8h.html" title="Gestionnaire de l&#39;interface d&#39;inventaire et d&#39;équipement." alt="" coords="2095,497,2229,524"/>
+<area shape="rect" id="node41" href="$button_8h.html" title="Système de gestion des boutons pour l&#39;interface utilisateur." alt="" coords="2299,401,2414,427"/>
+<area shape="rect" id="node43" href="$slider_8h.html" title="Gestion des curseurs glissants pour réglages de valeurs." alt="" coords="2736,594,2844,621"/>
+<area shape="rect" id="node45" href="$touche_8h.html" title="Gestion des touches affichées et interactives." alt="" coords="2442,497,2559,524"/>
+<area shape="rect" id="node47" href="$input_8c.html" title=" " alt="" coords="2787,80,2892,107"/>
+<area shape="rect" id="node48" href="$fscene_8h.html" title=" " alt="" coords="1699,80,1831,107"/>
+<area shape="rect" id="node3" href="$commande_menu_8c.html" title=" " alt="" coords="1657,833,1872,859"/>
+<area shape="rect" id="node4" href="$commande_menu_8h.html" title=" " alt="" coords="1803,751,2017,777"/>
+<area shape="rect" id="node6" href="$fps_menu_8h.html" title=" " alt="" coords="2247,751,2410,777"/>
+<area shape="rect" id="node8" href="$game_over_8h.html" title=" " alt="" coords="2463,751,2637,777"/>
+<area shape="rect" id="node10" href="$main_menu_8h.html" title=" " alt="" coords="1459,833,1633,859"/>
+<area shape="rect" id="node12" href="$main_world_8h.html" title=" " alt="" coords="1333,751,1509,777"/>
+<area shape="rect" id="node16" href="$option2_8h.html" title=" " alt="" coords="2661,751,2815,777"/>
+<area shape="rect" id="node18" href="$option_menu_8h.html" title=" " alt="" coords="2840,751,3023,777"/>
+<area shape="rect" id="node19" href="$scene_inventaire_8h.html" title=" " alt="" coords="1947,833,2158,859"/>
+<area shape="rect" id="node20" href="$win_8h.html" title=" " alt="" coords="2093,751,2223,777"/>
+<area shape="rect" id="node21" href="$commun_8c.html" title=" " alt="" coords="1613,751,1727,777"/>
+<area shape="rect" id="node5" href="$main_8c.html" title=" " alt="" coords="2079,922,2168,949"/>
+<area shape="rect" id="node7" href="$fps_menu_8c.html" title=" " alt="" coords="2233,833,2395,859"/>
+<area shape="rect" id="node9" href="$game_over_8c.html" title=" " alt="" coords="2471,833,2643,859"/>
+<area shape="rect" id="node11" href="$main_menu_8c.html" title=" " alt="" coords="1459,922,1633,949"/>
+<area shape="rect" id="node13" href="$main_world_8c.html" title=" " alt="" coords="1208,833,1383,859"/>
+<area shape="rect" id="node14" href="$boss__slime_8h.html" title="Définition et comportement du boss slime." alt="" coords="1033,825,1184,867"/>
+<area shape="rect" id="node15" href="$boss__slime_8c.html" title=" " alt="" coords="783,915,933,956"/>
+<area shape="rect" id="node17" href="$option2_8c.html" title=" " alt="" coords="2769,833,2923,859"/>
+<area shape="rect" id="node23" href="$context_8c.html" title=" " alt="" coords="468,311,573,338"/>
+<area shape="rect" id="node24" href="$health_8h.html" title="Système de gestion de la santé des entités." alt="" coords="842,304,1050,345"/>
+<area shape="rect" id="node25" href="$enemy_8h.html" title="Définition de la structure de base pour les ennemis." alt="" coords="1481,393,1624,435"/>
+<area shape="rect" id="node35" href="$barrel_8h.html" title="Définition et comportement du baril destructible." alt="" coords="322,587,469,628"/>
+<area shape="rect" id="node36" href="$spike_8h.html" title="Définition et comportement des pièges à pointes." alt="" coords="104,587,247,628"/>
+<area shape="rect" id="node26" href="$enemy_8c.html" title=" " alt="" coords="1619,490,1761,531"/>
+<area shape="rect" id="node27" href="$player_8c.html" title=" " alt="" coords="1452,490,1595,531"/>
+<area shape="rect" id="node28" href="$minimap_8h.html" title="Gestion de la minimap (affichage et mise a jour)" alt="" coords="1541,594,1671,621"/>
+<area shape="rect" id="node30" href="$equipements_manager_8c.html" title=" " alt="" coords="812,483,992,539"/>
+<area shape="rect" id="node31" href="$weapon_8c.html" title=" " alt="" coords="1016,490,1159,531"/>
+<area shape="rect" id="node32" href="$ghost_8c.html" title=" " alt="" coords="1183,490,1325,531"/>
+<area shape="rect" id="node33" href="$slime_8c.html" title=" " alt="" coords="645,490,788,531"/>
+<area shape="rect" id="node34" href="$tiles_entity_8h.html" title="Système d&#39;entités basées sur les tuiles." alt="" coords="173,490,316,531"/>
+<area shape="rect" id="node39" href="$hud_8h.html" title="Gestion de l&#39;interface utilisateur en jeu (HUD)" alt="" coords="1363,676,1460,703"/>
+<area shape="rect" id="node40" href="$mapview_8h.html" title="Gestion de l&#39;affichage de la carte du niveau." alt="" coords="1939,497,2071,524"/>
+<area shape="rect" id="node38" href="$affichage_8c.html" title=" " alt="" coords="2043,594,2175,621"/>
+<area shape="rect" id="node42" href="$button_8c.html" title=" " alt="" coords="2253,497,2367,524"/>
+<area shape="rect" id="node44" href="$slider_8c.html" title=" " alt="" coords="2646,676,2753,703"/>
+<area shape="rect" id="node46" href="$touche_8c.html" title=" " alt="" coords="2493,594,2609,621"/>
+<area shape="rect" id="node49" href="$genmap_8h.html" title=" " alt="" coords="1905,155,2104,181"/>
+<area shape="rect" id="node50" href="$fscene_8c.html" title=" " alt="" coords="1750,155,1881,181"/>
+</map>

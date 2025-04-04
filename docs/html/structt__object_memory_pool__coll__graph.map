@@ -1,4 +1,0 @@
-<map id="t_objectMemoryPool" name="t_objectMemoryPool">
-<area shape="rect" id="node1" title="Bloc memoire pour stockage d&#39;objets." alt="" coords="5,95,161,121"/>
-<area shape="rect" id="node2" href="$structt__typed_object.html" title="Objet type stocké dans le pool." alt="" coords="27,5,140,32"/>
-</map>

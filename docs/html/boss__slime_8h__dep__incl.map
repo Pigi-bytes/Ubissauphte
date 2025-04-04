@@ -1,9 +1,0 @@
-<map id="Ubissauphte/src/engine/entities/mobs/boss_slime.h" name="Ubissauphte/src/engine/entities/mobs/boss_slime.h">
-<area shape="rect" id="node1" title="Définition et comportement du boss slime." alt="" coords="189,5,393,47"/>
-<area shape="rect" id="node2" href="$main_world_8h.html" title=" " alt="" coords="204,95,379,136"/>
-<area shape="rect" id="node7" href="$boss__slime_8c.html" title=" " alt="" coords="403,95,606,136"/>
-<area shape="rect" id="node3" href="$main_menu_8h.html" title=" " alt="" coords="79,184,253,225"/>
-<area shape="rect" id="node5" href="$main_8c.html" title=" " alt="" coords="204,281,379,307"/>
-<area shape="rect" id="node6" href="$main_world_8c.html" title=" " alt="" coords="329,184,504,225"/>
-<area shape="rect" id="node4" href="$main_menu_8c.html" title=" " alt="" coords="5,273,180,315"/>
-</map>

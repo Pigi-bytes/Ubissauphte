@@ -1,8 +1,0 @@
-<map id="renderTouche" name="renderTouche">
-<area shape="rect" id="node1" title="Affiche une touche à l&#39;écran." alt="" coords="543,56,652,83"/>
-<area shape="rect" id="node2" href="$commun_8c.html#a6f136ac659e6de6d72e1bf97e2e78ac6" title="Wrapper pour le rendu des contrôles affichés." alt="" coords="331,56,495,83"/>
-<area shape="rect" id="node3" href="$commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,5,283,32"/>
-<area shape="rect" id="node5" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,56,271,83"/>
-<area shape="rect" id="node6" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,107,267,133"/>
-<area shape="rect" id="node4" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
-</map>

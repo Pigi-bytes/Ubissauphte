@@ -1,4 +1,0 @@
-<map id="s_grille" name="s_grille">
-<area shape="rect" id="node1" title=" " alt="" coords="5,95,75,121"/>
-<area shape="rect" id="node2" href="$structt__case.html" title="Représente une case individuelle dans la grille." alt="" coords="8,5,72,32"/>
-</map>

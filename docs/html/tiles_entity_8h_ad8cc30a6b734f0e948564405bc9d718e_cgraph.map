@@ -1,4 +1,0 @@
-<map id="replaceTileWithEntity" name="replaceTileWithEntity">
-<area shape="rect" id="node1" title="Remplace une tuile par une entité de tuile." alt="" coords="5,5,168,32"/>
-<area shape="rect" id="node2" href="$object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="216,5,304,32"/>
-</map>

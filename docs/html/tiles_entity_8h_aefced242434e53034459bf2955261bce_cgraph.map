@@ -1,4 +1,0 @@
-<map id="updateTileEntityWrapper" name="updateTileEntityWrapper">
-<area shape="rect" id="node1" title="Wrapper pour la mise à jour d&#39;entité de tuile (compatible avec fonctionManager)" alt="" coords="5,5,189,32"/>
-<area shape="rect" id="node2" href="$tiles_entity_8c.html#a4162d5d3dd8373f5d303da8e3538b7fb" title="Met à jour l&#39;état d&#39;une entité de tuile." alt="" coords="237,5,367,32"/>
-</map>

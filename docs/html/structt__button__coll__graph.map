@@ -1,5 +1,0 @@
-<map id="t_button" name="t_button">
-<area shape="rect" id="node1" title="Représente un bouton interactif de l&#39;interface utilisateur." alt="" coords="90,95,166,121"/>
-<area shape="rect" id="node2" href="$structt__fonction_param.html" title="Structure contenant les informations d&#39;une fonction." alt="" coords="5,5,133,32"/>
-<area shape="rect" id="node3" href="$structt__text.html" title="Structure représentant un élément textuel dans l&#39;interface." alt="" coords="158,5,218,32"/>
-</map>

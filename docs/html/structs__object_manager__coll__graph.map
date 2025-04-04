@@ -1,7 +1,0 @@
-<map id="s_objectManager" name="s_objectManager">
-<area shape="rect" id="node1" title=" " alt="" coords="126,199,259,225"/>
-<area shape="rect" id="node2" href="$structt__object_memory_pool.html" title="Bloc memoire pour stockage d&#39;objets." alt="" coords="5,95,161,121"/>
-<area shape="rect" id="node3" href="$structt__typed_object.html" title="Objet type stocké dans le pool." alt="" coords="27,5,140,32"/>
-<area shape="rect" id="node4" href="$structt__type_registry.html" title="Registre central des types." alt="" coords="243,95,361,121"/>
-<area shape="rect" id="node5" href="$structt__type_metadata.html" title="Metadonneée d&#39;un type enregistré (son nom et sa fonction de libération)" alt="" coords="239,5,365,32"/>
-</map>

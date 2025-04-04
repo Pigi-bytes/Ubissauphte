@@ -1,5 +1,0 @@
-<map id="placeOnRandomTile" name="placeOnRandomTile">
-<area shape="rect" id="node1" title="Place une entité sur une tuile libre aléatoire." alt="" coords="5,31,159,57"/>
-<area shape="rect" id="node2" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="207,5,292,32"/>
-<area shape="rect" id="node3" href="$tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="216,56,283,83"/>
-</map>
