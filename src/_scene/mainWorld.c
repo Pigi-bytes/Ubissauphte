@@ -61,7 +61,7 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     t_scene* scene = createScene(initObjectManager(registre), "main");
     t_tileset* tileset = initTileset(context->renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
     t_tileset* playerTileSet = initTileset(context->renderer, 32, 32, 16, "assets/imgs/chevaliervisiereouverteidle12run34.bmp");
-    // t_tileset* fantomTileSet = initTileset(context->renderer, 48, 16, 16, "assets/imgs/fantomeidle23un1232.bmp");
+    t_tileset* fantomTileSet = initTileset(context->renderer, 48, 16, 16, "assets/imgs/fantomeidle23un1232.bmp");
     t_tileset* slimeTileSet = initTileset(context->renderer, 48, 16, 16, "assets/imgs/slimeidle12run1213.bmp");
     // t_tileset* crabeTileSet = initTileset(context->renderer, 80, 16, 16, "assets/imgs/crabeidle123232run416.bmp");
 
@@ -85,7 +85,7 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     int nbEnemis;
     switch (context->difficulty) {
         case EASY:
-            nbEnemis = 0;
+            nbEnemis = 5;
             break;
         case NORMAL:
             nbEnemis = 10;
@@ -103,7 +103,7 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
 
     t_enemy* enemy;
     for (int i = 0; i < nbEnemis; i++) {
-        enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, scene);
+        enemy = createGhost((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, fantomTileSet, scene);
         addObject(salle->entities, &enemy->entity, ENEMY);
         placeOnRandomTile(*level, &enemy->entity, salle->entities);
         ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);

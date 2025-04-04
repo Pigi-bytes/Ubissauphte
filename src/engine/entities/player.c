@@ -426,6 +426,10 @@ void updatePlayer(t_joueur* player, float* deltaTime, t_salle* salle, t_objectMa
     player->health.maxHealth = player->calculatedStats.healthMax.additive;
     updateHealthSystem(&player->health, *deltaTime);
 
+    if (player->health.isDead) {
+        setScene(context->sceneController, "gameOver");
+    }
+
     // Gestion du ralentissement temporel (effet bullet-time apres une attaque reussie)
     updateTimeSlowEffect(player, &originalDeltaTime, deltaTime);
 
