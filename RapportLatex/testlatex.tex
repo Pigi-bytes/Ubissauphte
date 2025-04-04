@@ -64,8 +64,7 @@ Les contraintes imposées pour ce projet comprenaient :
 
 \subsection{Présentation du projet}
 
-\textbf{Lo Poti Donjon} est un projet ambitieux que nous, Ubissauphte, avons lancé le 13 janvier 2025. Initialement, nous envisagions de créer 
-un jeu de bataille navale en ligne. Cependant, après plusieurs réunions au sein du groupe, nous avons décidé de revoir notre approche. 
+\textbf{Lo Poti Donjon} est un projet ambitieux que nous, Ubissauphte, avons lancé le 13 janvier 2025. Initialement, nous envisagions de créer un jeu de bataille navale en ligne. Cependant, après plusieurs réunions au sein du groupe, nous avons décidé de revoir notre approche. 
 
 L'idée de créer un jeu plus complexe avec une patte graphique plus importante a vraiment stimulé notre créativité.
 
@@ -85,8 +84,8 @@ Portage sur diverses machines & \\
 \bottomrule
 \end{tabular}
 \end{center}
-Ce qui rend ce jeu unique, c'est son aspect imprévisible, grâce à une génération totalement aléatoire. Le design des cartes et le nombre d'ennemis que l'on rencontre sont impossible à anticiper. Chaque carte représente un environnement dans lequel le joueur évolue, et toutes les cartes sont générées aléatoirement sous forme de donjons, eux-mêmes générant un nombre aléatoire de cartes. Une fois que tous les ennemis ont été éliminés, le joueur débloque une nouvelle carte, différente de la précédente, qui le conduira jusqu'au boss final.
 
+Ce qui rend ce jeu unique, c'est son aspect imprévisible, grâce à une génération totalement aléatoire. Le design des cartes et le nombre d'ennemis que l'on rencontre sont impossible à anticiper. Chaque carte représente un environnement dans lequel le joueur évolue, et toutes les cartes sont générées aléatoirement sous forme de donjons, eux-mêmes générant un nombre aléatoire de cartes. Une fois que tous les ennemis ont été éliminés, le joueur débloque une nouvelle carte, différente de la précédente, qui le conduira jusqu'au boss final.
 
 \subsection{Conception}
 
@@ -133,7 +132,7 @@ Le donjon est généré sous forme de graphe où chaque nœud représente une sa
     \item Post-traitement : Insertion des salles spéciales à partir du graphe principal
 \end{itemize}
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.4\linewidth]{./img/map_generation.png}
 \caption{Exemple de sortie du générateur avec visualisation des connexions}
@@ -174,7 +173,7 @@ S_1(x) =
 \end{cases}
 \end{equation*}
 Après toutes ces étapes, nous obtenons une matrice de bruit de Perlin pour laquelle on obtient l'affichage suivant en modifiant certains paramètres comme la limite:\
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.4\textwidth]{./img/perlin.jpg}
 \caption{affichage du perlin noise}
@@ -256,7 +255,7 @@ Nous avons choisi d'utiliser un système de sauvegarde et de chargement de fichi
 Comment cela fonctionne-t-il ? 
 \end{center} Tout d'abord, les données relatives aux objets sont enregistrées dans un fichier texte, puis ces données sont injectées dans les structures correspondantes. Une fois les données utilisées et modifiées, nous pouvons les récupérer en les sauvegardant dans un nouveau fichier texte.
 
-\begin{figure}[ht]
+\begin{figure}[h]
     \centering 
     \includegraphics[width=1\linewidth]{./img/systemeSauvegarde.png} 
     \caption{Système de sauvegarde} 
@@ -266,7 +265,7 @@ Comment cela fonctionne-t-il ?
 
 Nous avons créé une interface d'inventaire permettant d'accéder aux différents objets collectés au cours de la partie. Elle s'adapte automatiquement à la taille de l'écran, offrant ainsi un affichage agréable pour les joueurs.
 
-\begin{figure}[ht] 
+\begin{figure}[h] 
     \centering 
     \includegraphics[width=0.4\linewidth]{./img/inventaire.png} 
     \caption{Inventaire} 
@@ -274,7 +273,7 @@ Nous avons créé une interface d'inventaire permettant d'accéder aux différen
 
    - Placement des objets dans les slots en fonction de leur type.
 
-\begin{figure}[ht]
+\begin{figure}[h]
     \centering 
     \includegraphics[width=0.2\linewidth]{./img/itemslot.png} 
     \caption{Inventaire : slot d'objet} 
@@ -283,17 +282,14 @@ Nous avons créé une interface d'inventaire permettant d'accéder aux différen
    - Affichage des statistiques et de la description en fonction de l'objet sur lequel on clique (voir \autoref{fig:inventaire}).
 
 
-
-
 \newpage
 
 \subsection{Le moteur physique}
 
 \subsubsection{Pourquoi un moteur physique ?}
 \label{sec:moteur_physique}
-
 Dans un jeu vidéo, et particulièrement dans un \textbf{rogue-like}, les interactions entre éléments (personnages, ennemis, objets) posent un défi de taille~: l'imprévisibilité des combinaisons de collisions. \\
-Les mouvements, les collisions, les rebonds et autres effets physiques doivent être simulés de manière réaliste pour ne pas gâcher l’expérience du joueur. Cependant, un système simplifié, où chaque interaction serait codée manuellement, devient rapidement ingérable, la solution que nous avons donc trouver est celle d'un \textbf{moteur physique}, permettant de gérer de manière automatisée toutes ces interactions.
+Les mouvements, les collisions, les rebonds et autres effets physiques doivent être simulés de manière réaliste pour ne pas gâcher l’expérience du joueur. Cependant, un système simplifié, où chaque interaction serait codée manuellement, devient rapidement ingérable, la solution que nous avons donc trouver est celle d'un \textbf{moteur physique}, permettant de gérer de manière automatisée toutes ces interactio
 
 \subsubsection{Composant Physique}
 \label{sec:structure_donnees}
@@ -305,7 +301,7 @@ Dans notre moteur de jeu, chaque entité est doté de \textbf{composant}, le com
     \item \texttt{restitution} : Élasticité des collisions
 \end{itemize}
 
-Ces propriétés physiques suffisent à générer des situations émergentes sans nécessiter de règles spécifiques :
+Ces propriétés physiques suffisent à gérer toute sorte de situations sans nécessité des règles prédéfinis.
 
 \paragraph{Slime qui subit une attaque}
 Lorsqu’un joueur frappe un Slime, la force appliquée le projette en arrière. Léger et élastique, il rebondit sur le sol et glisse légèrement si la friction est faible. S’il percute un mur, il rebondit en perdant de l’énergie à chaque impact. En heurtant un autre Slime, ils absorbent et redistribuent leur énergie, créant une réaction en chaîne.
@@ -313,44 +309,38 @@ Lorsqu’un joueur frappe un Slime, la force appliquée le projette en arrière.
 \paragraph{Orc qui subit une attaque}
 Face à un Orc, bien plus massif et peu élastique, l’impact le fait à peine reculer, tandis que le joueur subit lui un léger recul.
 
-\paragraph{Avantages}  
-Ce système réduit significativement la complexité du code. Par exemple, une épée qui repousse un ennemi utilise la même logique qu’un projectile ricochant sur un mur, grâce aux paramètres centralisés. Ajouter une entité (comme un projectile) se limite à définir ses constantes physiques.
-
 \subsubsection{Colliders}
 \label{sec:colliders}
-
 Sans détection des collisions, aucune interaction n'est possible. Pour rebondir, glisser ou transférer de l’énergie, les contacts doivent être détectés et traités. \\
 
-C’est ici qu’intervient le système de \textbf{colliders}, qui permet d’optimiser la détection des interactions en simplifiant la géométrie des objets. Plutôt que d’effectuer des calculs coûteux, chaque entité est associée à un volume primitive (cercle ou rectangle), c'est un compromis entre coût de calcul et précision: \\
+C’est ici qu’intervient le système de \textbf{colliders}, qui permet d’optimiser la détection des interactions en simplifiant la géométrie des objets. Plutôt que d’effectuer des calculs coûteux, chaque entité est associée à un volume géométrique simple (cercle ou rectangle), c'est un compromis entre coût de calcul et précision: 
 \begin{itemize}
     \item \textbf{Cercles} pour les éléments arrondis (tonneaux, ennemis, joueur).
     \item \textbf{Rectangles} pour les structures angulaire (caisses, murs).
 \end{itemize}
 
-\begin{figure}[ht]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.5\linewidth]{./img/debugCollider.png}
     \caption{Visualisation des colliders (en rouge) sur différentes entités}
     \label{fig:colliders_exemple}
 \end{figure}
 
-\paragraph{Modélisation du joueur} 
+\paragraph{Modélisation du joueur}
 Le joueur, initialement modélisé par un rectangle de \(16 \times 16\)~px, a été remplacé par un cercle de \(16\)~px de diamètre. Cette modification~: Procure une sensation de mouvement plus naturelle au joueur.
 
-\subsubsection{Algorithme de collisions}
+\subsubsection{Algorithme de detections des collisions}
 Pour détectée les contact entre deux \textbf{colliders}, nous avons accès à deux algorithmes (cercle-rectangle et cercle-cercle). Ces derniers nous renvoies certaines valeurs nécessaires pour la gérer les collisions:
 \begin{itemize}
 \item \textbf{Profondeur de pénétration} (\textit{depth}) : mesure la distance de chevauchement entre les objets.
 \item \textbf{Normale de collision (\(\vec{n}\))} : définit la direction dans laquelle appliquer la correction pour les séparer.
 \end{itemize}
 
-Soit un cercle de centre \((x_c, y_c)\) et de rayon \(r_c\), et un rectangle défini par son coin inférieur gauche \((x_r, y_r)\), sa largeur \(w_r\) et sa hauteur \(h_r\).  
+Soit un cercle de centre \((x_c, y_c)\) et de rayon \(r_c\), et un rectangle défini par son coin supérieur gauche \((x_r, y_r)\), sa largeur \(w_r\) et de hauteur \(h_r\), alors les algorithmes suivant s'appliquent :
 
-\paragraph{Algorithmes de Collision Implémenter} \hfill
-
-% Cercle-Rectangle
-\noindent\begin{minipage}[t]{0.48\textwidth}
-\subparagraph*{\underline{\small\textbf{Cercle-Rectangle}}}  
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+\subparagraph*{\underline{\small\textbf{Cercle-Rectangle}}}
 \begin{enumerate}[leftmargin=*,topsep=2pt,itemsep=2pt]
     \item Trouver le point du rectangle le plus proche du centre du cercle : 
     \[
@@ -379,9 +369,8 @@ Soit un cercle de centre \((x_c, y_c)\) et de rayon \(r_c\), et un rectangle dé
 \end{enumerate}
 \end{minipage}
 \hfill
-% Cercle-Cercle
 \begin{minipage}[t]{0.48\textwidth}
-\subparagraph*{\underline{\small\textbf{Cercle-Cercle}}}  
+\subparagraph*{\underline{\small\textbf{Cercle-Cercle}}}
 \begin{enumerate}[leftmargin=*,topsep=2pt,itemsep=2pt]
     \item Mesurer la distance\(^2\) entre les centres des deux cercles :  
     \[
@@ -405,15 +394,173 @@ Soit un cercle de centre \((x_c, y_c)\) et de rayon \(r_c\), et un rectangle dé
 
 \paragraph{Optimisation avec les distances au carré}
 \label{sec:optimisation}
-Pour accélérer la détection des collisions, nous comparons les distances au carré afin d'éviter l'utilisation coûteuse de \texttt{sqrt}. La distance entre deux points \((x_1,y_1)\) et \((x_2,y_2)\) est normalement :
-\[d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}\]
-On calcule plutôt :
-\[d^2 = (x_2-x_1)^2 + (y_2-y_1)^2\]
-et on compare directement \(d^2\) à la valeur seuil au carré. La condition \(d^2 < r^2\) est équivalente à \(d < r\), mais évite le calcul de la racine carrée.
+Pour accélérer la détection des collisions, nous utilisons les distances au carré, évitant ainsi le calcul coûteux de \texttt{sqrt}. En effet, la condition \(d^2 < r^2\) est équivalente à \(d < r\).
 
-\subsubsection{Resolution des collisions}
+La distance classique entre deux points \((x_1, y_1)\) et \((x_2, y_2)\) est donnée par :
+\[
+d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+\]
+Nous calculons plutôt :
+\[
+d^2 = (x_2 - x_1)^2 + (y_2 - y_1)^2
+\]
+Cette approche suffit pour la majorité des cas (absence de collision). Si une collision est détectée, le calcul de la racine reste nécessaire, mais le gain de temps est conséquent (\textit{voir Fig. en annexe \ref{fig:algoComparaison}}).
 
-\subsection{Les ennemis}
+\subsubsection{Résolution des collisions}
+\label{sec:resolution_collisions}
+Une fois la collision détectée (et les valeurs de \textbf{depth} et de \textbf{normale} calculées), il convient de \textbf{résoudre} la collision, c’est-à-dire de \textbf{corriger} la position des entités pour qu’elles ne se superposent plus et de \textbf{mettre à jour leurs vitesses} afin de simuler un rebond (ou tout autre effet physique souhaité).
+
+\paragraph{Étapes générales de la résolution}
+Lorsque deux objets entrent en collision selon les algorithmes précédemment décrits, nous procédons en deux temps :
+\begin{enumerate}
+    \item \textbf{Correction de la position}: Pour supprimer la pénétration de longueur \(\text{Depth}\) le long de la normale \(\vec{n}\), on ajuste les positions \(\text{pos}_1\) et \(\text{pos}_2\) proportionnellement aux masses des deux entitées~:
+    \[
+    \text{pos}_1 \gets \text{pos}_1 + \frac{\text{mass}_2}{\text{mass}_1 + \text{mass}_2} \times \text{Depth} \times\vec{n}, \quad
+    \text{pos}_2 \gets \text{pos}_2 - \frac{\text{mass}_1}{\text{mass}_1 + \text{mass}_2} \times \text{Depth} \times \vec{n}
+    \]
+
+    \textbf{Cas statique (\(\text{mass}_2 \to +\infty\))} : 
+    Lorsque l'objet \(m_2\) est considéré comme une surface fixe (comme un mur), il ne se déplace pas. L'ajustement de la position concerne uniquement l'objet \(m_1\).
+    \[
+    \text{pos}_1 \gets \text{pos}_1 +  \text{Depth} \times \vec{n}, \quad \text{pos}_2 \gets \text{pos}_2 - 0
+    \]
+
+    \item \textbf{Calcul et application de l’impulsion} : Dans le cas d’un choc, on calcule l'\textbf{impulsion} qui simulera la \textit{réaction élastique}. Cette impulsion dépend de la \texttt{vitesse}, de la \texttt{masse} et de la \texttt{restitution} (élasticité) de chaque entité.
+    \begin{itemize}
+        \item On commence par déterminer la \textbf{vitesse relative} \(\vec{v}_{\text{rel}}\), qui est la différence entre les vitesses \(\vec{v}_2\) et \(\vec{v}_1\) des deux objets :
+        \[
+        \vec{v}_{\text{rel}} \gets \vec{v}_2 - \vec{v}_1
+        \]
+        \item Ensuite, on calcule l'\textbf{impulsion effective} \(I\), qui modélise la réaction entre les deux objets lors de la collision. Cette impulsion dépend de la vitesse relative, des masses des objets et de leur restitution \(e\). Le coefficient de restitution \(e\) est la moyenne des coefficients \(e_1\) et \(e_2\) des deux objets :
+        \[
+        e \gets \frac{e_1 + e_2}{2}
+        \]
+        L'impulsion \(I\) est ensuite calculée à l'aide de la formule suivante :
+        \[
+        I \gets \frac{-(1 + e) \left( \vec{v}_{\text{rel}} \cdot \vec{n} \right)}{\dfrac{1}{\text{mass}_1} + \dfrac{1}{\text{mass}_2}}
+        \]
+        \item Enfin, on applique l'impulsion \(I\) aux deux objets pour mettre à jour leurs vitesses. L'impulsion est répartie entre les deux objets en fonction de leurs masses respectives :
+        \[
+        \vec{v}_1 \gets \vec{v}_1 + \frac{I}{\text{mass}_1} \, \vec{n}, \quad \vec{v}_2 \gets \vec{v}_2 - \frac{I}{\text{mass}_2} \, \vec{n}
+        \]
+        La vitesse de chaque objet est ajustée en fonction de l'impulsion \(I\) dans la direction de la normale \(\vec{n}\).
+    \end{itemize}
+\end{enumerate}
+
+\paragraph{Exemple : mur + slime + fantôme}
+Un \texttt{slime} projeté contre un mur voit d'abord son \textit{collider} corrigée pour sortir du mur. Ensuite, s’il rebondit et percute un autre \texttt{slime}, une nouvelle correction accompagnée de l'application d'une impulsion s'opère. Enfin, si dans la foulée un \texttt{fantôme} entre en contact avec les deux slimes, le moteur résout ces collisions \textbf{indépendamment} à chaque frame au sein de la même boucle de simulation.
+
+\paragraph{Limitations :}
+Même si le système fonctionne, il a encore quelques points faibles :
+\begin{itemize}
+    \item Il ne prend pas en compte les frottements latéraux, ce qui rend les rebonds et les glissades moins réalistes.
+    \item Le modèle de perte ou de restitution d'énergie est simplifié, sans détails comme l’angle du choc ou un amortissement progressif.
+    \item Lorsqu’il y a collision entre deux objets mobiles, seule la position de l’un d’eux est corrigée.
+\end{itemize}
+
+\subsubsection{Le \textit{deltaTime}}
+Le \textit{deltaTime} (\(\Delta t\)) est le temps écoulé entre deux frames. Il se calcule en soustrayant le temps de la frame précédente du temps actuel, puis en convertissant en secondes. Ce paramètre est essentiel pour rendre la simulation indépendante du taux de rafraîchissement. Il permet de mettre à jour les positions des entités de façon cohérente, en multipliant leur vitesse par \(\Delta t\).
+
+\paragraph{Limites liées à une chute importante du \textit{deltaTime}}
+Quand les FPS chutent brusquement, \(\Delta t\) devient très grand. Un \(\Delta t\) trop élevé peut entraîner des déplacements anormaux ou des disparitions d’entités. Cela perturbe la mise à jour des positions et la gestion des collisions dans le moteur physique, ce qui peut causer des comportements irréalistes ou même déstabiliser la simulation.
+
+\subsubsection{Bilan}
+La \textbf{résolution de collisions} \textbf{après} la \textbf{détection} constitue le \textbf{cœur} du comportement \og physique \fg{} du jeu. Grâce à cet enchaînement~:
+\begin{itemize}
+    \item \textbf{Détection} (algorithmes Cercle-Cercle / Cercle-Rectangle) + \textbf{Normale} + \textbf{Depth}.
+    \item \textbf{Correction de position} (pour annuler la pénétration).
+    \item \textbf{Calcul et application de l’impulsion} (rebonds, transfert d’énergie).
+\end{itemize}
+On obtient donc un système \textbf{relativement simple} mais qui \textbf{généralise} la plupart des interactions nécessaires : coups, poussées, glissades, etc.
+
+\subsection{Le système d'intelligence artificielle des ennemis}
+
+\subsection{Système des ennemis}
+
+\subsubsection{Pourquoi un système modulaire ?}
+\label{sec:systeme_modulaire}
+
+Dans un \textit{rogue-like}, les ennemis sont essentiels pour la dynamique du gameplay. Chaque ennemi doit offrir une expérience unique tout en s’intégrant harmonieusement dans le moteur de jeu. Coder chaque ennemi individuellement rendrait le système rigide et difficile à maintenir.  
+Pour éviter cela, nous avons adopté un \textbf{système modulaire}, où tous les ennemis partagent une base commune, tout en permettant des comportements spécifiques via des extensions.
+
+\subsubsection{Structure commune des ennemis}
+\label{sec:structure_commune}
+
+Tous les ennemis héritent d’une structure de base (\texttt{t\_enemy}), contenant les éléments essentiels à leur gestion :
+\begin{itemize}
+    \item \texttt{entity} : Gère la position, les collisions et les animations.
+    \item \texttt{health} : Contient les points de vie, l’invincibilité et les callbacks de mort.
+    \item \texttt{xpReward} : Définit les points d’expérience donnés au joueur à la mort de l’ennemi.
+\end{itemize}
+
+Cette structure permet une manipulation uniforme des ennemis dans le moteur de jeu, tout en autorisant des comportements spécifiques à chaque type d’ennemi.
+
+\subsubsection{Machines à états finis (FSM)}
+\label{sec:fsm}
+
+Chaque ennemi utilise une \textbf{machine à états finis} (FSM) pour gérer son comportement. Ce modèle permet de définir des états (\texttt{IDLE}, \texttt{CHASE\_PLAYER}, \texttt{ATTACK}) et des transitions entre eux selon les conditions du jeu.
+
+\paragraph{Exemple : Slime}  
+Le \texttt{Slime} utilise une FSM simple avec les états suivants :
+\begin{itemize}
+    \item \texttt{IDLE} : Immobile.
+    \item \texttt{PATROL} : Déplacement aléatoire.
+    \item \texttt{CHASE\_PLAYER} : Poursuite du joueur.
+    \item \texttt{CHASE\_LAST\_KNOWN} : Recherche la dernière position connue du joueur.
+\end{itemize}
+
+\paragraph{Exemple : Boss Slime}  
+Le \texttt{Boss Slime} possède une FSM plus avancée, intégrant des phases de combat (\texttt{PHASE1}, \texttt{PHASE2}, \texttt{PHASE3}) et des attaques spécifiques (\texttt{GROUND\_POUND}, \texttt{CHARGE\_ATTACK}).
+
+\subsubsection{Exemples d’ennemis}
+\label{sec:exemples_ennemis}
+
+\paragraph{Slime : Ennemi de base}  
+Le \texttt{Slime} est un ennemi simple apparaissant en grand nombre. Il se déplace par bonds successifs et alterne entre patrouille, poursuite et recherche de la dernière position connue du joueur.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.50\linewidth]{img/slimeFSM.png}
+    \caption{Schéma de décision du Slime}
+    \label{fig:slime_fsm}
+\end{figure}
+
+\paragraph{Fantôme : Ennemi imprévisible}  
+Le \texttt{Fantôme} se démarque par ses mouvements ondulatoires et sa capacité à orbiter autour du joueur. Il peut activer un mode \texttt{BOOST} pour accélérer et devenir plus difficile à esquiver.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.12\linewidth]{img/ghostFSM.png}
+    \caption{Schéma de décision du Fantôme}
+    \label{fig:ghost_fsm}
+\end{figure}
+
+\paragraph{Boss Slime : Ennemi complexe}  
+Le \texttt{Boss Slime} est un ennemi multi-phases, dont les attaques évoluent en fonction de sa santé. Il utilise des attaques spéciales comme :
+\begin{itemize}
+    \item \texttt{GROUND\_POUND} : Onde de choc au sol.
+    \item \texttt{CHARGE\_ATTACK} : Charge rapide vers le joueur.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/bossFSM.png}
+    \caption{Schéma de décision du Boss Slime}
+    \label{fig:boss_fsm}
+\end{figure}
+
+\subsubsection{Bilan}
+\label{sec:bilan_ennemis}
+
+Grâce à une structure commune et aux FSM, notre système est à la fois \textbf{modulaire} et \textbf{extensible}. De nouveaux ennemis peuvent être ajoutés ou modifiés sans impacter les autres, tout en garantissant des comportements variés et cohérents. Ce design simplifie la maintenance et améliore l’expérience de jeu.
+
+
+
+
+
+
+
+
 
 \subsection{Le cycle de jeu}
 
@@ -427,7 +574,7 @@ trouver des équipements grâce aux coffres et au marchand pour aller se battre 
 Le joueur commence son aventure avec un simple couteau, mais il sera possible pour lui de changer d'arme et d'améliorer son inventaire pour pouvoir jouer comme il le veut. Puisque les salles, boss et items sont aléatoires, une partie est unique
 \\\\
 Pour résumer : 
-\begin{figure}[ht] 
+\begin{figure}[h] 
     \centering 
     \includegraphics[width=0.4\linewidth]{./img/scchemaCycleJeu.png} 
     \caption{Inventaire} 
@@ -454,7 +601,7 @@ A force de test nous sommes arrivé à la conclusion que :
     \end{itemize} 
 \end{itemize}
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{./img/gdbSIGEGV.png}
 \caption{Trace d'exécution dans GDB montrant le point de crash}
@@ -468,21 +615,21 @@ L'analyse à l'aide de GDB a permis d'observer :
     \item Une variation aléatoire de la valeur de \texttt{salleDep} entre différentes exécutions et machine (\textit{voir Fig. \ref{fig:gdb0x1}})
 \end{itemize}
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{./img/gdb0xf0.png}
 \caption{Sortie de \texttt{print salleDep} montrant une adresse invalide}
 \label{fig:gdb0xf0}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{./img/gdb0x1.png}
 \caption{Variation de la valeur de \texttt{salleDep} entre deux exécutions}
 \label{fig:gdb0x1}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{./img/gdbNoError.png}
 \caption{Comportement normal lorsque tout marche}
@@ -498,18 +645,56 @@ t_scene* salleDep = (t_scene*)getObject(controller->scene, controller->currentSc
 Le problème venait de la tentative de conversion d'un pointeur \texttt{NULL}, retourné par la fonction \texttt{getObject} lorsqu'un indice invalide (Dans notre cas, \texttt{-1}) était utilisé.
 Nous avons théorisé que en raison des différences d'initialisation de la mémoire entre systèmes d'exploitation, certains environnements interprétaient correctement ce retour comme étant \texttt{NULL}, tandis que d'autres ne le faisaient pas, générant ainsi des valeurs indéterminées (par exemple : \texttt{0x01}, \texttt{0xf0}), pouvant inclure \texttt{NULL}, ne facilitant pas le debuggage.
 
-\newpage
-\subsection{Jeux de test}
-\textit{cette partie traite des jeux de test effecuter pour le projet}
 
-\subsubsection{Programme teste}
+\subsection{Analyse de compléxité d' l'algorithme de detection des collisions}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/algoComparaison.png}
+    \caption{Complexité moyenne de la détections de collision entre \(1\) et \(n\) objets}
+    \label{fig:algoComparaison}
+\end{figure}
+
+Ce graphique montre combien de temps prend un test de collision entre une entité et $n$ autres. Dans le jeu, chaque entité est comparée à toutes les autres, donc le temps total de calcul est en $O(n^2)$. Le graphique, lui, montre seulement un test (entre 1 et $n$), donc un coût linéaire $O(n)$.
+
+\subsubsection{Ce que montrent les courbes}
+
+On a quatre courbes :
+\begin{itemize}
+    \item \textbf{Optimisé avec collisions (bleu)} : On utilise les distances au carré, mais il y a des collisions détectées, donc on calcule encore quelques racines carrées.
+    \item \textbf{Optimisé sans collisions (vert)} : Même méthode, mais aucune collision n’est détectée, donc pas de racine carrée du tout.
+    \item \textbf{Non optimisé avec collisions (rouge)} : À chaque test, on calcule une racine carrée, et on traite les collisions.
+    \item \textbf{Non optimisé sans collisions (violet)} : On calcule la racine carrée, mais aucune collision détectée.
+\end{itemize}
+
+
+L’optimisation par distances au carré réduit significativement la constante de proportionnalité, mais ne change pas la complexité.
+
+\subsubsection{Ce que ça change dans le jeu}
+
+Comme chaque entité est comparée à toutes les autres, on a environ \(\frac{n(n-1)}{2}\) comparaisons. Donc si on gagne du temps sur une comparaison, ça se répercute partout. \\
+
+D’après le graphique, on observe que l’optimisation divise le temps de calcul global par environ 30\% et 50\% selon s’il y a beaucoup de collisions ou non. Ce n’est pas négligeable quand $n$ devient grand.
+
+\subsubsection{Limite de cette méthode}
+Même avec l’optimisation, on reste en $O(n^2)$, donc si le nombre d’entités augmente significativement, ça finira par ralentir.
+\subsubsection{Conclusion}
+L’optimisation avec les distances au carré est simple à mettre en place et permet déjà un bon gain de performance. Mais elle ne suffit pas si on veut gérer beaucoup d’entités. Il faudra à terme utiliser une autre structure pour réduire le nombre de comparaisons.
+
+\newpage
+
+
+\subsection{Programme test}
 Nous ne pouvons pas tester chaque bout de code car certain sont fait pour exclusivment marché qvec d'autre nous avons choisi trois programme pouvant fonctionné de façon autonome : objectManager, fscene et genMap.
+
+\subsubsection{Jeux de test}
+\textit{cette partie traite des jeux de test effecuter pour le projet}
 
 \subsubsection{Les test d'object Manager}
 Puisque l'object manager est centralisé pour fonctionner avec les autres alors il nous semble naturelle de comencé les teste par lui.
 Nous allons donc testé c'est fonction de création, d'ajout, de supression, de récuperation ainsi que de destruction\\
 
-\begin{table}[ht]
+\begin{table}[h]
 \centering
 \begin{tabular}{|c|c|}
 \hline
@@ -532,13 +717,15 @@ test\_deleteObject() & tester la supression d'un object de l'objectManager\\
 test\_freeObjectManager() & teste de destruction de l'objectManager\\
 \hline
 
+
+
 \end{tabular}
 \end{table}
 \vspace{-5mm}
 \bigskip
 \subsubsection{Les tests de fscene}
 Les tests sur fscne nous permettens de faire un test d'integration avec l'object manager voici les fonction de test utilisée.\\
-\begin{table}[ht]
+\begin{table}[h]
 \centering
 \begin{tabular}{|c|c|}
 \hline
@@ -562,7 +749,7 @@ test\_setScene()  & tester le changment de scène\\
 \subsubsection{Les tests de GenMap}
 Les tests sur GenMap nous permettens de faire un test unitaire pour la création d'un niveau, une partie essentiel au jeux.\\
 
-\begin{table}[ht]
+\begin{table}[h]
 \centering
 \begin{tabular}{|c|c|}
 \hline
@@ -585,7 +772,7 @@ test\_setScene()  & tester le changment de scène\\
 
 \subsection{Inventaire}
 
-\begin{figure}[ht]
+\begin{figure}[h]
     \centering 
     \includegraphics[width=0.75\linewidth]{./img/affichageStats.png} 
     \caption{ affichage stats-description} 
