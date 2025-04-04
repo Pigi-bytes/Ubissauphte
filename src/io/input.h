@@ -55,6 +55,11 @@ SDL_bool keyPressOnce(t_input* input, SDL_Scancode scancode);
  */
 void freeInput(t_input* input);
 
+/**
+ * @brief cherche l'indice de la touche pressé
+ * @param input Pointeur sur l'input à détruire
+ * @return l'indice de la touche
+ */
 int indiceToucheCliquer(t_input* input);
 
 #endif  // INPUT_H

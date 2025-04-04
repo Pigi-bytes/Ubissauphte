@@ -1,7 +1,12 @@
 /**
  * @file fonctionManager.h
  * @brief Gestion de fonction à paramètres variables
+ *
+ * @author Ubissauphte
+ * @version 1.0
+ * @date 2025
  */
+
 #ifndef FONCTION_MANAGER_H
 #define FONCTION_MANAGER_H
 
@@ -81,7 +86,18 @@ typedef struct fonction {
  */
 t_fonctionParam* creerFonction(void (*f)(t_fonctionParam*), ...);
 
+/**
+ * @brief ajout des paramètres dans le t_fonctionParam
+ * @param funct pointeur sur le fonctionParam à remplir
+ * @param list liste des argument à ajouter à funct
+ */
 void ajoutParametreInFonction(t_fonctionParam* funct, va_list list);
+
+/**
+ * @brief ajoute des paramètre dans un t_fonctionParam
+ * @param funct pointeur sur le fonctionParam à remplir
+ * @param ... liste des paramètres à rajouter
+ */
 void addPamaretre(t_fonctionParam* funct, ...);
 
 /**
