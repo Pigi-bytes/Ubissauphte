@@ -93,7 +93,7 @@ int main(int argc, char* argv[]) {
 
     context.itemListe = item_load(fichier, tileset, player);
     context.nbItem = fichier->blockManager->count;
-    
+
     equipementRecalculerStats(&player);
 
     player->indexCurrentRoom = 0;
@@ -122,6 +122,13 @@ int main(int argc, char* argv[]) {
         startFrame(context.frameData);
         t_scene* currentScene = getCurrentScene(context.sceneController);
 
+        if (keyPressOnce(context.input, SDL_SCANCODE_U)) {
+            // Ajoute les trois potions à l'inventaire du joueur
+            inventaireAjoutObjet(player->inventaire, context.itemListe[8], 1);   // Potion de Vitalité
+            inventaireAjoutObjet(player->inventaire, context.itemListe[9], 1);   // Potion de Téléportation
+            inventaireAjoutObjet(player->inventaire, context.itemListe[10], 1);  // Potion de Vitesse
+            equipementRecalculerStats(&player);
+        }
         executeSceneFunctions(currentScene, HANDLE_INPUT);
         updateInput(context.input);
 

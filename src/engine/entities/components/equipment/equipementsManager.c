@@ -209,7 +209,8 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
             else {
                 item[i]->arme->onEquipe = creerFonction(peutEquiperWrapper, FONCTION_PARAMS(&player->currentWeapon, item[i]->arme));
             }
-        } else if (strcmp(resultChar, "armure") == 0)
+        } else if (strcmp(
+            resultChar, "armure") == 0)
             item[i]->validSlot[0] = SLOT_ARMURE;
         else if (strcmp(resultChar, "activable") == 0)
             item[i]->validSlot[0] = SLOT_ACTIVABLE1;
@@ -221,6 +222,18 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
         getValue(block, "OnDeEquipe", &resultInt, INT);
         if (resultInt == 0)
             item[i]->onDeEquip = NULL;
+
+        getValue(block, "rarity", resultChar, STRING);
+        if (strcmp(resultChar, "uncommon") == 0)
+            item[i]->rarity = RARITY_UNCOMMON;
+        else if (strcmp(resultChar, "rare") == 0)
+            item[i]->rarity = RARITY_RARE;
+        else if (strcmp(resultChar, "epic") == 0)
+            item[i]->rarity = RARITY_EPIC;
+        else if (strcmp(resultChar, "legendary") == 0)
+            item[i]->rarity = RARITY_LEGENDARY;
+        else if (strcmp(resultChar, "common") == 0)
+            item[i]->rarity = RARITY_COMMON;
     }
 
     return item;
@@ -309,6 +322,37 @@ t_inventaire* inventory_load(t_fichier* fichier, t_item** item, int count) {
     return inv;
 }
 
+t_item* getItemByRarity(t_item** items, int count, t_itemRarity rarity) {
+    int* indices = malloc(count * sizeof(int));
+    if (!indices) return NULL;
+    int found = 0;
+    for (int i = 0; i < count; i++) {
+        if (items[i]->rarity == rarity)
+            indices[found++] = i;
+    }
+    if (found == 0) {
+        free(indices);
+        return NULL;
+    }
+    int chosen = indices[rand() % found];
+    free(indices);
+    return items[chosen];
+}
+
+t_itemRarity determineRarityByPercentage() {
+    int chance = rand() % 100;
+
+    if (chance < 60)
+        return RARITY_COMMON;
+    else if (chance < 85)
+        return RARITY_UNCOMMON;
+    else if (chance < 95)
+        return RARITY_RARE;
+    else if (chance < 99)
+        return RARITY_EPIC;
+    else
+        return RARITY_LEGENDARY;
+}
 t_inventaire* createInventaire() {
     t_inventaire* inv = (t_inventaire*)malloc(sizeof(t_inventaire));
 

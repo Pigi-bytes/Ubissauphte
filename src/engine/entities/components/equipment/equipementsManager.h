@@ -39,6 +39,14 @@ typedef struct {
     t_statModifier speed;
 } t_stats;
 
+typedef enum {
+    RARITY_COMMON,
+    RARITY_UNCOMMON,
+    RARITY_RARE,
+    RARITY_EPIC,
+    RARITY_LEGENDARY
+} t_itemRarity;
+
 typedef struct {
     char name[MAX_ITEM_NAME];
     t_stats stats;
@@ -51,6 +59,7 @@ typedef struct {
     char description[200];
     SDL_Texture* texture;
     int indiceTexture;
+    t_itemRarity rarity;
 } t_item;
 
 typedef struct {
@@ -101,6 +110,9 @@ void equipementRecalculerStats(struct s_joueur** c);
 
 // fonction use
 void equipementUse(struct s_joueur* c, equipementSlotType slot);
+
+t_item* getItemByRarity(t_item** items, int count, t_itemRarity rarity);
+t_itemRarity determineRarityByPercentage();
 
 // Debug
 void inventory_print(t_inventaire* inv);

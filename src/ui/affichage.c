@@ -1,5 +1,38 @@
 #include "affichage.h"
 
+t_text *createStackCountText(SDL_Renderer *renderer, TTF_Font *font, int count) {
+    char buffer[8];
+    snprintf(buffer, sizeof(buffer), "%d", count);
+    return createText(renderer, buffer, font, (SDL_Color){255, 255, 255, 255});
+}
+
+void renderStackCount(SDL_Renderer *renderer, TTF_Font *font, int count, SDL_Rect itemRect) {
+    if (count <= 1) {
+        return;  // Ne pas afficher si le compteur est à zéro
+    }
+    // Créer le texte pour le compteur
+    t_text *stackText = createStackCountText(renderer, font, count);
+
+    // Positionner le texte dans le coin inférieur droit
+    stackText->rect.x = itemRect.x + itemRect.w - stackText->rect.w - 5;
+    stackText->rect.y = itemRect.y + itemRect.h - stackText->rect.h - 5;
+
+    // Dessiner un fond semi-transparent pour améliorer la lisibilité
+    SDL_Rect bgRect = {
+        stackText->rect.x - 2,
+        stackText->rect.y - 2,
+        stackText->rect.w + 4,
+        stackText->rect.h + 4};
+
+    SDL_RenderFillRect(renderer, &bgRect);
+
+    // Rendre le texte
+    renderText(renderer, stackText);
+
+    // Nettoyer
+    freeText(stackText);
+}
+
 void calculCasePlayer(SDL_Rect *casePlayer, t_input *input, char *nom) {
     if (strcmp(nom, "Perso") == 0) {
         casePlayer->h = input->windowWidth * 0.14;
@@ -410,8 +443,7 @@ void updateAjoutObjet(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
         ui->elems->inventory_slots[newIndex].texture = stack->definition->texture;
 
         ui->j++;
-        // if (ui->j == 4) ui->j = 0;
-
+        
         int totalContentHeight = 0;
         for (int i = 0; i < ui->nbItems; i++) {
             int slotBottom = ui->elems->inventory_slots[i].rect.y + ui->elems->inventory_slots[i].rect.h;
@@ -419,7 +451,7 @@ void updateAjoutObjet(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
                 totalContentHeight = slotBottom;
             }
         }
-        
+
         totalContentHeight -= ui->elems->inventory_panel.rect.y;
         ui->maxScrollY = totalContentHeight - ui->elems->inventory_panel.rect.h;
         if (ui->maxScrollY < 0) ui->maxScrollY = 0;
@@ -459,13 +491,16 @@ void inventoryUI_Render(InventoryUI *ui, t_context *context) {
     SDL_RenderSetClipRect(context->renderer, &ui->elems->inventory_panel.rect);
     for (int i = 0; i < ui->nbItems; i++) {
         SDL_Rect dest = ui->elems->inventory_slots[i].rect;
-
         dest.y -= ui->scrollY;  // Appliquer le décalage
         ui->elems->inventory_slots[i].button->rect.y = dest.y;
         renderButton(context, ui->elems->inventory_slots[i].button);
 
         SDL_RenderCopy(context->renderer, ui->elems->inventory_slots[i].texture, NULL, &dest);
         SDL_RenderDrawRect(context->renderer, &dest);
+
+        // Récupérer la quantité de l'item
+        t_itemsStack *stack = getObject(ui->ext->character->inventaire->itemsStack, i);
+            renderStackCount(context->renderer, ui->ext->item_font, stack->quantite, dest);
     }
     SDL_RenderSetClipRect(context->renderer, NULL);
 

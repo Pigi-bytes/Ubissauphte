@@ -12,6 +12,7 @@ typedef struct {
     SDL_bool interactKeyPressed;
     SDL_Keycode lastInteractKey;
     t_text* interactText;
+    SDL_bool dropGiven;
 } t_chest;
 
 t_tileEntity* createChestEntity(t_tileset* tileset, t_scene* scene);

@@ -5,6 +5,7 @@
 
 #include "../../utils/fscene.h"
 #include "../tileset.h"
+#include "components/equipment/equipementsManager.h"
 #include "components/physic/physics.h"
 #include "entity.h"
 #include "player.h"

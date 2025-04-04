@@ -13,10 +13,8 @@ void updateChest(t_tileEntity* entity, t_context* context, t_salle* salle, t_obj
 
         if (chest->lastInteractKey != player->control->interact) {
             chest->lastInteractKey = player->control->interact;
-
             char interactPrompt[32];
             sprintf(interactPrompt, "[%s] to open", SDL_GetKeyName(SDL_GetKeyFromScancode(chest->lastInteractKey)));
-
             if (chest->interactText) {
                 updateText(&chest->interactText, context->renderer, interactPrompt, (SDL_Color){255, 255, 255, 255});
             } else {
@@ -26,22 +24,33 @@ void updateChest(t_tileEntity* entity, t_context* context, t_salle* salle, t_obj
 
         if (chest->playerInRange && !chest->isOpen) {
             SDL_bool interactKeyIsPressed = keyPressOnce(context->input, player->control->interact);
-
             if (interactKeyIsPressed && !chest->interactKeyPressed) {
                 chest->isOpen = SDL_TRUE;
                 jouerSFX("assets/chestOpening.wav", SDL_MIX_MAXVOLUME, 0, context->audioManager);
-
                 setAnimation(chest->base.entity.animationController, "open");
-                printf("Coffre ouvert ! Vous avez trouvé un trésor !\n");
+                printf("Coffre ouvert ! Vous avez trouvé un trésor aléatoire !\n");
             }
-
             chest->interactKeyPressed = interactKeyIsPressed;
         } else {
             chest->interactKeyPressed = SDL_FALSE;
         }
 
+        // Si le coffre est ouvert et que le drop n'a pas encore été généré, génère un objet aléatoire
+        if (chest->isOpen && !chest->dropGiven) {
+            t_itemRarity rarity = determineRarityByPercentage();
+            t_item* randomItem = getItemByRarity(context->itemListe, context->nbItem, rarity);
+            if (randomItem) {
+                inventaireAjoutObjet(player->inventaire, randomItem, 1);
+                printf("Vous avez obtenu: %s\n", randomItem->name);
+            } else {
+                printf("Aucun objet trouvé dans le coffre.\n");
+            }
+            chest->dropGiven = SDL_TRUE;
+        }
+
         if (entity->entity.debug) {
-            Debug_PushCircle(chest->detectionRange.x, chest->detectionRange.y, chest->detectionRange.radius, chest->playerInRange ? SDL_COLOR_GREEN : SDL_COLOR_BLUE);
+            Debug_PushCircle(chest->detectionRange.x, chest->detectionRange.y, chest->detectionRange.radius,
+                             chest->playerInRange ? SDL_COLOR_GREEN : SDL_COLOR_BLUE);
         }
     }
 
@@ -81,6 +90,7 @@ t_tileEntity* createChestEntity(t_tileset* tileset, t_scene* scene) {
     chest->lastInteractKey = 0;
     chest->interactText = NULL;
 
+    chest->dropGiven = SDL_FALSE;
     chest->base.update = updateChest;
     chest->base.render = renderChest;
 
