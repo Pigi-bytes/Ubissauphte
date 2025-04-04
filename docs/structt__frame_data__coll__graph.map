@@ -1,0 +1,4 @@
+<map id="t_frameData" name="t_frameData">
+<area shape="rect" id="node1" title="Structure de gestion des frames et du calcul de FPS." alt="" coords="5,109,109,136"/>
+<area shape="rect" id="node2" href="$structt__timer.html" title="Timer basé sur les ticks SDL." alt="" coords="23,5,92,32"/>
+</map>

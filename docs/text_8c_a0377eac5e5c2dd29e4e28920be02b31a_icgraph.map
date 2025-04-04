@@ -1,0 +1,45 @@
+<map id="renderText" name="renderText">
+<area shape="rect" id="node1" title="Affiche un texte à l&#39;écran." alt="" coords="1815,335,1905,361"/>
+<area shape="rect" id="node2" href="$affichage_8c.html#aef845a8c91f0a00b53865cd30d9cf1c5" title=" " alt="" coords="1614,5,1759,32"/>
+<area shape="rect" id="node7" href="$affichage_8c.html#aa9a711ef54b394d64cd54eb064acd062" title=" " alt="" coords="1408,157,1535,184"/>
+<area shape="rect" id="node8" href="$affichage_8c.html#a795ed97b31d862c27fb544d15f3128ba" title=" " alt="" coords="1402,107,1541,133"/>
+<area shape="rect" id="node9" href="$affichage_8c.html#a1cc7f7d5a20ca4ebd7951b5ec93330dc" title="Affiche un texte." alt="" coords="1637,157,1736,184"/>
+<area shape="rect" id="node10" href="$blacksmith_8c.html#afab43d4f6e89f6e6520be193bd0cf725" title="Affiche le forgeron et son interface." alt="" coords="1618,461,1755,488"/>
+<area shape="rect" id="node20" href="$boss__slime_8c.html#a81ccd0abdd116ce9abfeb9852237de51" title="Affiche la barre de vie du boss." alt="" coords="1607,664,1767,691"/>
+<area shape="rect" id="node22" href="$button_8c.html#a57726e67186d9103bd5627f07a2557d4" title="Affiche un bouton à l&#39;écran." alt="" coords="1418,208,1525,235"/>
+<area shape="rect" id="node32" href="$chest_8c.html#a3604f35f8ea76d7d2e23225a8302ea10" title="Affiche le coffre et son interface." alt="" coords="1636,512,1737,539"/>
+<area shape="rect" id="node34" href="$fps_display_8c.html#ab11eb3cfbb39ee3e14f3b1cedf0f6125" title="Affiche le compteur de FPS à l&#39;écran." alt="" coords="1618,360,1755,387"/>
+<area shape="rect" id="node36" href="$hud_8c.html#af388a8b4e2bda7685c3acb216ffc73ce" title="Affiche le HUD à l&#39;écran." alt="" coords="1639,613,1734,640"/>
+<area shape="rect" id="node38" href="$merchant_8c.html#ae41f37048288f6c61f3e29874c4b18a6" title="Affiche le marchand et son interface." alt="" coords="1624,563,1749,589"/>
+<area shape="rect" id="node40" href="$affichage_8c.html#a3fd6316e2996455f044cc30c206daba5" title="Affiche le nombre d&#39;items dans une pile." alt="" coords="1617,56,1756,83"/>
+<area shape="rect" id="node41" href="$commun_8c.html#a8daf30ec672eefaca3e824d1bc7dfb02" title="Wrapper pour le rendu de texte." alt="" coords="341,385,487,412"/>
+<area shape="rect" id="node42" href="$wizard_8c.html#a6d17b4d5016ebdb7a44e44396403fc89" title="Affiche le sorcier et son interface." alt="" coords="1632,411,1741,437"/>
+<area shape="rect" id="node3" href="$affichage_8c.html#a37a0b209c2ead72efaf0ae0c98c4af2c" title="Effectue le rendu de l&#39;interface." alt="" coords="1153,31,1304,57"/>
+<area shape="rect" id="node4" href="$commun_8c.html#a1ada1938c96f85c840f6c4ef88aca8b6" title="Wrapper pour le rendu de l&#39;UI d&#39;inventaire." alt="" coords="867,31,1073,57"/>
+<area shape="rect" id="node5" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="704,31,819,57"/>
+<area shape="rect" id="node6" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,309,60,336"/>
+<area shape="rect" id="node11" href="$blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1384,461,1559,488"/>
+<area shape="rect" id="node12" href="$tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1153,537,1304,564"/>
+<area shape="rect" id="node13" href="$main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="909,639,1031,665"/>
+<area shape="rect" id="node18" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="906,588,1034,615"/>
+<area shape="rect" id="node19" href="$main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="894,537,1046,564"/>
+<area shape="rect" id="node14" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="705,563,817,589"/>
+<area shape="rect" id="node15" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="545,537,656,564"/>
+<area shape="rect" id="node16" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="331,537,497,564"/>
+<area shape="rect" id="node17" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,487,261,513"/>
+<area shape="rect" id="node21" href="$boss__slime_8c.html#ad680bb14cc102a6fc5b2282894f399b1" title="Wrapper pour le rendu de la barre de vie (compatible avec fonctionManager)" alt="" coords="1121,639,1336,665"/>
+<area shape="rect" id="node23" href="$commun_8c.html#aa7943250e7e111ee38f3a8b0e3be002f" title="Wrapper pour le rendu des boutons UI." alt="" coords="333,335,495,361"/>
+<area shape="rect" id="node30" href="$touche_8c.html#aca735160ae65c1cae3a84690a11373ed" title="Affiche une touche à l&#39;écran." alt="" coords="707,81,816,108"/>
+<area shape="rect" id="node24" href="$commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,233,283,260"/>
+<area shape="rect" id="node25" href="$fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,436,257,463"/>
+<area shape="rect" id="node26" href="$game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,385,263,412"/>
+<area shape="rect" id="node27" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,183,271,209"/>
+<area shape="rect" id="node28" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,284,267,311"/>
+<area shape="rect" id="node29" href="$win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,335,241,361"/>
+<area shape="rect" id="node31" href="$commun_8c.html#a6f136ac659e6de6d72e1bf97e2e78ac6" title="Wrapper pour le rendu des contrôles affichés." alt="" coords="332,183,496,209"/>
+<area shape="rect" id="node33" href="$chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1402,512,1541,539"/>
+<area shape="rect" id="node35" href="$commun_8c.html#ae0721a23bab2cb039c5a0bdbe8965ae1" title="Wrapper pour l&#39;affichage du compteur FPS." alt="" coords="1133,436,1325,463"/>
+<area shape="rect" id="node37" href="$hud_8c.html#ad033bcd35bc8429da44582cc1d45a4ee" title="Wrapper pour afficher le HUD (compatible avec fonctionManager)" alt="" coords="1154,588,1303,615"/>
+<area shape="rect" id="node39" href="$merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1390,563,1553,589"/>
+<area shape="rect" id="node43" href="$wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1398,411,1545,437"/>
+</map>

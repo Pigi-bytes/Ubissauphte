@@ -1,0 +1,4 @@
+<map id="s_particleEmitter" name="s_particleEmitter">
+<area shape="rect" id="node1" title="Émetteur gérant un ensemble de particules." alt="" coords="5,95,139,121"/>
+<area shape="rect" id="node2" href="$structs__entity_particle.html" title="Représente une particule individuelle." alt="" coords="11,5,133,32"/>
+</map>

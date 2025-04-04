@@ -1,0 +1,4 @@
+<map id="s_healthSystem" name="s_healthSystem">
+<area shape="rect" id="node1" title="Gère la santé, les dégâts et les effets visuels associés." alt="" coords="5,124,132,151"/>
+<area shape="rect" id="node2" href="$structt__delta_timer.html" title="Timer accumulant un temps delta." alt="" coords="16,5,121,32"/>
+</map>

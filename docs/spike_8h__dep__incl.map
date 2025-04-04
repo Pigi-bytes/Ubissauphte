@@ -1,0 +1,5 @@
+<map id="src/engine/entities/tilesEntity/spike.h" name="src/engine/entities/tilesEntity/spike.h">
+<area shape="rect" id="node1" title="Définition et comportement des pièges à pointes." alt="" coords="88,5,231,47"/>
+<area shape="rect" id="node2" href="$spike_8c.html" title=" " alt="" coords="5,95,148,136"/>
+<area shape="rect" id="node3" href="$tiles_entity_8c.html" title=" " alt="" coords="172,95,315,136"/>
+</map>

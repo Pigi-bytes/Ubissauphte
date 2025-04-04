@@ -1,0 +1,95 @@
+/** 
+ * @mainpage Documentation du projet Lo poti donjon
+ *
+ * @section intro_sec Introduction
+ *
+ * Bienvenue dans la documentation du projet **Lo poti donjon**.  
+ * Ce projet est un jeu vidéo de type roguelike développé dans le cadre d'un projet universitaire.  
+ * L'objectif principal est de permettre au joueur d'explorer un donjon généré procéduralement, 
+ * tout en affrontant des ennemis, collectant des trésors, et améliorant son personnage.
+ *
+ * ---
+ *
+ * @section features_sec Fonctionnalités principales
+ *
+ * - **Génération procédurale** : Chaque partie est unique grâce à un système de génération aléatoire des niveaux.
+ * - **Système de combat** : Des combats dynamiques avec des ennemis dotés d'intelligence artificielle.
+ * - **Gestion de l'inventaire** : Collectez et gérez des objets, équipements et consommables.
+ * - **Interface utilisateur** : Une interface intuitive avec une carte, un HUD et des indicateurs de progression.
+ * - **Boss uniques** : Affrontez un boss puissant à la fin de chaque niveau.
+ * - **Système de progression** : Améliorez votre personnage avec des compétences et des équipements.
+ * - **Changement de touche** : La possiblité de changer ses touches ! 
+ * ---
+ *
+ * @section gameplay_sec Gameplay
+ *
+ * Le jeu se déroule dans un donjon généré aléatoirement, où le joueur doit :
+ * - Explorer les différentes salles pour trouver des trésors et des objets utiles.
+ * - Combattre des ennemis variés, chacun avec des comportements spécifiques.
+ * - Affronter un boss final
+ *
+ * ---
+ *
+ * @section tech_sec Technologies utilisées
+ *
+ * - **Langage** : C
+ * - **Bibliothèque graphique** : SDL2
+ * - **Extensions SDL utilisées** :
+ *   - SDL2_mixer : Pour la gestion des sons et musiques.
+ *   - SDL2_ttf : Pour l'affichage des polices de caractères.
+ * - **Système de build** : Makefile
+ * - **Outils de développement** :
+ *   - Git pour le contrôle de version.
+ *   - Doxygen pour la génération de documentation.
+ *   - GDB pour le débogage.
+     - Cunit pour les tests.
+ *
+ * ---
+ *
+ * @section install_sec Installation et compilation
+ *
+ * Avant de compiler le projet, assurez-vous que les dépendances suivantes sont installées sur votre système :
+ * - **SDL2** : Bibliothèque principale.
+ * - **SDL2_mixer** : Pour la gestion des sons.
+ * - **SDL2_ttf** : Pour l'affichage des polices.
+ *
+ * Sur un système Linux (par exemple Ubuntu), vous pouvez installer ces dépendances avec la commande suivante :
+ * ```
+ * sudo apt-get install libsdl2-dev libsdl2-mixer-dev libsdl2-ttf-dev
+ * ```
+ *
+ * Une fois les dépendances installées, suivez les étapes ci-dessous pour compiler et exécuter le projet :
+ * 1. Clonez le dépôt GitHub :
+ *    ```
+ *    git clone https://github.com/Pigi-bytes/Ubissauphte.git
+ *    ```
+ * 2. Accédez au répertoire du projet :
+ *    ```
+ *    cd Ubissauphte
+ *    ```
+ * 3. Compilez le projet avec `make` :
+ *    ```
+ *    make
+ *    ```
+ * 4. Lancez le jeu :
+ *    ```
+ *    ./lo-poti-donjon
+ *    ```
+ *
+ * ---
+ *
+ * @section usage_sec Comment utiliser cette documentation ?
+ *
+ * 1. **Explorer les classes et fonctions** : Utilisez le menu de navigation pour accéder aux différentes sections du code.
+ * 2. **Rechercher une fonctionnalité spécifique** : Utilisez la barre de recherche pour trouver des informations précises.
+ * 3. **Consulter les diagrammes** : Des diagrammes UML sont disponibles pour visualiser les relations entre les classes et les fonctions.
+ *
+ * ---
+ *
+ * @section contact_sec Contact
+ *
+ * Pour toute question ou contribution, veuillez contacter l'équipe de développement :
+ * - **GitHub** : [Lien vers le dépôt GitHub](https://github.com/Pigi-bytes/Ubissauphte)
+ *
+ * Merci d'utiliser **Lo poti donjon** et bonne exploration !
+ */

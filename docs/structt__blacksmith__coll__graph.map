@@ -1,0 +1,16 @@
+<map id="t_blacksmith" name="t_blacksmith">
+<area shape="rect" id="node1" title="Entité forgeron qui vend des objets rares." alt="" coords="429,424,536,451"/>
+<area shape="rect" id="node2" href="$structt__text.html" title="Structure représentant un élément textuel dans l&#39;interface." alt="" coords="301,320,361,347"/>
+<area shape="rect" id="node3" href="$structs__tile_entity.html" title="Entité spéciale placée sur une tuile avec des comportements spécifiques." alt="" coords="542,320,637,347"/>
+<area shape="rect" id="node4" href="$structs__entity.html" title="Structure de base pour toutes les entités du jeu." alt="" coords="552,231,627,257"/>
+<area shape="rect" id="node5" href="$structt__scene.html" title="Représente une scène composée d&#39;objets." alt="" coords="345,140,417,167"/>
+<area shape="rect" id="node6" href="$structt__fonction_param.html" title="Structure contenant les informations d&#39;une fonction." alt="" coords="141,5,269,32"/>
+<area shape="rect" id="node11" href="$structt__item.html" title="Définition d&#39;un item." alt="" coords="153,231,217,257"/>
+<area shape="rect" id="node14" href="$structt__arme.html" title="Représente une arme avec ses propriétés et attributs." alt="" coords="251,140,319,167"/>
+<area shape="rect" id="node7" href="$structt__object_manager.html" title="Gestionnaire des objets." alt="" coords="396,5,527,32"/>
+<area shape="rect" id="node9" href="$structt__animation_controller.html" title="Gère plusieurs animations pour une entité" alt="" coords="442,140,606,167"/>
+<area shape="rect" id="node8" href="$structt__physics.html" title="Composant de physique pour les entités." alt="" coords="631,140,713,167"/>
+<area shape="rect" id="node10" href="$structt__circle.html" title="Représente un cercle pour les collisions circulaires." alt="" coords="788,140,857,167"/>
+<area shape="rect" id="node12" href="$structt__stats.html" title="Statistiques d&#39;un personnage ou item." alt="" coords="33,140,100,167"/>
+<area shape="rect" id="node13" href="$structt__stat_modifier.html" title="Modificateurs de statistiques." alt="" coords="5,5,117,32"/>
+</map>

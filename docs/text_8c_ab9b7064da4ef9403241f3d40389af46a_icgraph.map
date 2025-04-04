@@ -1,0 +1,27 @@
+<map id="freeText" name="freeText">
+<area shape="rect" id="node1" title="Libère la mémoire utilisée par un élément textuel." alt="" coords="1305,537,1380,564"/>
+<area shape="rect" id="node2" href="$commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="680,360,855,387"/>
+<area shape="rect" id="node4" href="$fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="933,563,1056,589"/>
+<area shape="rect" id="node5" href="$game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="927,5,1062,32"/>
+<area shape="rect" id="node6" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,765,239,792"/>
+<area shape="rect" id="node7" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="692,443,843,469"/>
+<area shape="rect" id="node8" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="696,493,839,520"/>
+<area shape="rect" id="node9" href="$win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="949,56,1040,83"/>
+<area shape="rect" id="node10" href="$button_8c.html#a444d02738d087dbd280f7b8848284ae9" title="Libère la mémoire utilisée par un bouton." alt="" coords="1143,284,1233,311"/>
+<area shape="rect" id="node13" href="$fps_display_8c.html#a0fb9bb2a14f4944c0301375c3acd1243" title="Libère la mémoire utilisée par l&#39;affichage des FPS." alt="" coords="1127,715,1249,741"/>
+<area shape="rect" id="node20" href="$hud_8c.html#a61060e84df23feb6da2414e9ad044963" title="Libère la mémoire utilisée par le HUD." alt="" coords="1149,841,1227,868"/>
+<area shape="rect" id="node21" href="$affichage_8c.html#a96c4589074dbafb252edc8af036d2e43" title="Libère la mémoire de l&#39;interface." alt="" coords="1154,1019,1222,1045"/>
+<area shape="rect" id="node23" href="$affichage_8c.html#a3fd6316e2996455f044cc30c206daba5" title="Affiche le nombre d&#39;items dans une pile." alt="" coords="1119,1069,1257,1096"/>
+<area shape="rect" id="node3" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,468,60,495"/>
+<area shape="rect" id="node11" href="$affichage_8c.html#a450567ff27960688d155df65b947ab62" title=" " alt="" coords="923,157,1066,184"/>
+<area shape="rect" id="node12" href="$touche_8c.html#a35460666a6f7088a59aa2814c8aa85a0" title="Libère une touche de la mémoire." alt="" coords="948,360,1041,387"/>
+<area shape="rect" id="node14" href="$main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="933,867,1056,893"/>
+<area shape="rect" id="node18" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="931,917,1059,944"/>
+<area shape="rect" id="node19" href="$main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="919,816,1071,843"/>
+<area shape="rect" id="node15" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="711,841,823,868"/>
+<area shape="rect" id="node16" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="503,841,614,868"/>
+<area shape="rect" id="node17" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,816,453,843"/>
+<area shape="rect" id="node22" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="501,1019,616,1045"/>
+<area shape="rect" id="node24" href="$affichage_8c.html#a37a0b209c2ead72efaf0ae0c98c4af2c" title="Effectue le rendu de l&#39;interface." alt="" coords="919,1069,1070,1096"/>
+<area shape="rect" id="node25" href="$commun_8c.html#a1ada1938c96f85c840f6c4ef88aca8b6" title="Wrapper pour le rendu de l&#39;UI d&#39;inventaire." alt="" coords="664,1069,871,1096"/>
+</map>
