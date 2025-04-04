@@ -1,0 +1,7 @@
+<map id="renderHUD" name="renderHUD">
+<area shape="rect" id="node1" title="Affiche le HUD à l&#39;écran." alt="" coords="5,81,100,108"/>
+<area shape="rect" id="node2" href="$hud_8c.html#ac2ceb2c64a019e971014a312b534649f" title=" " alt="" coords="148,5,281,32"/>
+<area shape="rect" id="node3" href="$hud_8c.html#a026c775dfde1812480ba7b23cb9218c7" title=" " alt="" coords="150,56,279,83"/>
+<area shape="rect" id="node4" href="$text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="169,107,260,133"/>
+<area shape="rect" id="node5" href="$hud_8c.html#a79288053073d4617199b790c1aa5c4f9" title=" " alt="" coords="163,157,266,184"/>
+</map>

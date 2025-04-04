@@ -1,0 +1,4 @@
+<map id="applyDamage" name="applyDamage">
+<area shape="rect" id="node1" title="Applique des dégâts à une entité" alt="" coords="5,5,119,32"/>
+<area shape="rect" id="node2" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="167,5,295,32"/>
+</map>

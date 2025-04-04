@@ -1,0 +1,8 @@
+<map id="getFrontale" name="getFrontale">
+<area shape="rect" id="node1" title="Sélectionne une tuile frontale adaptée." alt="" coords="5,107,101,133"/>
+<area shape="rect" id="node2" href="$liste_block_8c.html#a30db6937fc6a2badca7e728d810f6960" title="Trouve un bloc par son nom." alt="" coords="166,5,279,32"/>
+<area shape="rect" id="node3" href="$liste_block_8c.html#a263b5829b42a63268f4c46467e03ff26" title="Vérifie si un bloc est d&#39;un type spécifique." alt="" coords="189,56,257,83"/>
+<area shape="rect" id="node4" href="$liste_block_8c.html#a9aa0642bbe5cd64582544bb08f6bf391" title="Copie les valeurs d&#39;un bloc vers un autre." alt="" coords="181,107,264,133"/>
+<area shape="rect" id="node5" href="$liste_block_8c.html#ae2648a0e73e7ec24142118d88e25c6e2" title="Récupère la liste des blocs d&#39;un type spécifique." alt="" coords="174,157,271,184"/>
+<area shape="rect" id="node6" href="$liste_block_8c.html#af11d3ca15d046a7fe2a5eab6962e63f7" title="Sélectionne un bloc aléatoire selon son type." alt="" coords="149,208,296,235"/>
+</map>

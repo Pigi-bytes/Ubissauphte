@@ -1,0 +1,4 @@
+<map id="stockerEtatVoisin" name="stockerEtatVoisin">
+<area shape="rect" id="node1" title="Stocke les voisins d&#39;une case." alt="" coords="5,5,140,32"/>
+<area shape="rect" id="node2" href="$group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d" title="Vérifie si des coordonnées sont dans la matrice." alt="" coords="188,5,271,32"/>
+</map>

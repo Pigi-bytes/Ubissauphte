@@ -1,0 +1,9 @@
+<map id="addPamaretre" name="addPamaretre">
+<area shape="rect" id="node1" title="ajoute des paramètre dans un t_fonctionParam" alt="" coords="331,107,444,133"/>
+<area shape="rect" id="node2" href="$commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,5,283,32"/>
+<area shape="rect" id="node4" href="$fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,56,257,83"/>
+<area shape="rect" id="node5" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,107,261,133"/>
+<area shape="rect" id="node6" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,157,271,184"/>
+<area shape="rect" id="node7" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,208,267,235"/>
+<area shape="rect" id="node3" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,107,60,133"/>
+</map>

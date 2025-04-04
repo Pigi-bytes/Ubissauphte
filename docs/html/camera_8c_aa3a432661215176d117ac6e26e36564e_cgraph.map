@@ -1,0 +1,7 @@
+<map id="centerCameraOn" name="centerCameraOn">
+<area shape="rect" id="node1" title="Centre la caméra sur des coordonnées précises en ne sortant pas du niveau." alt="" coords="5,56,137,83"/>
+<area shape="rect" id="node2" href="$camera_8c.html#a58b8c8fc7c7b6b734b86acccaade2f05" title="Met à jour l&#39;effet de tremblement de la caméra." alt="" coords="185,56,343,83"/>
+<area shape="rect" id="node3" href="$timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="403,5,519,32"/>
+<area shape="rect" id="node4" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="397,56,525,83"/>
+<area shape="rect" id="node5" href="$timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="391,107,531,133"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="createInventaire" name="createInventaire">
+<area shape="rect" id="node1" title="Crée un nouvel inventaire vide." alt="" coords="5,81,135,108"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="183,5,329,32"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="185,56,327,83"/>
+<area shape="rect" id="node4" href="$equipements_manager_8c.html#a145b60908123a9bc199af48b992b3baf" title="Fonction wrapper pour la libération d&#39;item." alt="" coords="201,107,311,133"/>
+<area shape="rect" id="node5" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="205,157,307,184"/>
+</map>

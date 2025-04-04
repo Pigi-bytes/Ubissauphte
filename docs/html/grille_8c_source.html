@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon:  Fichier source de Ubissauphte/src/engine/world/generationSalle/grille.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_2826858af9faa5fe77c775e96e0e1227.html">engine</a></li><li class="navelem"><a class="el" href="dir_ead93a21b55928290f9cdbe2a28bde81.html">world</a></li><li class="navelem"><a class="el" href="dir_2c8babf3c2c824670b2174408d28f18e.html">generationSalle</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">grille.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="grille_8c.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="grille_8h.html">grille.h</a>&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="grille_8c.html#aa46ed4b4197713dd30ef8b5eaac26a97">    3</a></span>&#160;<a class="code" href="structt__case.html">t_case</a> <a class="code" href="grille_8c.html#aa46ed4b4197713dd30ef8b5eaac26a97">case_null</a> = {-1, -1, NULL, -1, {NULL}};</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">    5</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> maxx, <span class="keywordtype">int</span> maxy) {</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="keywordflow">return</span> (x &gt;= 0 &amp;&amp; x &lt; maxx &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; maxy);</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;}</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="group__type__case__constants.html#ga2b120790d7e25547b735afe2a069367f">    9</a></span>&#160;<a class="code" href="structt__case.html">t_case</a>* <a class="code" href="group__type__case__constants.html#ga2b120790d7e25547b735afe2a069367f">initCase</a>(<span class="keywordtype">int</span> i, <span class="keywordtype">int</span> j, <span class="keywordtype">int</span> val) {</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="structt__case.html">t_case</a>* c = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structt__case.html">t_case</a>));</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    c-&gt;i = i;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    c-&gt;j = j;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    c-&gt;val = val;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    c-&gt;tiles = NULL;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> c;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="group__type__case__constants.html#ga6e4aa5870831bf3b631ed8cd25c458ae">   18</a></span>&#160;<a class="code" href="structt__grille.html">t_grille</a>* <a class="code" href="group__type__case__constants.html#ga6e4aa5870831bf3b631ed8cd25c458ae">initGrille</a>(<span class="keywordtype">int</span> nbLigne, <span class="keywordtype">int</span> nbColonne) {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="structt__grille.html">t_grille</a>* g = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structt__grille.html">t_grille</a>));</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">if</span> (!g) {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        printf(<span class="stringliteral">&quot;erreur lors de l&#39;allocationde la grille&quot;</span>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        exit(EXIT_FAILURE);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    g-&gt;grille = (<a class="code" href="structt__case.html">t_case</a>***)malloc(<span class="keyword">sizeof</span>(<a class="code" href="structt__case.html">t_case</a>**) * nbLigne);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">if</span> (!(g-&gt;grille)) {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        printf(<span class="stringliteral">&quot;erreur lors de l&#39;allocation des ligne de la grille&quot;</span>);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        exit(EXIT_FAILURE);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    }</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nbLigne; i++) {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        g-&gt;grille[i] = (<a class="code" href="structt__case.html">t_case</a>**)malloc(<span class="keyword">sizeof</span>(<a class="code" href="structt__case.html">t_case</a>*) * nbColonne);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">if</span> (!(g-&gt;grille[i])) {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            printf(<span class="stringliteral">&quot;erreur lors de l&#39;allocation de la colonne de la grille&quot;</span>);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            exit(EXIT_FAILURE);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nbLigne; i++) {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; nbColonne; j++) {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            g-&gt;grille[i][j] = NULL;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    g-&gt;nbLigne = nbLigne;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    g-&gt;nbColonne = nbColonne;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">return</span> g;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="group__type__case__constants.html#ga06ad57c4d3fec22479b2fb7631a982bd">   48</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__type__case__constants.html#ga06ad57c4d3fec22479b2fb7631a982bd">ajouterCase</a>(<a class="code" href="structt__grille.html">t_grille</a>* g, <span class="keywordtype">int</span> i, <span class="keywordtype">int</span> j, <span class="keywordtype">int</span> val) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">if</span> (g-&gt;grille[i][j] == NULL) {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        g-&gt;grille[i][j] = <a class="code" href="group__type__case__constants.html#ga2b120790d7e25547b735afe2a069367f">initCase</a>(i, j, val);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="group__type__case__constants.html#ga96c79584fd69d065d779dcf6b129a41c">   54</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__type__case__constants.html#ga96c79584fd69d065d779dcf6b129a41c">freeGrille</a>(<a class="code" href="structt__grille.html">t_grille</a>* g) {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; g-&gt;nbLigne; i++) {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; g-&gt;nbColonne; j++) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            free(g-&gt;grille[i][j]-&gt;tiles);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            free(g-&gt;grille[i][j]);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        free(g-&gt;grille[i]);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    free(g-&gt;grille);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    free(g);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="group__type__case__constants.html#gae5c605b887cfd15cb299a18ae25a4ce9">   66</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__type__case__constants.html#gae5c605b887cfd15cb299a18ae25a4ce9">stockerEtatVoisin</a>(<a class="code" href="structt__grille.html">t_grille</a>* g, <span class="keywordtype">int</span> i, <span class="keywordtype">int</span> j, <span class="keywordtype">int</span> nbLigne, <span class="keywordtype">int</span> nbColonne) {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#ga4923c641a8c6d1e844453b8851692ea6">VOISIN_HAUT</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i - 1, j, nbLigne, nbColonne)) ? g-&gt;grille[i - 1][j] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#ga485f2aef3e74d6ef015d335ac1711aa8">VOISIN_HAUT2</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i - 2, j, nbLigne, nbColonne)) ? g-&gt;grille[i - 2][j] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#gad18fcda361b70a08a942f4d21255ceb2">VOISIN_BAS</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i + 1, j, nbLigne, nbColonne)) ? g-&gt;grille[i + 1][j] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#gaaf397b08d44149edbe8d0af315f2fb6e">VOISIN_BAS2</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i + 2, j, nbLigne, nbColonne)) ? g-&gt;grille[i + 2][j] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#ga3b469b0d14bb70e73c62b26d32108c13">VOISIN_GAUCHE</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i, j - 1, nbLigne, nbColonne)) ? g-&gt;grille[i][j - 1] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#gaf9fc5d222fcd2ef9a057fc25903439cd">VOISIN_GAUCHE2</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i, j - 2, nbLigne, nbColonne)) ? g-&gt;grille[i][j - 2] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#gabf38d5a652dfa8540605fe7856badeb5">VOISIN_DROIT</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i, j + 1, nbLigne, nbColonne)) ? g-&gt;grille[i][j + 1] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#ga9776b8870433c3d64ef3af28839fa473">VOISIN_DROIT2</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i, j + 2, nbLigne, nbColonne)) ? g-&gt;grille[i][j + 2] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#gade60f28b556f7e8e821ea7397a02b975">VOISIN_DIAG_DROIT_BAS</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i + 1, j + 1, nbLigne, nbColonne)) ? g-&gt;grille[i + 1][j + 1] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#ga2065550128f2640692f26fe8738546ef">VOISIN_DIAG_DROIT_BAS2</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i + 2, j + 2, nbLigne, nbColonne)) ? g-&gt;grille[i + 2][j + 2] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#ga0b6578d830248a949a34c5d9218a3374">VOISIN_CENTRE_BAS2_DROIT</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i + 2, j + 1, nbLigne, nbColonne)) ? g-&gt;grille[i + 2][j + 1] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#ga5782cfbd5a24830e1a88e6eb509fe4b7">VOISIN_CENTRE_BAS2_GAUCHE</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i + 2, j - 1, nbLigne, nbColonne)) ? g-&gt;grille[i + 2][j - 1] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#gafe0f8d2a6b9eb4bb30c72079e92038f0">VOISIN_DIAG_DROIT_HAUT</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i - 1, j + 1, nbLigne, nbColonne)) ? g-&gt;grille[i - 1][j + 1] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#ga2eaa25d3f27bd0087b8f18a0be06e43d">VOISIN_DIAG_DROIT_HAUT2</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i - 2, j + 2, nbLigne, nbColonne)) ? g-&gt;grille[i - 2][j + 2] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#gab0ab0bb424870d2513bf51acb42e5f15">VOISIN_DIAG_GAUCHE_BAS</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i + 1, j - 1, nbLigne, nbColonne)) ? g-&gt;grille[i + 1][j - 1] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#ga2065550128f2640692f26fe8738546ef">VOISIN_DIAG_DROIT_BAS2</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i + 2, j - 2, nbLigne, nbColonne)) ? g-&gt;grille[i + 2][j - 2] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#ga06cc0bbecac08a2441aa81b71ef39db8">VOISIN_DIAG_GAUCHE_HAUT</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i - 1, j - 1, nbLigne, nbColonne)) ? g-&gt;grille[i - 1][j - 1] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    g-&gt;grille[i][j]-&gt;tabVoisin[<a class="code" href="group__voisins__constants.html#gafeb610146f4fdc33c1f7f87a58d3888b">VOISIN_DIAG_GAUCHE_HAUT2</a>] = (<a class="code" href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a>(i - 2, j - 2, nbLigne, nbColonne)) ? g-&gt;grille[i - 2][j - 2] : <a class="code" href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="group__type__case__constants.html#ga90f797ffc58216b364f7cff43ba3e23a">   87</a></span>&#160;<a class="code" href="structt__grille.html">t_grille</a>* <a class="code" href="group__type__case__constants.html#ga90f797ffc58216b364f7cff43ba3e23a">intToGrilleNiveau</a>(<span class="keywordtype">int</span>** entier, <span class="keywordtype">int</span> nbLigne, <span class="keywordtype">int</span> nbColonne) {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="structt__grille.html">t_grille</a>* g = <a class="code" href="group__type__case__constants.html#ga6e4aa5870831bf3b631ed8cd25c458ae">initGrille</a>(nbLigne, nbColonne);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nbLigne; i++) {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; nbColonne; j++) {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            g-&gt;grille[i][j] = <a class="code" href="group__type__case__constants.html#ga2b120790d7e25547b735afe2a069367f">initCase</a>(i, j, entier[i][j]);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nbLigne; i++) {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; nbColonne; j++) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <a class="code" href="group__type__case__constants.html#gae5c605b887cfd15cb299a18ae25a4ce9">stockerEtatVoisin</a>(g, i, j, nbLigne, nbColonne);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">return</span> g;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="group__type__case__constants.html#gaa0ac9a00d6c9397011a34628c13bb902">  103</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__type__case__constants.html#gaa0ac9a00d6c9397011a34628c13bb902">existe</a>(<span class="keyword">const</span> <a class="code" href="structt__case.html">t_case</a>* c) {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">return</span> ((c-&gt;i != -1) &amp;&amp; (c-&gt;j != -1) &amp;&amp; (c-&gt;val != -1));</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="group__type__case__constants.html#gaa0fb2834c52d32f76ece5d78b786382a">  107</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="group__type__case__constants.html#gaa0fb2834c52d32f76ece5d78b786382a">existeVoisin</a>(<a class="code" href="structt__case.html">t_case</a>* c, ...) {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="group__type__case__constants.html#gaa0ac9a00d6c9397011a34628c13bb902">existe</a>(c)) {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    va_list l;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    va_start(l, c);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <a class="code" href="structt__case.html">t_case</a>* arg;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">while</span> ((arg = va_arg(l, <a class="code" href="structt__case.html">t_case</a>*))) {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="group__type__case__constants.html#gaa0ac9a00d6c9397011a34628c13bb902">existe</a>(arg)) {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            va_end(l);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    va_end(l);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;}</div>
+<div class="ttc" id="agrille_8c_html_aa46ed4b4197713dd30ef8b5eaac26a97"><div class="ttname"><a href="grille_8c.html#aa46ed4b4197713dd30ef8b5eaac26a97">case_null</a></div><div class="ttdeci">t_case case_null</div><div class="ttdef"><b>Definition:</b> <a href="grille_8c_source.html#l00003">grille.c:3</a></div></div>
+<div class="ttc" id="agrille_8h_html"><div class="ttname"><a href="grille_8h.html">grille.h</a></div><div class="ttdoc">Gestion des grilles et cases du jeu.</div></div>
+<div class="ttc" id="agroup__type__case__constants_html_ga06ad57c4d3fec22479b2fb7631a982bd"><div class="ttname"><a href="group__type__case__constants.html#ga06ad57c4d3fec22479b2fb7631a982bd">ajouterCase</a></div><div class="ttdeci">void ajouterCase(t_grille *g, int i, int j, int val)</div><div class="ttdoc">Ajoute une case à la grille.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8c_source.html#l00048">grille.c:48</a></div></div>
+<div class="ttc" id="agroup__type__case__constants_html_ga2b120790d7e25547b735afe2a069367f"><div class="ttname"><a href="group__type__case__constants.html#ga2b120790d7e25547b735afe2a069367f">initCase</a></div><div class="ttdeci">t_case * initCase(int i, int j, int val)</div><div class="ttdoc">Initialise une nouvelle case.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8c_source.html#l00009">grille.c:9</a></div></div>
+<div class="ttc" id="agroup__type__case__constants_html_ga5524b2cf41074c73bc35a26fd830f12d"><div class="ttname"><a href="group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d">inMatrice</a></div><div class="ttdeci">int inMatrice(int x, int y, int maxx, int maxy)</div><div class="ttdoc">Vérifie si des coordonnées sont dans la matrice.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8c_source.html#l00005">grille.c:5</a></div></div>
+<div class="ttc" id="agroup__type__case__constants_html_ga651dada55001410f483f3af0fec33f5d"><div class="ttname"><a href="group__type__case__constants.html#ga651dada55001410f483f3af0fec33f5d">CASE_NULL</a></div><div class="ttdeci">#define CASE_NULL</div><div class="ttdoc">Case nulle par défaut.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00085">grille.h:85</a></div></div>
+<div class="ttc" id="agroup__type__case__constants_html_ga6e4aa5870831bf3b631ed8cd25c458ae"><div class="ttname"><a href="group__type__case__constants.html#ga6e4aa5870831bf3b631ed8cd25c458ae">initGrille</a></div><div class="ttdeci">t_grille * initGrille(int nbLigne, int nbColonne)</div><div class="ttdoc">Initialise une nouvelle grille.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8c_source.html#l00018">grille.c:18</a></div></div>
+<div class="ttc" id="agroup__type__case__constants_html_ga90f797ffc58216b364f7cff43ba3e23a"><div class="ttname"><a href="group__type__case__constants.html#ga90f797ffc58216b364f7cff43ba3e23a">intToGrilleNiveau</a></div><div class="ttdeci">t_grille * intToGrilleNiveau(int **entier, int nbLigne, int nbColonne)</div><div class="ttdoc">Convertit une matrice d'entiers en grille.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8c_source.html#l00087">grille.c:87</a></div></div>
+<div class="ttc" id="agroup__type__case__constants_html_ga96c79584fd69d065d779dcf6b129a41c"><div class="ttname"><a href="group__type__case__constants.html#ga96c79584fd69d065d779dcf6b129a41c">freeGrille</a></div><div class="ttdeci">void freeGrille(t_grille *g)</div><div class="ttdoc">Libère la mémoire d'une grille.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8c_source.html#l00054">grille.c:54</a></div></div>
+<div class="ttc" id="agroup__type__case__constants_html_gaa0ac9a00d6c9397011a34628c13bb902"><div class="ttname"><a href="group__type__case__constants.html#gaa0ac9a00d6c9397011a34628c13bb902">existe</a></div><div class="ttdeci">int existe(const t_case *c)</div><div class="ttdoc">Vérifie si une case existe.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8c_source.html#l00103">grille.c:103</a></div></div>
+<div class="ttc" id="agroup__type__case__constants_html_gaa0fb2834c52d32f76ece5d78b786382a"><div class="ttname"><a href="group__type__case__constants.html#gaa0fb2834c52d32f76ece5d78b786382a">existeVoisin</a></div><div class="ttdeci">int existeVoisin(t_case *c,...)</div><div class="ttdoc">Vérifie si des voisins existent.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8c_source.html#l00107">grille.c:107</a></div></div>
+<div class="ttc" id="agroup__type__case__constants_html_gae5c605b887cfd15cb299a18ae25a4ce9"><div class="ttname"><a href="group__type__case__constants.html#gae5c605b887cfd15cb299a18ae25a4ce9">stockerEtatVoisin</a></div><div class="ttdeci">void stockerEtatVoisin(t_grille *g, int i, int j, int nbLigne, int nbColonne)</div><div class="ttdoc">Stocke les voisins d'une case.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8c_source.html#l00066">grille.c:66</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_ga06cc0bbecac08a2441aa81b71ef39db8"><div class="ttname"><a href="group__voisins__constants.html#ga06cc0bbecac08a2441aa81b71ef39db8">VOISIN_DIAG_GAUCHE_HAUT</a></div><div class="ttdeci">#define VOISIN_DIAG_GAUCHE_HAUT</div><div class="ttdoc">Voisin diagonal haut-gauche.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00031">grille.h:31</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_ga0b6578d830248a949a34c5d9218a3374"><div class="ttname"><a href="group__voisins__constants.html#ga0b6578d830248a949a34c5d9218a3374">VOISIN_CENTRE_BAS2_DROIT</a></div><div class="ttdeci">#define VOISIN_CENTRE_BAS2_DROIT</div><div class="ttdoc">Voisin spécial bas-droite à 2 cases.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00045">grille.h:45</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_ga2065550128f2640692f26fe8738546ef"><div class="ttname"><a href="group__voisins__constants.html#ga2065550128f2640692f26fe8738546ef">VOISIN_DIAG_DROIT_BAS2</a></div><div class="ttdeci">#define VOISIN_DIAG_DROIT_BAS2</div><div class="ttdoc">Voisin diagonal bas-droite à 2 cases.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00043">grille.h:43</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_ga2eaa25d3f27bd0087b8f18a0be06e43d"><div class="ttname"><a href="group__voisins__constants.html#ga2eaa25d3f27bd0087b8f18a0be06e43d">VOISIN_DIAG_DROIT_HAUT2</a></div><div class="ttdeci">#define VOISIN_DIAG_DROIT_HAUT2</div><div class="ttdoc">Voisin diagonal haut-droite à 2 cases.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00041">grille.h:41</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_ga3b469b0d14bb70e73c62b26d32108c13"><div class="ttname"><a href="group__voisins__constants.html#ga3b469b0d14bb70e73c62b26d32108c13">VOISIN_GAUCHE</a></div><div class="ttdeci">#define VOISIN_GAUCHE</div><div class="ttdoc">Voisin direct à gauche.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00027">grille.h:27</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_ga485f2aef3e74d6ef015d335ac1711aa8"><div class="ttname"><a href="group__voisins__constants.html#ga485f2aef3e74d6ef015d335ac1711aa8">VOISIN_HAUT2</a></div><div class="ttdeci">#define VOISIN_HAUT2</div><div class="ttdoc">Voisin à 2 cases en haut.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00039">grille.h:39</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_ga4923c641a8c6d1e844453b8851692ea6"><div class="ttname"><a href="group__voisins__constants.html#ga4923c641a8c6d1e844453b8851692ea6">VOISIN_HAUT</a></div><div class="ttdeci">#define VOISIN_HAUT</div><div class="ttdoc">Voisin direct en haut.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00030">grille.h:30</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_ga5782cfbd5a24830e1a88e6eb509fe4b7"><div class="ttname"><a href="group__voisins__constants.html#ga5782cfbd5a24830e1a88e6eb509fe4b7">VOISIN_CENTRE_BAS2_GAUCHE</a></div><div class="ttdeci">#define VOISIN_CENTRE_BAS2_GAUCHE</div><div class="ttdoc">Voisin spécial bas-gauche à 2 cases.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00046">grille.h:46</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_ga9776b8870433c3d64ef3af28839fa473"><div class="ttname"><a href="group__voisins__constants.html#ga9776b8870433c3d64ef3af28839fa473">VOISIN_DROIT2</a></div><div class="ttdeci">#define VOISIN_DROIT2</div><div class="ttdoc">Voisin à 2 cases à droite.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00037">grille.h:37</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_gaaf397b08d44149edbe8d0af315f2fb6e"><div class="ttname"><a href="group__voisins__constants.html#gaaf397b08d44149edbe8d0af315f2fb6e">VOISIN_BAS2</a></div><div class="ttdeci">#define VOISIN_BAS2</div><div class="ttdoc">Voisin à 2 cases en bas.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00038">grille.h:38</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_gab0ab0bb424870d2513bf51acb42e5f15"><div class="ttname"><a href="group__voisins__constants.html#gab0ab0bb424870d2513bf51acb42e5f15">VOISIN_DIAG_GAUCHE_BAS</a></div><div class="ttdeci">#define VOISIN_DIAG_GAUCHE_BAS</div><div class="ttdoc">Voisin diagonal bas-gauche.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00033">grille.h:33</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_gabf38d5a652dfa8540605fe7856badeb5"><div class="ttname"><a href="group__voisins__constants.html#gabf38d5a652dfa8540605fe7856badeb5">VOISIN_DROIT</a></div><div class="ttdeci">#define VOISIN_DROIT</div><div class="ttdoc">Voisin direct à droite.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00028">grille.h:28</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_gad18fcda361b70a08a942f4d21255ceb2"><div class="ttname"><a href="group__voisins__constants.html#gad18fcda361b70a08a942f4d21255ceb2">VOISIN_BAS</a></div><div class="ttdeci">#define VOISIN_BAS</div><div class="ttdoc">Voisin direct en bas.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00029">grille.h:29</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_gade60f28b556f7e8e821ea7397a02b975"><div class="ttname"><a href="group__voisins__constants.html#gade60f28b556f7e8e821ea7397a02b975">VOISIN_DIAG_DROIT_BAS</a></div><div class="ttdeci">#define VOISIN_DIAG_DROIT_BAS</div><div class="ttdoc">Voisin diagonal bas-droite.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00034">grille.h:34</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_gaf9fc5d222fcd2ef9a057fc25903439cd"><div class="ttname"><a href="group__voisins__constants.html#gaf9fc5d222fcd2ef9a057fc25903439cd">VOISIN_GAUCHE2</a></div><div class="ttdeci">#define VOISIN_GAUCHE2</div><div class="ttdoc">Voisin à 2 cases à gauche.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00036">grille.h:36</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_gafe0f8d2a6b9eb4bb30c72079e92038f0"><div class="ttname"><a href="group__voisins__constants.html#gafe0f8d2a6b9eb4bb30c72079e92038f0">VOISIN_DIAG_DROIT_HAUT</a></div><div class="ttdeci">#define VOISIN_DIAG_DROIT_HAUT</div><div class="ttdoc">Voisin diagonal haut-droite.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00032">grille.h:32</a></div></div>
+<div class="ttc" id="agroup__voisins__constants_html_gafeb610146f4fdc33c1f7f87a58d3888b"><div class="ttname"><a href="group__voisins__constants.html#gafeb610146f4fdc33c1f7f87a58d3888b">VOISIN_DIAG_GAUCHE_HAUT2</a></div><div class="ttdeci">#define VOISIN_DIAG_GAUCHE_HAUT2</div><div class="ttdoc">Voisin diagonal haut-gauche à 2 cases.</div><div class="ttdef"><b>Definition:</b> <a href="grille_8h_source.html#l00040">grille.h:40</a></div></div>
+<div class="ttc" id="astructt__case_html"><div class="ttname"><a href="structt__case.html">t_case</a></div><div class="ttdoc">Représente une case individuelle dans la grille.</div></div>
+<div class="ttc" id="astructt__grille_html"><div class="ttname"><a href="structt__grille.html">t_grille</a></div><div class="ttdoc">Représente une grille complète du jeu.</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

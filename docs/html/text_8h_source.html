@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon:  Fichier source de Ubissauphte/src/ui/text.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_cbea5643ac5778c201b251489fa6a373.html">ui</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">text.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="text_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef TEXT_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define TEXT_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL_ttf.h&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;../debug.h&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structt__text.html">   24</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structt__text.html#a5633b1433389cec21ade3811bbe9ca5b">   25</a></span>&#160;    <span class="keywordtype">char</span>* <a class="code" href="structt__text.html#a5633b1433389cec21ade3811bbe9ca5b">text</a>;            </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="structt__text.html#a859b8efbf9abe8e82757ee5c75a0c97c">   26</a></span>&#160;    SDL_Texture* <a class="code" href="structt__text.html#a859b8efbf9abe8e82757ee5c75a0c97c">texture</a>;  </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="structt__text.html#abf5bfa705e66ffc1ddaa6ce46c960873">   27</a></span>&#160;    TTF_Font* <a class="code" href="structt__text.html#abf5bfa705e66ffc1ddaa6ce46c960873">font</a>;        </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="structt__text.html#a55aefd071649ac9dd8133e2d8a52d11f">   28</a></span>&#160;    SDL_Rect <a class="code" href="structt__text.html#a55aefd071649ac9dd8133e2d8a52d11f">rect</a>;         </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;} <a class="code" href="structt__text.html">t_text</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;TTF_Font* <a class="code" href="text_8h.html#acbc470380890367cf49339d34bf79a76">loadFont</a>(<span class="keywordtype">char</span>* filename, <span class="keywordtype">int</span> size);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;SDL_bool <a class="code" href="text_8h.html#af7877e1e000faa47a6bcb13a23476f3c">initTextEngine</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<a class="code" href="structt__text.html">t_text</a>* <a class="code" href="text_8h.html#a92567a5bf04e06ed469717198d991136">createTextOutline</a>(SDL_Renderer* renderer, <span class="keywordtype">char</span>* <a class="code" href="structtext.html">text</a>, TTF_Font* font, SDL_Color color, SDL_Color colorOutline, <span class="keywordtype">int</span> outlineSize);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">void</span> <a class="code" href="text_8h.html#a188a5e1361d94e2517bacbc2a6f39509">updateTextOutline</a>(<a class="code" href="structt__text.html">t_text</a>** <a class="code" href="structtext.html">text</a>, SDL_Renderer* renderer, <span class="keywordtype">char</span>* newText, SDL_Color color, SDL_Color CouleurOutline, <span class="keywordtype">int</span> sizeOutline);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<a class="code" href="structt__text.html">t_text</a>* <a class="code" href="text_8h.html#aeb2abb74af73c1c4372b43db48c96d3e">createText</a>(SDL_Renderer* renderer, <span class="keywordtype">char</span>* <a class="code" href="structtext.html">text</a>, TTF_Font* font, SDL_Color color);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">void</span> <a class="code" href="text_8h.html#a6aad28e2d5f69d57937dae840fa9a915">updateText</a>(<a class="code" href="structt__text.html">t_text</a>** <a class="code" href="structtext.html">text</a>, SDL_Renderer* renderer, <span class="keywordtype">char</span>* newText, SDL_Color color);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keywordtype">void</span> <a class="code" href="text_8h.html#a0377eac5e5c2dd29e4e28920be02b31a">renderText</a>(SDL_Renderer* renderer, <a class="code" href="structt__text.html">t_text</a>* <a class="code" href="structtext.html">text</a>);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">void</span> <a class="code" href="text_8h.html#ab9b7064da4ef9403241f3d40389af46a">freeText</a>(<span class="keywordtype">void</span>* objet);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="astructt__text_html"><div class="ttname"><a href="structt__text.html">t_text</a></div><div class="ttdoc">Structure représentant un élément textuel dans l'interface.</div><div class="ttdef"><b>Definition:</b> <a href="text_8h_source.html#l00024">text.h:24</a></div></div>
+<div class="ttc" id="astructt__text_html_a55aefd071649ac9dd8133e2d8a52d11f"><div class="ttname"><a href="structt__text.html#a55aefd071649ac9dd8133e2d8a52d11f">t_text::rect</a></div><div class="ttdeci">SDL_Rect rect</div><div class="ttdoc">Position et dimensions du texte à l'écran.</div><div class="ttdef"><b>Definition:</b> <a href="text_8h_source.html#l00028">text.h:28</a></div></div>
+<div class="ttc" id="astructt__text_html_a5633b1433389cec21ade3811bbe9ca5b"><div class="ttname"><a href="structt__text.html#a5633b1433389cec21ade3811bbe9ca5b">t_text::text</a></div><div class="ttdeci">char * text</div><div class="ttdoc">Texte à afficher.</div><div class="ttdef"><b>Definition:</b> <a href="text_8h_source.html#l00025">text.h:25</a></div></div>
+<div class="ttc" id="astructt__text_html_a859b8efbf9abe8e82757ee5c75a0c97c"><div class="ttname"><a href="structt__text.html#a859b8efbf9abe8e82757ee5c75a0c97c">t_text::texture</a></div><div class="ttdeci">SDL_Texture * texture</div><div class="ttdoc">Texture SDL contenant le rendu du texte.</div><div class="ttdef"><b>Definition:</b> <a href="text_8h_source.html#l00026">text.h:26</a></div></div>
+<div class="ttc" id="astructt__text_html_abf5bfa705e66ffc1ddaa6ce46c960873"><div class="ttname"><a href="structt__text.html#abf5bfa705e66ffc1ddaa6ce46c960873">t_text::font</a></div><div class="ttdeci">TTF_Font * font</div><div class="ttdoc">Police utilisée pour le rendu.</div><div class="ttdef"><b>Definition:</b> <a href="text_8h_source.html#l00027">text.h:27</a></div></div>
+<div class="ttc" id="astructtext_html"><div class="ttname"><a href="structtext.html">text</a></div><div class="ttdoc">Textes affichés dans le HUD.</div></div>
+<div class="ttc" id="atext_8h_html_a0377eac5e5c2dd29e4e28920be02b31a"><div class="ttname"><a href="text_8h.html#a0377eac5e5c2dd29e4e28920be02b31a">renderText</a></div><div class="ttdeci">void renderText(SDL_Renderer *renderer, t_text *text)</div><div class="ttdoc">Affiche un texte à l'écran.</div><div class="ttdef"><b>Definition:</b> <a href="text_8c_source.html#l00181">text.c:181</a></div></div>
+<div class="ttc" id="atext_8h_html_a188a5e1361d94e2517bacbc2a6f39509"><div class="ttname"><a href="text_8h.html#a188a5e1361d94e2517bacbc2a6f39509">updateTextOutline</a></div><div class="ttdeci">void updateTextOutline(t_text **text, SDL_Renderer *renderer, char *newText, SDL_Color color, SDL_Color CouleurOutline, int sizeOutline)</div><div class="ttdoc">Met à jour un texte avec contour existant.</div><div class="ttdef"><b>Definition:</b> <a href="text_8c_source.html#l00154">text.c:154</a></div></div>
+<div class="ttc" id="atext_8h_html_a6aad28e2d5f69d57937dae840fa9a915"><div class="ttname"><a href="text_8h.html#a6aad28e2d5f69d57937dae840fa9a915">updateText</a></div><div class="ttdeci">void updateText(t_text **text, SDL_Renderer *renderer, char *newText, SDL_Color color)</div><div class="ttdoc">Met à jour un texte simple existant.</div><div class="ttdef"><b>Definition:</b> <a href="text_8c_source.html#l00127">text.c:127</a></div></div>
+<div class="ttc" id="atext_8h_html_a92567a5bf04e06ed469717198d991136"><div class="ttname"><a href="text_8h.html#a92567a5bf04e06ed469717198d991136">createTextOutline</a></div><div class="ttdeci">t_text * createTextOutline(SDL_Renderer *renderer, char *text, TTF_Font *font, SDL_Color color, SDL_Color colorOutline, int outlineSize)</div><div class="ttdoc">Crée un texte avec contour.</div><div class="ttdef"><b>Definition:</b> <a href="text_8c_source.html#l00022">text.c:22</a></div></div>
+<div class="ttc" id="atext_8h_html_ab9b7064da4ef9403241f3d40389af46a"><div class="ttname"><a href="text_8h.html#ab9b7064da4ef9403241f3d40389af46a">freeText</a></div><div class="ttdeci">void freeText(void *objet)</div><div class="ttdoc">Libère la mémoire utilisée par un élément textuel.</div><div class="ttdef"><b>Definition:</b> <a href="text_8c_source.html#l00186">text.c:186</a></div></div>
+<div class="ttc" id="atext_8h_html_acbc470380890367cf49339d34bf79a76"><div class="ttname"><a href="text_8h.html#acbc470380890367cf49339d34bf79a76">loadFont</a></div><div class="ttdeci">TTF_Font * loadFont(char *filename, int size)</div><div class="ttdoc">Charge une police depuis un fichier avec une taille spécifiée.</div><div class="ttdef"><b>Definition:</b> <a href="text_8c_source.html#l00003">text.c:3</a></div></div>
+<div class="ttc" id="atext_8h_html_aeb2abb74af73c1c4372b43db48c96d3e"><div class="ttname"><a href="text_8h.html#aeb2abb74af73c1c4372b43db48c96d3e">createText</a></div><div class="ttdeci">t_text * createText(SDL_Renderer *renderer, char *text, TTF_Font *font, SDL_Color color)</div><div class="ttdoc">Crée un texte simple sans contour.</div><div class="ttdef"><b>Definition:</b> <a href="text_8c_source.html#l00091">text.c:91</a></div></div>
+<div class="ttc" id="atext_8h_html_af7877e1e000faa47a6bcb13a23476f3c"><div class="ttname"><a href="text_8h.html#af7877e1e000faa47a6bcb13a23476f3c">initTextEngine</a></div><div class="ttdeci">SDL_bool initTextEngine()</div><div class="ttdoc">Initialise le moteur de rendu de texte.</div><div class="ttdef"><b>Definition:</b> <a href="text_8c_source.html#l00013">text.c:13</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<map id="ghostDealDamageToPlayer" name="ghostDealDamageToPlayer">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,204,32"/>
+<area shape="rect" id="node2" href="$health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="252,5,365,32"/>
+<area shape="rect" id="node3" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="413,5,541,32"/>
+</map>

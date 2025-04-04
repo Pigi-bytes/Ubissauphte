@@ -1,0 +1,15 @@
+<map id="inventoryUI_Render" name="inventoryUI_Render">
+<area shape="rect" id="node1" title="Effectue le rendu de l&#39;interface." alt="" coords="5,157,156,184"/>
+<area shape="rect" id="node2" href="$affichage_8c.html#aef845a8c91f0a00b53865cd30d9cf1c5" title=" " alt="" coords="400,5,545,32"/>
+<area shape="rect" id="node4" href="$affichage_8c.html#aa9a711ef54b394d64cd54eb064acd062" title=" " alt="" coords="210,81,337,108"/>
+<area shape="rect" id="node6" href="$affichage_8c.html#a795ed97b31d862c27fb544d15f3128ba" title=" " alt="" coords="204,132,343,159"/>
+<area shape="rect" id="node7" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="231,183,316,209"/>
+<area shape="rect" id="node8" href="$button_8c.html#a57726e67186d9103bd5627f07a2557d4" title="Affiche un bouton à l&#39;écran." alt="" coords="220,233,327,260"/>
+<area shape="rect" id="node10" href="$affichage_8c.html#a3fd6316e2996455f044cc30c206daba5" title="Affiche le nombre d&#39;items dans une pile." alt="" coords="204,335,343,361"/>
+<area shape="rect" id="node3" href="$text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="603,132,693,159"/>
+<area shape="rect" id="node5" href="$affichage_8c.html#a1cc7f7d5a20ca4ebd7951b5ec93330dc" title="Affiche un texte." alt="" coords="423,107,522,133"/>
+<area shape="rect" id="node9" href="$button_8c.html#a289805f0c618adfd4a051e912198f3f7" title=" " alt="" coords="397,259,548,285"/>
+<area shape="rect" id="node11" href="$affichage_8c.html#a2066dcaf9ebb545d26aea7e391b0a997" title="Crée le texte pour afficher un nombre d&#39;items." alt="" coords="391,360,555,387"/>
+<area shape="rect" id="node13" href="$text_8c.html#ab9b7064da4ef9403241f3d40389af46a" title="Libère la mémoire utilisée par un élément textuel." alt="" coords="435,411,510,437"/>
+<area shape="rect" id="node12" href="$text_8c.html#aeb2abb74af73c1c4372b43db48c96d3e" title="Crée un texte simple sans contour." alt="" coords="603,360,693,387"/>
+</map>

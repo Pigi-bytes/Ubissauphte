@@ -1,0 +1,9 @@
+<map id="calculerItem" name="calculerItem">
+<area shape="rect" id="node1" title="Calcule la position d&#39;un slot d&#39;inventaire." alt="" coords="909,31,1012,57"/>
+<area shape="rect" id="node2" href="$affichage_8c.html#ab52cfc1609e782c407e667fde05707e3" title="Initialise ou met à jour l&#39;interface d&#39;inventaire." alt="" coords="730,5,857,32"/>
+<area shape="rect" id="node7" href="$affichage_8c.html#a871024c819663e324e301b442b147b95" title=" " alt="" coords="725,56,861,83"/>
+<area shape="rect" id="node3" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="108,31,223,57"/>
+<area shape="rect" id="node5" href="$affichage_8c.html#acac6e41a22a08962af5736bb23e8026e" title="Met à jour la logique de l&#39;interface." alt="" coords="525,56,677,83"/>
+<area shape="rect" id="node4" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
+<area shape="rect" id="node6" href="$commun_8c.html#abc60ca3fcbf54c897b7cea3dedde3150" title="Wrapper pour la mise à jour de l&#39;UI d&#39;inventaire." alt="" coords="271,56,477,83"/>
+</map>

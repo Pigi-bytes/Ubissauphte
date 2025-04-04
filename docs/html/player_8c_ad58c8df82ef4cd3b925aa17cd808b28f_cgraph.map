@@ -1,0 +1,17 @@
+<map id="handleInputPlayer" name="handleInputPlayer">
+<area shape="rect" id="node1" title="Traite les entrées utilisateur pour le joueur." alt="" coords="5,208,145,235"/>
+<area shape="rect" id="node2" href="$health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="219,5,333,32"/>
+<area shape="rect" id="node4" href="$camera_8c.html#aa565fc417430314cb021ebd9b85e74bc" title="Convertit des coordonnées souris (écran) en coordonnées monde (niveau)" alt="" coords="193,56,359,83"/>
+<area shape="rect" id="node5" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="451,107,537,133"/>
+<area shape="rect" id="node6" href="$timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="237,309,315,336"/>
+<area shape="rect" id="node7" href="$input_8c.html#a5dbfa0b962c1dde73b323300bc05034c" title="Détecte un appui unique sur une touche malgrés les frames." alt="" coords="219,360,333,387"/>
+<area shape="rect" id="node8" href="$animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="221,208,331,235"/>
+<area shape="rect" id="node10" href="$timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="634,233,725,260"/>
+<area shape="rect" id="node12" href="$fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="235,107,317,133"/>
+<area shape="rect" id="node15" href="$player_8c.html#a4c5383bacbe517b6c043977ffb61c39f" title=" " alt="" coords="229,411,323,437"/>
+<area shape="rect" id="node3" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="430,5,558,32"/>
+<area shape="rect" id="node9" href="$animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="435,208,553,235"/>
+<area shape="rect" id="node11" href="$animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="435,157,553,184"/>
+<area shape="rect" id="node13" href="$fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="407,56,581,83"/>
+<area shape="rect" id="node14" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="629,56,729,83"/>
+</map>

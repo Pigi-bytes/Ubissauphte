@@ -1,0 +1,4 @@
+<map id="saveFichier" name="saveFichier">
+<area shape="rect" id="node1" title="Sauvegarde des donnees dans un fichier." alt="" coords="5,5,101,32"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="149,5,235,32"/>
+</map>

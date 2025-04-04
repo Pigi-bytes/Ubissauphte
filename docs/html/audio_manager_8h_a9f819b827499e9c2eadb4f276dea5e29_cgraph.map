@@ -1,0 +1,10 @@
+<map id="jouerSFX" name="jouerSFX">
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,85,133"/>
+<area shape="rect" id="node2" href="$audio_manager_8c.html#a4ec64f2ae737ce1bd28ad405a07c7743" title=" " alt="" coords="147,56,217,83"/>
+<area shape="rect" id="node5" href="$audio_manager_8c.html#a0e16a111c05fb5ec00fd8abd413251e9" title=" " alt="" coords="133,107,231,133"/>
+<area shape="rect" id="node8" href="$audio_manager_8c.html#a55db07928385383549ca67bb3062f2ce" title=" " alt="" coords="148,157,216,184"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="305,5,393,32"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="279,56,420,83"/>
+<area shape="rect" id="node6" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="307,107,392,133"/>
+<area shape="rect" id="node7" href="$object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="286,157,413,184"/>
+</map>

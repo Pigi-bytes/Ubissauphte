@@ -1,0 +1,5 @@
+<map id="updateBossSlimeInfo" name="updateBossSlimeInfo">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,165,57"/>
+<area shape="rect" id="node2" href="$physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="213,5,404,32"/>
+<area shape="rect" id="node3" href="$physics_8c.html#a1948cf93821271dece76ca4022f7b25d" title="Lance un rayon à travers la grille et détecte la première obstruction." alt="" coords="259,56,358,83"/>
+</map>

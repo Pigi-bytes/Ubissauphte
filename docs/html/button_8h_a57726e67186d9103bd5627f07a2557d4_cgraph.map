@@ -1,0 +1,5 @@
+<map id="renderButton" name="renderButton">
+<area shape="rect" id="node1" title="Affiche un bouton à l&#39;écran." alt="" coords="5,31,112,57"/>
+<area shape="rect" id="node2" href="$button_8c.html#a289805f0c618adfd4a051e912198f3f7" title=" " alt="" coords="160,5,311,32"/>
+<area shape="rect" id="node3" href="$text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="190,56,281,83"/>
+</map>

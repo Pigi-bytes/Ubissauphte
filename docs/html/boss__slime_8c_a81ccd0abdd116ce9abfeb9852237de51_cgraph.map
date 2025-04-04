@@ -1,0 +1,5 @@
+<map id="renderBossHealthBar" name="renderBossHealthBar">
+<area shape="rect" id="node1" title="Affiche la barre de vie du boss." alt="" coords="5,31,165,57"/>
+<area shape="rect" id="node2" href="$text_8c.html#a92567a5bf04e06ed469717198d991136" title="Crée un texte avec contour." alt="" coords="213,5,351,32"/>
+<area shape="rect" id="node3" href="$text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="237,56,327,83"/>
+</map>

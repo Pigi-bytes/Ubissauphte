@@ -1,0 +1,4 @@
+<map id="freeFichier" name="freeFichier">
+<area shape="rect" id="node1" title="Libère la mémoire allouée pour un t_fichier." alt="" coords="5,5,96,32"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#aa17aa9d46c431f4b91114108468b73f3" title="Libere toute la memoire du gestionnaire et ses objets." alt="" coords="144,5,291,32"/>
+</map>

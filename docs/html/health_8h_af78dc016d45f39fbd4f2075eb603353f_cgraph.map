@@ -1,0 +1,6 @@
+<map id="initHealthSystem" name="initHealthSystem">
+<area shape="rect" id="node1" title="Initialise un système de santé" alt="" coords="5,56,140,83"/>
+<area shape="rect" id="node2" href="$timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="223,5,339,32"/>
+<area shape="rect" id="node3" href="$health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="188,56,375,83"/>
+<area shape="rect" id="node4" href="$timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="219,107,344,133"/>
+</map>

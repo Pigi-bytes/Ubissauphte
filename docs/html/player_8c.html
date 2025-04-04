@@ -1,0 +1,1034 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon: Référence du fichier Ubissauphte/src/engine/entities/player.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_2826858af9faa5fe77c775e96e0e1227.html">engine</a></li><li class="navelem"><a class="el" href="dir_136c429d572dc163e086310573299ad2.html">entities</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier player.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="player_8h_source.html">player.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="enemy_8h_source.html">enemy.h</a>&quot;</code><br />
+</div>
+<p><a href="player_8c_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a25a5b9b1991ba50388e6c3b0eab41d6c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a25a5b9b1991ba50388e6c3b0eab41d6c">createPlayer</a> (<a class="el" href="structt__control.html">t_control</a> *control, SDL_Texture *texture, SDL_Rect rect, <a class="el" href="structt__tileset.html">t_tileset</a> *tileset)</td></tr>
+<tr class="memdesc:a25a5b9b1991ba50388e6c3b0eab41d6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée un nouveau joueur.  <a href="player_8c.html#a25a5b9b1991ba50388e6c3b0eab41d6c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a25a5b9b1991ba50388e6c3b0eab41d6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68aa7bf08e883fd2ccdf5e65f3c4cc11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a68aa7bf08e883fd2ccdf5e65f3c4cc11">applyHitCameraShake</a> (<a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *player, <a class="el" href="structt__camera.html">t_camera</a> *camera)</td></tr>
+<tr class="separator:a68aa7bf08e883fd2ccdf5e65f3c4cc11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1ef56e04f9966bf30c4b7d8d494a961"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#ad1ef56e04f9966bf30c4b7d8d494a961">updateTimeSlowEffect</a> (<a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *player, float *originalDeltaTime, float *modifiedDeltaTime)</td></tr>
+<tr class="separator:ad1ef56e04f9966bf30c4b7d8d494a961"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c5383bacbe517b6c043977ffb61c39f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a4c5383bacbe517b6c043977ffb61c39f">startAttack</a> (<a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *player)</td></tr>
+<tr class="separator:a4c5383bacbe517b6c043977ffb61c39f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea2580dd56e7113d24936f6b09a66192"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#aea2580dd56e7113d24936f6b09a66192">updateAttack</a> (<a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *player, float *deltaTime, <a class="el" href="structt__object_manager.html">t_objectManager</a> *entities, <a class="el" href="structt__context.html">t_context</a> *context)</td></tr>
+<tr class="separator:aea2580dd56e7113d24936f6b09a66192"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad58c8df82ef4cd3b925aa17cd808b28f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f">handleInputPlayer</a> (<a class="el" href="structt__input.html">t_input</a> *input, <a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *player, <a class="el" href="tiles_8h.html#ab9f5e89fc0a2e21cf99c4c5f2d390344">t_grid</a> *grid, <a class="el" href="structt__view_port.html">t_viewPort</a> *vp, float *deltaTime, <a class="el" href="structt__scene_controller.html">t_sceneController</a> *sceneController)</td></tr>
+<tr class="memdesc:ad58c8df82ef4cd3b925aa17cd808b28f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traite les entrées utilisateur pour le joueur.  <a href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad58c8df82ef4cd3b925aa17cd808b28f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19c9b26bd5ea417615cd19e9ce4c46f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a19c9b26bd5ea417615cd19e9ce4c46f4">updatePlayer</a> (<a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *player, float *deltaTime, <a class="el" href="structt__salle.html">t_salle</a> *salle, <a class="el" href="structt__object_manager.html">t_objectManager</a> *entities, <a class="el" href="structt__context.html">t_context</a> *context)</td></tr>
+<tr class="memdesc:a19c9b26bd5ea417615cd19e9ce4c46f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met à jour l'état et le comportement du joueur.  <a href="player_8c.html#a19c9b26bd5ea417615cd19e9ce4c46f4">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a19c9b26bd5ea417615cd19e9ce4c46f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade88ef9b08cd5f904aaf3da1e9292fd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#ade88ef9b08cd5f904aaf3da1e9292fd2">renderDashTrail</a> (SDL_Renderer *renderer, <a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *player, <a class="el" href="structt__camera.html">t_camera</a> *camera)</td></tr>
+<tr class="separator:ade88ef9b08cd5f904aaf3da1e9292fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62de1cb2bc9e363cfa8a9ace8c9c612a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a">renderPlayer</a> (SDL_Renderer *renderer, <a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *player, <a class="el" href="structt__camera.html">t_camera</a> *camera)</td></tr>
+<tr class="memdesc:a62de1cb2bc9e363cfa8a9ace8c9c612a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le joueur à l'écran.  <a href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a62de1cb2bc9e363cfa8a9ace8c9c612a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07a36417f6cb5cd32e734eea6e583208"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a07a36417f6cb5cd32e734eea6e583208">freePlayer</a> (void *object)</td></tr>
+<tr class="memdesc:a07a36417f6cb5cd32e734eea6e583208"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libère la mémoire utilisée par un joueur.  <a href="player_8c.html#a07a36417f6cb5cd32e734eea6e583208">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a07a36417f6cb5cd32e734eea6e583208"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada3f1cfedc47c0c89696ca597444ef13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13">addPlayerXP</a> (<a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *player, int xpAmount)</td></tr>
+<tr class="memdesc:ada3f1cfedc47c0c89696ca597444ef13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute des points d'expérience au joueur.  <a href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ada3f1cfedc47c0c89696ca597444ef13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acecd15b6ea9287bbc4a1ef451e535fb9"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#acecd15b6ea9287bbc4a1ef451e535fb9">getPlayerXPProgress</a> (<a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *player)</td></tr>
+<tr class="memdesc:acecd15b6ea9287bbc4a1ef451e535fb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcule la progression vers le niveau suivant.  <a href="player_8c.html#acecd15b6ea9287bbc4a1ef451e535fb9">Plus de détails...</a><br /></td></tr>
+<tr class="separator:acecd15b6ea9287bbc4a1ef451e535fb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76ce13fbd671cedc0fe37b4790c7fd4d"><td class="memItemLeft" align="right" valign="top">SDL_bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d">checkAndProcessLevelUp</a> (<a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *player)</td></tr>
+<tr class="memdesc:a76ce13fbd671cedc0fe37b4790c7fd4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si le joueur peut monter de niveau et applique les améliorations.  <a href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a76ce13fbd671cedc0fe37b4790c7fd4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentation des fonctions</h2>
+<a id="ada3f1cfedc47c0c89696ca597444ef13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada3f1cfedc47c0c89696ca597444ef13">&#9670;&nbsp;</a></span>addPlayerXP()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void addPlayerXP </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>xpAmount</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ajoute des points d'expérience au joueur. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">player</td><td>Joueur qui reçoit l'XP </td></tr>
+    <tr><td class="paramname">xpAmount</td><td>Quantité d'XP à ajouter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="player_8c_source.html#l00589">589</a> du fichier <a class="el" href="player_8c_source.html">player.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_ada3f1cfedc47c0c89696ca597444ef13_cgraph.png" border="0" usemap="#aplayer_8c_ada3f1cfedc47c0c89696ca597444ef13_cgraph" alt=""/></div>
+<map name="aplayer_8c_ada3f1cfedc47c0c89696ca597444ef13_cgraph" id="aplayer_8c_ada3f1cfedc47c0c89696ca597444ef13_cgraph">
+<area shape="rect" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="5,5,109,32"/>
+<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="157,5,345,32"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_ada3f1cfedc47c0c89696ca597444ef13_icgraph.png" border="0" usemap="#aplayer_8c_ada3f1cfedc47c0c89696ca597444ef13_icgraph" alt=""/></div>
+<map name="aplayer_8c_ada3f1cfedc47c0c89696ca597444ef13_icgraph" id="aplayer_8c_ada3f1cfedc47c0c89696ca597444ef13_icgraph">
+<area shape="rect" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="1539,81,1643,108"/>
+<area shape="rect" href="boss__slime_8c.html#a0ce1840df2e8fdb6ab525023819624f8" title=" " alt="" coords="1175,5,1320,32"/>
+<area shape="rect" href="enemy_8c.html#ab8b2a078480e90346c66bfe478a428d4" title=" " alt="" coords="1368,56,1491,83"/>
+<area shape="rect" href="ghost_8c.html#a0915a1677e5b84321059f34f28e42a32" title=" " alt="" coords="1372,157,1487,184"/>
+<area shape="rect" href="slime_8c.html#a6020acb25a55f92cdb2e04ed979259d7" title="Fonction appelée lors de la mort d&#39;un slime." alt="" coords="1190,107,1305,133"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="996,31,1127,57"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="823,31,945,57"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+<area shape="rect" href="enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="1187,56,1307,83"/>
+<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1011,132,1112,159"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1011,81,1111,108"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,81,948,108"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a68aa7bf08e883fd2ccdf5e65f3c4cc11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68aa7bf08e883fd2ccdf5e65f3c4cc11">&#9670;&nbsp;</a></span>applyHitCameraShake()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void applyHitCameraShake </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__camera.html">t_camera</a> *&#160;</td>
+          <td class="paramname"><em>camera</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="player_8c_source.html#l00092">92</a> du fichier <a class="el" href="player_8c_source.html">player.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_a68aa7bf08e883fd2ccdf5e65f3c4cc11_cgraph.png" border="0" usemap="#aplayer_8c_a68aa7bf08e883fd2ccdf5e65f3c4cc11_cgraph" alt=""/></div>
+<map name="aplayer_8c_a68aa7bf08e883fd2ccdf5e65f3c4cc11_cgraph" id="aplayer_8c_a68aa7bf08e883fd2ccdf5e65f3c4cc11_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,172,32"/>
+<area shape="rect" href="camera_8c.html#aa33df647efea80a9d6ba2d01184a714d" title="Ajoute un effet de tremblement à la caméra." alt="" coords="220,5,355,32"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_a68aa7bf08e883fd2ccdf5e65f3c4cc11_icgraph.png" border="0" usemap="#aplayer_8c_a68aa7bf08e883fd2ccdf5e65f3c4cc11_icgraph" alt=""/></div>
+<map name="aplayer_8c_a68aa7bf08e883fd2ccdf5e65f3c4cc11_icgraph" id="aplayer_8c_a68aa7bf08e883fd2ccdf5e65f3c4cc11_icgraph">
+<area shape="rect" title=" " alt="" coords="1381,56,1548,83"/>
+<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1228,56,1333,83"/>
+<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="1020,56,1180,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a76ce13fbd671cedc0fe37b4790c7fd4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76ce13fbd671cedc0fe37b4790c7fd4d">&#9670;&nbsp;</a></span>checkAndProcessLevelUp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_bool checkAndProcessLevelUp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>player</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vérifie si le joueur peut monter de niveau et applique les améliorations. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">player</td><td>Joueur à vérifier </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>SDL_TRUE si le joueur a monté de niveau, SDL_FALSE sinon </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="player_8c_source.html#l00603">603</a> du fichier <a class="el" href="player_8c_source.html">player.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_a76ce13fbd671cedc0fe37b4790c7fd4d_icgraph.png" border="0" usemap="#aplayer_8c_a76ce13fbd671cedc0fe37b4790c7fd4d_icgraph" alt=""/></div>
+<map name="aplayer_8c_a76ce13fbd671cedc0fe37b4790c7fd4d_icgraph" id="aplayer_8c_a76ce13fbd671cedc0fe37b4790c7fd4d_icgraph">
+<area shape="rect" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="1691,81,1879,108"/>
+<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="1539,81,1643,108"/>
+<area shape="rect" href="boss__slime_8c.html#a0ce1840df2e8fdb6ab525023819624f8" title=" " alt="" coords="1175,5,1320,32"/>
+<area shape="rect" href="enemy_8c.html#ab8b2a078480e90346c66bfe478a428d4" title=" " alt="" coords="1368,56,1491,83"/>
+<area shape="rect" href="ghost_8c.html#a0915a1677e5b84321059f34f28e42a32" title=" " alt="" coords="1372,157,1487,184"/>
+<area shape="rect" href="slime_8c.html#a6020acb25a55f92cdb2e04ed979259d7" title="Fonction appelée lors de la mort d&#39;un slime." alt="" coords="1190,107,1305,133"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="996,31,1127,57"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="823,31,945,57"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+<area shape="rect" href="enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="1187,56,1307,83"/>
+<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1011,132,1112,159"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1011,81,1111,108"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,81,948,108"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a25a5b9b1991ba50388e6c3b0eab41d6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25a5b9b1991ba50388e6c3b0eab41d6c">&#9670;&nbsp;</a></span>createPlayer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a>* createPlayer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__control.html">t_control</a> *&#160;</td>
+          <td class="paramname"><em>control</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Texture *&#160;</td>
+          <td class="paramname"><em>texture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Rect&#160;</td>
+          <td class="paramname"><em>rect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__tileset.html">t_tileset</a> *&#160;</td>
+          <td class="paramname"><em>tileset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crée un nouveau joueur. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">control</td><td>Configuration des contrôles </td></tr>
+    <tr><td class="paramname">texture</td><td>Texture pour le rendu </td></tr>
+    <tr><td class="paramname">rect</td><td>Rectangle définissant la position et taille initiales </td></tr>
+    <tr><td class="paramname">tileset</td><td>Tileset pour les animations </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Pointeur vers le joueur créé </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="player_8c_source.html#l00005">5</a> du fichier <a class="el" href="player_8c_source.html">player.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_a25a5b9b1991ba50388e6c3b0eab41d6c_cgraph.png" border="0" usemap="#aplayer_8c_a25a5b9b1991ba50388e6c3b0eab41d6c_cgraph" alt=""/></div>
+<map name="aplayer_8c_a25a5b9b1991ba50388e6c3b0eab41d6c_cgraph" id="aplayer_8c_a25a5b9b1991ba50388e6c3b0eab41d6c_cgraph">
+<area shape="rect" title="Crée un nouveau joueur." alt="" coords="5,309,109,336"/>
+<area shape="rect" href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa" title="Ajoute une animation au contrôleur." alt="" coords="188,56,301,83"/>
+<area shape="rect" href="animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="179,157,310,184"/>
+<area shape="rect" href="timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2" title="Initialise un nouveau timer." alt="" coords="433,107,514,133"/>
+<area shape="rect" href="equipements_manager_8c.html#a43fd9bc1e73271ce69490fd2600dd3d1" title="Crée un nouvel inventaire vide." alt="" coords="180,411,309,437"/>
+<area shape="rect" href="particules_8c.html#ae582018b7ea20710f9845936d0b82cb5" title="Crée un nouvel émetteur de particules." alt="" coords="165,512,324,539"/>
+<area shape="rect" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="157,360,332,387"/>
+<area shape="rect" href="health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="177,639,312,665"/>
+<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="190,233,299,260"/>
+<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="615,259,705,285"/>
+<area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="429,56,517,83"/>
+<area shape="rect" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="403,5,544,32"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="431,157,516,184"/>
+<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="400,411,547,437"/>
+<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="402,461,545,488"/>
+<area shape="rect" href="equipements_manager_8c.html#a145b60908123a9bc199af48b992b3baf" title="Fonction wrapper pour la libération d&#39;item." alt="" coords="418,512,529,539"/>
+<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="422,360,525,387"/>
+<area shape="rect" href="particules_8c.html#a61fa4b7a83f49df939133c298c2a4dab" title="Réinitialise un émetteur de particules." alt="" coords="398,563,549,589"/>
+<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="415,613,531,640"/>
+<area shape="rect" href="health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="380,664,567,691"/>
+<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="411,715,536,741"/>
+<area shape="rect" href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="414,208,533,235"/>
+<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="415,259,532,285"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_a25a5b9b1991ba50388e6c3b0eab41d6c_icgraph.png" border="0" usemap="#aplayer_8c_a25a5b9b1991ba50388e6c3b0eab41d6c_icgraph" alt=""/></div>
+<map name="aplayer_8c_a25a5b9b1991ba50388e6c3b0eab41d6c_icgraph" id="aplayer_8c_a25a5b9b1991ba50388e6c3b0eab41d6c_icgraph">
+<area shape="rect" title="Crée un nouveau joueur." alt="" coords="108,5,212,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a07a36417f6cb5cd32e734eea6e583208"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07a36417f6cb5cd32e734eea6e583208">&#9670;&nbsp;</a></span>freePlayer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void freePlayer </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>object</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Libère la mémoire utilisée par un joueur. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">object</td><td>Pointeur vers le joueur à libérer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="player_8c_source.html#l00583">583</a> du fichier <a class="el" href="player_8c_source.html">player.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_a07a36417f6cb5cd32e734eea6e583208_icgraph.png" border="0" usemap="#aplayer_8c_a07a36417f6cb5cd32e734eea6e583208_icgraph" alt=""/></div>
+<map name="aplayer_8c_a07a36417f6cb5cd32e734eea6e583208_icgraph" id="aplayer_8c_a07a36417f6cb5cd32e734eea6e583208_icgraph">
+<area shape="rect" title="Libère la mémoire utilisée par un joueur." alt="" coords="1020,56,1109,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="acecd15b6ea9287bbc4a1ef451e535fb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acecd15b6ea9287bbc4a1ef451e535fb9">&#9670;&nbsp;</a></span>getPlayerXPProgress()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float getPlayerXPProgress </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>player</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calcule la progression vers le niveau suivant. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">player</td><td>Joueur dont on veut connaître la progression </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Ratio (0.0-1.0) de progression vers le niveau suivant </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="player_8c_source.html#l00595">595</a> du fichier <a class="el" href="player_8c_source.html">player.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_acecd15b6ea9287bbc4a1ef451e535fb9_icgraph.png" border="0" usemap="#aplayer_8c_acecd15b6ea9287bbc4a1ef451e535fb9_icgraph" alt=""/></div>
+<map name="aplayer_8c_acecd15b6ea9287bbc4a1ef451e535fb9_icgraph" id="aplayer_8c_acecd15b6ea9287bbc4a1ef451e535fb9_icgraph">
+<area shape="rect" title="Calcule la progression vers le niveau suivant." alt="" coords="1365,56,1523,83"/>
+<area shape="rect" href="hud_8c.html#a4d7fc060909e74a660fe1171b257f406" title="Met à jour les informations du HUD." alt="" coords="1220,56,1317,83"/>
+<area shape="rect" href="hud_8c.html#a18e3dbaca14748eb34c6b4249c3570b3" title="Wrapper pour mettre à jour le HUD (compatible avec fonctionManager)" alt="" coords="1020,56,1172,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad58c8df82ef4cd3b925aa17cd808b28f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad58c8df82ef4cd3b925aa17cd808b28f">&#9670;&nbsp;</a></span>handleInputPlayer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void handleInputPlayer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__input.html">t_input</a> *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="tiles_8h.html#ab9f5e89fc0a2e21cf99c4c5f2d390344">t_grid</a> *&#160;</td>
+          <td class="paramname"><em>grid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__view_port.html">t_viewPort</a> *&#160;</td>
+          <td class="paramname"><em>vp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>deltaTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__scene_controller.html">t_sceneController</a> *&#160;</td>
+          <td class="paramname"><em>sceneController</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Traite les entrées utilisateur pour le joueur. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>État des entrées </td></tr>
+    <tr><td class="paramname">player</td><td>Joueur à contrôler </td></tr>
+    <tr><td class="paramname">grid</td><td>Grille de collision du niveau </td></tr>
+    <tr><td class="paramname">vp</td><td>Viewport actif </td></tr>
+    <tr><td class="paramname">deltaTime</td><td>Temps écoulé depuis la dernière mise à jour </td></tr>
+    <tr><td class="paramname">sceneController</td><td>Contrôleur de scène pour les transitions </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="player_8c_source.html#l00291">291</a> du fichier <a class="el" href="player_8c_source.html">player.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_ad58c8df82ef4cd3b925aa17cd808b28f_cgraph.png" border="0" usemap="#aplayer_8c_ad58c8df82ef4cd3b925aa17cd808b28f_cgraph" alt=""/></div>
+<map name="aplayer_8c_ad58c8df82ef4cd3b925aa17cd808b28f_cgraph" id="aplayer_8c_ad58c8df82ef4cd3b925aa17cd808b28f_cgraph">
+<area shape="rect" title="Traite les entrées utilisateur pour le joueur." alt="" coords="5,208,145,235"/>
+<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="219,5,333,32"/>
+<area shape="rect" href="camera_8c.html#aa565fc417430314cb021ebd9b85e74bc" title="Convertit des coordonnées souris (écran) en coordonnées monde (niveau)" alt="" coords="193,56,359,83"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="451,107,537,133"/>
+<area shape="rect" href="timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="237,309,315,336"/>
+<area shape="rect" href="input_8c.html#a5dbfa0b962c1dde73b323300bc05034c" title="Détecte un appui unique sur une touche malgrés les frames." alt="" coords="219,360,333,387"/>
+<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="221,208,331,235"/>
+<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="634,233,725,260"/>
+<area shape="rect" href="fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="235,107,317,133"/>
+<area shape="rect" href="player_8c.html#a4c5383bacbe517b6c043977ffb61c39f" title=" " alt="" coords="229,411,323,437"/>
+<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="430,5,558,32"/>
+<area shape="rect" href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="435,208,553,235"/>
+<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="435,157,553,184"/>
+<area shape="rect" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="407,56,581,83"/>
+<area shape="rect" href="fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="629,56,729,83"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_ad58c8df82ef4cd3b925aa17cd808b28f_icgraph.png" border="0" usemap="#aplayer_8c_ad58c8df82ef4cd3b925aa17cd808b28f_icgraph" alt=""/></div>
+<map name="aplayer_8c_ad58c8df82ef4cd3b925aa17cd808b28f_icgraph" id="aplayer_8c_ad58c8df82ef4cd3b925aa17cd808b28f_icgraph">
+<area shape="rect" title="Traite les entrées utilisateur pour le joueur." alt="" coords="1263,56,1403,83"/>
+<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="1020,56,1215,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ade88ef9b08cd5f904aaf3da1e9292fd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade88ef9b08cd5f904aaf3da1e9292fd2">&#9670;&nbsp;</a></span>renderDashTrail()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderDashTrail </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__camera.html">t_camera</a> *&#160;</td>
+          <td class="paramname"><em>camera</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="player_8c_source.html#l00503">503</a> du fichier <a class="el" href="player_8c_source.html">player.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_ade88ef9b08cd5f904aaf3da1e9292fd2_icgraph.png" border="0" usemap="#aplayer_8c_ade88ef9b08cd5f904aaf3da1e9292fd2_icgraph" alt=""/></div>
+<map name="aplayer_8c_ade88ef9b08cd5f904aaf3da1e9292fd2_icgraph" id="aplayer_8c_ade88ef9b08cd5f904aaf3da1e9292fd2_icgraph">
+<area shape="rect" title=" " alt="" coords="1381,56,1505,83"/>
+<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1228,56,1333,83"/>
+<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="1020,56,1180,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a62de1cb2bc9e363cfa8a9ace8c9c612a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62de1cb2bc9e363cfa8a9ace8c9c612a">&#9670;&nbsp;</a></span>renderPlayer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderPlayer </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__camera.html">t_camera</a> *&#160;</td>
+          <td class="paramname"><em>camera</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche le joueur à l'écran. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>Renderer SDL pour l'affichage </td></tr>
+    <tr><td class="paramname">player</td><td>Joueur à afficher </td></tr>
+    <tr><td class="paramname">camera</td><td>Caméra active pour la conversion de coordonnées </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="player_8c_source.html#l00547">547</a> du fichier <a class="el" href="player_8c_source.html">player.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_a62de1cb2bc9e363cfa8a9ace8c9c612a_cgraph.png" border="0" usemap="#aplayer_8c_a62de1cb2bc9e363cfa8a9ace8c9c612a_cgraph" alt=""/></div>
+<map name="aplayer_8c_a62de1cb2bc9e363cfa8a9ace8c9c612a_cgraph" id="aplayer_8c_a62de1cb2bc9e363cfa8a9ace8c9c612a_cgraph">
+<area shape="rect" title="Affiche le joueur à l&#39;écran." alt="" coords="5,208,111,235"/>
+<area shape="rect" href="player_8c.html#a68aa7bf08e883fd2ccdf5e65f3c4cc11" title=" " alt="" coords="176,5,343,32"/>
+<area shape="rect" href="weapon_8c.html#a48d647ca61cdab6aee094d0420874f9e" title="Calcule l&#39;échelle de l&#39;arme en fonction des attributs du joueur." alt="" coords="175,56,343,83"/>
+<area shape="rect" href="weapon_8c.html#ad7e876fe31beedb31fd0e933a5061c09" title="Affiche un cône de débogage pour visualiser la zone d&#39;attaque." alt="" coords="169,107,350,133"/>
+<area shape="rect" href="player_8c.html#ade88ef9b08cd5f904aaf3da1e9292fd2" title=" " alt="" coords="197,157,321,184"/>
+<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="208,208,311,235"/>
+<area shape="rect" href="particules_8c.html#a4649283fd9dfa8005ebd85d1ef3a771e" title="Affiche toutes les particules actives." alt="" coords="181,259,338,285"/>
+<area shape="rect" href="weapon_8c.html#af96a799be749a80ec78faad1a28bc755" title="Affiche l&#39;arme pendant une attaque." alt="" coords="159,309,360,336"/>
+<area shape="rect" href="weapon_8c.html#a5d53a807540e29196d6a6626c870ece5" title="Affiche l&#39;arme en position de repos." alt="" coords="189,360,329,387"/>
+<area shape="rect" href="weapon_8c.html#a009bd4a508cff4e6e45bec4591379aab" title="Affiche l&#39;indicateur de portée de l&#39;arme dans l&#39;interface." alt="" coords="174,411,345,437"/>
+<area shape="rect" href="camera_8c.html#aa33df647efea80a9d6ba2d01184a714d" title="Ajoute un effet de tremblement à la caméra." alt="" coords="420,5,555,32"/>
+<area shape="rect" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="408,157,567,184"/>
+<area shape="rect" href="camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="422,208,553,235"/>
+<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="420,259,555,285"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="631,157,716,184"/>
+<area shape="rect" href="timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="635,208,712,235"/>
+<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="628,259,719,285"/>
+<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="615,309,732,336"/>
+<area shape="rect" href="core_8c.html#af285790c31a2afabd9332560b8249f5e" title="Interpole linéairement entre deux angles." alt="" coords="445,309,529,336"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_a62de1cb2bc9e363cfa8a9ace8c9c612a_icgraph.png" border="0" usemap="#aplayer_8c_a62de1cb2bc9e363cfa8a9ace8c9c612a_icgraph" alt=""/></div>
+<map name="aplayer_8c_a62de1cb2bc9e363cfa8a9ace8c9c612a_icgraph" id="aplayer_8c_a62de1cb2bc9e363cfa8a9ace8c9c612a_icgraph">
+<area shape="rect" title="Affiche le joueur à l&#39;écran." alt="" coords="1228,56,1333,83"/>
+<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="1020,56,1180,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4c5383bacbe517b6c043977ffb61c39f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c5383bacbe517b6c043977ffb61c39f">&#9670;&nbsp;</a></span>startAttack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void startAttack </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>player</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="player_8c_source.html#l00167">167</a> du fichier <a class="el" href="player_8c_source.html">player.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_a4c5383bacbe517b6c043977ffb61c39f_icgraph.png" border="0" usemap="#aplayer_8c_a4c5383bacbe517b6c043977ffb61c39f_icgraph" alt=""/></div>
+<map name="aplayer_8c_a4c5383bacbe517b6c043977ffb61c39f_icgraph" id="aplayer_8c_a4c5383bacbe517b6c043977ffb61c39f_icgraph">
+<area shape="rect" title=" " alt="" coords="1451,56,1545,83"/>
+<area shape="rect" href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f" title="Traite les entrées utilisateur pour le joueur." alt="" coords="1263,56,1403,83"/>
+<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="1020,56,1215,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aea2580dd56e7113d24936f6b09a66192"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea2580dd56e7113d24936f6b09a66192">&#9670;&nbsp;</a></span>updateAttack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updateAttack </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>deltaTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__object_manager.html">t_objectManager</a> *&#160;</td>
+          <td class="paramname"><em>entities</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__context.html">t_context</a> *&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="player_8c_source.html#l00189">189</a> du fichier <a class="el" href="player_8c_source.html">player.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_aea2580dd56e7113d24936f6b09a66192_cgraph.png" border="0" usemap="#aplayer_8c_aea2580dd56e7113d24936f6b09a66192_cgraph" alt=""/></div>
+<map name="aplayer_8c_aea2580dd56e7113d24936f6b09a66192_cgraph" id="aplayer_8c_aea2580dd56e7113d24936f6b09a66192_cgraph">
+<area shape="rect" title=" " alt="" coords="5,157,115,184"/>
+<area shape="rect" href="physics_8c.html#a7bdb858968c7b571e6577d1a30af9888" title="Vérifie si un cercle est dans un secteur angulaire." alt="" coords="195,5,309,32"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="209,56,295,83"/>
+<area shape="rect" href="object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="189,107,315,133"/>
+<area shape="rect" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="181,157,323,184"/>
+<area shape="rect" href="core_8c.html#af285790c31a2afabd9332560b8249f5e" title="Interpole linéairement entre deux angles." alt="" coords="210,208,294,235"/>
+<area shape="rect" href="core_8c.html#a94ac75d81eceed79e81da71bcb7dbda7" title="Applique une fonction de lissage à une valeur." alt="" coords="199,259,305,285"/>
+<area shape="rect" href="enemy_8c.html#ae756d207dddebceef48dfd1ad481cf4e" title="Applique des dégâts à un ennemi." alt="" coords="163,309,341,336"/>
+<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="389,309,503,336"/>
+<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="551,309,679,336"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_aea2580dd56e7113d24936f6b09a66192_icgraph.png" border="0" usemap="#aplayer_8c_aea2580dd56e7113d24936f6b09a66192_icgraph" alt=""/></div>
+<map name="aplayer_8c_aea2580dd56e7113d24936f6b09a66192_icgraph" id="aplayer_8c_aea2580dd56e7113d24936f6b09a66192_icgraph">
+<area shape="rect" title=" " alt="" coords="1387,56,1496,83"/>
+<area shape="rect" href="player_8c.html#a19c9b26bd5ea417615cd19e9ce4c46f4" title="Met à jour l&#39;état et le comportement du joueur." alt="" coords="1231,56,1339,83"/>
+<area shape="rect" href="commun_8c.html#a32d90a8046d05096f3ea9453c8c56797" title="Wrapper pour la mise à jour du joueur." alt="" coords="1020,56,1183,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a19c9b26bd5ea417615cd19e9ce4c46f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19c9b26bd5ea417615cd19e9ce4c46f4">&#9670;&nbsp;</a></span>updatePlayer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updatePlayer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>deltaTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__salle.html">t_salle</a> *&#160;</td>
+          <td class="paramname"><em>salle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__object_manager.html">t_objectManager</a> *&#160;</td>
+          <td class="paramname"><em>entities</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__context.html">t_context</a> *&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Met à jour l'état et le comportement du joueur. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">player</td><td>Joueur à mettre à jour </td></tr>
+    <tr><td class="paramname">deltaTime</td><td>Temps écoulé depuis la dernière mise à jour </td></tr>
+    <tr><td class="paramname">salle</td><td>Salle où se trouve le joueur </td></tr>
+    <tr><td class="paramname">entities</td><td>Gestionnaire des entités pour les interactions </td></tr>
+    <tr><td class="paramname">context</td><td>Contexte du jeu </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="player_8c_source.html#l00422">422</a> du fichier <a class="el" href="player_8c_source.html">player.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_a19c9b26bd5ea417615cd19e9ce4c46f4_cgraph.png" border="0" usemap="#aplayer_8c_a19c9b26bd5ea417615cd19e9ce4c46f4_cgraph" alt=""/></div>
+<map name="aplayer_8c_a19c9b26bd5ea417615cd19e9ce4c46f4_cgraph" id="aplayer_8c_a19c9b26bd5ea417615cd19e9ce4c46f4_cgraph">
+<area shape="rect" title="Met à jour l&#39;état et le comportement du joueur." alt="" coords="5,443,113,469"/>
+<area shape="rect" href="particules_8c.html#a60f0ce961cc85e715295bef28126c04d" title="Émet des particules de mouvement." alt="" coords="161,81,339,108"/>
+<area shape="rect" href="fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="209,157,291,184"/>
+<area shape="rect" href="player_8c.html#aea2580dd56e7113d24936f6b09a66192" title=" " alt="" coords="195,385,305,412"/>
+<area shape="rect" href="particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="170,443,330,469"/>
+<area shape="rect" href="health_8c.html#a0785e98f299a0efc4d634d618c7f9f75" title="Met à jour le système de santé" alt="" coords="171,563,329,589"/>
+<area shape="rect" href="physics_8c.html#a63880ca4246528d2b4a1e1fec0d9c661" title=" " alt="" coords="177,639,323,665"/>
+<area shape="rect" href="player_8c.html#ad1ef56e04f9966bf30c4b7d8d494a961" title=" " alt="" coords="166,505,334,532"/>
+<area shape="rect" href="particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="423,56,529,83"/>
+<area shape="rect" href="particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="623,5,774,32"/>
+<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="638,56,759,83"/>
+<area shape="rect" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="389,107,563,133"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="889,309,975,336"/>
+<area shape="rect" href="fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="649,107,749,133"/>
+<area shape="rect" href="physics_8c.html#a7bdb858968c7b571e6577d1a30af9888" title="Vérifie si un cercle est dans un secteur angulaire." alt="" coords="419,411,533,437"/>
+<area shape="rect" href="object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="413,461,539,488"/>
+<area shape="rect" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="405,259,547,285"/>
+<area shape="rect" href="core_8c.html#af285790c31a2afabd9332560b8249f5e" title="Interpole linéairement entre deux angles." alt="" coords="434,360,518,387"/>
+<area shape="rect" href="core_8c.html#a94ac75d81eceed79e81da71bcb7dbda7" title="Applique une fonction de lissage à une valeur." alt="" coords="423,512,529,539"/>
+<area shape="rect" href="enemy_8c.html#ae756d207dddebceef48dfd1ad481cf4e" title="Applique des dégâts à un ennemi." alt="" coords="387,208,565,235"/>
+<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="642,208,755,235"/>
+<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="868,208,996,235"/>
+<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="418,613,534,640"/>
+<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="406,563,546,589"/>
+<area shape="rect" href="physics_8c.html#a762abc05fd3932fd770b6669536c6a39" title=" " alt="" coords="413,664,539,691"/>
+<area shape="rect" href="physics_8c.html#a49535bbd051fba95b354c0b799aeaecd" title=" " alt="" coords="613,461,784,488"/>
+<area shape="rect" href="physics_8c.html#aa4c391b6039023d72360858573598931" title=" " alt="" coords="619,664,779,691"/>
+<area shape="rect" href="physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="837,487,1027,513"/>
+<area shape="rect" href="physics_8c.html#a939ce6d2a8a36cf8aa70ca659cca1cb5" title=" " alt="" coords="832,436,1032,463"/>
+<area shape="rect" href="physics_8c.html#aea0d92f868946fd053a28534a3f7cbf4" title="Détecte collision entre un cercle et un rectangle." alt="" coords="841,613,1023,640"/>
+<area shape="rect" href="tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="899,664,965,691"/>
+<area shape="rect" href="physics_8c.html#a3b50b7ed91abcb9306aaa9fd47b98e8a" title=" " alt="" coords="836,715,1028,741"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_a19c9b26bd5ea417615cd19e9ce4c46f4_icgraph.png" border="0" usemap="#aplayer_8c_a19c9b26bd5ea417615cd19e9ce4c46f4_icgraph" alt=""/></div>
+<map name="aplayer_8c_a19c9b26bd5ea417615cd19e9ce4c46f4_icgraph" id="aplayer_8c_a19c9b26bd5ea417615cd19e9ce4c46f4_icgraph">
+<area shape="rect" title="Met à jour l&#39;état et le comportement du joueur." alt="" coords="1231,56,1339,83"/>
+<area shape="rect" href="commun_8c.html#a32d90a8046d05096f3ea9453c8c56797" title="Wrapper pour la mise à jour du joueur." alt="" coords="1020,56,1183,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad1ef56e04f9966bf30c4b7d8d494a961"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1ef56e04f9966bf30c4b7d8d494a961">&#9670;&nbsp;</a></span>updateTimeSlowEffect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updateTimeSlowEffect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>originalDeltaTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>modifiedDeltaTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="player_8c_source.html#l00131">131</a> du fichier <a class="el" href="player_8c_source.html">player.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_ad1ef56e04f9966bf30c4b7d8d494a961_cgraph.png" border="0" usemap="#aplayer_8c_ad1ef56e04f9966bf30c4b7d8d494a961_cgraph" alt=""/></div>
+<map name="aplayer_8c_ad1ef56e04f9966bf30c4b7d8d494a961_cgraph" id="aplayer_8c_ad1ef56e04f9966bf30c4b7d8d494a961_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,173,32"/>
+<area shape="rect" href="core_8c.html#a94ac75d81eceed79e81da71bcb7dbda7" title="Applique une fonction de lissage à une valeur." alt="" coords="221,5,327,32"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="player_8c_ad1ef56e04f9966bf30c4b7d8d494a961_icgraph.png" border="0" usemap="#aplayer_8c_ad1ef56e04f9966bf30c4b7d8d494a961_icgraph" alt=""/></div>
+<map name="aplayer_8c_ad1ef56e04f9966bf30c4b7d8d494a961_icgraph" id="aplayer_8c_ad1ef56e04f9966bf30c4b7d8d494a961_icgraph">
+<area shape="rect" title=" " alt="" coords="1387,56,1555,83"/>
+<area shape="rect" href="player_8c.html#a19c9b26bd5ea417615cd19e9ce4c46f4" title="Met à jour l&#39;état et le comportement du joueur." alt="" coords="1231,56,1339,83"/>
+<area shape="rect" href="commun_8c.html#a32d90a8046d05096f3ea9453c8c56797" title="Wrapper pour la mise à jour du joueur." alt="" coords="1020,56,1183,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

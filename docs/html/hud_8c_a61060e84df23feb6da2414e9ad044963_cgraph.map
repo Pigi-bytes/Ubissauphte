@@ -1,0 +1,4 @@
+<map id="freeHUD" name="freeHUD">
+<area shape="rect" id="node1" title="Libère la mémoire utilisée par le HUD." alt="" coords="5,5,84,32"/>
+<area shape="rect" id="node2" href="$text_8c.html#ab9b7064da4ef9403241f3d40389af46a" title="Libère la mémoire utilisée par un élément textuel." alt="" coords="132,5,207,32"/>
+</map>

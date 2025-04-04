@@ -1,0 +1,9 @@
+<map id="handleInputInventaireWrapper" name="handleInputInventaireWrapper">
+<area shape="rect" id="node1" title="Wrapper pour la gestion de l&#39;inventaire." alt="" coords="5,56,225,83"/>
+<area shape="rect" id="node2" href="$affichage_8c.html#a97b3d1c61a1bb1026211fb94191e5485" title="Gère les entrées de l&#39;inventaire." alt="" coords="273,56,439,83"/>
+<area shape="rect" id="node3" href="$fscene_8c.html#a8d96eeeaa02433587861a66a7cc8b24f" title="Revient à la scène précédente." alt="" coords="487,56,617,83"/>
+<area shape="rect" id="node4" href="$fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="665,5,840,32"/>
+<area shape="rect" id="node6" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="895,81,981,108"/>
+<area shape="rect" id="node7" href="$fscene_8c.html#a203dc7420436877b66bbcc6e559483af" title="Récupère l&#39;index d&#39;une scène." alt="" coords="695,107,811,133"/>
+<area shape="rect" id="node5" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="888,5,988,32"/>
+</map>

@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon:  Fichier source de Ubissauphte/src/engine/entities/components/physic/physics.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_2826858af9faa5fe77c775e96e0e1227.html">engine</a></li><li class="navelem"><a class="el" href="dir_136c429d572dc163e086310573299ad2.html">entities</a></li><li class="navelem"><a class="el" href="dir_ff67d61d46a6c9bbabc370ff2ffaa5a7.html">components</a></li><li class="navelem"><a class="el" href="dir_80cc41f9e4509b0ba97491f0eb93a5f7.html">physic</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">physics.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="physics_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef PHYSIC_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define PHYSIC_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;../core.h&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// Forward declarations using &#39;struct&#39; to avoid name conflicts</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">struct </span><a class="code" href="structs__entity.html">s_entity</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">struct </span><a class="code" href="structs__grid.html">s_grid</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">struct </span><a class="code" href="structs__object_manager.html">s_objectManager</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="structt__physics.html">   22</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structt__physics.html#a60b0a6fd3f3f74891eb88685c7e89d4e">   23</a></span>&#160;    SDL_FPoint <a class="code" href="structt__physics.html#a60b0a6fd3f3f74891eb88685c7e89d4e">velocity</a>;  </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structt__physics.html#a7b2fa2b4300edd7ec1c54209a6a20258">   24</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="structt__physics.html#a7b2fa2b4300edd7ec1c54209a6a20258">mass</a>;           </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structt__physics.html#a585bd15db005143bac988d78710e4e93">   25</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="structt__physics.html#a585bd15db005143bac988d78710e4e93">friction</a>;       </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="structt__physics.html#a6890c1209f18d7527b172e45a01a95a6">   26</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="structt__physics.html#a6890c1209f18d7527b172e45a01a95a6">restitution</a>;    </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;} <a class="code" href="structt__physics.html">t_physics</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;SDL_bool <a class="code" href="physics_8h.html#aea0d92f868946fd053a28534a3f7cbf4">checkCircleRectCollision</a>(<a class="code" href="structt__circle.html">t_circle</a>* circle, SDL_Rect* rect, <a class="code" href="structt__collision_data.html">t_collisionData</a>* out);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;SDL_bool <a class="code" href="physics_8h.html#abcc381b9c63f813d5c6fa189f4f9dd2a">checkCircleCircleCollision</a>(<a class="code" href="structt__circle.html">t_circle</a>* a, <a class="code" href="structt__circle.html">t_circle</a>* b, <a class="code" href="structt__collision_data.html">t_collisionData</a>* out);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;SDL_bool <a class="code" href="physics_8h.html#a7bdb858968c7b571e6577d1a30af9888">cercleInSector</a>(SDL_FPoint target, <span class="keywordtype">float</span> target_radius, SDL_FPoint origin, <span class="keywordtype">float</span> currentAngle, <span class="keywordtype">float</span> range, <span class="keywordtype">float</span> arc);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="physics_8h.html#a00d00cb8ada6de463acf382fb6861067">   66</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="physics_8h.html#a00d00cb8ada6de463acf382fb6861067">updatePhysicEntity</a>(<span class="keyword">struct</span> <a class="code" href="structs__entity.html">s_entity</a>* entity, <span class="keywordtype">float</span>* deltaTime, <span class="keyword">struct</span> <a class="code" href="structs__grid.html">s_grid</a>* grid, <span class="keyword">struct</span> <a class="code" href="structs__object_manager.html">s_objectManager</a>* entities);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="physics_8h.html#a2795229beeb914ec46734134f67f096c">   74</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="physics_8h.html#a2795229beeb914ec46734134f67f096c">resolveCollision</a>(<span class="keyword">struct</span> <a class="code" href="structs__entity.html">s_entity</a>* entity, <span class="keyword">struct</span> <a class="code" href="structs__grid.html">s_grid</a>* grid, <span class="keyword">struct</span> <a class="code" href="structs__object_manager.html">s_objectManager</a>* entities);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;SDL_bool <a class="code" href="physics_8h.html#aba281738495a352af5d87d4e1057f465">gridRaycast</a>(<span class="keyword">struct</span> <a class="code" href="structs__grid.html">s_grid</a>* grid, SDL_FPoint start, SDL_FPoint end, <span class="keywordtype">int</span> tileSize, SDL_FPoint* obstructionPoint);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aphysics_8h_html_a00d00cb8ada6de463acf382fb6861067"><div class="ttname"><a href="physics_8h.html#a00d00cb8ada6de463acf382fb6861067">updatePhysicEntity</a></div><div class="ttdeci">void updatePhysicEntity(struct s_entity *entity, float *deltaTime, struct s_grid *grid, struct s_objectManager *entities)</div><div class="ttdoc">Met à jour la physique d'une entité</div></div>
+<div class="ttc" id="aphysics_8h_html_a2795229beeb914ec46734134f67f096c"><div class="ttname"><a href="physics_8h.html#a2795229beeb914ec46734134f67f096c">resolveCollision</a></div><div class="ttdeci">void resolveCollision(struct s_entity *entity, struct s_grid *grid, struct s_objectManager *entities)</div><div class="ttdoc">Résout les collisions d'une entité</div></div>
+<div class="ttc" id="aphysics_8h_html_a7bdb858968c7b571e6577d1a30af9888"><div class="ttname"><a href="physics_8h.html#a7bdb858968c7b571e6577d1a30af9888">cercleInSector</a></div><div class="ttdeci">SDL_bool cercleInSector(SDL_FPoint target, float target_radius, SDL_FPoint origin, float currentAngle, float range, float arc)</div><div class="ttdoc">Vérifie si un cercle est dans un secteur angulaire.</div><div class="ttdef"><b>Definition:</b> <a href="physics_8c_source.html#l00070">physics.c:70</a></div></div>
+<div class="ttc" id="aphysics_8h_html_aba281738495a352af5d87d4e1057f465"><div class="ttname"><a href="physics_8h.html#aba281738495a352af5d87d4e1057f465">gridRaycast</a></div><div class="ttdeci">SDL_bool gridRaycast(struct s_grid *grid, SDL_FPoint start, SDL_FPoint end, int tileSize, SDL_FPoint *obstructionPoint)</div><div class="ttdoc">Lance un rayon à travers la grille et détecte la première obstruction.</div><div class="ttdef"><b>Definition:</b> <a href="physics_8c_source.html#l00235">physics.c:235</a></div></div>
+<div class="ttc" id="aphysics_8h_html_abcc381b9c63f813d5c6fa189f4f9dd2a"><div class="ttname"><a href="physics_8h.html#abcc381b9c63f813d5c6fa189f4f9dd2a">checkCircleCircleCollision</a></div><div class="ttdeci">SDL_bool checkCircleCircleCollision(t_circle *a, t_circle *b, t_collisionData *out)</div><div class="ttdoc">Détecte collision entre deux cercles.</div><div class="ttdef"><b>Definition:</b> <a href="physics_8c_source.html#l00051">physics.c:51</a></div></div>
+<div class="ttc" id="aphysics_8h_html_aea0d92f868946fd053a28534a3f7cbf4"><div class="ttname"><a href="physics_8h.html#aea0d92f868946fd053a28534a3f7cbf4">checkCircleRectCollision</a></div><div class="ttdeci">SDL_bool checkCircleRectCollision(t_circle *circle, SDL_Rect *rect, t_collisionData *out)</div><div class="ttdoc">Détecte collision entre un cercle et un rectangle.</div><div class="ttdef"><b>Definition:</b> <a href="physics_8c_source.html#l00010">physics.c:10</a></div></div>
+<div class="ttc" id="astructs__entity_html"><div class="ttname"><a href="structs__entity.html">s_entity</a></div><div class="ttdoc">Structure de base pour toutes les entités du jeu.</div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00024">entity.h:24</a></div></div>
+<div class="ttc" id="astructs__grid_html"><div class="ttname"><a href="structs__grid.html">s_grid</a></div><div class="ttdoc">Représente une grille 3D de tuiles pour un niveau.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8h_source.html#l00038">tiles.h:38</a></div></div>
+<div class="ttc" id="astructs__object_manager_html"><div class="ttname"><a href="structs__object_manager.html">s_objectManager</a></div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8h_source.html#l00101">objectManager.h:101</a></div></div>
+<div class="ttc" id="astructt__circle_html"><div class="ttname"><a href="structt__circle.html">t_circle</a></div><div class="ttdoc">Représente un cercle pour les collisions circulaires.</div><div class="ttdef"><b>Definition:</b> <a href="core_8h_source.html#l00015">core.h:15</a></div></div>
+<div class="ttc" id="astructt__collision_data_html"><div class="ttname"><a href="structt__collision_data.html">t_collisionData</a></div><div class="ttdoc">Contient les informations résultant d'une collision.</div><div class="ttdef"><b>Definition:</b> <a href="core_8h_source.html#l00035">core.h:35</a></div></div>
+<div class="ttc" id="astructt__physics_html"><div class="ttname"><a href="structt__physics.html">t_physics</a></div><div class="ttdoc">Composant de physique pour les entités.</div><div class="ttdef"><b>Definition:</b> <a href="physics_8h_source.html#l00022">physics.h:22</a></div></div>
+<div class="ttc" id="astructt__physics_html_a585bd15db005143bac988d78710e4e93"><div class="ttname"><a href="structt__physics.html#a585bd15db005143bac988d78710e4e93">t_physics::friction</a></div><div class="ttdeci">float friction</div><div class="ttdoc">Frottement (pour ralentir l'entité)</div><div class="ttdef"><b>Definition:</b> <a href="physics_8h_source.html#l00025">physics.h:25</a></div></div>
+<div class="ttc" id="astructt__physics_html_a60b0a6fd3f3f74891eb88685c7e89d4e"><div class="ttname"><a href="structt__physics.html#a60b0a6fd3f3f74891eb88685c7e89d4e">t_physics::velocity</a></div><div class="ttdeci">SDL_FPoint velocity</div><div class="ttdoc">Vélocité actuelle (x,y)</div><div class="ttdef"><b>Definition:</b> <a href="physics_8h_source.html#l00023">physics.h:23</a></div></div>
+<div class="ttc" id="astructt__physics_html_a6890c1209f18d7527b172e45a01a95a6"><div class="ttname"><a href="structt__physics.html#a6890c1209f18d7527b172e45a01a95a6">t_physics::restitution</a></div><div class="ttdeci">float restitution</div><div class="ttdoc">Elasticité des collisions (0.0 = pas élastique, 1.0 = parfaitement élastique)</div><div class="ttdef"><b>Definition:</b> <a href="physics_8h_source.html#l00026">physics.h:26</a></div></div>
+<div class="ttc" id="astructt__physics_html_a7b2fa2b4300edd7ec1c54209a6a20258"><div class="ttname"><a href="structt__physics.html#a7b2fa2b4300edd7ec1c54209a6a20258">t_physics::mass</a></div><div class="ttdeci">float mass</div><div class="ttdoc">Masse de l'entité (0 = infinité/statique)</div><div class="ttdef"><b>Definition:</b> <a href="physics_8h_source.html#l00024">physics.h:24</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

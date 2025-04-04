@@ -1,0 +1,738 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon: Référence du fichier Ubissauphte/src/engine/world/generationSalle/listeBlock.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_2826858af9faa5fe77c775e96e0e1227.html">engine</a></li><li class="navelem"><a class="el" href="dir_ead93a21b55928290f9cdbe2a28bde81.html">world</a></li><li class="navelem"><a class="el" href="dir_2c8babf3c2c824670b2174408d28f18e.html">generationSalle</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier listeBlock.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="liste_block_8h_source.html">listeBlock.h</a>&quot;</code><br />
+</div>
+<p><a href="liste_block_8c_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a0374925ca137cff516ff1e935215c63b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__liste_block.html">t_listeBlock</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_block_8c.html#a0374925ca137cff516ff1e935215c63b">InitAllBlock</a> ()</td></tr>
+<tr class="memdesc:a0374925ca137cff516ff1e935215c63b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise toutes les listes de blocs.  <a href="liste_block_8c.html#a0374925ca137cff516ff1e935215c63b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a0374925ca137cff516ff1e935215c63b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ef121247dc980b530868d77561dd773"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_block_8c.html#a7ef121247dc980b530868d77561dd773">freeListeBlock</a> (<a class="el" href="structt__liste_block.html">t_listeBlock</a> **listAllBlock)</td></tr>
+<tr class="memdesc:a7ef121247dc980b530868d77561dd773"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libère la mémoire des listes de blocs.  <a href="liste_block_8c.html#a7ef121247dc980b530868d77561dd773">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a7ef121247dc980b530868d77561dd773"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af163cba383357ce8c4e41da299fd3021"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_block_8c.html#af163cba383357ce8c4e41da299fd3021">ajouterBlock</a> (<a class="el" href="structt__liste_block.html">t_listeBlock</a> **listAllBlock, <a class="el" href="liste_block_8h.html#aaf643fb69360d4670ece3242d74a5b1f">t_blocktype</a> type, <a class="el" href="liste_block_8h.html#a73eb99c7b9a7588f86cbc5ffa1d1e686">nom_block</a> name, int tailes, int rotation, double proba, SDL_bool collisions, SDL_bool rotationAutorise)</td></tr>
+<tr class="memdesc:af163cba383357ce8c4e41da299fd3021"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute un bloc à la liste correspondante.  <a href="liste_block_8c.html#af163cba383357ce8c4e41da299fd3021">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af163cba383357ce8c4e41da299fd3021"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2648a0e73e7ec24142118d88e25c6e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__liste_block.html">t_listeBlock</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_block_8c.html#ae2648a0e73e7ec24142118d88e25c6e2">listeByType</a> (<a class="el" href="structt__liste_block.html">t_listeBlock</a> **listAllBlock, <a class="el" href="liste_block_8h.html#aaf643fb69360d4670ece3242d74a5b1f">t_blocktype</a> type)</td></tr>
+<tr class="memdesc:ae2648a0e73e7ec24142118d88e25c6e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère la liste des blocs d'un type spécifique.  <a href="liste_block_8c.html#ae2648a0e73e7ec24142118d88e25c6e2">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae2648a0e73e7ec24142118d88e25c6e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30db6937fc6a2badca7e728d810f6960"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__block.html">t_block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_block_8c.html#a30db6937fc6a2badca7e728d810f6960">blockByName</a> (<a class="el" href="structt__liste_block.html">t_listeBlock</a> *listBlock, <a class="el" href="liste_block_8h.html#a73eb99c7b9a7588f86cbc5ffa1d1e686">nom_block</a> <a class="el" href="liste_block_8h.html#a73eb99c7b9a7588f86cbc5ffa1d1e686">nom_block</a>)</td></tr>
+<tr class="memdesc:a30db6937fc6a2badca7e728d810f6960"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trouve un bloc par son nom.  <a href="liste_block_8c.html#a30db6937fc6a2badca7e728d810f6960">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a30db6937fc6a2badca7e728d810f6960"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af11d3ca15d046a7fe2a5eab6962e63f7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__block.html">t_block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_block_8c.html#af11d3ca15d046a7fe2a5eab6962e63f7">randomBlocByType</a> (<a class="el" href="structt__liste_block.html">t_listeBlock</a> *listBlock)</td></tr>
+<tr class="memdesc:af11d3ca15d046a7fe2a5eab6962e63f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sélectionne un bloc aléatoire selon son type.  <a href="liste_block_8c.html#af11d3ca15d046a7fe2a5eab6962e63f7">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af11d3ca15d046a7fe2a5eab6962e63f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7de821f1726c7548a76b1b5edfe4bbc4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_block_8c.html#a7de821f1726c7548a76b1b5edfe4bbc4">rotationAleatoire</a> (<a class="el" href="structt__block.html">t_block</a> *block)</td></tr>
+<tr class="memdesc:a7de821f1726c7548a76b1b5edfe4bbc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applique une rotation aléatoire à un bloc.  <a href="liste_block_8c.html#a7de821f1726c7548a76b1b5edfe4bbc4">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a7de821f1726c7548a76b1b5edfe4bbc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a263b5829b42a63268f4c46467e03ff26"><td class="memItemLeft" align="right" valign="top">SDL_bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_block_8c.html#a263b5829b42a63268f4c46467e03ff26">blockIs</a> (<a class="el" href="structt__block.html">t_block</a> *block, <a class="el" href="liste_block_8h.html#a73eb99c7b9a7588f86cbc5ffa1d1e686">nom_block</a> nom)</td></tr>
+<tr class="memdesc:a263b5829b42a63268f4c46467e03ff26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si un bloc est d'un type spécifique.  <a href="liste_block_8c.html#a263b5829b42a63268f4c46467e03ff26">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a263b5829b42a63268f4c46467e03ff26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa722d352490a0883bf05e8cd9b61d776"><td class="memItemLeft" align="right" valign="top">SDL_bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_block_8c.html#aa722d352490a0883bf05e8cd9b61d776">blockIsOmbre</a> (<a class="el" href="structt__block.html">t_block</a> *block)</td></tr>
+<tr class="memdesc:aa722d352490a0883bf05e8cd9b61d776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si un bloc est une ombre.  <a href="liste_block_8c.html#aa722d352490a0883bf05e8cd9b61d776">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa722d352490a0883bf05e8cd9b61d776"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc5676a45aa44f0b5563198c098ed9cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__liste_block.html">t_listeBlock</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_block_8c.html#adc5676a45aa44f0b5563198c098ed9cc">createListAllBlock</a> ()</td></tr>
+<tr class="memdesc:adc5676a45aa44f0b5563198c098ed9cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée les listes de tous les blocs.  <a href="liste_block_8c.html#adc5676a45aa44f0b5563198c098ed9cc">Plus de détails...</a><br /></td></tr>
+<tr class="separator:adc5676a45aa44f0b5563198c098ed9cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aa0642bbe5cd64582544bb08f6bf391"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_block_8c.html#a9aa0642bbe5cd64582544bb08f6bf391">copierVal</a> (<a class="el" href="structt__block.html">t_block</a> *src, <a class="el" href="structt__block.html">t_block</a> **det)</td></tr>
+<tr class="memdesc:a9aa0642bbe5cd64582544bb08f6bf391"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copie les valeurs d'un bloc vers un autre.  <a href="liste_block_8c.html#a9aa0642bbe5cd64582544bb08f6bf391">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9aa0642bbe5cd64582544bb08f6bf391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentation des fonctions</h2>
+<a id="af163cba383357ce8c4e41da299fd3021"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af163cba383357ce8c4e41da299fd3021">&#9670;&nbsp;</a></span>ajouterBlock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ajouterBlock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__liste_block.html">t_listeBlock</a> **&#160;</td>
+          <td class="paramname"><em>listAllBlock</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="liste_block_8h.html#aaf643fb69360d4670ece3242d74a5b1f">t_blocktype</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="liste_block_8h.html#a73eb99c7b9a7588f86cbc5ffa1d1e686">nom_block</a>&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tailes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>rotation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>proba</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_bool&#160;</td>
+          <td class="paramname"><em>collisions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_bool&#160;</td>
+          <td class="paramname"><em>rotationAutorise</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ajoute un bloc à la liste correspondante. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">listAllBlock</td><td>Listes de blocs </td></tr>
+    <tr><td class="paramname">type</td><td>Type du bloc à ajouter </td></tr>
+    <tr><td class="paramname">name</td><td>Nom spécifique du bloc </td></tr>
+    <tr><td class="paramname">tailes</td><td>Index du bloc </td></tr>
+    <tr><td class="paramname">rotation</td><td>Rotation initiale </td></tr>
+    <tr><td class="paramname">proba</td><td>Probabilité d'apparition </td></tr>
+    <tr><td class="paramname">collisions</td><td>Si le bloc a des collisions </td></tr>
+    <tr><td class="paramname">rotationAutorise</td><td>Si la rotation est autorisée </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="liste_block_8c_source.html#l00035">35</a> du fichier <a class="el" href="liste_block_8c_source.html">listeBlock.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="liste_block_8c_af163cba383357ce8c4e41da299fd3021_icgraph.png" border="0" usemap="#aliste_block_8c_af163cba383357ce8c4e41da299fd3021_icgraph" alt=""/></div>
+<map name="aliste_block_8c_af163cba383357ce8c4e41da299fd3021_icgraph" id="aliste_block_8c_af163cba383357ce8c4e41da299fd3021_icgraph">
+<area shape="rect" title="Ajoute un bloc à la liste correspondante." alt="" coords="1323,5,1427,32"/>
+<area shape="rect" href="liste_block_8c.html#adc5676a45aa44f0b5563198c098ed9cc" title="Crée les listes de tous les blocs." alt="" coords="1136,5,1275,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a30db6937fc6a2badca7e728d810f6960"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30db6937fc6a2badca7e728d810f6960">&#9670;&nbsp;</a></span>blockByName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt__block.html">t_block</a>* blockByName </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__liste_block.html">t_listeBlock</a> *&#160;</td>
+          <td class="paramname"><em>listBlock</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="liste_block_8h.html#a73eb99c7b9a7588f86cbc5ffa1d1e686">nom_block</a>&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Trouve un bloc par son nom. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">listBlock</td><td>Liste de blocs à chercher </td></tr>
+    <tr><td class="paramname">name</td><td>Nom du bloc recherché </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Pointeur vers le bloc trouvé ou NULL </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="liste_block_8c_source.html#l00059">59</a> du fichier <a class="el" href="liste_block_8c_source.html">listeBlock.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="liste_block_8c_a30db6937fc6a2badca7e728d810f6960_icgraph.png" border="0" usemap="#aliste_block_8c_a30db6937fc6a2badca7e728d810f6960_icgraph" alt=""/></div>
+<map name="aliste_block_8c_a30db6937fc6a2badca7e728d810f6960_icgraph" id="aliste_block_8c_a30db6937fc6a2badca7e728d810f6960_icgraph">
+<area shape="rect" title="Trouve un bloc par son nom." alt="" coords="1459,81,1572,108"/>
+<area shape="rect" href="gene_room_8c.html#a405809018b17074928d18489e2cf4e7d" title=" " alt="" coords="1136,5,1267,32"/>
+<area shape="rect" href="gene_room_8c.html#a4bdb7b92951e3249dfb5c04dd7227c36" title="Applique les tuiles à la grille." alt="" coords="1157,81,1245,108"/>
+<area shape="rect" href="gene_room_8c.html#abbc2703ecc48a05326b416d24d507af0" title="Sélectionne une tuile frontale adaptée." alt="" coords="1315,81,1411,108"/>
+<area shape="rect" href="gene_room_8c.html#a4c0af876efaea0550cd7a8b0a7bb492b" title="Sélectionne un sol adapté à une case." alt="" coords="1331,132,1394,159"/>
+<area shape="rect" href="gene_room_8c.html#ade4f891d88036489d3477f266cdbac81" title="Crée des ouvertures dans la grille." alt="" coords="1315,183,1411,209"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,81,1088,108"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,81,948,108"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,81,772,108"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,81,612,108"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,81,453,108"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,81,239,108"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,81,60,108"/>
+<area shape="rect" href="gene_room_8c.html#af25582e67f334c8f4879a427566f2b68" title="Place la sortie dans la salle." alt="" coords="1151,157,1251,184"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a263b5829b42a63268f4c46467e03ff26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a263b5829b42a63268f4c46467e03ff26">&#9670;&nbsp;</a></span>blockIs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_bool blockIs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__block.html">t_block</a> *&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="liste_block_8h.html#a73eb99c7b9a7588f86cbc5ffa1d1e686">nom_block</a>&#160;</td>
+          <td class="paramname"><em>nom</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vérifie si un bloc est d'un type spécifique. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>Bloc à vérifier </td></tr>
+    <tr><td class="paramname">nom</td><td>Nom à comparer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>SDL_TRUE si le bloc correspond, SDL_FALSE sinon </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="liste_block_8c_source.html#l00088">88</a> du fichier <a class="el" href="liste_block_8c_source.html">listeBlock.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="liste_block_8c_a263b5829b42a63268f4c46467e03ff26_icgraph.png" border="0" usemap="#aliste_block_8c_a263b5829b42a63268f4c46467e03ff26_icgraph" alt=""/></div>
+<map name="aliste_block_8c_a263b5829b42a63268f4c46467e03ff26_icgraph" id="aliste_block_8c_a263b5829b42a63268f4c46467e03ff26_icgraph">
+<area shape="rect" title="Vérifie si un bloc est d&#39;un type spécifique." alt="" coords="1576,56,1644,83"/>
+<area shape="rect" href="liste_block_8c.html#aa722d352490a0883bf05e8cd9b61d776" title="Vérifie si un bloc est une ombre." alt="" coords="1416,5,1528,32"/>
+<area shape="rect" href="gene_room_8c.html#a4c0af876efaea0550cd7a8b0a7bb492b" title="Sélectionne un sol adapté à une case." alt="" coords="1289,56,1351,83"/>
+<area shape="rect" href="gene_room_8c.html#abbc2703ecc48a05326b416d24d507af0" title="Sélectionne une tuile frontale adaptée." alt="" coords="1272,107,1368,133"/>
+<area shape="rect" href="gene_room_8c.html#a4bdb7b92951e3249dfb5c04dd7227c36" title="Applique les tuiles à la grille." alt="" coords="1136,81,1224,108"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,81,1088,108"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,81,948,108"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,81,772,108"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,81,612,108"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,81,453,108"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,81,239,108"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,81,60,108"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa722d352490a0883bf05e8cd9b61d776"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa722d352490a0883bf05e8cd9b61d776">&#9670;&nbsp;</a></span>blockIsOmbre()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_bool blockIsOmbre </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__block.html">t_block</a> *&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vérifie si un bloc est une ombre. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>Bloc à vérifier </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>SDL_TRUE si c'est une ombre, SDL_FALSE sinon </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="liste_block_8c_source.html#l00092">92</a> du fichier <a class="el" href="liste_block_8c_source.html">listeBlock.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="liste_block_8c_aa722d352490a0883bf05e8cd9b61d776_cgraph.png" border="0" usemap="#aliste_block_8c_aa722d352490a0883bf05e8cd9b61d776_cgraph" alt=""/></div>
+<map name="aliste_block_8c_aa722d352490a0883bf05e8cd9b61d776_cgraph" id="aliste_block_8c_aa722d352490a0883bf05e8cd9b61d776_cgraph">
+<area shape="rect" title="Vérifie si un bloc est une ombre." alt="" coords="5,5,117,32"/>
+<area shape="rect" href="liste_block_8c.html#a263b5829b42a63268f4c46467e03ff26" title="Vérifie si un bloc est d&#39;un type spécifique." alt="" coords="165,5,233,32"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="liste_block_8c_aa722d352490a0883bf05e8cd9b61d776_icgraph.png" border="0" usemap="#aliste_block_8c_aa722d352490a0883bf05e8cd9b61d776_icgraph" alt=""/></div>
+<map name="aliste_block_8c_aa722d352490a0883bf05e8cd9b61d776_icgraph" id="aliste_block_8c_aa722d352490a0883bf05e8cd9b61d776_icgraph">
+<area shape="rect" title="Vérifie si un bloc est une ombre." alt="" coords="1383,5,1495,32"/>
+<area shape="rect" href="gene_room_8c.html#a4c0af876efaea0550cd7a8b0a7bb492b" title="Sélectionne un sol adapté à une case." alt="" coords="1272,5,1335,32"/>
+<area shape="rect" href="gene_room_8c.html#a4bdb7b92951e3249dfb5c04dd7227c36" title="Applique les tuiles à la grille." alt="" coords="1136,5,1224,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a9aa0642bbe5cd64582544bb08f6bf391"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9aa0642bbe5cd64582544bb08f6bf391">&#9670;&nbsp;</a></span>copierVal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void copierVal </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__block.html">t_block</a> *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__block.html">t_block</a> **&#160;</td>
+          <td class="paramname"><em>det</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copie les valeurs d'un bloc vers un autre. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>Bloc source </td></tr>
+    <tr><td class="paramname">det</td><td>Bloc destination (double pointeur pour allocation) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="liste_block_8c_source.html#l00167">167</a> du fichier <a class="el" href="liste_block_8c_source.html">listeBlock.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="liste_block_8c_a9aa0642bbe5cd64582544bb08f6bf391_icgraph.png" border="0" usemap="#aliste_block_8c_a9aa0642bbe5cd64582544bb08f6bf391_icgraph" alt=""/></div>
+<map name="aliste_block_8c_a9aa0642bbe5cd64582544bb08f6bf391_icgraph" id="aliste_block_8c_a9aa0642bbe5cd64582544bb08f6bf391_icgraph">
+<area shape="rect" title="Copie les valeurs d&#39;un bloc vers un autre." alt="" coords="1459,68,1541,95"/>
+<area shape="rect" href="gene_room_8c.html#a405809018b17074928d18489e2cf4e7d" title=" " alt="" coords="1136,5,1267,32"/>
+<area shape="rect" href="gene_room_8c.html#a4bdb7b92951e3249dfb5c04dd7227c36" title="Applique les tuiles à la grille." alt="" coords="1157,68,1245,95"/>
+<area shape="rect" href="gene_room_8c.html#abbc2703ecc48a05326b416d24d507af0" title="Sélectionne une tuile frontale adaptée." alt="" coords="1315,93,1411,120"/>
+<area shape="rect" href="gene_room_8c.html#ade4f891d88036489d3477f266cdbac81" title="Crée des ouvertures dans la grille." alt="" coords="1315,144,1411,171"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,68,1088,95"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,68,948,95"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,68,772,95"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,68,612,95"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,68,453,95"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,68,239,95"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,68,60,95"/>
+<area shape="rect" href="gene_room_8c.html#af25582e67f334c8f4879a427566f2b68" title="Place la sortie dans la salle." alt="" coords="1151,131,1251,157"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="adc5676a45aa44f0b5563198c098ed9cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc5676a45aa44f0b5563198c098ed9cc">&#9670;&nbsp;</a></span>createListAllBlock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt__liste_block.html">t_listeBlock</a>** createListAllBlock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crée les listes de tous les blocs. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Listes de blocs initialisées </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="liste_block_8c_source.html#l00096">96</a> du fichier <a class="el" href="liste_block_8c_source.html">listeBlock.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="liste_block_8c_adc5676a45aa44f0b5563198c098ed9cc_cgraph.png" border="0" usemap="#aliste_block_8c_adc5676a45aa44f0b5563198c098ed9cc_cgraph" alt=""/></div>
+<map name="aliste_block_8c_adc5676a45aa44f0b5563198c098ed9cc_cgraph" id="aliste_block_8c_adc5676a45aa44f0b5563198c098ed9cc_cgraph">
+<area shape="rect" title="Crée les listes de tous les blocs." alt="" coords="5,31,144,57"/>
+<area shape="rect" href="liste_block_8c.html#af163cba383357ce8c4e41da299fd3021" title="Ajoute un bloc à la liste correspondante." alt="" coords="192,5,296,32"/>
+<area shape="rect" href="liste_block_8c.html#a0374925ca137cff516ff1e935215c63b" title="Initialise toutes les listes de blocs." alt="" coords="196,56,292,83"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="liste_block_8c_adc5676a45aa44f0b5563198c098ed9cc_icgraph.png" border="0" usemap="#aliste_block_8c_adc5676a45aa44f0b5563198c098ed9cc_icgraph" alt=""/></div>
+<map name="aliste_block_8c_adc5676a45aa44f0b5563198c098ed9cc_icgraph" id="aliste_block_8c_adc5676a45aa44f0b5563198c098ed9cc_icgraph">
+<area shape="rect" title="Crée les listes de tous les blocs." alt="" coords="1136,5,1275,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a7ef121247dc980b530868d77561dd773"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ef121247dc980b530868d77561dd773">&#9670;&nbsp;</a></span>freeListeBlock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void freeListeBlock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__liste_block.html">t_listeBlock</a> **&#160;</td>
+          <td class="paramname"><em>listAllBlock</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Libère la mémoire des listes de blocs. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">listAllBlock</td><td>Listes de blocs à libérer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="liste_block_8c_source.html#l00025">25</a> du fichier <a class="el" href="liste_block_8c_source.html">listeBlock.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="liste_block_8c_a7ef121247dc980b530868d77561dd773_icgraph.png" border="0" usemap="#aliste_block_8c_a7ef121247dc980b530868d77561dd773_icgraph" alt=""/></div>
+<map name="aliste_block_8c_a7ef121247dc980b530868d77561dd773_icgraph" id="aliste_block_8c_a7ef121247dc980b530868d77561dd773_icgraph">
+<area shape="rect" title="Libère la mémoire des listes de blocs." alt="" coords="1136,5,1251,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a0374925ca137cff516ff1e935215c63b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0374925ca137cff516ff1e935215c63b">&#9670;&nbsp;</a></span>InitAllBlock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt__liste_block.html">t_listeBlock</a>** InitAllBlock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialise toutes les listes de blocs. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Tableau de listes de blocs organisé par type </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="liste_block_8c_source.html#l00003">3</a> du fichier <a class="el" href="liste_block_8c_source.html">listeBlock.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="liste_block_8c_a0374925ca137cff516ff1e935215c63b_icgraph.png" border="0" usemap="#aliste_block_8c_a0374925ca137cff516ff1e935215c63b_icgraph" alt=""/></div>
+<map name="aliste_block_8c_a0374925ca137cff516ff1e935215c63b_icgraph" id="aliste_block_8c_a0374925ca137cff516ff1e935215c63b_icgraph">
+<area shape="rect" title="Initialise toutes les listes de blocs." alt="" coords="1323,5,1419,32"/>
+<area shape="rect" href="liste_block_8c.html#adc5676a45aa44f0b5563198c098ed9cc" title="Crée les listes de tous les blocs." alt="" coords="1136,5,1275,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae2648a0e73e7ec24142118d88e25c6e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2648a0e73e7ec24142118d88e25c6e2">&#9670;&nbsp;</a></span>listeByType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt__liste_block.html">t_listeBlock</a>* listeByType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__liste_block.html">t_listeBlock</a> **&#160;</td>
+          <td class="paramname"><em>listAllBlock</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="liste_block_8h.html#aaf643fb69360d4670ece3242d74a5b1f">t_blocktype</a>&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Récupère la liste des blocs d'un type spécifique. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">listAllBlock</td><td>Listes complètes de blocs </td></tr>
+    <tr><td class="paramname">type</td><td>Type de bloc recherché </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Liste des blocs du type demandé </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="liste_block_8c_source.html#l00055">55</a> du fichier <a class="el" href="liste_block_8c_source.html">listeBlock.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="liste_block_8c_ae2648a0e73e7ec24142118d88e25c6e2_icgraph.png" border="0" usemap="#aliste_block_8c_ae2648a0e73e7ec24142118d88e25c6e2_icgraph" alt=""/></div>
+<map name="aliste_block_8c_ae2648a0e73e7ec24142118d88e25c6e2_icgraph" id="aliste_block_8c_ae2648a0e73e7ec24142118d88e25c6e2_icgraph">
+<area shape="rect" title="Récupère la liste des blocs d&#39;un type spécifique." alt="" coords="1459,109,1556,135"/>
+<area shape="rect" href="gene_room_8c.html#a405809018b17074928d18489e2cf4e7d" title=" " alt="" coords="1136,7,1267,34"/>
+<area shape="rect" href="gene_room_8c.html#a4bdb7b92951e3249dfb5c04dd7227c36" title="Applique les tuiles à la grille." alt="" coords="1157,109,1245,135"/>
+<area shape="rect" href="gene_room_8c.html#aa9cf0c4527a29ff9a303609c278e25c2" title="Récupère une décoration aléatoire." alt="" coords="1325,58,1401,85"/>
+<area shape="rect" href="gene_room_8c.html#abbc2703ecc48a05326b416d24d507af0" title="Sélectionne une tuile frontale adaptée." alt="" coords="1315,109,1411,135"/>
+<area shape="rect" href="gene_room_8c.html#ab0a4cc5e61b13354e01b5647e6e6e6b2" title="Récupère un plafond aléatoire." alt="" coords="1317,159,1409,186"/>
+<area shape="rect" href="gene_room_8c.html#a4c0af876efaea0550cd7a8b0a7bb492b" title="Sélectionne un sol adapté à une case." alt="" coords="1331,210,1394,237"/>
+<area shape="rect" href="gene_room_8c.html#af25582e67f334c8f4879a427566f2b68" title="Place la sortie dans la salle." alt="" coords="1151,210,1251,237"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,109,1088,135"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,109,948,135"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,109,772,135"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,109,612,135"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,109,453,135"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,109,239,135"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,109,60,135"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af11d3ca15d046a7fe2a5eab6962e63f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af11d3ca15d046a7fe2a5eab6962e63f7">&#9670;&nbsp;</a></span>randomBlocByType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt__block.html">t_block</a>* randomBlocByType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__liste_block.html">t_listeBlock</a> *&#160;</td>
+          <td class="paramname"><em>listBlock</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sélectionne un bloc aléatoire selon son type. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">listBlock</td><td>Liste de blocs </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Bloc sélectionné aléatoirement </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="liste_block_8c_source.html#l00068">68</a> du fichier <a class="el" href="liste_block_8c_source.html">listeBlock.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="liste_block_8c_af11d3ca15d046a7fe2a5eab6962e63f7_icgraph.png" border="0" usemap="#aliste_block_8c_af11d3ca15d046a7fe2a5eab6962e63f7_icgraph" alt=""/></div>
+<map name="aliste_block_8c_af11d3ca15d046a7fe2a5eab6962e63f7_icgraph" id="aliste_block_8c_af11d3ca15d046a7fe2a5eab6962e63f7_icgraph">
+<area shape="rect" title="Sélectionne un bloc aléatoire selon son type." alt="" coords="1416,81,1563,108"/>
+<area shape="rect" href="gene_room_8c.html#aa9cf0c4527a29ff9a303609c278e25c2" title="Récupère une décoration aléatoire." alt="" coords="1282,5,1358,32"/>
+<area shape="rect" href="gene_room_8c.html#abbc2703ecc48a05326b416d24d507af0" title="Sélectionne une tuile frontale adaptée." alt="" coords="1272,56,1368,83"/>
+<area shape="rect" href="gene_room_8c.html#ab0a4cc5e61b13354e01b5647e6e6e6b2" title="Récupère un plafond aléatoire." alt="" coords="1274,107,1366,133"/>
+<area shape="rect" href="gene_room_8c.html#a4c0af876efaea0550cd7a8b0a7bb492b" title="Sélectionne un sol adapté à une case." alt="" coords="1289,157,1351,184"/>
+<area shape="rect" href="gene_room_8c.html#a4bdb7b92951e3249dfb5c04dd7227c36" title="Applique les tuiles à la grille." alt="" coords="1136,81,1224,108"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,81,1088,108"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,81,948,108"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,81,772,108"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,81,612,108"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,81,453,108"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,81,239,108"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,81,60,108"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a7de821f1726c7548a76b1b5edfe4bbc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7de821f1726c7548a76b1b5edfe4bbc4">&#9670;&nbsp;</a></span>rotationAleatoire()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void rotationAleatoire </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__block.html">t_block</a> *&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applique une rotation aléatoire à un bloc. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>Bloc à faire tourner </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="liste_block_8c_source.html#l00082">82</a> du fichier <a class="el" href="liste_block_8c_source.html">listeBlock.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="liste_block_8c_a7de821f1726c7548a76b1b5edfe4bbc4_icgraph.png" border="0" usemap="#aliste_block_8c_a7de821f1726c7548a76b1b5edfe4bbc4_icgraph" alt=""/></div>
+<map name="aliste_block_8c_a7de821f1726c7548a76b1b5edfe4bbc4_icgraph" id="aliste_block_8c_a7de821f1726c7548a76b1b5edfe4bbc4_icgraph">
+<area shape="rect" title="Applique une rotation aléatoire à un bloc." alt="" coords="1272,5,1404,32"/>
+<area shape="rect" href="gene_room_8c.html#a4bdb7b92951e3249dfb5c04dd7227c36" title="Applique les tuiles à la grille." alt="" coords="1136,5,1224,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

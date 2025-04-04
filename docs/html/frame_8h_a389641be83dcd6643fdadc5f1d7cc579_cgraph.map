@@ -1,0 +1,5 @@
+<map id="updateFPS" name="updateFPS">
+<area shape="rect" id="node1" title="Met à jour le calcul des FPS." alt="" coords="5,31,96,57"/>
+<area shape="rect" id="node2" href="$timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="152,5,229,32"/>
+<area shape="rect" id="node3" href="$timer_8c.html#a78db0561c36aac22902f4bd478f48a6f" title="Réinitialise le timer au temps actuel." alt="" coords="144,56,237,83"/>
+</map>

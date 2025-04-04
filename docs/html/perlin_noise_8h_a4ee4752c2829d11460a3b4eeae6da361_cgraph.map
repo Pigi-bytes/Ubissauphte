@@ -1,0 +1,5 @@
+<map id="randomFloat" name="randomFloat">
+<area shape="rect" id="node1" title="Génère un float pseudo&#45;aléatoire basé sur une position et une seed." alt="" coords="5,31,111,57"/>
+<area shape="rect" id="node2" href="$perlin_noise_8c.html#a336a0164d9c88dea97a238471c15b92f" title="Produit scalaire entre deux points." alt="" coords="179,5,221,32"/>
+<area shape="rect" id="node3" href="$perlin_noise_8c.html#a73af3c16c64274ce7041dd8cec5dab5a" title="Partie fractionnaire d&#39;un float." alt="" coords="159,56,241,83"/>
+</map>

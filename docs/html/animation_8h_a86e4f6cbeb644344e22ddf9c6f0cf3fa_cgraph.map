@@ -1,0 +1,5 @@
+<map id="addAnimation" name="addAnimation">
+<area shape="rect" id="node1" title="Ajoute une animation au contrôleur." alt="" coords="5,31,119,57"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="193,5,281,32"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="167,56,308,83"/>
+</map>

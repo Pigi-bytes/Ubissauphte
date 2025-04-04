@@ -1,0 +1,4 @@
+<map id="capFrameRate" name="capFrameRate">
+<area shape="rect" id="node1" title="Limite le nombre d&#39;images par seconde au targetFPS configuré" alt="" coords="5,5,121,32"/>
+<area shape="rect" id="node2" href="$timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="169,5,247,32"/>
+</map>

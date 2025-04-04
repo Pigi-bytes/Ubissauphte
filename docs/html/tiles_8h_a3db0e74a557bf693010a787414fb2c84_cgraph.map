@@ -1,0 +1,10 @@
+<map id="loadMap" name="loadMap">
+<area shape="rect" id="node1" title="Charge une carte depuis un fichier." alt="" coords="5,81,84,108"/>
+<area shape="rect" id="node2" href="$tiles_8c.html#a8e7ac52bce5def6e962228651d4aa087" title="Crée une nouvelle grille aux dimensions spécifiées." alt="" coords="174,5,265,32"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="177,56,262,83"/>
+<area shape="rect" id="node4" href="$tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="186,107,253,133"/>
+<area shape="rect" id="node5" href="$animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="132,157,307,184"/>
+<area shape="rect" id="node6" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="355,107,501,133"/>
+<area shape="rect" id="node7" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="357,157,499,184"/>
+<area shape="rect" id="node8" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="377,208,479,235"/>
+</map>

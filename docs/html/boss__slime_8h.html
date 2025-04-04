@@ -1,0 +1,797 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon: Référence du fichier Ubissauphte/src/engine/entities/mobs/boss_slime.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_2826858af9faa5fe77c775e96e0e1227.html">engine</a></li><li class="navelem"><a class="el" href="dir_136c429d572dc163e086310573299ad2.html">entities</a></li><li class="navelem"><a class="el" href="dir_58751bea0d976c7bb3424fd455736209.html">mobs</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Structures de données</a> &#124;
+<a href="#enum-members">Énumérations</a> &#124;
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier boss_slime.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Définition et comportement du boss slime.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="main_world_8h_source.html">../../../_scene/mainWorld.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="debug_8h_source.html">../../../debug.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="text_8h_source.html">../../../ui/text.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="enemy_8h_source.html">../enemy.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h__dep__incl.png" border="0" usemap="#a_ubissauphte_2src_2engine_2entities_2mobs_2boss__slime_8hdep" alt=""/></div>
+<map name="a_ubissauphte_2src_2engine_2entities_2mobs_2boss__slime_8hdep" id="a_ubissauphte_2src_2engine_2entities_2mobs_2boss__slime_8hdep">
+<area shape="rect" title="Définition et comportement du boss slime." alt="" coords="189,5,393,47"/>
+<area shape="rect" href="main_world_8h.html" title=" " alt="" coords="204,95,379,136"/>
+<area shape="rect" href="boss__slime_8c.html" title=" " alt="" coords="403,95,606,136"/>
+<area shape="rect" href="main_menu_8h.html" title=" " alt="" coords="79,184,253,225"/>
+<area shape="rect" href="main_8c.html" title=" " alt="" coords="204,281,379,307"/>
+<area shape="rect" href="main_world_8c.html" title=" " alt="" coords="329,184,504,225"/>
+<area shape="rect" href="main_menu_8c.html" title=" " alt="" coords="5,273,180,315"/>
+</map>
+</div>
+</div>
+<p><a href="boss__slime_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Structures de données</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__boss__slime.html">t_boss_slime</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Boss slime avec plusieurs phases et attaques spéciales.  <a href="structt__boss__slime.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__boss_health_bar.html">t_bossHealthBar</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Barre de vie du boss avec affichage spécial.  <a href="structt__boss_health_bar.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Énumérations</h2></td></tr>
+<tr class="memitem:a99263efe08862fff828e7c0f9a9551f2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2">e_boss_slime_state</a> { <br />
+&#160;&#160;<a class="el" href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2acd8e06699e2218cd869397cc0e98ed94">BOSS_SLIME_IDLE</a>
+, <a class="el" href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2a1d8f5ba1f05e4a2fce2bc9c2c6e66f8d">BOSS_SLIME_CHASE_PLAYER</a>
+, <a class="el" href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2a28567828664ae413e4b9f7e0c5d8ada8">BOSS_SLIME_CHASE_LAST_KNOWN</a>
+, <a class="el" href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2a0199c67d9c232bb534740e14e8af5763">BOSS_SLIME_ENRAGED</a>
+, <br />
+&#160;&#160;<a class="el" href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2a5fc34d246ebb71bf44cf1dad8fa698d0">BOSS_SLIME_DESPERATE</a>
+, <a class="el" href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2a9867d511731e110db259c4882df60204">BOSS_SLIME_GROUND_POUND</a>
+, <a class="el" href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2a9ee1b31f626c3f053d29c3136f1c256a">BOSS_SLIME_CHARGE_ATTACK</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a99263efe08862fff828e7c0f9a9551f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">États possibles du boss slime.  <a href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a99263efe08862fff828e7c0f9a9551f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:aeba34d9ac36546820051b77f67ca7606"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boss__slime_8h.html#aeba34d9ac36546820051b77f67ca7606">updateBossSlime</a> (<a class="el" href="structt__enemy.html">t_enemy</a> *enemy, float *deltaTime, <a class="el" href="tiles_8h.html#ab9f5e89fc0a2e21cf99c4c5f2d390344">t_grid</a> *grid, <a class="el" href="structt__object_manager.html">t_objectManager</a> *entities)</td></tr>
+<tr class="memdesc:aeba34d9ac36546820051b77f67ca7606"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met à jour l'état et le comportement du boss slime.  <a href="boss__slime_8h.html#aeba34d9ac36546820051b77f67ca7606">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aeba34d9ac36546820051b77f67ca7606"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa7fc5b4ed8d914bfb5622f23692946e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__enemy.html">t_enemy</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boss__slime_8h.html#afa7fc5b4ed8d914bfb5622f23692946e">createBossSlime</a> (SDL_Texture *texture, SDL_Rect rect, <a class="el" href="structt__tileset.html">t_tileset</a> *tileset, <a class="el" href="structt__scene.html">t_scene</a> *scene)</td></tr>
+<tr class="memdesc:afa7fc5b4ed8d914bfb5622f23692946e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée un nouveau boss slime.  <a href="boss__slime_8h.html#afa7fc5b4ed8d914bfb5622f23692946e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:afa7fc5b4ed8d914bfb5622f23692946e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5702613fde9a96227c051caf5f7495df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__boss_health_bar.html">t_bossHealthBar</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boss__slime_8h.html#a5702613fde9a96227c051caf5f7495df">createBossHealthBar</a> (TTF_Font *font, <a class="el" href="structt__enemy.html">t_enemy</a> *boss)</td></tr>
+<tr class="memdesc:a5702613fde9a96227c051caf5f7495df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée une barre de vie pour le boss.  <a href="boss__slime_8h.html#a5702613fde9a96227c051caf5f7495df">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5702613fde9a96227c051caf5f7495df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ef4bb86f51ee9f115988b43358d9402"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boss__slime_8h.html#a4ef4bb86f51ee9f115988b43358d9402">updateBossHealthBar</a> (<a class="el" href="structt__boss_health_bar.html">t_bossHealthBar</a> *bar, float deltaTime)</td></tr>
+<tr class="memdesc:a4ef4bb86f51ee9f115988b43358d9402"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met à jour la barre de vie du boss.  <a href="boss__slime_8h.html#a4ef4bb86f51ee9f115988b43358d9402">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a4ef4bb86f51ee9f115988b43358d9402"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81ccd0abdd116ce9abfeb9852237de51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boss__slime_8h.html#a81ccd0abdd116ce9abfeb9852237de51">renderBossHealthBar</a> (SDL_Renderer *renderer, <a class="el" href="structt__boss_health_bar.html">t_bossHealthBar</a> *bar, int windowWidth, int windowHeight)</td></tr>
+<tr class="memdesc:a81ccd0abdd116ce9abfeb9852237de51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche la barre de vie du boss.  <a href="boss__slime_8h.html#a81ccd0abdd116ce9abfeb9852237de51">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a81ccd0abdd116ce9abfeb9852237de51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4852cfa77648628db902cb7bf56a7fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boss__slime_8h.html#ad4852cfa77648628db902cb7bf56a7fd">freeBossHealthBar</a> (void *obj)</td></tr>
+<tr class="memdesc:ad4852cfa77648628db902cb7bf56a7fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libère les ressources associées à la barre de vie.  <a href="boss__slime_8h.html#ad4852cfa77648628db902cb7bf56a7fd">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad4852cfa77648628db902cb7bf56a7fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39276f5b220a535bc957555b862f6a81"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boss__slime_8h.html#a39276f5b220a535bc957555b862f6a81">updateBossHealthBarWrapper</a> (<a class="el" href="structt__fonction_param.html">t_fonctionParam</a> *f)</td></tr>
+<tr class="memdesc:a39276f5b220a535bc957555b862f6a81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper pour la mise à jour de la barre de vie (compatible avec fonctionManager)  <a href="boss__slime_8h.html#a39276f5b220a535bc957555b862f6a81">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a39276f5b220a535bc957555b862f6a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad680bb14cc102a6fc5b2282894f399b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boss__slime_8h.html#ad680bb14cc102a6fc5b2282894f399b1">renderBossHealthBarWrapper</a> (<a class="el" href="structt__fonction_param.html">t_fonctionParam</a> *f)</td></tr>
+<tr class="memdesc:ad680bb14cc102a6fc5b2282894f399b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper pour le rendu de la barre de vie (compatible avec fonctionManager)  <a href="boss__slime_8h.html#ad680bb14cc102a6fc5b2282894f399b1">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad680bb14cc102a6fc5b2282894f399b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Définition et comportement du boss slime. </p>
+
+<p class="definition">Définition dans le fichier <a class="el" href="boss__slime_8h_source.html">boss_slime.h</a>.</p>
+</div><h2 class="groupheader">Documentation du type de l'énumération</h2>
+<a id="a99263efe08862fff828e7c0f9a9551f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99263efe08862fff828e7c0f9a9551f2">&#9670;&nbsp;</a></span>e_boss_slime_state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2">e_boss_slime_state</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>États possibles du boss slime. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a99263efe08862fff828e7c0f9a9551f2acd8e06699e2218cd869397cc0e98ed94"></a>BOSS_SLIME_IDLE&#160;</td><td class="fielddoc"><p>Immobile. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a99263efe08862fff828e7c0f9a9551f2a1d8f5ba1f05e4a2fce2bc9c2c6e66f8d"></a>BOSS_SLIME_CHASE_PLAYER&#160;</td><td class="fielddoc"><p>Poursuit le joueur activement. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a99263efe08862fff828e7c0f9a9551f2a28567828664ae413e4b9f7e0c5d8ada8"></a>BOSS_SLIME_CHASE_LAST_KNOWN&#160;</td><td class="fielddoc"><p>Se dirige vers la dernière position connue du joueur. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a99263efe08862fff828e7c0f9a9551f2a0199c67d9c232bb534740e14e8af5763"></a>BOSS_SLIME_ENRAGED&#160;</td><td class="fielddoc"><p>Phase 2 - plus rapide et agressif. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a99263efe08862fff828e7c0f9a9551f2a5fc34d246ebb71bf44cf1dad8fa698d0"></a>BOSS_SLIME_DESPERATE&#160;</td><td class="fielddoc"><p>Phase 3 - attaques désespérées. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a99263efe08862fff828e7c0f9a9551f2a9867d511731e110db259c4882df60204"></a>BOSS_SLIME_GROUND_POUND&#160;</td><td class="fielddoc"><p>Attaque spéciale 1 - saut puis impact. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a99263efe08862fff828e7c0f9a9551f2a9ee1b31f626c3f053d29c3136f1c256a"></a>BOSS_SLIME_CHARGE_ATTACK&#160;</td><td class="fielddoc"><p>Attaque spéciale 2 - charge rapide. </p>
+</td></tr>
+</table>
+
+<p class="definition">Définition à la ligne <a class="el" href="boss__slime_8h_source.html#l00018">18</a> du fichier <a class="el" href="boss__slime_8h_source.html">boss_slime.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a5702613fde9a96227c051caf5f7495df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5702613fde9a96227c051caf5f7495df">&#9670;&nbsp;</a></span>createBossHealthBar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt__boss_health_bar.html">t_bossHealthBar</a>* createBossHealthBar </td>
+          <td>(</td>
+          <td class="paramtype">TTF_Font *&#160;</td>
+          <td class="paramname"><em>font</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__enemy.html">t_enemy</a> *&#160;</td>
+          <td class="paramname"><em>boss</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crée une barre de vie pour le boss. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">font</td><td>Police pour le texte </td></tr>
+    <tr><td class="paramname">boss</td><td>Boss associé à la barre de vie </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Pointeur vers la barre de vie </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="boss__slime_8c_source.html#l00933">933</a> du fichier <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_a5702613fde9a96227c051caf5f7495df_cgraph.png" border="0" usemap="#aboss__slime_8h_a5702613fde9a96227c051caf5f7495df_cgraph" alt=""/></div>
+<map name="aboss__slime_8h_a5702613fde9a96227c051caf5f7495df_cgraph" id="aboss__slime_8h_a5702613fde9a96227c051caf5f7495df_cgraph">
+<area shape="rect" title="Crée une barre de vie pour le boss." alt="" coords="5,31,164,57"/>
+<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="217,5,333,32"/>
+<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="212,56,337,83"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_a5702613fde9a96227c051caf5f7495df_icgraph.png" border="0" usemap="#aboss__slime_8h_a5702613fde9a96227c051caf5f7495df_icgraph" alt=""/></div>
+<map name="aboss__slime_8h_a5702613fde9a96227c051caf5f7495df_icgraph" id="aboss__slime_8h_a5702613fde9a96227c051caf5f7495df_icgraph">
+<area shape="rect" title="Crée une barre de vie pour le boss." alt="" coords="991,5,1149,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afa7fc5b4ed8d914bfb5622f23692946e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa7fc5b4ed8d914bfb5622f23692946e">&#9670;&nbsp;</a></span>createBossSlime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt__enemy.html">t_enemy</a>* createBossSlime </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Texture *&#160;</td>
+          <td class="paramname"><em>texture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Rect&#160;</td>
+          <td class="paramname"><em>rect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__tileset.html">t_tileset</a> *&#160;</td>
+          <td class="paramname"><em>tileset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__scene.html">t_scene</a> *&#160;</td>
+          <td class="paramname"><em>scene</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crée un nouveau boss slime. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">texture</td><td>Texture à utiliser pour le rendu </td></tr>
+    <tr><td class="paramname">rect</td><td>Rectangle définissant la position et taille initiales </td></tr>
+    <tr><td class="paramname">tileset</td><td>Tileset pour les animations </td></tr>
+    <tr><td class="paramname">scene</td><td>Scène à laquelle appartient le boss </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Pointeur vers l'ennemi créé </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="boss__slime_8c_source.html#l00080">80</a> du fichier <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_afa7fc5b4ed8d914bfb5622f23692946e_cgraph.png" border="0" usemap="#aboss__slime_8h_afa7fc5b4ed8d914bfb5622f23692946e_cgraph" alt=""/></div>
+<map name="aboss__slime_8h_afa7fc5b4ed8d914bfb5622f23692946e_cgraph" id="aboss__slime_8h_afa7fc5b4ed8d914bfb5622f23692946e_cgraph">
+<area shape="rect" title="Crée un nouveau boss slime." alt="" coords="5,411,136,437"/>
+<area shape="rect" href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa" title="Ajoute une animation au contrôleur." alt="" coords="259,56,373,83"/>
+<area shape="rect" href="animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="251,461,381,488"/>
+<area shape="rect" href="particules_8c.html#ae582018b7ea20710f9845936d0b82cb5" title="Crée un nouvel émetteur de particules." alt="" coords="237,132,395,159"/>
+<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="813,265,929,292"/>
+<area shape="rect" href="enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="256,309,376,336"/>
+<area shape="rect" href="health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="535,360,669,387"/>
+<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="808,765,933,792"/>
+<area shape="rect" href="boss__slime_8c.html#a0ce1840df2e8fdb6ab525023819624f8" title=" " alt="" coords="529,411,675,437"/>
+<area shape="rect" href="boss__slime_8c.html#a59da355f4cb3eee3b9f70cd66e856102" title=" " alt="" coords="184,588,448,615"/>
+<area shape="rect" href="boss__slime_8c.html#a29432ff6afd8bf8895d14675c4f822c3" title=" " alt="" coords="250,537,382,564"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="249,1136,383,1163"/>
+<area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="558,5,646,32"/>
+<area shape="rect" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="531,56,673,83"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="1085,563,1170,589"/>
+<area shape="rect" href="timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2" title="Initialise un nouveau timer." alt="" coords="561,461,643,488"/>
+<area shape="rect" href="particules_8c.html#a61fa4b7a83f49df939133c298c2a4dab" title="Réinitialise un émetteur de particules." alt="" coords="527,107,677,133"/>
+<area shape="rect" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="515,157,689,184"/>
+<area shape="rect" href="health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="777,328,964,355"/>
+<area shape="rect" href="enemy_8c.html#ab8b2a078480e90346c66bfe478a428d4" title=" " alt="" coords="541,309,663,336"/>
+<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="797,107,944,133"/>
+<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="799,157,942,184"/>
+<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="819,208,922,235"/>
+<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="819,385,923,412"/>
+<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="1033,385,1221,412"/>
+<area shape="rect" href="fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="830,436,911,463"/>
+<area shape="rect" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="1040,436,1215,463"/>
+<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="551,563,653,589"/>
+<area shape="rect" href="particules_8c.html#a4649283fd9dfa8005ebd85d1ef3a771e" title="Affiche toutes les particules actives." alt="" coords="523,613,681,640"/>
+<area shape="rect" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="791,563,950,589"/>
+<area shape="rect" href="camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="805,664,936,691"/>
+<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="803,613,938,640"/>
+<area shape="rect" href="boss__slime_8c.html#ab277f1a8124edd1f8de99ae00ae7b118" title=" " alt="" coords="756,1592,985,1619"/>
+<area shape="rect" href="physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="775,1440,966,1467"/>
+<area shape="rect" href="boss__slime_8c.html#a928409466a5491f1a5bf815ce9132d68" title=" " alt="" coords="517,715,687,741"/>
+<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="813,951,929,977"/>
+<area shape="rect" href="boss__slime_8c.html#a69ec37228f33716636b841a2e0b801e6" title=" " alt="" coords="498,969,706,1010"/>
+<area shape="rect" href="boss__slime_8c.html#a087265293c2643217f2577a96c177825" title=" " alt="" coords="805,867,937,893"/>
+<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="816,1001,925,1028"/>
+<area shape="rect" href="boss__slime_8c.html#a34934ad2cfefc6f7727719ddaffa6d5a" title=" " alt="" coords="496,867,708,893"/>
+<area shape="rect" href="boss__slime_8c.html#a54688fe2dfac8aaa4a5d2b4164cde160" title=" " alt="" coords="525,1187,679,1213"/>
+<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="801,1212,941,1239"/>
+<area shape="rect" href="boss__slime_8c.html#ab62e052c9f0b507029ffc0ddde6e8410" title=" " alt="" coords="519,917,685,944"/>
+<area shape="rect" href="boss__slime_8c.html#a40b528cc711a2722b90ac87337648161" title=" " alt="" coords="525,816,679,843"/>
+<area shape="rect" href="boss__slime_8c.html#ae5041c65c23c41b5bfe6fdcb6cb735b9" title=" " alt="" coords="521,1085,683,1112"/>
+<area shape="rect" href="boss__slime_8c.html#ab5e6e01341858afe461d30b51e710eb8" title=" " alt="" coords="521,1288,683,1315"/>
+<area shape="rect" href="boss__slime_8c.html#a8768ef942c5ec6dfaa0aa1f43012bca3" title=" " alt="" coords="522,1491,682,1517"/>
+<area shape="rect" href="particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="522,1339,682,1365"/>
+<area shape="rect" href="physics_8c.html#a63880ca4246528d2b4a1e1fec0d9c661" title=" " alt="" coords="529,1389,675,1416"/>
+<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="1071,1592,1184,1619"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_afa7fc5b4ed8d914bfb5622f23692946e_icgraph.png" border="0" usemap="#aboss__slime_8h_afa7fc5b4ed8d914bfb5622f23692946e_icgraph" alt=""/></div>
+<map name="aboss__slime_8h_afa7fc5b4ed8d914bfb5622f23692946e_icgraph" id="aboss__slime_8h_afa7fc5b4ed8d914bfb5622f23692946e_icgraph">
+<area shape="rect" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad4852cfa77648628db902cb7bf56a7fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4852cfa77648628db902cb7bf56a7fd">&#9670;&nbsp;</a></span>freeBossHealthBar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void freeBossHealthBar </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Libère les ressources associées à la barre de vie. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>Pointeur vers la barre de vie à libérer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="boss__slime_8c_source.html#l01075">1075</a> du fichier <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_ad4852cfa77648628db902cb7bf56a7fd_icgraph.png" border="0" usemap="#aboss__slime_8h_ad4852cfa77648628db902cb7bf56a7fd_icgraph" alt=""/></div>
+<map name="aboss__slime_8h_ad4852cfa77648628db902cb7bf56a7fd_icgraph" id="aboss__slime_8h_ad4852cfa77648628db902cb7bf56a7fd_icgraph">
+<area shape="rect" title="Libère les ressources associées à la barre de vie." alt="" coords="991,5,1135,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a81ccd0abdd116ce9abfeb9852237de51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81ccd0abdd116ce9abfeb9852237de51">&#9670;&nbsp;</a></span>renderBossHealthBar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderBossHealthBar </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__boss_health_bar.html">t_bossHealthBar</a> *&#160;</td>
+          <td class="paramname"><em>bar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>windowWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>windowHeight</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche la barre de vie du boss. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>Renderer SDL </td></tr>
+    <tr><td class="paramname">bar</td><td>Barre de vie à afficher </td></tr>
+    <tr><td class="paramname">windowWidth</td><td>Largeur de la fenêtre </td></tr>
+    <tr><td class="paramname">windowHeight</td><td>Hauteur de la fenêtre </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="boss__slime_8c_source.html#l00981">981</a> du fichier <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_a81ccd0abdd116ce9abfeb9852237de51_cgraph.png" border="0" usemap="#aboss__slime_8h_a81ccd0abdd116ce9abfeb9852237de51_cgraph" alt=""/></div>
+<map name="aboss__slime_8h_a81ccd0abdd116ce9abfeb9852237de51_cgraph" id="aboss__slime_8h_a81ccd0abdd116ce9abfeb9852237de51_cgraph">
+<area shape="rect" title="Affiche la barre de vie du boss." alt="" coords="5,31,165,57"/>
+<area shape="rect" href="text_8c.html#a92567a5bf04e06ed469717198d991136" title="Crée un texte avec contour." alt="" coords="213,5,351,32"/>
+<area shape="rect" href="text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="237,56,327,83"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_a81ccd0abdd116ce9abfeb9852237de51_icgraph.png" border="0" usemap="#aboss__slime_8h_a81ccd0abdd116ce9abfeb9852237de51_icgraph" alt=""/></div>
+<map name="aboss__slime_8h_a81ccd0abdd116ce9abfeb9852237de51_icgraph" id="aboss__slime_8h_a81ccd0abdd116ce9abfeb9852237de51_icgraph">
+<area shape="rect" title="Affiche la barre de vie du boss." alt="" coords="1253,5,1413,32"/>
+<area shape="rect" href="boss__slime_8c.html#ad680bb14cc102a6fc5b2282894f399b1" title="Wrapper pour le rendu de la barre de vie (compatible avec fonctionManager)" alt="" coords="991,5,1205,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad680bb14cc102a6fc5b2282894f399b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad680bb14cc102a6fc5b2282894f399b1">&#9670;&nbsp;</a></span>renderBossHealthBarWrapper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderBossHealthBarWrapper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__fonction_param.html">t_fonctionParam</a> *&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wrapper pour le rendu de la barre de vie (compatible avec fonctionManager) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Paramètres de fonction </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="boss__slime_8c_source.html#l01094">1094</a> du fichier <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_ad680bb14cc102a6fc5b2282894f399b1_cgraph.png" border="0" usemap="#aboss__slime_8h_ad680bb14cc102a6fc5b2282894f399b1_cgraph" alt=""/></div>
+<map name="aboss__slime_8h_ad680bb14cc102a6fc5b2282894f399b1_cgraph" id="aboss__slime_8h_ad680bb14cc102a6fc5b2282894f399b1_cgraph">
+<area shape="rect" title="Wrapper pour le rendu de la barre de vie (compatible avec fonctionManager)" alt="" coords="5,31,220,57"/>
+<area shape="rect" href="boss__slime_8c.html#a81ccd0abdd116ce9abfeb9852237de51" title="Affiche la barre de vie du boss." alt="" coords="268,31,428,57"/>
+<area shape="rect" href="text_8c.html#a92567a5bf04e06ed469717198d991136" title="Crée un texte avec contour." alt="" coords="476,5,613,32"/>
+<area shape="rect" href="text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="499,56,590,83"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_ad680bb14cc102a6fc5b2282894f399b1_icgraph.png" border="0" usemap="#aboss__slime_8h_ad680bb14cc102a6fc5b2282894f399b1_icgraph" alt=""/></div>
+<map name="aboss__slime_8h_ad680bb14cc102a6fc5b2282894f399b1_icgraph" id="aboss__slime_8h_ad680bb14cc102a6fc5b2282894f399b1_icgraph">
+<area shape="rect" title="Wrapper pour le rendu de la barre de vie (compatible avec fonctionManager)" alt="" coords="991,5,1205,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4ef4bb86f51ee9f115988b43358d9402"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ef4bb86f51ee9f115988b43358d9402">&#9670;&nbsp;</a></span>updateBossHealthBar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updateBossHealthBar </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__boss_health_bar.html">t_bossHealthBar</a> *&#160;</td>
+          <td class="paramname"><em>bar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>deltaTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Met à jour la barre de vie du boss. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bar</td><td>Barre de vie à mettre à jour </td></tr>
+    <tr><td class="paramname">deltaTime</td><td>Temps écoulé depuis la dernière mise à jour </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="boss__slime_8c_source.html#l00958">958</a> du fichier <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_a4ef4bb86f51ee9f115988b43358d9402_cgraph.png" border="0" usemap="#aboss__slime_8h_a4ef4bb86f51ee9f115988b43358d9402_cgraph" alt=""/></div>
+<map name="aboss__slime_8h_a4ef4bb86f51ee9f115988b43358d9402_cgraph" id="aboss__slime_8h_a4ef4bb86f51ee9f115988b43358d9402_cgraph">
+<area shape="rect" title="Met à jour la barre de vie du boss." alt="" coords="5,56,168,83"/>
+<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="222,5,350,32"/>
+<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="223,56,349,83"/>
+<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="216,107,356,133"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_a4ef4bb86f51ee9f115988b43358d9402_icgraph.png" border="0" usemap="#aboss__slime_8h_a4ef4bb86f51ee9f115988b43358d9402_icgraph" alt=""/></div>
+<map name="aboss__slime_8h_a4ef4bb86f51ee9f115988b43358d9402_icgraph" id="aboss__slime_8h_a4ef4bb86f51ee9f115988b43358d9402_icgraph">
+<area shape="rect" title="Met à jour la barre de vie du boss." alt="" coords="1257,5,1420,32"/>
+<area shape="rect" href="boss__slime_8c.html#a39276f5b220a535bc957555b862f6a81" title="Wrapper pour la mise à jour de la barre de vie (compatible avec fonctionManager)" alt="" coords="991,5,1209,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a39276f5b220a535bc957555b862f6a81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39276f5b220a535bc957555b862f6a81">&#9670;&nbsp;</a></span>updateBossHealthBarWrapper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updateBossHealthBarWrapper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__fonction_param.html">t_fonctionParam</a> *&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wrapper pour la mise à jour de la barre de vie (compatible avec fonctionManager) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Paramètres de fonction </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="boss__slime_8c_source.html#l01090">1090</a> du fichier <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_a39276f5b220a535bc957555b862f6a81_cgraph.png" border="0" usemap="#aboss__slime_8h_a39276f5b220a535bc957555b862f6a81_cgraph" alt=""/></div>
+<map name="aboss__slime_8h_a39276f5b220a535bc957555b862f6a81_cgraph" id="aboss__slime_8h_a39276f5b220a535bc957555b862f6a81_cgraph">
+<area shape="rect" title="Wrapper pour la mise à jour de la barre de vie (compatible avec fonctionManager)" alt="" coords="5,56,224,83"/>
+<area shape="rect" href="boss__slime_8c.html#a4ef4bb86f51ee9f115988b43358d9402" title="Met à jour la barre de vie du boss." alt="" coords="272,56,435,83"/>
+<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="489,5,617,32"/>
+<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="490,56,615,83"/>
+<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="483,107,623,133"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_a39276f5b220a535bc957555b862f6a81_icgraph.png" border="0" usemap="#aboss__slime_8h_a39276f5b220a535bc957555b862f6a81_icgraph" alt=""/></div>
+<map name="aboss__slime_8h_a39276f5b220a535bc957555b862f6a81_icgraph" id="aboss__slime_8h_a39276f5b220a535bc957555b862f6a81_icgraph">
+<area shape="rect" title="Wrapper pour la mise à jour de la barre de vie (compatible avec fonctionManager)" alt="" coords="991,5,1209,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aeba34d9ac36546820051b77f67ca7606"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeba34d9ac36546820051b77f67ca7606">&#9670;&nbsp;</a></span>updateBossSlime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updateBossSlime </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__enemy.html">t_enemy</a> *&#160;</td>
+          <td class="paramname"><em>enemy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>deltaTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="tiles_8h.html#ab9f5e89fc0a2e21cf99c4c5f2d390344">t_grid</a> *&#160;</td>
+          <td class="paramname"><em>grid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__object_manager.html">t_objectManager</a> *&#160;</td>
+          <td class="paramname"><em>entities</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Met à jour l'état et le comportement du boss slime. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enemy</td><td>Pointeur vers l'ennemi à mettre à jour (cast en <a class="el" href="structt__boss__slime.html" title="Boss slime avec plusieurs phases et attaques spéciales.">t_boss_slime</a>) </td></tr>
+    <tr><td class="paramname">deltaTime</td><td>Temps écoulé depuis la dernière mise à jour </td></tr>
+    <tr><td class="paramname">grid</td><td>Grille de collision du niveau </td></tr>
+    <tr><td class="paramname">entities</td><td>Gestionnaire des entités pour les interactions </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="boss__slime_8c_source.html#l00868">868</a> du fichier <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_aeba34d9ac36546820051b77f67ca7606_cgraph.png" border="0" usemap="#aboss__slime_8h_aeba34d9ac36546820051b77f67ca7606_cgraph" alt=""/></div>
+<map name="aboss__slime_8h_aeba34d9ac36546820051b77f67ca7606_cgraph" id="aboss__slime_8h_aeba34d9ac36546820051b77f67ca7606_cgraph">
+<area shape="rect" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="5,559,140,585"/>
+<area shape="rect" href="boss__slime_8c.html#ab277f1a8124edd1f8de99ae00ae7b118" title=" " alt="" coords="448,669,677,696"/>
+<area shape="rect" href="physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="953,1151,1143,1177"/>
+<area shape="rect" href="boss__slime_8c.html#a928409466a5491f1a5bf815ce9132d68" title=" " alt="" coords="209,112,379,139"/>
+<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="505,365,621,392"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="1005,1024,1091,1051"/>
+<area shape="rect" href="boss__slime_8c.html#a69ec37228f33716636b841a2e0b801e6" title=" " alt="" coords="190,366,398,407"/>
+<area shape="rect" href="boss__slime_8c.html#a087265293c2643217f2577a96c177825" title=" " alt="" coords="497,264,629,291"/>
+<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="508,483,617,509"/>
+<area shape="rect" href="boss__slime_8c.html#a34934ad2cfefc6f7727719ddaffa6d5a" title=" " alt="" coords="188,163,400,189"/>
+<area shape="rect" href="boss__slime_8c.html#a54688fe2dfac8aaa4a5d2b4164cde160" title=" " alt="" coords="217,483,371,509"/>
+<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="493,551,633,577"/>
+<area shape="rect" href="boss__slime_8c.html#ab62e052c9f0b507029ffc0ddde6e8410" title=" " alt="" coords="211,213,377,240"/>
+<area shape="rect" href="boss__slime_8c.html#a40b528cc711a2722b90ac87337648161" title=" " alt="" coords="217,315,371,341"/>
+<area shape="rect" href="boss__slime_8c.html#ae5041c65c23c41b5bfe6fdcb6cb735b9" title=" " alt="" coords="213,635,375,661"/>
+<area shape="rect" href="boss__slime_8c.html#ab5e6e01341858afe461d30b51e710eb8" title=" " alt="" coords="213,736,375,763"/>
+<area shape="rect" href="boss__slime_8c.html#a8768ef942c5ec6dfaa0aa1f43012bca3" title=" " alt="" coords="214,1277,374,1304"/>
+<area shape="rect" href="particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="214,1227,374,1253"/>
+<area shape="rect" href="physics_8c.html#a63880ca4246528d2b4a1e1fec0d9c661" title=" " alt="" coords="221,1100,367,1127"/>
+<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="754,517,867,544"/>
+<area shape="rect" href="particules_8c.html#a5daf89ca83b59eabf3cd8d2d5195f529" title="Émet des particules d&#39;impact." alt="" coords="735,669,887,696"/>
+<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="984,289,1112,316"/>
+<area shape="rect" href="particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="995,720,1101,747"/>
+<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="1215,669,1336,696"/>
+<area shape="rect" href="particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="1200,771,1351,797"/>
+<area shape="rect" href="particules_8c.html#a6c99f1cfe6a58e4d007422917f3f1bdd" title="Émet des particules pour un changement de phase." alt="" coords="951,239,1145,265"/>
+<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="500,163,625,189"/>
+<area shape="rect" href="particules_8c.html#a7f1ed5ab81fd8ccf63bf08dd9e90f0b3" title="Émet des particules de mouvement pour un boss." alt="" coords="944,517,1152,544"/>
+<area shape="rect" href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="751,568,870,595"/>
+<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="752,467,869,493"/>
+<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="1003,568,1093,595"/>
+<area shape="rect" href="particules_8c.html#a6f9b02e2f494e301b0cd67ce54580088" title="Émet des particules pour un coup au sol." alt="" coords="951,821,1145,848"/>
+<area shape="rect" href="physics_8c.html#a1948cf93821271dece76ca4022f7b25d" title="Lance un rayon à travers la grille et détecte la première obstruction." alt="" coords="513,1227,612,1253"/>
+<area shape="rect" href="physics_8c.html#a762abc05fd3932fd770b6669536c6a39" title=" " alt="" coords="499,1125,626,1152"/>
+<area shape="rect" href="physics_8c.html#a49535bbd051fba95b354c0b799aeaecd" title=" " alt="" coords="725,1075,896,1101"/>
+<area shape="rect" href="physics_8c.html#aa4c391b6039023d72360858573598931" title=" " alt="" coords="731,1328,891,1355"/>
+<area shape="rect" href="physics_8c.html#a939ce6d2a8a36cf8aa70ca659cca1cb5" title=" " alt="" coords="948,1075,1148,1101"/>
+<area shape="rect" href="physics_8c.html#aea0d92f868946fd053a28534a3f7cbf4" title="Détecte collision entre un cercle et un rectangle." alt="" coords="957,1379,1139,1405"/>
+<area shape="rect" href="tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="1015,1277,1081,1304"/>
+<area shape="rect" href="physics_8c.html#a3b50b7ed91abcb9306aaa9fd47b98e8a" title=" " alt="" coords="952,1328,1144,1355"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="boss__slime_8h_aeba34d9ac36546820051b77f67ca7606_icgraph.png" border="0" usemap="#aboss__slime_8h_aeba34d9ac36546820051b77f67ca7606_icgraph" alt=""/></div>
+<map name="aboss__slime_8h_aeba34d9ac36546820051b77f67ca7606_icgraph" id="aboss__slime_8h_aeba34d9ac36546820051b77f67ca7606_icgraph">
+<area shape="rect" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1169,5,1304,32"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

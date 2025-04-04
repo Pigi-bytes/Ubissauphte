@@ -1,0 +1,6 @@
+<map id="emitImpactParticles" name="emitImpactParticles">
+<area shape="rect" id="node1" title="Émet des particules d&#39;impact." alt="" coords="5,31,157,57"/>
+<area shape="rect" id="node2" href="$particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="205,5,312,32"/>
+<area shape="rect" id="node4" href="$particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="375,56,496,83"/>
+<area shape="rect" id="node3" href="$particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="360,5,511,32"/>
+</map>

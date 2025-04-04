@@ -1,0 +1,4 @@
+<map id="t_animation" name="t_animation">
+<area shape="rect" id="node1" title="Représente une séquence d&#39;animation avec ses paramètres." alt="" coords="5,95,105,121"/>
+<area shape="rect" id="node2" href="$structt__timer.html" title="Timer basé sur les ticks SDL." alt="" coords="21,5,90,32"/>
+</map>

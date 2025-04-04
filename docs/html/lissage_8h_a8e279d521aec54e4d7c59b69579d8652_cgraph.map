@@ -1,0 +1,6 @@
+<map id="shouldAddBackWall" name="shouldAddBackWall">
+<area shape="rect" id="node1" title="Détermine si un mur arrière doit être ajouté" alt="" coords="5,31,156,57"/>
+<area shape="rect" id="node2" href="$lissage_8c.html#a1b6776a710f04af13d502a963c2e03ab" title="Vérifie si une case est de type plafond." alt="" coords="204,5,316,32"/>
+<area shape="rect" id="node4" href="$lissage_8c.html#a4cb665eeb015afb3aeab764f6def7070" title="Vérifie si une case est de type sol." alt="" coords="219,56,301,83"/>
+<area shape="rect" id="node3" href="$group__type__case__constants.html#gaa0ac9a00d6c9397011a34628c13bb902" title="Vérifie si une case existe." alt="" coords="364,31,427,57"/>
+</map>

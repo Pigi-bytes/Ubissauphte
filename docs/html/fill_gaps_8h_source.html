@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon:  Fichier source de Ubissauphte/src/engine/world/generationSalle/fillGaps.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_2826858af9faa5fe77c775e96e0e1227.html">engine</a></li><li class="navelem"><a class="el" href="dir_ead93a21b55928290f9cdbe2a28bde81.html">world</a></li><li class="navelem"><a class="el" href="dir_2c8babf3c2c824670b2174408d28f18e.html">generationSalle</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">fillGaps.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="fill_gaps_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#ifndef FILLGAPS_H</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define FILLGAPS_H</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="grille_8h.html">grille.h</a>&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/*=== STRUCTURE DE DONNEES ===*/</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="structs__element.html">   27</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structs__element.html">s_element</a> {</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="structs__element.html#a7c9d33e778bdb1c9b04af1dab3235cd5">   28</a></span>&#160;    SDL_Point *<a class="code" href="structs__element.html#a7c9d33e778bdb1c9b04af1dab3235cd5">point</a>;             </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structs__element.html#a222289f00d17c8d8a065f1a9ac1fbb66">   29</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structs__element.html">s_element</a> *<a class="code" href="structs__element.html#a222289f00d17c8d8a065f1a9ac1fbb66">precedent</a>;  </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="fill_gaps_8h.html#a41e8b1b5fa0ec1db39ba459bddd83901">   30</a></span>&#160;} <a class="code" href="fill_gaps_8h.html#a41e8b1b5fa0ec1db39ba459bddd83901">t_element</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/*=== OPERATIONS SUR PILES ===*/</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fill_gaps_8h.html#a5a1632c9a205c9605994d786b4d227d6">initPile</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">int</span> <a class="code" href="fill_gaps_8h.html#ac9164d43328199ab244e66bf4f217d24">PileVide</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fill_gaps_8h.html#a85ff82fe0360dd76cc5bb567a84c3224">empiler</a>(SDL_Point *p);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;SDL_Point *<a class="code" href="fill_gaps_8h.html#ab534f0ff1bfc2267e02515eefe0b0b3a">depiler</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fill_gaps_8h.html#a05899fa66d02f689ac99ed71240e37ec">viderPile</a>();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">/*=== FONCTIONS DE REMPLISSAGE ===*/</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordtype">float</span> **<a class="code" href="fill_gaps_8h.html#af016d7d1c717cf883acdd9a856375657">createMatriceFloat</a>(<span class="keywordtype">int</span> nbLigne, <span class="keywordtype">int</span> nbColonne);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">int</span> **<a class="code" href="fill_gaps_8h.html#a7a0e6d13465b1c134b65e151519d652a">matriceFloat2Int</a>(<span class="keywordtype">float</span> **mat, <span class="keywordtype">int</span> nbLigne, <span class="keywordtype">int</span> nbColonne);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fill_gaps_8h.html#a4f9378e5bc63c04f4602bda0c6d68b63">freeMatriceFloat</a>(<span class="keywordtype">float</span> **mat, <span class="keywordtype">int</span> nbLigne, <span class="keywordtype">int</span> nbColonne);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fill_gaps_8h.html#a574d5a5c2fea98b97c0311bef0cd8905">freeMatriceInt</a>(<span class="keywordtype">int</span> **mat, <span class="keywordtype">int</span> nbLigne, <span class="keywordtype">int</span> nbColonne);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;SDL_bool <a class="code" href="fill_gaps_8h.html#abac0aff8baf12fdd0a38c56baa2222cc">matriceSans0</a>(<span class="keywordtype">int</span> **mat, <span class="keywordtype">int</span> nbLigne, <span class="keywordtype">int</span> nbColonne);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keywordtype">int</span> <a class="code" href="fill_gaps_8h.html#a6bcb16c6349f23b1aa0b77c1ed2fb0a9">nombreElementsInBlock</a>(<span class="keywordtype">int</span> **mat, <span class="keywordtype">int</span> nbLigne, <span class="keywordtype">int</span> nbColonne, <span class="keywordtype">int</span> num_Block);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fill_gaps_8h.html#aadaa50d7d06895b528cbd4df2d2497d2">rendreMatriceContinue</a>(<span class="keywordtype">int</span> **mat, <span class="keywordtype">int</span> nbLigne, <span class="keywordtype">int</span> nbColonne);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fill_gaps_8h.html#ad596dbc553295de831175f5c1ab09076">comblerTrou</a>(<span class="keywordtype">int</span> **mat, <span class="keywordtype">int</span> nbLigne, <span class="keywordtype">int</span> nbColonne, <span class="keywordtype">int</span> **copie, <span class="keywordtype">int</span> num_Block);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="afill_gaps_8h_html_a05899fa66d02f689ac99ed71240e37ec"><div class="ttname"><a href="fill_gaps_8h.html#a05899fa66d02f689ac99ed71240e37ec">viderPile</a></div><div class="ttdeci">void viderPile()</div><div class="ttdoc">Vide complètement la pile.</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8c_source.html#l00032">fillGaps.c:32</a></div></div>
+<div class="ttc" id="afill_gaps_8h_html_a41e8b1b5fa0ec1db39ba459bddd83901"><div class="ttname"><a href="fill_gaps_8h.html#a41e8b1b5fa0ec1db39ba459bddd83901">t_element</a></div><div class="ttdeci">struct s_element t_element</div></div>
+<div class="ttc" id="afill_gaps_8h_html_a4f9378e5bc63c04f4602bda0c6d68b63"><div class="ttname"><a href="fill_gaps_8h.html#a4f9378e5bc63c04f4602bda0c6d68b63">freeMatriceFloat</a></div><div class="ttdeci">void freeMatriceFloat(float **mat, int nbLigne, int nbColonne)</div><div class="ttdoc">Libère une matrice de float.</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8c_source.html#l00062">fillGaps.c:62</a></div></div>
+<div class="ttc" id="afill_gaps_8h_html_a574d5a5c2fea98b97c0311bef0cd8905"><div class="ttname"><a href="fill_gaps_8h.html#a574d5a5c2fea98b97c0311bef0cd8905">freeMatriceInt</a></div><div class="ttdeci">void freeMatriceInt(int **mat, int nbLigne, int nbColonne)</div><div class="ttdoc">Libère une matrice d'entiers.</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8c_source.html#l00069">fillGaps.c:69</a></div></div>
+<div class="ttc" id="afill_gaps_8h_html_a5a1632c9a205c9605994d786b4d227d6"><div class="ttname"><a href="fill_gaps_8h.html#a5a1632c9a205c9605994d786b4d227d6">initPile</a></div><div class="ttdeci">void initPile()</div><div class="ttdoc">Initialise la pile globale.</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8c_source.html#l00006">fillGaps.c:6</a></div></div>
+<div class="ttc" id="afill_gaps_8h_html_a6bcb16c6349f23b1aa0b77c1ed2fb0a9"><div class="ttname"><a href="fill_gaps_8h.html#a6bcb16c6349f23b1aa0b77c1ed2fb0a9">nombreElementsInBlock</a></div><div class="ttdeci">int nombreElementsInBlock(int **mat, int nbLigne, int nbColonne, int num_Block)</div><div class="ttdoc">Compte les éléments dans un bloc continu.</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8c_source.html#l00086">fillGaps.c:86</a></div></div>
+<div class="ttc" id="afill_gaps_8h_html_a7a0e6d13465b1c134b65e151519d652a"><div class="ttname"><a href="fill_gaps_8h.html#a7a0e6d13465b1c134b65e151519d652a">matriceFloat2Int</a></div><div class="ttdeci">int ** matriceFloat2Int(float **mat, int nbLigne, int nbColonne)</div><div class="ttdoc">Convertit une matrice float en int.</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8c_source.html#l00046">fillGaps.c:46</a></div></div>
+<div class="ttc" id="afill_gaps_8h_html_a85ff82fe0360dd76cc5bb567a84c3224"><div class="ttname"><a href="fill_gaps_8h.html#a85ff82fe0360dd76cc5bb567a84c3224">empiler</a></div><div class="ttdeci">void empiler(SDL_Point *p)</div><div class="ttdoc">Empile un point.</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8c_source.html#l00014">fillGaps.c:14</a></div></div>
+<div class="ttc" id="afill_gaps_8h_html_aadaa50d7d06895b528cbd4df2d2497d2"><div class="ttname"><a href="fill_gaps_8h.html#aadaa50d7d06895b528cbd4df2d2497d2">rendreMatriceContinue</a></div><div class="ttdeci">void rendreMatriceContinue(int **mat, int nbLigne, int nbColonne)</div><div class="ttdoc">Rend la matrice continue (remplit les trous)</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8c_source.html#l00117">fillGaps.c:117</a></div></div>
+<div class="ttc" id="afill_gaps_8h_html_ab534f0ff1bfc2267e02515eefe0b0b3a"><div class="ttname"><a href="fill_gaps_8h.html#ab534f0ff1bfc2267e02515eefe0b0b3a">depiler</a></div><div class="ttdeci">SDL_Point * depiler()</div><div class="ttdoc">Dépile un point.</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8c_source.html#l00021">fillGaps.c:21</a></div></div>
+<div class="ttc" id="afill_gaps_8h_html_abac0aff8baf12fdd0a38c56baa2222cc"><div class="ttname"><a href="fill_gaps_8h.html#abac0aff8baf12fdd0a38c56baa2222cc">matriceSans0</a></div><div class="ttdeci">SDL_bool matriceSans0(int **mat, int nbLigne, int nbColonne)</div><div class="ttdoc">Vérifie si une matrice ne contient pas de 0.</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8c_source.html#l00077">fillGaps.c:77</a></div></div>
+<div class="ttc" id="afill_gaps_8h_html_ac9164d43328199ab244e66bf4f217d24"><div class="ttname"><a href="fill_gaps_8h.html#ac9164d43328199ab244e66bf4f217d24">PileVide</a></div><div class="ttdeci">int PileVide()</div><div class="ttdoc">Vérifie si la pile est vide.</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8c_source.html#l00010">fillGaps.c:10</a></div></div>
+<div class="ttc" id="afill_gaps_8h_html_ad596dbc553295de831175f5c1ab09076"><div class="ttname"><a href="fill_gaps_8h.html#ad596dbc553295de831175f5c1ab09076">comblerTrou</a></div><div class="ttdeci">void comblerTrou(int **mat, int nbLigne, int nbColonne, int **copie, int num_Block)</div><div class="ttdoc">Comble un trou spécifique dans la matrice.</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8c_source.html#l00096">fillGaps.c:96</a></div></div>
+<div class="ttc" id="afill_gaps_8h_html_af016d7d1c717cf883acdd9a856375657"><div class="ttname"><a href="fill_gaps_8h.html#af016d7d1c717cf883acdd9a856375657">createMatriceFloat</a></div><div class="ttdeci">float ** createMatriceFloat(int nbLigne, int nbColonne)</div><div class="ttdoc">Crée une matrice de float.</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8c_source.html#l00038">fillGaps.c:38</a></div></div>
+<div class="ttc" id="agrille_8h_html"><div class="ttname"><a href="grille_8h.html">grille.h</a></div><div class="ttdoc">Gestion des grilles et cases du jeu.</div></div>
+<div class="ttc" id="astructs__element_html"><div class="ttname"><a href="structs__element.html">s_element</a></div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8h_source.html#l00027">fillGaps.h:27</a></div></div>
+<div class="ttc" id="astructs__element_html_a222289f00d17c8d8a065f1a9ac1fbb66"><div class="ttname"><a href="structs__element.html#a222289f00d17c8d8a065f1a9ac1fbb66">s_element::precedent</a></div><div class="ttdeci">struct s_element * precedent</div><div class="ttdoc">Element précédent dans la pile.</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8h_source.html#l00029">fillGaps.h:29</a></div></div>
+<div class="ttc" id="astructs__element_html_a7c9d33e778bdb1c9b04af1dab3235cd5"><div class="ttname"><a href="structs__element.html#a7c9d33e778bdb1c9b04af1dab3235cd5">s_element::point</a></div><div class="ttdeci">SDL_Point * point</div><div class="ttdoc">Coordonnées du point.</div><div class="ttdef"><b>Definition:</b> <a href="fill_gaps_8h_source.html#l00028">fillGaps.h:28</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

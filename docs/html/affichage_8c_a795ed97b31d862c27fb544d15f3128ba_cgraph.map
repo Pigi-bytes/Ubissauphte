@@ -1,0 +1,5 @@
+<map id="afficherStatPlayer" name="afficherStatPlayer">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,144,57"/>
+<area shape="rect" id="node2" href="$affichage_8c.html#a1cc7f7d5a20ca4ebd7951b5ec93330dc" title="Affiche un texte." alt="" coords="192,5,291,32"/>
+<area shape="rect" id="node3" href="$text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="339,31,429,57"/>
+</map>

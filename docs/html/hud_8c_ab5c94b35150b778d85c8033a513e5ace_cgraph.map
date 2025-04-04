@@ -1,0 +1,8 @@
+<map id="createHUD" name="createHUD">
+<area shape="rect" id="node1" title="Crée une nouvelle instance du HUD." alt="" coords="5,56,99,83"/>
+<area shape="rect" id="node2" href="$animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="147,56,277,83"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="328,5,413,32"/>
+<area shape="rect" id="node5" href="$animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="153,107,271,133"/>
+<area shape="rect" id="node4" href="$timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2" title="Initialise un nouveau timer." alt="" coords="330,56,411,83"/>
+<area shape="rect" id="node6" href="$timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="325,107,416,133"/>
+</map>

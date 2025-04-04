@@ -1,0 +1,4 @@
+<map id="angleContinueGauche" name="angleContinueGauche">
+<area shape="rect" id="node1" title="Détecte un angle continu à gauche." alt="" coords="5,5,171,32"/>
+<area shape="rect" id="node2" href="$group__type__case__constants.html#gaa0ac9a00d6c9397011a34628c13bb902" title="Vérifie si une case existe." alt="" coords="219,5,281,32"/>
+</map>

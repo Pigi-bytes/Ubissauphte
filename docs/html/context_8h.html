@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon: Référence du fichier Ubissauphte/src/context.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Structures de données</a> &#124;
+<a href="#enum-members">Énumérations</a> &#124;
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier context.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Gestion du contexte global du jeu.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;SDL2/SDL.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL_ttf.h&gt;</code><br />
+<code>#include &lt;dirent.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="frame_8h_source.html">engine/core/frame.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="equipements_manager_8h_source.html">engine/entities/components/equipment/equipementsManager.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="genmap_8h_source.html">engine/world/genmap.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="audio_manager_8h_source.html">io/audioManager.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="input_8h_source.html">io/input.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="fps_display_8h_source.html">ui/fpsDisplay.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="fscene_8h_source.html">utils/fscene.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
+<div class="dyncontent">
+<div class="center"><img src="context_8h__dep__incl.png" border="0" usemap="#a_ubissauphte_2src_2context_8hdep" alt=""/></div>
+<map name="a_ubissauphte_2src_2context_8hdep" id="a_ubissauphte_2src_2context_8hdep">
+<area shape="rect" title="Gestion du contexte global du jeu." alt="" coords="2056,5,2247,32"/>
+<area shape="rect" href="commun_8h.html" title="Gestion du contenu utile pour le fonctionnement des différentes scènes." alt="" coords="856,511,1055,537"/>
+<area shape="rect" href="main_8c.html" title=" " alt="" coords="1069,786,1244,813"/>
+<area shape="rect" href="context_8c.html" title=" " alt="" coords="3444,95,3635,121"/>
+<area shape="rect" href="health_8h.html" title="Système de gestion de la santé des entités." alt="" coords="2120,80,2324,136"/>
+<area shape="rect" href="enemy_8h.html" title="Définition de la structure de base pour les ennemis." alt="" coords="1284,191,1459,233"/>
+<area shape="rect" href="player_8h.html" title="Définition et comportement du joueur principal." alt="" coords="1995,191,2169,233"/>
+<area shape="rect" href="barrel_8h.html" title="Définition et comportement du baril destructible." alt="" coords="2921,392,3096,448"/>
+<area shape="rect" href="spike_8h.html" title="Définition et comportement des pièges à pointes." alt="" coords="3120,392,3295,448"/>
+<area shape="rect" href="affichage_8h.html" title="Gestionnaire de l&#39;interface d&#39;inventaire et d&#39;équipement." alt="" coords="699,399,841,441"/>
+<area shape="rect" href="button_8h.html" title="Système de gestion des boutons pour l&#39;interface utilisateur." alt="" coords="535,295,677,337"/>
+<area shape="rect" href="commande_menu_8c.html" title=" " alt="" coords="1308,689,1483,731"/>
+<area shape="rect" href="commande_menu_8h.html" title=" " alt="" coords="1183,600,1357,641"/>
+<area shape="rect" href="fps_menu_8h.html" title=" " alt="" coords="535,600,709,641"/>
+<area shape="rect" href="game_over_8h.html" title=" " alt="" coords="733,600,908,641"/>
+<area shape="rect" href="main_menu_8h.html" title=" " alt="" coords="1507,689,1681,731"/>
+<area shape="rect" href="main_world_8h.html" title=" " alt="" coords="1757,600,1932,641"/>
+<area shape="rect" href="option2_8h.html" title=" " alt="" coords="332,600,507,641"/>
+<area shape="rect" href="option_menu_8h.html" title=" " alt="" coords="131,600,305,641"/>
+<area shape="rect" href="scene_inventaire_8h.html" title=" " alt="" coords="1007,689,1181,731"/>
+<area shape="rect" href="win_8h.html" title=" " alt="" coords="984,600,1159,641"/>
+<area shape="rect" href="commun_8c.html" title=" " alt="" coords="1432,607,1631,634"/>
+<area shape="rect" href="fps_menu_8c.html" title=" " alt="" coords="507,689,681,731"/>
+<area shape="rect" href="game_over_8c.html" title=" " alt="" coords="808,689,983,731"/>
+<area shape="rect" href="main_menu_8c.html" title=" " alt="" coords="1507,779,1681,820"/>
+<area shape="rect" href="main_world_8c.html" title=" " alt="" coords="1757,689,1932,731"/>
+<area shape="rect" href="boss__slime_8h.html" title="Définition et comportement du boss slime." alt="" coords="1956,689,2160,731"/>
+<area shape="rect" href="boss__slime_8c.html" title=" " alt="" coords="2306,779,2509,820"/>
+<area shape="rect" href="option2_8c.html" title=" " alt="" coords="256,689,431,731"/>
+<area shape="rect" href="option_menu_8c.html" title=" " alt="" coords="5,689,180,731"/>
+<area shape="rect" href="health_8c.html" title=" " alt="" coords="2193,184,2397,240"/>
+<area shape="rect" href="enemy_8c.html" title=" " alt="" coords="1608,295,1783,337"/>
+<area shape="rect" href="ghost_8h.html" title="Définition et comportement de l&#39;ennemi fantôme." alt="" coords="1108,295,1283,337"/>
+<area shape="rect" href="slime_8h.html" title="Définition et comportement de l&#39;ennemi slime." alt="" coords="909,295,1084,337"/>
+<area shape="rect" href="player_8c.html" title=" " alt="" coords="1409,295,1584,337"/>
+<area shape="rect" href="minimap_8h.html" title="Gestion de la minimap (affichage et mise a jour)" alt="" coords="2103,399,2245,441"/>
+<area shape="rect" href="ghost_8c.html" title=" " alt="" coords="1696,399,1871,441"/>
+<area shape="rect" href="slime_8c.html" title=" " alt="" coords="1423,399,1597,441"/>
+<area shape="rect" href="equipements_manager_8c.html" title=" " alt="" coords="2229,288,2463,344"/>
+<area shape="rect" href="weapon_8c.html" title=" " alt="" coords="2487,295,2669,337"/>
+<area shape="rect" href="tiles_entity_8h.html" title="Système d&#39;entités basées sur les tuiles." alt="" coords="2796,295,2971,337"/>
+<area shape="rect" href="hud_8h.html" title="Gestion de l&#39;interface utilisateur en jeu (HUD)" alt="" coords="2280,503,2423,545"/>
+<area shape="rect" href="mapview_8h.html" title="Gestion de l&#39;affichage de la carte du niveau." alt="" coords="2011,295,2153,337"/>
+<area shape="rect" href="tiles_entity_8c.html" title=" " alt="" coords="2995,503,3169,545"/>
+<area shape="rect" href="barrel_8c.html" title=" " alt="" coords="2796,496,2971,552"/>
+<area shape="rect" href="spike_8c.html" title=" " alt="" coords="3193,496,3368,552"/>
+<area shape="rect" href="affichage_8c.html" title=" " alt="" coords="689,503,832,545"/>
+<area shape="rect" href="button_8c.html" title=" " alt="" coords="480,399,623,441"/>
+<area shape="rect" href="slider_8h.html" title="Gestion des curseurs glissants pour réglages de valeurs." alt="" coords="147,399,289,441"/>
+<area shape="rect" href="touche_8h.html" title="Gestion des touches affichées et interactives." alt="" coords="313,399,456,441"/>
+</map>
+</div>
+</div>
+<p><a href="context_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Structures de données</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__control.html">t_control</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contient les configurations des touches de contrôle.  <a href="structt__control.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__option.html">t_option</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contient les options de configuration du jeu.  <a href="structt__option.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__context.html">t_context</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contient le contexte global du jeu.  <a href="structt__context.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Énumérations</h2></td></tr>
+<tr class="memitem:a6bdf1adf0ba98c2dad6d1e5b19e5a897"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="context_8h.html#a6bdf1adf0ba98c2dad6d1e5b19e5a897">difficulty</a> { <br />
+&#160;&#160;<a class="el" href="context_8h.html#a6bdf1adf0ba98c2dad6d1e5b19e5a897a26d394b5caf2853dbcef5884f0f068dd">EASY</a>
+, <a class="el" href="context_8h.html#a6bdf1adf0ba98c2dad6d1e5b19e5a897a50d1448013c6f17125caee18aa418af7">NORMAL</a>
+, <a class="el" href="context_8h.html#a6bdf1adf0ba98c2dad6d1e5b19e5a897a712b8eb9268f114b4afc567f24bc536f">HARD</a>
+, <a class="el" href="context_8h.html#a6bdf1adf0ba98c2dad6d1e5b19e5a897a41bb1567bff1166426a8194af019dd2b">DEMONIC</a>
+, <br />
+&#160;&#160;<a class="el" href="context_8h.html#a6bdf1adf0ba98c2dad6d1e5b19e5a897a5d39df11f344e7272bf0a14ff1c0262b">LEGEND</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a6bdf1adf0ba98c2dad6d1e5b19e5a897"><td class="mdescLeft">&#160;</td><td class="mdescRight">Définit les différents niveaux de difficulté du jeu.  <a href="context_8h.html#a6bdf1adf0ba98c2dad6d1e5b19e5a897">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6bdf1adf0ba98c2dad6d1e5b19e5a897"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a6b121ad300027d4e1233edf8c0d26d40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__option.html">t_option</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="context_8h.html#a6b121ad300027d4e1233edf8c0d26d40">creeOption</a> ()</td></tr>
+<tr class="memdesc:a6b121ad300027d4e1233edf8c0d26d40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée une structure d'options par défaut.  <a href="context_8h.html#a6b121ad300027d4e1233edf8c0d26d40">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6b121ad300027d4e1233edf8c0d26d40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac32a948fbebe617b73fe4b35caf13d33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="context_8h.html#ac32a948fbebe617b73fe4b35caf13d33">freeOption</a> (void *elt)</td></tr>
+<tr class="memdesc:ac32a948fbebe617b73fe4b35caf13d33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libère la mémoire d'une structure d'options.  <a href="context_8h.html#ac32a948fbebe617b73fe4b35caf13d33">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac32a948fbebe617b73fe4b35caf13d33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Gestion du contexte global du jeu. </p>
+<p>Ce fichier contient les définitions des structures et fonctions pour gérer l'état global du jeu (fenêtre, rendu, contrôles, options, etc.)</p>
+<dl class="section author"><dt>Auteur</dt><dd>Ubissauphte </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+
+<p class="definition">Définition dans le fichier <a class="el" href="context_8h_source.html">context.h</a>.</p>
+</div><h2 class="groupheader">Documentation du type de l'énumération</h2>
+<a id="a6bdf1adf0ba98c2dad6d1e5b19e5a897"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bdf1adf0ba98c2dad6d1e5b19e5a897">&#9670;&nbsp;</a></span>difficulty</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="context_8h.html#a6bdf1adf0ba98c2dad6d1e5b19e5a897">difficulty</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Définit les différents niveaux de difficulté du jeu. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a6bdf1adf0ba98c2dad6d1e5b19e5a897a26d394b5caf2853dbcef5884f0f068dd"></a>EASY&#160;</td><td class="fielddoc"><p>Difficulté facile. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6bdf1adf0ba98c2dad6d1e5b19e5a897a50d1448013c6f17125caee18aa418af7"></a>NORMAL&#160;</td><td class="fielddoc"><p>Difficulté normale. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6bdf1adf0ba98c2dad6d1e5b19e5a897a712b8eb9268f114b4afc567f24bc536f"></a>HARD&#160;</td><td class="fielddoc"><p>Difficulté difficile. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6bdf1adf0ba98c2dad6d1e5b19e5a897a41bb1567bff1166426a8194af019dd2b"></a>DEMONIC&#160;</td><td class="fielddoc"><p>Difficulté démoniaque. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6bdf1adf0ba98c2dad6d1e5b19e5a897a5d39df11f344e7272bf0a14ff1c0262b"></a>LEGEND&#160;</td><td class="fielddoc"><p>Difficulté légendaire. </p>
+</td></tr>
+</table>
+
+<p class="definition">Définition à la ligne <a class="el" href="context_8h_source.html#l00033">33</a> du fichier <a class="el" href="context_8h_source.html">context.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a6b121ad300027d4e1233edf8c0d26d40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b121ad300027d4e1233edf8c0d26d40">&#9670;&nbsp;</a></span>creeOption()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt__option.html">t_option</a>* creeOption </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crée une structure d'options par défaut. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Pointeur vers la structure d'options créée </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="context_8c_source.html#l00003">3</a> du fichier <a class="el" href="context_8c_source.html">context.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="context_8h_a6b121ad300027d4e1233edf8c0d26d40_icgraph.png" border="0" usemap="#acontext_8h_a6b121ad300027d4e1233edf8c0d26d40_icgraph" alt=""/></div>
+<map name="acontext_8h_a6b121ad300027d4e1233edf8c0d26d40_icgraph" id="acontext_8h_a6b121ad300027d4e1233edf8c0d26d40_icgraph">
+<area shape="rect" title="Crée une structure d&#39;options par défaut." alt="" coords="108,5,201,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac32a948fbebe617b73fe4b35caf13d33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac32a948fbebe617b73fe4b35caf13d33">&#9670;&nbsp;</a></span>freeOption()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void freeOption </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>elt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Libère la mémoire d'une structure d'options. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elt</td><td>Pointeur vers la structure à libérer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="context_8c_source.html#l00011">11</a> du fichier <a class="el" href="context_8c_source.html">context.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="context_8h_ac32a948fbebe617b73fe4b35caf13d33_icgraph.png" border="0" usemap="#acontext_8h_ac32a948fbebe617b73fe4b35caf13d33_icgraph" alt=""/></div>
+<map name="acontext_8h_ac32a948fbebe617b73fe4b35caf13d33_icgraph" id="acontext_8h_ac32a948fbebe617b73fe4b35caf13d33_icgraph">
+<area shape="rect" title="Libère la mémoire d&#39;une structure d&#39;options." alt="" coords="108,5,199,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

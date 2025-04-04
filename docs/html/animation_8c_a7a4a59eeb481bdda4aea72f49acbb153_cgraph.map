@@ -1,0 +1,9 @@
+<map id="updateController" name="updateController">
+<area shape="rect" id="node1" title="Met à jour l&#39;animation active." alt="" coords="5,56,136,83"/>
+<area shape="rect" id="node2" href="$animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="184,19,343,45"/>
+<area shape="rect" id="node4" href="$animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="196,81,331,108"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="407,5,492,32"/>
+<area shape="rect" id="node5" href="$timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="411,56,488,83"/>
+<area shape="rect" id="node6" href="$timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="404,107,495,133"/>
+<area shape="rect" id="node7" href="$animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="391,157,508,184"/>
+</map>

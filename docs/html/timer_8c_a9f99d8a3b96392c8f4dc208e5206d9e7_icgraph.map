@@ -1,0 +1,5 @@
+<map id="freeTimer" name="freeTimer">
+<area shape="rect" id="node1" title="Libère la mémoire allouée pour un timer." alt="" coords="276,5,363,32"/>
+<area shape="rect" id="node2" href="$frame_8c.html#a5b978228d93414b607b900c38341920c" title="Libère les ressources associées à une structure de frame." alt="" coords="108,5,228,32"/>
+<area shape="rect" id="node3" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>

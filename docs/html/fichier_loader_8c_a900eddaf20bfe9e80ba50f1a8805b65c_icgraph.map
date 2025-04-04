@@ -1,0 +1,7 @@
+<map id="createNewBlock" name="createNewBlock">
+<area shape="rect" id="node1" title="Crée un nouveau t_block." alt="" coords="279,56,407,83"/>
+<area shape="rect" id="node2" href="$fichier_loader_8c.html#ae867be5f0e2327d83dfc93cb1ac8e8b3" title="Récupère des donnees dans un fichier." alt="" coords="112,5,227,32"/>
+<area shape="rect" id="node4" href="$equipements_manager_8c.html#a8eab5d8d34e6c28f585bfd9b827fc553" title="Sauvegarde un inventaire dans un fichier." alt="" coords="108,56,231,83"/>
+<area shape="rect" id="node5" href="$equipements_manager_8c.html#a0f64357d2718b2c06b478b80d1ba5757" title="Sauvegarde des items dans un fichier." alt="" coords="124,107,215,133"/>
+<area shape="rect" id="node3" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>

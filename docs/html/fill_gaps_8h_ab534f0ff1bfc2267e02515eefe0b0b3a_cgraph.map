@@ -1,0 +1,4 @@
+<map id="depiler" name="depiler">
+<area shape="rect" id="node1" title="Dépile un point." alt="" coords="5,5,72,32"/>
+<area shape="rect" id="node2" href="$fill_gaps_8c.html#ac9164d43328199ab244e66bf4f217d24" title="Vérifie si la pile est vide." alt="" coords="120,5,195,32"/>
+</map>

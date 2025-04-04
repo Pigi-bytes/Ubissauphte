@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon:  Fichier source de Ubissauphte/src/ui/touche.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_cbea5643ac5778c201b251489fa6a373.html">ui</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">touche.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="touche_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#ifndef TOUCHE_H</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define TOUCHE_H</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL_ttf.h&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;../color.h&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;../io/input.h&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;../utils/fonctionManager.h&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="button_8h.html">button.h</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="text_8h.html">text.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">/*=== STRUCTURES ===*/</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structt__touche.html">   33</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structt__touche.html#ac4c2d536d38bd7ba2d4a212d00e442c2">   34</a></span>&#160;    <a class="code" href="structt__button.html">t_button</a>* <a class="code" href="structt__touche.html#ac4c2d536d38bd7ba2d4a212d00e442c2">button</a>;        </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structt__touche.html#a81af96e1bb1391973421c58db740580b">   35</a></span>&#160;    SDL_Scancode* <a class="code" href="structt__touche.html#a81af96e1bb1391973421c58db740580b">scancode</a>;  </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="structt__touche.html#aa5d32fce28906c50536cb035b950fb45">   36</a></span>&#160;    SDL_bool <a class="code" href="structt__touche.html#aa5d32fce28906c50536cb035b950fb45">flagCommande</a>;   </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="structt__touche.html#aa192e522685e809efc7e08f1a9fc3583">   37</a></span>&#160;    <span class="keywordtype">char</span> nom[10];            </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;} <a class="code" href="structt__touche.html">t_touche</a>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/*=== FONCTIONS ===*/</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordtype">void</span> <a class="code" href="touche_8h.html#aca735160ae65c1cae3a84690a11373ed">renderTouche</a>(<a class="code" href="structt__context.html">t_context</a>* ctx, <a class="code" href="structt__touche.html">t_touche</a>* touche);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">void</span> <a class="code" href="touche_8h.html#ab7804f17c8e030cc35e5ad4a66b53c04">handleInputTouche</a>(<a class="code" href="structt__context.html">t_context</a>* ctx, <a class="code" href="structt__touche.html">t_touche</a>* touche);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<a class="code" href="structt__touche.html">t_touche</a>* <a class="code" href="touche_8h.html#ab22adbe41d10d69d091bd9bb52b36201">createTouche</a>(<a class="code" href="structt__text.html">t_text</a>* <a class="code" href="structtext.html">text</a>,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                       SDL_Color color,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                       SDL_Color colorOnClick,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                       SDL_Rect rect,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                       <a class="code" href="structt__fonction_param.html">t_fonctionParam</a>* OnClick,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                       SDL_Scancode* scancode,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                       <span class="keywordtype">char</span>* nom);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">void</span> <a class="code" href="touche_8h.html#a40a75918dcc55a86d411596bf2fa481d">miseAjourCommande</a>(<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>* <a class="code" href="structfonction.html">fonction</a>);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">void</span> <a class="code" href="touche_8h.html#a35460666a6f7088a59aa2814c8aa85a0">freeTouche</a>(<span class="keywordtype">void</span>* elt);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abutton_8h_html"><div class="ttname"><a href="button_8h.html">button.h</a></div><div class="ttdoc">Système de gestion des boutons pour l'interface utilisateur.</div></div>
+<div class="ttc" id="astructfonction_html"><div class="ttname"><a href="structfonction.html">fonction</a></div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8h_source.html#l00074">fonctionManager.h:74</a></div></div>
+<div class="ttc" id="astructt__button_html"><div class="ttname"><a href="structt__button.html">t_button</a></div><div class="ttdoc">Représente un bouton interactif de l'interface utilisateur.</div><div class="ttdef"><b>Definition:</b> <a href="button_8h_source.html#l00029">button.h:29</a></div></div>
+<div class="ttc" id="astructt__context_html"><div class="ttname"><a href="structt__context.html">t_context</a></div><div class="ttdoc">Contient le contexte global du jeu.</div><div class="ttdef"><b>Definition:</b> <a href="context_8h_source.html#l00072">context.h:72</a></div></div>
+<div class="ttc" id="astructt__fonction_param_html"><div class="ttname"><a href="structt__fonction_param.html">t_fonctionParam</a></div><div class="ttdoc">Structure contenant les informations d'une fonction.</div></div>
+<div class="ttc" id="astructt__text_html"><div class="ttname"><a href="structt__text.html">t_text</a></div><div class="ttdoc">Structure représentant un élément textuel dans l'interface.</div><div class="ttdef"><b>Definition:</b> <a href="text_8h_source.html#l00024">text.h:24</a></div></div>
+<div class="ttc" id="astructt__touche_html"><div class="ttname"><a href="structt__touche.html">t_touche</a></div><div class="ttdoc">Représente une touche clavier affichée et interactive.</div><div class="ttdef"><b>Definition:</b> <a href="touche_8h_source.html#l00033">touche.h:33</a></div></div>
+<div class="ttc" id="astructt__touche_html_a81af96e1bb1391973421c58db740580b"><div class="ttname"><a href="structt__touche.html#a81af96e1bb1391973421c58db740580b">t_touche::scancode</a></div><div class="ttdeci">SDL_Scancode * scancode</div><div class="ttdoc">Code SDL de la touche clavier.</div><div class="ttdef"><b>Definition:</b> <a href="touche_8h_source.html#l00035">touche.h:35</a></div></div>
+<div class="ttc" id="astructt__touche_html_aa5d32fce28906c50536cb035b950fb45"><div class="ttname"><a href="structt__touche.html#aa5d32fce28906c50536cb035b950fb45">t_touche::flagCommande</a></div><div class="ttdeci">SDL_bool flagCommande</div><div class="ttdoc">Indicateur d'état des commandes.</div><div class="ttdef"><b>Definition:</b> <a href="touche_8h_source.html#l00036">touche.h:36</a></div></div>
+<div class="ttc" id="astructt__touche_html_ac4c2d536d38bd7ba2d4a212d00e442c2"><div class="ttname"><a href="structt__touche.html#ac4c2d536d38bd7ba2d4a212d00e442c2">t_touche::button</a></div><div class="ttdeci">t_button * button</div><div class="ttdoc">Bouton associé à la touche.</div><div class="ttdef"><b>Definition:</b> <a href="touche_8h_source.html#l00034">touche.h:34</a></div></div>
+<div class="ttc" id="astructtext_html"><div class="ttname"><a href="structtext.html">text</a></div><div class="ttdoc">Textes affichés dans le HUD.</div></div>
+<div class="ttc" id="atext_8h_html"><div class="ttname"><a href="text_8h.html">text.h</a></div><div class="ttdoc">Gestion du rendu de texte avec SDL2_ttf.</div></div>
+<div class="ttc" id="atouche_8h_html_a35460666a6f7088a59aa2814c8aa85a0"><div class="ttname"><a href="touche_8h.html#a35460666a6f7088a59aa2814c8aa85a0">freeTouche</a></div><div class="ttdeci">void freeTouche(void *elt)</div><div class="ttdoc">Libère une touche de la mémoire.</div><div class="ttdef"><b>Definition:</b> <a href="touche_8c_source.html#l00073">touche.c:73</a></div></div>
+<div class="ttc" id="atouche_8h_html_a40a75918dcc55a86d411596bf2fa481d"><div class="ttname"><a href="touche_8h.html#a40a75918dcc55a86d411596bf2fa481d">miseAjourCommande</a></div><div class="ttdeci">void miseAjourCommande(t_fonctionParam *fonction)</div><div class="ttdoc">Met à jour l'affichage des commandes.</div><div class="ttdef"><b>Definition:</b> <a href="touche_8c_source.html#l00062">touche.c:62</a></div></div>
+<div class="ttc" id="atouche_8h_html_ab22adbe41d10d69d091bd9bb52b36201"><div class="ttname"><a href="touche_8h.html#ab22adbe41d10d69d091bd9bb52b36201">createTouche</a></div><div class="ttdeci">t_touche * createTouche(t_text *text, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, t_fonctionParam *OnClick, SDL_Scancode *scancode, char *nom)</div><div class="ttdoc">Crée une nouvelle touche interactive.</div><div class="ttdef"><b>Definition:</b> <a href="touche_8c_source.html#l00053">touche.c:53</a></div></div>
+<div class="ttc" id="atouche_8h_html_ab7804f17c8e030cc35e5ad4a66b53c04"><div class="ttname"><a href="touche_8h.html#ab7804f17c8e030cc35e5ad4a66b53c04">handleInputTouche</a></div><div class="ttdeci">void handleInputTouche(t_context *ctx, t_touche *touche)</div><div class="ttdoc">Gère les interactions avec une touche.</div><div class="ttdef"><b>Definition:</b> <a href="touche_8c_source.html#l00007">touche.c:7</a></div></div>
+<div class="ttc" id="atouche_8h_html_aca735160ae65c1cae3a84690a11373ed"><div class="ttname"><a href="touche_8h.html#aca735160ae65c1cae3a84690a11373ed">renderTouche</a></div><div class="ttdeci">void renderTouche(t_context *ctx, t_touche *touche)</div><div class="ttdoc">Affiche une touche à l'écran.</div><div class="ttdef"><b>Definition:</b> <a href="touche_8c_source.html#l00003">touche.c:3</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

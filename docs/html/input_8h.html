@@ -1,0 +1,413 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon: Référence du fichier Ubissauphte/src/io/input.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_fe8d0a073a4138aafd6d54ea475e0076.html">io</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Structures de données</a> &#124;
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier input.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Implémentation de la gestion des entrées.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;SDL2/SDL.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="debug_8h_source.html">../debug.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
+<div class="dyncontent">
+<div class="center"><img src="input_8h__dep__incl.png" border="0" usemap="#a_ubissauphte_2src_2io_2input_8hdep" alt=""/></div>
+<map name="a_ubissauphte_2src_2io_2input_8hdep" id="a_ubissauphte_2src_2io_2input_8hdep">
+<area shape="rect" title="Implémentation de la gestion des entrées." alt="" coords="2575,5,2718,47"/>
+<area shape="rect" href="commun_8h.html" title="Gestion du contenu utile pour le fonctionnement des différentes scènes." alt="" coords="2273,757,2471,783"/>
+<area shape="rect" href="context_8h.html" title="Gestion du contexte global du jeu." alt="" coords="985,273,1175,300"/>
+<area shape="rect" href="player_8h.html" title="Définition et comportement du joueur principal." alt="" coords="1133,452,1307,493"/>
+<area shape="rect" href="affichage_8h.html" title="Gestionnaire de l&#39;interface d&#39;inventaire et d&#39;équipement." alt="" coords="2354,549,2497,590"/>
+<area shape="rect" href="button_8h.html" title="Système de gestion des boutons pour l&#39;interface utilisateur." alt="" coords="2575,452,2718,493"/>
+<area shape="rect" href="slider_8h.html" title="Gestion des curseurs glissants pour réglages de valeurs." alt="" coords="3059,653,3202,694"/>
+<area shape="rect" href="touche_8h.html" title="Gestion des touches affichées et interactives." alt="" coords="2739,549,2882,590"/>
+<area shape="rect" href="input_8c.html" title=" " alt="" coords="3110,95,3253,136"/>
+<area shape="rect" href="fscene_8h.html" title=" " alt="" coords="1930,95,2089,136"/>
+<area shape="rect" href="commande_menu_8c.html" title=" " alt="" coords="2034,928,2209,969"/>
+<area shape="rect" href="commande_menu_8h.html" title=" " alt="" coords="2159,839,2334,880"/>
+<area shape="rect" href="fps_menu_8h.html" title=" " alt="" coords="2609,839,2783,880"/>
+<area shape="rect" href="game_over_8h.html" title=" " alt="" coords="2807,839,2982,880"/>
+<area shape="rect" href="main_menu_8h.html" title=" " alt="" coords="1835,928,2010,969"/>
+<area shape="rect" href="main_world_8h.html" title=" " alt="" coords="1637,839,1811,880"/>
+<area shape="rect" href="option2_8h.html" title=" " alt="" coords="3006,839,3181,880"/>
+<area shape="rect" href="option_menu_8h.html" title=" " alt="" coords="3205,839,3379,880"/>
+<area shape="rect" href="scene_inventaire_8h.html" title=" " alt="" coords="2285,928,2459,969"/>
+<area shape="rect" href="win_8h.html" title=" " alt="" coords="2410,839,2585,880"/>
+<area shape="rect" href="commun_8c.html" title=" " alt="" coords="1886,846,2085,873"/>
+<area shape="rect" href="main_8c.html" title=" " alt="" coords="2347,1025,2522,1051"/>
+<area shape="rect" href="fps_menu_8c.html" title=" " alt="" coords="2535,928,2710,969"/>
+<area shape="rect" href="game_over_8c.html" title=" " alt="" coords="2786,928,2961,969"/>
+<area shape="rect" href="main_menu_8c.html" title=" " alt="" coords="1835,1017,2010,1059"/>
+<area shape="rect" href="main_world_8c.html" title=" " alt="" coords="1585,928,1759,969"/>
+<area shape="rect" href="boss__slime_8h.html" title="Définition et comportement du boss slime." alt="" coords="1357,928,1561,969"/>
+<area shape="rect" href="boss__slime_8c.html" title=" " alt="" coords="939,1017,1141,1059"/>
+<area shape="rect" href="option2_8c.html" title=" " alt="" coords="3087,928,3262,969"/>
+<area shape="rect" href="context_8c.html" title=" " alt="" coords="495,363,686,389"/>
+<area shape="rect" href="health_8h.html" title="Système de gestion de la santé des entités." alt="" coords="978,348,1182,404"/>
+<area shape="rect" href="enemy_8h.html" title="Définition de la structure de base pour les ennemis." alt="" coords="1687,452,1862,493"/>
+<area shape="rect" href="barrel_8h.html" title="Définition et comportement du baril destructible." alt="" coords="321,645,495,701"/>
+<area shape="rect" href="spike_8h.html" title="Définition et comportement des pièges à pointes." alt="" coords="70,645,245,701"/>
+<area shape="rect" href="enemy_8c.html" title=" " alt="" coords="1835,549,2010,590"/>
+<area shape="rect" href="player_8c.html" title=" " alt="" coords="1637,549,1811,590"/>
+<area shape="rect" href="minimap_8h.html" title="Gestion de la minimap (affichage et mise a jour)" alt="" coords="1751,653,1894,694"/>
+<area shape="rect" href="equipements_manager_8c.html" title=" " alt="" coords="871,541,1105,597"/>
+<area shape="rect" href="weapon_8c.html" title=" " alt="" coords="1129,549,1311,590"/>
+<area shape="rect" href="ghost_8c.html" title=" " alt="" coords="1335,549,1510,590"/>
+<area shape="rect" href="slime_8c.html" title=" " alt="" coords="673,549,847,590"/>
+<area shape="rect" href="tiles_entity_8h.html" title="Système d&#39;entités basées sur les tuiles." alt="" coords="169,549,343,590"/>
+<area shape="rect" href="hud_8h.html" title="Gestion de l&#39;interface utilisateur en jeu (HUD)" alt="" coords="1649,749,1791,791"/>
+<area shape="rect" href="mapview_8h.html" title="Gestion de l&#39;affichage de la carte du niveau." alt="" coords="2187,549,2330,590"/>
+<area shape="rect" href="affichage_8c.html" title=" " alt="" coords="2297,653,2439,694"/>
+<area shape="rect" href="button_8c.html" title=" " alt="" coords="2521,549,2663,590"/>
+<area shape="rect" href="slider_8c.html" title=" " alt="" coords="2950,749,3093,791"/>
+<area shape="rect" href="touche_8c.html" title=" " alt="" coords="2790,653,2933,694"/>
+<area shape="rect" href="genmap_8h.html" title=" " alt="" coords="2171,184,2346,225"/>
+<area shape="rect" href="fscene_8c.html" title=" " alt="" coords="1989,184,2147,225"/>
+</map>
+</div>
+</div>
+<p><a href="input_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Structures de données</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__input.html">t_input</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contient l'état actuel du clavier, de la souris et de la fenêtre.  <a href="structt__input.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a1fa89a09180d195d828caeb9be5f5e1e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="input_8h.html#a1fa89a09180d195d828caeb9be5f5e1e">updateInput</a> (<a class="el" href="structt__input.html">t_input</a> *input)</td></tr>
+<tr class="memdesc:a1fa89a09180d195d828caeb9be5f5e1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met a jour l'etat des entrees en lisant la file d'event.  <a href="input_8h.html#a1fa89a09180d195d828caeb9be5f5e1e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a1fa89a09180d195d828caeb9be5f5e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5582e30a5e8725ca11ed51c0d03b2609"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__input.html">t_input</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="input_8h.html#a5582e30a5e8725ca11ed51c0d03b2609">initInput</a> (int windowWidth, int windowHeight)</td></tr>
+<tr class="memdesc:a5582e30a5e8725ca11ed51c0d03b2609"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise la structure d'entrées avec des valeurs par défaut.  <a href="input_8h.html#a5582e30a5e8725ca11ed51c0d03b2609">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5582e30a5e8725ca11ed51c0d03b2609"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dbfa0b962c1dde73b323300bc05034c"><td class="memItemLeft" align="right" valign="top">SDL_bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="input_8h.html#a5dbfa0b962c1dde73b323300bc05034c">keyPressOnce</a> (<a class="el" href="structt__input.html">t_input</a> *input, SDL_Scancode scancode)</td></tr>
+<tr class="memdesc:a5dbfa0b962c1dde73b323300bc05034c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Détecte un appui unique sur une touche malgrés les frames.  <a href="input_8h.html#a5dbfa0b962c1dde73b323300bc05034c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5dbfa0b962c1dde73b323300bc05034c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0a2467ee6233f5a3cd482864b873359"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="input_8h.html#ab0a2467ee6233f5a3cd482864b873359">freeInput</a> (<a class="el" href="structt__input.html">t_input</a> *input)</td></tr>
+<tr class="memdesc:ab0a2467ee6233f5a3cd482864b873359"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libere la mémoire allouée pour l'input.  <a href="input_8h.html#ab0a2467ee6233f5a3cd482864b873359">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab0a2467ee6233f5a3cd482864b873359"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52996147ab518a8d16b94287a140c7ee"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="input_8h.html#a52996147ab518a8d16b94287a140c7ee">indiceToucheCliquer</a> (<a class="el" href="structt__input.html">t_input</a> *input)</td></tr>
+<tr class="memdesc:a52996147ab518a8d16b94287a140c7ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">cherche l'indice de la touche pressé  <a href="input_8h.html#a52996147ab518a8d16b94287a140c7ee">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a52996147ab518a8d16b94287a140c7ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Implémentation de la gestion des entrées. </p>
+
+<p class="definition">Définition dans le fichier <a class="el" href="input_8h_source.html">input.h</a>.</p>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="ab0a2467ee6233f5a3cd482864b873359"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0a2467ee6233f5a3cd482864b873359">&#9670;&nbsp;</a></span>freeInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void freeInput </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__input.html">t_input</a> *&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Libere la mémoire allouée pour l'input. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>Pointeur sur l'input à détruire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="input_8c_source.html#l00062">62</a> du fichier <a class="el" href="input_8c_source.html">input.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="input_8h_ab0a2467ee6233f5a3cd482864b873359_icgraph.png" border="0" usemap="#ainput_8h_ab0a2467ee6233f5a3cd482864b873359_icgraph" alt=""/></div>
+<map name="ainput_8h_ab0a2467ee6233f5a3cd482864b873359_icgraph" id="ainput_8h_ab0a2467ee6233f5a3cd482864b873359_icgraph">
+<area shape="rect" title="Libere la mémoire allouée pour l&#39;input." alt="" coords="108,5,189,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a52996147ab518a8d16b94287a140c7ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52996147ab518a8d16b94287a140c7ee">&#9670;&nbsp;</a></span>indiceToucheCliquer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int indiceToucheCliquer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__input.html">t_input</a> *&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>cherche l'indice de la touche pressé </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>Pointeur sur l'input à détruire </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>l'indice de la touche </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="input_8c_source.html#l00068">68</a> du fichier <a class="el" href="input_8c_source.html">input.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="input_8h_a52996147ab518a8d16b94287a140c7ee_icgraph.png" border="0" usemap="#ainput_8h_a52996147ab518a8d16b94287a140c7ee_icgraph" alt=""/></div>
+<map name="ainput_8h_a52996147ab518a8d16b94287a140c7ee_icgraph" id="ainput_8h_a52996147ab518a8d16b94287a140c7ee_icgraph">
+<area shape="rect" title="cherche l&#39;indice de la touche pressé" alt="" coords="769,56,921,83"/>
+<area shape="rect" href="touche_8c.html#ab7804f17c8e030cc35e5ad4a66b53c04" title="Gère les interactions avec une touche." alt="" coords="577,56,721,83"/>
+<area shape="rect" href="commun_8c.html#a3e5017757de7e251a0cfa2f2b4d2fdf5" title="Wrapper pour la gestion des contrôles affichés." alt="" coords="331,56,529,83"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,5,283,32"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,56,271,83"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,107,267,133"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5582e30a5e8725ca11ed51c0d03b2609"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5582e30a5e8725ca11ed51c0d03b2609">&#9670;&nbsp;</a></span>initInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt__input.html">t_input</a>* initInput </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>windowWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>windowHeight</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialise la structure d'entrées avec des valeurs par défaut. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">windowWidth</td><td>Largeur initiale de la fenêtre </td></tr>
+    <tr><td class="paramname">windowHeight</td><td>Hauteur initiale de la fenêtre </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>input Pointeur vers la structure initialiser </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="input_8c_source.html#l00035">35</a> du fichier <a class="el" href="input_8c_source.html">input.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="input_8h_a5582e30a5e8725ca11ed51c0d03b2609_icgraph.png" border="0" usemap="#ainput_8h_a5582e30a5e8725ca11ed51c0d03b2609_icgraph" alt=""/></div>
+<map name="ainput_8h_a5582e30a5e8725ca11ed51c0d03b2609_icgraph" id="ainput_8h_a5582e30a5e8725ca11ed51c0d03b2609_icgraph">
+<area shape="rect" title="Initialise la structure d&#39;entrées avec des valeurs par défaut." alt="" coords="108,5,184,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5dbfa0b962c1dde73b323300bc05034c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dbfa0b962c1dde73b323300bc05034c">&#9670;&nbsp;</a></span>keyPressOnce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_bool keyPressOnce </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__input.html">t_input</a> *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Scancode&#160;</td>
+          <td class="paramname"><em>scancode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Détecte un appui unique sur une touche malgrés les frames. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>Pointeur vers la structure d'entrées </td></tr>
+    <tr><td class="paramname">scancode</td><td>Code SDL_Scancode de la touche à vérifier </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>SDL_TRUE si la touche vient d'être pressée, SDL_FALSE sinon</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Utilise un tableau static pour suivre l'état des touches entre les appels </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="input_8c_source.html#l00049">49</a> du fichier <a class="el" href="input_8c_source.html">input.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="input_8h_a5dbfa0b962c1dde73b323300bc05034c_icgraph.png" border="0" usemap="#ainput_8h_a5dbfa0b962c1dde73b323300bc05034c_icgraph" alt=""/></div>
+<map name="ainput_8h_a5dbfa0b962c1dde73b323300bc05034c_icgraph" id="ainput_8h_a5dbfa0b962c1dde73b323300bc05034c_icgraph">
+<area shape="rect" title="Détecte un appui unique sur une touche malgrés les frames." alt="" coords="1673,125,1787,152"/>
+<area shape="rect" href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f" title="Traite les entrées utilisateur pour le joueur." alt="" coords="1485,252,1625,279"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
+<area shape="rect" href="blacksmith_8c.html#ad0f86fd1caafea8c947e960f2d8d3b5a" title="Met à jour l&#39;état et le comportement du forgeron." alt="" coords="1485,100,1625,127"/>
+<area shape="rect" href="chest_8c.html#a1a123992315c67f40cd6b50322b319fd" title="Met à jour l&#39;état et le comportement du coffre." alt="" coords="1503,151,1607,177"/>
+<area shape="rect" href="merchant_8c.html#a2327237b68bc5eb3a06b5c1d4ba522ad" title="Met à jour l&#39;état et le comportement du marchand." alt="" coords="1491,201,1619,228"/>
+<area shape="rect" href="wizard_8c.html#a33e12f0b600e2edcbd5b3db83f9c86ae" title="Met à jour l&#39;état et le comportement du sorcier." alt="" coords="1499,49,1611,76"/>
+<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="1020,176,1215,203"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,75,957,101"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,125,960,152"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,176,972,203"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,123,772,149"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,93,612,120"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,68,453,95"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1263,100,1437,127"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1042,125,1193,152"/>
+<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title=" " alt="" coords="1281,151,1419,177"/>
+<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1269,201,1431,228"/>
+<area shape="rect" href="wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1277,49,1423,76"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1fa89a09180d195d828caeb9be5f5e1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fa89a09180d195d828caeb9be5f5e1e">&#9670;&nbsp;</a></span>updateInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updateInput </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__input.html">t_input</a> *&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Met a jour l'etat des entrees en lisant la file d'event. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>Pointeur vers la structure d'input à mettre à jour </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="input_8c_source.html#l00003">3</a> du fichier <a class="el" href="input_8c_source.html">input.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="input_8h_a1fa89a09180d195d828caeb9be5f5e1e_icgraph.png" border="0" usemap="#ainput_8h_a1fa89a09180d195d828caeb9be5f5e1e_icgraph" alt=""/></div>
+<map name="ainput_8h_a1fa89a09180d195d828caeb9be5f5e1e_icgraph" id="ainput_8h_a1fa89a09180d195d828caeb9be5f5e1e_icgraph">
+<area shape="rect" title="Met a jour l&#39;etat des entrees en lisant la file d&#39;event." alt="" coords="108,5,208,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

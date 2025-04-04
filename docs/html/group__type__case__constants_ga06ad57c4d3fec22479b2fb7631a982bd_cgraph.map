@@ -1,0 +1,4 @@
+<map id="ajouterCase" name="ajouterCase">
+<area shape="rect" id="node1" title="Ajoute une case à la grille." alt="" coords="5,5,105,32"/>
+<area shape="rect" id="node2" href="$group__type__case__constants.html#ga2b120790d7e25547b735afe2a069367f" title="Initialise une nouvelle case." alt="" coords="153,5,228,32"/>
+</map>

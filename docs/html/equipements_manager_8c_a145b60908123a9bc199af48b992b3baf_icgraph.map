@@ -1,0 +1,7 @@
+<map id="itemFreeFunc" name="itemFreeFunc">
+<area shape="rect" id="node1" title="Fonction wrapper pour la libération d&#39;item." alt="" coords="452,31,563,57"/>
+<area shape="rect" id="node2" href="$equipements_manager_8c.html#a43fd9bc1e73271ce69490fd2600dd3d1" title="Crée un nouvel inventaire vide." alt="" coords="275,31,404,57"/>
+<area shape="rect" id="node3" href="$player_8c.html#a25a5b9b1991ba50388e6c3b0eab41d6c" title="Crée un nouveau joueur." alt="" coords="115,5,219,32"/>
+<area shape="rect" id="node5" href="$equipements_manager_8c.html#aca8ce83f7015926bf430cb136bb605f3" title="Charge un inventaire depuis un fichier." alt="" coords="108,56,227,83"/>
+<area shape="rect" id="node4" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>

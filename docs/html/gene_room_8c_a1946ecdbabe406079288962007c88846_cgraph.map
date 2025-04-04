@@ -1,0 +1,52 @@
+<map id="geneRoom" name="geneRoom">
+<area shape="rect" id="node1" title="Génère une salle complète." alt="" coords="5,1420,97,1446"/>
+<area shape="rect" id="node2" href="$gene_room_8c.html#a405809018b17074928d18489e2cf4e7d" title=" " alt="" coords="408,52,539,78"/>
+<area shape="rect" id="node6" href="$gene_room_8c.html#a4bdb7b92951e3249dfb5c04dd7227c36" title="Applique les tuiles à la grille." alt="" coords="187,609,275,636"/>
+<area shape="rect" id="node26" href="$liste_block_8c.html#adc5676a45aa44f0b5563198c098ed9cc" title="Crée les listes de tous les blocs." alt="" coords="161,1369,300,1396"/>
+<area shape="rect" id="node29" href="$fill_gaps_8c.html#af016d7d1c717cf883acdd9a856375657" title="Crée une matrice de float." alt="" coords="158,1217,303,1244"/>
+<area shape="rect" id="node30" href="$liste_block_8c.html#a7ef121247dc980b530868d77561dd773" title="Libère la mémoire des listes de blocs." alt="" coords="173,1268,288,1294"/>
+<area shape="rect" id="node31" href="$fill_gaps_8c.html#a4f9378e5bc63c04f4602bda0c6d68b63" title="Libère une matrice de float." alt="" coords="165,1318,296,1345"/>
+<area shape="rect" id="node32" href="$fill_gaps_8c.html#a574d5a5c2fea98b97c0311bef0cd8905" title="Libère une matrice d&#39;entiers." alt="" coords="416,1825,531,1852"/>
+<area shape="rect" id="node33" href="$group__type__case__constants.html#ga90f797ffc58216b364f7cff43ba3e23a" title="Convertit une matrice d&#39;entiers en grille." alt="" coords="163,1420,298,1446"/>
+<area shape="rect" id="node37" href="$lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="197,1496,265,1522"/>
+<area shape="rect" id="node45" href="$fill_gaps_8c.html#a7a0e6d13465b1c134b65e151519d652a" title="Convertit une matrice float en int." alt="" coords="165,1546,296,1573"/>
+<area shape="rect" id="node46" href="$perlin_noise_8c.html#a7c8af28e1b8293a934475fdabab52438" title="Génère du bruit de Perlin 2D." alt="" coords="202,1597,259,1624"/>
+<area shape="rect" id="node47" href="$gene_room_8c.html#af25582e67f334c8f4879a427566f2b68" title="Place la sortie dans la salle." alt="" coords="181,1166,281,1193"/>
+<area shape="rect" id="node48" href="$fill_gaps_8c.html#aadaa50d7d06895b528cbd4df2d2497d2" title="Rend la matrice continue (remplit les trous)" alt="" coords="145,1648,316,1674"/>
+<area shape="rect" id="node49" href="$gene_room_8c.html#a8fdf3221c9714d9d7bf4c4baefc2b808" title="Sauvegarde la carte générée." alt="" coords="190,1749,271,1776"/>
+<area shape="rect" id="node50" href="$gene_room_8c.html#a8ca9946b23915ac79e07c82dcb15460f" title=" " alt="" coords="184,1800,277,1826"/>
+<area shape="rect" id="node3" href="$liste_block_8c.html#a30db6937fc6a2badca7e728d810f6960" title="Trouve un bloc par son nom." alt="" coords="631,178,744,205"/>
+<area shape="rect" id="node4" href="$liste_block_8c.html#a9aa0642bbe5cd64582544bb08f6bf391" title="Copie les valeurs d&#39;un bloc vers un autre." alt="" coords="646,52,729,78"/>
+<area shape="rect" id="node5" href="$liste_block_8c.html#ae2648a0e73e7ec24142118d88e25c6e2" title="Récupère la liste des blocs d&#39;un type spécifique." alt="" coords="639,508,736,534"/>
+<area shape="rect" id="node7" href="$gene_room_8c.html#ae1852105b1a586291e0262eee5441e25" title="Détecte un angle continu à droite." alt="" coords="399,558,547,585"/>
+<area shape="rect" id="node8" href="$gene_room_8c.html#a8559ae75196fafce33bc543ce20505dd" title="Détecte un angle continu à gauche." alt="" coords="391,609,556,636"/>
+<area shape="rect" id="node9" href="$gene_room_8c.html#a44183f467db01dab918378452a3742fd" title="Détecte un angle droit à combler." alt="" coords="428,660,519,686"/>
+<area shape="rect" id="node10" href="$gene_room_8c.html#a2147c57585c3ffe5b147d90d869a228c" title="Détecte un angle gauche à combler." alt="" coords="420,710,527,737"/>
+<area shape="rect" id="node11" href="$gene_room_8c.html#a21039d31906285de7be3249ac10f905b" title="Détecte un arrondi inférieur droit." alt="" coords="396,812,551,838"/>
+<area shape="rect" id="node12" href="$gene_room_8c.html#a1f231d9e25b3c67b46a10dcb22e7af77" title="Détecte un arrondi inférieur gauche." alt="" coords="387,862,559,889"/>
+<area shape="rect" id="node13" href="$gene_room_8c.html#a7ed66c1dc8079a0f92651bf41e26bdce" title="Détecte un arrondi supérieur droit." alt="" coords="392,913,555,940"/>
+<area shape="rect" id="node14" href="$gene_room_8c.html#a6ff7427b2774a20a3485173b5166f442" title="Détecte un arrondi supérieur gauche." alt="" coords="384,964,563,990"/>
+<area shape="rect" id="node15" href="$gene_room_8c.html#a774dcd1fd93faa6c894c86f6ee5552aa" title=" " alt="" coords="435,1014,512,1041"/>
+<area shape="rect" id="node16" href="$gene_room_8c.html#a21d3e3b7cb18b07e3e8845c38dfa6f7a" title="Détecte une bordure mur avant." alt="" coords="406,1065,541,1092"/>
+<area shape="rect" id="node17" href="$gene_room_8c.html#ae856e0b23754e1b5db0c1fdea25af779" title="Détecte une bordure mur droit." alt="" coords="409,153,538,180"/>
+<area shape="rect" id="node18" href="$gene_room_8c.html#aa88154e40e29b7890cf31cd9049cff0c" title="Détecte une bordure mur gauche." alt="" coords="400,204,547,230"/>
+<area shape="rect" id="node19" href="$gene_room_8c.html#aa9cf0c4527a29ff9a303609c278e25c2" title="Récupère une décoration aléatoire." alt="" coords="435,1116,511,1142"/>
+<area shape="rect" id="node20" href="$gene_room_8c.html#abbc2703ecc48a05326b416d24d507af0" title="Sélectionne une tuile frontale adaptée." alt="" coords="425,254,521,281"/>
+<area shape="rect" id="node21" href="$gene_room_8c.html#ab0a4cc5e61b13354e01b5647e6e6e6b2" title="Récupère un plafond aléatoire." alt="" coords="427,508,519,534"/>
+<area shape="rect" id="node22" href="$gene_room_8c.html#a4c0af876efaea0550cd7a8b0a7bb492b" title="Sélectionne un sol adapté à une case." alt="" coords="442,406,505,433"/>
+<area shape="rect" id="node23" href="$gene_room_8c.html#a6e153ebbdb0a45eca65f3f2fae73afc4" title="Vérifie si un mur arrière est nécessaire." alt="" coords="427,305,519,332"/>
+<area shape="rect" id="node24" href="$gene_room_8c.html#a2a4e0f71e65c46b9236e10c77d6e25b7" title="Vérifie si un mur avant est nécessaire." alt="" coords="431,356,516,382"/>
+<area shape="rect" id="node25" href="$liste_block_8c.html#a7de821f1726c7548a76b1b5edfe4bbc4" title="Applique une rotation aléatoire à un bloc." alt="" coords="407,457,539,484"/>
+<area shape="rect" id="node27" href="$liste_block_8c.html#af163cba383357ce8c4e41da299fd3021" title="Ajoute un bloc à la liste correspondante." alt="" coords="421,1217,525,1244"/>
+<area shape="rect" id="node28" href="$liste_block_8c.html#a0374925ca137cff516ff1e935215c63b" title="Initialise toutes les listes de blocs." alt="" coords="425,1268,521,1294"/>
+<area shape="rect" id="node34" href="$group__type__case__constants.html#ga2b120790d7e25547b735afe2a069367f" title="Initialise une nouvelle case." alt="" coords="436,1420,511,1446"/>
+<area shape="rect" id="node35" href="$group__type__case__constants.html#ga6e4aa5870831bf3b631ed8cd25c458ae" title="Initialise une nouvelle grille." alt="" coords="434,1318,513,1345"/>
+<area shape="rect" id="node36" href="$group__type__case__constants.html#gae5c605b887cfd15cb299a18ae25a4ce9" title="Stocke les voisins d&#39;une case." alt="" coords="406,1369,541,1396"/>
+<area shape="rect" id="node38" href="$lissage_8c.html#a9e492bb56220c4c2f61cb24bb3b5f531" title="Applique le traitement pour un motif diagonal inférieur." alt="" coords="364,1673,583,1700"/>
+<area shape="rect" id="node39" href="$lissage_8c.html#a9cbebc2d912d5db181f453c6922b2ab3" title="Applique le traitement pour un motif diagonal en coin." alt="" coords="367,1724,580,1750"/>
+<area shape="rect" id="node40" href="$lissage_8c.html#aac8d3e00eeada130359453a0dc52efb4" title="Détecte un motif diagonal inférieur." alt="" coords="381,1774,566,1801"/>
+<area shape="rect" id="node41" href="$lissage_8c.html#a33747a07e6d181c27b5d6ff6085fbf6f" title="Détecte un motif diagonal en coin." alt="" coords="383,1470,563,1497"/>
+<area shape="rect" id="node42" href="$lissage_8c.html#a80ae6dd1186c7a961aaf870085b5fbfe" title="Détecte un motif diagonal supérieur." alt="" coords="394,1521,553,1548"/>
+<area shape="rect" id="node43" href="$lissage_8c.html#a5ac7e1f3c2f4c1c2c1e773876a0fe604" title="Vérifie les motifs horizontaux/verticaux." alt="" coords="377,1572,569,1598"/>
+<area shape="rect" id="node44" href="$lissage_8c.html#ae9193128b44d8297684e9cbdfad8b2c9" title="Vérifie si une case est isolée." alt="" coords="415,1622,532,1649"/>
+</map>

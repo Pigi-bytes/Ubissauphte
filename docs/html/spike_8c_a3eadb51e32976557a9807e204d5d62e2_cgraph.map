@@ -1,0 +1,9 @@
+<map id="placeNearTeleporter" name="placeNearTeleporter">
+<area shape="rect" id="node1" title=" " alt="" coords="5,132,159,159"/>
+<area shape="rect" id="node2" href="$spike_8c.html#ab8e87d5a582db35bc887b757eb279e21" title=" " alt="" coords="207,5,389,32"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="437,120,523,147"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="235,107,361,133"/>
+<area shape="rect" id="node5" href="$tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="447,196,513,223"/>
+<area shape="rect" id="node6" href="$object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="227,208,369,235"/>
+<area shape="rect" id="node7" href="$tiles_8c.html#ab4e8adeba82f1c41f904963ffa7260e8" title="Place une entité sur une tuile libre aléatoire." alt="" coords="221,157,375,184"/>
+</map>

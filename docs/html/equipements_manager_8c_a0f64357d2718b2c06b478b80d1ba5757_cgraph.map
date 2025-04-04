@@ -1,0 +1,15 @@
+<map id="item_save" name="item_save">
+<area shape="rect" id="node1" title="Sauvegarde des items dans un fichier." alt="" coords="5,208,96,235"/>
+<area shape="rect" id="node2" href="$fichier_loader_8c.html#aff6feef9add20765c6aedd2d346ba1bd" title="Ajoute un block dans un t_fichier." alt="" coords="167,56,249,83"/>
+<area shape="rect" id="node5" href="$fichier_loader_8c.html#a382934fd7d65a42903cbdb7e70293fc6" title="Ajoute une Pair de data dans un block d&#39;un t_fichier." alt="" coords="157,5,259,32"/>
+<area shape="rect" id="node6" href="$fichier_loader_8c.html#af5e826d956c5f3bfbecce8b6399933f7" title="Libère la mémoire allouée pour un block." alt="" coords="151,107,265,133"/>
+<area shape="rect" id="node8" href="$fichier_loader_8c.html#a900eddaf20bfe9e80ba50f1a8805b65c" title="Crée un nouveau t_block." alt="" coords="144,259,272,285"/>
+<area shape="rect" id="node9" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="320,157,467,184"/>
+<area shape="rect" id="node10" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="322,208,465,235"/>
+<area shape="rect" id="node11" href="$fichier_loader_8c.html#a752fa46871c5c0ad80b4ebb04e6453fa" title="Libère la mémoire allouée pour une pair de donnee (cle/valeur)" alt="" coords="341,271,446,297"/>
+<area shape="rect" id="node12" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="342,347,445,373"/>
+<area shape="rect" id="node13" href="$fichier_loader_8c.html#ad07cd6d979d38d3f0e411c4dcd3444c7" title="Création d&#39;un t_pairData." alt="" coords="149,411,267,437"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="349,56,437,83"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="323,5,464,32"/>
+<area shape="rect" id="node7" href="$object_manager_8c.html#aa17aa9d46c431f4b91114108468b73f3" title="Libere toute la memoire du gestionnaire et ses objets." alt="" coords="320,107,467,133"/>
+</map>

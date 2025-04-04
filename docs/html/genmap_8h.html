@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon: Référence du fichier Ubissauphte/src/engine/world/genmap.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_2826858af9faa5fe77c775e96e0e1227.html">engine</a></li><li class="navelem"><a class="el" href="dir_ead93a21b55928290f9cdbe2a28bde81.html">world</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Structures de données</a> &#124;
+<a href="#typedef-members">Définitions de type</a> &#124;
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier genmap.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;SDL2/SDL.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="debug_8h_source.html">../../debug.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="fscene_8h_source.html">../../utils/fscene.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="object_manager_8h_source.html">../../utils/objectManager.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="tiles_8h_source.html">../entities/tiles.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
+<div class="dyncontent">
+<div class="center"><img src="genmap_8h__dep__incl.png" border="0" usemap="#a_ubissauphte_2src_2engine_2world_2genmap_8hdep" alt=""/></div>
+<map name="a_ubissauphte_2src_2engine_2world_2genmap_8hdep" id="a_ubissauphte_2src_2engine_2world_2genmap_8hdep">
+<area shape="rect" title=" " alt="" coords="2652,5,2827,47"/>
+<area shape="rect" href="commun_8h.html" title="Gestion du contenu utile pour le fonctionnement des différentes scènes." alt="" coords="2269,622,2468,649"/>
+<area shape="rect" href="context_8h.html" title="Gestion du contexte global du jeu." alt="" coords="1768,109,1959,136"/>
+<area shape="rect" href="mapview_8h.html" title="Gestion de l&#39;affichage de la carte du niveau." alt="" coords="2457,414,2600,455"/>
+<area shape="rect" href="gene_room_8h.html" title="Générateur de salles procédurales." alt="" coords="2777,95,2952,151"/>
+<area shape="rect" href="genmap_8c.html" title=" " alt="" coords="2976,102,3151,143"/>
+<area shape="rect" href="commande_menu_8c.html" title=" " alt="" coords="3100,793,3275,835"/>
+<area shape="rect" href="commande_menu_8h.html" title=" " alt="" coords="3151,704,3325,745"/>
+<area shape="rect" href="fps_menu_8h.html" title=" " alt="" coords="1649,704,1824,745"/>
+<area shape="rect" href="game_over_8h.html" title=" " alt="" coords="1884,704,2059,745"/>
+<area shape="rect" href="main_menu_8h.html" title=" " alt="" coords="1348,793,1523,835"/>
+<area shape="rect" href="main_world_8h.html" title=" " alt="" coords="1357,704,1532,745"/>
+<area shape="rect" href="option2_8h.html" title=" " alt="" coords="2480,704,2655,745"/>
+<area shape="rect" href="option_menu_8h.html" title=" " alt="" coords="2083,704,2257,745"/>
+<area shape="rect" href="scene_inventaire_8h.html" title=" " alt="" coords="2281,704,2456,745"/>
+<area shape="rect" href="win_8h.html" title=" " alt="" coords="2679,704,2853,745"/>
+<area shape="rect" href="commun_8c.html" title=" " alt="" coords="2928,711,3127,738"/>
+<area shape="rect" href="main_8c.html" title=" " alt="" coords="2151,890,2325,917"/>
+<area shape="rect" href="fps_menu_8c.html" title=" " alt="" coords="1649,793,1824,835"/>
+<area shape="rect" href="game_over_8c.html" title=" " alt="" coords="1900,793,2075,835"/>
+<area shape="rect" href="main_menu_8c.html" title=" " alt="" coords="1348,883,1523,924"/>
+<area shape="rect" href="main_world_8c.html" title=" " alt="" coords="1149,793,1324,835"/>
+<area shape="rect" href="boss__slime_8h.html" title="Définition et comportement du boss slime." alt="" coords="921,793,1125,835"/>
+<area shape="rect" href="boss__slime_8c.html" title=" " alt="" coords="669,883,871,924"/>
+<area shape="rect" href="option2_8c.html" title=" " alt="" coords="2600,793,2775,835"/>
+<area shape="rect" href="option_menu_8c.html" title=" " alt="" coords="2151,793,2325,835"/>
+<area shape="rect" href="scene_inventaire_8c.html" title=" " alt="" coords="2401,793,2576,835"/>
+<area shape="rect" href="win_8c.html" title=" " alt="" coords="2901,793,3076,835"/>
+<area shape="rect" href="context_8c.html" title=" " alt="" coords="5,213,196,240"/>
+<area shape="rect" href="health_8h.html" title="Système de gestion de la santé des entités." alt="" coords="1151,199,1355,255"/>
+<area shape="rect" href="enemy_8h.html" title="Définition de la structure de base pour les ennemis." alt="" coords="1776,310,1951,351"/>
+<area shape="rect" href="player_8h.html" title="Définition et comportement du joueur principal." alt="" coords="1165,310,1340,351"/>
+<area shape="rect" href="barrel_8h.html" title="Définition et comportement du baril destructible." alt="" coords="99,511,273,567"/>
+<area shape="rect" href="spike_8h.html" title="Définition et comportement des pièges à pointes." alt="" coords="297,511,472,567"/>
+<area shape="rect" href="affichage_8h.html" title="Gestionnaire de l&#39;interface d&#39;inventaire et d&#39;équipement." alt="" coords="2291,414,2433,455"/>
+<area shape="rect" href="button_8h.html" title="Système de gestion des boutons pour l&#39;interface utilisateur." alt="" coords="2291,310,2433,351"/>
+<area shape="rect" href="health_8c.html" title=" " alt="" coords="937,303,1141,359"/>
+<area shape="rect" href="enemy_8c.html" title=" " alt="" coords="1489,414,1664,455"/>
+<area shape="rect" href="ghost_8h.html" title="Définition et comportement de l&#39;ennemi fantôme." alt="" coords="1688,414,1863,455"/>
+<area shape="rect" href="slime_8h.html" title="Définition et comportement de l&#39;ennemi slime." alt="" coords="2040,414,2215,455"/>
+<area shape="rect" href="player_8c.html" title=" " alt="" coords="1291,414,1465,455"/>
+<area shape="rect" href="minimap_8h.html" title="Gestion de la minimap (affichage et mise a jour)" alt="" coords="1623,518,1765,559"/>
+<area shape="rect" href="ghost_8c.html" title=" " alt="" coords="1280,518,1455,559"/>
+<area shape="rect" href="slime_8c.html" title=" " alt="" coords="1789,518,1964,559"/>
+<area shape="rect" href="equipements_manager_8c.html" title=" " alt="" coords="424,407,657,463"/>
+<area shape="rect" href="weapon_8c.html" title=" " alt="" coords="681,414,864,455"/>
+<area shape="rect" href="tiles_entity_8h.html" title="Système d&#39;entités basées sur les tuiles." alt="" coords="888,414,1063,455"/>
+<area shape="rect" href="hud_8h.html" title="Gestion de l&#39;interface utilisateur en jeu (HUD)" alt="" coords="1369,615,1512,656"/>
+<area shape="rect" href="mapview_8c.html" title=" " alt="" coords="2457,518,2600,559"/>
+<area shape="rect" href="gene_room_8c.html" title=" " alt="" coords="3401,199,3576,255"/>
+</map>
+</div>
+</div>
+<p><a href="genmap_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Structures de données</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__salle.html">t_salle</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__level.html">t_level</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Définitions de type</h2></td></tr>
+<tr class="memitem:a1bc00929eca8834a4e84f91a3caea40f"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structt__salle.html">t_salle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="genmap_8h.html#a1bc00929eca8834a4e84f91a3caea40f">t_salle</a></td></tr>
+<tr class="separator:a1bc00929eca8834a4e84f91a3caea40f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ac50fbce591c797fbf374390298a701e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__salle.html">t_salle</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="genmap_8h.html#ac50fbce591c797fbf374390298a701e0">initRoom</a> ()</td></tr>
+<tr class="separator:ac50fbce591c797fbf374390298a701e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a782542f234d59803605c4d24d7cc48a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="genmap_8h.html#a782542f234d59803605c4d24d7cc48a9">connectRoom</a> (<a class="el" href="structt__salle.html">t_salle</a> *origineRoom, <a class="el" href="structt__salle.html">t_salle</a> *destinationRoom, int dir)</td></tr>
+<tr class="separator:a782542f234d59803605c4d24d7cc48a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cc62c2ec750666aff9cbdac83f72102"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__salle.html">t_salle</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="genmap_8h.html#a8cc62c2ec750666aff9cbdac83f72102">genMap</a> (int numberRoom, SDL_Rect *roomCoords)</td></tr>
+<tr class="separator:a8cc62c2ec750666aff9cbdac83f72102"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a5b22ca28851f21ea1a9ff1f1e43702"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="genmap_8h.html#a4a5b22ca28851f21ea1a9ff1f1e43702">freeLevel</a> (<a class="el" href="structt__level.html">t_level</a> *level)</td></tr>
+<tr class="separator:a4a5b22ca28851f21ea1a9ff1f1e43702"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentation des définitions de type</h2>
+<a id="a1bc00929eca8834a4e84f91a3caea40f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bc00929eca8834a4e84f91a3caea40f">&#9670;&nbsp;</a></span>t_salle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structt__salle.html">t_salle</a> <a class="el" href="structt__salle.html">t_salle</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a782542f234d59803605c4d24d7cc48a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a782542f234d59803605c4d24d7cc48a9">&#9670;&nbsp;</a></span>connectRoom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void connectRoom </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__salle.html">t_salle</a> *&#160;</td>
+          <td class="paramname"><em>origineRoom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__salle.html">t_salle</a> *&#160;</td>
+          <td class="paramname"><em>destinationRoom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dir</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="genmap_8c_source.html#l00019">19</a> du fichier <a class="el" href="genmap_8c_source.html">genmap.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="genmap_8h_a782542f234d59803605c4d24d7cc48a9_icgraph.png" border="0" usemap="#agenmap_8h_a782542f234d59803605c4d24d7cc48a9_icgraph" alt=""/></div>
+<map name="agenmap_8h_a782542f234d59803605c4d24d7cc48a9_icgraph" id="agenmap_8h_a782542f234d59803605c4d24d7cc48a9_icgraph">
+<area shape="rect" title=" " alt="" coords="783,5,893,32"/>
+<area shape="rect" href="genmap_8c.html#a8cc62c2ec750666aff9cbdac83f72102" title=" " alt="" coords="660,5,735,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4a5b22ca28851f21ea1a9ff1f1e43702"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a5b22ca28851f21ea1a9ff1f1e43702">&#9670;&nbsp;</a></span>freeLevel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void freeLevel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__level.html">t_level</a> *&#160;</td>
+          <td class="paramname"><em>level</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="genmap_8c_source.html#l00199">199</a> du fichier <a class="el" href="genmap_8c_source.html">genmap.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="genmap_8h_a4a5b22ca28851f21ea1a9ff1f1e43702_icgraph.png" border="0" usemap="#agenmap_8h_a4a5b22ca28851f21ea1a9ff1f1e43702_icgraph" alt=""/></div>
+<map name="agenmap_8h_a4a5b22ca28851f21ea1a9ff1f1e43702_icgraph" id="agenmap_8h_a4a5b22ca28851f21ea1a9ff1f1e43702_icgraph">
+<area shape="rect" title=" " alt="" coords="164,31,247,57"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="33,5,88,32"/>
+<area shape="rect" href="main_world_8c.html#a450f0cf0cb1b7658e24da51e56db4122" title=" " alt="" coords="5,56,116,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8cc62c2ec750666aff9cbdac83f72102"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cc62c2ec750666aff9cbdac83f72102">&#9670;&nbsp;</a></span>genMap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt__salle.html">t_salle</a>** genMap </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numberRoom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Rect *&#160;</td>
+          <td class="paramname"><em>roomCoords</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="genmap_8c_source.html#l00028">28</a> du fichier <a class="el" href="genmap_8c_source.html">genmap.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="genmap_8h_a8cc62c2ec750666aff9cbdac83f72102_cgraph.png" border="0" usemap="#agenmap_8h_a8cc62c2ec750666aff9cbdac83f72102_cgraph" alt=""/></div>
+<map name="agenmap_8h_a8cc62c2ec750666aff9cbdac83f72102_cgraph" id="agenmap_8h_a8cc62c2ec750666aff9cbdac83f72102_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,80,57"/>
+<area shape="rect" href="genmap_8c.html#a782542f234d59803605c4d24d7cc48a9" title=" " alt="" coords="128,5,239,32"/>
+<area shape="rect" href="genmap_8c.html#ac50fbce591c797fbf374390298a701e0" title=" " alt="" coords="143,56,224,83"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="genmap_8h_a8cc62c2ec750666aff9cbdac83f72102_icgraph.png" border="0" usemap="#agenmap_8h_a8cc62c2ec750666aff9cbdac83f72102_icgraph" alt=""/></div>
+<map name="agenmap_8h_a8cc62c2ec750666aff9cbdac83f72102_icgraph" id="agenmap_8h_a8cc62c2ec750666aff9cbdac83f72102_icgraph">
+<area shape="rect" title=" " alt="" coords="660,5,735,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac50fbce591c797fbf374390298a701e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac50fbce591c797fbf374390298a701e0">&#9670;&nbsp;</a></span>initRoom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt__salle.html">t_salle</a>* initRoom </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="genmap_8c_source.html#l00003">3</a> du fichier <a class="el" href="genmap_8c_source.html">genmap.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="genmap_8h_ac50fbce591c797fbf374390298a701e0_icgraph.png" border="0" usemap="#agenmap_8h_ac50fbce591c797fbf374390298a701e0_icgraph" alt=""/></div>
+<map name="agenmap_8h_ac50fbce591c797fbf374390298a701e0_icgraph" id="agenmap_8h_ac50fbce591c797fbf374390298a701e0_icgraph">
+<area shape="rect" title=" " alt="" coords="783,5,864,32"/>
+<area shape="rect" href="genmap_8c.html#a8cc62c2ec750666aff9cbdac83f72102" title=" " alt="" coords="660,5,735,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

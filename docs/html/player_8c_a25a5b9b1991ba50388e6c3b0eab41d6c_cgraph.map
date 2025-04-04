@@ -1,0 +1,25 @@
+<map id="createPlayer" name="createPlayer">
+<area shape="rect" id="node1" title="Crée un nouveau joueur." alt="" coords="5,309,109,336"/>
+<area shape="rect" id="node2" href="$animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa" title="Ajoute une animation au contrôleur." alt="" coords="188,56,301,83"/>
+<area shape="rect" id="node5" href="$animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="179,157,310,184"/>
+<area shape="rect" id="node7" href="$timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2" title="Initialise un nouveau timer." alt="" coords="433,107,514,133"/>
+<area shape="rect" id="node8" href="$equipements_manager_8c.html#a43fd9bc1e73271ce69490fd2600dd3d1" title="Crée un nouvel inventaire vide." alt="" coords="180,411,309,437"/>
+<area shape="rect" id="node13" href="$particules_8c.html#ae582018b7ea20710f9845936d0b82cb5" title="Crée un nouvel émetteur de particules." alt="" coords="165,512,324,539"/>
+<area shape="rect" id="node15" href="$animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="157,360,332,387"/>
+<area shape="rect" id="node16" href="$health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="177,639,312,665"/>
+<area shape="rect" id="node20" href="$animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="190,233,299,260"/>
+<area shape="rect" id="node22" href="$timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="615,259,705,285"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="429,56,517,83"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="403,5,544,32"/>
+<area shape="rect" id="node6" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="431,157,516,184"/>
+<area shape="rect" id="node9" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="400,411,547,437"/>
+<area shape="rect" id="node10" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="402,461,545,488"/>
+<area shape="rect" id="node11" href="$equipements_manager_8c.html#a145b60908123a9bc199af48b992b3baf" title="Fonction wrapper pour la libération d&#39;item." alt="" coords="418,512,529,539"/>
+<area shape="rect" id="node12" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="422,360,525,387"/>
+<area shape="rect" id="node14" href="$particules_8c.html#a61fa4b7a83f49df939133c298c2a4dab" title="Réinitialise un émetteur de particules." alt="" coords="398,563,549,589"/>
+<area shape="rect" id="node17" href="$timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="415,613,531,640"/>
+<area shape="rect" id="node18" href="$health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="380,664,567,691"/>
+<area shape="rect" id="node19" href="$timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="411,715,536,741"/>
+<area shape="rect" id="node21" href="$animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="414,208,533,235"/>
+<area shape="rect" id="node23" href="$animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="415,259,532,285"/>
+</map>

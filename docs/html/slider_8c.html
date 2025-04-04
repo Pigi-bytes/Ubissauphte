@@ -1,0 +1,325 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon: Référence du fichier Ubissauphte/src/ui/slider.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_cbea5643ac5778c201b251489fa6a373.html">ui</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier slider.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="slider_8h_source.html">slider.h</a>&quot;</code><br />
+</div>
+<p><a href="slider_8c_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:af75f71d1a08b6bc31f979c5af4e07b77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__barre_volumme.html">t_barreVolumme</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="slider_8c.html#af75f71d1a08b6bc31f979c5af4e07b77">CreerBarreVolume</a> (SDL_Rect barre, SDL_Rect curseur, SDL_Color couleur, SDL_Color couleurCurseur, <a class="el" href="structt__fonction_param.html">t_fonctionParam</a> *OnClick)</td></tr>
+<tr class="memdesc:af75f71d1a08b6bc31f979c5af4e07b77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée un nouveau curseur de volume.  <a href="slider_8c.html#af75f71d1a08b6bc31f979c5af4e07b77">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af75f71d1a08b6bc31f979c5af4e07b77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2ecee42a46ae153f803a7d5689a36a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="slider_8c.html#aa2ecee42a46ae153f803a7d5689a36a5">renderBarreVolumme</a> (SDL_Renderer *renderer, <a class="el" href="structt__barre_volumme.html">t_barreVolumme</a> *barre)</td></tr>
+<tr class="memdesc:aa2ecee42a46ae153f803a7d5689a36a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche un curseur de volume.  <a href="slider_8c.html#aa2ecee42a46ae153f803a7d5689a36a5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa2ecee42a46ae153f803a7d5689a36a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29af67b33ed115856fafa8953b577a8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="slider_8c.html#a29af67b33ed115856fafa8953b577a8c">handleInputButtonVolumme</a> (<a class="el" href="structt__input.html">t_input</a> *input, <a class="el" href="structt__barre_volumme.html">t_barreVolumme</a> *barre)</td></tr>
+<tr class="memdesc:a29af67b33ed115856fafa8953b577a8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gère les entrées pour un curseur de volume.  <a href="slider_8c.html#a29af67b33ed115856fafa8953b577a8c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a29af67b33ed115856fafa8953b577a8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b63d1aa95e2303c561f51711a91228e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="slider_8c.html#a2b63d1aa95e2303c561f51711a91228e">freeBv</a> (void *elt)</td></tr>
+<tr class="memdesc:a2b63d1aa95e2303c561f51711a91228e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libère la mémoire utilisée par un curseur.  <a href="slider_8c.html#a2b63d1aa95e2303c561f51711a91228e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a2b63d1aa95e2303c561f51711a91228e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentation des fonctions</h2>
+<a id="af75f71d1a08b6bc31f979c5af4e07b77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af75f71d1a08b6bc31f979c5af4e07b77">&#9670;&nbsp;</a></span>CreerBarreVolume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt__barre_volumme.html">t_barreVolumme</a>* CreerBarreVolume </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Rect&#160;</td>
+          <td class="paramname"><em>barre</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Rect&#160;</td>
+          <td class="paramname"><em>curseur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Color&#160;</td>
+          <td class="paramname"><em>couleur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Color&#160;</td>
+          <td class="paramname"><em>couleurCurseur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__fonction_param.html">t_fonctionParam</a> *&#160;</td>
+          <td class="paramname"><em>OnClick</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crée un nouveau curseur de volume. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">barre</td><td>Rectangle définissant la barre </td></tr>
+    <tr><td class="paramname">curseur</td><td>Rectangle définissant le curseur </td></tr>
+    <tr><td class="paramname">couleur</td><td>Couleur de la barre </td></tr>
+    <tr><td class="paramname">couleurCurseur</td><td>Couleur du curseur </td></tr>
+    <tr><td class="paramname">OnClick</td><td>Fonction à appeler lors d'un changement </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Pointeur vers le curseur créé </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="slider_8c_source.html#l00003">3</a> du fichier <a class="el" href="slider_8c_source.html">slider.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="slider_8c_af75f71d1a08b6bc31f979c5af4e07b77_icgraph.png" border="0" usemap="#aslider_8c_af75f71d1a08b6bc31f979c5af4e07b77_icgraph" alt=""/></div>
+<map name="aslider_8c_af75f71d1a08b6bc31f979c5af4e07b77_icgraph" id="aslider_8c_af75f71d1a08b6bc31f979c5af4e07b77_icgraph">
+<area shape="rect" title="Crée un nouveau curseur de volume." alt="" coords="307,31,448,57"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="108,5,259,32"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="112,56,255,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2b63d1aa95e2303c561f51711a91228e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b63d1aa95e2303c561f51711a91228e">&#9670;&nbsp;</a></span>freeBv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void freeBv </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>elt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Libère la mémoire utilisée par un curseur. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elt</td><td>Pointeur vers le curseur à libérer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="slider_8c_source.html#l00049">49</a> du fichier <a class="el" href="slider_8c_source.html">slider.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="slider_8c_a2b63d1aa95e2303c561f51711a91228e_icgraph.png" border="0" usemap="#aslider_8c_a2b63d1aa95e2303c561f51711a91228e_icgraph" alt=""/></div>
+<map name="aslider_8c_a2b63d1aa95e2303c561f51711a91228e_icgraph" id="aslider_8c_a2b63d1aa95e2303c561f51711a91228e_icgraph">
+<area shape="rect" title="Libère la mémoire utilisée par un curseur." alt="" coords="307,31,372,57"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="108,5,259,32"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="112,56,255,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a29af67b33ed115856fafa8953b577a8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29af67b33ed115856fafa8953b577a8c">&#9670;&nbsp;</a></span>handleInputButtonVolumme()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void handleInputButtonVolumme </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__input.html">t_input</a> *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__barre_volumme.html">t_barreVolumme</a> *&#160;</td>
+          <td class="paramname"><em>barre</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gère les entrées pour un curseur de volume. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>Gestionnaire d'entrées </td></tr>
+    <tr><td class="paramname">barre</td><td>Curseur à manipuler </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="slider_8c_source.html#l00029">29</a> du fichier <a class="el" href="slider_8c_source.html">slider.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="slider_8c_a29af67b33ed115856fafa8953b577a8c_cgraph.png" border="0" usemap="#aslider_8c_a29af67b33ed115856fafa8953b577a8c_cgraph" alt=""/></div>
+<map name="aslider_8c_a29af67b33ed115856fafa8953b577a8c_cgraph" id="aslider_8c_a29af67b33ed115856fafa8953b577a8c_cgraph">
+<area shape="rect" title="Gère les entrées pour un curseur de volume." alt="" coords="5,5,209,32"/>
+<area shape="rect" href="button_8c.html#a279965621a6b64d1a4f58eac1f1a9a14" title="Vérifie si le curseur se trouve à l&#39;intérieur d&#39;un rectangle." alt="" coords="257,5,401,32"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="slider_8c_a29af67b33ed115856fafa8953b577a8c_icgraph.png" border="0" usemap="#aslider_8c_a29af67b33ed115856fafa8953b577a8c_icgraph" alt=""/></div>
+<map name="aslider_8c_a29af67b33ed115856fafa8953b577a8c_icgraph" id="aslider_8c_a29af67b33ed115856fafa8953b577a8c_icgraph">
+<area shape="rect" title="Gère les entrées pour un curseur de volume." alt="" coords="559,31,763,57"/>
+<area shape="rect" href="commun_8c.html#a1975aaa807c02f9cadfd71949d825ea0" title="Wrapper pour la gestion du volume." alt="" coords="307,23,511,65"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="108,5,259,32"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="112,56,255,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa2ecee42a46ae153f803a7d5689a36a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2ecee42a46ae153f803a7d5689a36a5">&#9670;&nbsp;</a></span>renderBarreVolumme()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderBarreVolumme </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__barre_volumme.html">t_barreVolumme</a> *&#160;</td>
+          <td class="paramname"><em>barre</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche un curseur de volume. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>Renderer SDL pour l'affichage </td></tr>
+    <tr><td class="paramname">barre</td><td>Curseur à afficher </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="slider_8c_source.html#l00016">16</a> du fichier <a class="el" href="slider_8c_source.html">slider.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="slider_8c_aa2ecee42a46ae153f803a7d5689a36a5_icgraph.png" border="0" usemap="#aslider_8c_aa2ecee42a46ae153f803a7d5689a36a5_icgraph" alt=""/></div>
+<map name="aslider_8c_aa2ecee42a46ae153f803a7d5689a36a5_icgraph" id="aslider_8c_aa2ecee42a46ae153f803a7d5689a36a5_icgraph">
+<area shape="rect" title="Affiche un curseur de volume." alt="" coords="571,31,732,57"/>
+<area shape="rect" href="commun_8c.html#a4435d134f7d84d3e13b3cd0a531d62cd" title="Wrapper pour le rendu de la barre de volume." alt="" coords="307,31,523,57"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="108,5,259,32"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="112,56,255,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

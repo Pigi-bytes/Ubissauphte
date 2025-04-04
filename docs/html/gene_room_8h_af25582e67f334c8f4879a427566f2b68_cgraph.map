@@ -1,0 +1,9 @@
+<map id="placerSortie" name="placerSortie">
+<area shape="rect" id="node1" title="Place la sortie dans la salle." alt="" coords="5,31,105,57"/>
+<area shape="rect" id="node2" href="$liste_block_8c.html#ae2648a0e73e7ec24142118d88e25c6e2" title="Récupère la liste des blocs d&#39;un type spécifique." alt="" coords="153,5,251,32"/>
+<area shape="rect" id="node3" href="$gene_room_8c.html#ade4f891d88036489d3477f266cdbac81" title="Crée des ouvertures dans la grille." alt="" coords="154,56,250,83"/>
+<area shape="rect" id="node4" href="$liste_block_8c.html#a30db6937fc6a2badca7e728d810f6960" title="Trouve un bloc par son nom." alt="" coords="299,5,412,32"/>
+<area shape="rect" id="node5" href="$liste_block_8c.html#a9aa0642bbe5cd64582544bb08f6bf391" title="Copie les valeurs d&#39;un bloc vers un autre." alt="" coords="314,56,397,83"/>
+<area shape="rect" id="node6" href="$gene_room_8c.html#aead906ad6b8df812764bf423e1837fa4" title="Vérifie si une case est ouverte." alt="" coords="312,107,399,133"/>
+<area shape="rect" id="node7" href="$group__type__case__constants.html#gaa0ac9a00d6c9397011a34628c13bb902" title="Vérifie si une case existe." alt="" coords="460,107,523,133"/>
+</map>

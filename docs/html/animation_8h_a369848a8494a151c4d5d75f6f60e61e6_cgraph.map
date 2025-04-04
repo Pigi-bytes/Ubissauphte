@@ -1,0 +1,4 @@
+<map id="getCurrentAnimation" name="getCurrentAnimation">
+<area shape="rect" id="node1" title="Récupère l&#39;animation active." alt="" coords="5,5,164,32"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="212,5,297,32"/>
+</map>

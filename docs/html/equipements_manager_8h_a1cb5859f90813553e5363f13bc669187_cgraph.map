@@ -1,0 +1,8 @@
+<map id="ajoutVie" name="ajoutVie">
+<area shape="rect" id="node1" title="Fonction de soin." alt="" coords="5,81,81,108"/>
+<area shape="rect" id="node2" href="$equipements_manager_8c.html#a5f21545bda1f1285fa46e8c5245bc53f" title="Déséquipe un item." alt="" coords="129,56,301,83"/>
+<area shape="rect" id="node5" href="$equipements_manager_8c.html#aeb66c8d0b70efa9056e84b0e77331878" title="Trouve une pile d&#39;items dans l&#39;inventaire." alt="" coords="140,107,291,133"/>
+<area shape="rect" id="node3" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="400,5,500,32"/>
+<area shape="rect" id="node4" href="$equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="349,56,551,83"/>
+<area shape="rect" id="node6" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="407,107,493,133"/>
+</map>

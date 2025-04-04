@@ -1,0 +1,8 @@
+<map id="inventaireAjoutObjet" name="inventaireAjoutObjet">
+<area shape="rect" id="node1" title="Ajoute un objet à l&#39;inventaire." alt="" coords="5,81,163,108"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="242,5,330,32"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="215,56,357,83"/>
+<area shape="rect" id="node4" href="$equipements_manager_8c.html#a0a7ab9c085d79cdb4ab665c5d7095e8a" title="Vérifie si un item possède un flag donné" alt="" coords="249,107,323,133"/>
+<area shape="rect" id="node5" href="$equipements_manager_8c.html#aeb66c8d0b70efa9056e84b0e77331878" title="Trouve une pile d&#39;items dans l&#39;inventaire." alt="" coords="211,157,361,184"/>
+<area shape="rect" id="node6" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="409,157,495,184"/>
+</map>

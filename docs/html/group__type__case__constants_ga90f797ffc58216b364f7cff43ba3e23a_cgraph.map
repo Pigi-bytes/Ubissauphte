@@ -1,0 +1,7 @@
+<map id="intToGrilleNiveau" name="intToGrilleNiveau">
+<area shape="rect" id="node1" title="Convertit une matrice d&#39;entiers en grille." alt="" coords="5,56,140,83"/>
+<area shape="rect" id="node2" href="$group__type__case__constants.html#ga2b120790d7e25547b735afe2a069367f" title="Initialise une nouvelle case." alt="" coords="218,5,293,32"/>
+<area shape="rect" id="node3" href="$group__type__case__constants.html#ga6e4aa5870831bf3b631ed8cd25c458ae" title="Initialise une nouvelle grille." alt="" coords="216,56,295,83"/>
+<area shape="rect" id="node4" href="$group__type__case__constants.html#gae5c605b887cfd15cb299a18ae25a4ce9" title="Stocke les voisins d&#39;une case." alt="" coords="188,107,323,133"/>
+<area shape="rect" id="node5" href="$group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d" title="Vérifie si des coordonnées sont dans la matrice." alt="" coords="371,107,453,133"/>
+</map>

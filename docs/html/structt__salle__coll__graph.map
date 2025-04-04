@@ -1,0 +1,12 @@
+<map id="t_salle" name="t_salle">
+<area shape="rect" id="node1" title=" " alt="" coords="302,468,367,495"/>
+<area shape="rect" id="node2" href="$structt__scene.html" title="Représente une scène composée d&#39;objets." alt="" coords="75,95,147,121"/>
+<area shape="rect" id="node7" href="$structs__entity.html" title="Structure de base pour toutes les entités du jeu." alt="" coords="297,184,372,211"/>
+<area shape="rect" id="node3" href="$structt__fonction_param.html" title="Structure contenant les informations d&#39;une fonction." alt="" coords="5,5,133,32"/>
+<area shape="rect" id="node4" href="$structt__object_manager.html" title="Gestionnaire des objets." alt="" coords="232,5,363,32"/>
+<area shape="rect" id="node9" href="$structt__animation_controller.html" title="Gère plusieurs animations pour une entité" alt="" coords="194,95,358,121"/>
+<area shape="rect" id="node5" href="$structs__grid.html" title="Représente une grille 3D de tuiles pour un niveau." alt="" coords="304,363,365,389"/>
+<area shape="rect" id="node6" href="$structt__tile.html" title="Représente une tuile individuelle dans la grille." alt="" coords="307,273,362,300"/>
+<area shape="rect" id="node8" href="$structt__physics.html" title="Composant de physique pour les entités." alt="" coords="500,95,583,121"/>
+<area shape="rect" id="node10" href="$structt__circle.html" title="Représente un cercle pour les collisions circulaires." alt="" coords="383,95,452,121"/>
+</map>

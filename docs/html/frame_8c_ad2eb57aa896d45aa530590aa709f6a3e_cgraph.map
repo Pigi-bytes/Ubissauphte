@@ -1,0 +1,4 @@
+<map id="startFrame" name="startFrame">
+<area shape="rect" id="node1" title="Démarre le calcul d&#39;une nouvelle frame." alt="" coords="5,5,99,32"/>
+<area shape="rect" id="node2" href="$timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="147,5,224,32"/>
+</map>

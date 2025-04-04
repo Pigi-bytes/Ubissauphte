@@ -1,0 +1,12 @@
+<map id="rendreMatriceContinue" name="rendreMatriceContinue">
+<area shape="rect" id="node1" title="Rend la matrice continue (remplit les trous)" alt="" coords="5,183,176,209"/>
+<area shape="rect" id="node2" href="$fill_gaps_8c.html#ad596dbc553295de831175f5c1ab09076" title="Comble un trou spécifique dans la matrice." alt="" coords="230,5,333,32"/>
+<area shape="rect" id="node4" href="$fill_gaps_8c.html#ab534f0ff1bfc2267e02515eefe0b0b3a" title="Dépile un point." alt="" coords="248,56,315,83"/>
+<area shape="rect" id="node5" href="$fill_gaps_8c.html#ac9164d43328199ab244e66bf4f217d24" title="Vérifie si la pile est vide." alt="" coords="440,81,515,108"/>
+<area shape="rect" id="node6" href="$fill_gaps_8c.html#a85ff82fe0360dd76cc5bb567a84c3224" title="Empile un point." alt="" coords="245,157,317,184"/>
+<area shape="rect" id="node7" href="$fill_gaps_8c.html#a574d5a5c2fea98b97c0311bef0cd8905" title="Libère une matrice d&#39;entiers." alt="" coords="224,208,339,235"/>
+<area shape="rect" id="node8" href="$fill_gaps_8c.html#a5a1632c9a205c9605994d786b4d227d6" title="Initialise la pile globale." alt="" coords="248,259,315,285"/>
+<area shape="rect" id="node9" href="$group__type__case__constants.html#ga5524b2cf41074c73bc35a26fd830f12d" title="Vérifie si des coordonnées sont dans la matrice." alt="" coords="240,309,323,336"/>
+<area shape="rect" id="node10" href="$fill_gaps_8c.html#abac0aff8baf12fdd0a38c56baa2222cc" title="Vérifie si une matrice ne contient pas de 0." alt="" coords="226,360,337,387"/>
+<area shape="rect" id="node3" href="$fill_gaps_8c.html#a6bcb16c6349f23b1aa0b77c1ed2fb0a9" title="Compte les éléments dans un bloc continu." alt="" coords="387,5,568,32"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="viderPile" name="viderPile">
+<area shape="rect" id="node1" title="Vide complètement la pile." alt="" coords="5,31,84,57"/>
+<area shape="rect" id="node2" href="$fill_gaps_8c.html#ab534f0ff1bfc2267e02515eefe0b0b3a" title="Dépile un point." alt="" coords="132,5,199,32"/>
+<area shape="rect" id="node3" href="$fill_gaps_8c.html#ac9164d43328199ab244e66bf4f217d24" title="Vérifie si la pile est vide." alt="" coords="247,31,321,57"/>
+</map>

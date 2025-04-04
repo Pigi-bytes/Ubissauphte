@@ -1,0 +1,4 @@
+<map id="handleInputButtonVolumme" name="handleInputButtonVolumme">
+<area shape="rect" id="node1" title="Gère les entrées pour un curseur de volume." alt="" coords="5,5,209,32"/>
+<area shape="rect" id="node2" href="$button_8c.html#a279965621a6b64d1a4f58eac1f1a9a14" title="Vérifie si le curseur se trouve à l&#39;intérieur d&#39;un rectangle." alt="" coords="257,5,401,32"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="equiperEquipement" name="equiperEquipement">
+<area shape="rect" id="node1" title="Équipe un item depuis l&#39;inventaire." alt="" coords="5,56,155,83"/>
+<area shape="rect" id="node2" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="253,5,353,32"/>
+<area shape="rect" id="node3" href="$equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="203,56,404,83"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="261,107,346,133"/>
+</map>

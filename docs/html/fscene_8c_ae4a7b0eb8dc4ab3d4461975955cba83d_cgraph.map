@@ -1,0 +1,9 @@
+<map id="initSceneController" name="initSceneController">
+<area shape="rect" id="node1" title="Initialise un nouveau contrôleur de scènes." alt="" coords="5,81,152,108"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="200,5,347,32"/>
+<area shape="rect" id="node3" href="$fscene_8c.html#a69ac741c95a278f52722cfe8213661e8" title="Libère une scène." alt="" coords="230,56,317,83"/>
+<area shape="rect" id="node6" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="202,107,345,133"/>
+<area shape="rect" id="node7" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="222,157,325,184"/>
+<area shape="rect" id="node4" href="$fonction_manager_8c.html#aa61a39c82b2044678dea685d75cdd8a9" title="Libere la mémoire d&#39;une fonctionParametrable." alt="" coords="417,31,519,57"/>
+<area shape="rect" id="node5" href="$object_manager_8c.html#aa17aa9d46c431f4b91114108468b73f3" title="Libere toute la memoire du gestionnaire et ses objets." alt="" coords="395,81,541,108"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="sceneAddObject" name="sceneAddObject">
+<area shape="rect" id="node1" title="Ajoute un objet à une scène avec enregistrement automatique." alt="" coords="5,5,132,32"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="180,5,268,32"/>
+</map>

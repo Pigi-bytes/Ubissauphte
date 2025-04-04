@@ -1,0 +1,17 @@
+<map id="renderButton" name="renderButton">
+<area shape="rect" id="node1" title="Affiche un bouton à l&#39;écran." alt="" coords="784,208,891,235"/>
+<area shape="rect" id="node2" href="$affichage_8c.html#a37a0b209c2ead72efaf0ae0c98c4af2c" title="Effectue le rendu de l&#39;interface." alt="" coords="585,119,736,145"/>
+<area shape="rect" id="node6" href="$commun_8c.html#aa7943250e7e111ee38f3a8b0e3be002f" title="Wrapper pour le rendu des boutons UI." alt="" coords="353,208,515,235"/>
+<area shape="rect" id="node14" href="$touche_8c.html#aca735160ae65c1cae3a84690a11373ed" title="Affiche une touche à l&#39;écran." alt="" coords="606,284,715,311"/>
+<area shape="rect" id="node3" href="$commun_8c.html#a1ada1938c96f85c840f6c4ef88aca8b6" title="Wrapper pour le rendu de l&#39;UI d&#39;inventaire." alt="" coords="331,81,537,108"/>
+<area shape="rect" id="node4" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="138,5,253,32"/>
+<area shape="rect" id="node5" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,183,60,209"/>
+<area shape="rect" id="node7" href="$commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,259,283,285"/>
+<area shape="rect" id="node8" href="$fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,56,257,83"/>
+<area shape="rect" id="node9" href="$game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,107,263,133"/>
+<area shape="rect" id="node10" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,157,261,184"/>
+<area shape="rect" id="node11" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,309,271,336"/>
+<area shape="rect" id="node12" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,360,267,387"/>
+<area shape="rect" id="node13" href="$win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,208,241,235"/>
+<area shape="rect" id="node15" href="$commun_8c.html#a6f136ac659e6de6d72e1bf97e2e78ac6" title="Wrapper pour le rendu des contrôles affichés." alt="" coords="352,284,516,311"/>
+</map>

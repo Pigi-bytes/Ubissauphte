@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon:  Fichier source de Ubissauphte/src/ui/minimap.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_cbea5643ac5778c201b251489fa6a373.html">ui</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">minimap.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="minimap_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef MINIMAP_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define MINIMAP_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;../engine/core/camera.h&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;../engine/entities/enemy.h&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;../engine/entities/player.h&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;../engine/entities/tiles.h&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;../engine/entities/tilesEntity.h&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="minimap_8h.html#a62ecd70800687eb2d625af180c4210d7">   17</a></span>&#160;<span class="preprocessor">#define TILE_SIZE 16</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="minimap_8h.html#a0c6924741c71ffd61435b740c19918f4">   23</a></span>&#160;<span class="preprocessor">#define MINIMAP_SIZE 200</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="minimap_8h.html#a5a5427fda4e5d833a63c281a297e7b73">   29</a></span>&#160;<span class="preprocessor">#define MINIMAP_MARGIN 10</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structt__minimap.html">   35</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="structt__minimap.html#a859b8efbf9abe8e82757ee5c75a0c97c">   36</a></span>&#160;    SDL_Texture* <a class="code" href="structt__minimap.html#a859b8efbf9abe8e82757ee5c75a0c97c">texture</a>;  </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="structt__minimap.html#a439227feff9d7f55384e8780cfc2eb82">   37</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structt__minimap.html#a439227feff9d7f55384e8780cfc2eb82">size</a>;              </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="structt__minimap.html#a863a6ce49a581dba9da9e7def06f2e1c">   38</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structt__minimap.html#a863a6ce49a581dba9da9e7def06f2e1c">margin</a>;            </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="structt__minimap.html#a1dfd8e548927f88b995edc1946c310b1">   39</a></span>&#160;    SDL_Rect <a class="code" href="structt__minimap.html#a1dfd8e548927f88b995edc1946c310b1">area</a>;         </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;} <a class="code" href="structt__minimap.html">t_minimap</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<a class="code" href="structt__minimap.html">t_minimap</a>* <a class="code" href="minimap_8h.html#a01a246976ef77cc09305d689ad93a829">createMinimap</a>(SDL_Renderer* renderer, <span class="keywordtype">int</span> windowW, <span class="keywordtype">int</span> windowH);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> <a class="code" href="minimap_8h.html#af89eb2c1015a83f78a092dc9f7acb521">updateMinimap</a>(<a class="code" href="structt__minimap.html">t_minimap</a>* minimap, <a class="code" href="structt__camera.html">t_camera</a>* camera, SDL_Renderer* renderer, <a class="code" href="structt__object_manager.html">t_objectManager</a>* entities, <a class="code" href="structs__grid.html">t_grid</a>* grid);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">void</span> <a class="code" href="minimap_8h.html#ac0f6da31e9e7a76db6cd9b9fef9a9934">renderMinimap</a>(SDL_Renderer* renderer, <a class="code" href="structt__minimap.html">t_minimap</a>* minimap);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keywordtype">void</span> <a class="code" href="minimap_8h.html#a4c26549b8031ed61c1a6b718b027f1e2">freeMinimap</a>(<span class="keywordtype">void</span>* <span class="keywordtype">object</span>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">void</span> <a class="code" href="minimap_8h.html#a07a4de1e34b72f09cb917156d0341379">resizeMinimap</a>(SDL_Renderer* renderer, <a class="code" href="structt__minimap.html">t_minimap</a>* minimap, <span class="keywordtype">int</span>* windowW, <span class="keywordtype">int</span>* windowH);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aminimap_8h_html_a01a246976ef77cc09305d689ad93a829"><div class="ttname"><a href="minimap_8h.html#a01a246976ef77cc09305d689ad93a829">createMinimap</a></div><div class="ttdeci">t_minimap * createMinimap(SDL_Renderer *renderer, int windowW, int windowH)</div><div class="ttdoc">Crée et initialise une nouvelle minimap.</div><div class="ttdef"><b>Definition:</b> <a href="minimap_8c_source.html#l00003">minimap.c:3</a></div></div>
+<div class="ttc" id="aminimap_8h_html_a07a4de1e34b72f09cb917156d0341379"><div class="ttname"><a href="minimap_8h.html#a07a4de1e34b72f09cb917156d0341379">resizeMinimap</a></div><div class="ttdeci">void resizeMinimap(SDL_Renderer *renderer, t_minimap *minimap, int *windowW, int *windowH)</div><div class="ttdoc">Change la position de la minimap selon la taille de l'eccran.</div><div class="ttdef"><b>Definition:</b> <a href="minimap_8c_source.html#l00033">minimap.c:33</a></div></div>
+<div class="ttc" id="aminimap_8h_html_a4c26549b8031ed61c1a6b718b027f1e2"><div class="ttname"><a href="minimap_8h.html#a4c26549b8031ed61c1a6b718b027f1e2">freeMinimap</a></div><div class="ttdeci">void freeMinimap(void *object)</div><div class="ttdoc">Libere la mémoire allouée pour la minimap.</div><div class="ttdef"><b>Definition:</b> <a href="minimap_8c_source.html#l00158">minimap.c:158</a></div></div>
+<div class="ttc" id="aminimap_8h_html_ac0f6da31e9e7a76db6cd9b9fef9a9934"><div class="ttname"><a href="minimap_8h.html#ac0f6da31e9e7a76db6cd9b9fef9a9934">renderMinimap</a></div><div class="ttdeci">void renderMinimap(SDL_Renderer *renderer, t_minimap *minimap)</div><div class="ttdoc">Dessine la minimap a l'écran.</div><div class="ttdef"><b>Definition:</b> <a href="minimap_8c_source.html#l00154">minimap.c:154</a></div></div>
+<div class="ttc" id="aminimap_8h_html_af89eb2c1015a83f78a092dc9f7acb521"><div class="ttname"><a href="minimap_8h.html#af89eb2c1015a83f78a092dc9f7acb521">updateMinimap</a></div><div class="ttdeci">void updateMinimap(t_minimap *minimap, t_camera *camera, SDL_Renderer *renderer, t_objectManager *entities, t_grid *grid)</div><div class="ttdoc">Met a jour le contenu de la minimap.</div><div class="ttdef"><b>Definition:</b> <a href="minimap_8c_source.html#l00042">minimap.c:42</a></div></div>
+<div class="ttc" id="astructs__grid_html"><div class="ttname"><a href="structs__grid.html">s_grid</a></div><div class="ttdoc">Représente une grille 3D de tuiles pour un niveau.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8h_source.html#l00038">tiles.h:38</a></div></div>
+<div class="ttc" id="astructt__camera_html"><div class="ttname"><a href="structt__camera.html">t_camera</a></div><div class="ttdoc">Représente une caméra 2D pour naviguer dans un niveau.</div><div class="ttdef"><b>Definition:</b> <a href="camera_8h_source.html#l00022">camera.h:22</a></div></div>
+<div class="ttc" id="astructt__minimap_html"><div class="ttname"><a href="structt__minimap.html">t_minimap</a></div><div class="ttdoc">Structure contenant tous les éléments relatifs a la minimap.</div><div class="ttdef"><b>Definition:</b> <a href="minimap_8h_source.html#l00035">minimap.h:35</a></div></div>
+<div class="ttc" id="astructt__minimap_html_a1dfd8e548927f88b995edc1946c310b1"><div class="ttname"><a href="structt__minimap.html#a1dfd8e548927f88b995edc1946c310b1">t_minimap::area</a></div><div class="ttdeci">SDL_Rect area</div><div class="ttdoc">Rectangle d'affichage (position ET taille)</div><div class="ttdef"><b>Definition:</b> <a href="minimap_8h_source.html#l00039">minimap.h:39</a></div></div>
+<div class="ttc" id="astructt__minimap_html_a439227feff9d7f55384e8780cfc2eb82"><div class="ttname"><a href="structt__minimap.html#a439227feff9d7f55384e8780cfc2eb82">t_minimap::size</a></div><div class="ttdeci">int size</div><div class="ttdoc">Taille d'un de la minimap (doit être carrée)</div><div class="ttdef"><b>Definition:</b> <a href="minimap_8h_source.html#l00037">minimap.h:37</a></div></div>
+<div class="ttc" id="astructt__minimap_html_a859b8efbf9abe8e82757ee5c75a0c97c"><div class="ttname"><a href="structt__minimap.html#a859b8efbf9abe8e82757ee5c75a0c97c">t_minimap::texture</a></div><div class="ttdeci">SDL_Texture * texture</div><div class="ttdoc">Texture SDL rendue de la minimap.</div><div class="ttdef"><b>Definition:</b> <a href="minimap_8h_source.html#l00036">minimap.h:36</a></div></div>
+<div class="ttc" id="astructt__minimap_html_a863a6ce49a581dba9da9e7def06f2e1c"><div class="ttname"><a href="structt__minimap.html#a863a6ce49a581dba9da9e7def06f2e1c">t_minimap::margin</a></div><div class="ttdeci">int margin</div><div class="ttdoc">Marge avec les bords de l'écran.</div><div class="ttdef"><b>Definition:</b> <a href="minimap_8h_source.html#l00038">minimap.h:38</a></div></div>
+<div class="ttc" id="astructt__object_manager_html"><div class="ttname"><a href="structt__object_manager.html">t_objectManager</a></div><div class="ttdoc">Gestionnaire des objets.</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

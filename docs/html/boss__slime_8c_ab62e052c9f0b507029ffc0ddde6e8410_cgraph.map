@@ -1,0 +1,15 @@
+<map id="handleDesperateState" name="handleDesperateState">
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,172,133"/>
+<area shape="rect" id="node2" href="$timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="228,5,344,32"/>
+<area shape="rect" id="node3" href="$boss__slime_8c.html#a087265293c2643217f2577a96c177825" title=" " alt="" coords="220,56,352,83"/>
+<area shape="rect" id="node7" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="440,81,568,108"/>
+<area shape="rect" id="node8" href="$animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="231,157,341,184"/>
+<area shape="rect" id="node13" href="$timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="223,208,349,235"/>
+<area shape="rect" id="node4" href="$particules_8c.html#a7f1ed5ab81fd8ccf63bf08dd9e90f0b3" title="Émet des particules de mouvement pour un boss." alt="" coords="400,31,608,57"/>
+<area shape="rect" id="node5" href="$particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="656,5,807,32"/>
+<area shape="rect" id="node6" href="$particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="671,56,792,83"/>
+<area shape="rect" id="node9" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="461,132,547,159"/>
+<area shape="rect" id="node10" href="$animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="445,183,563,209"/>
+<area shape="rect" id="node12" href="$animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="445,233,563,260"/>
+<area shape="rect" id="node11" href="$timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="686,183,777,209"/>
+</map>

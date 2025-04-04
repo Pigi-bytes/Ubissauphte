@@ -1,0 +1,8 @@
+<map id="sceneRemoveObject" name="sceneRemoveObject">
+<area shape="rect" id="node1" title="Supprime un objet d&#39;une scène." alt="" coords="5,56,161,83"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9" title="Supprime un objet du gestionnaire à l&#39;index spécifié" alt="" coords="219,56,324,83"/>
+<area shape="rect" id="node5" href="$fscene_8c.html#a8be677f8994885ab5fa62328e5e580da" title="Trouve l&#39;index d&#39;un objet dans son gestionnaire." alt="" coords="209,5,333,32"/>
+<area shape="rect" id="node6" href="$fonction_manager_8c.html#aa61a39c82b2044678dea685d75cdd8a9" title="Libere la mémoire d&#39;une fonctionParametrable." alt="" coords="220,107,323,133"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="402,5,487,32"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="381,56,508,83"/>
+</map>

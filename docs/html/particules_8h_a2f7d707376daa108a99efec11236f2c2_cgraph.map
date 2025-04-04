@@ -1,0 +1,5 @@
+<map id="emitLandingParticles" name="emitLandingParticles">
+<area shape="rect" id="node1" title="Émet des particules d&#39;atterrissage." alt="" coords="5,31,164,57"/>
+<area shape="rect" id="node2" href="$particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="212,5,363,32"/>
+<area shape="rect" id="node3" href="$particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="227,56,348,83"/>
+</map>

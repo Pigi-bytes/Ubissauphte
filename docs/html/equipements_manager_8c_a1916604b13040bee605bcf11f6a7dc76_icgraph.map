@@ -1,0 +1,4 @@
+<map id="inventory_print" name="inventory_print">
+<area shape="rect" id="node1" title="Affiche le contenu de l&#39;inventaire." alt="" coords="183,5,304,32"/>
+<area shape="rect" id="node2" href="$equipements_manager_8c.html#ac2029164800cd4fe890b1fa0bf24fc83" title="Affiche l&#39;équipement." alt="" coords="5,5,135,32"/>
+</map>

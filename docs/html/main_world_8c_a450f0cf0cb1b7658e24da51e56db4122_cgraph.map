@@ -1,0 +1,11 @@
+<map id="recreateLevel" name="recreateLevel">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,116,83"/>
+<area shape="rect" id="node2" href="$genmap_8c.html#a4a5b22ca28851f21ea1a9ff1f1e43702" title=" " alt="" coords="194,5,277,32"/>
+<area shape="rect" id="node3" href="$fscene_8c.html#aaf87e3d204392bd39aa8e399744406eb" title="Libère une scène par son nom." alt="" coords="164,56,307,83"/>
+<area shape="rect" id="node7" href="$fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="195,107,276,133"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9" title="Supprime un objet du gestionnaire à l&#39;index spécifié" alt="" coords="389,5,495,32"/>
+<area shape="rect" id="node5" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="598,56,683,83"/>
+<area shape="rect" id="node6" href="$object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="577,5,704,32"/>
+<area shape="rect" id="node8" href="$fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="355,157,529,184"/>
+<area shape="rect" id="node9" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="591,157,691,184"/>
+</map>

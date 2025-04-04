@@ -1,0 +1,15 @@
+<map id="loadFont" name="loadFont">
+<area shape="rect" id="node1" title="Charge une police depuis un fichier avec une taille spécifiée." alt="" coords="1156,107,1235,133"/>
+<area shape="rect" id="node2" href="$main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="971,5,1093,32"/>
+<area shape="rect" id="node7" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,157,60,184"/>
+<area shape="rect" id="node8" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="968,56,1096,83"/>
+<area shape="rect" id="node9" href="$main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="956,107,1108,133"/>
+<area shape="rect" id="node10" href="$affichage_8c.html#ab52cfc1609e782c407e667fde05707e3" title="Initialise ou met à jour l&#39;interface d&#39;inventaire." alt="" coords="969,208,1095,235"/>
+<area shape="rect" id="node3" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="776,63,888,89"/>
+<area shape="rect" id="node4" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="549,75,660,101"/>
+<area shape="rect" id="node5" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,81,453,108"/>
+<area shape="rect" id="node6" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,93,239,120"/>
+<area shape="rect" id="node11" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="313,208,427,235"/>
+<area shape="rect" id="node12" href="$affichage_8c.html#acac6e41a22a08962af5736bb23e8026e" title="Met à jour la logique de l&#39;interface." alt="" coords="756,259,908,285"/>
+<area shape="rect" id="node13" href="$commun_8c.html#abc60ca3fcbf54c897b7cea3dedde3150" title="Wrapper pour la mise à jour de l&#39;UI d&#39;inventaire." alt="" coords="501,259,708,285"/>
+</map>

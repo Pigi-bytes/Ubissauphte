@@ -1,0 +1,5 @@
+<map id="equipment_print" name="equipment_print">
+<area shape="rect" id="node1" title="Affiche l&#39;équipement." alt="" coords="5,5,135,32"/>
+<area shape="rect" id="node2" href="$equipements_manager_8c.html#a1916604b13040bee605bcf11f6a7dc76" title="Affiche le contenu de l&#39;inventaire." alt="" coords="183,5,304,32"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="352,5,437,32"/>
+</map>

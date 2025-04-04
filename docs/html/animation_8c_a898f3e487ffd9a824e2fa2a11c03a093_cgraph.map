@@ -1,0 +1,6 @@
+<map id="initAnimationController" name="initAnimationController">
+<area shape="rect" id="node1" title="Initialise un contrôleur d&#39;animations." alt="" coords="5,56,180,83"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="228,5,375,32"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="230,56,373,83"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="250,107,353,133"/>
+</map>

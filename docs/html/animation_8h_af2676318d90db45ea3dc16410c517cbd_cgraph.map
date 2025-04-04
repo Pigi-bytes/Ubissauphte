@@ -1,0 +1,4 @@
+<map id="startAnimation" name="startAnimation">
+<area shape="rect" id="node1" title="Démarre une animation." alt="" coords="5,5,124,32"/>
+<area shape="rect" id="node2" href="$timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="172,5,263,32"/>
+</map>

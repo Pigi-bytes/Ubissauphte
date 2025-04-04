@@ -1,0 +1,12 @@
+<map id="updateAttack" name="updateAttack">
+<area shape="rect" id="node1" title=" " alt="" coords="5,157,115,184"/>
+<area shape="rect" id="node2" href="$physics_8c.html#a7bdb858968c7b571e6577d1a30af9888" title="Vérifie si un cercle est dans un secteur angulaire." alt="" coords="195,5,309,32"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="209,56,295,83"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="189,107,315,133"/>
+<area shape="rect" id="node5" href="$object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="181,157,323,184"/>
+<area shape="rect" id="node6" href="$core_8c.html#af285790c31a2afabd9332560b8249f5e" title="Interpole linéairement entre deux angles." alt="" coords="210,208,294,235"/>
+<area shape="rect" id="node7" href="$core_8c.html#a94ac75d81eceed79e81da71bcb7dbda7" title="Applique une fonction de lissage à une valeur." alt="" coords="199,259,305,285"/>
+<area shape="rect" id="node8" href="$enemy_8c.html#ae756d207dddebceef48dfd1ad481cf4e" title="Applique des dégâts à un ennemi." alt="" coords="163,309,341,336"/>
+<area shape="rect" id="node9" href="$health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="389,309,503,336"/>
+<area shape="rect" id="node10" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="551,309,679,336"/>
+</map>

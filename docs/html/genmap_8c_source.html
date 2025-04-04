@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon:  Fichier source de Ubissauphte/src/engine/world/genmap.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_2826858af9faa5fe77c775e96e0e1227.html">engine</a></li><li class="navelem"><a class="el" href="dir_ead93a21b55928290f9cdbe2a28bde81.html">world</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">genmap.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="genmap_8c.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="genmap_8h.html">genmap.h</a>&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="genmap_8c.html#ac50fbce591c797fbf374390298a701e0">    3</a></span>&#160;<a class="code" href="structt__salle.html">t_salle</a>* <a class="code" href="genmap_8c.html#ac50fbce591c797fbf374390298a701e0">initRoom</a>() {</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    <a class="code" href="structt__salle.html">t_salle</a>* room = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structt__salle.html">t_salle</a>));</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="keywordflow">if</span> (room == NULL) {</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;ERREUR MALLOC dans initRoom()\n&quot;</span>);</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    }</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    room-&gt;<a class="code" href="structt__salle.html#af180e926633cde08a05ccbc3af397ee4">ID</a> = 0;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    room-&gt;<a class="code" href="structt__salle.html#a180251ec42e29f08470dff06073165ef">droite</a> = NULL;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    room-&gt;<a class="code" href="structt__salle.html#aba2532247d0d9d896017547e182fb74e">gauche</a> = NULL;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    room-&gt;<a class="code" href="structt__salle.html#a470d65ae6598facaeacfc8115ab0b298">haut</a> = NULL;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    room-&gt;<a class="code" href="structt__salle.html#aa09dc6e953cc457ceb9692a39b087af6">bas</a> = NULL;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordflow">return</span> room;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="genmap_8c.html#a782542f234d59803605c4d24d7cc48a9">   19</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="genmap_8c.html#a782542f234d59803605c4d24d7cc48a9">connectRoom</a>(<a class="code" href="structt__salle.html">t_salle</a>* origineRoom, <a class="code" href="structt__salle.html">t_salle</a>* destinationRoom, <span class="keywordtype">int</span> dir) {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">// Liste opposées des directions pour avoir une connection</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="structt__salle.html">t_salle</a>** doorOrigin[4] = {&amp;origineRoom-&gt;<a class="code" href="structt__salle.html#a180251ec42e29f08470dff06073165ef">droite</a>, &amp;origineRoom-&gt;<a class="code" href="structt__salle.html#aba2532247d0d9d896017547e182fb74e">gauche</a>, &amp;origineRoom-&gt;<a class="code" href="structt__salle.html#a470d65ae6598facaeacfc8115ab0b298">haut</a>, &amp;origineRoom-&gt;<a class="code" href="structt__salle.html#aa09dc6e953cc457ceb9692a39b087af6">bas</a>};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="structt__salle.html">t_salle</a>** doorDestination[4] = {&amp;destinationRoom-&gt;<a class="code" href="structt__salle.html#aba2532247d0d9d896017547e182fb74e">gauche</a>, &amp;destinationRoom-&gt;<a class="code" href="structt__salle.html#a180251ec42e29f08470dff06073165ef">droite</a>, &amp;destinationRoom-&gt;<a class="code" href="structt__salle.html#aa09dc6e953cc457ceb9692a39b087af6">bas</a>, &amp;destinationRoom-&gt;<a class="code" href="structt__salle.html#a470d65ae6598facaeacfc8115ab0b298">haut</a>};</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    *doorOrigin[dir] = destinationRoom;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    *doorDestination[dir] = origineRoom;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="genmap_8c.html#a8cc62c2ec750666aff9cbdac83f72102">   28</a></span>&#160;<a class="code" href="structt__salle.html">t_salle</a>** <a class="code" href="genmap_8c.html#a8cc62c2ec750666aff9cbdac83f72102">genMap</a>(<span class="keywordtype">int</span> numberRoom, SDL_Rect* roomCoords) {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">int</span> seed = time(NULL);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    srand(seed);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    printf(<span class="stringliteral">&quot;Seed : %d\n&quot;</span>, seed);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">if</span> (numberRoom &lt; 3) {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        printf(<span class="stringliteral">&quot;Besoin d&#39;au moins 3 salles.&quot;</span>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="structt__salle.html">t_salle</a>** roomList = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structt__salle.html">t_salle</a>*) * numberRoom);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    roomList[0] = <a class="code" href="genmap_8c.html#ac50fbce591c797fbf374390298a701e0">initRoom</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    roomList[0]-&gt;<a class="code" href="structt__salle.html#af180e926633cde08a05ccbc3af397ee4">ID</a> = 0;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    roomCoords[0] = (SDL_Rect){0, 0, 0, 0};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">// Offsets de coord par direction (Droite gauche haut bas)</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">int</span> coordsX[4] = {1, -1, 0, 0};  <span class="comment">// Deplacement horizontaux</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">int</span> coordsY[4] = {0, 0, -1, 1};  <span class="comment">// Deplacement verticaux</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; numberRoom - 2; i++) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="structt__salle.html">t_salle</a>* newRoom = NULL;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="comment">// Selection d&#39;une salle aléatoire dans la liste</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordtype">int</span> randomRoomIndex = rand() % i;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <a class="code" href="structt__salle.html">t_salle</a>* currentRoom = roomList[randomRoomIndex];</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="comment">// On va analyser les 4 directions.</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="comment">// Une direction est libre si le pointeur est NULL</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordtype">int</span> directionPossible[4];</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordtype">int</span> directionTester = 0;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> dir = 0; dir &lt; 4; dir++) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="comment">// Conversion implicite :</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="comment">// currentRoom-&gt;droite = ((t_salle**)currentRoom)[0]</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                <span class="comment">// currentRoom-&gt;gauche = ((t_salle**)currentRoom)[1]</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="comment">// ...</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="keywordflow">if</span> (!*((<a class="code" href="structt__salle.html">t_salle</a>**)currentRoom + dir)) {  <span class="comment">// Check pointeur NULL</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    directionPossible[directionTester++] = dir;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="comment">// Si au moins une des 4 direction est libre</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="keywordflow">if</span> (directionTester &gt; 0) {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                <span class="comment">// Selection d&#39;une direction aléatoire</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                <span class="keywordtype">int</span> dir = directionPossible[rand() % directionTester];</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <span class="comment">// coordsX/Y[dir] contiennent le déplacement relatif (-1, 0 ou 1)</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                <span class="comment">// Utilisé pour palcer les rectangles de maniere coherente sur la carte</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <span class="keywordtype">int</span> newX = roomCoords[randomRoomIndex].x + coordsX[dir];</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <span class="keywordtype">int</span> newY = roomCoords[randomRoomIndex].y + coordsY[dir];</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="comment">// Vérification des superpos</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                <span class="keywordtype">int</span> superpos = 0;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; i; j++) {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                    <span class="keywordflow">if</span> (roomCoords[j].x == newX &amp;&amp; roomCoords[j].y == newY) {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                        superpos = 1;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <span class="comment">// Si ya pas de superposition</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                <span class="keywordflow">if</span> (!superpos) {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    newRoom = <a class="code" href="genmap_8c.html#ac50fbce591c797fbf374390298a701e0">initRoom</a>();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    newRoom-&gt;<a class="code" href="structt__salle.html#af180e926633cde08a05ccbc3af397ee4">ID</a> = i;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    <a class="code" href="genmap_8c.html#a782542f234d59803605c4d24d7cc48a9">connectRoom</a>(currentRoom, newRoom, dir);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                    roomCoords[i] = (SDL_Rect){newX, newY, 0, 0};</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    roomList[i] = newRoom;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            currentRoom-&gt;<a class="code" href="structt__salle.html#a776d8055e9e33c2d5d0324e213909c76">scene</a> = NULL;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        } <span class="keywordflow">while</span> (!newRoom);  <span class="comment">// newRoom point sur NULL si on genere pas -&gt; on enleve la variable de control</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="comment">// Après la génération des salles normales</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="comment">// Ajout de la salle du boss</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">int</span> trouve = 0;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">while</span> (trouve == 0) {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordtype">int</span> boss = 5;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="comment">// Détermine la direction et les offsets selon le type de boss</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordtype">int</span> dir_boss;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordflow">switch</span> (boss) {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keywordflow">case</span> 5:</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                dir_boss = 2;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                <span class="keywordflow">break</span>;  <span class="comment">// Haut -&gt; Bas du Boss</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keywordtype">int</span> i = rand() % (numberRoom - 2);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <a class="code" href="structt__salle.html">t_salle</a>* salle = roomList[i];</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="comment">// Calcule les nouvelles coordonnées</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordtype">int</span> newX = roomCoords[i].x + coordsX[dir_boss];</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordtype">int</span> newY = roomCoords[i].y + coordsY[dir_boss];</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="comment">// Vérifie les superpositions</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keywordtype">int</span> collision = 0;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; numberRoom - 2; j++) {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            <span class="keywordflow">if</span> (roomCoords[j].x == newX &amp;&amp; roomCoords[j].y == newY) {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                collision = 1;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        }</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordflow">if</span> (!collision) {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            <span class="comment">// Crée et connecte la salle du boss</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            <a class="code" href="structt__salle.html">t_salle</a>* salleBoss = <a class="code" href="genmap_8c.html#ac50fbce591c797fbf374390298a701e0">initRoom</a>();</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            salleBoss-&gt;<a class="code" href="structt__salle.html#af180e926633cde08a05ccbc3af397ee4">ID</a> = -boss;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <a class="code" href="genmap_8c.html#a782542f234d59803605c4d24d7cc48a9">connectRoom</a>(salle, salleBoss, dir_boss);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            roomCoords[numberRoom - 2] = (SDL_Rect){newX, newY, 0, 0};</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            roomList[numberRoom - 2] = salleBoss;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            trouve = 1;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="comment">// Ajout salle du marchant</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    trouve = 0;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keywordflow">while</span> (trouve == 0) {</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keywordtype">int</span> marchant = (rand() % 4) + 1;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="comment">// Détermine la direction et les offsets selon le type de marchant</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordtype">int</span> dir_marchant;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keywordflow">switch</span> (marchant) {</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                dir_marchant = 2;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                <span class="keywordflow">break</span>;  <span class="comment">// Haut -&gt; Bas du marchand</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                dir_marchant = 0;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                <span class="keywordflow">break</span>;  <span class="comment">// Droite -&gt; Gauche du marchand</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <span class="keywordflow">case</span> 3:</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                dir_marchant = 3;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                <span class="keywordflow">break</span>;  <span class="comment">// Bas -&gt; Haut du marchand</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="keywordflow">case</span> 4:</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                dir_marchant = 1;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                <span class="keywordflow">break</span>;  <span class="comment">// Gauche -&gt; Droite du marchand</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keywordtype">int</span> i = rand() % (numberRoom - 2);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <a class="code" href="structt__salle.html">t_salle</a>* salle = roomList[i];</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="comment">// Calcule les nouvelles coordonnées</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keywordtype">int</span> newX = roomCoords[i].x + coordsX[dir_marchant];</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="keywordtype">int</span> newY = roomCoords[i].y + coordsY[dir_marchant];</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="comment">// Vérifie les superpositions</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="keywordtype">int</span> collision = 0;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; numberRoom - 1; j++) {</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <span class="keywordflow">if</span> (roomCoords[j].x == newX &amp;&amp; roomCoords[j].y == newY) {</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                collision = 1;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            }</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        }</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keywordflow">if</span> (!collision) {</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            <span class="comment">// Crée et connecte la salle marchande</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            <a class="code" href="structt__salle.html">t_salle</a>* marchand = <a class="code" href="genmap_8c.html#ac50fbce591c797fbf374390298a701e0">initRoom</a>();</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            marchand-&gt;<a class="code" href="structt__salle.html#af180e926633cde08a05ccbc3af397ee4">ID</a> = -marchant;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            <a class="code" href="genmap_8c.html#a782542f234d59803605c4d24d7cc48a9">connectRoom</a>(salle, marchand, dir_marchant);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            roomCoords[numberRoom - 1] = (SDL_Rect){newX, newY, 0, 0};</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            roomList[numberRoom - 1] = marchand;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            trouve = 1;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        }</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    }</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="comment">// Debug: affiche toutes les coordonnées</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    printf(<span class="stringliteral">&quot;Nb salles : %d\n&quot;</span>, numberRoom);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numberRoom; i++) {</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        printf(<span class="stringliteral">&quot;X[%d] et Y[%d] et ID : %d\n&quot;</span>, roomCoords[i].x, roomCoords[i].y, roomList[i]-&gt;ID);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    }</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordflow">return</span> roomList;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;}</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
+<div class="line"><a name="l00199"></a><span class="lineno"><a class="line" href="genmap_8c.html#a4a5b22ca28851f21ea1a9ff1f1e43702">  199</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="genmap_8c.html#a4a5b22ca28851f21ea1a9ff1f1e43702">freeLevel</a>(<a class="code" href="structt__level.html">t_level</a>* level) {</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordflow">if</span> (level) {</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; level-&gt;<a class="code" href="structt__level.html#a4335e5d1246ed72b32822700719ffdbc">nbSalles</a>; i++) {</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            free(level-&gt;<a class="code" href="structt__level.html#acc2bab024f1115845b68452cd89b316c">salles</a>[i]);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        }</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        free(level-&gt;<a class="code" href="structt__level.html#acc2bab024f1115845b68452cd89b316c">salles</a>);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keywordflow">if</span> (level-&gt;<a class="code" href="structt__level.html#ad13922904a57f6847e9f000127a68a7c">rectcord</a>)</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            free(level-&gt;<a class="code" href="structt__level.html#ad13922904a57f6847e9f000127a68a7c">rectcord</a>);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        free(level);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    }</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;}</div>
+<div class="ttc" id="agenmap_8c_html_a4a5b22ca28851f21ea1a9ff1f1e43702"><div class="ttname"><a href="genmap_8c.html#a4a5b22ca28851f21ea1a9ff1f1e43702">freeLevel</a></div><div class="ttdeci">void freeLevel(t_level *level)</div><div class="ttdef"><b>Definition:</b> <a href="genmap_8c_source.html#l00199">genmap.c:199</a></div></div>
+<div class="ttc" id="agenmap_8c_html_a782542f234d59803605c4d24d7cc48a9"><div class="ttname"><a href="genmap_8c.html#a782542f234d59803605c4d24d7cc48a9">connectRoom</a></div><div class="ttdeci">void connectRoom(t_salle *origineRoom, t_salle *destinationRoom, int dir)</div><div class="ttdef"><b>Definition:</b> <a href="genmap_8c_source.html#l00019">genmap.c:19</a></div></div>
+<div class="ttc" id="agenmap_8c_html_a8cc62c2ec750666aff9cbdac83f72102"><div class="ttname"><a href="genmap_8c.html#a8cc62c2ec750666aff9cbdac83f72102">genMap</a></div><div class="ttdeci">t_salle ** genMap(int numberRoom, SDL_Rect *roomCoords)</div><div class="ttdef"><b>Definition:</b> <a href="genmap_8c_source.html#l00028">genmap.c:28</a></div></div>
+<div class="ttc" id="agenmap_8c_html_ac50fbce591c797fbf374390298a701e0"><div class="ttname"><a href="genmap_8c.html#ac50fbce591c797fbf374390298a701e0">initRoom</a></div><div class="ttdeci">t_salle * initRoom()</div><div class="ttdef"><b>Definition:</b> <a href="genmap_8c_source.html#l00003">genmap.c:3</a></div></div>
+<div class="ttc" id="agenmap_8h_html"><div class="ttname"><a href="genmap_8h.html">genmap.h</a></div></div>
+<div class="ttc" id="astructt__level_html"><div class="ttname"><a href="structt__level.html">t_level</a></div><div class="ttdef"><b>Definition:</b> <a href="genmap_8h_source.html#l00025">genmap.h:25</a></div></div>
+<div class="ttc" id="astructt__level_html_a4335e5d1246ed72b32822700719ffdbc"><div class="ttname"><a href="structt__level.html#a4335e5d1246ed72b32822700719ffdbc">t_level::nbSalles</a></div><div class="ttdeci">int nbSalles</div><div class="ttdef"><b>Definition:</b> <a href="genmap_8h_source.html#l00027">genmap.h:27</a></div></div>
+<div class="ttc" id="astructt__level_html_acc2bab024f1115845b68452cd89b316c"><div class="ttname"><a href="structt__level.html#acc2bab024f1115845b68452cd89b316c">t_level::salles</a></div><div class="ttdeci">t_salle ** salles</div><div class="ttdef"><b>Definition:</b> <a href="genmap_8h_source.html#l00026">genmap.h:26</a></div></div>
+<div class="ttc" id="astructt__level_html_ad13922904a57f6847e9f000127a68a7c"><div class="ttname"><a href="structt__level.html#ad13922904a57f6847e9f000127a68a7c">t_level::rectcord</a></div><div class="ttdeci">SDL_Rect * rectcord</div><div class="ttdef"><b>Definition:</b> <a href="genmap_8h_source.html#l00028">genmap.h:28</a></div></div>
+<div class="ttc" id="astructt__salle_html"><div class="ttname"><a href="structt__salle.html">t_salle</a></div><div class="ttdef"><b>Definition:</b> <a href="genmap_8h_source.html#l00014">genmap.h:14</a></div></div>
+<div class="ttc" id="astructt__salle_html_a180251ec42e29f08470dff06073165ef"><div class="ttname"><a href="structt__salle.html#a180251ec42e29f08470dff06073165ef">t_salle::droite</a></div><div class="ttdeci">struct t_salle * droite</div><div class="ttdef"><b>Definition:</b> <a href="genmap_8h_source.html#l00016">genmap.h:16</a></div></div>
+<div class="ttc" id="astructt__salle_html_a470d65ae6598facaeacfc8115ab0b298"><div class="ttname"><a href="structt__salle.html#a470d65ae6598facaeacfc8115ab0b298">t_salle::haut</a></div><div class="ttdeci">struct t_salle * haut</div><div class="ttdef"><b>Definition:</b> <a href="genmap_8h_source.html#l00018">genmap.h:18</a></div></div>
+<div class="ttc" id="astructt__salle_html_a776d8055e9e33c2d5d0324e213909c76"><div class="ttname"><a href="structt__salle.html#a776d8055e9e33c2d5d0324e213909c76">t_salle::scene</a></div><div class="ttdeci">t_scene * scene</div><div class="ttdef"><b>Definition:</b> <a href="genmap_8h_source.html#l00020">genmap.h:20</a></div></div>
+<div class="ttc" id="astructt__salle_html_aa09dc6e953cc457ceb9692a39b087af6"><div class="ttname"><a href="structt__salle.html#aa09dc6e953cc457ceb9692a39b087af6">t_salle::bas</a></div><div class="ttdeci">struct t_salle * bas</div><div class="ttdef"><b>Definition:</b> <a href="genmap_8h_source.html#l00019">genmap.h:19</a></div></div>
+<div class="ttc" id="astructt__salle_html_aba2532247d0d9d896017547e182fb74e"><div class="ttname"><a href="structt__salle.html#aba2532247d0d9d896017547e182fb74e">t_salle::gauche</a></div><div class="ttdeci">struct t_salle * gauche</div><div class="ttdef"><b>Definition:</b> <a href="genmap_8h_source.html#l00017">genmap.h:17</a></div></div>
+<div class="ttc" id="astructt__salle_html_af180e926633cde08a05ccbc3af397ee4"><div class="ttname"><a href="structt__salle.html#af180e926633cde08a05ccbc3af397ee4">t_salle::ID</a></div><div class="ttdeci">int ID</div><div class="ttdef"><b>Definition:</b> <a href="genmap_8h_source.html#l00015">genmap.h:15</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

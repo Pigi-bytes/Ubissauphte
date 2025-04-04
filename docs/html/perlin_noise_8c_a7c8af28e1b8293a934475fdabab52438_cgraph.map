@@ -1,0 +1,10 @@
+<map id="noise" name="noise">
+<area shape="rect" id="node1" title="Génère du bruit de Perlin 2D." alt="" coords="5,107,63,133"/>
+<area shape="rect" id="node2" href="$perlin_noise_8c.html#a27be6bcafb303217a0905196bbc064a0" title="Interpolation linéaire entre deux valeurs." alt="" coords="129,5,197,32"/>
+<area shape="rect" id="node3" href="$perlin_noise_8c.html#a27ede35d47c78a42d19dc473339a03fd" title="Arrondi chaque composante d&#39;un point vers le bas." alt="" coords="119,56,207,83"/>
+<area shape="rect" id="node4" href="$perlin_noise_8c.html#aed56ac6f46bfae65593bba1cd0a49d7c" title="Partie fractionnaire d&#39;un point." alt="" coords="120,107,207,133"/>
+<area shape="rect" id="node5" href="$perlin_noise_8c.html#a4ee4752c2829d11460a3b4eeae6da361" title="Génère un float pseudo&#45;aléatoire basé sur une position et une seed." alt="" coords="111,157,216,184"/>
+<area shape="rect" id="node8" href="$perlin_noise_8c.html#a545ae6176b8e6c9d9103571e81b0a122" title="Applique une interpolation lissée (smoothstep) à un point." alt="" coords="113,208,213,235"/>
+<area shape="rect" id="node6" href="$perlin_noise_8c.html#a336a0164d9c88dea97a238471c15b92f" title="Produit scalaire entre deux points." alt="" coords="284,132,327,159"/>
+<area shape="rect" id="node7" href="$perlin_noise_8c.html#a73af3c16c64274ce7041dd8cec5dab5a" title="Partie fractionnaire d&#39;un float." alt="" coords="264,183,347,209"/>
+</map>

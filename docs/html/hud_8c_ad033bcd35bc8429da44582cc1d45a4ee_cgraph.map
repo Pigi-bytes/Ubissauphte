@@ -1,0 +1,8 @@
+<map id="renderHUDWrapper" name="renderHUDWrapper">
+<area shape="rect" id="node1" title="Wrapper pour afficher le HUD (compatible avec fonctionManager)" alt="" coords="5,81,155,108"/>
+<area shape="rect" id="node2" href="$hud_8c.html#af388a8b4e2bda7685c3acb216ffc73ce" title="Affiche le HUD à l&#39;écran." alt="" coords="203,81,297,108"/>
+<area shape="rect" id="node3" href="$hud_8c.html#ac2ceb2c64a019e971014a312b534649f" title=" " alt="" coords="345,5,479,32"/>
+<area shape="rect" id="node4" href="$hud_8c.html#a026c775dfde1812480ba7b23cb9218c7" title=" " alt="" coords="347,56,477,83"/>
+<area shape="rect" id="node5" href="$text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="367,107,457,133"/>
+<area shape="rect" id="node6" href="$hud_8c.html#a79288053073d4617199b790c1aa5c4f9" title=" " alt="" coords="361,157,463,184"/>
+</map>

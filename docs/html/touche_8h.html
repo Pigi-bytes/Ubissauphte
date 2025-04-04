@@ -1,0 +1,485 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon: Référence du fichier Ubissauphte/src/ui/touche.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_cbea5643ac5778c201b251489fa6a373.html">ui</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Structures de données</a> &#124;
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier touche.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Gestion des touches affichées et interactives.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;SDL2/SDL.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL_ttf.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="color_8h_source.html">../color.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="input_8h_source.html">../io/input.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="fonction_manager_8h_source.html">../utils/fonctionManager.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="button_8h_source.html">button.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="text_8h_source.html">text.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
+<div class="dyncontent">
+<div class="center"><img src="touche_8h__dep__incl.png" border="0" usemap="#a_ubissauphte_2src_2ui_2touche_8hdep" alt=""/></div>
+<map name="a_ubissauphte_2src_2ui_2touche_8hdep" id="a_ubissauphte_2src_2ui_2touche_8hdep">
+<area shape="rect" title="Gestion des touches affichées et interactives." alt="" coords="1120,5,1263,47"/>
+<area shape="rect" href="commun_8h.html" title="Gestion du contenu utile pour le fonctionnement des différentes scènes." alt="" coords="995,102,1193,129"/>
+<area shape="rect" href="touche_8c.html" title=" " alt="" coords="1217,95,1360,136"/>
+<area shape="rect" href="commande_menu_8c.html" title=" " alt="" coords="5,273,180,315"/>
+<area shape="rect" href="commande_menu_8h.html" title=" " alt="" coords="131,184,305,225"/>
+<area shape="rect" href="fps_menu_8h.html" title=" " alt="" coords="329,184,504,225"/>
+<area shape="rect" href="game_over_8h.html" title=" " alt="" coords="557,184,732,225"/>
+<area shape="rect" href="main_menu_8h.html" title=" " alt="" coords="756,273,931,315"/>
+<area shape="rect" href="main_world_8h.html" title=" " alt="" coords="1007,184,1181,225"/>
+<area shape="rect" href="option2_8h.html" title=" " alt="" coords="1360,184,1535,225"/>
+<area shape="rect" href="option_menu_8h.html" title=" " alt="" coords="1611,184,1785,225"/>
+<area shape="rect" href="scene_inventaire_8h.html" title=" " alt="" coords="1861,184,2036,225"/>
+<area shape="rect" href="win_8h.html" title=" " alt="" coords="2085,184,2260,225"/>
+<area shape="rect" href="commun_8c.html" title=" " alt="" coords="2284,191,2483,218"/>
+<area shape="rect" href="main_8c.html" title=" " alt="" coords="917,370,1092,397"/>
+<area shape="rect" href="fps_menu_8c.html" title=" " alt="" coords="307,273,481,315"/>
+<area shape="rect" href="game_over_8c.html" title=" " alt="" coords="557,273,732,315"/>
+<area shape="rect" href="main_menu_8c.html" title=" " alt="" coords="719,363,893,404"/>
+<area shape="rect" href="main_world_8c.html" title=" " alt="" coords="1007,273,1181,315"/>
+<area shape="rect" href="boss__slime_8h.html" title="Définition et comportement du boss slime." alt="" coords="1205,273,1409,315"/>
+<area shape="rect" href="boss__slime_8c.html" title=" " alt="" coords="1206,363,1409,404"/>
+<area shape="rect" href="option2_8c.html" title=" " alt="" coords="1485,273,1660,315"/>
+<area shape="rect" href="option_menu_8c.html" title=" " alt="" coords="1736,273,1911,315"/>
+<area shape="rect" href="scene_inventaire_8c.html" title=" " alt="" coords="1987,273,2161,315"/>
+<area shape="rect" href="win_8c.html" title=" " alt="" coords="2237,273,2412,315"/>
+</map>
+</div>
+</div>
+<p><a href="touche_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Structures de données</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structt__touche.html">t_touche</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Représente une touche clavier affichée et interactive.  <a href="structt__touche.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:aca735160ae65c1cae3a84690a11373ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="touche_8h.html#aca735160ae65c1cae3a84690a11373ed">renderTouche</a> (<a class="el" href="structt__context.html">t_context</a> *ctx, <a class="el" href="structt__touche.html">t_touche</a> *touche)</td></tr>
+<tr class="memdesc:aca735160ae65c1cae3a84690a11373ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche une touche à l'écran.  <a href="touche_8h.html#aca735160ae65c1cae3a84690a11373ed">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aca735160ae65c1cae3a84690a11373ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7804f17c8e030cc35e5ad4a66b53c04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="touche_8h.html#ab7804f17c8e030cc35e5ad4a66b53c04">handleInputTouche</a> (<a class="el" href="structt__context.html">t_context</a> *ctx, <a class="el" href="structt__touche.html">t_touche</a> *touche)</td></tr>
+<tr class="memdesc:ab7804f17c8e030cc35e5ad4a66b53c04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gère les interactions avec une touche.  <a href="touche_8h.html#ab7804f17c8e030cc35e5ad4a66b53c04">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab7804f17c8e030cc35e5ad4a66b53c04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab22adbe41d10d69d091bd9bb52b36201"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__touche.html">t_touche</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="touche_8h.html#ab22adbe41d10d69d091bd9bb52b36201">createTouche</a> (<a class="el" href="structt__text.html">t_text</a> *<a class="el" href="structtext.html">text</a>, SDL_Color color, SDL_Color colorOnClick, SDL_Rect rect, <a class="el" href="structt__fonction_param.html">t_fonctionParam</a> *OnClick, SDL_Scancode *scancode, char *nom)</td></tr>
+<tr class="memdesc:ab22adbe41d10d69d091bd9bb52b36201"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée une nouvelle touche interactive.  <a href="touche_8h.html#ab22adbe41d10d69d091bd9bb52b36201">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab22adbe41d10d69d091bd9bb52b36201"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40a75918dcc55a86d411596bf2fa481d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="touche_8h.html#a40a75918dcc55a86d411596bf2fa481d">miseAjourCommande</a> (<a class="el" href="structt__fonction_param.html">t_fonctionParam</a> *<a class="el" href="structfonction.html">fonction</a>)</td></tr>
+<tr class="memdesc:a40a75918dcc55a86d411596bf2fa481d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met à jour l'affichage des commandes.  <a href="touche_8h.html#a40a75918dcc55a86d411596bf2fa481d">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a40a75918dcc55a86d411596bf2fa481d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35460666a6f7088a59aa2814c8aa85a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="touche_8h.html#a35460666a6f7088a59aa2814c8aa85a0">freeTouche</a> (void *elt)</td></tr>
+<tr class="memdesc:a35460666a6f7088a59aa2814c8aa85a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libère une touche de la mémoire.  <a href="touche_8h.html#a35460666a6f7088a59aa2814c8aa85a0">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a35460666a6f7088a59aa2814c8aa85a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Gestion des touches affichées et interactives. </p>
+<p>Ce module permet de créer et gérer des éléments d'interface représentant des touches clavier configurables et cliquables.</p>
+<dl class="section author"><dt>Auteur</dt><dd>Ubissauphte </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2025 </dd></dl>
+
+<p class="definition">Définition dans le fichier <a class="el" href="touche_8h_source.html">touche.h</a>.</p>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="ab22adbe41d10d69d091bd9bb52b36201"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab22adbe41d10d69d091bd9bb52b36201">&#9670;&nbsp;</a></span>createTouche()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt__touche.html">t_touche</a>* createTouche </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__text.html">t_text</a> *&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Color&#160;</td>
+          <td class="paramname"><em>color</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Color&#160;</td>
+          <td class="paramname"><em>colorOnClick</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Rect&#160;</td>
+          <td class="paramname"><em>rect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__fonction_param.html">t_fonctionParam</a> *&#160;</td>
+          <td class="paramname"><em>OnClick</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Scancode *&#160;</td>
+          <td class="paramname"><em>scancode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nom</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crée une nouvelle touche interactive. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">text</td><td>Texte à afficher </td></tr>
+    <tr><td class="paramname">color</td><td>Couleur normale </td></tr>
+    <tr><td class="paramname">colorOnClick</td><td>Couleur au clic </td></tr>
+    <tr><td class="paramname">rect</td><td>Rectangle de position/dimension </td></tr>
+    <tr><td class="paramname">OnClick</td><td>fonction lié au clic </td></tr>
+    <tr><td class="paramname">scancode</td><td>Code SDL de la touche </td></tr>
+    <tr><td class="paramname">nom</td><td>Nom affiché </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Nouvelle touche configurée </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="touche_8c_source.html#l00053">53</a> du fichier <a class="el" href="touche_8c_source.html">touche.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="touche_8h_ab22adbe41d10d69d091bd9bb52b36201_cgraph.png" border="0" usemap="#atouche_8h_ab22adbe41d10d69d091bd9bb52b36201_cgraph" alt=""/></div>
+<map name="atouche_8h_ab22adbe41d10d69d091bd9bb52b36201_cgraph" id="atouche_8h_ab22adbe41d10d69d091bd9bb52b36201_cgraph">
+<area shape="rect" title="Crée une nouvelle touche interactive." alt="" coords="5,5,113,32"/>
+<area shape="rect" href="button_8c.html#a27a05bc9ac9288cc041454d2765d0c50" title="Crée un nouveau bouton." alt="" coords="161,5,268,32"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="touche_8h_ab22adbe41d10d69d091bd9bb52b36201_icgraph.png" border="0" usemap="#atouche_8h_ab22adbe41d10d69d091bd9bb52b36201_icgraph" alt=""/></div>
+<map name="atouche_8h_ab22adbe41d10d69d091bd9bb52b36201_icgraph" id="atouche_8h_ab22adbe41d10d69d091bd9bb52b36201_icgraph">
+<area shape="rect" title="Crée une nouvelle touche interactive." alt="" coords="331,5,439,32"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,5,283,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a35460666a6f7088a59aa2814c8aa85a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35460666a6f7088a59aa2814c8aa85a0">&#9670;&nbsp;</a></span>freeTouche()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void freeTouche </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>elt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Libère une touche de la mémoire. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">elt</td><td>Touche à libérer (passé en void* pour compatibilité) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="touche_8c_source.html#l00073">73</a> du fichier <a class="el" href="touche_8c_source.html">touche.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="touche_8h_a35460666a6f7088a59aa2814c8aa85a0_cgraph.png" border="0" usemap="#atouche_8h_a35460666a6f7088a59aa2814c8aa85a0_cgraph" alt=""/></div>
+<map name="atouche_8h_a35460666a6f7088a59aa2814c8aa85a0_cgraph" id="atouche_8h_a35460666a6f7088a59aa2814c8aa85a0_cgraph">
+<area shape="rect" title="Libère une touche de la mémoire." alt="" coords="5,31,99,57"/>
+<area shape="rect" href="button_8c.html#a444d02738d087dbd280f7b8848284ae9" title="Libère la mémoire utilisée par un bouton." alt="" coords="147,31,237,57"/>
+<area shape="rect" href="fonction_manager_8c.html#aa61a39c82b2044678dea685d75cdd8a9" title="Libere la mémoire d&#39;une fonctionParametrable." alt="" coords="285,5,388,32"/>
+<area shape="rect" href="text_8c.html#ab9b7064da4ef9403241f3d40389af46a" title="Libère la mémoire utilisée par un élément textuel." alt="" coords="299,56,374,83"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="touche_8h_a35460666a6f7088a59aa2814c8aa85a0_icgraph.png" border="0" usemap="#atouche_8h_a35460666a6f7088a59aa2814c8aa85a0_icgraph" alt=""/></div>
+<map name="atouche_8h_a35460666a6f7088a59aa2814c8aa85a0_icgraph" id="atouche_8h_a35460666a6f7088a59aa2814c8aa85a0_icgraph">
+<area shape="rect" title="Libère une touche de la mémoire." alt="" coords="331,56,424,83"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,5,283,32"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,56,271,83"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,107,267,133"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab7804f17c8e030cc35e5ad4a66b53c04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7804f17c8e030cc35e5ad4a66b53c04">&#9670;&nbsp;</a></span>handleInputTouche()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void handleInputTouche </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__context.html">t_context</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__touche.html">t_touche</a> *&#160;</td>
+          <td class="paramname"><em>touche</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gère les interactions avec une touche. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>Contexte du jeu </td></tr>
+    <tr><td class="paramname">touche</td><td>Touche à gérer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="touche_8c_source.html#l00007">7</a> du fichier <a class="el" href="touche_8c_source.html">touche.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="touche_8h_ab7804f17c8e030cc35e5ad4a66b53c04_cgraph.png" border="0" usemap="#atouche_8h_ab7804f17c8e030cc35e5ad4a66b53c04_cgraph" alt=""/></div>
+<map name="atouche_8h_ab7804f17c8e030cc35e5ad4a66b53c04_cgraph" id="atouche_8h_ab7804f17c8e030cc35e5ad4a66b53c04_cgraph">
+<area shape="rect" title="Gère les interactions avec une touche." alt="" coords="5,81,149,108"/>
+<area shape="rect" href="fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="223,5,323,32"/>
+<area shape="rect" href="input_8c.html#a52996147ab518a8d16b94287a140c7ee" title="cherche l&#39;indice de la touche pressé" alt="" coords="197,56,349,83"/>
+<area shape="rect" href="button_8c.html#a279965621a6b64d1a4f58eac1f1a9a14" title="Vérifie si le curseur se trouve à l&#39;intérieur d&#39;un rectangle." alt="" coords="201,107,345,133"/>
+<area shape="rect" href="text_8c.html#a188a5e1361d94e2517bacbc2a6f39509" title="Met à jour un texte avec contour existant." alt="" coords="203,157,344,184"/>
+<area shape="rect" href="text_8c.html#a92567a5bf04e06ed469717198d991136" title="Crée un texte avec contour." alt="" coords="397,157,535,184"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="touche_8h_ab7804f17c8e030cc35e5ad4a66b53c04_icgraph.png" border="0" usemap="#atouche_8h_ab7804f17c8e030cc35e5ad4a66b53c04_icgraph" alt=""/></div>
+<map name="atouche_8h_ab7804f17c8e030cc35e5ad4a66b53c04_icgraph" id="atouche_8h_ab7804f17c8e030cc35e5ad4a66b53c04_icgraph">
+<area shape="rect" title="Gère les interactions avec une touche." alt="" coords="577,56,721,83"/>
+<area shape="rect" href="commun_8c.html#a3e5017757de7e251a0cfa2f2b4d2fdf5" title="Wrapper pour la gestion des contrôles affichés." alt="" coords="331,56,529,83"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,5,283,32"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,56,271,83"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,107,267,133"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a40a75918dcc55a86d411596bf2fa481d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40a75918dcc55a86d411596bf2fa481d">&#9670;&nbsp;</a></span>miseAjourCommande()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void miseAjourCommande </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__fonction_param.html">t_fonctionParam</a> *&#160;</td>
+          <td class="paramname"><em>fonction</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Met à jour l'affichage des commandes. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fonction</td><td>Paramètres de mise à jour </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="touche_8c_source.html#l00062">62</a> du fichier <a class="el" href="touche_8c_source.html">touche.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="touche_8h_a40a75918dcc55a86d411596bf2fa481d_cgraph.png" border="0" usemap="#atouche_8h_a40a75918dcc55a86d411596bf2fa481d_cgraph" alt=""/></div>
+<map name="atouche_8h_a40a75918dcc55a86d411596bf2fa481d_cgraph" id="atouche_8h_a40a75918dcc55a86d411596bf2fa481d_cgraph">
+<area shape="rect" title="Met à jour l&#39;affichage des commandes." alt="" coords="5,5,168,32"/>
+<area shape="rect" href="text_8c.html#a188a5e1361d94e2517bacbc2a6f39509" title="Met à jour un texte avec contour existant." alt="" coords="216,5,357,32"/>
+<area shape="rect" href="text_8c.html#a92567a5bf04e06ed469717198d991136" title="Crée un texte avec contour." alt="" coords="405,5,543,32"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="touche_8h_a40a75918dcc55a86d411596bf2fa481d_icgraph.png" border="0" usemap="#atouche_8h_a40a75918dcc55a86d411596bf2fa481d_icgraph" alt=""/></div>
+<map name="atouche_8h_a40a75918dcc55a86d411596bf2fa481d_icgraph" id="atouche_8h_a40a75918dcc55a86d411596bf2fa481d_icgraph">
+<area shape="rect" title="Met à jour l&#39;affichage des commandes." alt="" coords="331,5,493,32"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,5,283,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aca735160ae65c1cae3a84690a11373ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca735160ae65c1cae3a84690a11373ed">&#9670;&nbsp;</a></span>renderTouche()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderTouche </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__context.html">t_context</a> *&#160;</td>
+          <td class="paramname"><em>ctx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__touche.html">t_touche</a> *&#160;</td>
+          <td class="paramname"><em>touche</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche une touche à l'écran. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>Contexte du jeu </td></tr>
+    <tr><td class="paramname">touche</td><td>Touche à afficher </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="touche_8c_source.html#l00003">3</a> du fichier <a class="el" href="touche_8c_source.html">touche.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="touche_8h_aca735160ae65c1cae3a84690a11373ed_cgraph.png" border="0" usemap="#atouche_8h_aca735160ae65c1cae3a84690a11373ed_cgraph" alt=""/></div>
+<map name="atouche_8h_aca735160ae65c1cae3a84690a11373ed_cgraph" id="atouche_8h_aca735160ae65c1cae3a84690a11373ed_cgraph">
+<area shape="rect" title="Affiche une touche à l&#39;écran." alt="" coords="5,31,115,57"/>
+<area shape="rect" href="button_8c.html#a57726e67186d9103bd5627f07a2557d4" title="Affiche un bouton à l&#39;écran." alt="" coords="163,31,269,57"/>
+<area shape="rect" href="button_8c.html#a289805f0c618adfd4a051e912198f3f7" title=" " alt="" coords="317,5,468,32"/>
+<area shape="rect" href="text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="347,56,438,83"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="touche_8h_aca735160ae65c1cae3a84690a11373ed_icgraph.png" border="0" usemap="#atouche_8h_aca735160ae65c1cae3a84690a11373ed_icgraph" alt=""/></div>
+<map name="atouche_8h_aca735160ae65c1cae3a84690a11373ed_icgraph" id="atouche_8h_aca735160ae65c1cae3a84690a11373ed_icgraph">
+<area shape="rect" title="Affiche une touche à l&#39;écran." alt="" coords="543,56,652,83"/>
+<area shape="rect" href="commun_8c.html#a6f136ac659e6de6d72e1bf97e2e78ac6" title="Wrapper pour le rendu des contrôles affichés." alt="" coords="331,56,495,83"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,5,283,32"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,56,271,83"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,107,267,133"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

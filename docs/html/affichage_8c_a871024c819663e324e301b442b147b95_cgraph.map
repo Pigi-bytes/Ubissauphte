@@ -1,0 +1,12 @@
+<map id="updateAjoutObjet" name="updateAjoutObjet">
+<area shape="rect" id="node1" title=" " alt="" coords="5,132,141,159"/>
+<area shape="rect" id="node2" href="$affichage_8c.html#a1e1e4198c4d748bc7d7e32fae74f501e" title="Calcule la position d&#39;un slot d&#39;inventaire." alt="" coords="211,5,314,32"/>
+<area shape="rect" id="node3" href="$button_8c.html#a27a05bc9ac9288cc041454d2765d0c50" title="Crée un nouveau bouton." alt="" coords="209,56,316,83"/>
+<area shape="rect" id="node4" href="$text_8c.html#aeb2abb74af73c1c4372b43db48c96d3e" title="Crée un texte simple sans contour." alt="" coords="634,107,725,133"/>
+<area shape="rect" id="node5" href="$affichage_8c.html#af97eaceefbe2a5d829756cc09f74a94d" title="Wrapper pour la création de description." alt="" coords="189,157,336,184"/>
+<area shape="rect" id="node8" href="$fonction_manager_8c.html#a594fab892bbe8bced787e56601ddd16a" title="Crée un t_fonctionParam." alt="" coords="207,208,318,235"/>
+<area shape="rect" id="node10" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="220,259,305,285"/>
+<area shape="rect" id="node6" href="$affichage_8c.html#a4f621e52e3844e0c63866c37b48587e9" title=" " alt="" coords="433,157,525,184"/>
+<area shape="rect" id="node7" href="$affichage_8c.html#a89792fe0f90bf5107fe4dc53a0d72260" title="Crée une ligne de texte pour une statistique." alt="" coords="621,157,737,184"/>
+<area shape="rect" id="node9" href="$fonction_manager_8c.html#a3fdc9fb7992919f32229e99affe0ea71" title="ajout des paramètres dans le t_fonctionParam" alt="" coords="384,208,573,235"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="createNewBlock" name="createNewBlock">
+<area shape="rect" id="node1" title="Crée un nouveau t_block." alt="" coords="5,81,133,108"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="181,5,328,32"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="183,56,326,83"/>
+<area shape="rect" id="node4" href="$fichier_loader_8c.html#a752fa46871c5c0ad80b4ebb04e6453fa" title="Libère la mémoire allouée pour une pair de donnee (cle/valeur)" alt="" coords="202,107,307,133"/>
+<area shape="rect" id="node5" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="203,157,306,184"/>
+</map>

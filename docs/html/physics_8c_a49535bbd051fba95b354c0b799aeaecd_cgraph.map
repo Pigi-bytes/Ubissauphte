@@ -1,0 +1,6 @@
+<map id="resolveEntityCollisions" name="resolveEntityCollisions">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,176,83"/>
+<area shape="rect" id="node2" href="$physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="229,5,419,32"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="281,56,367,83"/>
+<area shape="rect" id="node4" href="$physics_8c.html#a939ce6d2a8a36cf8aa70ca659cca1cb5" title=" " alt="" coords="224,107,424,133"/>
+</map>

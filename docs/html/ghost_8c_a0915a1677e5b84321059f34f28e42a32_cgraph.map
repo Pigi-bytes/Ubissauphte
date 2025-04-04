@@ -1,0 +1,5 @@
+<map id="onGhostDeath" name="onGhostDeath">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,120,32"/>
+<area shape="rect" id="node2" href="$player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="168,5,272,32"/>
+<area shape="rect" id="node3" href="$player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="320,5,508,32"/>
+</map>

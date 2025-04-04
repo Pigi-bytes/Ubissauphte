@@ -1,0 +1,1092 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon: Référence du fichier Ubissauphte/src/ui/hud.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_cbea5643ac5778c201b251489fa6a373.html">ui</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier hud.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="hud_8h_source.html">hud.h</a>&quot;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+</div>
+<p><a href="hud_8c_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aaa69f89df4c8e47abeb574bfdd11d9f4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#aaa69f89df4c8e47abeb574bfdd11d9f4">ANIMATION_SPEED</a>&#160;&#160;&#160;0.05f</td></tr>
+<tr class="separator:aaa69f89df4c8e47abeb574bfdd11d9f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a002b2f4894492820fe708b1b7e7c5e70"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#a002b2f4894492820fe708b1b7e7c5e70">EPSILON</a>&#160;&#160;&#160;0.001f</td></tr>
+<tr class="separator:a002b2f4894492820fe708b1b7e7c5e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d13ba8e5f084c7b2cc6e600e799ffb6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#a8d13ba8e5f084c7b2cc6e600e799ffb6">HEALTH_BAR_PADDING</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a8d13ba8e5f084c7b2cc6e600e799ffb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab164b13e1552704b42e65b216a5f2309"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#ab164b13e1552704b42e65b216a5f2309">HEALTH_BAR_BORDER</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:ab164b13e1552704b42e65b216a5f2309"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a072e72751b90f05048e313dcfe580845"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#a072e72751b90f05048e313dcfe580845">HEALTH_HIGHLIGHT_HEIGHT</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:a072e72751b90f05048e313dcfe580845"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac167d16e092cb0814fb9413df5df1971"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#ac167d16e092cb0814fb9413df5df1971">HUD_PADDING</a>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:ac167d16e092cb0814fb9413df5df1971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2769e7df8f8cb9b9aa545061eabede5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#af2769e7df8f8cb9b9aa545061eabede5">HEALTH_BAR_HEIGHT</a>&#160;&#160;&#160;24</td></tr>
+<tr class="separator:af2769e7df8f8cb9b9aa545061eabede5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a801b26dd9f3a318acf84d78efbe56294"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#a801b26dd9f3a318acf84d78efbe56294">XP_BAR_HEIGHT</a>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:a801b26dd9f3a318acf84d78efbe56294"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0b42faa15a14c500e4c1fb4b804d2df"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#ab0b42faa15a14c500e4c1fb4b804d2df">BAR_GAP</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:ab0b42faa15a14c500e4c1fb4b804d2df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf24cd7bee569151330489a0fe592349"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#adf24cd7bee569151330489a0fe592349">ICON_SIZE</a>&#160;&#160;&#160;32</td></tr>
+<tr class="separator:adf24cd7bee569151330489a0fe592349"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa67f5290e4cf518cd55c95c8b644d5f2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#aa67f5290e4cf518cd55c95c8b644d5f2">BAR_WIDTH</a>&#160;&#160;&#160;250</td></tr>
+<tr class="separator:aa67f5290e4cf518cd55c95c8b644d5f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a89fc053a2dfbb21597473287f4e918c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#a89fc053a2dfbb21597473287f4e918c8">update_text</a> (<a class="el" href="structt__text.html">t_text</a> **<a class="el" href="structtext.html">text</a>, SDL_Renderer *renderer, char *content, TTF_Font *font, SDL_Color fg, SDL_Color bg, int outline)</td></tr>
+<tr class="separator:a89fc053a2dfbb21597473287f4e918c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5c94b35150b778d85c8033a513e5ace"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__hud.html">t_hud</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#ab5c94b35150b778d85c8033a513e5ace">createHUD</a> (SDL_Renderer *renderer, TTF_Font *font, <a class="el" href="structt__tileset.html">t_tileset</a> *tileset)</td></tr>
+<tr class="memdesc:ab5c94b35150b778d85c8033a513e5ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée une nouvelle instance du HUD.  <a href="hud_8c.html#ab5c94b35150b778d85c8033a513e5ace">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab5c94b35150b778d85c8033a513e5ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d7fc060909e74a660fe1171b257f406"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#a4d7fc060909e74a660fe1171b257f406">updateHUD</a> (<a class="el" href="structt__hud.html">t_hud</a> *hud, SDL_Renderer *renderer, <a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *player)</td></tr>
+<tr class="memdesc:a4d7fc060909e74a660fe1171b257f406"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met à jour les informations du HUD.  <a href="hud_8c.html#a4d7fc060909e74a660fe1171b257f406">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a4d7fc060909e74a660fe1171b257f406"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ceb2c64a019e971014a312b534649f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#ac2ceb2c64a019e971014a312b534649f">render_cooldown</a> (SDL_Renderer *renderer, SDL_Rect rect, float ratio)</td></tr>
+<tr class="separator:ac2ceb2c64a019e971014a312b534649f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a026c775dfde1812480ba7b23cb9218c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#a026c775dfde1812480ba7b23cb9218c7">renderHealthBar</a> (SDL_Renderer *renderer, SDL_Rect barRect, float *currentRatio, float targetRatio)</td></tr>
+<tr class="separator:a026c775dfde1812480ba7b23cb9218c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79288053073d4617199b790c1aa5c4f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#a79288053073d4617199b790c1aa5c4f9">renderXPBar</a> (SDL_Renderer *renderer, SDL_Rect barRect, float *currentRatio, float targetRatio)</td></tr>
+<tr class="separator:a79288053073d4617199b790c1aa5c4f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af388a8b4e2bda7685c3acb216ffc73ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#af388a8b4e2bda7685c3acb216ffc73ce">renderHUD</a> (SDL_Renderer *renderer, <a class="el" href="structt__hud.html">t_hud</a> *hud)</td></tr>
+<tr class="memdesc:af388a8b4e2bda7685c3acb216ffc73ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le HUD à l'écran.  <a href="hud_8c.html#af388a8b4e2bda7685c3acb216ffc73ce">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af388a8b4e2bda7685c3acb216ffc73ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61060e84df23feb6da2414e9ad044963"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#a61060e84df23feb6da2414e9ad044963">freeHUD</a> (void *object)</td></tr>
+<tr class="memdesc:a61060e84df23feb6da2414e9ad044963"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libère la mémoire utilisée par le HUD.  <a href="hud_8c.html#a61060e84df23feb6da2414e9ad044963">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a61060e84df23feb6da2414e9ad044963"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18e3dbaca14748eb34c6b4249c3570b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#a18e3dbaca14748eb34c6b4249c3570b3">updateHUDWrapper</a> (<a class="el" href="structt__fonction_param.html">t_fonctionParam</a> *f)</td></tr>
+<tr class="memdesc:a18e3dbaca14748eb34c6b4249c3570b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper pour mettre à jour le HUD (compatible avec fonctionManager)  <a href="hud_8c.html#a18e3dbaca14748eb34c6b4249c3570b3">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a18e3dbaca14748eb34c6b4249c3570b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad033bcd35bc8429da44582cc1d45a4ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#ad033bcd35bc8429da44582cc1d45a4ee">renderHUDWrapper</a> (<a class="el" href="structt__fonction_param.html">t_fonctionParam</a> *f)</td></tr>
+<tr class="memdesc:ad033bcd35bc8429da44582cc1d45a4ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper pour afficher le HUD (compatible avec fonctionManager)  <a href="hud_8c.html#ad033bcd35bc8429da44582cc1d45a4ee">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad033bcd35bc8429da44582cc1d45a4ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a26a1be3cbca1bd0a066c243f3e093a8f"><td class="memItemLeft" align="right" valign="top">const SDL_Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#a26a1be3cbca1bd0a066c243f3e093a8f">HEALTH_BG</a> = {40, 40, 40, 255}</td></tr>
+<tr class="separator:a26a1be3cbca1bd0a066c243f3e093a8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6e589984de65ef9cadf683b43a28f62"><td class="memItemLeft" align="right" valign="top">const SDL_Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#ab6e589984de65ef9cadf683b43a28f62">HEALTH_BORDER</a> = {80, 80, 80, 255}</td></tr>
+<tr class="separator:ab6e589984de65ef9cadf683b43a28f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d7f0a2bb355e5af518dead03af80dd4"><td class="memItemLeft" align="right" valign="top">const SDL_Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#a7d7f0a2bb355e5af518dead03af80dd4">HEALTH_HIGHLIGHT</a> = {255, 255, 255, 100}</td></tr>
+<tr class="separator:a7d7f0a2bb355e5af518dead03af80dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a153fe425be6db3efa84633a4fcb4a76a"><td class="memItemLeft" align="right" valign="top">const SDL_Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#a153fe425be6db3efa84633a4fcb4a76a">XP_BG</a> = {15, 20, 50, 200}</td></tr>
+<tr class="separator:a153fe425be6db3efa84633a4fcb4a76a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa76a20f781e805412f0b8b9b9896d681"><td class="memItemLeft" align="right" valign="top">const SDL_Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#aa76a20f781e805412f0b8b9b9896d681">XP_BORDER</a> = {30, 35, 80, 255}</td></tr>
+<tr class="separator:aa76a20f781e805412f0b8b9b9896d681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04b953cdb26a047fdff6507d2d190270"><td class="memItemLeft" align="right" valign="top">const SDL_Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hud_8c.html#a04b953cdb26a047fdff6507d2d190270">GOLD_COLOR</a> = {255, 215, 0, 255}</td></tr>
+<tr class="separator:a04b953cdb26a047fdff6507d2d190270"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentation des macros</h2>
+<a id="aaa69f89df4c8e47abeb574bfdd11d9f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa69f89df4c8e47abeb574bfdd11d9f4">&#9670;&nbsp;</a></span>ANIMATION_SPEED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ANIMATION_SPEED&#160;&#160;&#160;0.05f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00007">7</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="ab0b42faa15a14c500e4c1fb4b804d2df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0b42faa15a14c500e4c1fb4b804d2df">&#9670;&nbsp;</a></span>BAR_GAP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BAR_GAP&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00016">16</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="aa67f5290e4cf518cd55c95c8b644d5f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa67f5290e4cf518cd55c95c8b644d5f2">&#9670;&nbsp;</a></span>BAR_WIDTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BAR_WIDTH&#160;&#160;&#160;250</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00018">18</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="a002b2f4894492820fe708b1b7e7c5e70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a002b2f4894492820fe708b1b7e7c5e70">&#9670;&nbsp;</a></span>EPSILON</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EPSILON&#160;&#160;&#160;0.001f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00008">8</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="ab164b13e1552704b42e65b216a5f2309"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab164b13e1552704b42e65b216a5f2309">&#9670;&nbsp;</a></span>HEALTH_BAR_BORDER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HEALTH_BAR_BORDER&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00010">10</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="af2769e7df8f8cb9b9aa545061eabede5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2769e7df8f8cb9b9aa545061eabede5">&#9670;&nbsp;</a></span>HEALTH_BAR_HEIGHT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HEALTH_BAR_HEIGHT&#160;&#160;&#160;24</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00014">14</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="a8d13ba8e5f084c7b2cc6e600e799ffb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d13ba8e5f084c7b2cc6e600e799ffb6">&#9670;&nbsp;</a></span>HEALTH_BAR_PADDING</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HEALTH_BAR_PADDING&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00009">9</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="a072e72751b90f05048e313dcfe580845"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a072e72751b90f05048e313dcfe580845">&#9670;&nbsp;</a></span>HEALTH_HIGHLIGHT_HEIGHT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HEALTH_HIGHLIGHT_HEIGHT&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00011">11</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="ac167d16e092cb0814fb9413df5df1971"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac167d16e092cb0814fb9413df5df1971">&#9670;&nbsp;</a></span>HUD_PADDING</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HUD_PADDING&#160;&#160;&#160;10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00013">13</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="adf24cd7bee569151330489a0fe592349"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf24cd7bee569151330489a0fe592349">&#9670;&nbsp;</a></span>ICON_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ICON_SIZE&#160;&#160;&#160;32</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00017">17</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="a801b26dd9f3a318acf84d78efbe56294"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a801b26dd9f3a318acf84d78efbe56294">&#9670;&nbsp;</a></span>XP_BAR_HEIGHT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define XP_BAR_HEIGHT&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00015">15</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des fonctions</h2>
+<a id="ab5c94b35150b778d85c8033a513e5ace"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5c94b35150b778d85c8033a513e5ace">&#9670;&nbsp;</a></span>createHUD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structt__hud.html">t_hud</a>* createHUD </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TTF_Font *&#160;</td>
+          <td class="paramname"><em>font</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__tileset.html">t_tileset</a> *&#160;</td>
+          <td class="paramname"><em>tileset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crée une nouvelle instance du HUD. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>Renderer SDL pour créer les textures </td></tr>
+    <tr><td class="paramname">font</td><td>Police à utiliser pour les textes </td></tr>
+    <tr><td class="paramname">tileset</td><td>Tileset contenant les graphismes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Pointeur vers le HUD créé </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00035">35</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_ab5c94b35150b778d85c8033a513e5ace_cgraph.png" border="0" usemap="#ahud_8c_ab5c94b35150b778d85c8033a513e5ace_cgraph" alt=""/></div>
+<map name="ahud_8c_ab5c94b35150b778d85c8033a513e5ace_cgraph" id="ahud_8c_ab5c94b35150b778d85c8033a513e5ace_cgraph">
+<area shape="rect" title="Crée une nouvelle instance du HUD." alt="" coords="5,56,99,83"/>
+<area shape="rect" href="animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="147,56,277,83"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="328,5,413,32"/>
+<area shape="rect" href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="153,107,271,133"/>
+<area shape="rect" href="timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2" title="Initialise un nouveau timer." alt="" coords="330,56,411,83"/>
+<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="325,107,416,133"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_ab5c94b35150b778d85c8033a513e5ace_icgraph.png" border="0" usemap="#ahud_8c_ab5c94b35150b778d85c8033a513e5ace_icgraph" alt=""/></div>
+<map name="ahud_8c_ab5c94b35150b778d85c8033a513e5ace_icgraph" id="ahud_8c_ab5c94b35150b778d85c8033a513e5ace_icgraph">
+<area shape="rect" title="Crée une nouvelle instance du HUD." alt="" coords="1020,56,1113,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a61060e84df23feb6da2414e9ad044963"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61060e84df23feb6da2414e9ad044963">&#9670;&nbsp;</a></span>freeHUD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void freeHUD </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>hud</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Libère la mémoire utilisée par le HUD. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hud</td><td>Pointeur vers le HUD à libérer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00199">199</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_a61060e84df23feb6da2414e9ad044963_cgraph.png" border="0" usemap="#ahud_8c_a61060e84df23feb6da2414e9ad044963_cgraph" alt=""/></div>
+<map name="ahud_8c_a61060e84df23feb6da2414e9ad044963_cgraph" id="ahud_8c_a61060e84df23feb6da2414e9ad044963_cgraph">
+<area shape="rect" title="Libère la mémoire utilisée par le HUD." alt="" coords="5,5,84,32"/>
+<area shape="rect" href="text_8c.html#ab9b7064da4ef9403241f3d40389af46a" title="Libère la mémoire utilisée par un élément textuel." alt="" coords="132,5,207,32"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_a61060e84df23feb6da2414e9ad044963_icgraph.png" border="0" usemap="#ahud_8c_a61060e84df23feb6da2414e9ad044963_icgraph" alt=""/></div>
+<map name="ahud_8c_a61060e84df23feb6da2414e9ad044963_icgraph" id="ahud_8c_a61060e84df23feb6da2414e9ad044963_icgraph">
+<area shape="rect" title="Libère la mémoire utilisée par le HUD." alt="" coords="1020,56,1099,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac2ceb2c64a019e971014a312b534649f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2ceb2c64a019e971014a312b534649f">&#9670;&nbsp;</a></span>render_cooldown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void render_cooldown </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Rect&#160;</td>
+          <td class="paramname"><em>rect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ratio</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00096">96</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_ac2ceb2c64a019e971014a312b534649f_icgraph.png" border="0" usemap="#ahud_8c_ac2ceb2c64a019e971014a312b534649f_icgraph" alt=""/></div>
+<map name="ahud_8c_ac2ceb2c64a019e971014a312b534649f_icgraph" id="ahud_8c_ac2ceb2c64a019e971014a312b534649f_icgraph">
+<area shape="rect" title=" " alt="" coords="1360,56,1493,83"/>
+<area shape="rect" href="hud_8c.html#af388a8b4e2bda7685c3acb216ffc73ce" title="Affiche le HUD à l&#39;écran." alt="" coords="1217,56,1312,83"/>
+<area shape="rect" href="hud_8c.html#ad033bcd35bc8429da44582cc1d45a4ee" title="Wrapper pour afficher le HUD (compatible avec fonctionManager)" alt="" coords="1020,56,1169,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a026c775dfde1812480ba7b23cb9218c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a026c775dfde1812480ba7b23cb9218c7">&#9670;&nbsp;</a></span>renderHealthBar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderHealthBar </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Rect&#160;</td>
+          <td class="paramname"><em>barRect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>currentRatio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>targetRatio</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00107">107</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_a026c775dfde1812480ba7b23cb9218c7_icgraph.png" border="0" usemap="#ahud_8c_a026c775dfde1812480ba7b23cb9218c7_icgraph" alt=""/></div>
+<map name="ahud_8c_a026c775dfde1812480ba7b23cb9218c7_icgraph" id="ahud_8c_a026c775dfde1812480ba7b23cb9218c7_icgraph">
+<area shape="rect" title=" " alt="" coords="1360,56,1489,83"/>
+<area shape="rect" href="hud_8c.html#af388a8b4e2bda7685c3acb216ffc73ce" title="Affiche le HUD à l&#39;écran." alt="" coords="1217,56,1312,83"/>
+<area shape="rect" href="hud_8c.html#ad033bcd35bc8429da44582cc1d45a4ee" title="Wrapper pour afficher le HUD (compatible avec fonctionManager)" alt="" coords="1020,56,1169,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af388a8b4e2bda7685c3acb216ffc73ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af388a8b4e2bda7685c3acb216ffc73ce">&#9670;&nbsp;</a></span>renderHUD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderHUD </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structt__hud.html">t_hud</a> *&#160;</td>
+          <td class="paramname"><em>hud</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche le HUD à l'écran. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>Renderer SDL pour l'affichage </td></tr>
+    <tr><td class="paramname">hud</td><td>HUD à afficher </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00166">166</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_af388a8b4e2bda7685c3acb216ffc73ce_cgraph.png" border="0" usemap="#ahud_8c_af388a8b4e2bda7685c3acb216ffc73ce_cgraph" alt=""/></div>
+<map name="ahud_8c_af388a8b4e2bda7685c3acb216ffc73ce_cgraph" id="ahud_8c_af388a8b4e2bda7685c3acb216ffc73ce_cgraph">
+<area shape="rect" title="Affiche le HUD à l&#39;écran." alt="" coords="5,81,100,108"/>
+<area shape="rect" href="hud_8c.html#ac2ceb2c64a019e971014a312b534649f" title=" " alt="" coords="148,5,281,32"/>
+<area shape="rect" href="hud_8c.html#a026c775dfde1812480ba7b23cb9218c7" title=" " alt="" coords="150,56,279,83"/>
+<area shape="rect" href="text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="169,107,260,133"/>
+<area shape="rect" href="hud_8c.html#a79288053073d4617199b790c1aa5c4f9" title=" " alt="" coords="163,157,266,184"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_af388a8b4e2bda7685c3acb216ffc73ce_icgraph.png" border="0" usemap="#ahud_8c_af388a8b4e2bda7685c3acb216ffc73ce_icgraph" alt=""/></div>
+<map name="ahud_8c_af388a8b4e2bda7685c3acb216ffc73ce_icgraph" id="ahud_8c_af388a8b4e2bda7685c3acb216ffc73ce_icgraph">
+<area shape="rect" title="Affiche le HUD à l&#39;écran." alt="" coords="1217,56,1312,83"/>
+<area shape="rect" href="hud_8c.html#ad033bcd35bc8429da44582cc1d45a4ee" title="Wrapper pour afficher le HUD (compatible avec fonctionManager)" alt="" coords="1020,56,1169,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad033bcd35bc8429da44582cc1d45a4ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad033bcd35bc8429da44582cc1d45a4ee">&#9670;&nbsp;</a></span>renderHUDWrapper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderHUDWrapper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__fonction_param.html">t_fonctionParam</a> *&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wrapper pour afficher le HUD (compatible avec fonctionManager) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Paramètres de la fonction </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00214">214</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_ad033bcd35bc8429da44582cc1d45a4ee_cgraph.png" border="0" usemap="#ahud_8c_ad033bcd35bc8429da44582cc1d45a4ee_cgraph" alt=""/></div>
+<map name="ahud_8c_ad033bcd35bc8429da44582cc1d45a4ee_cgraph" id="ahud_8c_ad033bcd35bc8429da44582cc1d45a4ee_cgraph">
+<area shape="rect" title="Wrapper pour afficher le HUD (compatible avec fonctionManager)" alt="" coords="5,81,155,108"/>
+<area shape="rect" href="hud_8c.html#af388a8b4e2bda7685c3acb216ffc73ce" title="Affiche le HUD à l&#39;écran." alt="" coords="203,81,297,108"/>
+<area shape="rect" href="hud_8c.html#ac2ceb2c64a019e971014a312b534649f" title=" " alt="" coords="345,5,479,32"/>
+<area shape="rect" href="hud_8c.html#a026c775dfde1812480ba7b23cb9218c7" title=" " alt="" coords="347,56,477,83"/>
+<area shape="rect" href="text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="367,107,457,133"/>
+<area shape="rect" href="hud_8c.html#a79288053073d4617199b790c1aa5c4f9" title=" " alt="" coords="361,157,463,184"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_ad033bcd35bc8429da44582cc1d45a4ee_icgraph.png" border="0" usemap="#ahud_8c_ad033bcd35bc8429da44582cc1d45a4ee_icgraph" alt=""/></div>
+<map name="ahud_8c_ad033bcd35bc8429da44582cc1d45a4ee_icgraph" id="ahud_8c_ad033bcd35bc8429da44582cc1d45a4ee_icgraph">
+<area shape="rect" title="Wrapper pour afficher le HUD (compatible avec fonctionManager)" alt="" coords="1020,56,1169,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a79288053073d4617199b790c1aa5c4f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79288053073d4617199b790c1aa5c4f9">&#9670;&nbsp;</a></span>renderXPBar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderXPBar </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Rect&#160;</td>
+          <td class="paramname"><em>barRect</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>currentRatio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>targetRatio</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00144">144</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_a79288053073d4617199b790c1aa5c4f9_icgraph.png" border="0" usemap="#ahud_8c_a79288053073d4617199b790c1aa5c4f9_icgraph" alt=""/></div>
+<map name="ahud_8c_a79288053073d4617199b790c1aa5c4f9_icgraph" id="ahud_8c_a79288053073d4617199b790c1aa5c4f9_icgraph">
+<area shape="rect" title=" " alt="" coords="1360,56,1463,83"/>
+<area shape="rect" href="hud_8c.html#af388a8b4e2bda7685c3acb216ffc73ce" title="Affiche le HUD à l&#39;écran." alt="" coords="1217,56,1312,83"/>
+<area shape="rect" href="hud_8c.html#ad033bcd35bc8429da44582cc1d45a4ee" title="Wrapper pour afficher le HUD (compatible avec fonctionManager)" alt="" coords="1020,56,1169,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a89fc053a2dfbb21597473287f4e918c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89fc053a2dfbb21597473287f4e918c8">&#9670;&nbsp;</a></span>update_text()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void update_text </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__text.html">t_text</a> **&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>content</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TTF_Font *&#160;</td>
+          <td class="paramname"><em>font</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Color&#160;</td>
+          <td class="paramname"><em>fg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Color&#160;</td>
+          <td class="paramname"><em>bg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>outline</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00027">27</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_a89fc053a2dfbb21597473287f4e918c8_cgraph.png" border="0" usemap="#ahud_8c_a89fc053a2dfbb21597473287f4e918c8_cgraph" alt=""/></div>
+<map name="ahud_8c_a89fc053a2dfbb21597473287f4e918c8_cgraph" id="ahud_8c_a89fc053a2dfbb21597473287f4e918c8_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,105,32"/>
+<area shape="rect" href="text_8c.html#a92567a5bf04e06ed469717198d991136" title="Crée un texte avec contour." alt="" coords="343,5,480,32"/>
+<area shape="rect" href="text_8c.html#a188a5e1361d94e2517bacbc2a6f39509" title="Met à jour un texte avec contour existant." alt="" coords="153,31,295,57"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_a89fc053a2dfbb21597473287f4e918c8_icgraph.png" border="0" usemap="#ahud_8c_a89fc053a2dfbb21597473287f4e918c8_icgraph" alt=""/></div>
+<map name="ahud_8c_a89fc053a2dfbb21597473287f4e918c8_icgraph" id="ahud_8c_a89fc053a2dfbb21597473287f4e918c8_icgraph">
+<area shape="rect" title=" " alt="" coords="1365,56,1465,83"/>
+<area shape="rect" href="hud_8c.html#a4d7fc060909e74a660fe1171b257f406" title="Met à jour les informations du HUD." alt="" coords="1220,56,1317,83"/>
+<area shape="rect" href="hud_8c.html#a18e3dbaca14748eb34c6b4249c3570b3" title="Wrapper pour mettre à jour le HUD (compatible avec fonctionManager)" alt="" coords="1020,56,1172,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4d7fc060909e74a660fe1171b257f406"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d7fc060909e74a660fe1171b257f406">&#9670;&nbsp;</a></span>updateHUD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updateHUD </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__hud.html">t_hud</a> *&#160;</td>
+          <td class="paramname"><em>hud</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="enemy_8h.html#a562df2301504c40a35596ed45f41f2b2">t_joueur</a> *&#160;</td>
+          <td class="paramname"><em>player</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Met à jour les informations du HUD. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hud</td><td>HUD à mettre à jour </td></tr>
+    <tr><td class="paramname">renderer</td><td>Renderer SDL pour mettre à jour les textures </td></tr>
+    <tr><td class="paramname">player</td><td>Joueur dont les informations sont à afficher </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00064">64</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_a4d7fc060909e74a660fe1171b257f406_cgraph.png" border="0" usemap="#ahud_8c_a4d7fc060909e74a660fe1171b257f406_cgraph" alt=""/></div>
+<map name="ahud_8c_a4d7fc060909e74a660fe1171b257f406_cgraph" id="ahud_8c_a4d7fc060909e74a660fe1171b257f406_cgraph">
+<area shape="rect" title="Met à jour les informations du HUD." alt="" coords="5,81,103,108"/>
+<area shape="rect" href="player_8c.html#acecd15b6ea9287bbc4a1ef451e535fb9" title="Calcule la progression vers le niveau suivant." alt="" coords="151,5,308,32"/>
+<area shape="rect" href="timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="388,107,465,133"/>
+<area shape="rect" href="hud_8c.html#a89fc053a2dfbb21597473287f4e918c8" title=" " alt="" coords="179,56,279,83"/>
+<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="162,157,297,184"/>
+<area shape="rect" href="text_8c.html#a92567a5bf04e06ed469717198d991136" title="Crée un texte avec contour." alt="" coords="545,31,683,57"/>
+<area shape="rect" href="text_8c.html#a188a5e1361d94e2517bacbc2a6f39509" title="Met à jour un texte avec contour existant." alt="" coords="356,56,497,83"/>
+<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="381,208,472,235"/>
+<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="368,157,485,184"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_a4d7fc060909e74a660fe1171b257f406_icgraph.png" border="0" usemap="#ahud_8c_a4d7fc060909e74a660fe1171b257f406_icgraph" alt=""/></div>
+<map name="ahud_8c_a4d7fc060909e74a660fe1171b257f406_icgraph" id="ahud_8c_a4d7fc060909e74a660fe1171b257f406_icgraph">
+<area shape="rect" title="Met à jour les informations du HUD." alt="" coords="1220,56,1317,83"/>
+<area shape="rect" href="hud_8c.html#a18e3dbaca14748eb34c6b4249c3570b3" title="Wrapper pour mettre à jour le HUD (compatible avec fonctionManager)" alt="" coords="1020,56,1172,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a18e3dbaca14748eb34c6b4249c3570b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18e3dbaca14748eb34c6b4249c3570b3">&#9670;&nbsp;</a></span>updateHUDWrapper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void updateHUDWrapper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__fonction_param.html">t_fonctionParam</a> *&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wrapper pour mettre à jour le HUD (compatible avec fonctionManager) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Paramètres de la fonction </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00210">210</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+<div class="dynheader">
+Voici le graphe d'appel pour cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_a18e3dbaca14748eb34c6b4249c3570b3_cgraph.png" border="0" usemap="#ahud_8c_a18e3dbaca14748eb34c6b4249c3570b3_cgraph" alt=""/></div>
+<map name="ahud_8c_a18e3dbaca14748eb34c6b4249c3570b3_cgraph" id="ahud_8c_a18e3dbaca14748eb34c6b4249c3570b3_cgraph">
+<area shape="rect" title="Wrapper pour mettre à jour le HUD (compatible avec fonctionManager)" alt="" coords="5,81,157,108"/>
+<area shape="rect" href="hud_8c.html#a4d7fc060909e74a660fe1171b257f406" title="Met à jour les informations du HUD." alt="" coords="205,81,303,108"/>
+<area shape="rect" href="player_8c.html#acecd15b6ea9287bbc4a1ef451e535fb9" title="Calcule la progression vers le niveau suivant." alt="" coords="351,5,508,32"/>
+<area shape="rect" href="timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="588,107,665,133"/>
+<area shape="rect" href="hud_8c.html#a89fc053a2dfbb21597473287f4e918c8" title=" " alt="" coords="379,56,479,83"/>
+<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="362,157,497,184"/>
+<area shape="rect" href="text_8c.html#a92567a5bf04e06ed469717198d991136" title="Crée un texte avec contour." alt="" coords="745,31,883,57"/>
+<area shape="rect" href="text_8c.html#a188a5e1361d94e2517bacbc2a6f39509" title="Met à jour un texte avec contour existant." alt="" coords="556,56,697,83"/>
+<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="581,208,672,235"/>
+<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="568,157,685,184"/>
+</map>
+</div>
+<div class="dynheader">
+Voici le graphe des appelants de cette fonction :</div>
+<div class="dyncontent">
+<div class="center"><img src="hud_8c_a18e3dbaca14748eb34c6b4249c3570b3_icgraph.png" border="0" usemap="#ahud_8c_a18e3dbaca14748eb34c6b4249c3570b3_icgraph" alt=""/></div>
+<map name="ahud_8c_a18e3dbaca14748eb34c6b4249c3570b3_icgraph" id="ahud_8c_a18e3dbaca14748eb34c6b4249c3570b3_icgraph">
+<area shape="rect" title="Wrapper pour mettre à jour le HUD (compatible avec fonctionManager)" alt="" coords="1020,56,1172,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des variables</h2>
+<a id="a04b953cdb26a047fdff6507d2d190270"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04b953cdb26a047fdff6507d2d190270">&#9670;&nbsp;</a></span>GOLD_COLOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const SDL_Color GOLD_COLOR = {255, 215, 0, 255}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00025">25</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="a26a1be3cbca1bd0a066c243f3e093a8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26a1be3cbca1bd0a066c243f3e093a8f">&#9670;&nbsp;</a></span>HEALTH_BG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const SDL_Color HEALTH_BG = {40, 40, 40, 255}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00020">20</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="ab6e589984de65ef9cadf683b43a28f62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6e589984de65ef9cadf683b43a28f62">&#9670;&nbsp;</a></span>HEALTH_BORDER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const SDL_Color HEALTH_BORDER = {80, 80, 80, 255}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00021">21</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="a7d7f0a2bb355e5af518dead03af80dd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d7f0a2bb355e5af518dead03af80dd4">&#9670;&nbsp;</a></span>HEALTH_HIGHLIGHT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const SDL_Color HEALTH_HIGHLIGHT = {255, 255, 255, 100}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00022">22</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="a153fe425be6db3efa84633a4fcb4a76a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a153fe425be6db3efa84633a4fcb4a76a">&#9670;&nbsp;</a></span>XP_BG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const SDL_Color XP_BG = {15, 20, 50, 200}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00023">23</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+<a id="aa76a20f781e805412f0b8b9b9896d681"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa76a20f781e805412f0b8b9b9896d681">&#9670;&nbsp;</a></span>XP_BORDER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const SDL_Color XP_BORDER = {30, 35, 80, 255}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="hud_8c_source.html#l00024">24</a> du fichier <a class="el" href="hud_8c_source.html">hud.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

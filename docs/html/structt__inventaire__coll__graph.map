@@ -1,0 +1,4 @@
+<map id="t_inventaire" name="t_inventaire">
+<area shape="rect" id="node1" title="Inventaire contenant les items." alt="" coords="21,95,121,121"/>
+<area shape="rect" id="node2" href="$structt__object_manager.html" title="Gestionnaire des objets." alt="" coords="5,5,136,32"/>
+</map>

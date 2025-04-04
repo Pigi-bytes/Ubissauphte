@@ -1,0 +1,4 @@
+<map id="itemFree" name="itemFree">
+<area shape="rect" id="node1" title="Libère la mémoire d&#39;un item." alt="" coords="5,5,85,32"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#aa17aa9d46c431f4b91114108468b73f3" title="Libere toute la memoire du gestionnaire et ses objets." alt="" coords="133,5,280,32"/>
+</map>

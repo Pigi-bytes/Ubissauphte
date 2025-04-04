@@ -1,0 +1,6 @@
+<map id="t_hud" name="t_hud">
+<area shape="rect" id="node1" title="Structure principale du HUD (Heads&#45;Up Display)" alt="" coords="94,213,153,240"/>
+<area shape="rect" id="node2" href="$structt__animation.html" title="Représente une séquence d&#39;animation avec ses paramètres." alt="" coords="5,95,105,121"/>
+<area shape="rect" id="node3" href="$structt__timer.html" title="Timer basé sur les ticks SDL." alt="" coords="21,5,90,32"/>
+<area shape="rect" id="node4" href="$structt__text.html" title="Structure représentant un élément textuel dans l&#39;interface." alt="" coords="161,95,221,121"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="inventory_load" name="inventory_load">
+<area shape="rect" id="node1" title="Charge un inventaire depuis un fichier." alt="" coords="5,233,124,260"/>
+<area shape="rect" id="node2" href="$equipements_manager_8c.html#a43fd9bc1e73271ce69490fd2600dd3d1" title="Crée un nouvel inventaire vide." alt="" coords="186,107,315,133"/>
+<area shape="rect" id="node7" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="576,259,661,285"/>
+<area shape="rect" id="node8" href="$fichier_loader_8c.html#aac2d50f05107099fa1c4ef3e494949ed" title="Recherche une valeur dans un block de donnees." alt="" coords="211,259,290,285"/>
+<area shape="rect" id="node9" href="$equipements_manager_8c.html#aee54a2c5f88bf08ed74e4c1c016f773a" title="Ajoute un objet à l&#39;inventaire." alt="" coords="172,360,329,387"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="379,5,526,32"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="381,56,524,83"/>
+<area shape="rect" id="node5" href="$equipements_manager_8c.html#a145b60908123a9bc199af48b992b3baf" title="Fonction wrapper pour la libération d&#39;item." alt="" coords="397,107,508,133"/>
+<area shape="rect" id="node6" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="401,157,504,184"/>
+<area shape="rect" id="node10" href="$object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="409,309,497,336"/>
+<area shape="rect" id="node11" href="$object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="382,360,523,387"/>
+<area shape="rect" id="node12" href="$equipements_manager_8c.html#a0a7ab9c085d79cdb4ab665c5d7095e8a" title="Vérifie si un item possède un flag donné" alt="" coords="416,411,489,437"/>
+<area shape="rect" id="node13" href="$equipements_manager_8c.html#aeb66c8d0b70efa9056e84b0e77331878" title="Trouve une pile d&#39;items dans l&#39;inventaire." alt="" coords="377,461,528,488"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="resolveCollision" name="resolveCollision">
+<area shape="rect" id="node1" title=" " alt="" coords="5,145,132,172"/>
+<area shape="rect" id="node2" href="$physics_8c.html#a49535bbd051fba95b354c0b799aeaecd" title=" " alt="" coords="180,95,351,121"/>
+<area shape="rect" id="node6" href="$physics_8c.html#aa4c391b6039023d72360858573598931" title=" " alt="" coords="185,171,345,197"/>
+<area shape="rect" id="node3" href="$physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="403,5,594,32"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="456,56,541,83"/>
+<area shape="rect" id="node5" href="$physics_8c.html#a939ce6d2a8a36cf8aa70ca659cca1cb5" title=" " alt="" coords="399,107,599,133"/>
+<area shape="rect" id="node7" href="$physics_8c.html#aea0d92f868946fd053a28534a3f7cbf4" title="Détecte collision entre un cercle et un rectangle." alt="" coords="407,157,590,184"/>
+<area shape="rect" id="node8" href="$tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="465,208,532,235"/>
+<area shape="rect" id="node9" href="$physics_8c.html#a3b50b7ed91abcb9306aaa9fd47b98e8a" title=" " alt="" coords="403,259,595,285"/>
+</map>

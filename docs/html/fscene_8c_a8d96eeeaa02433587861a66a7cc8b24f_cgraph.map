@@ -1,0 +1,7 @@
+<map id="getPrevuisScene" name="getPrevuisScene">
+<area shape="rect" id="node1" title="Revient à la scène précédente." alt="" coords="5,56,136,83"/>
+<area shape="rect" id="node2" href="$fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="184,5,359,32"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="414,81,499,108"/>
+<area shape="rect" id="node5" href="$fscene_8c.html#a203dc7420436877b66bbcc6e559483af" title="Récupère l&#39;index d&#39;une scène." alt="" coords="213,107,329,133"/>
+<area shape="rect" id="node3" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="407,5,507,32"/>
+</map>

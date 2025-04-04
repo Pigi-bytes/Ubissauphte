@@ -1,0 +1,6 @@
+<map id="freeSceneByName" name="freeSceneByName">
+<area shape="rect" id="node1" title="Libère une scène par son nom." alt="" coords="5,31,148,57"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9" title="Supprime un objet du gestionnaire à l&#39;index spécifié" alt="" coords="196,56,301,83"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="370,5,455,32"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="349,56,476,83"/>
+</map>

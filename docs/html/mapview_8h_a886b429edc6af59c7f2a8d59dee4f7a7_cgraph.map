@@ -1,0 +1,4 @@
+<map id="generateMap" name="generateMap">
+<area shape="rect" id="node1" title="Génère la représentation visuelle de la carte." alt="" coords="5,5,113,32"/>
+<area shape="rect" id="node2" href="$mapview_8c.html#a8cf36049c7d8cffd14321df249e73f55" title="Détermine les limites min/max des coordonnées des salles." alt="" coords="161,5,252,32"/>
+</map>

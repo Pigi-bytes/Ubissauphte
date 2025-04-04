@@ -1,0 +1,6 @@
+<map id="updateFPSDisplayWrapper" name="updateFPSDisplayWrapper">
+<area shape="rect" id="node1" title="Wrapper pour la mise à jour du compteur FPS." alt="" coords="5,5,200,32"/>
+<area shape="rect" id="node2" href="$fps_display_8c.html#a9dcc13543c4699deb3a644de85384005" title="Met à jour l&#39;affichage des FPS." alt="" coords="248,5,388,32"/>
+<area shape="rect" id="node3" href="$text_8c.html#a6aad28e2d5f69d57937dae840fa9a915" title="Met à jour un texte simple existant." alt="" coords="436,5,531,32"/>
+<area shape="rect" id="node4" href="$text_8c.html#aeb2abb74af73c1c4372b43db48c96d3e" title="Crée un texte simple sans contour." alt="" coords="579,5,669,32"/>
+</map>

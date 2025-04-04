@@ -1,0 +1,7 @@
+<map id="renderStackCount" name="renderStackCount">
+<area shape="rect" id="node1" title="Affiche le nombre d&#39;items dans une pile." alt="" coords="5,56,144,83"/>
+<area shape="rect" id="node2" href="$affichage_8c.html#a2066dcaf9ebb545d26aea7e391b0a997" title="Crée le texte pour afficher un nombre d&#39;items." alt="" coords="192,5,356,32"/>
+<area shape="rect" id="node4" href="$text_8c.html#ab9b7064da4ef9403241f3d40389af46a" title="Libère la mémoire utilisée par un élément textuel." alt="" coords="237,56,311,83"/>
+<area shape="rect" id="node5" href="$text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="229,107,319,133"/>
+<area shape="rect" id="node3" href="$text_8c.html#aeb2abb74af73c1c4372b43db48c96d3e" title="Crée un texte simple sans contour." alt="" coords="404,5,495,32"/>
+</map>

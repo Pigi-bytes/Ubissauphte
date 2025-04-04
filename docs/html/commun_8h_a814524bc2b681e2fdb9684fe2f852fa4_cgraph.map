@@ -1,0 +1,4 @@
+<map id="renderMinimapWrapper" name="renderMinimapWrapper">
+<area shape="rect" id="node1" title="Wrapper pour le rendu de la minimap." alt="" coords="5,5,181,32"/>
+<area shape="rect" id="node2" href="$minimap_8c.html#ac0f6da31e9e7a76db6cd9b9fef9a9934" title="Dessine la minimap a l&#39;écran." alt="" coords="229,5,351,32"/>
+</map>

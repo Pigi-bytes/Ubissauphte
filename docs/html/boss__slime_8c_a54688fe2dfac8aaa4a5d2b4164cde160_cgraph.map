@@ -1,0 +1,11 @@
+<map id="handleBossIdleState" name="handleBossIdleState">
+<area shape="rect" id="node1" title=" " alt="" coords="5,81,160,108"/>
+<area shape="rect" id="node2" href="$timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="220,5,336,32"/>
+<area shape="rect" id="node3" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="214,56,342,83"/>
+<area shape="rect" id="node4" href="$animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="223,107,333,133"/>
+<area shape="rect" id="node9" href="$timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="208,157,348,184"/>
+<area shape="rect" id="node5" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="413,56,498,83"/>
+<area shape="rect" id="node6" href="$animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="396,107,515,133"/>
+<area shape="rect" id="node8" href="$animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="397,157,514,184"/>
+<area shape="rect" id="node7" href="$timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="563,107,653,133"/>
+</map>

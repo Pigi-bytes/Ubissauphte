@@ -1,0 +1,11 @@
+<map id="equiperSlotWrapper" name="equiperSlotWrapper">
+<area shape="rect" id="node1" title=" " alt="" coords="5,81,156,108"/>
+<area shape="rect" id="node2" href="$affichage_8c.html#a4ab9d7cb686cf3aaf787bebeb9797f96" title=" " alt="" coords="204,81,300,108"/>
+<area shape="rect" id="node3" href="$affichage_8c.html#a89792fe0f90bf5107fe4dc53a0d72260" title="Crée une ligne de texte pour une statistique." alt="" coords="377,5,493,32"/>
+<area shape="rect" id="node4" href="$text_8c.html#aeb2abb74af73c1c4372b43db48c96d3e" title="Crée un texte simple sans contour." alt="" coords="390,56,481,83"/>
+<area shape="rect" id="node5" href="$equipements_manager_8c.html#a25f46091d53834a778e3659f9f3b8772" title="Équipe un item depuis l&#39;inventaire." alt="" coords="361,107,510,133"/>
+<area shape="rect" id="node9" href="$equipements_manager_8c.html#a4f9ae7e71964ead6eb3db8d5a2285849" title="Trouve l&#39;index d&#39;un item dans l&#39;inventaire." alt="" coords="348,157,523,184"/>
+<area shape="rect" id="node6" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="621,56,721,83"/>
+<area shape="rect" id="node7" href="$equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="571,107,772,133"/>
+<area shape="rect" id="node8" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="629,157,714,184"/>
+</map>

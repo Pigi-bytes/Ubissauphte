@@ -1,0 +1,9 @@
+<map id="checkPhaseTransitions" name="checkPhaseTransitions">
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,175,133"/>
+<area shape="rect" id="node2" href="$particules_8c.html#a6c99f1cfe6a58e4d007422917f3f1bdd" title="Émet des particules pour un changement de phase." alt="" coords="223,31,417,57"/>
+<area shape="rect" id="node5" href="$timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="262,81,378,108"/>
+<area shape="rect" id="node6" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="256,132,384,159"/>
+<area shape="rect" id="node7" href="$timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="257,183,383,209"/>
+<area shape="rect" id="node3" href="$particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="465,5,616,32"/>
+<area shape="rect" id="node4" href="$particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="480,56,601,83"/>
+</map>

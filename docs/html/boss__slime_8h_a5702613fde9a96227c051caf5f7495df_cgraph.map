@@ -1,0 +1,5 @@
+<map id="createBossHealthBar" name="createBossHealthBar">
+<area shape="rect" id="node1" title="Crée une barre de vie pour le boss." alt="" coords="5,31,164,57"/>
+<area shape="rect" id="node2" href="$timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="217,5,333,32"/>
+<area shape="rect" id="node3" href="$timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="212,56,337,83"/>
+</map>

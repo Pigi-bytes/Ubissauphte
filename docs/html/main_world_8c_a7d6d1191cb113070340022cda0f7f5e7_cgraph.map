@@ -1,0 +1,21 @@
+<map id="createMapWord" name="createMapWord">
+<area shape="rect" id="node1" title="Crée une carte à partir d&#39;une configuration." alt="" coords="5,208,129,235"/>
+<area shape="rect" id="node2" href="$commun_8c.html#ad908d5c383621415ac3303b78f098812" title="Wrapper générique d&#39;affichage." alt="" coords="200,5,337,32"/>
+<area shape="rect" id="node4" href="$fscene_8c.html#a4b143d78504ee5f7584a44fb6479e3f0" title="Crée une nouvelle scène." alt="" coords="217,56,320,83"/>
+<area shape="rect" id="node5" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="195,107,342,133"/>
+<area shape="rect" id="node6" href="$mapview_8c.html#af13e3afed524e2cb61d969acf1042011" title="Libère la mémoire utilisée par la structure d&#39;affichage de carte." alt="" coords="208,157,329,184"/>
+<area shape="rect" id="node7" href="$mapview_8c.html#a88fc166e98c5406a3d4fb5d5a5fb3263" title="Génère la représentation visuelle de la carte." alt="" coords="215,208,323,235"/>
+<area shape="rect" id="node9" href="$commun_8c.html#a3c58046d1cbb0700448c2967b7576171" title="Wrapper pour la gestion de la carte." alt="" coords="177,259,360,285"/>
+<area shape="rect" id="node16" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="197,309,340,336"/>
+<area shape="rect" id="node17" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="217,360,320,387"/>
+<area shape="rect" id="node18" href="$fscene_8c.html#accbd14eb8c93d348b61a8cb09bbbf489" title="Enregistre une fonction pour une scène." alt="" coords="184,411,353,437"/>
+<area shape="rect" id="node3" href="$mapview_8c.html#a30356d6bf7d30b155f68fbbbea7dc377" title="Affiche la carte à l&#39;écran." alt="" coords="430,5,513,32"/>
+<area shape="rect" id="node8" href="$mapview_8c.html#a8cf36049c7d8cffd14321df249e73f55" title="Détermine les limites min/max des coordonnées des salles." alt="" coords="426,208,517,235"/>
+<area shape="rect" id="node10" href="$mapview_8c.html#accf55e351452252df51157768a5c9657" title="Gère les entrées utilisateur dans la vue carte." alt="" coords="408,259,535,285"/>
+<area shape="rect" id="node11" href="$fscene_8c.html#a8d96eeeaa02433587861a66a7cc8b24f" title="Revient à la scène précédente." alt="" coords="583,259,713,285"/>
+<area shape="rect" id="node12" href="$fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="761,208,936,235"/>
+<area shape="rect" id="node14" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="991,309,1077,336"/>
+<area shape="rect" id="node15" href="$fscene_8c.html#a203dc7420436877b66bbcc6e559483af" title="Récupère l&#39;index d&#39;une scène." alt="" coords="791,309,907,336"/>
+<area shape="rect" id="node13" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="984,208,1084,235"/>
+<area shape="rect" id="node19" href="$object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="408,411,535,437"/>
+</map>

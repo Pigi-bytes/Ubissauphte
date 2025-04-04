@@ -1,0 +1,5 @@
+<map id="createAnimation" name="createAnimation">
+<area shape="rect" id="node1" title="Crée une nouvelle animation." alt="" coords="5,31,136,57"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="184,5,269,32"/>
+<area shape="rect" id="node3" href="$timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2" title="Initialise un nouveau timer." alt="" coords="186,56,267,83"/>
+</map>

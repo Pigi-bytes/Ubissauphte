@@ -1,0 +1,9 @@
+<map id="bouttonClickQuit" name="bouttonClickQuit">
+<area shape="rect" id="node1" title="fonction de ferme le programe si le boutton l&#39;utilisant est cliqué" alt="" coords="307,107,437,133"/>
+<area shape="rect" id="node2" href="$game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="116,5,251,32"/>
+<area shape="rect" id="node4" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="118,56,249,83"/>
+<area shape="rect" id="node5" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="108,107,259,133"/>
+<area shape="rect" id="node6" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="112,157,255,184"/>
+<area shape="rect" id="node7" href="$win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="138,208,229,235"/>
+<area shape="rect" id="node3" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,107,60,133"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="updateAnimation" name="updateAnimation">
+<area shape="rect" id="node1" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="5,56,140,83"/>
+<area shape="rect" id="node2" href="$timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="208,5,285,32"/>
+<area shape="rect" id="node3" href="$timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="201,56,292,83"/>
+<area shape="rect" id="node4" href="$animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="188,107,305,133"/>
+</map>

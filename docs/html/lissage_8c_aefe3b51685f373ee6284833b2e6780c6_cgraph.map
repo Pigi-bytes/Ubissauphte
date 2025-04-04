@@ -1,0 +1,5 @@
+<map id="caseSansVoisins" name="caseSansVoisins">
+<area shape="rect" id="node1" title="Vérifie si une case n&#39;a pas de voisins." alt="" coords="5,5,135,32"/>
+<area shape="rect" id="node2" href="$lissage_8c.html#a4cb665eeb015afb3aeab764f6def7070" title="Vérifie si une case est de type sol." alt="" coords="183,5,265,32"/>
+<area shape="rect" id="node3" href="$group__type__case__constants.html#gaa0ac9a00d6c9397011a34628c13bb902" title="Vérifie si une case existe." alt="" coords="313,5,376,32"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="initFPSDisplay" name="initFPSDisplay">
+<area shape="rect" id="node1" title="Initialise l&#39;affichage des FPS." alt="" coords="5,5,121,32"/>
+<area shape="rect" id="node2" href="$text_8c.html#aeb2abb74af73c1c4372b43db48c96d3e" title="Crée un texte simple sans contour." alt="" coords="169,5,260,32"/>
+</map>

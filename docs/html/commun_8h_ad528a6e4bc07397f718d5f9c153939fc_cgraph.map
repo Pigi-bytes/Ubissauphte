@@ -1,0 +1,8 @@
+<map id="updateMinimapWrapper" name="updateMinimapWrapper">
+<area shape="rect" id="node1" title="Wrapper pour la mise à jour de la minimap." alt="" coords="5,81,184,108"/>
+<area shape="rect" id="node2" href="$minimap_8c.html#af89eb2c1015a83f78a092dc9f7acb521" title="Met a jour le contenu de la minimap." alt="" coords="232,81,356,108"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="432,5,517,32"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="411,56,538,83"/>
+<area shape="rect" id="node5" href="$tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="441,107,508,133"/>
+<area shape="rect" id="node6" href="$object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="404,157,545,184"/>
+</map>

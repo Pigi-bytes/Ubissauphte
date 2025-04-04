@@ -1,0 +1,29 @@
+<map id="choixTiles" name="choixTiles">
+<area shape="rect" id="node1" title="Applique les tuiles à la grille." alt="" coords="5,537,93,564"/>
+<area shape="rect" id="node2" href="$gene_room_8c.html#ae1852105b1a586291e0262eee5441e25" title="Détecte un angle continu à droite." alt="" coords="157,107,305,133"/>
+<area shape="rect" id="node4" href="$gene_room_8c.html#a8559ae75196fafce33bc543ce20505dd" title="Détecte un angle continu à gauche." alt="" coords="148,157,313,184"/>
+<area shape="rect" id="node5" href="$gene_room_8c.html#a44183f467db01dab918378452a3742fd" title="Détecte un angle droit à combler." alt="" coords="185,563,276,589"/>
+<area shape="rect" id="node6" href="$gene_room_8c.html#a2147c57585c3ffe5b147d90d869a228c" title="Détecte un angle gauche à combler." alt="" coords="177,613,284,640"/>
+<area shape="rect" id="node7" href="$gene_room_8c.html#a21039d31906285de7be3249ac10f905b" title="Détecte un arrondi inférieur droit." alt="" coords="153,664,308,691"/>
+<area shape="rect" id="node8" href="$gene_room_8c.html#a1f231d9e25b3c67b46a10dcb22e7af77" title="Détecte un arrondi inférieur gauche." alt="" coords="145,715,317,741"/>
+<area shape="rect" id="node9" href="$gene_room_8c.html#a7ed66c1dc8079a0f92651bf41e26bdce" title="Détecte un arrondi supérieur droit." alt="" coords="149,5,312,32"/>
+<area shape="rect" id="node10" href="$gene_room_8c.html#a6ff7427b2774a20a3485173b5166f442" title="Détecte un arrondi supérieur gauche." alt="" coords="141,56,320,83"/>
+<area shape="rect" id="node11" href="$liste_block_8c.html#a30db6937fc6a2badca7e728d810f6960" title="Trouve un bloc par son nom." alt="" coords="385,259,498,285"/>
+<area shape="rect" id="node12" href="$gene_room_8c.html#a774dcd1fd93faa6c894c86f6ee5552aa" title=" " alt="" coords="192,765,269,792"/>
+<area shape="rect" id="node13" href="$gene_room_8c.html#a21d3e3b7cb18b07e3e8845c38dfa6f7a" title="Détecte une bordure mur avant." alt="" coords="163,816,298,843"/>
+<area shape="rect" id="node14" href="$gene_room_8c.html#ae856e0b23754e1b5db0c1fdea25af779" title="Détecte une bordure mur droit." alt="" coords="166,867,295,893"/>
+<area shape="rect" id="node15" href="$gene_room_8c.html#aa88154e40e29b7890cf31cd9049cff0c" title="Détecte une bordure mur gauche." alt="" coords="157,917,304,944"/>
+<area shape="rect" id="node16" href="$liste_block_8c.html#a9aa0642bbe5cd64582544bb08f6bf391" title="Copie les valeurs d&#39;un bloc vers un autre." alt="" coords="400,309,483,336"/>
+<area shape="rect" id="node17" href="$gene_room_8c.html#aa9cf0c4527a29ff9a303609c278e25c2" title="Récupère une décoration aléatoire." alt="" coords="193,461,269,488"/>
+<area shape="rect" id="node18" href="$liste_block_8c.html#ae2648a0e73e7ec24142118d88e25c6e2" title="Récupère la liste des blocs d&#39;un type spécifique." alt="" coords="393,461,490,488"/>
+<area shape="rect" id="node20" href="$gene_room_8c.html#abbc2703ecc48a05326b416d24d507af0" title="Sélectionne une tuile frontale adaptée." alt="" coords="183,360,279,387"/>
+<area shape="rect" id="node22" href="$gene_room_8c.html#ab0a4cc5e61b13354e01b5647e6e6e6b2" title="Récupère un plafond aléatoire." alt="" coords="185,411,277,437"/>
+<area shape="rect" id="node23" href="$gene_room_8c.html#a4c0af876efaea0550cd7a8b0a7bb492b" title="Sélectionne un sol adapté à une case." alt="" coords="199,208,262,235"/>
+<area shape="rect" id="node25" href="$gene_room_8c.html#a6e153ebbdb0a45eca65f3f2fae73afc4" title="Vérifie si un mur arrière est nécessaire." alt="" coords="185,968,277,995"/>
+<area shape="rect" id="node26" href="$gene_room_8c.html#a2a4e0f71e65c46b9236e10c77d6e25b7" title="Vérifie si un mur avant est nécessaire." alt="" coords="188,1019,273,1045"/>
+<area shape="rect" id="node27" href="$liste_block_8c.html#a7de821f1726c7548a76b1b5edfe4bbc4" title="Applique une rotation aléatoire à un bloc." alt="" coords="165,1069,297,1096"/>
+<area shape="rect" id="node3" href="$group__type__case__constants.html#gaa0ac9a00d6c9397011a34628c13bb902" title="Vérifie si une case existe." alt="" coords="410,107,473,133"/>
+<area shape="rect" id="node19" href="$liste_block_8c.html#af11d3ca15d046a7fe2a5eab6962e63f7" title="Sélectionne un bloc aléatoire selon son type." alt="" coords="368,411,515,437"/>
+<area shape="rect" id="node21" href="$liste_block_8c.html#a263b5829b42a63268f4c46467e03ff26" title="Vérifie si un bloc est d&#39;un type spécifique." alt="" coords="563,208,631,235"/>
+<area shape="rect" id="node24" href="$liste_block_8c.html#aa722d352490a0883bf05e8cd9b61d776" title="Vérifie si un bloc est une ombre." alt="" coords="385,157,497,184"/>
+</map>

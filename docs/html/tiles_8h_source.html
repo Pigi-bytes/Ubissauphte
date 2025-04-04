@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon:  Fichier source de Ubissauphte/src/engine/entities/tiles.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_2826858af9faa5fe77c775e96e0e1227.html">engine</a></li><li class="navelem"><a class="el" href="dir_136c429d572dc163e086310573299ad2.html">entities</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">tiles.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="tiles_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef TILESMANAGER_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define TILESMANAGER_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;../../debug.h&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;../core/camera.h&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;../tileset.h&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="animation_8h.html">components/animation/animation.h</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="entity_8h.html">entity.h</a>&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="tiles_8h.html#af0f2173e3b202ddf5756531b4471dcb2">   23</a></span>&#160;<span class="preprocessor">#define MAX_LINE_LENGTH 2048</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="structt__tile.html">   29</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structt__tile.html#a7955abb430dff5d4f6e61010d60e9d17">   30</a></span>&#160;    SDL_bool <a class="code" href="structt__tile.html#a7955abb430dff5d4f6e61010d60e9d17">solide</a>;  </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structt__tile.html#a17bef51545f242d210cb157423f42c96">   31</a></span>&#160;    <a class="code" href="structs__entity.html">t_entity</a> <a class="code" href="structt__tile.html#a17bef51545f242d210cb157423f42c96">entity</a>;  </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;} <a class="code" href="structt__tile.html">t_tile</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="structs__grid.html">   38</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structs__grid.html">s_grid</a> {</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="structs__grid.html#a2474a5474cbff19523a51eb1de01cda4">   39</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structs__grid.html#a2474a5474cbff19523a51eb1de01cda4">width</a>;        </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structs__grid.html#ad12fc34ce789bce6c8a05d8a17138534">   40</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structs__grid.html#ad12fc34ce789bce6c8a05d8a17138534">height</a>;       </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="structs__grid.html#acb5ba97551079e0b072c62c21d784ac5">   41</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structs__grid.html#acb5ba97551079e0b072c62c21d784ac5">depth</a>;        </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="structs__grid.html#ae38e6f527fd9844f6bd554974a416181">   42</a></span>&#160;    <a class="code" href="structt__tile.html">t_tile</a>*** <a class="code" href="structs__grid.html#ae38e6f527fd9844f6bd554974a416181">tiles</a>;  </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="tiles_8h.html#ab9f5e89fc0a2e21cf99c4c5f2d390344">   43</a></span>&#160;} <a class="code" href="tiles_8h.html#ab9f5e89fc0a2e21cf99c4c5f2d390344">t_grid</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<a class="code" href="structt__tile.html">t_tile</a>* <a class="code" href="tiles_8h.html#a9ac46e039a03cdb3e4be596b50d7f4b3">getTile</a>(<a class="code" href="structs__grid.html">t_grid</a>* grid, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> z);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<a class="code" href="structs__grid.html">t_grid</a>* <a class="code" href="tiles_8h.html#a8e7ac52bce5def6e962228651d4aa087">createGrid</a>(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> depth);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<a class="code" href="structs__grid.html">t_grid</a>* <a class="code" href="tiles_8h.html#a3db0e74a557bf693010a787414fb2c84">loadMap</a>(<span class="keywordtype">char</span>* filename, <a class="code" href="structt__tileset.html">t_tileset</a>* tileset);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">void</span> <a class="code" href="tiles_8h.html#a5a47b36ec2d30e30479aea0d4fd0698a">renderGrid</a>(SDL_Renderer* renderer, <a class="code" href="structs__grid.html">t_grid</a>* grid, <a class="code" href="structt__camera.html">t_camera</a>* camera);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordtype">void</span> <a class="code" href="tiles_8h.html#a57a81d0b091991f20ee178ef1d5a9543">freeGrid</a>(<span class="keywordtype">void</span>* <span class="keywordtype">object</span>);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keywordtype">void</span> <a class="code" href="tiles_8h.html#ab4e8adeba82f1c41f904963ffa7260e8">placeOnRandomTile</a>(<a class="code" href="structs__grid.html">t_grid</a>* grid, <a class="code" href="structs__entity.html">t_entity</a>* entity, <a class="code" href="structt__object_manager.html">t_objectManager</a>* entities);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">void</span> <a class="code" href="tiles_8h.html#a923ccae68363da002082e3119cb5544c">SDL_DestroyTextureWrapper</a>(<span class="keywordtype">void</span>* <span class="keywordtype">object</span>);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aanimation_8h_html"><div class="ttname"><a href="animation_8h.html">animation.h</a></div><div class="ttdoc">Système d'animation pour les entités.</div></div>
+<div class="ttc" id="aentity_8h_html"><div class="ttname"><a href="entity_8h.html">entity.h</a></div><div class="ttdoc">Définition de la structure de base pour toutes les entités du jeu.</div></div>
+<div class="ttc" id="astructs__entity_html"><div class="ttname"><a href="structs__entity.html">s_entity</a></div><div class="ttdoc">Structure de base pour toutes les entités du jeu.</div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00024">entity.h:24</a></div></div>
+<div class="ttc" id="astructs__grid_html"><div class="ttname"><a href="structs__grid.html">s_grid</a></div><div class="ttdoc">Représente une grille 3D de tuiles pour un niveau.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8h_source.html#l00038">tiles.h:38</a></div></div>
+<div class="ttc" id="astructs__grid_html_a2474a5474cbff19523a51eb1de01cda4"><div class="ttname"><a href="structs__grid.html#a2474a5474cbff19523a51eb1de01cda4">s_grid::width</a></div><div class="ttdeci">int width</div><div class="ttdoc">Largeur de la grille en nombre de tuiles.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8h_source.html#l00039">tiles.h:39</a></div></div>
+<div class="ttc" id="astructs__grid_html_acb5ba97551079e0b072c62c21d784ac5"><div class="ttname"><a href="structs__grid.html#acb5ba97551079e0b072c62c21d784ac5">s_grid::depth</a></div><div class="ttdeci">int depth</div><div class="ttdoc">Profondeur de la grille (nombre de couches)</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8h_source.html#l00041">tiles.h:41</a></div></div>
+<div class="ttc" id="astructs__grid_html_ad12fc34ce789bce6c8a05d8a17138534"><div class="ttname"><a href="structs__grid.html#ad12fc34ce789bce6c8a05d8a17138534">s_grid::height</a></div><div class="ttdeci">int height</div><div class="ttdoc">Hauteur de la grille en nombre de tuiles.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8h_source.html#l00040">tiles.h:40</a></div></div>
+<div class="ttc" id="astructs__grid_html_ae38e6f527fd9844f6bd554974a416181"><div class="ttname"><a href="structs__grid.html#ae38e6f527fd9844f6bd554974a416181">s_grid::tiles</a></div><div class="ttdeci">t_tile *** tiles</div><div class="ttdoc">Tableau à 3 dimensions [profondeur][hauteur][largeur].</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8h_source.html#l00042">tiles.h:42</a></div></div>
+<div class="ttc" id="astructt__camera_html"><div class="ttname"><a href="structt__camera.html">t_camera</a></div><div class="ttdoc">Représente une caméra 2D pour naviguer dans un niveau.</div><div class="ttdef"><b>Definition:</b> <a href="camera_8h_source.html#l00022">camera.h:22</a></div></div>
+<div class="ttc" id="astructt__object_manager_html"><div class="ttname"><a href="structt__object_manager.html">t_objectManager</a></div><div class="ttdoc">Gestionnaire des objets.</div></div>
+<div class="ttc" id="astructt__tile_html"><div class="ttname"><a href="structt__tile.html">t_tile</a></div><div class="ttdoc">Représente une tuile individuelle dans la grille.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8h_source.html#l00029">tiles.h:29</a></div></div>
+<div class="ttc" id="astructt__tile_html_a17bef51545f242d210cb157423f42c96"><div class="ttname"><a href="structt__tile.html#a17bef51545f242d210cb157423f42c96">t_tile::entity</a></div><div class="ttdeci">t_entity entity</div><div class="ttdoc">Entité associée pour le rendu.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8h_source.html#l00031">tiles.h:31</a></div></div>
+<div class="ttc" id="astructt__tile_html_a7955abb430dff5d4f6e61010d60e9d17"><div class="ttname"><a href="structt__tile.html#a7955abb430dff5d4f6e61010d60e9d17">t_tile::solide</a></div><div class="ttdeci">SDL_bool solide</div><div class="ttdoc">Propriété de collision (SDL_TRUE = solide, SDL_FALSE = traversable)</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8h_source.html#l00030">tiles.h:30</a></div></div>
+<div class="ttc" id="astructt__tileset_html"><div class="ttname"><a href="structt__tileset.html">t_tileset</a></div><div class="ttdoc">Représente un ensemble de tuiles utilisées pour construire les niveaux.</div><div class="ttdef"><b>Definition:</b> <a href="tileset_8h_source.html#l00018">tileset.h:18</a></div></div>
+<div class="ttc" id="atiles_8h_html_a3db0e74a557bf693010a787414fb2c84"><div class="ttname"><a href="tiles_8h.html#a3db0e74a557bf693010a787414fb2c84">loadMap</a></div><div class="ttdeci">t_grid * loadMap(char *filename, t_tileset *tileset)</div><div class="ttdoc">Charge une carte depuis un fichier.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8c_source.html#l00067">tiles.c:67</a></div></div>
+<div class="ttc" id="atiles_8h_html_a57a81d0b091991f20ee178ef1d5a9543"><div class="ttname"><a href="tiles_8h.html#a57a81d0b091991f20ee178ef1d5a9543">freeGrid</a></div><div class="ttdeci">void freeGrid(void *object)</div><div class="ttdoc">Libère la mémoire utilisée par une grille.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8c_source.html#l00030">tiles.c:30</a></div></div>
+<div class="ttc" id="atiles_8h_html_a5a47b36ec2d30e30479aea0d4fd0698a"><div class="ttname"><a href="tiles_8h.html#a5a47b36ec2d30e30479aea0d4fd0698a">renderGrid</a></div><div class="ttdeci">void renderGrid(SDL_Renderer *renderer, t_grid *grid, t_camera *camera)</div><div class="ttdoc">Affiche une grille de tuiles.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8c_source.html#l00045">tiles.c:45</a></div></div>
+<div class="ttc" id="atiles_8h_html_a8e7ac52bce5def6e962228651d4aa087"><div class="ttname"><a href="tiles_8h.html#a8e7ac52bce5def6e962228651d4aa087">createGrid</a></div><div class="ttdeci">t_grid * createGrid(int width, int height, int depth)</div><div class="ttdoc">Crée une nouvelle grille aux dimensions spécifiées.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8c_source.html#l00003">tiles.c:3</a></div></div>
+<div class="ttc" id="atiles_8h_html_a923ccae68363da002082e3119cb5544c"><div class="ttname"><a href="tiles_8h.html#a923ccae68363da002082e3119cb5544c">SDL_DestroyTextureWrapper</a></div><div class="ttdeci">void SDL_DestroyTextureWrapper(void *object)</div><div class="ttdoc">Wrapper pour SDL_DestroyTexture (compatible avec objectManager)</div><div class="ttdef"><b>Definition:</b> <a href="tileset_8c_source.html#l00057">tileset.c:57</a></div></div>
+<div class="ttc" id="atiles_8h_html_a9ac46e039a03cdb3e4be596b50d7f4b3"><div class="ttname"><a href="tiles_8h.html#a9ac46e039a03cdb3e4be596b50d7f4b3">getTile</a></div><div class="ttdeci">t_tile * getTile(t_grid *grid, int x, int y, int z)</div><div class="ttdoc">Récupère une tuile à des coordonnées spécifiques.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8c_source.html#l00058">tiles.c:58</a></div></div>
+<div class="ttc" id="atiles_8h_html_ab4e8adeba82f1c41f904963ffa7260e8"><div class="ttname"><a href="tiles_8h.html#ab4e8adeba82f1c41f904963ffa7260e8">placeOnRandomTile</a></div><div class="ttdeci">void placeOnRandomTile(t_grid *grid, t_entity *entity, t_objectManager *entities)</div><div class="ttdoc">Place une entité sur une tuile libre aléatoire.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8c_source.html#l00147">tiles.c:147</a></div></div>
+<div class="ttc" id="atiles_8h_html_ab9f5e89fc0a2e21cf99c4c5f2d390344"><div class="ttname"><a href="tiles_8h.html#ab9f5e89fc0a2e21cf99c4c5f2d390344">t_grid</a></div><div class="ttdeci">struct s_grid t_grid</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title=" " alt="" coords="5,1247,60,1273"/>
+<area shape="rect" id="node2" href="$fscene_8c.html#a39d0e7fbc78f3ff2fbd207962ff6ab42" title="Ajoute une scène au contrôleur." alt="" coords="402,5,487,32"/>
+<area shape="rect" id="node5" href="$frame_8c.html#a17bbb9773ac9f2f6f7fbdcd1d3457a87" title="Limite le nombre d&#39;images par seconde au targetFPS configuré" alt="" coords="151,968,267,995"/>
+<area shape="rect" id="node7" href="$fichier_loader_8c.html#ae867be5f0e2327d83dfc93cb1ac8e8b3" title="Récupère des donnees dans un fichier." alt="" coords="151,208,266,235"/>
+<area shape="rect" id="node14" href="$commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="357,613,532,640"/>
+<area shape="rect" id="node15" href="$fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="383,664,506,691"/>
+<area shape="rect" id="node16" href="$game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="377,715,512,741"/>
+<area shape="rect" id="node17" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="151,411,266,437"/>
+<area shape="rect" id="node18" href="$tileset_8c.html#ab041e3b90591cb42626107fb85289c09" title="Initialise un nouveau tileset à partir d&#39;une image." alt="" coords="401,461,488,488"/>
+<area shape="rect" id="node19" href="$equipements_manager_8c.html#aee54a2c5f88bf08ed74e4c1c016f773a" title="Ajoute un objet à l&#39;inventaire." alt="" coords="366,309,523,336"/>
+<area shape="rect" id="node20" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="379,765,510,792"/>
+<area shape="rect" id="node21" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="369,816,520,843"/>
+<area shape="rect" id="node22" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="373,867,516,893"/>
+<area shape="rect" id="node23" href="$player_8c.html#a25a5b9b1991ba50388e6c3b0eab41d6c" title="Crée un nouveau joueur." alt="" coords="157,1120,261,1147"/>
+<area shape="rect" id="node24" href="$win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="399,917,490,944"/>
+<area shape="rect" id="node25" href="$context_8c.html#a6b121ad300027d4e1233edf8c0d26d40" title="Crée une structure d&#39;options par défaut." alt="" coords="162,1171,255,1197"/>
+<area shape="rect" id="node26" href="$equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="108,1221,309,1248"/>
+<area shape="rect" id="node27" href="$fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="357,1323,532,1349"/>
+<area shape="rect" id="node28" href="$equipements_manager_8c.html#a0ae19ea3f5533a295491688458906fb0" title="Libère la mémoire d&#39;un tableau d&#39;items." alt="" coords="166,1525,251,1552"/>
+<area shape="rect" id="node29" href="$frame_8c.html#a5b978228d93414b607b900c38341920c" title="Libère les ressources associées à une structure de frame." alt="" coords="149,1576,269,1603"/>
+<area shape="rect" id="node30" href="$input_8c.html#ab0a2467ee6233f5a3cd482864b873359" title="Libere la mémoire allouée pour l&#39;input." alt="" coords="168,1627,249,1653"/>
+<area shape="rect" id="node31" href="$genmap_8c.html#a4a5b22ca28851f21ea1a9ff1f1e43702" title=" " alt="" coords="167,1677,250,1704"/>
+<area shape="rect" id="node32" href="$context_8c.html#ac32a948fbebe617b73fe4b35caf13d33" title="Libère la mémoire d&#39;une structure d&#39;options." alt="" coords="163,1728,254,1755"/>
+<area shape="rect" id="node33" href="$fscene_8c.html#ad44392d8a60c751117238d056dafa456" title="Libère un contrôleur de scènes." alt="" coords="133,1779,284,1805"/>
+<area shape="rect" id="node34" href="$fscene_8c.html#a30e466cad04c05ed83227c9f7f99bb29" title="Récupère la scène courante." alt="" coords="143,1323,274,1349"/>
+<area shape="rect" id="node35" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="402,1399,487,1425"/>
+<area shape="rect" id="node36" href="$audio_manager_8c.html#aa9ae2bd109191bf7c025bb3bce5c4d29" title=" " alt="" coords="376,512,513,539"/>
+<area shape="rect" id="node37" href="$audio_manager_8c.html#a97c0cf97a269d373ccbbcc21424e7721" title=" " alt="" coords="144,1829,273,1856"/>
+<area shape="rect" id="node38" href="$fps_display_8c.html#a8c0282efe7dcb698df005f46a534ed05" title="Initialise l&#39;affichage des FPS." alt="" coords="151,1880,267,1907"/>
+<area shape="rect" id="node39" href="$frame_8c.html#ad2a5b5c041395e6cfa3798c420377f88" title="Initialise une structure de gestion des frames." alt="" coords="151,1931,266,1957"/>
+<area shape="rect" id="node40" href="$input_8c.html#a5582e30a5e8725ca11ed51c0d03b2609" title="Initialise la structure d&#39;entrées avec des valeurs par défaut." alt="" coords="171,1981,247,2008"/>
+<area shape="rect" id="node41" href="$fscene_8c.html#ae4a7b0eb8dc4ab3d4461975955cba83d" title="Initialise un nouveau contrôleur de scènes." alt="" coords="371,563,518,589"/>
+<area shape="rect" id="node42" href="$text_8c.html#af7877e1e000faa47a6bcb13a23476f3c" title="Initialise le moteur de rendu de texte." alt="" coords="151,2032,266,2059"/>
+<area shape="rect" id="node43" href="$equipements_manager_8c.html#af526de5db1591532940e76eb6de0e04e" title="Charge des items depuis un fichier." alt="" coords="165,1475,252,1501"/>
+<area shape="rect" id="node44" href="$input_8c.html#a5dbfa0b962c1dde73b323300bc05034c" title="Détecte un appui unique sur une touche malgrés les frames." alt="" coords="152,2083,265,2109"/>
+<area shape="rect" id="node45" href="$text_8c.html#acbc470380890367cf49339d34bf79a76" title="Charge une police depuis un fichier avec une taille spécifiée." alt="" coords="169,2133,248,2160"/>
+<area shape="rect" id="node46" href="$fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="168,1373,249,1400"/>
+<area shape="rect" id="node47" href="$frame_8c.html#ad2eb57aa896d45aa530590aa709f6a3e" title="Démarre le calcul d&#39;une nouvelle frame." alt="" coords="162,1019,255,1045"/>
+<area shape="rect" id="node48" href="$main_8c.html#a2c05a2e9e13d998241c036d66d5dfa28" title=" " alt="" coords="136,2184,281,2211"/>
+<area shape="rect" id="node49" href="$frame_8c.html#a389641be83dcd6643fdadc5f1d7cc579" title="Met à jour le calcul des FPS." alt="" coords="163,1069,254,1096"/>
+<area shape="rect" id="node50" href="$input_8c.html#a1fa89a09180d195d828caeb9be5f5e1e" title="Met a jour l&#39;etat des entrees en lisant la file d&#39;event." alt="" coords="159,2235,259,2261"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="609,157,697,184"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="583,81,724,108"/>
+<area shape="rect" id="node6" href="$timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="406,1019,483,1045"/>
+<area shape="rect" id="node8" href="$fichier_loader_8c.html#aff6feef9add20765c6aedd2d346ba1bd" title="Ajoute un block dans un t_fichier." alt="" coords="403,157,486,184"/>
+<area shape="rect" id="node9" href="$fichier_loader_8c.html#a382934fd7d65a42903cbdb7e70293fc6" title="Ajoute une Pair de data dans un block d&#39;un t_fichier." alt="" coords="394,56,495,83"/>
+<area shape="rect" id="node10" href="$fichier_loader_8c.html#af5e826d956c5f3bfbecce8b6399933f7" title="Libère la mémoire allouée pour un block." alt="" coords="387,208,502,235"/>
+<area shape="rect" id="node11" href="$fichier_loader_8c.html#a900eddaf20bfe9e80ba50f1a8805b65c" title="Crée un nouveau t_block." alt="" coords="381,360,509,387"/>
+<area shape="rect" id="node12" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="580,613,727,640"/>
+<area shape="rect" id="node13" href="$fichier_loader_8c.html#ad07cd6d979d38d3f0e411c4dcd3444c7" title="Création d&#39;un t_pairData." alt="" coords="385,107,504,133"/>
+</map>

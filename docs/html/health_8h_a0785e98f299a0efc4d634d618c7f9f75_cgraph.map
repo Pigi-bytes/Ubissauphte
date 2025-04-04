@@ -1,0 +1,5 @@
+<map id="updateHealthSystem" name="updateHealthSystem">
+<area shape="rect" id="node1" title="Met à jour le système de santé" alt="" coords="5,31,164,57"/>
+<area shape="rect" id="node2" href="$timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="224,5,340,32"/>
+<area shape="rect" id="node3" href="$timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="212,56,352,83"/>
+</map>

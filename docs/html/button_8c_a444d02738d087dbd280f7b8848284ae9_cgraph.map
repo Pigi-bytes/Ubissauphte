@@ -1,0 +1,5 @@
+<map id="freeButton" name="freeButton">
+<area shape="rect" id="node1" title="Libère la mémoire utilisée par un bouton." alt="" coords="5,31,96,57"/>
+<area shape="rect" id="node2" href="$fonction_manager_8c.html#aa61a39c82b2044678dea685d75cdd8a9" title="Libere la mémoire d&#39;une fonctionParametrable." alt="" coords="144,5,247,32"/>
+<area shape="rect" id="node3" href="$text_8c.html#ab9b7064da4ef9403241f3d40389af46a" title="Libère la mémoire utilisée par un élément textuel." alt="" coords="158,56,233,83"/>
+</map>

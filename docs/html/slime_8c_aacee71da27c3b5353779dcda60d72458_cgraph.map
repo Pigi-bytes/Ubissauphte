@@ -1,0 +1,9 @@
+<map id="handlePatrolState" name="handlePatrolState">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,143,57"/>
+<area shape="rect" id="node2" href="$timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="202,5,318,32"/>
+<area shape="rect" id="node3" href="$slime_8c.html#a12bab3fae6c9885a2cb3db522d6fc110" title=" " alt="" coords="191,56,329,83"/>
+<area shape="rect" id="node4" href="$particules_8c.html#a2f7d707376daa108a99efec11236f2c2" title="Émet des particules d&#39;atterrissage." alt="" coords="377,31,536,57"/>
+<area shape="rect" id="node7" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="393,81,521,108"/>
+<area shape="rect" id="node5" href="$particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="584,5,735,32"/>
+<area shape="rect" id="node6" href="$particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="599,56,720,83"/>
+</map>

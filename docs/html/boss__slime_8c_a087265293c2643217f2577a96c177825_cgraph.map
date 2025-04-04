@@ -1,0 +1,7 @@
+<map id="initiateBossJump" name="initiateBossJump">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,137,83"/>
+<area shape="rect" id="node2" href="$particules_8c.html#a7f1ed5ab81fd8ccf63bf08dd9e90f0b3" title="Émet des particules de mouvement pour un boss." alt="" coords="185,31,393,57"/>
+<area shape="rect" id="node5" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="225,81,353,108"/>
+<area shape="rect" id="node3" href="$particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="441,5,592,32"/>
+<area shape="rect" id="node4" href="$particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="456,56,577,83"/>
+</map>

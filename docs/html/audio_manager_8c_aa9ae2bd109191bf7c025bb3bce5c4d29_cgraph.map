@@ -1,0 +1,8 @@
+<map id="initAudioManager" name="initAudioManager">
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,143,133"/>
+<area shape="rect" id="node2" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="191,5,337,32"/>
+<area shape="rect" id="node3" href="$audio_manager_8c.html#a51cb68df22b3067ae90f68c66a4b53a0" title=" " alt="" coords="221,56,307,83"/>
+<area shape="rect" id="node4" href="$audio_manager_8c.html#a52a51e3b11ff17262395800a99e52183" title=" " alt="" coords="227,107,301,133"/>
+<area shape="rect" id="node5" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="193,157,335,184"/>
+<area shape="rect" id="node6" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="213,208,315,235"/>
+</map>

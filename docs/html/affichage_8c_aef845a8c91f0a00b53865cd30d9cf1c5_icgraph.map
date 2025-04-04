@@ -1,0 +1,7 @@
+<map id="afficherDescription" name="afficherDescription">
+<area shape="rect" id="node1" title=" " alt="" coords="724,5,869,32"/>
+<area shape="rect" id="node2" href="$affichage_8c.html#a37a0b209c2ead72efaf0ae0c98c4af2c" title="Effectue le rendu de l&#39;interface." alt="" coords="525,5,676,32"/>
+<area shape="rect" id="node3" href="$commun_8c.html#a1ada1938c96f85c840f6c4ef88aca8b6" title="Wrapper pour le rendu de l&#39;UI d&#39;inventaire." alt="" coords="271,5,477,32"/>
+<area shape="rect" id="node4" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="108,5,223,32"/>
+<area shape="rect" id="node5" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+</map>

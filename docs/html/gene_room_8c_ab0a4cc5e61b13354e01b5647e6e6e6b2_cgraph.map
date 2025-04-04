@@ -1,0 +1,5 @@
+<map id="getPlafond" name="getPlafond">
+<area shape="rect" id="node1" title="Récupère un plafond aléatoire." alt="" coords="5,31,97,57"/>
+<area shape="rect" id="node2" href="$liste_block_8c.html#ae2648a0e73e7ec24142118d88e25c6e2" title="Récupère la liste des blocs d&#39;un type spécifique." alt="" coords="170,5,267,32"/>
+<area shape="rect" id="node3" href="$liste_block_8c.html#af11d3ca15d046a7fe2a5eab6962e63f7" title="Sélectionne un bloc aléatoire selon son type." alt="" coords="145,56,292,83"/>
+</map>

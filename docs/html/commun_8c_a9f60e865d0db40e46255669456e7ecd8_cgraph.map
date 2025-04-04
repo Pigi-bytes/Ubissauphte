@@ -1,0 +1,14 @@
+<map id="handleInputButtonWrapper" name="handleInputButtonWrapper">
+<area shape="rect" id="node1" title="Wrapper pour la gestion des entrées boutons." alt="" coords="5,56,203,83"/>
+<area shape="rect" id="node2" href="$button_8c.html#a0b17babfe6275495728adc3e4ce2cb18" title="Traite les entrées utilisateur pour un bouton." alt="" coords="251,56,393,83"/>
+<area shape="rect" id="node3" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="463,5,563,32"/>
+<area shape="rect" id="node4" href="$button_8c.html#a279965621a6b64d1a4f58eac1f1a9a14" title="Vérifie si le curseur se trouve à l&#39;intérieur d&#39;un rectangle." alt="" coords="441,56,585,83"/>
+<area shape="rect" id="node5" href="$audio_manager_8c.html#a9f819b827499e9c2eadb4f276dea5e29" title=" " alt="" coords="473,107,553,133"/>
+<area shape="rect" id="node6" href="$audio_manager_8c.html#a4ec64f2ae737ce1bd28ad405a07c7743" title=" " alt="" coords="647,56,717,83"/>
+<area shape="rect" id="node9" href="$audio_manager_8c.html#a0e16a111c05fb5ec00fd8abd413251e9" title=" " alt="" coords="633,107,731,133"/>
+<area shape="rect" id="node12" href="$audio_manager_8c.html#a55db07928385383549ca67bb3062f2ce" title=" " alt="" coords="648,157,716,184"/>
+<area shape="rect" id="node7" href="$object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="805,5,893,32"/>
+<area shape="rect" id="node8" href="$object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="779,56,920,83"/>
+<area shape="rect" id="node10" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="807,107,892,133"/>
+<area shape="rect" id="node11" href="$object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="786,157,913,184"/>
+</map>

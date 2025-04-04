@@ -1,0 +1,4 @@
+<map id="peutEquiperWrapper" name="peutEquiperWrapper">
+<area shape="rect" id="node1" title="Wrapper pour la fonction peutEquiper." alt="" coords="5,5,160,32"/>
+<area shape="rect" id="node2" href="$equipements_manager_8c.html#a301c7c062005914e4ec1905c715b2816" title="Vérifie si une arme peut être équipée." alt="" coords="208,5,308,32"/>
+</map>

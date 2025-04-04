@@ -1,0 +1,6 @@
+<map id="getCurrentScene" name="getCurrentScene">
+<area shape="rect" id="node1" title="Récupère la scène courante." alt="" coords="5,31,136,57"/>
+<area shape="rect" id="node2" href="$fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="184,5,359,32"/>
+<area shape="rect" id="node4" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="229,56,314,83"/>
+<area shape="rect" id="node3" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="407,5,507,32"/>
+</map>

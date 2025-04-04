@@ -1,0 +1,9 @@
+<map id="getSol" name="getSol">
+<area shape="rect" id="node1" title="Sélectionne un sol adapté à une case." alt="" coords="5,132,68,159"/>
+<area shape="rect" id="node2" href="$liste_block_8c.html#a30db6937fc6a2badca7e728d810f6960" title="Trouve un bloc par son nom." alt="" coords="133,5,246,32"/>
+<area shape="rect" id="node3" href="$liste_block_8c.html#a263b5829b42a63268f4c46467e03ff26" title="Vérifie si un bloc est d&#39;un type spécifique." alt="" coords="311,81,379,108"/>
+<area shape="rect" id="node4" href="$liste_block_8c.html#aa722d352490a0883bf05e8cd9b61d776" title="Vérifie si un bloc est une ombre." alt="" coords="133,107,245,133"/>
+<area shape="rect" id="node5" href="$group__type__case__constants.html#gaa0ac9a00d6c9397011a34628c13bb902" title="Vérifie si une case existe." alt="" coords="158,157,221,184"/>
+<area shape="rect" id="node6" href="$liste_block_8c.html#ae2648a0e73e7ec24142118d88e25c6e2" title="Récupère la liste des blocs d&#39;un type spécifique." alt="" coords="141,208,238,235"/>
+<area shape="rect" id="node7" href="$liste_block_8c.html#af11d3ca15d046a7fe2a5eab6962e63f7" title="Sélectionne un bloc aléatoire selon son type." alt="" coords="116,259,263,285"/>
+</map>

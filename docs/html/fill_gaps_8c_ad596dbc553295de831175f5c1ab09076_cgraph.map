@@ -1,0 +1,4 @@
+<map id="comblerTrou" name="comblerTrou">
+<area shape="rect" id="node1" title="Comble un trou spécifique dans la matrice." alt="" coords="5,5,108,32"/>
+<area shape="rect" id="node2" href="$fill_gaps_8c.html#a6bcb16c6349f23b1aa0b77c1ed2fb0a9" title="Compte les éléments dans un bloc continu." alt="" coords="156,5,337,32"/>
+</map>

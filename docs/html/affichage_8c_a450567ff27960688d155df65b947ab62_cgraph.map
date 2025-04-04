@@ -1,0 +1,6 @@
+<map id="freeInventorySlots" name="freeInventorySlots">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,148,57"/>
+<area shape="rect" id="node2" href="$button_8c.html#a444d02738d087dbd280f7b8848284ae9" title="Libère la mémoire utilisée par un bouton." alt="" coords="196,31,287,57"/>
+<area shape="rect" id="node3" href="$fonction_manager_8c.html#aa61a39c82b2044678dea685d75cdd8a9" title="Libere la mémoire d&#39;une fonctionParametrable." alt="" coords="335,5,437,32"/>
+<area shape="rect" id="node4" href="$text_8c.html#ab9b7064da4ef9403241f3d40389af46a" title="Libère la mémoire utilisée par un élément textuel." alt="" coords="349,56,423,83"/>
+</map>

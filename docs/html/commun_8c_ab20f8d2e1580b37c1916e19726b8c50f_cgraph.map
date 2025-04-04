@@ -1,0 +1,4 @@
+<map id="cameraHandleZoomWrapper" name="cameraHandleZoomWrapper">
+<area shape="rect" id="node1" title="Wrapper pour la gestion du zoom de la caméra." alt="" coords="5,5,216,32"/>
+<area shape="rect" id="node2" href="$camera_8c.html#a9477257358163a9f4067a6a359692e71" title="Applique un zoom relatif à la caméra via le viewport." alt="" coords="264,5,419,32"/>
+</map>

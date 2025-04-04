@@ -1,0 +1,5 @@
+<map id="takeDamageBarrel" name="takeDamageBarrel">
+<area shape="rect" id="node1" title="Inflige des dégâts au baril." alt="" coords="5,5,149,32"/>
+<area shape="rect" id="node2" href="$health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="197,5,311,32"/>
+<area shape="rect" id="node3" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="359,5,487,32"/>
+</map>

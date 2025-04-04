@@ -1,0 +1,5 @@
+<map id="freeScene" name="freeScene">
+<area shape="rect" id="node1" title="Libère une scène." alt="" coords="5,31,92,57"/>
+<area shape="rect" id="node2" href="$fonction_manager_8c.html#aa61a39c82b2044678dea685d75cdd8a9" title="Libere la mémoire d&#39;une fonctionParametrable." alt="" coords="162,5,265,32"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#aa17aa9d46c431f4b91114108468b73f3" title="Libere toute la memoire du gestionnaire et ses objets." alt="" coords="140,56,287,83"/>
+</map>

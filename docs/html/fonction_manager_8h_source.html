@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon:  Fichier source de Ubissauphte/src/utils/fonctionManager.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_b1abb0c2f15d2768472eef8772e819d8.html">utils</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">fonctionManager.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="fonction_manager_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifndef FONCTION_MANAGER_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define FONCTION_MANAGER_H</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;stdarg.h&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;../debug.h&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="fonction_manager_8h.html#abaa9ce64f975e79556e8cac95dccbdc7">   32</a></span>&#160;<span class="preprocessor">#define FONCTION_PARAMS(...) __VA_ARGS__, NULL</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="fonction_manager_8h.html#abeee535e6664b26db9f09eeeef46ea84">   34</a></span>&#160;<span class="preprocessor">#define GENERATE_WRAPPER_6(FUNC, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5, TYPE6) \</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">    void FUNC##Wrapper(t_fonctionParam* f) { FUNC(GET_PTR(f, 0, TYPE1), GET_PTR(f, 1, TYPE2), GET_PTR(f, 2, TYPE3), GET_PTR(f, 3, TYPE4), GET_PTR(f, 4, TYPE5), GET_PTR(f, 5, TYPE6)); }</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="fonction_manager_8h.html#a8822665fc7d705c2266ee2a26f18b088">   37</a></span>&#160;<span class="preprocessor">#define GENERATE_WRAPPER_5(FUNC, TYPE1, TYPE2, TYPE3, TYPE4, TYPE5) \</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">    void FUNC##Wrapper(t_fonctionParam* f) { FUNC(GET_PTR(f, 0, TYPE1), GET_PTR(f, 1, TYPE2), GET_PTR(f, 2, TYPE3), GET_PTR(f, 3, TYPE4), GET_PTR(f, 4, TYPE5)); }</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="fonction_manager_8h.html#a427403260d3ce5585adc031068ebe89d">   40</a></span>&#160;<span class="preprocessor">#define GENERATE_WRAPPER_4(FUNC, TYPE1, TYPE2, TYPE3, TYPE4) \</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">    void FUNC##Wrapper(t_fonctionParam* f) { FUNC(GET_PTR(f, 0, TYPE1), GET_PTR(f, 1, TYPE2), GET_PTR(f, 2, TYPE3), GET_PTR(f, 3, TYPE4)); }</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="fonction_manager_8h.html#a527e161917fdc6b0fe02b41fcbfbb532">   43</a></span>&#160;<span class="preprocessor">#define GENERATE_WRAPPER_3(FUNC, TYPE1, TYPE2, TYPE3) \</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">    void FUNC##Wrapper(t_fonctionParam* f) { FUNC(GET_PTR(f, 0, TYPE1), GET_PTR(f, 1, TYPE2), GET_PTR(f, 2, TYPE3)); }</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="fonction_manager_8h.html#a3ad2f9d948e3ae13374ee401c416d326">   46</a></span>&#160;<span class="preprocessor">#define GENERATE_WRAPPER_2(FUNC, TYPE1, TYPE2) \</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">    void FUNC##Wrapper(t_fonctionParam* f) { FUNC(GET_PTR(f, 0, TYPE1), GET_PTR(f, 1, TYPE2)); }</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="fonction_manager_8h.html#abb970d4f3eb8cecbb56e754db808aec6">   49</a></span>&#160;<span class="preprocessor">#define GENERATE_WRAPPER_1(FUNC, TYPE1, TYPE2) \</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">    void FUNC##Wrapper(t_fonctionParam* f) { FUNC(GET_PTR(f, 0, TYPE1)); }</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="fonction_manager_8h.html#a50ddc05ad7a51a30a979b25c2ed45321">   59</a></span>&#160;<span class="preprocessor">#define GET_VALUE(f, index, type) (*(type*)(f)-&gt;param[index])</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="fonction_manager_8h.html#a07caf25102da53eb3c6d1a575c438a98">   68</a></span>&#160;<span class="preprocessor">#define GET_PTR(f, index, type) ((type)(f)-&gt;param[index])</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="structfonction.html">   74</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structfonction.html">fonction</a> {</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="structfonction.html#a241db1d140617e10a92f51cf87bbe4d6">   75</a></span>&#160;    void (*<a class="code" href="structfonction.html">fonction</a>)(<span class="keyword">struct </span><a class="code" href="structfonction.html">fonction</a>*);  </div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="structfonction.html#a49dce89a1a7df6102c32d834d6ea9aac">   76</a></span>&#160;    <span class="keywordtype">void</span>** <a class="code" href="structfonction.html#a49dce89a1a7df6102c32d834d6ea9aac">param</a>;                        </div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="structfonction.html#a5fb5a59fc0abc483649e3da41d38eb77">   77</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structfonction.html#a5fb5a59fc0abc483649e3da41d38eb77">nb_param</a>;                        </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="fonction_manager_8h.html#a0cbb1167567e7678d48054d4210899a8">   78</a></span>&#160;} <a class="code" href="fonction_manager_8h.html#a0cbb1167567e7678d48054d4210899a8">t_fonctionParam</a>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>* <a class="code" href="fonction_manager_8h.html#a594fab892bbe8bced787e56601ddd16a">creerFonction</a>(<span class="keywordtype">void</span> (*f)(<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>*), ...);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fonction_manager_8h.html#a3fdc9fb7992919f32229e99affe0ea71">ajoutParametreInFonction</a>(<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>* funct, va_list list);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fonction_manager_8h.html#a94d22af965333b1cc59cc33e393b95c9">addPamaretre</a>(<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>* funct, ...);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fonction_manager_8h.html#ad131d3cb840ae8a9c198b38a7e1abf6e">callFonction</a>(<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>* funct);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keywordtype">void</span> <a class="code" href="fonction_manager_8h.html#aa61a39c82b2044678dea685d75cdd8a9">freeFonction</a>(<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>** fonctParam);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="afonction_manager_8h_html_a0cbb1167567e7678d48054d4210899a8"><div class="ttname"><a href="fonction_manager_8h.html#a0cbb1167567e7678d48054d4210899a8">t_fonctionParam</a></div><div class="ttdeci">struct fonction t_fonctionParam</div></div>
+<div class="ttc" id="afonction_manager_8h_html_a3fdc9fb7992919f32229e99affe0ea71"><div class="ttname"><a href="fonction_manager_8h.html#a3fdc9fb7992919f32229e99affe0ea71">ajoutParametreInFonction</a></div><div class="ttdeci">void ajoutParametreInFonction(t_fonctionParam *funct, va_list list)</div><div class="ttdoc">ajout des paramètres dans le t_fonctionParam</div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8c_source.html#l00010">fonctionManager.c:10</a></div></div>
+<div class="ttc" id="afonction_manager_8h_html_a594fab892bbe8bced787e56601ddd16a"><div class="ttname"><a href="fonction_manager_8h.html#a594fab892bbe8bced787e56601ddd16a">creerFonction</a></div><div class="ttdeci">t_fonctionParam * creerFonction(void(*f)(t_fonctionParam *),...)</div><div class="ttdoc">Crée un t_fonctionParam.</div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8c_source.html#l00018">fonctionManager.c:18</a></div></div>
+<div class="ttc" id="afonction_manager_8h_html_a94d22af965333b1cc59cc33e393b95c9"><div class="ttname"><a href="fonction_manager_8h.html#a94d22af965333b1cc59cc33e393b95c9">addPamaretre</a></div><div class="ttdeci">void addPamaretre(t_fonctionParam *funct,...)</div><div class="ttdoc">ajoute des paramètre dans un t_fonctionParam</div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8c_source.html#l00003">fonctionManager.c:3</a></div></div>
+<div class="ttc" id="afonction_manager_8h_html_aa61a39c82b2044678dea685d75cdd8a9"><div class="ttname"><a href="fonction_manager_8h.html#aa61a39c82b2044678dea685d75cdd8a9">freeFonction</a></div><div class="ttdeci">void freeFonction(t_fonctionParam **fonctParam)</div><div class="ttdoc">Libere la mémoire d'une fonctionParametrable.</div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8c_source.html#l00037">fonctionManager.c:37</a></div></div>
+<div class="ttc" id="afonction_manager_8h_html_ad131d3cb840ae8a9c198b38a7e1abf6e"><div class="ttname"><a href="fonction_manager_8h.html#ad131d3cb840ae8a9c198b38a7e1abf6e">callFonction</a></div><div class="ttdeci">void callFonction(t_fonctionParam *funct)</div><div class="ttdoc">Execute la fonctionParam.</div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8c_source.html#l00033">fonctionManager.c:33</a></div></div>
+<div class="ttc" id="astructfonction_html"><div class="ttname"><a href="structfonction.html">fonction</a></div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8h_source.html#l00074">fonctionManager.h:74</a></div></div>
+<div class="ttc" id="astructfonction_html_a49dce89a1a7df6102c32d834d6ea9aac"><div class="ttname"><a href="structfonction.html#a49dce89a1a7df6102c32d834d6ea9aac">fonction::param</a></div><div class="ttdeci">void ** param</div><div class="ttdoc">Tableau de pointeurs vers les parametres.</div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8h_source.html#l00076">fonctionManager.h:76</a></div></div>
+<div class="ttc" id="astructfonction_html_a5fb5a59fc0abc483649e3da41d38eb77"><div class="ttname"><a href="structfonction.html#a5fb5a59fc0abc483649e3da41d38eb77">fonction::nb_param</a></div><div class="ttdeci">int nb_param</div><div class="ttdoc">Nombre de parametres.</div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8h_source.html#l00077">fonctionManager.h:77</a></div></div>
+<div class="ttc" id="astructt__fonction_param_html"><div class="ttname"><a href="structt__fonction_param.html">t_fonctionParam</a></div><div class="ttdoc">Structure contenant les informations d'une fonction.</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

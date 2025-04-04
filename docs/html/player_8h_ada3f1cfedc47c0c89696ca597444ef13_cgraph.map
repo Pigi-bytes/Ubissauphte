@@ -1,0 +1,4 @@
+<map id="addPlayerXP" name="addPlayerXP">
+<area shape="rect" id="node1" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="5,5,109,32"/>
+<area shape="rect" id="node2" href="$player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="157,5,345,32"/>
+</map>

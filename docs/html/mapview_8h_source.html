@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lo Poti Donjon:  Fichier source de Ubissauphte/src/ui/mapview.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Lo Poti Donjon
+   &#160;<span id="projectnumber">1</span>
+   </div>
+   <div id="projectbrief">Le projet Ubissauphte est un jeu vidéo de type roguelike développé dans le cadre d&#39;un projet universitaire</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d8c42d08af5cee73efdd88797b6935ba.html">Ubissauphte</a></li><li class="navelem"><a class="el" href="dir_4d90b13c9e7a640df24fc621537fe559.html">src</a></li><li class="navelem"><a class="el" href="dir_cbea5643ac5778c201b251489fa6a373.html">ui</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">mapview.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="mapview_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef MAPVIEW_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define MAPVIEW_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;../engine/entities/player.h&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;../engine/world/genmap.h&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="struct_line.html">   21</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="struct_line.html#a97fcb0e1731b36905e90757f211b1340">   22</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_line.html#a97fcb0e1731b36905e90757f211b1340">x1</a>, y1;  </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="struct_line.html#ad660c90589efbb535c7d55dc032c1b09">   23</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_line.html#ad660c90589efbb535c7d55dc032c1b09">x2</a>, y2;  </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;} <a class="code" href="struct_line.html">Line</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structt__map_affichage.html">   30</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="structt__map_affichage.html#af5fdc64eba4f6dfa779730b2a3758967">   31</a></span>&#160;    SDL_Rect *<a class="code" href="structt__map_affichage.html#af5fdc64eba4f6dfa779730b2a3758967">rooms</a>;  </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="structt__map_affichage.html#a4b68369fe60984b7ea06695e700ac9d6">   32</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structt__map_affichage.html#a4b68369fe60984b7ea06695e700ac9d6">numRooms</a>;     </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="structt__map_affichage.html#aa87b825e3a0187f0e24698064ee0e2aa">   33</a></span>&#160;    <a class="code" href="struct_line.html">Line</a> *<a class="code" href="structt__map_affichage.html#aa87b825e3a0187f0e24698064ee0e2aa">lines</a>;      </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="structt__map_affichage.html#aadd3a59cea049460bd4e196c59181118">   34</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="structt__map_affichage.html#aadd3a59cea049460bd4e196c59181118">numLines</a>;     </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;} <a class="code" href="structt__map_affichage.html">t_mapAffichage</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mapview_8h.html#ad6e9798ed4cf9ff2d630544ca75f84ed">XYMinMax</a>(<span class="keywordtype">int</span> *zonneAff, SDL_Rect *roomCoords, <span class="keywordtype">int</span> numberRoom);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mapview_8h.html#a886b429edc6af59c7f2a8d59dee4f7a7">generateMap</a>(SDL_Rect *roomCoords, <a class="code" href="structt__salle.html">t_salle</a> **listeRoom, <span class="keywordtype">int</span> numberRoom, <a class="code" href="structt__map_affichage.html">t_mapAffichage</a> *map, <span class="keywordtype">int</span> WW, <span class="keywordtype">int</span> WH);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mapview_8h.html#a30356d6bf7d30b155f68fbbbea7dc377">affichage</a>(SDL_Renderer *renderer, <a class="code" href="structt__map_affichage.html">t_mapAffichage</a> *map, <a class="code" href="structs__joueur.html">t_joueur</a> *player);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mapview_8h.html#accf55e351452252df51157768a5c9657">handleInputMap</a>(<a class="code" href="structt__input.html">t_input</a> *input, <a class="code" href="structs__joueur.html">t_joueur</a> *player, <a class="code" href="structt__scene_controller.html">t_sceneController</a> *sceneController);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keywordtype">void</span> <a class="code" href="mapview_8h.html#af13e3afed524e2cb61d969acf1042011">freeMapAffiche</a>(<span class="keywordtype">void</span> *elt);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="amapview_8h_html_a30356d6bf7d30b155f68fbbbea7dc377"><div class="ttname"><a href="mapview_8h.html#a30356d6bf7d30b155f68fbbbea7dc377">affichage</a></div><div class="ttdeci">void affichage(SDL_Renderer *renderer, t_mapAffichage *map, t_joueur *player)</div><div class="ttdoc">Affiche la carte à l'écran.</div><div class="ttdef"><b>Definition:</b> <a href="mapview_8c_source.html#l00094">mapview.c:94</a></div></div>
+<div class="ttc" id="amapview_8h_html_a886b429edc6af59c7f2a8d59dee4f7a7"><div class="ttname"><a href="mapview_8h.html#a886b429edc6af59c7f2a8d59dee4f7a7">generateMap</a></div><div class="ttdeci">void generateMap(SDL_Rect *roomCoords, t_salle **listeRoom, int numberRoom, t_mapAffichage *map, int WW, int WH)</div><div class="ttdoc">Génère la représentation visuelle de la carte.</div><div class="ttdef"><b>Definition:</b> <a href="mapview_8c_source.html#l00024">mapview.c:24</a></div></div>
+<div class="ttc" id="amapview_8h_html_accf55e351452252df51157768a5c9657"><div class="ttname"><a href="mapview_8h.html#accf55e351452252df51157768a5c9657">handleInputMap</a></div><div class="ttdeci">void handleInputMap(t_input *input, t_joueur *player, t_sceneController *sceneController)</div><div class="ttdoc">Gère les entrées utilisateur dans la vue carte.</div><div class="ttdef"><b>Definition:</b> <a href="mapview_8c_source.html#l00126">mapview.c:126</a></div></div>
+<div class="ttc" id="amapview_8h_html_ad6e9798ed4cf9ff2d630544ca75f84ed"><div class="ttname"><a href="mapview_8h.html#ad6e9798ed4cf9ff2d630544ca75f84ed">XYMinMax</a></div><div class="ttdeci">void XYMinMax(int *zonneAff, SDL_Rect *roomCoords, int numberRoom)</div><div class="ttdoc">Détermine les limites min/max des coordonnées des salles.</div><div class="ttdef"><b>Definition:</b> <a href="mapview_8c_source.html#l00002">mapview.c:2</a></div></div>
+<div class="ttc" id="amapview_8h_html_af13e3afed524e2cb61d969acf1042011"><div class="ttname"><a href="mapview_8h.html#af13e3afed524e2cb61d969acf1042011">freeMapAffiche</a></div><div class="ttdeci">void freeMapAffiche(void *elt)</div><div class="ttdoc">Libère la mémoire utilisée par la structure d'affichage de carte.</div><div class="ttdef"><b>Definition:</b> <a href="mapview_8c_source.html#l00136">mapview.c:136</a></div></div>
+<div class="ttc" id="astruct_line_html"><div class="ttname"><a href="struct_line.html">Line</a></div><div class="ttdoc">Représente une ligne connectant deux salles sur la carte.</div><div class="ttdef"><b>Definition:</b> <a href="mapview_8h_source.html#l00021">mapview.h:21</a></div></div>
+<div class="ttc" id="astruct_line_html_a97fcb0e1731b36905e90757f211b1340"><div class="ttname"><a href="struct_line.html#a97fcb0e1731b36905e90757f211b1340">Line::x1</a></div><div class="ttdeci">int x1</div><div class="ttdef"><b>Definition:</b> <a href="mapview_8h_source.html#l00022">mapview.h:22</a></div></div>
+<div class="ttc" id="astruct_line_html_ad660c90589efbb535c7d55dc032c1b09"><div class="ttname"><a href="struct_line.html#ad660c90589efbb535c7d55dc032c1b09">Line::x2</a></div><div class="ttdeci">int x2</div><div class="ttdef"><b>Definition:</b> <a href="mapview_8h_source.html#l00023">mapview.h:23</a></div></div>
+<div class="ttc" id="astructs__joueur_html"><div class="ttname"><a href="structs__joueur.html">s_joueur</a></div><div class="ttdoc">Référence au type joueur pour éviter les inclusions circulaires.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00080">player.h:80</a></div></div>
+<div class="ttc" id="astructt__input_html"><div class="ttname"><a href="structt__input.html">t_input</a></div><div class="ttdoc">Contient l'état actuel du clavier, de la souris et de la fenêtre.</div><div class="ttdef"><b>Definition:</b> <a href="input_8h_source.html#l00017">input.h:17</a></div></div>
+<div class="ttc" id="astructt__map_affichage_html"><div class="ttname"><a href="structt__map_affichage.html">t_mapAffichage</a></div><div class="ttdoc">Structure contenant les éléments d'affichage de la carte.</div><div class="ttdef"><b>Definition:</b> <a href="mapview_8h_source.html#l00030">mapview.h:30</a></div></div>
+<div class="ttc" id="astructt__map_affichage_html_a4b68369fe60984b7ea06695e700ac9d6"><div class="ttname"><a href="structt__map_affichage.html#a4b68369fe60984b7ea06695e700ac9d6">t_mapAffichage::numRooms</a></div><div class="ttdeci">int numRooms</div><div class="ttdoc">Nombre de salles.</div><div class="ttdef"><b>Definition:</b> <a href="mapview_8h_source.html#l00032">mapview.h:32</a></div></div>
+<div class="ttc" id="astructt__map_affichage_html_aa87b825e3a0187f0e24698064ee0e2aa"><div class="ttname"><a href="structt__map_affichage.html#aa87b825e3a0187f0e24698064ee0e2aa">t_mapAffichage::lines</a></div><div class="ttdeci">Line * lines</div><div class="ttdoc">Tableau des lignes connectant les salles.</div><div class="ttdef"><b>Definition:</b> <a href="mapview_8h_source.html#l00033">mapview.h:33</a></div></div>
+<div class="ttc" id="astructt__map_affichage_html_aadd3a59cea049460bd4e196c59181118"><div class="ttname"><a href="structt__map_affichage.html#aadd3a59cea049460bd4e196c59181118">t_mapAffichage::numLines</a></div><div class="ttdeci">int numLines</div><div class="ttdoc">Nombre de lignes.</div><div class="ttdef"><b>Definition:</b> <a href="mapview_8h_source.html#l00034">mapview.h:34</a></div></div>
+<div class="ttc" id="astructt__map_affichage_html_af5fdc64eba4f6dfa779730b2a3758967"><div class="ttname"><a href="structt__map_affichage.html#af5fdc64eba4f6dfa779730b2a3758967">t_mapAffichage::rooms</a></div><div class="ttdeci">SDL_Rect * rooms</div><div class="ttdoc">Tableau des rectangles représentant les salles.</div><div class="ttdef"><b>Definition:</b> <a href="mapview_8h_source.html#l00031">mapview.h:31</a></div></div>
+<div class="ttc" id="astructt__salle_html"><div class="ttname"><a href="structt__salle.html">t_salle</a></div><div class="ttdef"><b>Definition:</b> <a href="genmap_8h_source.html#l00014">genmap.h:14</a></div></div>
+<div class="ttc" id="astructt__scene_controller_html"><div class="ttname"><a href="structt__scene_controller.html">t_sceneController</a></div><div class="ttdoc">Contrôleur central des scènes.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8h_source.html#l00081">fscene.h:81</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<map id="renderFPSDisplayWrapper" name="renderFPSDisplayWrapper">
+<area shape="rect" id="node1" title="Wrapper pour l&#39;affichage du compteur FPS." alt="" coords="5,5,197,32"/>
+<area shape="rect" id="node2" href="$fps_display_8c.html#ab11eb3cfbb39ee3e14f3b1cedf0f6125" title="Affiche le compteur de FPS à l&#39;écran." alt="" coords="245,5,383,32"/>
+<area shape="rect" id="node3" href="$text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="431,5,521,32"/>
+</map>

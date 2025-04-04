@@ -1,0 +1,5 @@
+<map id="updateFPSDisplay" name="updateFPSDisplay">
+<area shape="rect" id="node1" title="Met à jour l&#39;affichage des FPS." alt="" coords="5,5,145,32"/>
+<area shape="rect" id="node2" href="$text_8c.html#a6aad28e2d5f69d57937dae840fa9a915" title="Met à jour un texte simple existant." alt="" coords="193,5,288,32"/>
+<area shape="rect" id="node3" href="$text_8c.html#aeb2abb74af73c1c4372b43db48c96d3e" title="Crée un texte simple sans contour." alt="" coords="336,5,427,32"/>
+</map>

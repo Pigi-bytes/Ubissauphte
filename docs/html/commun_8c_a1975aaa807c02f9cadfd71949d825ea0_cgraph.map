@@ -1,0 +1,5 @@
+<map id="handleInputButtonVolummeWrapper" name="handleInputButtonVolummeWrapper">
+<area shape="rect" id="node1" title="Wrapper pour la gestion du volume." alt="" coords="5,5,209,47"/>
+<area shape="rect" id="node2" href="$slider_8c.html#a29af67b33ed115856fafa8953b577a8c" title="Gère les entrées pour un curseur de volume." alt="" coords="257,13,461,39"/>
+<area shape="rect" id="node3" href="$button_8c.html#a279965621a6b64d1a4f58eac1f1a9a14" title="Vérifie si le curseur se trouve à l&#39;intérieur d&#39;un rectangle." alt="" coords="509,13,653,39"/>
+</map>

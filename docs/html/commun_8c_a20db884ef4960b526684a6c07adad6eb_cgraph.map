@@ -1,0 +1,4 @@
+<map id="renderViewportWrapper" name="renderViewportWrapper">
+<area shape="rect" id="node1" title="Wrapper pour le rendu du viewport principal." alt="" coords="5,5,183,32"/>
+<area shape="rect" id="node2" href="$camera_8c.html#a54b42feeaaf64d0f44bb067c197d6000" title="Rend le viewport à l&#39;écran en copiant la texture natif et en l&#39;upscalant a la taille de l&#39;ecran." alt="" coords="231,5,353,32"/>
+</map>
