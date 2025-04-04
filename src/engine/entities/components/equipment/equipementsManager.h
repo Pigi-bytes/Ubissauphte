@@ -110,6 +110,7 @@ void equipementRecalculerStats(struct s_joueur** c);
 
 // fonction use
 void equipementUse(struct s_joueur* c, equipementSlotType slot);
+void ajoutVie(t_fonctionParam* f);
 
 t_item* getItemByRarity(t_item** items, int count, t_itemRarity rarity);
 t_itemRarity determineRarityByPercentage();

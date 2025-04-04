@@ -210,11 +210,20 @@ t_item** item_load(t_fichier* fichier, t_tileset* tileset, t_joueur* player) {
                 item[i]->arme->onEquipe = creerFonction(peutEquiperWrapper, FONCTION_PARAMS(&player->currentWeapon, item[i]->arme));
             }
         } else if (strcmp(
-            resultChar, "armure") == 0)
+                       resultChar, "armure") == 0)
             item[i]->validSlot[0] = SLOT_ARMURE;
-        else if (strcmp(resultChar, "activable") == 0)
+        else if (strcmp(resultChar, "activable") == 0) {
             item[i]->validSlot[0] = SLOT_ACTIVABLE1;
-        else if (strcmp(resultChar, "talisment") == 0)
+            getValue(block, "OnUse", &resultInt, INT);
+            switch (resultInt) {
+                case 0:
+                    item[i]->onUse = creerFonction(ajoutVie, FONCTION_PARAMS(&player, item[i]->arme));
+                    break;
+                default:
+                    break;
+            }
+
+        } else if (strcmp(resultChar, "talisment") == 0)
             item[i]->validSlot[0] = SLOT_TALISMENT;
 
         item[i]->arme->indice = i;
@@ -362,6 +371,30 @@ t_inventaire* createInventaire() {
     return inv;
 }
 
+void ajoutVie(t_fonctionParam* f) {
+    t_joueur* joueur = GET_PTR(f, 0, t_joueur*);
+    int vie = 25;
+    t_item* potion = GET_PTR(f, 1, t_item*);
+    t_itemsStack* stack = inventaireFindStack(joueur->inventaire, potion);
+    if (stack == NULL) {
+        fprintf(stderr, "Erreur: Potion non trouvée dans l'inventaire.\n");
+        return;
+    }
+    if (((joueur->health.currentHealth < joueur->baseStats.healthMax.additive) && (stack->quantite > 0))) {
+        joueur->health.currentHealth += vie;
+        if (joueur->health.currentHealth > joueur->baseStats.healthMax.additive)
+            joueur->health.currentHealth = joueur->baseStats.healthMax.additive;
+        stack->quantite--;
+        if (stack->quantite == 0) {
+            desequiperEquipement(&joueur, stack->definition->validSlot[0]);
+        }
+    } else {
+        fprintf(stderr, "Erreur: Quantité de potion insuffisante.\n");
+        printf("potion vide zebi");
+        return;
+    }
+}
+
 void inventaireAjoutObjet(t_inventaire* inv, t_item* item, int quantite) {
     t_itemsStack* itemStack = inventaireFindStack(inv, item);
 
@@ -441,8 +474,8 @@ void equiperEquipement(t_joueur** c, int inventoryIndex, equipementSlotType slot
     if ((*c)->equipement[slot].stack->definition->arme->onEquipe != NULL) {
         callFonction((*c)->equipement[slot].stack->definition->arme->onEquipe);
     }
-
-    equipementRecalculerStats(c);
+    if (itemStack->definition->validSlot[0] != SLOT_ACTIVABLE1)
+        equipementRecalculerStats(c);
 }
 
 void peutEquiper(t_arme** arme, t_arme* armeAjout) {

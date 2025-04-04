@@ -190,6 +190,7 @@ attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 0
 rarity: common
+onUse: 0
 description: \nUn breuvage rougeoyant qui\n pulse d'énergie vitale
 
 id Item: 8
