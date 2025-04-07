@@ -60,9 +60,10 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
 
     t_scene* scene = createScene(initObjectManager(registre), "main");
     t_tileset* tileset = initTileset(context->renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
-    t_tileset* playerTileSet = initTileset(context->renderer, 32, 32, 16, "assets/imgs/chevaliervisiereouverteidle12run34.bmp");
     t_tileset* fantomTileSet = initTileset(context->renderer, 48, 16, 16, "assets/imgs/fantomeidle23un1232.bmp");
     t_tileset* slimeTileSet = initTileset(context->renderer, 48, 16, 16, "assets/imgs/slimeidle12run1213.bmp");
+    t_tileset* sorcierTileSet = initTileset(context->renderer, 64, 16, 16, "assets/imgs/sorcieridle12run34.bmp");
+
     // t_tileset* crabeTileSet = initTileset(context->renderer, 80, 16, 16, "assets/imgs/crabeidle123232run416.bmp");
 
     // addScene(context->sceneController, createMapWord(context->renderer, salle, rectcord));
@@ -102,12 +103,22 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     }
 
     t_enemy* enemy;
+    enemy = createWizard((SDL_Texture*)getObject(tileset->textureTiles, 10), (SDL_Rect){100, 100, 16, 16}, sorcierTileSet, scene);
     for (int i = 0; i < nbEnemis; i++) {
-        if (rand() % 2 == 0) {
-            enemy = createGhost((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, fantomTileSet, scene);
-        } else {
-            enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, scene);
+        int enemyType = rand() % 3;  // 0 = ghost, 1 = slime, 2 = wizard
+
+        switch (enemyType) {
+            case 0:
+                enemy = createGhost((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, fantomTileSet, scene);
+                break;
+            case 1:
+                enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, scene);
+                break;
+            case 2:
+                enemy = createWizard((SDL_Texture*)getObject(tileset->textureTiles, 10), (SDL_Rect){100, 100, 16, 16}, sorcierTileSet, scene);
+                break;
         }
+
         addObject(salle->entities, &enemy->entity, ENEMY);
         placeOnRandomTile(*level, &enemy->entity, salle->entities);
         ADD_OBJECT_TO_SCENE(scene, enemy, ENEMY_TYPE);

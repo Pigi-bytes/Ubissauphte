@@ -17,6 +17,7 @@
 #include "../commun.h"
 #include "../engine/entities/mobs/boss_slime.h"
 #include "../engine/entities/mobs/ghost.h"
+#include "../engine/entities/mobs/wizard.h"
 #include "../engine/entities/tilesEntity.h"
 #include "../ui/hud.h"
 
