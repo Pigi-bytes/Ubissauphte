@@ -146,3 +146,21 @@ void freeHealthSystem(t_healthSystem* health) {
     free(health->flashTimer);
     free(health->invincibilityTimer);
 }
+
+int applyHealing(t_healthSystem* health, int healAmount, void* entity) {
+    if (!health || health->isDead || health->currentHealth >= health->maxHealth) return 0;
+
+    int oldHealth = health->currentHealth;
+    health->currentHealth += healAmount;
+
+    if (health->currentHealth > health->maxHealth) {
+        health->currentHealth = health->maxHealth;
+    }
+
+    health->targetHealthRatio = (float)health->currentHealth / (float)health->maxHealth;
+
+    health->showHealthBar = SDL_TRUE;
+    resetDeltaTimer(health->healthBarTimer);
+
+    return health->currentHealth - oldHealth;
+}

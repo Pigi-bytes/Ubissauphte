@@ -78,4 +78,13 @@ void freeHealthSystem(t_healthSystem* health);
  */
 void renderStandardHealthBar(SDL_Renderer* renderer, t_healthSystem* health, SDL_Rect entityRect, t_camera* camera);
 
+/**
+ * @brief Applique un soin à une entité
+ * @param health Système de santé cible
+ * @param healAmount Quantité de soin à appliquer
+ * @param entity Pointeur vers l'entité affectée (non utilisé actuellement)
+ * @return Quantité réelle de PV soignés
+ */
+int applyHealing(t_healthSystem* health, int healAmount, void* entity);
+
 #endif

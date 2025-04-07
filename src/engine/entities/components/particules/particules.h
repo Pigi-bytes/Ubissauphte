@@ -22,8 +22,8 @@
  */
 typedef struct s_entityParticle {
     SDL_bool active;      ///< Indique si la particule est active
-    SDL_FPoint position;  ///< Position en x,y 
-    SDL_FPoint velocity;  ///< Vitesse en x,y 
+    SDL_FPoint position;  ///< Position en x,y
+    SDL_FPoint velocity;  ///< Vitesse en x,y
     float lifetime;       ///< Durée de vie restante
     float maxLifetime;    ///< Durée de vie totale
     float size;           ///< Taille de la particule
@@ -197,5 +197,32 @@ void emitBarrelExplosionParticles(t_particleEmitter* emitter, SDL_FPoint positio
  * @return Nombre flottant aléatoire entre min et max
  */
 float randomRangeF(float min, float max);
+
+/**
+ * @brief Émet des particules de soin pour le sorcier
+ * @param emitter Émetteur à utiliser
+ * @param position Position centrale
+ * @param radius Rayon d'émission
+ * @param baseColor Couleur de base des particules
+ */
+void emitHealParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor);
+
+/**
+ * @brief Émet des particules pour la connexion de soin entre le sorcier et l'allié soigné
+ * @param emitter Émetteur à utiliser
+ * @param sourcePos Position du sorcier
+ * @param targetPos Position de l'allié soigné
+ * @param baseColor Couleur de base des particules
+ */
+void emitHealConnectionParticles(t_particleEmitter* emitter, SDL_FPoint sourcePos, SDL_FPoint targetPos, SDL_Color baseColor);
+
+/**
+ * @brief Émet des particules pour le lancement de sort du sorcier
+ * @param emitter Émetteur à utiliser
+ * @param position Position centrale
+ * @param radius Rayon d'émission
+ * @param baseColor Couleur de base des particules
+ */
+void emitSpellCastParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor);
 
 #endif

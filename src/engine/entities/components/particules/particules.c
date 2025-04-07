@@ -187,7 +187,7 @@ void emitChargeAttackParticles(t_particleEmitter* emitter, SDL_FPoint position, 
     if (!emitter) return;
 
     // Définition des couleurs constantes - facilement modifiables
-    const SDL_Color CHARGE_PREPARE_COLOR = {0, 238, 194, 100};  // Orange vif pour préparation
+    const SDL_Color CHARGE_PREPARE_COLOR = {0, 238, 194, 100};    // Orange vif pour préparation
     const SDL_Color CHARGE_GLOW_COLOR = {255, 69, 0, 150};        // Rouge-orangé pour l'aura
     const SDL_Color CHARGE_TRAIL_COLOR = {30, 144, 255, 170};     // Bleu vif pour la traînée
     const SDL_Color CHARGE_SPARK_COLOR = {255, 215, 0, 220};      // Or pour les étincelles
@@ -920,6 +920,161 @@ void emitBarrelExplosionParticles(t_particleEmitter* emitter, SDL_FPoint positio
             p->color = chunkColor;
             p->shape = 0;
         }
+    }
+}
+
+void emitSpellCastParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor) {
+    if (!emitter) return;
+
+    SDL_FPoint hands[2] = {{position.x - radius * 0.6f, position.y - radius * 0.2f}, {position.x + radius * 0.6f, position.y - radius * 0.2f}};
+
+    for (int hand = 0; hand < 2; hand++) {
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (p) {
+            p->position = hands[hand];
+            p->velocity = (SDL_FPoint){0, 0};
+            p->lifetime = p->maxLifetime = randomRangeF(0.3f, 0.5f);
+            p->size = radius * 0.4f;
+            p->color = (SDL_Color){baseColor.r, baseColor.g, baseColor.b, 100};
+            p->shape = 1;  // Circle
+        }
+
+        // Orbiting particles
+        for (int i = 0; i < 6; i++) {
+            float angle = (float)i / 6.0f * 2.0f * M_PI;
+            p = getNextFreeParticle(emitter);
+            if (!p) continue;
+
+            p->position = (SDL_FPoint){hands[hand].x + cosf(angle) * (radius * 0.3f), hands[hand].y + sinf(angle) * (radius * 0.3f)};
+
+            p->velocity = (SDL_FPoint){cosf(angle + M_PI / 2) * 25.0f, sinf(angle + M_PI / 2) * 25.0f};
+            p->lifetime = p->maxLifetime = randomRangeF(0.2f, 0.4f);
+            p->size = randomRangeF(2.0f, 4.0f);
+            p->color = (SDL_Color){fmin(255, baseColor.r + randomRangeF(-20.0f, 20.0f)), fmin(255, baseColor.g + randomRangeF(-20.0f, 20.0f)), fmin(255, baseColor.b + randomRangeF(-20.0f, 20.0f)), 200};
+            p->shape = randomRangeF(0.0f, 1.0f) > 0.3f ? 1 : 0;
+        }
+    }
+
+    // Connection between hands
+    for (int i = 0; i < 8; i++) {
+        float t = (float)i / 8.0f;
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (!p) continue;
+
+        p->position = (SDL_FPoint){hands[0].x + (hands[1].x - hands[0].x) * t + randomRangeF(-3.0f, 3.0f), hands[0].y + (hands[1].y - hands[0].y) * t + randomRangeF(-3.0f, 3.0f)};
+        p->velocity = (SDL_FPoint){randomRangeF(-3.0f, 3.0f), randomRangeF(-10.0f, -5.0f)};
+        p->lifetime = p->maxLifetime = randomRangeF(0.1f, 0.3f);
+        p->size = randomRangeF(1.5f, 3.5f);
+        p->color = (SDL_Color){fmin(255, baseColor.r + 40), fmin(255, baseColor.g + 40), fmin(255, baseColor.b + 40), 220};
+        p->shape = 0;
+    }
+}
+
+void emitHealParticles(t_particleEmitter* emitter, SDL_FPoint position, float radius, SDL_Color baseColor) {
+    if (!emitter) return;
+
+    for (int i = 0; i < 12; i++) {
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (!p) continue;
+
+        float angle = randomRangeF(0, 2.0f * M_PI);
+        float distance = randomRangeF(0.0f, radius * 0.8f);
+
+        p->position = (SDL_FPoint){position.x + cosf(angle) * distance, position.y + sinf(angle) * distance};
+        p->velocity = (SDL_FPoint){randomRangeF(-10.0f, 10.0f), randomRangeF(-40.0f, -15.0f)};
+        p->lifetime = p->maxLifetime = randomRangeF(0.5f, 1.2f);
+        p->size = randomRangeF(2.0f, 5.0f);
+
+        float brightness = randomRangeF(0.8f, 1.2f);
+        p->color = (SDL_Color){fmin(255, baseColor.r * brightness), fmin(255, baseColor.g * brightness), fmin(255, baseColor.b * brightness), randomRangeF(150.0f, 230.0f)};
+        p->shape = rand() % 3 > 0 ? 1 : 0;  // Mostly circles
+    }
+
+    // Healing symbol
+    t_entityParticle* p = getNextFreeParticle(emitter);
+    if (p) {
+        p->position = (SDL_FPoint){position.x, position.y - radius * 0.5f};
+        p->velocity = (SDL_FPoint){0, -15.0f};
+        p->lifetime = p->maxLifetime = randomRangeF(0.8f, 1.2f);
+        p->size = radius * 0.5f;
+        p->color = (SDL_Color){20, 220, 120, 200};  // Bright green
+        p->shape = 2;                               // Healing cross
+    }
+
+    // Glowing circles
+    for (int i = 0; i < 2; i++) {
+        p = getNextFreeParticle(emitter);
+        if (!p) continue;
+
+        p->position = position;
+        p->velocity = (SDL_FPoint){0, 0};
+        p->lifetime = p->maxLifetime = randomRangeF(0.3f, 0.6f);
+        p->size = radius * (0.6f + i * 0.4f);
+        p->color = (SDL_Color){baseColor.r, baseColor.g, baseColor.b, (Uint8)(baseColor.a * 0.4f)};
+        p->shape = 1;  // Circle
+    }
+}
+
+void emitHealConnectionParticles(t_particleEmitter* emitter, SDL_FPoint source, SDL_FPoint target, SDL_Color baseColor) {
+    if (!emitter) return;
+
+    float dx = target.x - source.x;
+    float dy = target.y - source.y;
+    float dist = sqrtf(dx * dx + dy * dy);
+
+    if (dist < 1.0f) return;  // Avoid division by zero
+
+    float dirX = dx / dist;
+    float dirY = dy / dist;
+    float perpendicularX = -dirY;
+    float perpendicularY = dirX;
+
+    // Moving particles along beam
+    int particleCount = fminf(30, dist / 5);
+    for (int i = 0; i < particleCount; i++) {
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (!p) continue;
+
+        float t = randomRangeF(0.0f, 0.4f);
+        float offset = randomRangeF(0.0f, 5.0f);
+        float angle = randomRangeF(0.0f, 2.0f * M_PI);
+
+        p->position = (SDL_FPoint){source.x + dx * t + cosf(angle) * offset, source.y + dy * t + sinf(angle) * offset};
+
+        float speed = randomRangeF(80.0f, 120.0f) * (1.2f + t * 0.3f);
+        p->velocity = (SDL_FPoint){dirX * speed, dirY * speed};
+        p->lifetime = p->maxLifetime = randomRangeF(0.2f, 0.4f);
+        p->size = randomRangeF(3.0f, 5.0f);
+        p->color = (SDL_Color){
+            20,
+            fmin(255, 200 + randomRangeF(-30.0f, 55.0f)),
+            fmin(255, 180 + randomRangeF(-50.0f, 75.0f)),
+            (Uint8)(200 + randomRangeF(-30.0f, 55.0f))};
+        p->shape = rand() % 3 > 0 ? 1 : 0;  // Mostly circles
+    }
+
+    // Energy link
+    int numSegments = fminf(20, dist / 10);
+    for (int i = 0; i < numSegments; i++) {
+        t_entityParticle* p = getNextFreeParticle(emitter);
+        if (!p) continue;
+
+        float t = (float)i / numSegments;
+        float wave = sinf(t * 10.0f + SDL_GetTicks() * 0.01f) * 3.0f;
+
+        p->position = (SDL_FPoint){
+            source.x + dx * t + perpendicularX * wave,
+            source.y + dy * t + perpendicularY * wave};
+
+        p->velocity = (SDL_FPoint){dirX * randomRangeF(5.0f, 15.0f), dirY * randomRangeF(5.0f, 15.0f)};
+        p->lifetime = p->maxLifetime = randomRangeF(0.1f, 0.2f);
+        p->size = randomRangeF(2.0f, 4.0f);
+        p->color = (SDL_Color){
+            20,
+            fmin(255, 150 + t * 100),
+            fmin(255, 100 + t * 100),
+            (Uint8)(150 + t * 100)};
+        p->shape = rand() % 10 > 7 ? 0 : 1;  // Mostly circles
     }
 }
 
