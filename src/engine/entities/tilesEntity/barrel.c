@@ -50,7 +50,7 @@ void updateBarrel(t_tileEntity* entity, t_context* context, t_salle* salle, t_ob
 
         if (cercleInSector(barrelPos, entity->entity.collisionCircle.radius, player->attack.hitBox.origin, currentAngle, player->currentWeapon->range, player->currentWeapon->angleAttack)) {
             barrel->lastDamagedBy = player;
-            takeDamageBarrel(entity, player->currentWeapon->damage, context);
+            takeDamageBarrel(entity, player->currentWeapon->damage + player->calculatedStats.attack.additive, context);
 
             SDL_FPoint hitDirection = {barrelPos.x - player->entity.collisionCircle.x, barrelPos.y - player->entity.collisionCircle.y};
             float length = sqrtf(hitDirection.x * hitDirection.x + hitDirection.y * hitDirection.y);

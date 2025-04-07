@@ -607,7 +607,15 @@ SDL_bool checkAndProcessLevelUp(t_joueur* player) {
 
     player->xpToNextLevel = (int)(player->xpToNextLevel * 1.2f);
 
+    player->baseStats.attack.additive += 5;
+    player->baseStats.defense.additive += 5;
+    player->baseStats.healthMax.additive += 5;
+    player->baseStats.speed.additive += 5;
 
+    equipementRecalculerStats(&player);
+    emitHealParticles(player->particleEmitter, (SDL_FPoint){player->entity.collisionCircle.x, player->entity.collisionCircle.y}, player->entity.collisionCircle.radius, (SDL_Color){64, 255, 128, 200});
+
+    player->health.currentHealth = player->health.maxHealth;
     if (player->xp >= player->xpToNextLevel) {
         player->health.currentHealth = player->health.maxHealth;
         return checkAndProcessLevelUp(player);  // Récursion pour gérer plusieurs level up d'un coup
