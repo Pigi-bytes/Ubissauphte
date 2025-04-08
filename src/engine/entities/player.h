@@ -83,6 +83,7 @@ typedef struct s_joueur {
     t_dash dash;                         ///< Système de dash (esquive)
     t_healthSystem health;               ///< Système de gestion de la santé
     t_particleEmitter* particleEmitter;  ///< Émetteur de particules
+    int indexOffset;
 
     t_stats baseStats;        ///< Statistiques de base
     t_stats calculatedStats;  ///< Statistiques calculées avec équipement
@@ -108,6 +109,7 @@ typedef struct s_joueur {
  * @param texture Texture pour le rendu
  * @param rect Rectangle définissant la position et taille initiales
  * @param tileset Tileset pour les animations
+ * @param offset indice du skin du joueur
  * @return Pointeur vers le joueur créé
  */
 t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, int offset);

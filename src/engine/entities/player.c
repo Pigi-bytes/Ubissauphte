@@ -11,6 +11,7 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->entity.flip = SDL_FLIP_NONE;
     joueur->entity.animationController = initAnimationController();
     joueur->entity.debug = SDL_TRUE;
+    joueur->indexOffset = offset;
 
     joueur->entity.useCircleCollision = SDL_TRUE;
     joueur->entity.collisionCircle.x = rect.x + rect.w / 2;
@@ -45,8 +46,8 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->xpToNextLevel = 100;
     joueur->gold = 0;
 
-    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){offset + 1, offset + 2}, 2, 240, SDL_TRUE, "idle"));
-    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){offset + 3, offset + 4}, 2, 240, SDL_TRUE, "walk"));
+    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){joueur->indexOffset + 1, joueur->indexOffset + 2}, 2, 240, SDL_TRUE, "idle"));
+    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){joueur->indexOffset + 3, joueur->indexOffset + 4}, 2, 240, SDL_TRUE, "walk"));
     setAnimation(joueur->entity.animationController, "idle");
 
     joueur->particleEmitter = createParticleEmitter();

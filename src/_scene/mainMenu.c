@@ -19,6 +19,15 @@ void afficheImage(t_fonctionParam* fp) {
     SDL_RenderCopy(context->renderer, texture, NULL, &destRect);
 }
 
+void renderPlayerMain(t_fonctionParam* fp) {
+    t_context* context = GET_PTR(fp, 0, t_context*);
+    t_joueur* player = GET_PTR(fp, 1, t_joueur*);
+    SDL_Rect rect = creerRect(0.55f, 0.35f, 16.0f, 16.0f);
+
+    SDL_RenderCopyEx(context->renderer, player->entity.texture, NULL, &rect, 0, NULL, player->entity.flip);
+    printf("coucoucoucouc");
+}
+
 void modifierDifficulty(t_fonctionParam* fonction) {
     t_context* context = GET_PTR(fonction, 0, t_context*);
     t_text** text = GET_PTR(fonction, 1, t_text**);
@@ -63,6 +72,7 @@ t_scene* createMainMenu(t_context* context, t_joueur** player) {
     const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
     const uint8_t FRAME_DISPLAY_TYPE = registerType(registre, freeFPSDisplay, "frameData");
     const uint8_t FOND_TYPE = registerType(registre, freeTexture, "fond");
+    const uint8_t PLAYER_TYPE = registerType(registre, NULL, "player");
 
     SDL_Texture* texture = loadImage("./assets/imgs/fondEcran.bmp", context->renderer);
 
@@ -84,6 +94,7 @@ t_scene* createMainMenu(t_context* context, t_joueur** player) {
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "Option", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.20f, 0.5f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(context->sceneController, "option"))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "Quitter", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.20f, 0.65f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(context->input))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, NULL, FRAME_DISPLAY_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, NULL, PLAYER_TYPE);
 
     sceneRegisterFunction(scene, FOND_TYPE, RENDER_UI, afficheImage, 1, FONCTION_PARAMS(context));
     sceneRegisterFunction(scene, BUTTON_TYPE, HANDLE_INPUT, handleInputButtonWrapper, 1, FONCTION_PARAMS(context));
@@ -92,6 +103,7 @@ t_scene* createMainMenu(t_context* context, t_joueur** player) {
     sceneRegisterFunction(scene, FRAME_DISPLAY_TYPE, RENDER_UI, renderFPSDisplayWrapper, -1, FONCTION_PARAMS(context->renderer, context->fpsDisplay));
     sceneRegisterFunction(scene, BUTTON_TYPE, RENDER_UI, renderButtonWrapper, 1, FONCTION_PARAMS(context));
     sceneRegisterFunction(scene, TEXTE_TYPE, RENDER_UI, renderTextWrapper, 1, FONCTION_PARAMS(context->renderer));
+    sceneRegisterFunction(scene, PLAYER_TYPE, RENDER_UI, renderPlayerMain, -1, FONCTION_PARAMS(context, *player));
 
     return scene;
 }
