@@ -73,7 +73,7 @@ Le jeu possède un système de niveau, puisque le jeu est assez punitif, si le j
 - https://www.jetbrains.com/lp/mono/
 - https://www.zone38.net/font/
 
-### Imgs :
+### Tiles Set :
 - https://kenney-assets.itch.io/tiny-dungeon
 
 ## Installation du jeu :
