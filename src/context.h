@@ -87,6 +87,8 @@ typedef struct {
     t_item** itemListe;                  ///< Liste des objets du jeu
     int nbItem;                          ///< Nombre d'objets dans la liste
     t_tileset* playerSkin;               ///< Tileset des skin
+    t_tileset* tileSet;                  ///< Tileset du jeux
+
 } t_context;
 
 /**

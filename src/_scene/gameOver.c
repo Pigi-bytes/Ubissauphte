@@ -7,10 +7,13 @@ t_scene* CreateGameOver(t_context* context) {
     const uint8_t LOAD_TYPE = registerType(registre, NULL, "load");
 
     char* phrases[] = {
-        "!aaa",
-        "aaaa",
-        "a",
-        "aa"};
+        "C'est la fin... et c'est aussi pour ça que t'as pas de meuf !",
+        "T'as perdu... encore. C'est pas comme ça que tu vas te faire des potes.",
+        "On notera que le boss, lui, n'a pas ce problème de célibat !",
+        "Eh oui, c'est pour ça que t'es seul dans ce donjon.",
+        "Tombé à plat... comme ta cote de popularité !",
+        "Le donjon n'est pas le seul endroit où tu erres seul...",
+        "Tu échoues ici, comme tes tentatives de rencard !"};
     int nombrePhrases = sizeof(phrases) / sizeof(phrases[0]);
 
     srand((unsigned int)time(NULL));
@@ -21,12 +24,9 @@ t_scene* CreateGameOver(t_context* context) {
 
     t_text* text2 = createText(context->renderer, phrases[indexAleatoire], context->font, RED);
 
-    text2->rect = creerRect(0.3f, 0.25f, 0.075f, 0.075f);
-
     int centerX = 600;  // abscisse du point cible
     int centerY = 500;  // ordonnée du point cible
 
-    // Par exemple, pour un objet t_text nommé "texte":
     text2->rect.x = centerX - text2->rect.w / 2;
     text2->rect.y = centerY - text2->rect.h / 2;
 

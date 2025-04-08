@@ -42,10 +42,11 @@ void supprimerAllfichier() {
         perror("création du répertoire map");
     }
 }
+
 int main(int argc, char* argv[]) {
     supprimerAllfichier();
     if (initAudioSystem() != 0) {
-        return 1;  // Arrêter si l'initialisation échoue
+        return 1;
     }
 
     SDL_Init(SDL_INIT_VIDEO);
@@ -83,14 +84,14 @@ int main(int argc, char* argv[]) {
     context.control->inventaire = SDL_SCANCODE_I;
     context.control->activable1 = SDL_SCANCODE_1;
 
-    t_tileset* tileset = initTileset(context.renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
+    context.tileSet = initTileset(context.renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
     context.playerSkin = initTileset(context.renderer, 1088, 16, 16, "assets/imgs/16skins_idle12_run34.bmp");
-    t_joueur* player = createPlayer(context.control, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, context.playerSkin, 0);
+    t_joueur* player = createPlayer(context.control, (SDL_Texture*)getObject(context.tileSet->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, context.playerSkin, 0);
     reloadPlayerAnimations(player, context.playerSkin, 0);
 
     t_fichier* fichier = chargerFichier("src/test.txt");
 
-    context.itemListe = item_load(fichier, tileset, player);
+    context.itemListe = item_load(fichier, context.tileSet, player);
     context.nbItem = fichier->blockManager->count;
 
     equipementRecalculerStats(&player);
@@ -123,13 +124,6 @@ int main(int argc, char* argv[]) {
         startFrame(context.frameData);
         t_scene* currentScene = getCurrentScene(context.sceneController);
 
-        if (keyPressOnce(context.input, SDL_SCANCODE_U)) {
-            // Ajoute les trois potions à l'inventaire du joueur
-            inventaireAjoutObjet(player->inventaire, context.itemListe[8], 1);   // Potion de Vitalité
-            inventaireAjoutObjet(player->inventaire, context.itemListe[9], 1);   // Potion de Téléportation
-            inventaireAjoutObjet(player->inventaire, context.itemListe[10], 1);  // Potion de Vitesse
-            equipementRecalculerStats(&player);
-        }
         executeSceneFunctions(currentScene, HANDLE_INPUT);
         updateInput(context.input);
 
@@ -161,7 +155,12 @@ int main(int argc, char* argv[]) {
     freeLevel(context.currentLevel);
     free_item(context.itemListe, fichier->blockManager->count);
 
+    freeTileset(context.playerSkin);
+    freeTileset(context.tileSet);
+
     TTF_CloseFont(context.font);
+    TTF_CloseFont(context.gameFont);
+
     freeInput(context.input);
     SDL_DestroyRenderer(context.renderer);
     SDL_DestroyWindow(context.window);

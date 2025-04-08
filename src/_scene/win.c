@@ -7,10 +7,10 @@ t_scene* CreateWin(t_context* context) {
     const uint8_t LOAD_TYPE = registerType(registre, NULL, "load");
 
     char* phrases[] = {
-        "!aaa",
-        "aaaa",
-        "a",
-        "aa"};
+        "Félicitations, tu as vaincu les ténèbres !",
+        "La gloire t'appartient, héros intrépide !",
+        "Tu as surpassé toutes les épreuves !",
+        "La légende retiendra ton nom…"};
     int nombrePhrases = sizeof(phrases) / sizeof(phrases[0]);
 
     srand((unsigned int)time(NULL));
@@ -26,7 +26,6 @@ t_scene* CreateWin(t_context* context) {
     int centerX = 600;  // abscisse du point cible
     int centerY = 500;  // ordonnée du point cible
 
-    // Par exemple, pour un objet t_text nommé "texte":
     text2->rect.x = centerX - text2->rect.w / 2;
     text2->rect.y = centerY - text2->rect.h / 2;
 

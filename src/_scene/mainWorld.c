@@ -59,7 +59,7 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     const uint8_t HUD_TYPE = registerType(registre, freeHUD, "hud");
 
     t_scene* scene = createScene(initObjectManager(registre), "main");
-    t_tileset* tileset = initTileset(context->renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
+
     t_tileset* fantomTileSet = initTileset(context->renderer, 48, 16, 16, "assets/imgs/fantomeidle23un1232.bmp");
     t_tileset* slimeTileSet = initTileset(context->renderer, 48, 16, 16, "assets/imgs/slimeidle12run1213.bmp");
     t_tileset* sorcierTileSet = initTileset(context->renderer, 64, 16, 16, "assets/imgs/sorcieridle12run34.bmp");
@@ -76,9 +76,9 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     registerType(salle->entities->registry, NULL, "BARREL");
 
     t_grille* grille = geneRoom(salle);
-    (*level) = loadMap(grille->nom, tileset);
-    int levelWidth = (*level)->width * tileset->tileSize;
-    int levelHeight = (*level)->height * tileset->tileSize;
+    (*level) = loadMap(grille->nom, context->tileSet);
+    int levelWidth = (*level)->width * context->tileSet->tileSize;
+    int levelHeight = (*level)->height * context->tileSet->tileSize;
     free(grille);
 
     addObject(salle->entities, &(*player)->entity, PLAYER);
@@ -103,19 +103,19 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     }
 
     t_enemy* enemy;
-    enemy = createWizard((SDL_Texture*)getObject(tileset->textureTiles, 10), (SDL_Rect){100, 100, 16, 16}, sorcierTileSet, scene);
+    enemy = createWizard((SDL_Texture*)getObject(context->tileSet->textureTiles, 10), (SDL_Rect){100, 100, 16, 16}, sorcierTileSet, scene);
     for (int i = 0; i < nbEnemis; i++) {
         int enemyType = rand() % 3;  // 0 = ghost, 1 = slime, 2 = wizard
 
         switch (enemyType) {
             case 0:
-                enemy = createGhost((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, fantomTileSet, scene);
+                enemy = createGhost((SDL_Texture*)getObject(context->tileSet->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, fantomTileSet, scene);
                 break;
             case 1:
-                enemy = createSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, scene);
+                enemy = createSlime((SDL_Texture*)getObject(context->tileSet->textureTiles, 109), (SDL_Rect){100, 100, 16, 16}, slimeTileSet, scene);
                 break;
             case 2:
-                enemy = createWizard((SDL_Texture*)getObject(tileset->textureTiles, 10), (SDL_Rect){100, 100, 16, 16}, sorcierTileSet, scene);
+                enemy = createWizard((SDL_Texture*)getObject(context->tileSet->textureTiles, 10), (SDL_Rect){100, 100, 16, 16}, sorcierTileSet, scene);
                 break;
         }
 
@@ -127,7 +127,7 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     t_camera* camera = createCamera(levelWidth, levelHeight, 300, 300);
     t_viewPort* viewport = createViewport(context->renderer, camera, WINDOW_WIDTH, WINDOW_HEIGHT);
     t_minimap* minimap = createMinimap(context->renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
-    t_hud* playerHUD = createHUD(context->renderer, loadFont("assets/fonts/PressStart2P-vaV7.ttf", 16), tileset);
+    t_hud* playerHUD = createHUD(context->renderer, loadFont("assets/fonts/PressStart2P-vaV7.ttf", 16), context->tileSet);
 
     ADD_OBJECT_TO_SCENE(scene, playerHUD, HUD_TYPE);
 
@@ -138,7 +138,7 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
     ADD_OBJECT_TO_SCENE(scene, NULL, FRAME_DISPLAY_TYPE);
 
-    processSpecialTiles(*level, tileset, salle->entities, TILE_ENTITY, scene, context);
+    processSpecialTiles(*level, context->tileSet, salle->entities, TILE_ENTITY, scene, context);
 
     sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, -1, FONCTION_PARAMS(context->input, *player, *level, viewport, &context->frameData->deltaTime, context->sceneController));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&context->input->mouseYWheel));
@@ -185,8 +185,6 @@ t_scene* createMarchantMap(t_context* context, t_salle* salle, t_joueur** player
     const uint8_t HUD_TYPE = registerType(registre, freeHUD, "hud");
 
     t_scene* scene = createScene(initObjectManager(registre), "main");
-    t_tileset* tileset = initTileset(context->renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
-
     char* chemin;
 
     switch (salle->ID) {
@@ -203,9 +201,9 @@ t_scene* createMarchantMap(t_context* context, t_salle* salle, t_joueur** player
             chemin = "assets/mapSpecial/mapMarchant/4marchant20x20.txt";
     }
 
-    (*level) = loadMap(chemin, tileset);
-    int levelWidth = (*level)->width * tileset->tileSize;
-    int levelHeight = (*level)->height * tileset->tileSize;
+    (*level) = loadMap(chemin, context->tileSet);
+    int levelWidth = (*level)->width * context->tileSet->tileSize;
+    int levelHeight = (*level)->height * context->tileSet->tileSize;
 
     salle->entities = initObjectManager(createTypeRegistry());
     const uint8_t PLAYER = registerType(salle->entities->registry, NULL, "PLAYER");
@@ -220,7 +218,7 @@ t_scene* createMarchantMap(t_context* context, t_salle* salle, t_joueur** player
     t_camera* camera = createCamera(levelWidth, levelHeight, 300, 300);
     t_viewPort* viewport = createViewport(context->renderer, camera, WINDOW_WIDTH, WINDOW_HEIGHT);
     t_minimap* minimap = createMinimap(context->renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
-    t_hud* playerHUD = createHUD(context->renderer, loadFont("assets/fonts/PressStart2P-vaV7.ttf", 16), tileset);
+    t_hud* playerHUD = createHUD(context->renderer, loadFont("assets/fonts/PressStart2P-vaV7.ttf", 16), context->tileSet);
 
     ADD_OBJECT_TO_SCENE(scene, playerHUD, HUD_TYPE);
     ADD_OBJECT_TO_SCENE(scene, NULL, PLAYER_TYPE);
@@ -230,7 +228,7 @@ t_scene* createMarchantMap(t_context* context, t_salle* salle, t_joueur** player
     ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
     ADD_OBJECT_TO_SCENE(scene, NULL, FRAME_DISPLAY_TYPE);
 
-    processSpecialTiles(*level, tileset, salle->entities, TILE_ENTITY, scene, context);
+    processSpecialTiles(*level, context->tileSet, salle->entities, TILE_ENTITY, scene, context);
 
     sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, -1, FONCTION_PARAMS(context->input, *player, *level, viewport, &context->frameData->deltaTime, context->sceneController));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&context->input->mouseYWheel));
@@ -277,12 +275,11 @@ t_scene* createBossMap(t_context* context, t_salle* salle, t_joueur** player, t_
     const uint8_t BOSS_HUD_TYPE = registerType(registre, freeBossHealthBar, "boss_hud");
 
     t_scene* scene = createScene(initObjectManager(registre), "main");
-    t_tileset* tileset = initTileset(context->renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
     t_tileset* slimeTileSet = initTileset(context->renderer, 48, 16, 16, "assets/imgs/slimeidle12run1213.bmp");
 
-    (*level) = loadMap("assets/mapSpecial/mapBoss/1boss80x80.txt", tileset);
-    int levelWidth = (*level)->width * tileset->tileSize;
-    int levelHeight = (*level)->height * tileset->tileSize;
+    (*level) = loadMap("assets/mapSpecial/mapBoss/1boss80x80.txt", context->tileSet);
+    int levelWidth = (*level)->width * context->tileSet->tileSize;
+    int levelHeight = (*level)->height * context->tileSet->tileSize;
 
     salle->entities = initObjectManager(createTypeRegistry());
     const uint8_t PLAYER = registerType(salle->entities->registry, NULL, "PLAYER");
@@ -298,9 +295,9 @@ t_scene* createBossMap(t_context* context, t_salle* salle, t_joueur** player, t_
     t_camera* camera = createCamera(levelWidth, levelHeight, 300, 300);
     t_viewPort* viewport = createViewport(context->renderer, camera, WINDOW_WIDTH, WINDOW_HEIGHT);
     t_minimap* minimap = createMinimap(context->renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
-    t_hud* playerHUD = createHUD(context->renderer, loadFont("assets/fonts/PressStart2P-vaV7.ttf", 16), tileset);
+    t_hud* playerHUD = createHUD(context->renderer, loadFont("assets/fonts/PressStart2P-vaV7.ttf", 16), context->tileSet);
 
-    t_enemy* enemy = createBossSlime((SDL_Texture*)getObject(tileset->textureTiles, 109), (SDL_Rect){100, 100, 128, 128}, slimeTileSet, scene);
+    t_enemy* enemy = createBossSlime((SDL_Texture*)getObject(context->tileSet->textureTiles, 109), (SDL_Rect){100, 100, 128, 128}, slimeTileSet, scene);
     enemy->entity.physics.mass = 200;
     enemy->health.currentHealth = 100000;
     enemy->health.maxHealth = 100000;
@@ -324,7 +321,7 @@ t_scene* createBossMap(t_context* context, t_salle* salle, t_joueur** player, t_
     ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
     ADD_OBJECT_TO_SCENE(scene, NULL, FRAME_DISPLAY_TYPE);
 
-    processSpecialTiles(*level, tileset, salle->entities, TILE_ENTITY, scene, context);
+    processSpecialTiles(*level, context->tileSet, salle->entities, TILE_ENTITY, scene, context);
 
     sceneRegisterFunction(scene, PLAYER_TYPE, HANDLE_INPUT, handleInputPlayerWrapper, -1, FONCTION_PARAMS(context->input, *player, *level, viewport, &context->frameData->deltaTime, context->sceneController));
     sceneRegisterFunction(scene, VIEWPORT_TYPE, HANDLE_INPUT, cameraHandleZoomWrapper, 0, FONCTION_PARAMS(&context->input->mouseYWheel));
