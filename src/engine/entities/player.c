@@ -2,7 +2,7 @@
 
 #include "enemy.h"
 
-t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset) {
+t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, int offset) {
     t_joueur* joueur = (t_joueur*)malloc(sizeof(t_joueur));
 
     joueur->control = control;
@@ -45,8 +45,8 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     joueur->xpToNextLevel = 100;
     joueur->gold = 0;
 
-    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){1, 2}, 2, 240, SDL_TRUE, "idle"));
-    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){3, 4}, 2, 240, SDL_TRUE, "walk"));
+    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){offset + 1, offset + 2}, 2, 240, SDL_TRUE, "idle"));
+    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){offset + 3, offset + 4}, 2, 240, SDL_TRUE, "walk"));
     setAnimation(joueur->entity.animationController, "idle");
 
     joueur->particleEmitter = createParticleEmitter();

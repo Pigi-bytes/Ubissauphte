@@ -110,7 +110,7 @@ typedef struct s_joueur {
  * @param tileset Tileset pour les animations
  * @return Pointeur vers le joueur créé
  */
-t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset);
+t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, int offset);
 
 /**
  * @brief Met à jour l'état et le comportement du joueur

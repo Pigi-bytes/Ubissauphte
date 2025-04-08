@@ -117,7 +117,6 @@ void setScene(t_sceneController* controller, char* name) {
             }
             if (salleDep && strcmp(salleDep->name, "main")) {
                 controller->lastMenu->historique[++controller->lastMenu->nb_Menu] = (t_scene*)getObject(controller->scene, controller->currentScene);
-                printf("ajouter\n");
             }
             if (!strcmp(scene->name, "main")) {
                 controller->lastMenu->nb_Menu = -1;
