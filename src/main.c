@@ -105,6 +105,7 @@ int main(int argc, char* argv[]) {
     t_scene* scene5 = createOption2Menu(&context);
     t_scene* scene6 = CreateWin(&context);
     t_scene* scene7 = CreateGameOver(&context);
+    t_scene* scene8 = chargement(&context, &player);
 
     addScene(context.sceneController, scene);
     addScene(context.sceneController, scene0);
@@ -114,6 +115,7 @@ int main(int argc, char* argv[]) {
     addScene(context.sceneController, scene5);
     addScene(context.sceneController, scene6);
     addScene(context.sceneController, scene7);
+    addScene(context.sceneController, scene8);
 
     setScene(context.sceneController, "menuPrincipal");
 

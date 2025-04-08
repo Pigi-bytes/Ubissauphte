@@ -102,7 +102,7 @@ t_scene* createMainMenu(t_context* context, t_joueur** player) {
 
     ADD_OBJECT_TO_SCENE(scene, texture, FOND_TYPE);
     ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
-    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "Jouer", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.20f, 0.35f, 0.3f, 0.1f), creerFonction(CreateNiveauWrapper, FONCTION_PARAMS(context, &context->nbLevel, player))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "Jouer", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.20f, 0.35f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(context->sceneController, "chargement"))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, difficultyButton, BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "Option", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.20f, 0.5f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(context->sceneController, "option"))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "Quitter", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.20f, 0.65f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(context->input))), BUTTON_TYPE);
@@ -139,4 +139,25 @@ char* indiceFromDifficulty(difficulty d) {
             return "Legend";
     }
     return "";
+}
+
+t_scene* chargement(t_context* context, t_joueur** player) {
+    t_typeRegistry* registre = createTypeRegistry();
+    const uint8_t TEXTE_TYPE = registerType(registre, freeText, "text");
+    const uint8_t BUTTON_TYPE = registerType(registre, freeButton, "button");
+
+    t_scene* scene = createScene(initObjectManager(registre), "chargement");
+
+    t_text* text = createTextOutline(context->renderer, "Chargement de la carte ...", context->font, BLACK, WHITE, 3);
+    text->rect = creerRect((1 - 0.8f) / 2, 0.1f, 0.8f, 0.2f);
+
+    ADD_OBJECT_TO_SCENE(scene, text, TEXTE_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "cliquer ici pour génerer la carte", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.225f, 0.4f, 0.5f, 0.1f), creerFonction(CreateNiveauWrapper, FONCTION_PARAMS(context, &context->nbLevel, player))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "Menu Principal", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.325f, 0.55f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(context->sceneController, "menuPrincipal"))), BUTTON_TYPE);
+
+    sceneRegisterFunction(scene, TEXTE_TYPE, RENDER_UI, renderTextWrapper, 1, FONCTION_PARAMS(context->renderer));
+    sceneRegisterFunction(scene, BUTTON_TYPE, HANDLE_INPUT, handleInputButtonWrapper, 1, FONCTION_PARAMS(context));
+    sceneRegisterFunction(scene, BUTTON_TYPE, RENDER_UI, renderButtonWrapper, 1, FONCTION_PARAMS(context));
+
+    return scene;
 }

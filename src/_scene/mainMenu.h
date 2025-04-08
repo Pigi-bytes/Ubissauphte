@@ -37,4 +37,6 @@ t_scene* createMainMenu(t_context* context, t_joueur** player);
  */
 char* indiceFromDifficulty(difficulty d);
 
+t_scene* chargement(t_context* context, t_joueur** player);
+
 #endif
