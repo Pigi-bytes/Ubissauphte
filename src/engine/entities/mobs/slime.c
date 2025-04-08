@@ -30,7 +30,6 @@ void onSlimeDeath(t_context* context, void* entity) {
 
     emitDeathParticles(slime->particles, position, radius, slime->particleColor);
 
-
     if (enemy->lastDamagedBy != NULL) {
         addPlayerXP(enemy->lastDamagedBy, enemy->xpReward);
     }
@@ -39,11 +38,22 @@ void onSlimeDeath(t_context* context, void* entity) {
 void slimeDealDamageToPlayer(t_slime* slime, t_joueur* player, t_context* context) {
     if (!player || player->health.isInvincible || player->health.isDead) return;
 
-    int damage = 10; 
-    applyDamage(&player->health, damage, &player->entity, context);
+    int damage = 10;
+
+    SDL_FPoint hitDirection = {player->entity.collisionCircle.x - slime->base.entity.collisionCircle.x, player->entity.collisionCircle.y - slime->base.entity.collisionCircle.y};
+
+    float length = sqrtf(hitDirection.x * hitDirection.x + hitDirection.y * hitDirection.y);
+    if (length > 0) {
+        hitDirection.x /= length;
+        hitDirection.y /= length;
+    } else {
+        hitDirection.x = 0;
+        hitDirection.y = -1;
+    }
 
     SDL_FPoint position = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
-    emitImpactParticles(slime->particles, position, (SDL_FPoint){0, 0}, player->entity.collisionCircle.radius, slime->particleColor);
+    emitImpactParticles(slime->particles, position, hitDirection, player->entity.collisionCircle.radius, slime->particleColor);
+    playerTakeDamage(player, 15, context, hitDirection);
 }
 
 void slimeTakeDamage(t_enemy* enemy, int damage, t_joueur* player, t_context* context, SDL_FPoint hitDirection) {

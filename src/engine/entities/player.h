@@ -172,4 +172,6 @@ SDL_bool checkAndProcessLevelUp(t_joueur* player);
 
 void reloadPlayerAnimations(t_joueur* joueur, t_tileset* tileset, int newOffset);
 
+void playerTakeDamage(t_joueur* player, int damage, t_context* context, SDL_FPoint hitDirection);
+
 #endif

@@ -559,6 +559,14 @@ void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
 
     renderAttackConeDebug(player);
 
+    if (player->health.isFlashing) {
+        SDL_SetTextureColorMod(player->entity.texture, 255, 255, 255);
+        SDL_SetTextureBlendMode(player->entity.texture, SDL_BLENDMODE_ADD);
+    } else {
+        SDL_SetTextureBlendMode(player->entity.texture, SDL_BLENDMODE_BLEND);
+        SDL_SetTextureColorMod(player->entity.texture, 255, 255, 255);
+    }
+
     SDL_FPoint origin = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
 
     // Calcul de l'échelle adaptée à la portée de l'arme
@@ -575,9 +583,13 @@ void renderPlayer(SDL_Renderer* renderer, t_joueur* player, t_camera* camera) {
 
     if (player->attack.isActive) {
         renderWeaponDuringAttack(renderer, player, origin, pivotPoint, scaledWidth, scaledHeight, player->entity.flip);
-        renderEntity(renderer, &player->entity, camera);
+        if (!(player->health.isInvincible && fmodf(getDeltaTimer(player->health.invincibilityTimer), 0.1) < 0.05)) {
+            renderEntity(renderer, &player->entity, camera);
+        }
     } else {
-        renderEntity(renderer, &player->entity, camera);
+        if (!(player->health.isInvincible && fmodf(getDeltaTimer(player->health.invincibilityTimer), 0.1) < 0.05)) {
+            renderEntity(renderer, &player->entity, camera);
+        }
         renderWeaponIdle(renderer, player, origin, pivotPoint, scaledWidth, scaledHeight, player->entity.flip);
     }
 }
@@ -630,12 +642,22 @@ void reloadPlayerAnimations(t_joueur* joueur, t_tileset* tileset, int newOffset)
     freeAnimationController(joueur->entity.animationController);
     joueur->entity.animationController = initAnimationController();
 
-    printf("%d \n", newOffset);
-
     joueur->entity.texture = getObject(tileset->textureTiles, newOffset + 1);
 
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){newOffset + 1, newOffset + 2}, 2, 240, SDL_TRUE, "idle"));
     addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){newOffset + 3, newOffset + 4}, 2, 240, SDL_TRUE, "walk"));
 
     setAnimation(joueur->entity.animationController, "idle");
+}
+
+void playerTakeDamage(t_joueur* player, int damage, t_context* context, SDL_FPoint hitDirection) {
+    if (!player || player->health.isInvincible || player->health.isDead) return;
+
+    SDL_FPoint position = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
+    float radius = player->entity.collisionCircle.radius;
+
+    SDL_Color bloodColor = {200, 20, 20, 200};
+    emitImpactParticles(player->particleEmitter, position, hitDirection, radius, bloodColor);
+
+    applyDamage(&player->health, fmax(0, damage - player->calculatedStats.defense.additive), &player->entity, context);
 }

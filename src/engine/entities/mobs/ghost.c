@@ -53,7 +53,21 @@ void onGhostDeath(t_context* context, void* entity) {
 
 void ghostDealDamageToPlayer(t_ghost* ghost, t_joueur* player, t_context* context) {
     if (!player || player->health.isInvincible || player->health.isDead) return;
-    applyDamage(&player->health, 15, &player->entity, context);
+
+    SDL_FPoint hitDirection = {
+        player->entity.collisionCircle.x - ghost->base.entity.collisionCircle.x,
+        player->entity.collisionCircle.y - ghost->base.entity.collisionCircle.y};
+
+    float length = sqrtf(hitDirection.x * hitDirection.x + hitDirection.y * hitDirection.y);
+    if (length > 0) {
+        hitDirection.x /= length;
+        hitDirection.y /= length;
+    } else {
+        hitDirection.x = 0;
+        hitDirection.y = -1;
+    }
+
+    playerTakeDamage(player, 15, context, hitDirection);
 }
 
 void ghostTakeDamage(t_enemy* enemy, int damage, t_joueur* player, t_context* context, SDL_FPoint hitDirection) {
