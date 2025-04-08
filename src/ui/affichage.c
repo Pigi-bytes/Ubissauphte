@@ -157,17 +157,17 @@ char *createStatLine(const char *statLabel, float additive, float multiplicative
 void calculerItem(SDL_Rect *item, SDL_Rect inv, SDL_Rect *comp, int nb, int ind, t_input *input) {
     item->h = inv.h / 6;
     item->w = item->h;
-    
+
     // Calcul de la ligne et de la colonne
     int ligne = ind / 4;    // Division entière pour obtenir la ligne
     int colonne = ind % 4;  // Modulo pour obtenir la colonne
-    
+
     // Position X
     if (colonne == 0)
         item->x = inv.x + input->windowWidth * 0.02;
     else
         item->x = comp->x + comp->w + input->windowWidth * 0.02;
-    
+
     // Position Y
     if (ligne == 0)
         item->y = inv.y + input->windowHeight * 0.016;
@@ -442,7 +442,7 @@ void updateAjoutObjet(InventoryUI *ui, SDL_Renderer *renderer, t_input *input) {
         ui->elems->inventory_slots[newIndex].texture = stack->definition->texture;
 
         ui->j++;
-       
+
         int totalContentHeight = 0;
         for (int i = 0; i < ui->nbItems; i++) {
             int slotBottom = ui->elems->inventory_slots[i].rect.y + ui->elems->inventory_slots[i].rect.h;
@@ -463,7 +463,7 @@ void inventoryUI_Render(InventoryUI *ui, t_context *context) {
 
     SDL_SetRenderDrawColor(context->renderer, 0, 0, 0, 255);
 
-    SDL_RenderCopy(context->renderer, ui->elems->player_panel.texture, NULL, &ui->elems->player_panel.rect);
+    SDL_RenderCopy(context->renderer, ui->ext->character->entity.texture, NULL, &ui->elems->player_panel.rect);
     SDL_RenderDrawRect(context->renderer, &ui->elems->player_panel.rect);
 
     SDL_RenderDrawRect(context->renderer, &ui->elems->caseArme.rect);
