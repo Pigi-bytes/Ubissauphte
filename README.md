@@ -1,87 +1,91 @@
 # Ubissauphte ![logo Claude Chappe](assets/imgReadme/Claude.png)
 
-Bienvenue sur le projet Lo Poti Donjon créé par Ubissauphte, un projet de fin d'année 2024-2025 pour la L2 informatique.
+Bienvenue sur le projet **Lo Poti Donjon**, créé par **Ubissauphte**, un projet de fin d'année 2024-2025 pour la L2 informatique.
 
 ## Table des matières
-1. [Contributeurs](#Contributeurs)
-2. [Principe du jeu ](#Principe-du-jeu)
-3. [Histoire du jeu](#Histoire-du-jeu)
-4. [Fonctionnalités du jeu](#Fonctionnalités-du-jeu)
-5. [lien](#Lien)
-6. [Installation](#Installation-du-jeu )
-7. [image du jeu](#Image-du-jeu)
+1. [Contributeurs](#contributeurs)
+2. [Principe du jeu](#principe-du-jeu)
+3. [Histoire du jeu](#histoire-du-jeu)
+4. [Fonctionnalités du jeu](#fonctionnalités-du-jeu)
+5. [Liens](#liens)
+6. [Installation du jeu](#installation-du-jeu)
+7. [Images du jeu](#images-du-jeu)
 
-## Contributeurs :
 
-- **Souleymane Barry** (souley-b)
+## Contributeurs
 
-- **Barthélémy Derouault** (Pigi-bytes)
+Voici les membres de l'équipe ayant contribué au projet :
 
-- **Victor Fombertasse** (Michele530)
+- **Souleymane Barry** *(souley-b)*
+- **Barthélémy Derouault** *(Pigi-bytes)*
+- **Victor Fombertasse** *(Michele530)*
+- **Baptiste Carfantan** *(Baptcarf)*
 
-- **Baptiste Carfantan** (Baptcarf)
 
 ## Principe du jeu :
 
-Notre jeu est un jeu de type rogue-like où le joueur devra se préparer pour résister le plus longtemps dans le donjon rempli de dangers et de monstres.
+**Lo Poti Donjon** est un jeu de type **rogue-like** où le joueur doit se préparer pour survivre le plus longtemps possible dans un donjon rempli de dangers et de monstres.
 
-## Histoire du jeu :
+## Histoire du jeu
 
-Lo Poti Donjon est un jeu centré sur un aventurier égaré dans un vaste donjon, celui de Pablo, privé de toutes ses capacités. Pour récupérer ce qui lui revient de droit, il devra parcourir un long périple dans un donjon rempli de pièges et de monstres déterminés à protéger leur domaine.
+Dans **Lo Poti Donjon**, vous incarnez un aventurier égaré dans le vaste donjon de Pablo, dépouillé de toutes ses capacités. Pour récupérer ce qui lui revient de droit, vous devrez traverser un long périple semé de pièges et de monstres déterminés à protéger leur domaine.
 
-Dans ce donjon réside un antagoniste puissant et impitoyable, il incarne l'ultime défi du donjon. Le périple s'achève une fois qu'il est vaincu.
+Le donjon abrite un antagoniste puissant et impitoyable, représentant l'ultime défi. Votre aventure s'achève une fois cet ennemi vaincu.
 
-Pour surmonter ces épreuves, notre aventurier devra allier force et stratégie afin d'augmenter sa puissance et mettre fin au règne de Pablo. Il débute avec une simple dague. Pour progresser, il peut ouvrir des coffres contenant divers objets ou accumuler des pièces pour acheter des armes de différentes raretés auprès des marchands, qu'il stockera dans son inventaire. Avec un peu de chance, il pourra même dénicher la Double Hache de Guerrier Légendaire.
+Pour surmonter ces épreuves, vous devrez allier force et stratégie afin d'augmenter votre puissance et mettre fin au règne de Pablo. Vous commencez avec une simple dague, mais en explorant, vous pourrez :
+
+- Ouvrir des coffres contenant divers objets.
+- Accumuler des pièces pour acheter des armes de différentes raretés auprès des marchands.
+- Découvrir des équipements rares, comme la **Double Hache de Guerrier Légendaire**.
 
 ## Fonctionnalités du jeu :
 
-Lorsqu'on lance le jeu, le programme génère un niveau et les salles de celui-ci en fonction du niveau de difficulté choisi par le joueur :
+Lors du lancement, le programme génère un niveau et ses salles en fonction de la difficulté choisie par le joueur :
 
-- **easy**: 7 salles avec 5 monstres par salle.
+- **Easy** : 7 salles avec 5 monstres par salle.
+- **Normal** : 17 salles avec 10 monstres par salle.
+- **Hard** : 22 salles avec 20 monstres par salle.
+- **Demonic** : 32 salles avec 30 monstres par salle.
+- **Legendary** : 102 salles avec 50 monstres par salle.
 
-- **normal** : 17 salles avec 10 monstres par salle.
+### Points clés :
+- **Temps de chargement** : Les salles sont générées au début de la partie pour éviter des latences lors des changements de carte.
+- **Objectif** : Tuer les monstres dans chaque salle pour progresser.
+- **Équipements** : Trouvez des objets dans les coffres ou achetez-les auprès des marchands pour affronter le boss final.
+- **Système de niveau** : Le jeu est punitif, mais chaque montée de niveau restaure entièrement la vie du joueur.
 
-- **hard**: 22 salles avec 20 monstres par salle.
+## Comment jouer
 
-- **demonic** : 32 salles avec 30 monstres par salle.
+Dans **Lo Poti Donjon**, vous utilisez les touches suivantes par default pour vous déplacer et interagir :
 
-- **legendary** : 102 salles avec 50 monstres par salle.
+- **Z/Q/S/D** : Déplacements du personnage.
+- **Espace** : Dash.
+- **E** : Intéragir.
+- **I** : Ouvrir l’inventaire.
+- **Échap** : Accéder au menu principal ou revenir en 
+- **p** ; ouvrir la carte.
+ 
+## Liens
 
-Puis, quand le joueur clique sur le bouton jouer, le programme va générer les salles demandées, ce qui crée un petit temps d'attente si le joueur décide de jouer en mode légendaire.
+### Diagrammes et documentation
+- [Diagramme de Gantt Prévu](https://docs.google.com/spreadsheets/d/1izmjEU3AdizAlb6oVq4sjDTDMpQiwE0Ea9UwfN2fawg/edit?usp=sharing)
+- [Diagramme de Gantt Réel](https://docs.google.com/spreadsheets/d/1kdkzD_GTPsmrwCW2jH0_2ET8rOUeqwklMZoLPcJabdQ/edit?usp=sharing)
+- [Documentation Doxygen](https://pigi-bytes.github.io/Ubissauphte/index.html)
 
-Nous avons préféré que le joueur attende en début de partie plutôt que d'avoir de la latence quand il change de map car il faut la créer.
-
-Une fois les cartes générées, il est placé aléatoirement sur la première. Le but du joueur : tuer les monstres des différentes salles pour pouvoir passer à la suivante,
-
-Trouver des équipements grâce aux coffres et au marchand est donc essentiel pour aller se battre contre le boss du jeu et le tuer.
-
-Le jeu possède un système de niveau, puisque le jeu est assez punitif, si le joueur monte d'un niveau il regagne toute sa vie.
-
-## Lien
-
-### Diagramme de Gant
-[lien vers le Gantt Prévu ](https://docs.google.com/spreadsheets/d/1izmjEU3AdizAlb6oVq4sjDTDMpQiwE0Ea9UwfN2fawg/edit?usp=sharing)
-
-
-[lien vers le Gantt Réel ](https://docs.google.com/spreadsheets/d/1kdkzD_GTPsmrwCW2jH0_2ET8rOUeqwklMZoLPcJabdQ/edit?usp=sharing)
-
-### Doxygen
-[lien vers la documentation Doxygen ]( https://pigi-bytes.github.io/Ubissauphte/index.html)
-
-
-### Fonts :
-- https://www.jetbrains.com/lp/mono/
-- https://www.zone38.net/font/
-
-### Tiles Set :
-- https://kenney-assets.itch.io/tiny-dungeon
+### Ressources utilisées
+- **Fonts** :
+  - [JetBrains Mono](https://www.jetbrains.com/lp/mono/)
+  - [Zone38 Fonts](https://www.zone38.net/font/)
+- **Tileset** :
+  - [Tiny Dungeon by Kenney](https://kenney-assets.itch.io/tiny-dungeon)
 
 ## Installation du jeu :
 Avant de compiler le projet, assurez-vous que les dépendances suivantes sont installées sur votre système :  
 
-- SDL2 : Bibliothèque principale.
-- SDL2_mixer : Pour la gestion des sons.
-- SDL2_ttf : Pour l'affichage des polices.
+- **SDL2** : Bibliothèque principale.
+- **SDL2_mixer** : Pour la gestion des sons.
+- **SDL2_ttf** : Pour l'affichage des polices.
+
 
 Sur un système Linux (par exemple Ubuntu), vous pouvez installer ces dépendances avec la commande suivante :  
 
