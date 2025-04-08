@@ -9,23 +9,36 @@ void afficheImage(t_fonctionParam* fp) {
     SDL_Texture* texture = GET_PTR(fp, 1, SDL_Texture*);
 
     SDL_RenderClear(context->renderer);
-
-    // Créer un rectangle de destination pour l'image, prenant toute la fenêtre
     SDL_Rect destRect = {0, 0, window_width, window_height};
     Uint8 mod = (Uint8)(255 * 0.8);
     SDL_SetTextureColorMod(texture, mod, mod, mod);
-
-    // Afficher l'image en la redimensionnant pour remplir toute la fenêtre
     SDL_RenderCopy(context->renderer, texture, NULL, &destRect);
 }
 
 void renderPlayerMain(t_fonctionParam* fp) {
     t_context* context = GET_PTR(fp, 0, t_context*);
     t_joueur* player = GET_PTR(fp, 1, t_joueur*);
-    SDL_Rect rect = creerRect(0.55f, 0.35f, 16.0f, 16.0f);
+    SDL_Rect rect = (SDL_Rect){850, 600, 128, 128};
 
     SDL_RenderCopyEx(context->renderer, player->entity.texture, NULL, &rect, 0, NULL, player->entity.flip);
-    printf("coucoucoucouc");
+}
+
+void incrementPlayerOffset(t_fonctionParam* fp) {
+    t_context* context = GET_PTR(fp, 0, t_context*);
+    t_joueur* player = GET_PTR(fp, 1, t_joueur*);
+
+    player->indexOffset = (player->indexOffset + 4) % (context->playerSkin->textureTiles->count - (context->playerSkin->textureTiles->count % 4));
+
+    reloadPlayerAnimations(player, context->playerSkin, player->indexOffset);
+}
+
+void decrementPlayerOffset(t_fonctionParam* fp) {
+    t_context* context = GET_PTR(fp, 0, t_context*);
+    t_joueur* player = GET_PTR(fp, 1, t_joueur*);
+
+    player->indexOffset = (player->indexOffset - 4 + (context->playerSkin->textureTiles->count - (context->playerSkin->textureTiles->count % 4))) % (context->playerSkin->textureTiles->count - (context->playerSkin->textureTiles->count % 4));
+
+    reloadPlayerAnimations(player, context->playerSkin, player->indexOffset);
 }
 
 void modifierDifficulty(t_fonctionParam* fonction) {
@@ -93,6 +106,10 @@ t_scene* createMainMenu(t_context* context, t_joueur** player) {
     ADD_OBJECT_TO_SCENE(scene, difficultyButton, BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "Option", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.20f, 0.5f, 0.3f, 0.1f), creerFonction(setSceneWrapper, FONCTION_PARAMS(context->sceneController, "option"))), BUTTON_TYPE);
     ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "Quitter", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.20f, 0.65f, 0.3f, 0.1f), creerFonction(bouttonClickQuit, FONCTION_PARAMS(context->input))), BUTTON_TYPE);
+
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "->", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.75f, 0.65f, 0.1f, 0.1f), creerFonction(incrementPlayerOffset, FONCTION_PARAMS(context, *player))), BUTTON_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, createButton(createTextOutline(context->renderer, "<-", context->font, BLACK, WHITE, 2), MAGENTA, BLUE, creerRect(0.58f, 0.65f, 0.1f, 0.1f), creerFonction(decrementPlayerOffset, FONCTION_PARAMS(context, *player))), BUTTON_TYPE);
+
     ADD_OBJECT_TO_SCENE(scene, NULL, FRAME_DISPLAY_TYPE);
     ADD_OBJECT_TO_SCENE(scene, NULL, PLAYER_TYPE);
 

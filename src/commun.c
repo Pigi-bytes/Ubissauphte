@@ -124,8 +124,7 @@ void getPrevuisMenuWrapper(t_fonctionParam* f) {
     getPrevuisMenu((t_sceneController*)f->param[0]);
 }
 
-SDL_Rect
-creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio) {
+SDL_Rect creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio) {
     return (SDL_Rect){WINDOW_WIDTH * x_ratio, WINDOW_HEIGHT * y_ratio, WINDOW_WIDTH * w_ratio, WINDOW_HEIGHT * h_ratio};
 }
 void bouttonClickQuit(t_fonctionParam* fonction) {

@@ -101,4 +101,6 @@ t_animation* getCurrentAnimation(t_animationController* controller);
  */
 void updateController(t_animationController* controller);
 
+void freeAnimationController(t_animationController* controller);
+
 #endif

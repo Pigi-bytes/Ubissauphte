@@ -170,4 +170,6 @@ float getPlayerXPProgress(t_joueur* player);
  */
 SDL_bool checkAndProcessLevelUp(t_joueur* player);
 
+void reloadPlayerAnimations(t_joueur* joueur, t_tileset* tileset, int newOffset);
+
 #endif

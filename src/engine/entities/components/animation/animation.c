@@ -44,11 +44,29 @@ void stopAnimation(t_animation* animation) {
     animation->isActive = SDL_FALSE;
 }
 
+void freeAnimation(void* object) {
+    if (!object) return;
+
+    t_animation* animation = (t_animation*)object;
+
+    // Libérer les frames de l'animation
+    free(animation->frames);
+
+    // Libérer le nom de l'animation
+    free(animation->name);
+
+    // Libérer le timer de l'animation
+    free(animation->frameTimer);
+
+    // Libérer l'animation elle-même
+    free(animation);
+}
+
 t_animationController* initAnimationController() {
     t_animationController* controller = malloc(sizeof(t_animationController));
 
     t_typeRegistry* registre = createTypeRegistry();
-    registerType(registre, NULL, "ANIMATION_TYPE");
+    registerType(registre, freeAnimation, "ANIMATION_TYPE");
 
     controller->animations = initObjectManager(registre);
     controller->currentAnim = -1;
@@ -94,4 +112,14 @@ t_animation* getCurrentAnimation(t_animationController* controller) {
 
 void updateController(t_animationController* controller) {
     updateAnimation(getCurrentAnimation(controller));
+}
+
+void freeAnimationController(t_animationController* controller) {
+    if (!controller) return;
+
+    // Libérer le gestionnaire d'animations
+    freeObjectManager(controller->animations);
+
+    // Libérer le contrôleur lui-même
+    free(controller);
 }

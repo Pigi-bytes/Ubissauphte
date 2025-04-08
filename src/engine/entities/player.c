@@ -6,7 +6,8 @@ t_joueur* createPlayer(t_control* control, SDL_Texture* texture, SDL_Rect rect, 
     t_joueur* joueur = (t_joueur*)malloc(sizeof(t_joueur));
 
     joueur->control = control;
-    joueur->entity.texture = texture;
+    joueur->entity.texture = getObject(tileset->textureTiles, offset);
+
     joueur->entity.displayRect = rect;
     joueur->entity.flip = SDL_FLIP_NONE;
     joueur->entity.animationController = initAnimationController();
@@ -623,4 +624,18 @@ SDL_bool checkAndProcessLevelUp(t_joueur* player) {
     }
 
     return SDL_TRUE;
+}
+
+void reloadPlayerAnimations(t_joueur* joueur, t_tileset* tileset, int newOffset) {
+    freeAnimationController(joueur->entity.animationController);
+    joueur->entity.animationController = initAnimationController();
+
+    printf("%d \n", newOffset);
+
+    joueur->entity.texture = getObject(tileset->textureTiles, newOffset + 1);
+
+    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){newOffset + 1, newOffset + 2}, 2, 240, SDL_TRUE, "idle"));
+    addAnimation(joueur->entity.animationController, createAnimation(tileset, (int[]){newOffset + 3, newOffset + 4}, 2, 240, SDL_TRUE, "walk"));
+
+    setAnimation(joueur->entity.animationController, "idle");
 }
