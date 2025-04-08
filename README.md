@@ -9,29 +9,37 @@ Contributeurs:
 - Victor Fombertasse (Michele530)
 - Baptiste Carfantan (Baptcarf)
 
-Principe du jeu:
+Principe du jeu:  
+
 Notre jeu est un jeu de type rogue-like où le joueur devra se préparer pour résister le plus longtemps dans le donjon rempli de dangers et de monstres
 
-Histoire du jeu :
+Histoire du jeu :  
+
 Lo Poti Donjon est un jeu centré sur un aventurier égaré dans un vaste donjon, celui de Pablo, privé de toutes ses capacités. Pour récupérer ce qui lui revient de droit, il devra parcourir un long périple dans un donjon rempli de pièges et de monstres déterminés à protéger leur domaine.
 
+
 Dans ce donjon réside un intagoniste puissant et impitoyable, il incarne l'ultime défi du donjon. Le périple s'achève une fois qu'il est vaincu.
+
 
 Pour surmonter ces épreuves, notre aventurier devra allier force et stratégie afin d'augmenter sa puissance et mettre fin au règne de Pablo. Il débute avec une simple dague. Pour progresser, il peut ouvrir des coffres contenant divers objets ou accumuler des pièces pour acheter des armes de différentes raretés auprès des marchands, qu'il stockera dans son inventaire. Avec un peu de chance, il pourra même dénicher la Double Hache de Guerrier Légendaire.
 
 
-Fonctionnalités du jeu:
-Lorsqu'on lance le jeu, le programme génère un niveau et les salles de celui-ci en fonction du niveau de difficulté choisi par le joueur : 
-    - easy : 7 salles avec 5 monstres par salles
-    - normal : 17 salles avec 10 monstres pas salles
-    - hard : 22 salles avec 20 enemis par salles
-    - demonic : 32 salles avec 30 enemis par salles
-    - legendaire : 102 salles avec 50 enemis par salle
+Fonctionnalités du jeu:  
 
-Puis, quand le joueur clique sur le bouton jouer, le programme va générer les salles demandées, ce qui crée un petit temps d'attente si le joueur décide de jouer en mode légendaire.
+Lorsqu'on lance le jeu, le programme génère un niveau et les salles de celui-ci en fonction du niveau de difficulté choisi par le joueur :   
+
+- easy : 7 salles avec 5 monstres par salles
+- normal : 17 salles avec 10 monstres pas salles
+- hard : 22 salles avec 20 enemis par salles
+- demonic : 32 salles avec 30 enemis par salles
+- legendaire : 102 salles avec 50 enemis par salle
+
+Puis, quand le joueur clique sur le bouton jouer, le programme va générer les salles demandées, ce qui crée un petit temps d'attente si le joueur décide de jouer en mode légendaire.  
+
 Nous avons préféré que le joueur attende en début de partie plutôt que d'avoir de la latence quand il change de map car il faut la créer.
 
-Une fois les cartes générées, il est placé aléatoirement sur la première. Le but du joueur : tuer les monstres des différentes salles pour pouvoir passer à la prochaine, 
+Une fois les cartes générées, il est placé aléatoirement sur la première. Le but du joueur : tuer les monstres des différentes salles pour pouvoir passer à la prochaine,   
+
 Trouver des équipements grâce aux coffres et au marchand  est donc essentiel  pour aller se battre contre le boss du jeu et le tuer.
 
 Le jeu possède un système de niveau, puisque le jeu est assez punitif, si le joueur monte d'un niveau il regagne toute ça vie
