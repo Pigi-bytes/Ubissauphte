@@ -53,7 +53,7 @@ var searchData=
   ['direction_5ftype_305',['DIRECTION_TYPE',['../liste_block_8h.html#aaf643fb69360d4670ece3242d74a5b1fa2fe313f73a7e3ab04b7e45a73647632e',1,'listeBlock.h']]],
   ['displayedhealthratio_306',['displayedHealthRatio',['../structs__health_system.html#a50dbb164123eded2ccb04fb6972631fb',1,'s_healthSystem::displayedHealthRatio()'],['../structt__boss_health_bar.html#a50dbb164123eded2ccb04fb6972631fb',1,'t_bossHealthBar::displayedHealthRatio()']]],
   ['displayrect_307',['displayRect',['../structs__entity.html#aff5382dbfeddafc18d0582c032bd1f7c',1,'s_entity::displayRect()'],['../structt__arme.html#aff5382dbfeddafc18d0582c032bd1f7c',1,'t_arme::displayRect()']]],
-  ['documentation_20du_20projet_20lo_20poti_20donjon_308',['Documentation du projet Lo poti donjon',['../index.html',1,'']]],
+  ['documentation_20du_20projet_20lo_20poti_20donjon_308',['Documentation du projet Lo Poti Donjon',['../index.html',1,'']]],
   ['dot_309',['dot',['../perlin_noise_8c.html#a336a0164d9c88dea97a238471c15b92f',1,'dot(SDL_FPoint a, SDL_FPoint b):&#160;perlinNoise.c'],['../perlin_noise_8h.html#a336a0164d9c88dea97a238471c15b92f',1,'dot(SDL_FPoint a, SDL_FPoint b):&#160;perlinNoise.c']]],
   ['double_310',['DOUBLE',['../fichier_loader_8h.html#a635988d80b4892662ba31826269279d2a33465d1d419b1074fb259ef444609e92',1,'fichierLoader.h']]],
   ['down_311',['down',['../structt__control.html#a0ef5e67f26b698bd87b8e3348f927133',1,'t_control']]],
