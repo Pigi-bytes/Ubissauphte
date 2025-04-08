@@ -29,6 +29,8 @@ static void onWizardDeath(t_context* context, void* entity) {
     SDL_FPoint position = {wizard->base.entity.collisionCircle.x, wizard->base.entity.collisionCircle.y};
     float radius = wizard->base.entity.collisionCircle.radius;
 
+    emitDeathParticles(wizard->particles, position, radius, (SDL_Color){154, 82, 9});
+
     if (enemy->lastDamagedBy) {
         addPlayerXP(enemy->lastDamagedBy, enemy->xpReward);
     }

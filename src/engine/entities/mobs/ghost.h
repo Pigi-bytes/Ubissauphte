@@ -6,6 +6,7 @@
 #ifndef GHOST_H
 #define GHOST_H
 
+#include "../components/particules/particules.h"
 #include "../enemy.h"
 
 /**
@@ -33,6 +34,9 @@ typedef struct {
     SDL_bool isBoosting;  ///< Indique si le fantôme est en mode boost
     float boostTimer;     ///< Temps restant en mode boost
     float boostCooldown;  ///< Temps de récupération entre deux boosts
+
+    t_particleEmitter* particles;  // Added particle emitter
+    SDL_Color particleColor;       // Added color for particles
 } t_ghost;
 
 /**

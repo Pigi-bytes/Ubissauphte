@@ -48,7 +48,19 @@ static void generateNewTarget(t_ghost* ghost, t_grid* grid, t_entity* player) {
 
 void onGhostDeath(t_context* context, void* entity) {
     t_enemy* enemy = (t_enemy*)entity;
-    if (enemy->lastDamagedBy) addPlayerXP(enemy->lastDamagedBy, enemy->xpReward);
+    t_ghost* ghost = (t_ghost*)enemy;
+
+    enemy->entity.useCircleCollision = SDL_FALSE;
+    resetParticleEmitter(ghost->particles);
+
+    SDL_FPoint position = {ghost->base.entity.collisionCircle.x, ghost->base.entity.collisionCircle.y};
+    float radius = ghost->base.entity.collisionCircle.radius;
+
+    emitDeathParticles(ghost->particles, position, radius, ghost->particleColor);
+
+    if (enemy->lastDamagedBy) {
+        addPlayerXP(enemy->lastDamagedBy, enemy->xpReward);
+    }
 }
 
 void ghostDealDamageToPlayer(t_ghost* ghost, t_joueur* player, t_context* context) {
@@ -67,16 +79,27 @@ void ghostDealDamageToPlayer(t_ghost* ghost, t_joueur* player, t_context* contex
         hitDirection.y = -1;
     }
 
+    SDL_FPoint position = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
+    emitImpactParticles(ghost->particles, position, hitDirection, player->entity.collisionCircle.radius, ghost->particleColor);
+
     playerTakeDamage(player, 15, context, hitDirection);
 }
 
 void ghostTakeDamage(t_enemy* enemy, int damage, t_joueur* player, t_context* context, SDL_FPoint hitDirection) {
-    ((t_ghost*)enemy)->transparency = 120;
+    t_ghost* ghost = (t_ghost*)enemy;
+    ghost->transparency = 120;
+
+    SDL_FPoint position = {ghost->base.entity.collisionCircle.x, ghost->base.entity.collisionCircle.y};
+    float radius = ghost->base.entity.collisionCircle.radius;
+    emitImpactParticles(ghost->particles, position, hitDirection, radius, ghost->particleColor);
+
     applyDamage(&enemy->health, damage, &enemy->entity, context);
 }
 
 void renderGhost(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
     t_ghost* ghost = (t_ghost*)enemy;
+
+    renderEntityParticles(renderer, ghost->particles);
 
     if (enemy->health.isDead) return;
 
@@ -141,6 +164,9 @@ t_enemy* createGhost(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset, t_
     ghost->boostTimer = 0.0f;
     ghost->boostCooldown = 1.0f;
 
+    ghost->particles = createParticleEmitter();
+    ghost->particleColor = (SDL_Color){180, 180, 255, 200};  // Ghostly blue-white color
+
     return (t_enemy*)ghost;
 }
 
@@ -162,6 +188,8 @@ void updateGhost(t_enemy* enemy, float* deltaTime, t_grid* grid, t_objectManager
     updateHealthSystem(&enemy->health, *deltaTime);
     updateDeltaTimer(ghost->timer, *deltaTime);
     ghost->elapsedTime += *deltaTime;
+
+    updateEntityParticles(ghost->particles, *deltaTime);
 
     if (getDeltaTimer(ghost->timer) >= ghost->targetChangeTime) {
         generateNewTarget(ghost, grid, player);

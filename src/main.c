@@ -84,7 +84,7 @@ int main(int argc, char* argv[]) {
     context.control->activable1 = SDL_SCANCODE_1;
 
     t_tileset* tileset = initTileset(context.renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
-    context.playerSkin = initTileset(context.renderer, 1024, 16, 16, "assets/imgs/16skins_idle12_run34.bmp");
+    context.playerSkin = initTileset(context.renderer, 1088, 16, 16, "assets/imgs/16skins_idle12_run34.bmp");
     t_joueur* player = createPlayer(context.control, (SDL_Texture*)getObject(tileset->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, context.playerSkin, 0);
     reloadPlayerAnimations(player, context.playerSkin, 0);
 
