@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('lissage_8c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_7cf6b88a36d52e4ad5b6560432f2e789.html">world</a></li><li class="navelem"><a class="el" href="dir_de2f8a3e61d6bf711d15f49e88433b64.html">generationSalle</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
@@ -158,18 +174,18 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lissage_8c_a1b6776a710f04af13d502a963c2e03ab_icgraph.png" border="0" usemap="#alissage_8c_a1b6776a710f04af13d502a963c2e03ab_icgraph" alt=""/></div>
 <map name="alissage_8c_a1b6776a710f04af13d502a963c2e03ab_icgraph" id="alissage_8c_a1b6776a710f04af13d502a963c2e03ab_icgraph">
-<area shape="rect" title="Vérifie si une case est de type plafond." alt="" coords="1485,81,1597,108"/>
-<area shape="rect" href="lissage_8c.html#aac8d3e00eeada130359453a0dc52efb4" title="Détecte un motif diagonal inférieur." alt="" coords="1252,5,1437,32"/>
-<area shape="rect" href="lissage_8c.html#a33747a07e6d181c27b5d6ff6085fbf6f" title="Détecte un motif diagonal en coin." alt="" coords="1255,56,1435,83"/>
-<area shape="rect" href="lissage_8c.html#a80ae6dd1186c7a961aaf870085b5fbfe" title="Détecte un motif diagonal supérieur." alt="" coords="1265,107,1424,133"/>
-<area shape="rect" href="lissage_8c.html#a8e279d521aec54e4d7c59b69579d8652" title="Détermine si un mur arrière doit être ajouté" alt="" coords="1269,157,1420,184"/>
-<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1136,81,1204,108"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,81,1088,108"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,81,948,108"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,81,772,108"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,81,612,108"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,81,453,108"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,81,239,108"/>
+<area shape="rect" title="Vérifie si une case est de type plafond." alt="" coords="1455,81,1567,108"/>
+<area shape="rect" href="lissage_8c.html#aac8d3e00eeada130359453a0dc52efb4" title="Détecte un motif diagonal inférieur." alt="" coords="1221,5,1407,32"/>
+<area shape="rect" href="lissage_8c.html#a33747a07e6d181c27b5d6ff6085fbf6f" title="Détecte un motif diagonal en coin." alt="" coords="1224,56,1404,83"/>
+<area shape="rect" href="lissage_8c.html#a80ae6dd1186c7a961aaf870085b5fbfe" title="Détecte un motif diagonal supérieur." alt="" coords="1235,107,1393,133"/>
+<area shape="rect" href="lissage_8c.html#a8e279d521aec54e4d7c59b69579d8652" title="Détermine si un mur arrière doit être ajouté" alt="" coords="1239,157,1389,184"/>
+<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1105,81,1173,108"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,81,1057,108"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,81,917,108"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,81,741,108"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,81,581,108"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,81,423,108"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,81,208,108"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,81,60,108"/>
 </map>
 </div>
@@ -216,21 +232,21 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lissage_8c_a4cb665eeb015afb3aeab764f6def7070_icgraph.png" border="0" usemap="#alissage_8c_a4cb665eeb015afb3aeab764f6def7070_icgraph" alt=""/></div>
 <map name="alissage_8c_a4cb665eeb015afb3aeab764f6def7070_icgraph" id="alissage_8c_a4cb665eeb015afb3aeab764f6def7070_icgraph">
-<area shape="rect" title="Vérifie si une case est de type sol." alt="" coords="1492,157,1575,184"/>
-<area shape="rect" href="lissage_8c.html#aefe3b51685f373ee6284833b2e6780c6" title="Vérifie si une case n&#39;a pas de voisins." alt="" coords="1283,5,1413,32"/>
-<area shape="rect" href="lissage_8c.html#aac8d3e00eeada130359453a0dc52efb4" title="Détecte un motif diagonal inférieur." alt="" coords="1255,56,1441,83"/>
-<area shape="rect" href="lissage_8c.html#a33747a07e6d181c27b5d6ff6085fbf6f" title="Détecte un motif diagonal en coin." alt="" coords="1258,107,1438,133"/>
-<area shape="rect" href="lissage_8c.html#a80ae6dd1186c7a961aaf870085b5fbfe" title="Détecte un motif diagonal supérieur." alt="" coords="1269,157,1427,184"/>
-<area shape="rect" href="lissage_8c.html#a5ac7e1f3c2f4c1c2c1e773876a0fe604" title="Vérifie les motifs horizontaux/verticaux." alt="" coords="1252,208,1444,235"/>
-<area shape="rect" href="lissage_8c.html#ae9193128b44d8297684e9cbdfad8b2c9" title="Vérifie si une case est isolée." alt="" coords="1289,259,1407,285"/>
-<area shape="rect" href="lissage_8c.html#a8e279d521aec54e4d7c59b69579d8652" title="Détermine si un mur arrière doit être ajouté" alt="" coords="1273,309,1423,336"/>
-<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1136,183,1204,209"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,183,1088,209"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,183,948,209"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,183,772,209"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,183,612,209"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,183,453,209"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,183,239,209"/>
+<area shape="rect" title="Vérifie si une case est de type sol." alt="" coords="1461,157,1544,184"/>
+<area shape="rect" href="lissage_8c.html#aefe3b51685f373ee6284833b2e6780c6" title="Vérifie si une case n&#39;a pas de voisins." alt="" coords="1253,5,1382,32"/>
+<area shape="rect" href="lissage_8c.html#aac8d3e00eeada130359453a0dc52efb4" title="Détecte un motif diagonal inférieur." alt="" coords="1225,56,1410,83"/>
+<area shape="rect" href="lissage_8c.html#a33747a07e6d181c27b5d6ff6085fbf6f" title="Détecte un motif diagonal en coin." alt="" coords="1227,107,1407,133"/>
+<area shape="rect" href="lissage_8c.html#a80ae6dd1186c7a961aaf870085b5fbfe" title="Détecte un motif diagonal supérieur." alt="" coords="1238,157,1397,184"/>
+<area shape="rect" href="lissage_8c.html#a5ac7e1f3c2f4c1c2c1e773876a0fe604" title="Vérifie les motifs horizontaux/verticaux." alt="" coords="1221,208,1413,235"/>
+<area shape="rect" href="lissage_8c.html#ae9193128b44d8297684e9cbdfad8b2c9" title="Vérifie si une case est isolée." alt="" coords="1259,259,1376,285"/>
+<area shape="rect" href="lissage_8c.html#a8e279d521aec54e4d7c59b69579d8652" title="Détermine si un mur arrière doit être ajouté" alt="" coords="1242,309,1393,336"/>
+<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1105,183,1173,209"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,183,1057,209"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,183,917,209"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,183,741,209"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,183,581,209"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,183,423,209"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,183,208,209"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,183,60,209"/>
 </map>
 </div>
@@ -333,14 +349,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lissage_8c_a9e492bb56220c4c2f61cb24bb3b5f531_icgraph.png" border="0" usemap="#alissage_8c_a9e492bb56220c4c2f61cb24bb3b5f531_icgraph" alt=""/></div>
 <map name="alissage_8c_a9e492bb56220c4c2f61cb24bb3b5f531_icgraph" id="alissage_8c_a9e492bb56220c4c2f61cb24bb3b5f531_icgraph">
-<area shape="rect" title="Applique le traitement pour un motif diagonal inférieur." alt="" coords="1252,5,1471,32"/>
-<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1136,5,1204,32"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Applique le traitement pour un motif diagonal inférieur." alt="" coords="1221,5,1440,32"/>
+<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1105,5,1173,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,5,1057,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -404,14 +420,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lissage_8c_a9cbebc2d912d5db181f453c6922b2ab3_icgraph.png" border="0" usemap="#alissage_8c_a9cbebc2d912d5db181f453c6922b2ab3_icgraph" alt=""/></div>
 <map name="alissage_8c_a9cbebc2d912d5db181f453c6922b2ab3_icgraph" id="alissage_8c_a9cbebc2d912d5db181f453c6922b2ab3_icgraph">
-<area shape="rect" title="Applique le traitement pour un motif diagonal en coin." alt="" coords="1252,5,1465,32"/>
-<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1136,5,1204,32"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Applique le traitement pour un motif diagonal en coin." alt="" coords="1221,5,1435,32"/>
+<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1105,5,1173,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,5,1057,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -460,14 +476,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lissage_8c_aac8d3e00eeada130359453a0dc52efb4_icgraph.png" border="0" usemap="#alissage_8c_aac8d3e00eeada130359453a0dc52efb4_icgraph" alt=""/></div>
 <map name="alissage_8c_aac8d3e00eeada130359453a0dc52efb4_icgraph" id="alissage_8c_aac8d3e00eeada130359453a0dc52efb4_icgraph">
-<area shape="rect" title="Détecte un motif diagonal inférieur." alt="" coords="1252,5,1437,32"/>
-<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1136,5,1204,32"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Détecte un motif diagonal inférieur." alt="" coords="1221,5,1407,32"/>
+<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1105,5,1173,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,5,1057,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -516,14 +532,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lissage_8c_a33747a07e6d181c27b5d6ff6085fbf6f_icgraph.png" border="0" usemap="#alissage_8c_a33747a07e6d181c27b5d6ff6085fbf6f_icgraph" alt=""/></div>
 <map name="alissage_8c_a33747a07e6d181c27b5d6ff6085fbf6f_icgraph" id="alissage_8c_a33747a07e6d181c27b5d6ff6085fbf6f_icgraph">
-<area shape="rect" title="Détecte un motif diagonal en coin." alt="" coords="1252,5,1432,32"/>
-<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1136,5,1204,32"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Détecte un motif diagonal en coin." alt="" coords="1221,5,1401,32"/>
+<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1105,5,1173,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,5,1057,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -572,14 +588,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lissage_8c_a80ae6dd1186c7a961aaf870085b5fbfe_icgraph.png" border="0" usemap="#alissage_8c_a80ae6dd1186c7a961aaf870085b5fbfe_icgraph" alt=""/></div>
 <map name="alissage_8c_a80ae6dd1186c7a961aaf870085b5fbfe_icgraph" id="alissage_8c_a80ae6dd1186c7a961aaf870085b5fbfe_icgraph">
-<area shape="rect" title="Détecte un motif diagonal supérieur." alt="" coords="1252,5,1411,32"/>
-<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1136,5,1204,32"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Détecte un motif diagonal supérieur." alt="" coords="1221,5,1380,32"/>
+<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1105,5,1173,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,5,1057,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -627,14 +643,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lissage_8c_a5ac7e1f3c2f4c1c2c1e773876a0fe604_icgraph.png" border="0" usemap="#alissage_8c_a5ac7e1f3c2f4c1c2c1e773876a0fe604_icgraph" alt=""/></div>
 <map name="alissage_8c_a5ac7e1f3c2f4c1c2c1e773876a0fe604_icgraph" id="alissage_8c_a5ac7e1f3c2f4c1c2c1e773876a0fe604_icgraph">
-<area shape="rect" title="Vérifie les motifs horizontaux/verticaux." alt="" coords="1252,5,1444,32"/>
-<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1136,5,1204,32"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Vérifie les motifs horizontaux/verticaux." alt="" coords="1221,5,1413,32"/>
+<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1105,5,1173,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,5,1057,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -682,14 +698,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lissage_8c_ae9193128b44d8297684e9cbdfad8b2c9_icgraph.png" border="0" usemap="#alissage_8c_ae9193128b44d8297684e9cbdfad8b2c9_icgraph" alt=""/></div>
 <map name="alissage_8c_ae9193128b44d8297684e9cbdfad8b2c9_icgraph" id="alissage_8c_ae9193128b44d8297684e9cbdfad8b2c9_icgraph">
-<area shape="rect" title="Vérifie si une case est isolée." alt="" coords="1252,5,1369,32"/>
-<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1136,5,1204,32"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Vérifie si une case est isolée." alt="" coords="1221,5,1339,32"/>
+<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1105,5,1173,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,5,1057,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -746,13 +762,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lissage_8c_a3ea44210d642fd93567e4844c9c1ed4b_icgraph.png" border="0" usemap="#alissage_8c_a3ea44210d642fd93567e4844c9c1ed4b_icgraph" alt=""/></div>
 <map name="alissage_8c_a3ea44210d642fd93567e4844c9c1ed4b_icgraph" id="alissage_8c_a3ea44210d642fd93567e4844c9c1ed4b_icgraph">
-<area shape="rect" title="Applique le lissage sur toute la grille." alt="" coords="1136,5,1204,32"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Applique le lissage sur toute la grille." alt="" coords="1105,5,1173,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,5,1057,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -801,14 +817,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="lissage_8c_a8e279d521aec54e4d7c59b69579d8652_icgraph.png" border="0" usemap="#alissage_8c_a8e279d521aec54e4d7c59b69579d8652_icgraph" alt=""/></div>
 <map name="alissage_8c_a8e279d521aec54e4d7c59b69579d8652_icgraph" id="alissage_8c_a8e279d521aec54e4d7c59b69579d8652_icgraph">
-<area shape="rect" title="Détermine si un mur arrière doit être ajouté" alt="" coords="1252,5,1403,32"/>
-<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1136,5,1204,32"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Détermine si un mur arrière doit être ajouté" alt="" coords="1221,5,1372,32"/>
+<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1105,5,1173,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,5,1057,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -816,9 +832,13 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_7cf6b88a36d52e4ad5b6560432f2e789.html">world</a></li><li class="navelem"><a class="el" href="dir_de2f8a3e61d6bf711d15f49e88433b64.html">generationSalle</a></li><li class="navelem"><a class="el" href="lissage_8c.html">lissage.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

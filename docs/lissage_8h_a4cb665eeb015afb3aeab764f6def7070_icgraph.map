@@ -1,18 +1,18 @@
 <map id="caseIsSol" name="caseIsSol">
-<area shape="rect" id="node1" title="Vérifie si une case est de type sol." alt="" coords="1492,157,1575,184"/>
-<area shape="rect" id="node2" href="$lissage_8c.html#aefe3b51685f373ee6284833b2e6780c6" title="Vérifie si une case n&#39;a pas de voisins." alt="" coords="1283,5,1413,32"/>
-<area shape="rect" id="node3" href="$lissage_8c.html#aac8d3e00eeada130359453a0dc52efb4" title="Détecte un motif diagonal inférieur." alt="" coords="1255,56,1441,83"/>
-<area shape="rect" id="node12" href="$lissage_8c.html#a33747a07e6d181c27b5d6ff6085fbf6f" title="Détecte un motif diagonal en coin." alt="" coords="1258,107,1438,133"/>
-<area shape="rect" id="node13" href="$lissage_8c.html#a80ae6dd1186c7a961aaf870085b5fbfe" title="Détecte un motif diagonal supérieur." alt="" coords="1269,157,1427,184"/>
-<area shape="rect" id="node14" href="$lissage_8c.html#a5ac7e1f3c2f4c1c2c1e773876a0fe604" title="Vérifie les motifs horizontaux/verticaux." alt="" coords="1252,208,1444,235"/>
-<area shape="rect" id="node15" href="$lissage_8c.html#ae9193128b44d8297684e9cbdfad8b2c9" title="Vérifie si une case est isolée." alt="" coords="1289,259,1407,285"/>
-<area shape="rect" id="node16" href="$lissage_8c.html#a8e279d521aec54e4d7c59b69579d8652" title="Détermine si un mur arrière doit être ajouté" alt="" coords="1273,309,1423,336"/>
-<area shape="rect" id="node4" href="$lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1136,183,1204,209"/>
-<area shape="rect" id="node5" href="$gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,183,1088,209"/>
-<area shape="rect" id="node6" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,183,948,209"/>
-<area shape="rect" id="node7" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,183,772,209"/>
-<area shape="rect" id="node8" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,183,612,209"/>
-<area shape="rect" id="node9" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,183,453,209"/>
-<area shape="rect" id="node10" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,183,239,209"/>
+<area shape="rect" id="node1" title="Vérifie si une case est de type sol." alt="" coords="1461,157,1544,184"/>
+<area shape="rect" id="node2" href="$lissage_8c.html#aefe3b51685f373ee6284833b2e6780c6" title="Vérifie si une case n&#39;a pas de voisins." alt="" coords="1253,5,1382,32"/>
+<area shape="rect" id="node3" href="$lissage_8c.html#aac8d3e00eeada130359453a0dc52efb4" title="Détecte un motif diagonal inférieur." alt="" coords="1225,56,1410,83"/>
+<area shape="rect" id="node12" href="$lissage_8c.html#a33747a07e6d181c27b5d6ff6085fbf6f" title="Détecte un motif diagonal en coin." alt="" coords="1227,107,1407,133"/>
+<area shape="rect" id="node13" href="$lissage_8c.html#a80ae6dd1186c7a961aaf870085b5fbfe" title="Détecte un motif diagonal supérieur." alt="" coords="1238,157,1397,184"/>
+<area shape="rect" id="node14" href="$lissage_8c.html#a5ac7e1f3c2f4c1c2c1e773876a0fe604" title="Vérifie les motifs horizontaux/verticaux." alt="" coords="1221,208,1413,235"/>
+<area shape="rect" id="node15" href="$lissage_8c.html#ae9193128b44d8297684e9cbdfad8b2c9" title="Vérifie si une case est isolée." alt="" coords="1259,259,1376,285"/>
+<area shape="rect" id="node16" href="$lissage_8c.html#a8e279d521aec54e4d7c59b69579d8652" title="Détermine si un mur arrière doit être ajouté" alt="" coords="1242,309,1393,336"/>
+<area shape="rect" id="node4" href="$lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1105,183,1173,209"/>
+<area shape="rect" id="node5" href="$gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,183,1057,209"/>
+<area shape="rect" id="node6" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,183,917,209"/>
+<area shape="rect" id="node7" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,183,741,209"/>
+<area shape="rect" id="node8" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,183,581,209"/>
+<area shape="rect" id="node9" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,183,423,209"/>
+<area shape="rect" id="node10" href="$main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,183,208,209"/>
 <area shape="rect" id="node11" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,183,60,209"/>
 </map>

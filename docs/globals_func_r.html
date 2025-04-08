@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -49,6 +53,22 @@ $(function() {
 /* @license-end */</script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('globals_func_r.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -96,6 +116,10 @@ $(function() {
 : <a class="el" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062">objectManager.c</a>
 , <a class="el" href="object_manager_8h.html#a2aa55325cfca978689146f3fc4479062">objectManager.h</a>
 </li>
+<li>reloadPlayerAnimations()
+: <a class="el" href="player_8c.html#a3adff23aec4ff9cdf14e365c8ef60eb4">player.c</a>
+, <a class="el" href="player_8h.html#a3adff23aec4ff9cdf14e365c8ef60eb4">player.h</a>
+</li>
 <li>render_cooldown()
 : <a class="el" href="hud_8c.html#ac2ceb2c64a019e971014a312b534649f">hud.c</a>
 </li>
@@ -104,8 +128,8 @@ $(function() {
 , <a class="el" href="weapon_8h.html#ad7e876fe31beedb31fd0e933a5061c09">weapon.h</a>
 </li>
 <li>renderBarrel()
-: <a class="el" href="barrel_8c.html#a14b30fc367591d33581261cf7a4f7a1d">barrel.c</a>
-, <a class="el" href="barrel_8h.html#a14b30fc367591d33581261cf7a4f7a1d">barrel.h</a>
+: <a class="el" href="barrel_8h.html#a14b30fc367591d33581261cf7a4f7a1d">barrel.h</a>
+, <a class="el" href="barrel_8c.html#a14b30fc367591d33581261cf7a4f7a1d">barrel.c</a>
 </li>
 <li>renderBarreVolumme()
 : <a class="el" href="slider_8c.html#aa2ecee42a46ae153f803a7d5689a36a5">slider.c</a>
@@ -135,8 +159,8 @@ $(function() {
 , <a class="el" href="button_8h.html#a57726e67186d9103bd5627f07a2557d4">button.h</a>
 </li>
 <li>renderButtonWrapper()
-: <a class="el" href="commun_8h.html#aa7943250e7e111ee38f3a8b0e3be002f">commun.h</a>
-, <a class="el" href="commun_8c.html#aa7943250e7e111ee38f3a8b0e3be002f">commun.c</a>
+: <a class="el" href="commun_8c.html#aa7943250e7e111ee38f3a8b0e3be002f">commun.c</a>
+, <a class="el" href="commun_8h.html#aa7943250e7e111ee38f3a8b0e3be002f">commun.h</a>
 </li>
 <li>renderChest()
 : <a class="el" href="chest_8c.html#a3604f35f8ea76d7d2e23225a8302ea10">chest.c</a>
@@ -207,6 +231,9 @@ $(function() {
 : <a class="el" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a">player.c</a>
 , <a class="el" href="player_8h.html#a62de1cb2bc9e363cfa8a9ace8c9c612a">player.h</a>
 </li>
+<li>renderPlayerMain()
+: <a class="el" href="main_menu_8c.html#a51f44f46d5eef92ae2bb2eedcaeee5a7">mainMenu.c</a>
+</li>
 <li>renderPlayerWrapper()
 : <a class="el" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0">commun.c</a>
 , <a class="el" href="commun_8h.html#aeeaad6c85aeeabd9a1aadb8b74670ba0">commun.h</a>
@@ -234,8 +261,8 @@ $(function() {
 , <a class="el" href="text_8h.html#a0377eac5e5c2dd29e4e28920be02b31a">text.h</a>
 </li>
 <li>renderTextWrapper()
-: <a class="el" href="commun_8c.html#a8daf30ec672eefaca3e824d1bc7dfb02">commun.c</a>
-, <a class="el" href="commun_8h.html#a8daf30ec672eefaca3e824d1bc7dfb02">commun.h</a>
+: <a class="el" href="commun_8h.html#a8daf30ec672eefaca3e824d1bc7dfb02">commun.h</a>
+, <a class="el" href="commun_8c.html#a8daf30ec672eefaca3e824d1bc7dfb02">commun.c</a>
 </li>
 <li>renderTileEntity()
 : <a class="el" href="tiles_entity_8c.html#ab31c21bf012499d0d2e65835187d9ec2">tilesEntity.c</a>
@@ -266,16 +293,16 @@ $(function() {
 , <a class="el" href="weapon_8h.html#af96a799be749a80ec78faad1a28bc755">weapon.h</a>
 </li>
 <li>renderWeaponIdle()
-: <a class="el" href="weapon_8h.html#a5d53a807540e29196d6a6626c870ece5">weapon.h</a>
-, <a class="el" href="weapon_8c.html#a5d53a807540e29196d6a6626c870ece5">weapon.c</a>
+: <a class="el" href="weapon_8c.html#a5d53a807540e29196d6a6626c870ece5">weapon.c</a>
+, <a class="el" href="weapon_8h.html#a5d53a807540e29196d6a6626c870ece5">weapon.h</a>
 </li>
 <li>renderWeaponRangeUI()
 : <a class="el" href="weapon_8c.html#a009bd4a508cff4e6e45bec4591379aab">weapon.c</a>
 , <a class="el" href="weapon_8h.html#a009bd4a508cff4e6e45bec4591379aab">weapon.h</a>
 </li>
 <li>renderWizard()
-: <a class="el" href="wizard_8c.html#a6d17b4d5016ebdb7a44e44396403fc89">wizard.c</a>
-, <a class="el" href="wizard_8h.html#a6d17b4d5016ebdb7a44e44396403fc89">wizard.h</a>
+: <a class="el" href="tiles_entity_2wizard_8c.html#a6d17b4d5016ebdb7a44e44396403fc89">wizard.c</a>
+, <a class="el" href="tiles_entity_2wizard_8h.html#a6d17b4d5016ebdb7a44e44396403fc89">wizard.h</a>
 </li>
 <li>renderXPBar()
 : <a class="el" href="hud_8c.html#a79288053073d4617199b790c1aa5c4f9">hud.c</a>
@@ -338,9 +365,12 @@ $(function() {
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

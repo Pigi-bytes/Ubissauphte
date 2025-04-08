@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -49,6 +53,22 @@ $(function() {
 /* @license-end */</script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('group__type__case__constants.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -442,36 +462,36 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__type__case__constants_gaa0ac9a00d6c9397011a34628c13bb902_icgraph.png" border="0" usemap="#agroup__type__case__constants_gaa0ac9a00d6c9397011a34628c13bb902_icgraph" alt=""/></div>
 <map name="agroup__type__case__constants_gaa0ac9a00d6c9397011a34628c13bb902_icgraph" id="agroup__type__case__constants_gaa0ac9a00d6c9397011a34628c13bb902_icgraph">
-<area shape="rect" title="Vérifie si une case existe." alt="" coords="1812,259,1875,285"/>
-<area shape="rect" href="gene_room_8c.html#ae1852105b1a586291e0262eee5441e25" title="Détecte un angle continu à droite." alt="" coords="1583,157,1731,184"/>
-<area shape="rect" href="gene_room_8c.html#a8559ae75196fafce33bc543ce20505dd" title="Détecte un angle continu à gauche." alt="" coords="1575,208,1740,235"/>
-<area shape="rect" href="gene_room_8c.html#a7ed66c1dc8079a0f92651bf41e26bdce" title="Détecte un arrondi supérieur droit." alt="" coords="1576,5,1739,32"/>
-<area shape="rect" href="gene_room_8c.html#a6ff7427b2774a20a3485173b5166f442" title="Détecte un arrondi supérieur gauche." alt="" coords="1568,56,1747,83"/>
-<area shape="rect" href="lissage_8c.html#a1b6776a710f04af13d502a963c2e03ab" title="Vérifie si une case est de type plafond." alt="" coords="1601,360,1713,387"/>
-<area shape="rect" href="lissage_8c.html#a4cb665eeb015afb3aeab764f6def7070" title="Vérifie si une case est de type sol." alt="" coords="1616,411,1699,437"/>
-<area shape="rect" href="gene_room_8c.html#aead906ad6b8df812764bf423e1837fa4" title="Vérifie si une case est ouverte." alt="" coords="1614,461,1701,488"/>
-<area shape="rect" href="group__type__case__constants.html#gaa0fb2834c52d32f76ece5d78b786382a" title="Vérifie si des voisins existent." alt="" coords="1607,512,1708,539"/>
-<area shape="rect" href="gene_room_8c.html#a4c0af876efaea0550cd7a8b0a7bb492b" title="Sélectionne un sol adapté à une case." alt="" coords="1626,107,1689,133"/>
-<area shape="rect" href="lissage_8c.html#a9e492bb56220c4c2f61cb24bb3b5f531" title="Applique le traitement pour un motif diagonal inférieur." alt="" coords="1284,157,1503,184"/>
-<area shape="rect" href="lissage_8c.html#a9cbebc2d912d5db181f453c6922b2ab3" title="Applique le traitement pour un motif diagonal en coin." alt="" coords="1551,309,1764,336"/>
-<area shape="rect" href="gene_room_8c.html#a4bdb7b92951e3249dfb5c04dd7227c36" title="Applique les tuiles à la grille." alt="" coords="1349,107,1437,133"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,335,1088,361"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,335,948,361"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,335,772,361"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,335,612,361"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,335,453,361"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,335,239,361"/>
+<area shape="rect" title="Vérifie si une case existe." alt="" coords="1781,259,1844,285"/>
+<area shape="rect" href="gene_room_8c.html#ae1852105b1a586291e0262eee5441e25" title="Détecte un angle continu à droite." alt="" coords="1553,157,1701,184"/>
+<area shape="rect" href="gene_room_8c.html#a8559ae75196fafce33bc543ce20505dd" title="Détecte un angle continu à gauche." alt="" coords="1544,208,1709,235"/>
+<area shape="rect" href="gene_room_8c.html#a7ed66c1dc8079a0f92651bf41e26bdce" title="Détecte un arrondi supérieur droit." alt="" coords="1545,5,1708,32"/>
+<area shape="rect" href="gene_room_8c.html#a6ff7427b2774a20a3485173b5166f442" title="Détecte un arrondi supérieur gauche." alt="" coords="1537,56,1716,83"/>
+<area shape="rect" href="lissage_8c.html#a1b6776a710f04af13d502a963c2e03ab" title="Vérifie si une case est de type plafond." alt="" coords="1571,360,1683,387"/>
+<area shape="rect" href="lissage_8c.html#a4cb665eeb015afb3aeab764f6def7070" title="Vérifie si une case est de type sol." alt="" coords="1585,411,1668,437"/>
+<area shape="rect" href="gene_room_8c.html#aead906ad6b8df812764bf423e1837fa4" title="Vérifie si une case est ouverte." alt="" coords="1583,461,1670,488"/>
+<area shape="rect" href="group__type__case__constants.html#gaa0fb2834c52d32f76ece5d78b786382a" title="Vérifie si des voisins existent." alt="" coords="1576,512,1677,539"/>
+<area shape="rect" href="gene_room_8c.html#a4c0af876efaea0550cd7a8b0a7bb492b" title="Sélectionne un sol adapté à une case." alt="" coords="1595,107,1658,133"/>
+<area shape="rect" href="lissage_8c.html#a9e492bb56220c4c2f61cb24bb3b5f531" title="Applique le traitement pour un motif diagonal inférieur." alt="" coords="1253,157,1472,184"/>
+<area shape="rect" href="lissage_8c.html#a9cbebc2d912d5db181f453c6922b2ab3" title="Applique le traitement pour un motif diagonal en coin." alt="" coords="1520,309,1733,336"/>
+<area shape="rect" href="gene_room_8c.html#a4bdb7b92951e3249dfb5c04dd7227c36" title="Applique les tuiles à la grille." alt="" coords="1319,107,1407,133"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,335,1057,361"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,335,917,361"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,335,741,361"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,335,581,361"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,335,423,361"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,335,208,361"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,335,60,361"/>
-<area shape="rect" href="lissage_8c.html#aac8d3e00eeada130359453a0dc52efb4" title="Détecte un motif diagonal inférieur." alt="" coords="1301,360,1486,387"/>
-<area shape="rect" href="lissage_8c.html#a33747a07e6d181c27b5d6ff6085fbf6f" title="Détecte un motif diagonal en coin." alt="" coords="1303,411,1483,437"/>
-<area shape="rect" href="lissage_8c.html#a80ae6dd1186c7a961aaf870085b5fbfe" title="Détecte un motif diagonal supérieur." alt="" coords="1314,259,1473,285"/>
-<area shape="rect" href="lissage_8c.html#a8e279d521aec54e4d7c59b69579d8652" title="Détermine si un mur arrière doit être ajouté" alt="" coords="1318,309,1469,336"/>
-<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1152,335,1220,361"/>
-<area shape="rect" href="lissage_8c.html#aefe3b51685f373ee6284833b2e6780c6" title="Vérifie si une case n&#39;a pas de voisins." alt="" coords="1329,512,1458,539"/>
-<area shape="rect" href="lissage_8c.html#a5ac7e1f3c2f4c1c2c1e773876a0fe604" title="Vérifie les motifs horizontaux/verticaux." alt="" coords="1297,461,1489,488"/>
-<area shape="rect" href="lissage_8c.html#ae9193128b44d8297684e9cbdfad8b2c9" title="Vérifie si une case est isolée." alt="" coords="1335,563,1452,589"/>
-<area shape="rect" href="gene_room_8c.html#ade4f891d88036489d3477f266cdbac81" title="Crée des ouvertures dans la grille." alt="" coords="1345,613,1441,640"/>
-<area shape="rect" href="gene_room_8c.html#af25582e67f334c8f4879a427566f2b68" title="Place la sortie dans la salle." alt="" coords="1136,487,1236,513"/>
+<area shape="rect" href="lissage_8c.html#aac8d3e00eeada130359453a0dc52efb4" title="Détecte un motif diagonal inférieur." alt="" coords="1270,360,1455,387"/>
+<area shape="rect" href="lissage_8c.html#a33747a07e6d181c27b5d6ff6085fbf6f" title="Détecte un motif diagonal en coin." alt="" coords="1273,411,1453,437"/>
+<area shape="rect" href="lissage_8c.html#a80ae6dd1186c7a961aaf870085b5fbfe" title="Détecte un motif diagonal supérieur." alt="" coords="1283,259,1442,285"/>
+<area shape="rect" href="lissage_8c.html#a8e279d521aec54e4d7c59b69579d8652" title="Détermine si un mur arrière doit être ajouté" alt="" coords="1287,309,1438,336"/>
+<area shape="rect" href="lissage_8c.html#a3ea44210d642fd93567e4844c9c1ed4b" title="Applique le lissage sur toute la grille." alt="" coords="1121,335,1189,361"/>
+<area shape="rect" href="lissage_8c.html#aefe3b51685f373ee6284833b2e6780c6" title="Vérifie si une case n&#39;a pas de voisins." alt="" coords="1298,512,1427,539"/>
+<area shape="rect" href="lissage_8c.html#a5ac7e1f3c2f4c1c2c1e773876a0fe604" title="Vérifie les motifs horizontaux/verticaux." alt="" coords="1267,461,1459,488"/>
+<area shape="rect" href="lissage_8c.html#ae9193128b44d8297684e9cbdfad8b2c9" title="Vérifie si une case est isolée." alt="" coords="1304,563,1421,589"/>
+<area shape="rect" href="gene_room_8c.html#ade4f891d88036489d3477f266cdbac81" title="Crée des ouvertures dans la grille." alt="" coords="1315,613,1411,640"/>
+<area shape="rect" href="gene_room_8c.html#af25582e67f334c8f4879a427566f2b68" title="Place la sortie dans la salle." alt="" coords="1105,487,1205,513"/>
 </map>
 </div>
 
@@ -603,15 +623,15 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__type__case__constants_ga2b120790d7e25547b735afe2a069367f_icgraph.png" border="0" usemap="#agroup__type__case__constants_ga2b120790d7e25547b735afe2a069367f_icgraph" alt=""/></div>
 <map name="agroup__type__case__constants_ga2b120790d7e25547b735afe2a069367f_icgraph" id="agroup__type__case__constants_ga2b120790d7e25547b735afe2a069367f_icgraph">
-<area shape="rect" title="Initialise une nouvelle case." alt="" coords="1319,31,1393,57"/>
-<area shape="rect" href="group__type__case__constants.html#ga06ad57c4d3fec22479b2fb7631a982bd" title="Ajoute une case à la grille." alt="" coords="1153,5,1253,32"/>
-<area shape="rect" href="group__type__case__constants.html#ga90f797ffc58216b364f7cff43ba3e23a" title="Convertit une matrice d&#39;entiers en grille." alt="" coords="1136,56,1271,83"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,56,1088,83"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,56,948,83"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Initialise une nouvelle case." alt="" coords="1288,31,1363,57"/>
+<area shape="rect" href="group__type__case__constants.html#ga06ad57c4d3fec22479b2fb7631a982bd" title="Ajoute une case à la grille." alt="" coords="1123,5,1223,32"/>
+<area shape="rect" href="group__type__case__constants.html#ga90f797ffc58216b364f7cff43ba3e23a" title="Convertit une matrice d&#39;entiers en grille." alt="" coords="1105,56,1240,83"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,56,1057,83"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,56,917,83"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -660,14 +680,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__type__case__constants_ga6e4aa5870831bf3b631ed8cd25c458ae_icgraph.png" border="0" usemap="#agroup__type__case__constants_ga6e4aa5870831bf3b631ed8cd25c458ae_icgraph" alt=""/></div>
 <map name="agroup__type__case__constants_ga6e4aa5870831bf3b631ed8cd25c458ae_icgraph" id="agroup__type__case__constants_ga6e4aa5870831bf3b631ed8cd25c458ae_icgraph">
-<area shape="rect" title="Initialise une nouvelle grille." alt="" coords="1319,5,1397,32"/>
-<area shape="rect" href="group__type__case__constants.html#ga90f797ffc58216b364f7cff43ba3e23a" title="Convertit une matrice d&#39;entiers en grille." alt="" coords="1136,5,1271,32"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Initialise une nouvelle grille." alt="" coords="1288,5,1367,32"/>
+<area shape="rect" href="group__type__case__constants.html#ga90f797ffc58216b364f7cff43ba3e23a" title="Convertit une matrice d&#39;entiers en grille." alt="" coords="1105,5,1240,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,5,1057,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -730,17 +750,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__type__case__constants_ga5524b2cf41074c73bc35a26fd830f12d_icgraph.png" border="0" usemap="#agroup__type__case__constants_ga5524b2cf41074c73bc35a26fd830f12d_icgraph" alt=""/></div>
 <map name="agroup__type__case__constants_ga5524b2cf41074c73bc35a26fd830f12d_icgraph" id="agroup__type__case__constants_ga5524b2cf41074c73bc35a26fd830f12d_icgraph">
-<area shape="rect" title="Vérifie si des coordonnées sont dans la matrice." alt="" coords="1537,31,1620,57"/>
-<area shape="rect" href="fill_gaps_8c.html#aadaa50d7d06895b528cbd4df2d2497d2" title="Rend la matrice continue (remplit les trous)" alt="" coords="1136,5,1307,32"/>
-<area shape="rect" href="group__type__case__constants.html#gae5c605b887cfd15cb299a18ae25a4ce9" title="Stocke les voisins d&#39;une case." alt="" coords="1355,56,1489,83"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,31,1088,57"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,31,948,57"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,31,772,57"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,31,612,57"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,31,453,57"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,31,239,57"/>
+<area shape="rect" title="Vérifie si des coordonnées sont dans la matrice." alt="" coords="1507,31,1589,57"/>
+<area shape="rect" href="fill_gaps_8c.html#aadaa50d7d06895b528cbd4df2d2497d2" title="Rend la matrice continue (remplit les trous)" alt="" coords="1105,5,1276,32"/>
+<area shape="rect" href="group__type__case__constants.html#gae5c605b887cfd15cb299a18ae25a4ce9" title="Stocke les voisins d&#39;une case." alt="" coords="1324,56,1459,83"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,31,1057,57"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,31,917,57"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,31,741,57"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,31,581,57"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,31,423,57"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,31,208,57"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
-<area shape="rect" href="group__type__case__constants.html#ga90f797ffc58216b364f7cff43ba3e23a" title="Convertit une matrice d&#39;entiers en grille." alt="" coords="1154,56,1289,83"/>
+<area shape="rect" href="group__type__case__constants.html#ga90f797ffc58216b364f7cff43ba3e23a" title="Convertit une matrice d&#39;entiers en grille." alt="" coords="1123,56,1258,83"/>
 </map>
 </div>
 
@@ -807,13 +827,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__type__case__constants_ga90f797ffc58216b364f7cff43ba3e23a_icgraph.png" border="0" usemap="#agroup__type__case__constants_ga90f797ffc58216b364f7cff43ba3e23a_icgraph" alt=""/></div>
 <map name="agroup__type__case__constants_ga90f797ffc58216b364f7cff43ba3e23a_icgraph" id="agroup__type__case__constants_ga90f797ffc58216b364f7cff43ba3e23a_icgraph">
-<area shape="rect" title="Convertit une matrice d&#39;entiers en grille." alt="" coords="1136,5,1271,32"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Convertit une matrice d&#39;entiers en grille." alt="" coords="1105,5,1240,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,5,1057,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -891,14 +911,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="group__type__case__constants_gae5c605b887cfd15cb299a18ae25a4ce9_icgraph.png" border="0" usemap="#agroup__type__case__constants_gae5c605b887cfd15cb299a18ae25a4ce9_icgraph" alt=""/></div>
 <map name="agroup__type__case__constants_gae5c605b887cfd15cb299a18ae25a4ce9_icgraph" id="agroup__type__case__constants_gae5c605b887cfd15cb299a18ae25a4ce9_icgraph">
-<area shape="rect" title="Stocke les voisins d&#39;une case." alt="" coords="1319,5,1453,32"/>
-<area shape="rect" href="group__type__case__constants.html#ga90f797ffc58216b364f7cff43ba3e23a" title="Convertit une matrice d&#39;entiers en grille." alt="" coords="1136,5,1271,32"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,5,1088,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Stocke les voisins d&#39;une case." alt="" coords="1288,5,1423,32"/>
+<area shape="rect" href="group__type__case__constants.html#ga90f797ffc58216b364f7cff43ba3e23a" title="Convertit une matrice d&#39;entiers en grille." alt="" coords="1105,5,1240,32"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,5,1057,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1067,9 +1087,12 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

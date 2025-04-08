@@ -1,13 +1,13 @@
 <map id="loadImage" name="loadImage">
-<area shape="rect" id="node1" title="Charge une image depuis un fichier dans une texture SDL." alt="" coords="1157,68,1248,95"/>
-<area shape="rect" id="node2" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,93,239,120"/>
-<area shape="rect" id="node4" href="$tileset_8c.html#ab041e3b90591cb42626107fb85289c09" title="Initialise un nouveau tileset à partir d&#39;une image." alt="" coords="1023,119,1109,145"/>
-<area shape="rect" id="node3" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,195,60,221"/>
-<area shape="rect" id="node5" href="$main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="837,43,960,69"/>
-<area shape="rect" id="node9" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="660,245,775,272"/>
-<area shape="rect" id="node10" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="835,93,963,120"/>
-<area shape="rect" id="node11" href="$main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="823,144,975,171"/>
-<area shape="rect" id="node6" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="661,93,773,120"/>
-<area shape="rect" id="node7" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,93,612,120"/>
-<area shape="rect" id="node8" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,93,453,120"/>
+<area shape="rect" id="node1" title="Charge une image depuis un fichier dans une texture SDL." alt="" coords="1123,56,1213,83"/>
+<area shape="rect" id="node2" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="633,5,764,32"/>
+<area shape="rect" id="node4" href="$tileset_8c.html#ab041e3b90591cb42626107fb85289c09" title="Initialise un nouveau tileset à partir d&#39;une image." alt="" coords="988,107,1075,133"/>
+<area shape="rect" id="node3" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,81,60,108"/>
+<area shape="rect" id="node5" href="$main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="815,107,937,133"/>
+<area shape="rect" id="node10" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="471,196,585,223"/>
+<area shape="rect" id="node11" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="812,157,940,184"/>
+<area shape="rect" id="node6" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="643,107,755,133"/>
+<area shape="rect" id="node7" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="473,107,583,133"/>
+<area shape="rect" id="node8" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,107,423,133"/>
+<area shape="rect" id="node9" href="$main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,107,208,133"/>
 </map>

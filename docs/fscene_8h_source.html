@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('fscene_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">fscene.h</div>  </div>
@@ -172,7 +188,7 @@ $(function() {
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="afonction_manager_8h_html"><div class="ttname"><a href="fonction_manager_8h.html">fonctionManager.h</a></div><div class="ttdoc">Gestion de fonction à paramètres variables.</div></div>
 <div class="ttc" id="afscene_8h_html_a11d7d5a9fbddf09cdc522707e4815ed1"><div class="ttname"><a href="fscene_8h.html#a11d7d5a9fbddf09cdc522707e4815ed1">executeSceneFunctions</a></div><div class="ttdeci">void executeSceneFunctions(t_scene *scene, t_fonctionType ftype)</div><div class="ttdoc">Exécute toutes les fonctions d'un type donné</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00068">fscene.c:68</a></div></div>
-<div class="ttc" id="afscene_8h_html_a17f4d95603320ee5e898ff0f67f25e3a"><div class="ttname"><a href="fscene_8h.html#a17f4d95603320ee5e898ff0f67f25e3a">GetSceneByName</a></div><div class="ttdeci">t_scene * GetSceneByName(t_sceneController *controller, char *name)</div><div class="ttdoc">Récupère une scène par son nom.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00132">fscene.c:132</a></div></div>
+<div class="ttc" id="afscene_8h_html_a17f4d95603320ee5e898ff0f67f25e3a"><div class="ttname"><a href="fscene_8h.html#a17f4d95603320ee5e898ff0f67f25e3a">GetSceneByName</a></div><div class="ttdeci">t_scene * GetSceneByName(t_sceneController *controller, char *name)</div><div class="ttdoc">Récupère une scène par son nom.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00131">fscene.c:131</a></div></div>
 <div class="ttc" id="afscene_8h_html_a1cfdf75da162e74b369a77b939b85f3b"><div class="ttname"><a href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3b">t_fonctionType</a></div><div class="ttdeci">t_fonctionType</div><div class="ttdoc">Types de fonctions gérées par le système de scènes.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8h_source.html#l00044">fscene.h:44</a></div></div>
 <div class="ttc" id="afscene_8h_html_a1cfdf75da162e74b369a77b939b85f3ba0358531de7a98ec1a223a0126db31868"><div class="ttname"><a href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3ba0358531de7a98ec1a223a0126db31868">SET_BUFFER</a></div><div class="ttdeci">@ SET_BUFFER</div><div class="ttdoc">Configuration des buffers.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8h_source.html#l00050">fscene.h:50</a></div></div>
 <div class="ttc" id="afscene_8h_html_a1cfdf75da162e74b369a77b939b85f3ba3912ed627c0090ccc7fa1b03fef04202"><div class="ttname"><a href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3ba3912ed627c0090ccc7fa1b03fef04202">UPDATE</a></div><div class="ttdeci">@ UPDATE</div><div class="ttdoc">Mise à jour logique.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8h_source.html#l00049">fscene.h:49</a></div></div>
@@ -182,22 +198,22 @@ $(function() {
 <div class="ttc" id="afscene_8h_html_a1cfdf75da162e74b369a77b939b85f3ba77fa7a883f89628c66a7d1ecc85b49a2"><div class="ttname"><a href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3ba77fa7a883f89628c66a7d1ecc85b49a2">RENDER_UI</a></div><div class="ttdeci">@ RENDER_UI</div><div class="ttdoc">Rendu de l'interface.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8h_source.html#l00046">fscene.h:46</a></div></div>
 <div class="ttc" id="afscene_8h_html_a1cfdf75da162e74b369a77b939b85f3bab771525a3ece79ab5db8c44b228a8b0f"><div class="ttname"><a href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3bab771525a3ece79ab5db8c44b228a8b0f">RENDER_BUFFER</a></div><div class="ttdeci">@ RENDER_BUFFER</div><div class="ttdoc">Rendu des buffers.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8h_source.html#l00051">fscene.h:51</a></div></div>
 <div class="ttc" id="afscene_8h_html_a1cfdf75da162e74b369a77b939b85f3bad98976969ba364eb51f1ded025ed85e7"><div class="ttname"><a href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3bad98976969ba364eb51f1ded025ed85e7">NUM_FONCTION</a></div><div class="ttdeci">@ NUM_FONCTION</div><div class="ttdoc">Nombre total de types.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8h_source.html#l00053">fscene.h:52</a></div></div>
-<div class="ttc" id="afscene_8h_html_a203dc7420436877b66bbcc6e559483af"><div class="ttname"><a href="fscene_8h.html#a203dc7420436877b66bbcc6e559483af">indiceByscene</a></div><div class="ttdeci">int indiceByscene(t_sceneController *controller, t_scene *scene)</div><div class="ttdoc">Récupère l'index d'une scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00142">fscene.c:142</a></div></div>
-<div class="ttc" id="afscene_8h_html_a30e466cad04c05ed83227c9f7f99bb29"><div class="ttname"><a href="fscene_8h.html#a30e466cad04c05ed83227c9f7f99bb29">getCurrentScene</a></div><div class="ttdeci">t_scene * getCurrentScene(t_sceneController *controller)</div><div class="ttdoc">Récupère la scène courante.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00166">fscene.c:166</a></div></div>
+<div class="ttc" id="afscene_8h_html_a203dc7420436877b66bbcc6e559483af"><div class="ttname"><a href="fscene_8h.html#a203dc7420436877b66bbcc6e559483af">indiceByscene</a></div><div class="ttdeci">int indiceByscene(t_sceneController *controller, t_scene *scene)</div><div class="ttdoc">Récupère l'index d'une scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00141">fscene.c:141</a></div></div>
+<div class="ttc" id="afscene_8h_html_a30e466cad04c05ed83227c9f7f99bb29"><div class="ttname"><a href="fscene_8h.html#a30e466cad04c05ed83227c9f7f99bb29">getCurrentScene</a></div><div class="ttdeci">t_scene * getCurrentScene(t_sceneController *controller)</div><div class="ttdoc">Récupère la scène courante.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00165">fscene.c:165</a></div></div>
 <div class="ttc" id="afscene_8h_html_a39d0e7fbc78f3ff2fbd207962ff6ab42"><div class="ttname"><a href="fscene_8h.html#a39d0e7fbc78f3ff2fbd207962ff6ab42">addScene</a></div><div class="ttdeci">void addScene(t_sceneController *controller, t_scene *scene)</div><div class="ttdoc">Ajoute une scène au contrôleur.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00102">fscene.c:102</a></div></div>
 <div class="ttc" id="afscene_8h_html_a41cb33c742203a83f3b38ad344168917"><div class="ttname"><a href="fscene_8h.html#a41cb33c742203a83f3b38ad344168917">setScene</a></div><div class="ttdeci">void setScene(t_sceneController *controller, char *name)</div><div class="ttdoc">Change la scène courante.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00106">fscene.c:106</a></div></div>
-<div class="ttc" id="afscene_8h_html_a5a7ba8ae4552319c04444654620c392e"><div class="ttname"><a href="fscene_8h.html#a5a7ba8ae4552319c04444654620c392e">getPrevuisMenu</a></div><div class="ttdeci">void getPrevuisMenu(t_sceneController *controller)</div><div class="ttdoc">Revient au menu précédent.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00157">fscene.c:157</a></div></div>
+<div class="ttc" id="afscene_8h_html_a5a7ba8ae4552319c04444654620c392e"><div class="ttname"><a href="fscene_8h.html#a5a7ba8ae4552319c04444654620c392e">getPrevuisMenu</a></div><div class="ttdeci">void getPrevuisMenu(t_sceneController *controller)</div><div class="ttdoc">Revient au menu précédent.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00156">fscene.c:156</a></div></div>
 <div class="ttc" id="afscene_8h_html_a69ac741c95a278f52722cfe8213661e8"><div class="ttname"><a href="fscene_8h.html#a69ac741c95a278f52722cfe8213661e8">freeScene</a></div><div class="ttdeci">void freeScene(void *object)</div><div class="ttdoc">Libère une scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00074">fscene.c:74</a></div></div>
-<div class="ttc" id="afscene_8h_html_a7656ed7499653162fa7c9f48d67f4034"><div class="ttname"><a href="fscene_8h.html#a7656ed7499653162fa7c9f48d67f4034">registerFunctionForObject</a></div><div class="ttdeci">void registerFunctionForObject(t_scene *scene, void *object, uint8_t typeId, t_fonctionType funcType, void(*fonct)(t_fonctionParam *), int indexObj,...)</div><div class="ttdoc">Enregistre une fonction pour un objet spécifique.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00223">fscene.c:223</a></div></div>
-<div class="ttc" id="afscene_8h_html_a8be677f8994885ab5fa62328e5e580da"><div class="ttname"><a href="fscene_8h.html#a8be677f8994885ab5fa62328e5e580da">findObjectIndex</a></div><div class="ttdeci">int findObjectIndex(t_objectManager *manager, void *object)</div><div class="ttdoc">Trouve l'index d'un objet dans son gestionnaire.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00205">fscene.c:205</a></div></div>
-<div class="ttc" id="afscene_8h_html_a8d96eeeaa02433587861a66a7cc8b24f"><div class="ttname"><a href="fscene_8h.html#a8d96eeeaa02433587861a66a7cc8b24f">getPrevuisScene</a></div><div class="ttdeci">void getPrevuisScene(t_sceneController *controller)</div><div class="ttdoc">Revient à la scène précédente.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00151">fscene.c:151</a></div></div>
-<div class="ttc" id="afscene_8h_html_a9f300e274afec9ccfe738afd10f7e01d"><div class="ttname"><a href="fscene_8h.html#a9f300e274afec9ccfe738afd10f7e01d">sceneAddObject</a></div><div class="ttdeci">void * sceneAddObject(t_scene *scene, void *object, uint8_t typeId)</div><div class="ttdoc">Ajoute un objet à une scène avec enregistrement automatique.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00214">fscene.c:214</a></div></div>
-<div class="ttc" id="afscene_8h_html_aaf87e3d204392bd39aa8e399744406eb"><div class="ttname"><a href="fscene_8h.html#aaf87e3d204392bd39aa8e399744406eb">freeSceneByName</a></div><div class="ttdeci">void freeSceneByName(t_sceneController **controller, char *name)</div><div class="ttdoc">Libère une scène par son nom.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00172">fscene.c:172</a></div></div>
+<div class="ttc" id="afscene_8h_html_a7656ed7499653162fa7c9f48d67f4034"><div class="ttname"><a href="fscene_8h.html#a7656ed7499653162fa7c9f48d67f4034">registerFunctionForObject</a></div><div class="ttdeci">void registerFunctionForObject(t_scene *scene, void *object, uint8_t typeId, t_fonctionType funcType, void(*fonct)(t_fonctionParam *), int indexObj,...)</div><div class="ttdoc">Enregistre une fonction pour un objet spécifique.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00222">fscene.c:222</a></div></div>
+<div class="ttc" id="afscene_8h_html_a8be677f8994885ab5fa62328e5e580da"><div class="ttname"><a href="fscene_8h.html#a8be677f8994885ab5fa62328e5e580da">findObjectIndex</a></div><div class="ttdeci">int findObjectIndex(t_objectManager *manager, void *object)</div><div class="ttdoc">Trouve l'index d'un objet dans son gestionnaire.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00204">fscene.c:204</a></div></div>
+<div class="ttc" id="afscene_8h_html_a8d96eeeaa02433587861a66a7cc8b24f"><div class="ttname"><a href="fscene_8h.html#a8d96eeeaa02433587861a66a7cc8b24f">getPrevuisScene</a></div><div class="ttdeci">void getPrevuisScene(t_sceneController *controller)</div><div class="ttdoc">Revient à la scène précédente.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00150">fscene.c:150</a></div></div>
+<div class="ttc" id="afscene_8h_html_a9f300e274afec9ccfe738afd10f7e01d"><div class="ttname"><a href="fscene_8h.html#a9f300e274afec9ccfe738afd10f7e01d">sceneAddObject</a></div><div class="ttdeci">void * sceneAddObject(t_scene *scene, void *object, uint8_t typeId)</div><div class="ttdoc">Ajoute un objet à une scène avec enregistrement automatique.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00213">fscene.c:213</a></div></div>
+<div class="ttc" id="afscene_8h_html_aaf87e3d204392bd39aa8e399744406eb"><div class="ttname"><a href="fscene_8h.html#aaf87e3d204392bd39aa8e399744406eb">freeSceneByName</a></div><div class="ttdeci">void freeSceneByName(t_sceneController **controller, char *name)</div><div class="ttdoc">Libère une scène par son nom.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00171">fscene.c:171</a></div></div>
 <div class="ttc" id="afscene_8h_html_accbd14eb8c93d348b61a8cb09bbbf489"><div class="ttname"><a href="fscene_8h.html#accbd14eb8c93d348b61a8cb09bbbf489">sceneRegisterFunction</a></div><div class="ttdeci">void sceneRegisterFunction(t_scene *scene, uint8_t typeObject, t_fonctionType typeFunction, void(*fonct)(t_fonctionParam *), int indexObj,...)</div><div class="ttdoc">Enregistre une fonction pour une scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00017">fscene.c:17</a></div></div>
-<div class="ttc" id="afscene_8h_html_ad44392d8a60c751117238d056dafa456"><div class="ttname"><a href="fscene_8h.html#ad44392d8a60c751117238d056dafa456">freeSceneController</a></div><div class="ttdeci">void freeSceneController(t_sceneController **controller)</div><div class="ttdoc">Libère un contrôleur de scènes.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00193">fscene.c:193</a></div></div>
+<div class="ttc" id="afscene_8h_html_ad44392d8a60c751117238d056dafa456"><div class="ttname"><a href="fscene_8h.html#ad44392d8a60c751117238d056dafa456">freeSceneController</a></div><div class="ttdeci">void freeSceneController(t_sceneController **controller)</div><div class="ttdoc">Libère un contrôleur de scènes.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00192">fscene.c:192</a></div></div>
 <div class="ttc" id="afscene_8h_html_ae4a7b0eb8dc4ab3d4461975955cba83d"><div class="ttname"><a href="fscene_8h.html#ae4a7b0eb8dc4ab3d4461975955cba83d">initSceneController</a></div><div class="ttdeci">t_sceneController * initSceneController()</div><div class="ttdoc">Initialise un nouveau contrôleur de scènes.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00087">fscene.c:87</a></div></div>
 <div class="ttc" id="afscene_8h_html_afbd5854cb60eb9bd14ddc2758282fceb"><div class="ttname"><a href="fscene_8h.html#afbd5854cb60eb9bd14ddc2758282fceb">t_scene</a></div><div class="ttdeci">struct t_scene t_scene</div></div>
-<div class="ttc" id="afscene_8h_html_afd15beab139da97e2891821e59f2bb02"><div class="ttname"><a href="fscene_8h.html#afd15beab139da97e2891821e59f2bb02">sceneRemoveObject</a></div><div class="ttdeci">void sceneRemoveObject(t_scene *scene, void *object)</div><div class="ttdoc">Supprime un objet d'une scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00267">fscene.c:267</a></div></div>
+<div class="ttc" id="afscene_8h_html_afd15beab139da97e2891821e59f2bb02"><div class="ttname"><a href="fscene_8h.html#afd15beab139da97e2891821e59f2bb02">sceneRemoveObject</a></div><div class="ttdeci">void sceneRemoveObject(t_scene *scene, void *object)</div><div class="ttdoc">Supprime un objet d'une scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00266">fscene.c:266</a></div></div>
 <div class="ttc" id="afscene_8h_html_afee9b24c13757d42115fdd0cce90c9c4"><div class="ttname"><a href="fscene_8h.html#afee9b24c13757d42115fdd0cce90c9c4">createScene</a></div><div class="ttdeci">t_scene * createScene(t_objectManager *objectManager, char *name)</div><div class="ttdoc">Crée une nouvelle scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00005">fscene.c:5</a></div></div>
 <div class="ttc" id="aobject_manager_8h_html"><div class="ttname"><a href="object_manager_8h.html">objectManager.h</a></div></div>
 <div class="ttc" id="astructt__fonction_param_html"><div class="ttname"><a href="structt__fonction_param.html">t_fonctionParam</a></div><div class="ttdoc">Structure contenant les informations d'une fonction.</div></div>
@@ -216,9 +232,13 @@ $(function() {
 <div class="ttc" id="astructt__scene_html_ab23b2dc587711bef90e8bcdca4bfbb0c"><div class="ttname"><a href="structt__scene.html#ab23b2dc587711bef90e8bcdca4bfbb0c">t_scene::objectManager</a></div><div class="ttdeci">t_objectManager * objectManager</div><div class="ttdoc">Gestionnaire d'objets.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8h_source.html#l00063">fscene.h:63</a></div></div>
 <div class="ttc" id="astructt__scene_html_ad5351c002d4c73225bb9e12fb53a99da"><div class="ttname"><a href="structt__scene.html#ad5351c002d4c73225bb9e12fb53a99da">t_scene::nbFonctions</a></div><div class="ttdeci">int nbFonctions[NUM_FONCTION]</div><div class="ttdoc">Nombre de fonctions par type.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8h_source.html#l00065">fscene.h:65</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li><li class="navelem"><a class="el" href="fscene_8h.html">fscene.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

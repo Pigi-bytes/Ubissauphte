@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('blacksmith_8c_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_7d056440595eb1d73063e62f754f7138.html">tilesEntity</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">blacksmith.c</div>  </div>
@@ -188,8 +204,8 @@ $(function() {
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="structs__tile_entity.html">t_tileEntity</a>*)blacksmith;</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
-<div class="ttc" id="aanimation_8c_html_a558f44850e43c0e5f4673279e0e58611"><div class="ttname"><a href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611">setAnimation</a></div><div class="ttdeci">void setAnimation(t_animationController *controller, char *name)</div><div class="ttdoc">Change l'animation active.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00065">animation.c:65</a></div></div>
-<div class="ttc" id="aanimation_8c_html_a86e4f6cbeb644344e22ddf9c6f0cf3fa"><div class="ttname"><a href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa">addAnimation</a></div><div class="ttdeci">void addAnimation(t_animationController *controller, t_animation *animation)</div><div class="ttdoc">Ajoute une animation au contrôleur.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00060">animation.c:60</a></div></div>
+<div class="ttc" id="aanimation_8c_html_a558f44850e43c0e5f4673279e0e58611"><div class="ttname"><a href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611">setAnimation</a></div><div class="ttdeci">void setAnimation(t_animationController *controller, char *name)</div><div class="ttdoc">Change l'animation active.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00083">animation.c:83</a></div></div>
+<div class="ttc" id="aanimation_8c_html_a86e4f6cbeb644344e22ddf9c6f0cf3fa"><div class="ttname"><a href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa">addAnimation</a></div><div class="ttdeci">void addAnimation(t_animationController *controller, t_animation *animation)</div><div class="ttdoc">Ajoute une animation au contrôleur.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00078">animation.c:78</a></div></div>
 <div class="ttc" id="aanimation_8c_html_aa7621b37ce4e22d8f57f39c38970a052"><div class="ttname"><a href="animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052">createAnimation</a></div><div class="ttdeci">t_animation * createAnimation(t_tileset *tileset, int *frameIndices, int numFrames, int speed, SDL_bool looping, char *name)</div><div class="ttdoc">Crée une nouvelle animation.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00003">animation.c:3</a></div></div>
 <div class="ttc" id="aaudio_manager_8c_html_a9f819b827499e9c2eadb4f276dea5e29"><div class="ttname"><a href="audio_manager_8c.html#a9f819b827499e9c2eadb4f276dea5e29">jouerSFX</a></div><div class="ttdeci">void jouerSFX(char *path, int volume, int loops, t_audiomanager *audioManager)</div><div class="ttdef"><b>Definition:</b> <a href="audio_manager_8c_source.html#l00149">audioManager.c:149</a></div></div>
 <div class="ttc" id="ablacksmith_8c_html_abacc1529332b556609060ccd2b26abe3"><div class="ttname"><a href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3">createBlacksmithEntity</a></div><div class="ttdeci">t_tileEntity * createBlacksmithEntity(t_tileset *tileset, t_scene *scene, t_context *context)</div><div class="ttdoc">Crée une nouvelle entité forgeron.</div><div class="ttdef"><b>Definition:</b> <a href="blacksmith_8c_source.html#l00090">blacksmith.c:90</a></div></div>
@@ -201,8 +217,8 @@ $(function() {
 <div class="ttc" id="adebug_8h_html_acead8251aa2d9e6455c17b9c571808d3"><div class="ttname"><a href="debug_8h.html#acead8251aa2d9e6455c17b9c571808d3">SDL_COLOR_GREEN</a></div><div class="ttdeci">#define SDL_COLOR_GREEN</div><div class="ttdef"><b>Definition:</b> <a href="debug_8h_source.html#l00014">debug.h:14</a></div></div>
 <div class="ttc" id="aentity_8c_html_a064827d9879b14f9b529edd8612ffdc8"><div class="ttname"><a href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8">renderEntity</a></div><div class="ttdeci">void renderEntity(SDL_Renderer *renderer, t_entity *entity, t_camera *camera)</div><div class="ttdoc">Affiche une entité à l'écran.</div><div class="ttdef"><b>Definition:</b> <a href="entity_8c_source.html#l00003">entity.c:3</a></div></div>
 <div class="ttc" id="aequipements_manager_8c_html_a48783b770b3a170aa95d048d02dcb573"><div class="ttname"><a href="equipements_manager_8c.html#a48783b770b3a170aa95d048d02dcb573">getItemByRarity</a></div><div class="ttdeci">t_item * getItemByRarity(t_item **items, int count, t_itemRarity rarity)</div><div class="ttdoc">Récupère un item aléatoire d'une rareté donnée.</div><div class="ttdef"><b>Definition:</b> <a href="equipements_manager_8c_source.html#l00334">equipementsManager.c:334</a></div></div>
-<div class="ttc" id="aequipements_manager_8c_html_a8c2af2e271f9da3ba156de14441b6e3a"><div class="ttname"><a href="equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a">equipementRecalculerStats</a></div><div class="ttdeci">void equipementRecalculerStats(t_joueur **c)</div><div class="ttdoc">Recalcule les statistiques après changement d'équipement.</div><div class="ttdef"><b>Definition:</b> <a href="equipements_manager_8c_source.html#l00425">equipementsManager.c:425</a></div></div>
-<div class="ttc" id="aequipements_manager_8c_html_aee54a2c5f88bf08ed74e4c1c016f773a"><div class="ttname"><a href="equipements_manager_8c.html#aee54a2c5f88bf08ed74e4c1c016f773a">inventaireAjoutObjet</a></div><div class="ttdeci">void inventaireAjoutObjet(t_inventaire *inv, t_item *item, int quantite)</div><div class="ttdoc">Ajoute un objet à l'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="equipements_manager_8c_source.html#l00398">equipementsManager.c:398</a></div></div>
+<div class="ttc" id="aequipements_manager_8c_html_a8c2af2e271f9da3ba156de14441b6e3a"><div class="ttname"><a href="equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a">equipementRecalculerStats</a></div><div class="ttdeci">void equipementRecalculerStats(t_joueur **c)</div><div class="ttdoc">Recalcule les statistiques après changement d'équipement.</div><div class="ttdef"><b>Definition:</b> <a href="equipements_manager_8c_source.html#l00424">equipementsManager.c:424</a></div></div>
+<div class="ttc" id="aequipements_manager_8c_html_aee54a2c5f88bf08ed74e4c1c016f773a"><div class="ttname"><a href="equipements_manager_8c.html#aee54a2c5f88bf08ed74e4c1c016f773a">inventaireAjoutObjet</a></div><div class="ttdeci">void inventaireAjoutObjet(t_inventaire *inv, t_item *item, int quantite)</div><div class="ttdoc">Ajoute un objet à l'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="equipements_manager_8c_source.html#l00397">equipementsManager.c:397</a></div></div>
 <div class="ttc" id="aequipements_manager_8h_html_afe22aa231f9048182796b82eddba32a8a381245357b88cf2d4ef463eb3e721ac7"><div class="ttname"><a href="equipements_manager_8h.html#afe22aa231f9048182796b82eddba32a8a381245357b88cf2d4ef463eb3e721ac7">RARITY_RARE</a></div><div class="ttdeci">@ RARITY_RARE</div><div class="ttdoc">Item rare.</div><div class="ttdef"><b>Definition:</b> <a href="equipements_manager_8h_source.html#l00063">equipementsManager.h:63</a></div></div>
 <div class="ttc" id="ainput_8c_html_a5dbfa0b962c1dde73b323300bc05034c"><div class="ttname"><a href="input_8c.html#a5dbfa0b962c1dde73b323300bc05034c">keyPressOnce</a></div><div class="ttdeci">SDL_bool keyPressOnce(t_input *input, SDL_Scancode scancode)</div><div class="ttdoc">Détecte un appui unique sur une touche malgrés les frames.</div><div class="ttdef"><b>Definition:</b> <a href="input_8c_source.html#l00049">input.c:49</a></div></div>
 <div class="ttc" id="aobject_manager_8c_html_ad54381aaf28c8563e5faafa52728a115"><div class="ttname"><a href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a></div><div class="ttdeci">void * getObject(t_objectManager *manager, int index)</div><div class="ttdoc">Récupère un objet à partir de son index dans le gestionnaire d'objets.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8c_source.html#l00077">objectManager.c:77</a></div></div>
@@ -212,10 +228,10 @@ $(function() {
 <div class="ttc" id="astructs__entity_html_afd2f866f64dc9091e4c989d5e92a21a2"><div class="ttname"><a href="structs__entity.html#afd2f866f64dc9091e4c989d5e92a21a2">s_entity::collisionCircle</a></div><div class="ttdeci">t_circle collisionCircle</div><div class="ttdoc">Position et taille pour les collisions circulaires.</div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00028">entity.h:28</a></div></div>
 <div class="ttc" id="astructs__entity_html_aff5382dbfeddafc18d0582c032bd1f7c"><div class="ttname"><a href="structs__entity.html#aff5382dbfeddafc18d0582c032bd1f7c">s_entity::displayRect</a></div><div class="ttdeci">SDL_Rect displayRect</div><div class="ttdoc">Position et taille pour l'affichage.</div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00025">entity.h:25</a></div></div>
 <div class="ttc" id="astructs__joueur_html"><div class="ttname"><a href="structs__joueur.html">s_joueur</a></div><div class="ttdoc">Référence au type joueur pour éviter les inclusions circulaires.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00080">player.h:80</a></div></div>
-<div class="ttc" id="astructs__joueur_html_a12351b93415a5c2dd94a9cf2413d18b7"><div class="ttname"><a href="structs__joueur.html#a12351b93415a5c2dd94a9cf2413d18b7">s_joueur::gold</a></div><div class="ttdeci">int gold</div><div class="ttdoc">Or possédé</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00096">player.h:96</a></div></div>
+<div class="ttc" id="astructs__joueur_html_a12351b93415a5c2dd94a9cf2413d18b7"><div class="ttname"><a href="structs__joueur.html#a12351b93415a5c2dd94a9cf2413d18b7">s_joueur::gold</a></div><div class="ttdeci">int gold</div><div class="ttdoc">Or possédé</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00097">player.h:97</a></div></div>
 <div class="ttc" id="astructs__joueur_html_a17bef51545f242d210cb157423f42c96"><div class="ttname"><a href="structs__joueur.html#a17bef51545f242d210cb157423f42c96">s_joueur::entity</a></div><div class="ttdeci">t_entity entity</div><div class="ttdoc">Entité de base héritée.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00081">player.h:81</a></div></div>
 <div class="ttc" id="astructs__joueur_html_a961a80946d0f9a9fbb425ed0e0f73879"><div class="ttname"><a href="structs__joueur.html#a961a80946d0f9a9fbb425ed0e0f73879">s_joueur::control</a></div><div class="ttdeci">t_control * control</div><div class="ttdoc">Configuration des contrôles.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00082">player.h:82</a></div></div>
-<div class="ttc" id="astructs__joueur_html_aacb46876904d592518623fabf006b5c2"><div class="ttname"><a href="structs__joueur.html#aacb46876904d592518623fabf006b5c2">s_joueur::inventaire</a></div><div class="ttdeci">t_inventaire * inventaire</div><div class="ttdoc">Inventaire du joueur.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00091">player.h:91</a></div></div>
+<div class="ttc" id="astructs__joueur_html_aacb46876904d592518623fabf006b5c2"><div class="ttname"><a href="structs__joueur.html#aacb46876904d592518623fabf006b5c2">s_joueur::inventaire</a></div><div class="ttdeci">t_inventaire * inventaire</div><div class="ttdoc">Inventaire du joueur.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00092">player.h:92</a></div></div>
 <div class="ttc" id="astructs__tile_entity_html"><div class="ttname"><a href="structs__tile_entity.html">s_tileEntity</a></div><div class="ttdoc">Entité spéciale placée sur une tuile avec des comportements spécifiques.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_entity_8h_source.html#l00025">tilesEntity.h:25</a></div></div>
 <div class="ttc" id="astructs__tile_entity_html_a17bef51545f242d210cb157423f42c96"><div class="ttname"><a href="structs__tile_entity.html#a17bef51545f242d210cb157423f42c96">s_tileEntity::entity</a></div><div class="ttdeci">t_entity entity</div><div class="ttdoc">Entité de base héritée.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_entity_8h_source.html#l00026">tilesEntity.h:26</a></div></div>
 <div class="ttc" id="astructs__tile_entity_html_a420e3b21e2c93f469c4fccfe40021130"><div class="ttname"><a href="structs__tile_entity.html#a420e3b21e2c93f469c4fccfe40021130">s_tileEntity::render</a></div><div class="ttdeci">void(* render)(struct s_tileEntity *entity, t_context *context, t_camera *camera)</div><div class="ttdoc">Fonction de rendu spécifique au type d'entité</div><div class="ttdef"><b>Definition:</b> <a href="tiles_entity_8h_source.html#l00032">tilesEntity.h:32</a></div></div>
@@ -255,9 +271,13 @@ $(function() {
 <div class="ttc" id="atext_8c_html_aeb2abb74af73c1c4372b43db48c96d3e"><div class="ttname"><a href="text_8c.html#aeb2abb74af73c1c4372b43db48c96d3e">createText</a></div><div class="ttdeci">t_text * createText(SDL_Renderer *renderer, char *text, TTF_Font *font, SDL_Color color)</div><div class="ttdoc">Crée un texte simple sans contour.</div><div class="ttdef"><b>Definition:</b> <a href="text_8c_source.html#l00091">text.c:91</a></div></div>
 <div class="ttc" id="atiles_entity_8c_html_aab887fa625ebafb48717f3a50359f61a"><div class="ttname"><a href="tiles_entity_8c.html#aab887fa625ebafb48717f3a50359f61a">initTileEntityBase</a></div><div class="ttdeci">void initTileEntityBase(t_tileEntity *base, SDL_Texture *texture, SDL_Rect rect, t_scene *scene)</div><div class="ttdoc">Initialise les propriétés de base d'une entité de tuile.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_entity_8c_source.html#l00010">tilesEntity.c:10</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_7d056440595eb1d73063e62f754f7138.html">tilesEntity</a></li><li class="navelem"><a class="el" href="blacksmith_8c.html">blacksmith.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

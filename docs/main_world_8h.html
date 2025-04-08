@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('main_world_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7ecf341207a704509dc0db07e1771050.html">_scene</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
@@ -77,6 +93,7 @@ $(function() {
 <div class="textblock"><code>#include &quot;<a class="el" href="commun_8h_source.html">../commun.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="boss__slime_8h_source.html">../engine/entities/mobs/boss_slime.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ghost_8h_source.html">../engine/entities/mobs/ghost.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="mobs_2wizard_8h_source.html">../engine/entities/mobs/wizard.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="tiles_entity_8h_source.html">../engine/entities/tilesEntity.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="hud_8h_source.html">../ui/hud.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -169,17 +186,17 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>Pointeur vers la scène créée</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>La scène retournée doit être libérée avec <a class="el" href="fscene_8c.html#a69ac741c95a278f52722cfe8213661e8" title="Libère une scène.">freeScene()</a> quand elle n'est plus utilisée sauf si mis dans uns scèneControler. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="main_world_8c_source.html#l00262">262</a> of file <a class="el" href="main_world_8c_source.html">mainWorld.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_world_8c_source.html#l00264">264</a> of file <a class="el" href="main_world_8c_source.html">mainWorld.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_world_8h_a5af69ec6bbe844df7067691ce04d8605_icgraph.png" border="0" usemap="#amain_world_8h_a5af69ec6bbe844df7067691ce04d8605_icgraph" alt=""/></div>
 <map name="amain_world_8h_a5af69ec6bbe844df7067691ce04d8605_icgraph" id="amain_world_8h_a5af69ec6bbe844df7067691ce04d8605_icgraph">
-<area shape="rect" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -243,56 +260,56 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_world_8h_aaa26b897de5b502695ac80372c7c102f_cgraph.png" border="0" usemap="#amain_world_8h_aaa26b897de5b502695ac80372c7c102f_cgraph" alt=""/></div>
 <map name="amain_world_8h_aaa26b897de5b502695ac80372c7c102f_cgraph" id="amain_world_8h_aaa26b897de5b502695ac80372c7c102f_cgraph">
-<area shape="rect" title="Crée le monde principal du jeu." alt="" coords="5,1205,133,1231"/>
-<area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="473,21,561,47"/>
+<area shape="rect" title="Crée le monde principal du jeu." alt="" coords="5,1230,133,1256"/>
+<area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="469,20,557,47"/>
 <area shape="rect" href="commun_8c.html#ab20f8d2e1580b37c1916e19726b8c50f" title="Wrapper pour la gestion du zoom de la caméra." alt="" coords="181,267,392,294"/>
-<area shape="rect" href="commun_8c.html#a2f230d2752707af35e4081358841f4bb" title="Wrapper pour centrer la caméra." alt="" coords="193,318,380,345"/>
-<area shape="rect" href="camera_8c.html#ac19afa9c1c457717cd5e9e090db7611b" title="Crée une caméra avec des dimensions initiales." alt="" coords="229,369,344,395"/>
+<area shape="rect" href="commun_8c.html#a2f230d2752707af35e4081358841f4bb" title="Wrapper pour centrer la caméra." alt="" coords="193,318,380,344"/>
+<area shape="rect" href="camera_8c.html#ac19afa9c1c457717cd5e9e090db7611b" title="Crée une caméra avec des dimensions initiales." alt="" coords="229,368,344,395"/>
 <area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="236,419,337,446"/>
-<area shape="rect" href="hud_8c.html#ab5c94b35150b778d85c8033a513e5ace" title="Crée une nouvelle instance du HUD." alt="" coords="240,521,333,547"/>
-<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="475,597,560,623"/>
-<area shape="rect" href="minimap_8c.html#a01a246976ef77cc09305d689ad93a829" title="Crée et initialise une nouvelle minimap." alt="" coords="227,774,347,801"/>
-<area shape="rect" href="fscene_8c.html#a4b143d78504ee5f7584a44fb6479e3f0" title="Crée une nouvelle scène." alt="" coords="235,825,338,851"/>
+<area shape="rect" href="hud_8c.html#ab5c94b35150b778d85c8033a513e5ace" title="Crée une nouvelle instance du HUD." alt="" coords="240,672,333,699"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="471,596,556,623"/>
+<area shape="rect" href="minimap_8c.html#a01a246976ef77cc09305d689ad93a829" title="Crée et initialise une nouvelle minimap." alt="" coords="227,774,347,800"/>
+<area shape="rect" href="fscene_8c.html#a4b143d78504ee5f7584a44fb6479e3f0" title="Crée une nouvelle scène." alt="" coords="235,824,338,851"/>
 <area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="237,875,337,902"/>
-<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="444,78,591,105"/>
-<area shape="rect" href="camera_8c.html#adf268fdb00008071ac27d58151601156" title="Crée un viewport lié à une caméra." alt="" coords="226,926,347,953"/>
-<area shape="rect" href="camera_8c.html#ac911db209d3a4d35e02782ddb737a276" title="Libere la mémoire allouée pour la camera." alt="" coords="237,977,336,1003"/>
-<area shape="rect" href="enemy_8c.html#ad1a4da7343608052f2a50b7a4a554931" title="Libère la mémoire utilisée par un ennemi." alt="" coords="240,1027,333,1054"/>
-<area shape="rect" href="fps_display_8c.html#a0fb9bb2a14f4944c0301375c3acd1243" title="Libère la mémoire utilisée par l&#39;affichage des FPS." alt="" coords="226,1078,347,1105"/>
-<area shape="rect" href="tiles_8c.html#a57a81d0b091991f20ee178ef1d5a9543" title="Libère la mémoire utilisée par une grille." alt="" coords="249,1129,324,1155"/>
-<area shape="rect" href="hud_8c.html#a61060e84df23feb6da2414e9ad044963" title="Libère la mémoire utilisée par le HUD." alt="" coords="247,1179,326,1206"/>
-<area shape="rect" href="minimap_8c.html#a4c26549b8031ed61c1a6b718b027f1e2" title="Libere la mémoire allouée pour la minimap." alt="" coords="234,1230,339,1257"/>
-<area shape="rect" href="player_8c.html#a07a36417f6cb5cd32e734eea6e583208" title="Libère la mémoire utilisée par un joueur." alt="" coords="242,1281,331,1307"/>
-<area shape="rect" href="tiles_entity_8c.html#a5ea1104470b2ddeee45f51dc8286cd28" title="Libère la mémoire utilisée par une entité de tuile." alt="" coords="231,1331,342,1358"/>
-<area shape="rect" href="camera_8c.html#a74ac7719529d43608fbf1ece5cb03455" title="Libere la mémoire allouée pour le viewport." alt="" coords="233,1382,340,1409"/>
-<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="241,1433,333,1459"/>
-<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="189,1483,384,1510"/>
-<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="446,141,589,167"/>
+<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="440,78,587,104"/>
+<area shape="rect" href="camera_8c.html#adf268fdb00008071ac27d58151601156" title="Crée un viewport lié à une caméra." alt="" coords="226,926,347,952"/>
+<area shape="rect" href="mobs_2wizard_8c.html#a9cf3a13d8474f8728fd4aaf80458a51b" title="Crée et initialise un sorcier." alt="" coords="233,976,341,1003"/>
+<area shape="rect" href="camera_8c.html#ac911db209d3a4d35e02782ddb737a276" title="Libere la mémoire allouée pour la camera." alt="" coords="237,1027,336,1054"/>
+<area shape="rect" href="enemy_8c.html#ad1a4da7343608052f2a50b7a4a554931" title="Libère la mémoire utilisée par un ennemi." alt="" coords="240,1078,333,1104"/>
+<area shape="rect" href="fps_display_8c.html#a0fb9bb2a14f4944c0301375c3acd1243" title="Libère la mémoire utilisée par l&#39;affichage des FPS." alt="" coords="226,1128,347,1155"/>
+<area shape="rect" href="tiles_8c.html#a57a81d0b091991f20ee178ef1d5a9543" title="Libère la mémoire utilisée par une grille." alt="" coords="249,1179,324,1206"/>
+<area shape="rect" href="hud_8c.html#a61060e84df23feb6da2414e9ad044963" title="Libère la mémoire utilisée par le HUD." alt="" coords="247,1230,326,1256"/>
+<area shape="rect" href="minimap_8c.html#a4c26549b8031ed61c1a6b718b027f1e2" title="Libere la mémoire allouée pour la minimap." alt="" coords="234,1280,339,1307"/>
+<area shape="rect" href="player_8c.html#a07a36417f6cb5cd32e734eea6e583208" title="Libère la mémoire utilisée par un joueur." alt="" coords="242,1331,331,1358"/>
+<area shape="rect" href="tiles_entity_8c.html#a5ea1104470b2ddeee45f51dc8286cd28" title="Libère la mémoire utilisée par une entité de tuile." alt="" coords="231,1382,342,1408"/>
+<area shape="rect" href="camera_8c.html#a74ac7719529d43608fbf1ece5cb03455" title="Libere la mémoire allouée pour le viewport." alt="" coords="233,1432,340,1459"/>
+<area shape="rect" href="gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="241,1483,333,1510"/>
+<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="189,1534,384,1560"/>
+<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="442,140,585,167"/>
 <area shape="rect" href="tileset_8c.html#ab041e3b90591cb42626107fb85289c09" title="Initialise un nouveau tileset à partir d&#39;une image." alt="" coords="243,115,330,142"/>
-<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="466,191,569,218"/>
-<area shape="rect" href="text_8c.html#acbc470380890367cf49339d34bf79a76" title="Charge une police depuis un fichier avec une taille spécifiée." alt="" coords="247,1534,326,1561"/>
-<area shape="rect" href="tiles_8c.html#a3db0e74a557bf693010a787414fb2c84" title="Charge une carte depuis un fichier." alt="" coords="247,571,326,598"/>
-<area shape="rect" href="tiles_8c.html#ab4e8adeba82f1c41f904963ffa7260e8" title="Place une entité sur une tuile libre aléatoire." alt="" coords="210,622,363,649"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="211,673,362,699"/>
-<area shape="rect" href="enemy_8c.html#ae8b9c9cabe6fb5d0fb9eee9f92d1e1a9" title="Wrapper pour le rendu d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="205,1585,369,1611"/>
-<area shape="rect" href="commun_8c.html#ae0721a23bab2cb039c5a0bdbe8965ae1" title="Wrapper pour l&#39;affichage du compteur FPS." alt="" coords="191,1635,383,1662"/>
-<area shape="rect" href="commun_8c.html#aa3de3a6f246b611ffa81f4f52cb12ff7" title="Wrapper pour le rendu de la grille de debug." alt="" coords="213,1686,360,1713"/>
-<area shape="rect" href="hud_8c.html#ad033bcd35bc8429da44582cc1d45a4ee" title="Wrapper pour afficher le HUD (compatible avec fonctionManager)" alt="" coords="212,1737,361,1763"/>
-<area shape="rect" href="commun_8c.html#a814524bc2b681e2fdb9684fe2f852fa4" title="Wrapper pour le rendu de la minimap." alt="" coords="199,1787,375,1814"/>
-<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="207,1838,367,1865"/>
-<area shape="rect" href="tiles_entity_8c.html#a7903ee7d4dc10f12ce5dd7ab3c4d0706" title="Wrapper pour le rendu d&#39;entité de tuile (compatible avec fonctionManager)" alt="" coords="196,1889,377,1915"/>
-<area shape="rect" href="commun_8c.html#a20db884ef4960b526684a6c07adad6eb" title="Wrapper pour le rendu du viewport principal." alt="" coords="198,1939,375,1966"/>
-<area shape="rect" href="commun_8c.html#a591150d6ecef911a5e8de6101893a228" title="Wrapper pour redimensionner la minimap." alt="" coords="200,1990,373,2017"/>
-<area shape="rect" href="commun_8c.html#a0fdd01f50c34f4db33bfa1808f3e36d5" title="Wrapper pour redimensionner le viewport." alt="" coords="199,2041,374,2067"/>
-<area shape="rect" href="fscene_8c.html#accbd14eb8c93d348b61a8cb09bbbf489" title="Enregistre une fonction pour une scène." alt="" coords="202,723,371,750"/>
-<area shape="rect" href="commun_8c.html#a16ec2c51f6724544166f735343bd8c56" title="Wrapper pour définir la cible de rendu." alt="" coords="195,2091,378,2118"/>
-<area shape="rect" href="enemy_8c.html#a1984c1627c588895da06920e804c6d63" title="Wrapper pour la mise à jour d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="203,2142,370,2169"/>
-<area shape="rect" href="commun_8c.html#a3d7ceef02fbf5954ffd809f4bf8c40c3" title="Wrapper pour la mise à jour du compteur FPS." alt="" coords="189,2193,384,2219"/>
-<area shape="rect" href="hud_8c.html#a18e3dbaca14748eb34c6b4249c3570b3" title="Wrapper pour mettre à jour le HUD (compatible avec fonctionManager)" alt="" coords="211,2243,363,2270"/>
-<area shape="rect" href="commun_8c.html#ad528a6e4bc07397f718d5f9c153939fc" title="Wrapper pour la mise à jour de la minimap." alt="" coords="197,2294,376,2321"/>
-<area shape="rect" href="commun_8c.html#a32d90a8046d05096f3ea9453c8c56797" title="Wrapper pour la mise à jour du joueur." alt="" coords="205,2345,368,2371"/>
-<area shape="rect" href="tiles_entity_8c.html#aefced242434e53034459bf2955261bce" title="Wrapper pour la mise à jour d&#39;entité de tuile (compatible avec fonctionManager)" alt="" coords="195,2395,379,2422"/>
-<area shape="rect" href="camera_8c.html#a9477257358163a9f4067a6a359692e71" title="Applique un zoom relatif à la caméra via le viewport." alt="" coords="440,267,595,294"/>
+<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="462,191,565,218"/>
+<area shape="rect" href="text_8c.html#acbc470380890367cf49339d34bf79a76" title="Charge une police depuis un fichier avec une taille spécifiée." alt="" coords="247,1584,326,1611"/>
+<area shape="rect" href="tiles_8c.html#a3db0e74a557bf693010a787414fb2c84" title="Charge une carte depuis un fichier." alt="" coords="247,723,326,750"/>
+<area shape="rect" href="tiles_8c.html#ab4e8adeba82f1c41f904963ffa7260e8" title="Place une entité sur une tuile libre aléatoire." alt="" coords="210,470,363,496"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="211,520,362,547"/>
+<area shape="rect" href="enemy_8c.html#ae8b9c9cabe6fb5d0fb9eee9f92d1e1a9" title="Wrapper pour le rendu d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="205,1635,369,1662"/>
+<area shape="rect" href="commun_8c.html#ae0721a23bab2cb039c5a0bdbe8965ae1" title="Wrapper pour l&#39;affichage du compteur FPS." alt="" coords="191,1686,383,1712"/>
+<area shape="rect" href="commun_8c.html#aa3de3a6f246b611ffa81f4f52cb12ff7" title="Wrapper pour le rendu de la grille de debug." alt="" coords="213,1736,360,1763"/>
+<area shape="rect" href="hud_8c.html#ad033bcd35bc8429da44582cc1d45a4ee" title="Wrapper pour afficher le HUD (compatible avec fonctionManager)" alt="" coords="212,1787,361,1814"/>
+<area shape="rect" href="commun_8c.html#a814524bc2b681e2fdb9684fe2f852fa4" title="Wrapper pour le rendu de la minimap." alt="" coords="199,1838,375,1864"/>
+<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="207,1888,367,1915"/>
+<area shape="rect" href="tiles_entity_8c.html#a7903ee7d4dc10f12ce5dd7ab3c4d0706" title="Wrapper pour le rendu d&#39;entité de tuile (compatible avec fonctionManager)" alt="" coords="196,1939,377,1966"/>
+<area shape="rect" href="commun_8c.html#a20db884ef4960b526684a6c07adad6eb" title="Wrapper pour le rendu du viewport principal." alt="" coords="198,1990,375,2016"/>
+<area shape="rect" href="commun_8c.html#a591150d6ecef911a5e8de6101893a228" title="Wrapper pour redimensionner la minimap." alt="" coords="200,2040,373,2067"/>
+<area shape="rect" href="commun_8c.html#a0fdd01f50c34f4db33bfa1808f3e36d5" title="Wrapper pour redimensionner le viewport." alt="" coords="199,2091,374,2118"/>
+<area shape="rect" href="fscene_8c.html#accbd14eb8c93d348b61a8cb09bbbf489" title="Enregistre une fonction pour une scène." alt="" coords="202,571,371,598"/>
+<area shape="rect" href="commun_8c.html#a16ec2c51f6724544166f735343bd8c56" title="Wrapper pour définir la cible de rendu." alt="" coords="195,2142,378,2168"/>
+<area shape="rect" href="enemy_8c.html#a1984c1627c588895da06920e804c6d63" title="Wrapper pour la mise à jour d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="203,2192,370,2219"/>
+<area shape="rect" href="commun_8c.html#a3d7ceef02fbf5954ffd809f4bf8c40c3" title="Wrapper pour la mise à jour du compteur FPS." alt="" coords="189,2243,384,2270"/>
+<area shape="rect" href="hud_8c.html#a18e3dbaca14748eb34c6b4249c3570b3" title="Wrapper pour mettre à jour le HUD (compatible avec fonctionManager)" alt="" coords="211,2294,363,2320"/>
+<area shape="rect" href="commun_8c.html#ad528a6e4bc07397f718d5f9c153939fc" title="Wrapper pour la mise à jour de la minimap." alt="" coords="197,2344,376,2371"/>
+<area shape="rect" href="commun_8c.html#a32d90a8046d05096f3ea9453c8c56797" title="Wrapper pour la mise à jour du joueur." alt="" coords="205,2395,368,2422"/>
+<area shape="rect" href="tiles_entity_8c.html#aefced242434e53034459bf2955261bce" title="Wrapper pour la mise à jour d&#39;entité de tuile (compatible avec fonctionManager)" alt="" coords="195,2446,379,2472"/>
 </map>
 </div>
 <div class="dynheader">
@@ -300,11 +317,11 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_world_8h_aaa26b897de5b502695ac80372c7c102f_icgraph.png" border="0" usemap="#amain_world_8h_aaa26b897de5b502695ac80372c7c102f_icgraph" alt=""/></div>
 <map name="amain_world_8h_aaa26b897de5b502695ac80372c7c102f_icgraph" id="amain_world_8h_aaa26b897de5b502695ac80372c7c102f_icgraph">
-<area shape="rect" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -369,7 +386,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>Pointeur vers la scène créée</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>La scène retournée doit être libérée avec <a class="el" href="fscene_8c.html#a69ac741c95a278f52722cfe8213661e8" title="Libère une scène.">freeScene()</a> quand elle n'est plus utilisée sauf si mis dans uns scèneControler. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="main_world_8c_source.html#l00358">358</a> of file <a class="el" href="main_world_8c_source.html">mainWorld.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_world_8c_source.html#l00359">359</a> of file <a class="el" href="main_world_8c_source.html">mainWorld.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -401,10 +418,10 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_world_8h_a7d6d1191cb113070340022cda0f7f5e7_icgraph.png" border="0" usemap="#amain_world_8h_a7d6d1191cb113070340022cda0f7f5e7_icgraph" alt=""/></div>
 <map name="amain_world_8h_a7d6d1191cb113070340022cda0f7f5e7_icgraph" id="amain_world_8h_a7d6d1191cb113070340022cda0f7f5e7_icgraph">
-<area shape="rect" title="Crée une carte à partir d&#39;une configuration." alt="" coords="660,5,784,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Crée une carte à partir d&#39;une configuration." alt="" coords="629,5,753,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -462,62 +479,62 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>Pointeur vers la scène créée</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>La scène retournée doit être libérée avec <a class="el" href="fscene_8c.html#a69ac741c95a278f52722cfe8213661e8" title="Libère une scène.">freeScene()</a> quand elle n'est plus utilisée sauf si mis dans uns scèneControler. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="main_world_8c_source.html#l00172">172</a> of file <a class="el" href="main_world_8c_source.html">mainWorld.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="main_world_8c_source.html#l00176">176</a> of file <a class="el" href="main_world_8c_source.html">mainWorld.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_world_8h_a4ee501030b3411bfd8216ce665b34520_cgraph.png" border="0" usemap="#amain_world_8h_a4ee501030b3411bfd8216ce665b34520_cgraph" alt=""/></div>
 <map name="amain_world_8h_a4ee501030b3411bfd8216ce665b34520_cgraph" id="amain_world_8h_a4ee501030b3411bfd8216ce665b34520_cgraph">
-<area shape="rect" title="Crée une carte de marchand." alt="" coords="5,1007,157,1033"/>
-<area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="505,19,593,45"/>
-<area shape="rect" href="commun_8c.html#ab20f8d2e1580b37c1916e19726b8c50f" title="Wrapper pour la gestion du zoom de la caméra." alt="" coords="205,272,416,299"/>
-<area shape="rect" href="commun_8c.html#a2f230d2752707af35e4081358841f4bb" title="Wrapper pour centrer la caméra." alt="" coords="217,323,404,349"/>
-<area shape="rect" href="camera_8c.html#ac19afa9c1c457717cd5e9e090db7611b" title="Crée une caméra avec des dimensions initiales." alt="" coords="253,373,368,400"/>
-<area shape="rect" href="hud_8c.html#ab5c94b35150b778d85c8033a513e5ace" title="Crée une nouvelle instance du HUD." alt="" coords="264,424,357,451"/>
-<area shape="rect" href="minimap_8c.html#a01a246976ef77cc09305d689ad93a829" title="Crée et initialise une nouvelle minimap." alt="" coords="251,677,371,704"/>
-<area shape="rect" href="fscene_8c.html#a4b143d78504ee5f7584a44fb6479e3f0" title="Crée une nouvelle scène." alt="" coords="259,728,362,755"/>
-<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="475,69,622,96"/>
-<area shape="rect" href="camera_8c.html#adf268fdb00008071ac27d58151601156" title="Crée un viewport lié à une caméra." alt="" coords="250,779,371,805"/>
-<area shape="rect" href="camera_8c.html#ac911db209d3a4d35e02782ddb737a276" title="Libere la mémoire allouée pour la camera." alt="" coords="261,829,360,856"/>
-<area shape="rect" href="fps_display_8c.html#a0fb9bb2a14f4944c0301375c3acd1243" title="Libère la mémoire utilisée par l&#39;affichage des FPS." alt="" coords="250,880,371,907"/>
-<area shape="rect" href="tiles_8c.html#a57a81d0b091991f20ee178ef1d5a9543" title="Libère la mémoire utilisée par une grille." alt="" coords="273,981,348,1008"/>
-<area shape="rect" href="hud_8c.html#a61060e84df23feb6da2414e9ad044963" title="Libère la mémoire utilisée par le HUD." alt="" coords="271,931,350,957"/>
-<area shape="rect" href="minimap_8c.html#a4c26549b8031ed61c1a6b718b027f1e2" title="Libere la mémoire allouée pour la minimap." alt="" coords="258,1032,363,1059"/>
-<area shape="rect" href="player_8c.html#a07a36417f6cb5cd32e734eea6e583208" title="Libère la mémoire utilisée par un joueur." alt="" coords="266,1083,355,1109"/>
-<area shape="rect" href="tiles_entity_8c.html#a5ea1104470b2ddeee45f51dc8286cd28" title="Libère la mémoire utilisée par une entité de tuile." alt="" coords="255,1133,366,1160"/>
-<area shape="rect" href="camera_8c.html#a74ac7719529d43608fbf1ece5cb03455" title="Libere la mémoire allouée pour le viewport." alt="" coords="257,1184,364,1211"/>
-<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="213,475,408,501"/>
-<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="477,120,620,147"/>
-<area shape="rect" href="tileset_8c.html#ab041e3b90591cb42626107fb85289c09" title="Initialise un nouveau tileset à partir d&#39;une image." alt="" coords="267,120,354,147"/>
-<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="497,171,600,197"/>
-<area shape="rect" href="text_8c.html#acbc470380890367cf49339d34bf79a76" title="Charge une police depuis un fichier avec une taille spécifiée." alt="" coords="271,1235,350,1261"/>
-<area shape="rect" href="tiles_8c.html#a3db0e74a557bf693010a787414fb2c84" title="Charge une carte depuis un fichier." alt="" coords="509,627,588,653"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="473,677,624,704"/>
-<area shape="rect" href="commun_8c.html#ae0721a23bab2cb039c5a0bdbe8965ae1" title="Wrapper pour l&#39;affichage du compteur FPS." alt="" coords="215,1285,407,1312"/>
-<area shape="rect" href="commun_8c.html#aa3de3a6f246b611ffa81f4f52cb12ff7" title="Wrapper pour le rendu de la grille de debug." alt="" coords="237,1336,384,1363"/>
-<area shape="rect" href="hud_8c.html#ad033bcd35bc8429da44582cc1d45a4ee" title="Wrapper pour afficher le HUD (compatible avec fonctionManager)" alt="" coords="236,1387,385,1413"/>
-<area shape="rect" href="commun_8c.html#a814524bc2b681e2fdb9684fe2f852fa4" title="Wrapper pour le rendu de la minimap." alt="" coords="223,1437,399,1464"/>
-<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="231,1488,391,1515"/>
-<area shape="rect" href="tiles_entity_8c.html#a7903ee7d4dc10f12ce5dd7ab3c4d0706" title="Wrapper pour le rendu d&#39;entité de tuile (compatible avec fonctionManager)" alt="" coords="220,1539,401,1565"/>
-<area shape="rect" href="commun_8c.html#a20db884ef4960b526684a6c07adad6eb" title="Wrapper pour le rendu du viewport principal." alt="" coords="222,1589,399,1616"/>
-<area shape="rect" href="commun_8c.html#a591150d6ecef911a5e8de6101893a228" title="Wrapper pour redimensionner la minimap." alt="" coords="224,1640,397,1667"/>
-<area shape="rect" href="commun_8c.html#a0fdd01f50c34f4db33bfa1808f3e36d5" title="Wrapper pour redimensionner le viewport." alt="" coords="223,1691,398,1717"/>
-<area shape="rect" href="fscene_8c.html#accbd14eb8c93d348b61a8cb09bbbf489" title="Enregistre une fonction pour une scène." alt="" coords="464,728,633,755"/>
-<area shape="rect" href="commun_8c.html#a16ec2c51f6724544166f735343bd8c56" title="Wrapper pour définir la cible de rendu." alt="" coords="219,1741,402,1768"/>
-<area shape="rect" href="commun_8c.html#a3d7ceef02fbf5954ffd809f4bf8c40c3" title="Wrapper pour la mise à jour du compteur FPS." alt="" coords="213,1792,408,1819"/>
-<area shape="rect" href="hud_8c.html#a18e3dbaca14748eb34c6b4249c3570b3" title="Wrapper pour mettre à jour le HUD (compatible avec fonctionManager)" alt="" coords="235,1843,387,1869"/>
-<area shape="rect" href="commun_8c.html#ad528a6e4bc07397f718d5f9c153939fc" title="Wrapper pour la mise à jour de la minimap." alt="" coords="221,1893,400,1920"/>
-<area shape="rect" href="commun_8c.html#a32d90a8046d05096f3ea9453c8c56797" title="Wrapper pour la mise à jour du joueur." alt="" coords="229,1944,392,1971"/>
-<area shape="rect" href="tiles_entity_8c.html#aefced242434e53034459bf2955261bce" title="Wrapper pour la mise à jour d&#39;entité de tuile (compatible avec fonctionManager)" alt="" coords="219,1995,403,2021"/>
-<area shape="rect" href="camera_8c.html#a9477257358163a9f4067a6a359692e71" title="Applique un zoom relatif à la caméra via le viewport." alt="" coords="471,221,626,248"/>
-<area shape="rect" href="camera_8c.html#aa3a432661215176d117ac6e26e36564e" title="Centre la caméra sur des coordonnées précises en ne sortant pas du niveau." alt="" coords="483,272,615,299"/>
-<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="491,323,607,349"/>
-<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="486,373,611,400"/>
-<area shape="rect" href="animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="483,424,614,451"/>
-<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="681,601,767,628"/>
-<area shape="rect" href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="489,525,608,552"/>
-<area shape="rect" href="text_8c.html#ab9b7064da4ef9403241f3d40389af46a" title="Libère la mémoire utilisée par un élément textuel." alt="" coords="511,905,586,932"/>
-<area shape="rect" href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f" title="Traite les entrées utilisateur pour le joueur." alt="" coords="479,576,619,603"/>
+<area shape="rect" title="Crée une carte de marchand." alt="" coords="5,968,157,995"/>
+<area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="267,5,355,32"/>
+<area shape="rect" href="commun_8c.html#ab20f8d2e1580b37c1916e19726b8c50f" title="Wrapper pour la gestion du zoom de la caméra." alt="" coords="205,56,416,83"/>
+<area shape="rect" href="commun_8c.html#a2f230d2752707af35e4081358841f4bb" title="Wrapper pour centrer la caméra." alt="" coords="217,107,404,133"/>
+<area shape="rect" href="camera_8c.html#ac19afa9c1c457717cd5e9e090db7611b" title="Crée une caméra avec des dimensions initiales." alt="" coords="253,157,368,184"/>
+<area shape="rect" href="hud_8c.html#ab5c94b35150b778d85c8033a513e5ace" title="Crée une nouvelle instance du HUD." alt="" coords="264,208,357,235"/>
+<area shape="rect" href="minimap_8c.html#a01a246976ef77cc09305d689ad93a829" title="Crée et initialise une nouvelle minimap." alt="" coords="251,259,371,285"/>
+<area shape="rect" href="fscene_8c.html#a4b143d78504ee5f7584a44fb6479e3f0" title="Crée une nouvelle scène." alt="" coords="259,309,362,336"/>
+<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="237,360,384,387"/>
+<area shape="rect" href="camera_8c.html#adf268fdb00008071ac27d58151601156" title="Crée un viewport lié à une caméra." alt="" coords="250,411,371,437"/>
+<area shape="rect" href="camera_8c.html#ac911db209d3a4d35e02782ddb737a276" title="Libere la mémoire allouée pour la camera." alt="" coords="261,461,360,488"/>
+<area shape="rect" href="fps_display_8c.html#a0fb9bb2a14f4944c0301375c3acd1243" title="Libère la mémoire utilisée par l&#39;affichage des FPS." alt="" coords="250,512,371,539"/>
+<area shape="rect" href="tiles_8c.html#a57a81d0b091991f20ee178ef1d5a9543" title="Libère la mémoire utilisée par une grille." alt="" coords="273,563,348,589"/>
+<area shape="rect" href="hud_8c.html#a61060e84df23feb6da2414e9ad044963" title="Libère la mémoire utilisée par le HUD." alt="" coords="271,613,350,640"/>
+<area shape="rect" href="minimap_8c.html#a4c26549b8031ed61c1a6b718b027f1e2" title="Libere la mémoire allouée pour la minimap." alt="" coords="258,664,363,691"/>
+<area shape="rect" href="player_8c.html#a07a36417f6cb5cd32e734eea6e583208" title="Libère la mémoire utilisée par un joueur." alt="" coords="266,715,355,741"/>
+<area shape="rect" href="tiles_entity_8c.html#a5ea1104470b2ddeee45f51dc8286cd28" title="Libère la mémoire utilisée par une entité de tuile." alt="" coords="255,765,366,792"/>
+<area shape="rect" href="camera_8c.html#a74ac7719529d43608fbf1ece5cb03455" title="Libere la mémoire allouée pour le viewport." alt="" coords="257,816,364,843"/>
+<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="213,867,408,893"/>
+<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="239,917,382,944"/>
+<area shape="rect" href="text_8c.html#acbc470380890367cf49339d34bf79a76" title="Charge une police depuis un fichier avec une taille spécifiée." alt="" coords="271,968,350,995"/>
+<area shape="rect" href="tiles_8c.html#a3db0e74a557bf693010a787414fb2c84" title="Charge une carte depuis un fichier." alt="" coords="271,1019,350,1045"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="473,1069,624,1096"/>
+<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="259,1120,362,1147"/>
+<area shape="rect" href="commun_8c.html#ae0721a23bab2cb039c5a0bdbe8965ae1" title="Wrapper pour l&#39;affichage du compteur FPS." alt="" coords="215,1171,407,1197"/>
+<area shape="rect" href="commun_8c.html#aa3de3a6f246b611ffa81f4f52cb12ff7" title="Wrapper pour le rendu de la grille de debug." alt="" coords="237,1221,384,1248"/>
+<area shape="rect" href="hud_8c.html#ad033bcd35bc8429da44582cc1d45a4ee" title="Wrapper pour afficher le HUD (compatible avec fonctionManager)" alt="" coords="236,1272,385,1299"/>
+<area shape="rect" href="commun_8c.html#a814524bc2b681e2fdb9684fe2f852fa4" title="Wrapper pour le rendu de la minimap." alt="" coords="223,1323,399,1349"/>
+<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="231,1373,391,1400"/>
+<area shape="rect" href="tiles_entity_8c.html#a7903ee7d4dc10f12ce5dd7ab3c4d0706" title="Wrapper pour le rendu d&#39;entité de tuile (compatible avec fonctionManager)" alt="" coords="220,1424,401,1451"/>
+<area shape="rect" href="commun_8c.html#a20db884ef4960b526684a6c07adad6eb" title="Wrapper pour le rendu du viewport principal." alt="" coords="222,1475,399,1501"/>
+<area shape="rect" href="commun_8c.html#a591150d6ecef911a5e8de6101893a228" title="Wrapper pour redimensionner la minimap." alt="" coords="224,1525,397,1552"/>
+<area shape="rect" href="commun_8c.html#a0fdd01f50c34f4db33bfa1808f3e36d5" title="Wrapper pour redimensionner le viewport." alt="" coords="223,1576,398,1603"/>
+<area shape="rect" href="fscene_8c.html#accbd14eb8c93d348b61a8cb09bbbf489" title="Enregistre une fonction pour une scène." alt="" coords="464,1373,633,1400"/>
+<area shape="rect" href="commun_8c.html#a16ec2c51f6724544166f735343bd8c56" title="Wrapper pour définir la cible de rendu." alt="" coords="219,1677,402,1704"/>
+<area shape="rect" href="commun_8c.html#a3d7ceef02fbf5954ffd809f4bf8c40c3" title="Wrapper pour la mise à jour du compteur FPS." alt="" coords="213,1728,408,1755"/>
+<area shape="rect" href="hud_8c.html#a18e3dbaca14748eb34c6b4249c3570b3" title="Wrapper pour mettre à jour le HUD (compatible avec fonctionManager)" alt="" coords="235,1779,387,1805"/>
+<area shape="rect" href="commun_8c.html#ad528a6e4bc07397f718d5f9c153939fc" title="Wrapper pour la mise à jour de la minimap." alt="" coords="221,1829,400,1856"/>
+<area shape="rect" href="commun_8c.html#a32d90a8046d05096f3ea9453c8c56797" title="Wrapper pour la mise à jour du joueur." alt="" coords="229,1880,392,1907"/>
+<area shape="rect" href="tiles_entity_8c.html#aefced242434e53034459bf2955261bce" title="Wrapper pour la mise à jour d&#39;entité de tuile (compatible avec fonctionManager)" alt="" coords="219,1931,403,1957"/>
+<area shape="rect" href="camera_8c.html#a9477257358163a9f4067a6a359692e71" title="Applique un zoom relatif à la caméra via le viewport." alt="" coords="471,56,626,83"/>
+<area shape="rect" href="camera_8c.html#aa3a432661215176d117ac6e26e36564e" title="Centre la caméra sur des coordonnées précises en ne sortant pas du niveau." alt="" coords="483,107,615,133"/>
+<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="491,157,607,184"/>
+<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="486,208,611,235"/>
+<area shape="rect" href="animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="483,259,614,285"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="681,919,767,945"/>
+<area shape="rect" href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="489,360,608,387"/>
+<area shape="rect" href="text_8c.html#ab9b7064da4ef9403241f3d40389af46a" title="Libère la mémoire utilisée par un élément textuel." alt="" coords="511,563,586,589"/>
+<area shape="rect" href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f" title="Traite les entrées utilisateur pour le joueur." alt="" coords="479,880,619,907"/>
+<area shape="rect" href="tiles_8c.html#a8e7ac52bce5def6e962228651d4aa087" title="Crée une nouvelle grille aux dimensions spécifiées." alt="" coords="503,1019,594,1045"/>
 </map>
 </div>
 <div class="dynheader">
@@ -525,11 +542,11 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_world_8h_a4ee501030b3411bfd8216ce665b34520_icgraph.png" border="0" usemap="#amain_world_8h_a4ee501030b3411bfd8216ce665b34520_icgraph" alt=""/></div>
 <map name="amain_world_8h_a4ee501030b3411bfd8216ce665b34520_icgraph" id="amain_world_8h_a4ee501030b3411bfd8216ce665b34520_icgraph">
-<area shape="rect" title="Crée une carte de marchand." alt="" coords="820,5,972,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Crée une carte de marchand." alt="" coords="789,5,941,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -585,56 +602,56 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_world_8h_ac7fc26c7f4cf2c13c3ab508715993ec6_cgraph.png" border="0" usemap="#amain_world_8h_ac7fc26c7f4cf2c13c3ab508715993ec6_cgraph" alt=""/></div>
 <map name="amain_world_8h_ac7fc26c7f4cf2c13c3ab508715993ec6_cgraph" id="amain_world_8h_ac7fc26c7f4cf2c13c3ab508715993ec6_cgraph">
-<area shape="rect" title="Crée un niveau complet." alt="" coords="5,1424,116,1451"/>
-<area shape="rect" href="fscene_8c.html#a39d0e7fbc78f3ff2fbd207962ff6ab42" title="Ajoute une scène au contrôleur." alt="" coords="369,816,454,843"/>
-<area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="349,233,473,260"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="164,1272,276,1299"/>
-<area shape="rect" href="tiles_8c.html#ab4e8adeba82f1c41f904963ffa7260e8" title="Place une entité sur une tuile libre aléatoire." alt="" coords="575,2336,729,2363"/>
-<area shape="rect" href="genmap_8c.html#a8cc62c2ec750666aff9cbdac83f72102" title=" " alt="" coords="183,1551,257,1577"/>
-<area shape="rect" href="fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="179,2285,261,2312"/>
-<area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="835,867,923,893"/>
-<area shape="rect" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="581,360,723,387"/>
-<area shape="rect" href="commun_8c.html#ad908d5c383621415ac3303b78f098812" title="Wrapper générique d&#39;affichage." alt="" coords="583,157,721,184"/>
-<area shape="rect" href="fscene_8c.html#a4b143d78504ee5f7584a44fb6479e3f0" title="Crée une nouvelle scène." alt="" coords="601,715,703,741"/>
-<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="805,816,952,843"/>
-<area shape="rect" href="mapview_8c.html#af13e3afed524e2cb61d969acf1042011" title="Libère la mémoire utilisée par la structure d&#39;affichage de carte." alt="" coords="591,107,713,133"/>
-<area shape="rect" href="mapview_8c.html#a88fc166e98c5406a3d4fb5d5a5fb3263" title="Génère la représentation visuelle de la carte." alt="" coords="598,5,706,32"/>
-<area shape="rect" href="commun_8c.html#a3c58046d1cbb0700448c2967b7576171" title="Wrapper pour la gestion de la carte." alt="" coords="561,56,743,83"/>
-<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="807,765,950,792"/>
-<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="827,917,930,944"/>
-<area shape="rect" href="fscene_8c.html#accbd14eb8c93d348b61a8cb09bbbf489" title="Enregistre une fonction pour une scène." alt="" coords="567,664,737,691"/>
-<area shape="rect" href="mapview_8c.html#a30356d6bf7d30b155f68fbbbea7dc377" title="Affiche la carte à l&#39;écran." alt="" coords="837,157,920,184"/>
-<area shape="rect" href="mapview_8c.html#a8cf36049c7d8cffd14321df249e73f55" title="Détermine les limites min/max des coordonnées des salles." alt="" coords="833,5,924,32"/>
-<area shape="rect" href="mapview_8c.html#accf55e351452252df51157768a5c9657" title="Gère les entrées utilisateur dans la vue carte." alt="" coords="815,56,942,83"/>
-<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="836,2007,921,2033"/>
-<area shape="rect" href="object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="815,664,942,691"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="350,1500,473,1527"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="347,1272,475,1299"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="335,1221,487,1248"/>
-<area shape="rect" href="commun_8c.html#ab20f8d2e1580b37c1916e19726b8c50f" title="Wrapper pour la gestion du zoom de la caméra." alt="" coords="547,1019,757,1045"/>
-<area shape="rect" href="commun_8c.html#a2f230d2752707af35e4081358841f4bb" title="Wrapper pour centrer la caméra." alt="" coords="559,1120,745,1147"/>
-<area shape="rect" href="boss__slime_8c.html#a5702613fde9a96227c051caf5f7495df" title="Crée une barre de vie pour le boss." alt="" coords="573,2083,731,2109"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="587,2133,717,2160"/>
-<area shape="rect" href="camera_8c.html#ac19afa9c1c457717cd5e9e090db7611b" title="Crée une caméra avec des dimensions initiales." alt="" coords="595,1171,709,1197"/>
-<area shape="rect" href="hud_8c.html#ab5c94b35150b778d85c8033a513e5ace" title="Crée une nouvelle instance du HUD." alt="" coords="605,1728,699,1755"/>
-<area shape="rect" href="minimap_8c.html#a01a246976ef77cc09305d689ad93a829" title="Crée et initialise une nouvelle minimap." alt="" coords="592,1221,712,1248"/>
-<area shape="rect" href="camera_8c.html#adf268fdb00008071ac27d58151601156" title="Crée un viewport lié à une caméra." alt="" coords="591,1272,713,1299"/>
-<area shape="rect" href="boss__slime_8c.html#ad4852cfa77648628db902cb7bf56a7fd" title="Libère les ressources associées à la barre de vie." alt="" coords="580,2184,724,2211"/>
-<area shape="rect" href="camera_8c.html#ac911db209d3a4d35e02782ddb737a276" title="Libere la mémoire allouée pour la camera." alt="" coords="603,1323,701,1349"/>
-<area shape="rect" href="enemy_8c.html#ad1a4da7343608052f2a50b7a4a554931" title="Libère la mémoire utilisée par un ennemi." alt="" coords="605,1829,699,1856"/>
-<area shape="rect" href="fps_display_8c.html#a0fb9bb2a14f4944c0301375c3acd1243" title="Libère la mémoire utilisée par l&#39;affichage des FPS." alt="" coords="591,1373,713,1400"/>
-<area shape="rect" href="tiles_8c.html#a57a81d0b091991f20ee178ef1d5a9543" title="Libère la mémoire utilisée par une grille." alt="" coords="615,1424,689,1451"/>
-<area shape="rect" href="hud_8c.html#a61060e84df23feb6da2414e9ad044963" title="Libère la mémoire utilisée par le HUD." alt="" coords="613,1475,691,1501"/>
-<area shape="rect" href="minimap_8c.html#a4c26549b8031ed61c1a6b718b027f1e2" title="Libere la mémoire allouée pour la minimap." alt="" coords="599,1525,705,1552"/>
-<area shape="rect" href="player_8c.html#a07a36417f6cb5cd32e734eea6e583208" title="Libère la mémoire utilisée par un joueur." alt="" coords="607,1576,697,1603"/>
-<area shape="rect" href="tiles_entity_8c.html#a5ea1104470b2ddeee45f51dc8286cd28" title="Libère la mémoire utilisée par une entité de tuile." alt="" coords="597,1627,707,1653"/>
-<area shape="rect" href="camera_8c.html#a74ac7719529d43608fbf1ece5cb03455" title="Libere la mémoire allouée pour le viewport." alt="" coords="599,1677,705,1704"/>
-<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="555,968,749,995"/>
-<area shape="rect" href="tileset_8c.html#ab041e3b90591cb42626107fb85289c09" title="Initialise un nouveau tileset à partir d&#39;une image." alt="" coords="609,867,695,893"/>
-<area shape="rect" href="tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="845,2336,912,2363"/>
-<area shape="rect" href="genmap_8c.html#a782542f234d59803605c4d24d7cc48a9" title=" " alt="" coords="356,1551,467,1577"/>
-<area shape="rect" href="genmap_8c.html#ac50fbce591c797fbf374390298a701e0" title=" " alt="" coords="371,1601,452,1628"/>
-<area shape="rect" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="324,2336,499,2363"/>
+<area shape="rect" title="Crée un niveau complet." alt="" coords="5,1400,116,1426"/>
+<area shape="rect" href="fscene_8c.html#a39d0e7fbc78f3ff2fbd207962ff6ab42" title="Ajoute une scène au contrôleur." alt="" coords="369,197,454,224"/>
+<area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="349,386,473,413"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="164,1273,276,1300"/>
+<area shape="rect" href="tiles_8c.html#ab4e8adeba82f1c41f904963ffa7260e8" title="Place une entité sur une tuile libre aléatoire." alt="" coords="575,2337,729,2364"/>
+<area shape="rect" href="genmap_8c.html#a8cc62c2ec750666aff9cbdac83f72102" title=" " alt="" coords="183,1501,257,1528"/>
+<area shape="rect" href="fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="179,2286,261,2313"/>
+<area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="835,766,923,793"/>
+<area shape="rect" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="581,57,723,84"/>
+<area shape="rect" href="commun_8c.html#ad908d5c383621415ac3303b78f098812" title="Wrapper générique d&#39;affichage." alt="" coords="583,260,721,286"/>
+<area shape="rect" href="fscene_8c.html#a4b143d78504ee5f7584a44fb6479e3f0" title="Crée une nouvelle scène." alt="" coords="601,665,703,692"/>
+<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="805,868,952,894"/>
+<area shape="rect" href="mapview_8c.html#af13e3afed524e2cb61d969acf1042011" title="Libère la mémoire utilisée par la structure d&#39;affichage de carte." alt="" coords="591,209,713,236"/>
+<area shape="rect" href="mapview_8c.html#a88fc166e98c5406a3d4fb5d5a5fb3263" title="Génère la représentation visuelle de la carte." alt="" coords="598,108,706,134"/>
+<area shape="rect" href="commun_8c.html#a3c58046d1cbb0700448c2967b7576171" title="Wrapper pour la gestion de la carte." alt="" coords="561,158,743,185"/>
+<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="807,1628,950,1654"/>
+<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="827,817,930,844"/>
+<area shape="rect" href="fscene_8c.html#accbd14eb8c93d348b61a8cb09bbbf489" title="Enregistre une fonction pour une scène." alt="" coords="567,716,737,742"/>
+<area shape="rect" href="mapview_8c.html#a30356d6bf7d30b155f68fbbbea7dc377" title="Affiche la carte à l&#39;écran." alt="" coords="837,260,920,286"/>
+<area shape="rect" href="mapview_8c.html#a8cf36049c7d8cffd14321df249e73f55" title="Détermine les limites min/max des coordonnées des salles." alt="" coords="833,108,924,134"/>
+<area shape="rect" href="mapview_8c.html#accf55e351452252df51157768a5c9657" title="Gère les entrées utilisateur dans la vue carte." alt="" coords="815,158,942,185"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="836,1957,921,1984"/>
+<area shape="rect" href="object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="815,716,942,742"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="350,1450,473,1477"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="347,1273,475,1300"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="335,1146,487,1173"/>
+<area shape="rect" href="commun_8c.html#ab20f8d2e1580b37c1916e19726b8c50f" title="Wrapper pour la gestion du zoom de la caméra." alt="" coords="547,1020,757,1046"/>
+<area shape="rect" href="commun_8c.html#a2f230d2752707af35e4081358841f4bb" title="Wrapper pour centrer la caméra." alt="" coords="559,1070,745,1097"/>
+<area shape="rect" href="boss__slime_8c.html#a5702613fde9a96227c051caf5f7495df" title="Crée une barre de vie pour le boss." alt="" coords="573,2084,731,2110"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="587,2134,717,2161"/>
+<area shape="rect" href="camera_8c.html#ac19afa9c1c457717cd5e9e090db7611b" title="Crée une caméra avec des dimensions initiales." alt="" coords="595,1121,709,1148"/>
+<area shape="rect" href="hud_8c.html#ab5c94b35150b778d85c8033a513e5ace" title="Crée une nouvelle instance du HUD." alt="" coords="605,1678,699,1705"/>
+<area shape="rect" href="minimap_8c.html#a01a246976ef77cc09305d689ad93a829" title="Crée et initialise une nouvelle minimap." alt="" coords="592,1172,712,1198"/>
+<area shape="rect" href="camera_8c.html#adf268fdb00008071ac27d58151601156" title="Crée un viewport lié à une caméra." alt="" coords="591,1222,713,1249"/>
+<area shape="rect" href="boss__slime_8c.html#ad4852cfa77648628db902cb7bf56a7fd" title="Libère les ressources associées à la barre de vie." alt="" coords="580,2236,724,2262"/>
+<area shape="rect" href="camera_8c.html#ac911db209d3a4d35e02782ddb737a276" title="Libere la mémoire allouée pour la camera." alt="" coords="603,1273,701,1300"/>
+<area shape="rect" href="enemy_8c.html#ad1a4da7343608052f2a50b7a4a554931" title="Libère la mémoire utilisée par un ennemi." alt="" coords="605,1780,699,1806"/>
+<area shape="rect" href="fps_display_8c.html#a0fb9bb2a14f4944c0301375c3acd1243" title="Libère la mémoire utilisée par l&#39;affichage des FPS." alt="" coords="591,1324,713,1350"/>
+<area shape="rect" href="tiles_8c.html#a57a81d0b091991f20ee178ef1d5a9543" title="Libère la mémoire utilisée par une grille." alt="" coords="615,1374,689,1401"/>
+<area shape="rect" href="hud_8c.html#a61060e84df23feb6da2414e9ad044963" title="Libère la mémoire utilisée par le HUD." alt="" coords="613,1425,691,1452"/>
+<area shape="rect" href="minimap_8c.html#a4c26549b8031ed61c1a6b718b027f1e2" title="Libere la mémoire allouée pour la minimap." alt="" coords="599,1476,705,1502"/>
+<area shape="rect" href="player_8c.html#a07a36417f6cb5cd32e734eea6e583208" title="Libère la mémoire utilisée par un joueur." alt="" coords="607,1526,697,1553"/>
+<area shape="rect" href="tiles_entity_8c.html#a5ea1104470b2ddeee45f51dc8286cd28" title="Libère la mémoire utilisée par une entité de tuile." alt="" coords="597,1577,707,1604"/>
+<area shape="rect" href="camera_8c.html#a74ac7719529d43608fbf1ece5cb03455" title="Libere la mémoire allouée pour le viewport." alt="" coords="599,918,705,945"/>
+<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="555,969,749,996"/>
+<area shape="rect" href="tileset_8c.html#ab041e3b90591cb42626107fb85289c09" title="Initialise un nouveau tileset à partir d&#39;une image." alt="" coords="609,1881,695,1908"/>
+<area shape="rect" href="tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="845,2337,912,2364"/>
+<area shape="rect" href="genmap_8c.html#a782542f234d59803605c4d24d7cc48a9" title=" " alt="" coords="356,1501,467,1528"/>
+<area shape="rect" href="genmap_8c.html#ac50fbce591c797fbf374390298a701e0" title=" " alt="" coords="371,1552,452,1578"/>
+<area shape="rect" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="324,2337,499,2364"/>
 </map>
 </div>
 <div class="dynheader">
@@ -642,9 +659,9 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_world_8h_ac7fc26c7f4cf2c13c3ab508715993ec6_icgraph.png" border="0" usemap="#amain_world_8h_ac7fc26c7f4cf2c13c3ab508715993ec6_icgraph" alt=""/></div>
 <map name="amain_world_8h_ac7fc26c7f4cf2c13c3ab508715993ec6_icgraph" id="amain_world_8h_ac7fc26c7f4cf2c13c3ab508715993ec6_icgraph">
-<area shape="rect" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -739,8 +756,8 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_world_8h_ab2a044b94ae940beca7966898071cc03_icgraph.png" border="0" usemap="#amain_world_8h_ab2a044b94ae940beca7966898071cc03_icgraph" alt=""/></div>
 <map name="amain_world_8h_ab2a044b94ae940beca7966898071cc03_icgraph" id="amain_world_8h_ab2a044b94ae940beca7966898071cc03_icgraph">
-<area shape="rect" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -748,9 +765,13 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7ecf341207a704509dc0db07e1771050.html">_scene</a></li><li class="navelem"><a class="el" href="main_world_8h.html">mainWorld.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -7,7 +7,7 @@
 <area shape="rect" id="node37" href="$chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="222,1399,361,1425"/>
 <area shape="rect" id="node40" href="$merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="210,1525,373,1552"/>
 <area shape="rect" id="node43" href="$spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="223,1855,359,1881"/>
-<area shape="rect" id="node46" href="$wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="218,1677,365,1704"/>
+<area shape="rect" id="node46" href="$tiles_entity_2wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="218,1677,365,1704"/>
 <area shape="rect" id="node49" href="$tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="258,2221,325,2248"/>
 <area shape="rect" id="node50" href="$tiles_entity_8c.html#ad8cc30a6b734f0e948564405bc9d718e" title="Remplace une tuile par une entité de tuile." alt="" coords="210,2272,373,2299"/>
 <area shape="rect" id="node3" href="$particules_8c.html#ae582018b7ea20710f9845936d0b82cb5" title="Crée un nouvel émetteur de particules." alt="" coords="427,487,585,513"/>
@@ -47,6 +47,6 @@
 <area shape="rect" id="node42" href="$merchant_8c.html#a2327237b68bc5eb3a06b5c1d4ba522ad" title="Met à jour l&#39;état et le comportement du marchand." alt="" coords="442,1424,570,1451"/>
 <area shape="rect" id="node44" href="$spike_8c.html#a6198e9c03fa7efac06bf0dee490f1993" title="Affiche le piège à pointes." alt="" coords="457,1880,555,1907"/>
 <area shape="rect" id="node45" href="$spike_8c.html#a797af6559aa4443cd399e4fa810613c4" title="Met à jour l&#39;état et le comportement du piège à pointes." alt="" coords="455,2083,557,2109"/>
-<area shape="rect" id="node47" href="$wizard_8c.html#a6d17b4d5016ebdb7a44e44396403fc89" title="Affiche le sorcier et son interface." alt="" coords="451,1677,561,1704"/>
-<area shape="rect" id="node48" href="$wizard_8c.html#a33e12f0b600e2edcbd5b3db83f9c86ae" title="Met à jour l&#39;état et le comportement du sorcier." alt="" coords="450,1779,562,1805"/>
+<area shape="rect" id="node47" href="$tiles_entity_2wizard_8c.html#a6d17b4d5016ebdb7a44e44396403fc89" title="Affiche le sorcier et son interface." alt="" coords="451,1677,561,1704"/>
+<area shape="rect" id="node48" href="$tiles_entity_2wizard_8c.html#a33e12f0b600e2edcbd5b3db83f9c86ae" title="Met à jour l&#39;état et le comportement du sorcier." alt="" coords="450,1779,562,1805"/>
 </map>

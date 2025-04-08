@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('boss__slime_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_1ca600b48b2e9612787975e781d8be10.html">mobs</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">boss_slime.h</div>  </div>
@@ -158,10 +174,10 @@ $(function() {
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="keywordtype">void</span> <a class="code" href="boss__slime_8h.html#ad680bb14cc102a6fc5b2282894f399b1">renderBossHealthBarWrapper</a>(<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>* f);</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aboss__slime_8h_html_a39276f5b220a535bc957555b862f6a81"><div class="ttname"><a href="boss__slime_8h.html#a39276f5b220a535bc957555b862f6a81">updateBossHealthBarWrapper</a></div><div class="ttdeci">void updateBossHealthBarWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour la mise à jour de la barre de vie (compatible avec fonctionManager)</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l01090">boss_slime.c:1090</a></div></div>
-<div class="ttc" id="aboss__slime_8h_html_a4ef4bb86f51ee9f115988b43358d9402"><div class="ttname"><a href="boss__slime_8h.html#a4ef4bb86f51ee9f115988b43358d9402">updateBossHealthBar</a></div><div class="ttdeci">void updateBossHealthBar(t_bossHealthBar *bar, float deltaTime)</div><div class="ttdoc">Met à jour la barre de vie du boss.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l00958">boss_slime.c:958</a></div></div>
-<div class="ttc" id="aboss__slime_8h_html_a5702613fde9a96227c051caf5f7495df"><div class="ttname"><a href="boss__slime_8h.html#a5702613fde9a96227c051caf5f7495df">createBossHealthBar</a></div><div class="ttdeci">t_bossHealthBar * createBossHealthBar(TTF_Font *font, t_enemy *boss)</div><div class="ttdoc">Crée une barre de vie pour le boss.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l00933">boss_slime.c:933</a></div></div>
-<div class="ttc" id="aboss__slime_8h_html_a81ccd0abdd116ce9abfeb9852237de51"><div class="ttname"><a href="boss__slime_8h.html#a81ccd0abdd116ce9abfeb9852237de51">renderBossHealthBar</a></div><div class="ttdeci">void renderBossHealthBar(SDL_Renderer *renderer, t_bossHealthBar *bar, int windowWidth, int windowHeight)</div><div class="ttdoc">Affiche la barre de vie du boss.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l00981">boss_slime.c:981</a></div></div>
+<div class="ttc" id="aboss__slime_8h_html_a39276f5b220a535bc957555b862f6a81"><div class="ttname"><a href="boss__slime_8h.html#a39276f5b220a535bc957555b862f6a81">updateBossHealthBarWrapper</a></div><div class="ttdeci">void updateBossHealthBarWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour la mise à jour de la barre de vie (compatible avec fonctionManager)</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l01075">boss_slime.c:1075</a></div></div>
+<div class="ttc" id="aboss__slime_8h_html_a4ef4bb86f51ee9f115988b43358d9402"><div class="ttname"><a href="boss__slime_8h.html#a4ef4bb86f51ee9f115988b43358d9402">updateBossHealthBar</a></div><div class="ttdeci">void updateBossHealthBar(t_bossHealthBar *bar, float deltaTime)</div><div class="ttdoc">Met à jour la barre de vie du boss.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l00943">boss_slime.c:943</a></div></div>
+<div class="ttc" id="aboss__slime_8h_html_a5702613fde9a96227c051caf5f7495df"><div class="ttname"><a href="boss__slime_8h.html#a5702613fde9a96227c051caf5f7495df">createBossHealthBar</a></div><div class="ttdeci">t_bossHealthBar * createBossHealthBar(TTF_Font *font, t_enemy *boss)</div><div class="ttdoc">Crée une barre de vie pour le boss.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l00918">boss_slime.c:918</a></div></div>
+<div class="ttc" id="aboss__slime_8h_html_a81ccd0abdd116ce9abfeb9852237de51"><div class="ttname"><a href="boss__slime_8h.html#a81ccd0abdd116ce9abfeb9852237de51">renderBossHealthBar</a></div><div class="ttdeci">void renderBossHealthBar(SDL_Renderer *renderer, t_bossHealthBar *bar, int windowWidth, int windowHeight)</div><div class="ttdoc">Affiche la barre de vie du boss.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l00966">boss_slime.c:966</a></div></div>
 <div class="ttc" id="aboss__slime_8h_html_a99263efe08862fff828e7c0f9a9551f2"><div class="ttname"><a href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2">e_boss_slime_state</a></div><div class="ttdeci">e_boss_slime_state</div><div class="ttdoc">États possibles du boss slime.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8h_source.html#l00018">boss_slime.h:18</a></div></div>
 <div class="ttc" id="aboss__slime_8h_html_a99263efe08862fff828e7c0f9a9551f2a0199c67d9c232bb534740e14e8af5763"><div class="ttname"><a href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2a0199c67d9c232bb534740e14e8af5763">BOSS_SLIME_ENRAGED</a></div><div class="ttdeci">@ BOSS_SLIME_ENRAGED</div><div class="ttdoc">Phase 2 - plus rapide et agressif.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8h_source.html#l00022">boss_slime.h:22</a></div></div>
 <div class="ttc" id="aboss__slime_8h_html_a99263efe08862fff828e7c0f9a9551f2a1d8f5ba1f05e4a2fce2bc9c2c6e66f8d"><div class="ttname"><a href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2a1d8f5ba1f05e4a2fce2bc9c2c6e66f8d">BOSS_SLIME_CHASE_PLAYER</a></div><div class="ttdeci">@ BOSS_SLIME_CHASE_PLAYER</div><div class="ttdoc">Poursuit le joueur activement.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8h_source.html#l00020">boss_slime.h:20</a></div></div>
@@ -170,10 +186,10 @@ $(function() {
 <div class="ttc" id="aboss__slime_8h_html_a99263efe08862fff828e7c0f9a9551f2a9867d511731e110db259c4882df60204"><div class="ttname"><a href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2a9867d511731e110db259c4882df60204">BOSS_SLIME_GROUND_POUND</a></div><div class="ttdeci">@ BOSS_SLIME_GROUND_POUND</div><div class="ttdoc">Attaque spéciale 1 - saut puis impact.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8h_source.html#l00024">boss_slime.h:24</a></div></div>
 <div class="ttc" id="aboss__slime_8h_html_a99263efe08862fff828e7c0f9a9551f2a9ee1b31f626c3f053d29c3136f1c256a"><div class="ttname"><a href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2a9ee1b31f626c3f053d29c3136f1c256a">BOSS_SLIME_CHARGE_ATTACK</a></div><div class="ttdeci">@ BOSS_SLIME_CHARGE_ATTACK</div><div class="ttdoc">Attaque spéciale 2 - charge rapide.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8h_source.html#l00026">boss_slime.h:25</a></div></div>
 <div class="ttc" id="aboss__slime_8h_html_a99263efe08862fff828e7c0f9a9551f2acd8e06699e2218cd869397cc0e98ed94"><div class="ttname"><a href="boss__slime_8h.html#a99263efe08862fff828e7c0f9a9551f2acd8e06699e2218cd869397cc0e98ed94">BOSS_SLIME_IDLE</a></div><div class="ttdeci">@ BOSS_SLIME_IDLE</div><div class="ttdoc">Immobile.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8h_source.html#l00019">boss_slime.h:19</a></div></div>
-<div class="ttc" id="aboss__slime_8h_html_ad4852cfa77648628db902cb7bf56a7fd"><div class="ttname"><a href="boss__slime_8h.html#ad4852cfa77648628db902cb7bf56a7fd">freeBossHealthBar</a></div><div class="ttdeci">void freeBossHealthBar(void *obj)</div><div class="ttdoc">Libère les ressources associées à la barre de vie.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l01075">boss_slime.c:1075</a></div></div>
-<div class="ttc" id="aboss__slime_8h_html_ad680bb14cc102a6fc5b2282894f399b1"><div class="ttname"><a href="boss__slime_8h.html#ad680bb14cc102a6fc5b2282894f399b1">renderBossHealthBarWrapper</a></div><div class="ttdeci">void renderBossHealthBarWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour le rendu de la barre de vie (compatible avec fonctionManager)</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l01094">boss_slime.c:1094</a></div></div>
-<div class="ttc" id="aboss__slime_8h_html_aeba34d9ac36546820051b77f67ca7606"><div class="ttname"><a href="boss__slime_8h.html#aeba34d9ac36546820051b77f67ca7606">updateBossSlime</a></div><div class="ttdeci">void updateBossSlime(t_enemy *enemy, float *deltaTime, t_grid *grid, t_objectManager *entities)</div><div class="ttdoc">Met à jour l'état et le comportement du boss slime.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l00868">boss_slime.c:868</a></div></div>
-<div class="ttc" id="aboss__slime_8h_html_afa7fc5b4ed8d914bfb5622f23692946e"><div class="ttname"><a href="boss__slime_8h.html#afa7fc5b4ed8d914bfb5622f23692946e">createBossSlime</a></div><div class="ttdeci">t_enemy * createBossSlime(SDL_Texture *texture, SDL_Rect rect, t_tileset *tileset, t_scene *scene)</div><div class="ttdoc">Crée un nouveau boss slime.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l00080">boss_slime.c:80</a></div></div>
+<div class="ttc" id="aboss__slime_8h_html_ad4852cfa77648628db902cb7bf56a7fd"><div class="ttname"><a href="boss__slime_8h.html#ad4852cfa77648628db902cb7bf56a7fd">freeBossHealthBar</a></div><div class="ttdeci">void freeBossHealthBar(void *obj)</div><div class="ttdoc">Libère les ressources associées à la barre de vie.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l01060">boss_slime.c:1060</a></div></div>
+<div class="ttc" id="aboss__slime_8h_html_ad680bb14cc102a6fc5b2282894f399b1"><div class="ttname"><a href="boss__slime_8h.html#ad680bb14cc102a6fc5b2282894f399b1">renderBossHealthBarWrapper</a></div><div class="ttdeci">void renderBossHealthBarWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour le rendu de la barre de vie (compatible avec fonctionManager)</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l01079">boss_slime.c:1079</a></div></div>
+<div class="ttc" id="aboss__slime_8h_html_aeba34d9ac36546820051b77f67ca7606"><div class="ttname"><a href="boss__slime_8h.html#aeba34d9ac36546820051b77f67ca7606">updateBossSlime</a></div><div class="ttdeci">void updateBossSlime(t_enemy *enemy, float *deltaTime, t_grid *grid, t_objectManager *entities)</div><div class="ttdoc">Met à jour l'état et le comportement du boss slime.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l00853">boss_slime.c:853</a></div></div>
+<div class="ttc" id="aboss__slime_8h_html_afa7fc5b4ed8d914bfb5622f23692946e"><div class="ttname"><a href="boss__slime_8h.html#afa7fc5b4ed8d914bfb5622f23692946e">createBossSlime</a></div><div class="ttdeci">t_enemy * createBossSlime(SDL_Texture *texture, SDL_Rect rect, t_tileset *tileset, t_scene *scene)</div><div class="ttdoc">Crée un nouveau boss slime.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8c_source.html#l00078">boss_slime.c:78</a></div></div>
 <div class="ttc" id="astructs__grid_html"><div class="ttname"><a href="structs__grid.html">s_grid</a></div><div class="ttdoc">Représente une grille 3D de tuiles pour un niveau.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8h_source.html#l00038">tiles.h:38</a></div></div>
 <div class="ttc" id="astructs__particle_emitter_html"><div class="ttname"><a href="structs__particle_emitter.html">s_particleEmitter</a></div><div class="ttdoc">Émetteur gérant un ensemble de particules.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8h_source.html#l00039">particules.h:39</a></div></div>
 <div class="ttc" id="astructt__boss__slime_html"><div class="ttname"><a href="structt__boss__slime.html">t_boss_slime</a></div><div class="ttdoc">Boss slime avec plusieurs phases et attaques spéciales.</div><div class="ttdef"><b>Definition:</b> <a href="boss__slime_8h_source.html#l00032">boss_slime.h:32</a></div></div>
@@ -223,9 +239,13 @@ $(function() {
 <div class="ttc" id="astructt__text_html"><div class="ttname"><a href="structt__text.html">t_text</a></div><div class="ttdoc">Structure représentant un élément textuel dans l'interface.</div><div class="ttdef"><b>Definition:</b> <a href="text_8h_source.html#l00024">text.h:24</a></div></div>
 <div class="ttc" id="astructt__tileset_html"><div class="ttname"><a href="structt__tileset.html">t_tileset</a></div><div class="ttdoc">Représente un ensemble de tuiles utilisées pour construire les niveaux.</div><div class="ttdef"><b>Definition:</b> <a href="tileset_8h_source.html#l00018">tileset.h:18</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_1ca600b48b2e9612787975e781d8be10.html">mobs</a></li><li class="navelem"><a class="el" href="boss__slime_8h.html">boss_slime.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

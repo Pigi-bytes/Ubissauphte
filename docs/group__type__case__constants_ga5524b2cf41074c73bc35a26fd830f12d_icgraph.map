@@ -1,13 +1,13 @@
 <map id="inMatrice" name="inMatrice">
-<area shape="rect" id="node1" title="Vérifie si des coordonnées sont dans la matrice." alt="" coords="1537,31,1620,57"/>
-<area shape="rect" id="node2" href="$fill_gaps_8c.html#aadaa50d7d06895b528cbd4df2d2497d2" title="Rend la matrice continue (remplit les trous)" alt="" coords="1136,5,1307,32"/>
-<area shape="rect" id="node10" href="$group__type__case__constants.html#gae5c605b887cfd15cb299a18ae25a4ce9" title="Stocke les voisins d&#39;une case." alt="" coords="1355,56,1489,83"/>
-<area shape="rect" id="node3" href="$gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="996,31,1088,57"/>
-<area shape="rect" id="node4" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,31,948,57"/>
-<area shape="rect" id="node5" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,31,772,57"/>
-<area shape="rect" id="node6" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,31,612,57"/>
-<area shape="rect" id="node7" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,31,453,57"/>
-<area shape="rect" id="node8" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,31,239,57"/>
+<area shape="rect" id="node1" title="Vérifie si des coordonnées sont dans la matrice." alt="" coords="1507,31,1589,57"/>
+<area shape="rect" id="node2" href="$fill_gaps_8c.html#aadaa50d7d06895b528cbd4df2d2497d2" title="Rend la matrice continue (remplit les trous)" alt="" coords="1105,5,1276,32"/>
+<area shape="rect" id="node10" href="$group__type__case__constants.html#gae5c605b887cfd15cb299a18ae25a4ce9" title="Stocke les voisins d&#39;une case." alt="" coords="1324,56,1459,83"/>
+<area shape="rect" id="node3" href="$gene_room_8c.html#a1946ecdbabe406079288962007c88846" title="Génère une salle complète." alt="" coords="965,31,1057,57"/>
+<area shape="rect" id="node4" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,31,917,57"/>
+<area shape="rect" id="node5" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,31,741,57"/>
+<area shape="rect" id="node6" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,31,581,57"/>
+<area shape="rect" id="node7" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,31,423,57"/>
+<area shape="rect" id="node8" href="$main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,31,208,57"/>
 <area shape="rect" id="node9" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
-<area shape="rect" id="node11" href="$group__type__case__constants.html#ga90f797ffc58216b364f7cff43ba3e23a" title="Convertit une matrice d&#39;entiers en grille." alt="" coords="1154,56,1289,83"/>
+<area shape="rect" id="node11" href="$group__type__case__constants.html#ga90f797ffc58216b364f7cff43ba3e23a" title="Convertit une matrice d&#39;entiers en grille." alt="" coords="1123,56,1258,83"/>
 </map>

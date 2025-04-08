@@ -1,0 +1,4 @@
+<map id="applyHealing" name="applyHealing">
+<area shape="rect" id="node1" title="Applique un soin à une entité" alt="" coords="5,5,113,32"/>
+<area shape="rect" id="node2" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="161,5,289,32"/>
+</map>

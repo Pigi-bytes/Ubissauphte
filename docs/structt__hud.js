@@ -1,0 +1,28 @@
+var structt__hud =
+[
+    [ "dash", "structt__hud.html#a01b5be2fd857091c4dd146da5d92b808", null ],
+    [ "dash_cooldown", "structt__hud.html#ae807c39dabca41c0d03abeaa51287ce1", null ],
+    [ "dash_icon", "structt__hud.html#a82d8dccd1d45614a6f5899becdb6a7f1", null ],
+    [ "font", "structt__hud.html#abf5bfa705e66ffc1ddaa6ce46c960873", null ],
+    [ "gold", "structt__hud.html#af2461716c98960dea088ffc480a1d011", null ],
+    [ "gold", "structt__hud.html#a4c277356d511210cc30848e535faf95f", null ],
+    [ "gold_animation", "structt__hud.html#a3aabf0db23d2c3dd99ac143ff82ff6e5", null ],
+    [ "health", "structt__hud.html#a62844875aace613ff8855bd385d0def3", null ],
+    [ "health_bar", "structt__hud.html#aabba6763dd6105e547d1a9043c252a61", null ],
+    [ "health_ratio", "structt__hud.html#ab95969fc0b1a90e82f00fe32a63de832", null ],
+    [ "layout", "structt__hud.html#a2f32b32f85377fd630f61dfa8fe97097", null ],
+    [ "level", "structt__hud.html#ac1ecfc88cc8daafad619201c2794b965", null ],
+    [ "outline_color", "structt__hud.html#a282747d1acfee0c03e663c3ba6d89136", null ],
+    [ "player", "structt__hud.html#ac014b3ad4ac680f7d1d539ef1fd2eae2", null ],
+    [ "player_icon", "structt__hud.html#a95a75e0af5bdb89690963a097c0b827e", null ],
+    [ "state", "structt__hud.html#ab3223cd70cecf0601c15525d1564e5d7", null ],
+    [ "target_health_ratio", "structt__hud.html#a756a986cf354e8e523d4c9bd4bca65fc", null ],
+    [ "target_xp_ratio", "structt__hud.html#a7edcbd30894972f268d18ad73eebd1da", null ],
+    [ "text", "structt__hud.html#ace3171ffd0314502a15536f894a56aad", null ],
+    [ "text_color", "structt__hud.html#a637da824b980695a57194b97c9c8193b", null ],
+    [ "weapon", "structt__hud.html#ae8d475101a2929b5374ae3cbb214cf12", null ],
+    [ "weapon_cooldown", "structt__hud.html#aad597691401becbcec95815c837d22fc", null ],
+    [ "weapon_icon", "structt__hud.html#a075d5d1a752c3c2efd7af52b1dac383e", null ],
+    [ "xp_bar", "structt__hud.html#abbccc9d754a1a09c3e6255759f4c3cf7", null ],
+    [ "xp_ratio", "structt__hud.html#a2c060a70eb3cd28a1a398c53f5757a2e", null ]
+];

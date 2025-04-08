@@ -1,7 +1,8 @@
 <map id="setSceneWrapper" name="setSceneWrapper">
-<area shape="rect" id="node1" title="Wrapper pour changer de scène." alt="" coords="307,56,443,83"/>
-<area shape="rect" id="node2" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="118,5,249,32"/>
-<area shape="rect" id="node4" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="108,56,259,83"/>
-<area shape="rect" id="node5" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="112,107,255,133"/>
-<area shape="rect" id="node3" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+<area shape="rect" id="node1" title="Wrapper pour changer de scène." alt="" coords="307,81,443,108"/>
+<area shape="rect" id="node2" href="$main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="133,5,233,32"/>
+<area shape="rect" id="node4" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="118,56,249,83"/>
+<area shape="rect" id="node5" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="108,107,259,133"/>
+<area shape="rect" id="node6" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="112,157,255,184"/>
+<area shape="rect" id="node3" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,81,60,108"/>
 </map>

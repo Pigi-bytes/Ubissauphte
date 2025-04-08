@@ -1,0 +1,9 @@
+<map id="playerTakeDamage" name="playerTakeDamage">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,152,57"/>
+<area shape="rect" id="node2" href="$health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="219,5,333,32"/>
+<area shape="rect" id="node4" href="$particules_8c.html#a5daf89ca83b59eabf3cd8d2d5195f529" title="Émet des particules d&#39;impact." alt="" coords="200,56,352,83"/>
+<area shape="rect" id="node3" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="400,5,528,32"/>
+<area shape="rect" id="node5" href="$particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="411,56,517,83"/>
+<area shape="rect" id="node7" href="$particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="591,107,712,133"/>
+<area shape="rect" id="node6" href="$particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="576,56,727,83"/>
+</map>

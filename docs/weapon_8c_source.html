@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('weapon_8c_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_b57b442d877ecd6884e02e1ed1363c51.html">items</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">weapon.c</div>  </div>
@@ -326,10 +342,10 @@ $(function() {
 <div class="ttc" id="astructs__entity_html_acaca78d8d3ac42a3b6ef8aa6f3153e44"><div class="ttname"><a href="structs__entity.html#acaca78d8d3ac42a3b6ef8aa6f3153e44">s_entity::physics</a></div><div class="ttdeci">t_physics physics</div><div class="ttdoc">Composant physique de l'entité</div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00031">entity.h:31</a></div></div>
 <div class="ttc" id="astructs__entity_html_afd2f866f64dc9091e4c989d5e92a21a2"><div class="ttname"><a href="structs__entity.html#afd2f866f64dc9091e4c989d5e92a21a2">s_entity::collisionCircle</a></div><div class="ttdeci">t_circle collisionCircle</div><div class="ttdoc">Position et taille pour les collisions circulaires.</div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00028">entity.h:28</a></div></div>
 <div class="ttc" id="astructs__joueur_html"><div class="ttname"><a href="structs__joueur.html">s_joueur</a></div><div class="ttdoc">Référence au type joueur pour éviter les inclusions circulaires.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00080">player.h:80</a></div></div>
-<div class="ttc" id="astructs__joueur_html_a0ca625a4d261647f9aab3d35cb104080"><div class="ttname"><a href="structs__joueur.html#a0ca625a4d261647f9aab3d35cb104080">s_joueur::attack</a></div><div class="ttdeci">t_attack attack</div><div class="ttdoc">État de l'attaque en cours.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00101">player.h:101</a></div></div>
+<div class="ttc" id="astructs__joueur_html_a0ca625a4d261647f9aab3d35cb104080"><div class="ttname"><a href="structs__joueur.html#a0ca625a4d261647f9aab3d35cb104080">s_joueur::attack</a></div><div class="ttdeci">t_attack attack</div><div class="ttdoc">État de l'attaque en cours.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00102">player.h:102</a></div></div>
 <div class="ttc" id="astructs__joueur_html_a17bef51545f242d210cb157423f42c96"><div class="ttname"><a href="structs__joueur.html#a17bef51545f242d210cb157423f42c96">s_joueur::entity</a></div><div class="ttdeci">t_entity entity</div><div class="ttdoc">Entité de base héritée.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00081">player.h:81</a></div></div>
-<div class="ttc" id="astructs__joueur_html_aa1f0e0b0b5cde6070983b7210b25e0ec"><div class="ttname"><a href="structs__joueur.html#aa1f0e0b0b5cde6070983b7210b25e0ec">s_joueur::currentWeapon</a></div><div class="ttdeci">t_arme * currentWeapon</div><div class="ttdoc">Arme actuellement équipée.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00098">player.h:98</a></div></div>
-<div class="ttc" id="astructs__joueur_html_ae9d8af26c1cf479c756e09a86f622c0d"><div class="ttname"><a href="structs__joueur.html#ae9d8af26c1cf479c756e09a86f622c0d">s_joueur::aimAngle</a></div><div class="ttdeci">float aimAngle</div><div class="ttdoc">Angle de visée en radians.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00102">player.h:102</a></div></div>
+<div class="ttc" id="astructs__joueur_html_aa1f0e0b0b5cde6070983b7210b25e0ec"><div class="ttname"><a href="structs__joueur.html#aa1f0e0b0b5cde6070983b7210b25e0ec">s_joueur::currentWeapon</a></div><div class="ttdeci">t_arme * currentWeapon</div><div class="ttdoc">Arme actuellement équipée.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00099">player.h:99</a></div></div>
+<div class="ttc" id="astructs__joueur_html_ae9d8af26c1cf479c756e09a86f622c0d"><div class="ttname"><a href="structs__joueur.html#ae9d8af26c1cf479c756e09a86f622c0d">s_joueur::aimAngle</a></div><div class="ttdeci">float aimAngle</div><div class="ttdoc">Angle de visée en radians.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00103">player.h:103</a></div></div>
 <div class="ttc" id="astructt__arme_html"><div class="ttname"><a href="structt__arme.html">t_arme</a></div><div class="ttdoc">Représente une arme avec ses propriétés et attributs.</div><div class="ttdef"><b>Definition:</b> <a href="weapon_8h_source.html#l00019">weapon.h:19</a></div></div>
 <div class="ttc" id="astructt__arme_html_a16e093e75a60cf5776ce5848a30a1d67"><div class="ttname"><a href="structt__arme.html#a16e093e75a60cf5776ce5848a30a1d67">t_arme::angleAttack</a></div><div class="ttdeci">float angleAttack</div><div class="ttdoc">Angle de l'arc d'attaque en radians.</div><div class="ttdef"><b>Definition:</b> <a href="weapon_8h_source.html#l00023">weapon.h:23</a></div></div>
 <div class="ttc" id="astructt__arme_html_a3930d1e8af0848833f4de0e0e9517dca"><div class="ttname"><a href="structt__arme.html#a3930d1e8af0848833f4de0e0e9517dca">t_arme::range</a></div><div class="ttdeci">float range</div><div class="ttdoc">Portée de l'arme en pixels.</div><div class="ttdef"><b>Definition:</b> <a href="weapon_8h_source.html#l00022">weapon.h:22</a></div></div>
@@ -350,9 +366,13 @@ $(function() {
 <div class="ttc" id="aweapon_8c_html_af96a799be749a80ec78faad1a28bc755"><div class="ttname"><a href="weapon_8c.html#af96a799be749a80ec78faad1a28bc755">renderWeaponDuringAttack</a></div><div class="ttdeci">void renderWeaponDuringAttack(SDL_Renderer *renderer, t_joueur *player, SDL_FPoint origin, SDL_Point pivotPoint, int scaledWidth, int scaledHeight, SDL_RendererFlip weaponFlip)</div><div class="ttdoc">Affiche l'arme pendant une attaque.</div><div class="ttdef"><b>Definition:</b> <a href="weapon_8c_source.html#l00091">weapon.c:91</a></div></div>
 <div class="ttc" id="aweapon_8h_html"><div class="ttname"><a href="weapon_8h.html">weapon.h</a></div><div class="ttdoc">Système de gestion des armes pour les entités joueur.</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_b57b442d877ecd6884e02e1ed1363c51.html">items</a></li><li class="navelem"><a class="el" href="weapon_8c.html">weapon.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

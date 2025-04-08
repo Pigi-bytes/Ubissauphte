@@ -1,0 +1,26 @@
+var ghost_8c =
+[
+    [ "GHOST_BOOST_COOLDOWN", "ghost_8c.html#a741d3b336841bef833ee2ab8f8d5454d", null ],
+    [ "GHOST_BOOST_DURATION", "ghost_8c.html#a25c2aa6b0b6f504393957a6a0161ec28", null ],
+    [ "GHOST_BOOST_SPEED_FACTOR", "ghost_8c.html#a962270d9741c8ef87aa0e9dd759e8d7a", null ],
+    [ "GHOST_HORIZ_AMP_MAX", "ghost_8c.html#a20439fa014c62a859d11870d135a461b", null ],
+    [ "GHOST_HORIZ_AMP_MIN", "ghost_8c.html#aabd134a52b1614306ea4d2eaf6d1e65c", null ],
+    [ "GHOST_HORIZ_FREQ_MAX", "ghost_8c.html#acb1b64a28f8dfc99650c98a951874a00", null ],
+    [ "GHOST_HORIZ_FREQ_MIN", "ghost_8c.html#aab993692007cc4affb8f31ec4584d7dc", null ],
+    [ "GHOST_MOVE_SPEED", "ghost_8c.html#a3b8dbfe50b944cc1e4c683688a802af8", null ],
+    [ "GHOST_NORMAL_SPEED_FACTOR", "ghost_8c.html#a162a7ff8f9efba5dd28e615ed1bbec1c", null ],
+    [ "GHOST_PLAYER_ORBIT_MAX", "ghost_8c.html#abc49268215ccd3ae546973a8ee324fe7", null ],
+    [ "GHOST_PLAYER_ORBIT_MIN", "ghost_8c.html#aac691ef84570990b8368ba114b3548a7", null ],
+    [ "GHOST_TARGET_CHANGE_MAX", "ghost_8c.html#ad82501137726edebf07e57c94ec018ef", null ],
+    [ "GHOST_TARGET_CHANGE_MIN", "ghost_8c.html#aae29733a01548ac991aaae6e699cb173", null ],
+    [ "GHOST_VERT_AMP_MAX", "ghost_8c.html#a8ad3f19948a7e6bf8a9ca1693f6f4fda", null ],
+    [ "GHOST_VERT_AMP_MIN", "ghost_8c.html#a6c66b1a3e5223937db4960865805c243", null ],
+    [ "GHOST_VERT_FREQ_MAX", "ghost_8c.html#af20ea0e0bc794dde6cd452c7e8493f8e", null ],
+    [ "GHOST_VERT_FREQ_MIN", "ghost_8c.html#a8c33cf5239f56f1129bf1afe541164ac", null ],
+    [ "createGhost", "ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744", null ],
+    [ "ghostDealDamageToPlayer", "ghost_8c.html#a93b9a0dd98eaf3400294542883b1a4f9", null ],
+    [ "ghostTakeDamage", "ghost_8c.html#a36e7cc7f5b0b8c9a0e3a37eb41ba79d5", null ],
+    [ "onGhostDeath", "ghost_8c.html#a0915a1677e5b84321059f34f28e42a32", null ],
+    [ "renderGhost", "ghost_8c.html#a025653a8fad002e720cff4348a09567f", null ],
+    [ "updateGhost", "ghost_8c.html#a61c160b5d8cfc720b9f43b95d847bfa2", null ]
+];

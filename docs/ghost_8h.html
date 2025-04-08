@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('ghost_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_1ca600b48b2e9612787975e781d8be10.html">mobs</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
@@ -78,7 +94,8 @@ $(function() {
 
 <p>Définition et comportement de l'ennemi fantôme.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="enemy_8h_source.html">../enemy.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="particules_8h_source.html">../components/particules/particules.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="enemy_8h_source.html">../enemy.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
@@ -168,51 +185,62 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointeur vers l'ennemi créé </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ghost_8c_source.html#l00088">88</a> of file <a class="el" href="ghost_8c_source.html">ghost.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ghost_8c_source.html#l00125">125</a> of file <a class="el" href="ghost_8c_source.html">ghost.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ghost_8h_a3afebc41b56af20344e2113e2a2bc744_cgraph.png" border="0" usemap="#aghost_8h_a3afebc41b56af20344e2113e2a2bc744_cgraph" alt=""/></div>
 <map name="aghost_8h_a3afebc41b56af20344e2113e2a2bc744_cgraph" id="aghost_8h_a3afebc41b56af20344e2113e2a2bc744_cgraph">
 <area shape="rect" title="Crée un nouvel ennemi de type fantôme." alt="" coords="5,461,107,488"/>
-<area shape="rect" href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa" title="Ajoute une animation au contrôleur." alt="" coords="169,56,283,83"/>
-<area shape="rect" href="animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="161,208,291,235"/>
-<area shape="rect" href="ghost_8c.html#a36e7cc7f5b0b8c9a0e3a37eb41ba79d5" title=" " alt="" coords="155,537,297,564"/>
-<area shape="rect" href="enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="166,715,286,741"/>
-<area shape="rect" href="health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="365,664,500,691"/>
-<area shape="rect" href="ghost_8c.html#a0915a1677e5b84321059f34f28e42a32" title=" " alt="" coords="169,791,283,817"/>
-<area shape="rect" href="ghost_8c.html#a025653a8fad002e720cff4348a09567f" title=" " alt="" coords="175,309,277,336"/>
-<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="378,107,487,133"/>
-<area shape="rect" href="ghost_8c.html#a61c160b5d8cfc720b9f43b95d847bfa2" title="Met à jour l&#39;état et le comportement du fantôme." alt="" coords="173,461,279,488"/>
-<area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="389,5,477,32"/>
-<area shape="rect" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="362,56,503,83"/>
-<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="854,309,939,336"/>
-<area shape="rect" href="timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2" title="Initialise un nouveau timer." alt="" coords="392,157,473,184"/>
-<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="376,613,489,640"/>
-<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="597,613,725,640"/>
-<area shape="rect" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="345,892,520,919"/>
-<area shape="rect" href="health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="568,765,755,792"/>
-<area shape="rect" href="enemy_8c.html#ab8b2a078480e90346c66bfe478a428d4" title=" " alt="" coords="371,765,494,792"/>
-<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="588,917,735,944"/>
-<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="590,968,733,995"/>
-<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="610,867,713,893"/>
-<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="603,664,719,691"/>
-<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="599,715,724,741"/>
-<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="609,816,713,843"/>
-<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="803,816,991,843"/>
-<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="603,360,719,387"/>
-<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="381,259,484,285"/>
-<area shape="rect" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="582,309,741,336"/>
-<area shape="rect" href="camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="596,259,727,285"/>
-<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="594,107,729,133"/>
-<area shape="rect" href="timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="858,107,935,133"/>
-<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="851,56,942,83"/>
-<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="838,5,955,32"/>
-<area shape="rect" href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="602,56,721,83"/>
-<area shape="rect" href="object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9" title="Supprime un objet du gestionnaire à l&#39;index spécifié" alt="" coords="380,512,485,539"/>
-<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="591,411,731,437"/>
-<area shape="rect" href="health_8c.html#a0785e98f299a0efc4d634d618c7f9f75" title="Met à jour le système de santé" alt="" coords="353,411,512,437"/>
-<area shape="rect" href="object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="598,512,725,539"/>
+<area shape="rect" href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa" title="Ajoute une animation au contrôleur." alt="" coords="163,63,277,89"/>
+<area shape="rect" href="animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="155,652,285,679"/>
+<area shape="rect" href="ghost_8c.html#a36e7cc7f5b0b8c9a0e3a37eb41ba79d5" title=" " alt="" coords="578,5,721,32"/>
+<area shape="rect" href="enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="160,284,280,311"/>
+<area shape="rect" href="health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="353,164,488,191"/>
+<area shape="rect" href="ghost_8c.html#a0915a1677e5b84321059f34f28e42a32" title=" " alt="" coords="363,461,478,488"/>
+<area shape="rect" href="ghost_8c.html#a025653a8fad002e720cff4348a09567f" title=" " alt="" coords="169,791,271,817"/>
+<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="366,576,475,603"/>
+<area shape="rect" href="ghost_8c.html#a61c160b5d8cfc720b9f43b95d847bfa2" title="Met à jour l&#39;état et le comportement du fantôme." alt="" coords="167,1019,273,1045"/>
+<area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="377,12,465,39"/>
+<area shape="rect" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="350,63,491,89"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="842,867,927,893"/>
+<area shape="rect" href="timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2" title="Initialise un nouveau timer." alt="" coords="380,652,461,679"/>
+<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="828,5,941,32"/>
+<area shape="rect" href="particules_8c.html#a5daf89ca83b59eabf3cd8d2d5195f529" title="Émet des particules d&#39;impact." alt="" coords="809,259,961,285"/>
+<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="1063,5,1191,32"/>
+<area shape="rect" href="particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="1074,360,1181,387"/>
+<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="1291,360,1412,387"/>
+<area shape="rect" href="particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="1276,309,1427,336"/>
+<area shape="rect" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="333,284,508,311"/>
+<area shape="rect" href="health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="556,157,743,184"/>
+<area shape="rect" href="enemy_8c.html#ab8b2a078480e90346c66bfe478a428d4" title=" " alt="" coords="359,360,482,387"/>
+<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="576,208,723,235"/>
+<area shape="rect" href="animation_8c.html#ae6819740180def325e96797c282287a6" title=" " alt="" coords="592,259,707,285"/>
+<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="578,309,721,336"/>
+<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="598,360,701,387"/>
+<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="591,107,707,133"/>
+<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="587,56,712,83"/>
+<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="597,411,701,437"/>
+<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="791,411,979,437"/>
+<area shape="rect" href="particules_8c.html#aea0223a544ee988ed39eafc6faed78ce" title="Émet des particules de soin pour le sorcier." alt="" coords="1059,309,1196,336"/>
+<area shape="rect" href="equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="1027,411,1228,437"/>
+<area shape="rect" href="particules_8c.html#ac20bc3614a107eaf746b683fd7b73bb1" title="Émet des particules de mort." alt="" coords="811,461,958,488"/>
+<area shape="rect" href="particules_8c.html#a61fa4b7a83f49df939133c298c2a4dab" title="Réinitialise un émetteur de particules." alt="" coords="574,512,725,539"/>
+<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="591,917,707,944"/>
+<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="369,765,472,792"/>
+<area shape="rect" href="particules_8c.html#a4649283fd9dfa8005ebd85d1ef3a771e" title="Affiche toutes les particules actives." alt="" coords="342,816,499,843"/>
+<area shape="rect" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="570,867,729,893"/>
+<area shape="rect" href="camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="584,816,715,843"/>
+<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="582,664,717,691"/>
+<area shape="rect" href="timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="846,664,923,691"/>
+<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="839,563,930,589"/>
+<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="826,613,943,640"/>
+<area shape="rect" href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="590,563,709,589"/>
+<area shape="rect" href="object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9" title="Supprime un objet du gestionnaire à l&#39;index spécifié" alt="" coords="368,1120,473,1147"/>
+<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="579,1019,719,1045"/>
+<area shape="rect" href="particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="341,968,501,995"/>
+<area shape="rect" href="health_8c.html#a0785e98f299a0efc4d634d618c7f9f75" title="Met à jour le système de santé" alt="" coords="341,1019,500,1045"/>
+<area shape="rect" href="object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="586,1120,713,1147"/>
 </map>
 </div>
 <div class="dynheader">
@@ -220,12 +248,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ghost_8h_a3afebc41b56af20344e2113e2a2bc744_icgraph.png" border="0" usemap="#aghost_8h_a3afebc41b56af20344e2113e2a2bc744_icgraph" alt=""/></div>
 <map name="aghost_8h_a3afebc41b56af20344e2113e2a2bc744_icgraph" id="aghost_8h_a3afebc41b56af20344e2113e2a2bc744_icgraph">
-<area shape="rect" title="Crée un nouvel ennemi de type fantôme." alt="" coords="996,5,1097,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Crée un nouvel ennemi de type fantôme." alt="" coords="965,5,1067,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -281,19 +309,20 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ghost_8c_source.html#l00133">133</a> of file <a class="el" href="ghost_8c_source.html">ghost.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ghost_8c_source.html#l00173">173</a> of file <a class="el" href="ghost_8c_source.html">ghost.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ghost_8h_a61c160b5d8cfc720b9f43b95d847bfa2_cgraph.png" border="0" usemap="#aghost_8h_a61c160b5d8cfc720b9f43b95d847bfa2_cgraph" alt=""/></div>
 <map name="aghost_8h_a61c160b5d8cfc720b9f43b95d847bfa2_cgraph" id="aghost_8h_a61c160b5d8cfc720b9f43b95d847bfa2_cgraph">
-<area shape="rect" title="Met à jour l&#39;état et le comportement du fantôme." alt="" coords="5,107,111,133"/>
-<area shape="rect" href="object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9" title="Supprime un objet du gestionnaire à l&#39;index spécifié" alt="" coords="185,56,291,83"/>
-<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="393,5,478,32"/>
-<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="377,119,493,145"/>
-<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="365,195,505,221"/>
-<area shape="rect" href="health_8c.html#a0785e98f299a0efc4d634d618c7f9f75" title="Met à jour le système de santé" alt="" coords="159,157,317,184"/>
-<area shape="rect" href="object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="372,56,499,83"/>
+<area shape="rect" title="Met à jour l&#39;état et le comportement du fantôme." alt="" coords="5,132,111,159"/>
+<area shape="rect" href="object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9" title="Supprime un objet du gestionnaire à l&#39;index spécifié" alt="" coords="186,56,291,83"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="394,5,479,32"/>
+<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="379,132,495,159"/>
+<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="367,233,507,260"/>
+<area shape="rect" href="particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="159,208,319,235"/>
+<area shape="rect" href="health_8c.html#a0785e98f299a0efc4d634d618c7f9f75" title="Met à jour le système de santé" alt="" coords="159,157,318,184"/>
+<area shape="rect" href="object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="373,56,500,83"/>
 </map>
 </div>
 <div class="dynheader">
@@ -301,13 +330,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="ghost_8h_a61c160b5d8cfc720b9f43b95d847bfa2_icgraph.png" border="0" usemap="#aghost_8h_a61c160b5d8cfc720b9f43b95d847bfa2_icgraph" alt=""/></div>
 <map name="aghost_8h_a61c160b5d8cfc720b9f43b95d847bfa2_icgraph" id="aghost_8h_a61c160b5d8cfc720b9f43b95d847bfa2_icgraph">
-<area shape="rect" title="Met à jour l&#39;état et le comportement du fantôme." alt="" coords="1145,5,1251,32"/>
-<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="996,5,1097,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Met à jour l&#39;état et le comportement du fantôme." alt="" coords="1115,5,1220,32"/>
+<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="965,5,1067,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -315,9 +344,13 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_1ca600b48b2e9612787975e781d8be10.html">mobs</a></li><li class="navelem"><a class="el" href="ghost_8h.html">ghost.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

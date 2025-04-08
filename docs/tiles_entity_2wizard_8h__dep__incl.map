@@ -1,0 +1,5 @@
+<map id="src/engine/entities/tilesEntity/wizard.h" name="src/engine/entities/tilesEntity/wizard.h">
+<area shape="rect" id="node1" title="Définition et comportement du sorcier." alt="" coords="91,5,241,47"/>
+<area shape="rect" id="node2" href="$tiles_entity_2wizard_8c.html" title=" " alt="" coords="5,95,156,136"/>
+<area shape="rect" id="node3" href="$tiles_entity_8c.html" title=" " alt="" coords="180,95,323,136"/>
+</map>

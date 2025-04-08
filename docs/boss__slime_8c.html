@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('boss__slime_8c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_1ca600b48b2e9612787975e781d8be10.html">mobs</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
@@ -500,15 +516,15 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_ab277f1a8124edd1f8de99ae00ae7b118_icgraph.png" border="0" usemap="#aboss__slime_8c_ab277f1a8124edd1f8de99ae00ae7b118_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_ab277f1a8124edd1f8de99ae00ae7b118_icgraph" id="aboss__slime_8c_ab277f1a8124edd1f8de99ae00ae7b118_icgraph">
-<area shape="rect" title=" " alt="" coords="1561,31,1791,57"/>
-<area shape="rect" href="boss__slime_8c.html#ab5e6e01341858afe461d30b51e710eb8" title=" " alt="" coords="1352,5,1513,32"/>
-<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1169,31,1304,57"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,31,1121,57"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,31,943,57"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,31,772,57"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,31,612,57"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,31,453,57"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,31,239,57"/>
+<area shape="rect" title=" " alt="" coords="1531,31,1760,57"/>
+<area shape="rect" href="boss__slime_8c.html#ab5e6e01341858afe461d30b51e710eb8" title=" " alt="" coords="1321,5,1483,32"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1139,31,1273,57"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,31,1091,57"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,31,912,57"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,31,741,57"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,31,581,57"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,31,423,57"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,31,208,57"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
 </map>
 </div>
@@ -531,7 +547,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00181">181</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00179">179</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -551,14 +567,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a928409466a5491f1a5bf815ce9132d68_icgraph.png" border="0" usemap="#aboss__slime_8c_a928409466a5491f1a5bf815ce9132d68_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_a928409466a5491f1a5bf815ce9132d68_icgraph" id="aboss__slime_8c_a928409466a5491f1a5bf815ce9132d68_icgraph">
-<area shape="rect" title=" " alt="" coords="1352,5,1521,32"/>
-<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1169,5,1304,32"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title=" " alt="" coords="1321,5,1491,32"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1139,5,1273,32"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,5,1091,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -601,7 +617,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointeur vers la barre de vie </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00933">933</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00918">918</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -617,12 +633,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a5702613fde9a96227c051caf5f7495df_icgraph.png" border="0" usemap="#aboss__slime_8c_a5702613fde9a96227c051caf5f7495df_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_a5702613fde9a96227c051caf5f7495df_icgraph" id="aboss__slime_8c_a5702613fde9a96227c051caf5f7495df_icgraph">
-<area shape="rect" title="Crée une barre de vie pour le boss." alt="" coords="991,5,1149,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Crée une barre de vie pour le boss." alt="" coords="960,5,1119,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -679,7 +695,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointeur vers l'ennemi créé </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00080">80</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00078">78</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -689,52 +705,52 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa" title="Ajoute une animation au contrôleur." alt="" coords="259,56,373,83"/>
 <area shape="rect" href="animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="251,461,381,488"/>
 <area shape="rect" href="particules_8c.html#ae582018b7ea20710f9845936d0b82cb5" title="Crée un nouvel émetteur de particules." alt="" coords="237,132,395,159"/>
-<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="813,265,929,292"/>
+<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="813,259,929,285"/>
 <area shape="rect" href="enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="256,309,376,336"/>
-<area shape="rect" href="health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="535,360,669,387"/>
-<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="808,765,933,792"/>
+<area shape="rect" href="health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="535,259,669,285"/>
+<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="808,791,933,817"/>
 <area shape="rect" href="boss__slime_8c.html#a0ce1840df2e8fdb6ab525023819624f8" title=" " alt="" coords="529,411,675,437"/>
 <area shape="rect" href="boss__slime_8c.html#a59da355f4cb3eee3b9f70cd66e856102" title=" " alt="" coords="184,588,448,615"/>
 <area shape="rect" href="boss__slime_8c.html#a29432ff6afd8bf8895d14675c4f822c3" title=" " alt="" coords="250,537,382,564"/>
 <area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="249,1136,383,1163"/>
 <area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="558,5,646,32"/>
 <area shape="rect" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="531,56,673,83"/>
-<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="1085,563,1170,589"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="1085,613,1170,640"/>
 <area shape="rect" href="timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2" title="Initialise un nouveau timer." alt="" coords="561,461,643,488"/>
 <area shape="rect" href="particules_8c.html#a61fa4b7a83f49df939133c298c2a4dab" title="Réinitialise un émetteur de particules." alt="" coords="527,107,677,133"/>
 <area shape="rect" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="515,157,689,184"/>
-<area shape="rect" href="health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="777,328,964,355"/>
-<area shape="rect" href="enemy_8c.html#ab8b2a078480e90346c66bfe478a428d4" title=" " alt="" coords="541,309,663,336"/>
-<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="797,107,944,133"/>
-<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="799,157,942,184"/>
-<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="819,208,922,235"/>
-<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="819,385,923,412"/>
-<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="1033,385,1221,412"/>
+<area shape="rect" href="health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="777,309,964,336"/>
+<area shape="rect" href="enemy_8c.html#ab8b2a078480e90346c66bfe478a428d4" title=" " alt="" coords="541,360,663,387"/>
+<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="797,208,944,235"/>
+<area shape="rect" href="animation_8c.html#ae6819740180def325e96797c282287a6" title=" " alt="" coords="813,56,928,83"/>
+<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="799,107,942,133"/>
+<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="819,157,922,184"/>
+<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="819,373,923,400"/>
+<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="1033,373,1221,400"/>
 <area shape="rect" href="fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="830,436,911,463"/>
 <area shape="rect" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="1040,436,1215,463"/>
 <area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="551,563,653,589"/>
 <area shape="rect" href="particules_8c.html#a4649283fd9dfa8005ebd85d1ef3a771e" title="Affiche toutes les particules actives." alt="" coords="523,613,681,640"/>
-<area shape="rect" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="791,563,950,589"/>
+<area shape="rect" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="791,613,950,640"/>
 <area shape="rect" href="camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="805,664,936,691"/>
-<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="803,613,938,640"/>
-<area shape="rect" href="boss__slime_8c.html#ab277f1a8124edd1f8de99ae00ae7b118" title=" " alt="" coords="756,1592,985,1619"/>
+<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="803,563,938,589"/>
+<area shape="rect" href="boss__slime_8c.html#ab277f1a8124edd1f8de99ae00ae7b118" title=" " alt="" coords="756,1516,985,1543"/>
 <area shape="rect" href="physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="775,1440,966,1467"/>
-<area shape="rect" href="boss__slime_8c.html#a928409466a5491f1a5bf815ce9132d68" title=" " alt="" coords="517,715,687,741"/>
-<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="813,951,929,977"/>
-<area shape="rect" href="boss__slime_8c.html#a69ec37228f33716636b841a2e0b801e6" title=" " alt="" coords="498,969,706,1010"/>
+<area shape="rect" href="boss__slime_8c.html#a928409466a5491f1a5bf815ce9132d68" title=" " alt="" coords="517,765,687,792"/>
+<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="813,968,929,995"/>
+<area shape="rect" href="boss__slime_8c.html#a69ec37228f33716636b841a2e0b801e6" title=" " alt="" coords="498,1019,706,1061"/>
 <area shape="rect" href="boss__slime_8c.html#a087265293c2643217f2577a96c177825" title=" " alt="" coords="805,867,937,893"/>
-<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="816,1001,925,1028"/>
+<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="816,1027,925,1053"/>
 <area shape="rect" href="boss__slime_8c.html#a34934ad2cfefc6f7727719ddaffa6d5a" title=" " alt="" coords="496,867,708,893"/>
-<area shape="rect" href="boss__slime_8c.html#a54688fe2dfac8aaa4a5d2b4164cde160" title=" " alt="" coords="525,1187,679,1213"/>
-<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="801,1212,941,1239"/>
+<area shape="rect" href="boss__slime_8c.html#a54688fe2dfac8aaa4a5d2b4164cde160" title=" " alt="" coords="525,1237,679,1264"/>
+<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="801,1313,941,1340"/>
 <area shape="rect" href="boss__slime_8c.html#ab62e052c9f0b507029ffc0ddde6e8410" title=" " alt="" coords="519,917,685,944"/>
 <area shape="rect" href="boss__slime_8c.html#a40b528cc711a2722b90ac87337648161" title=" " alt="" coords="525,816,679,843"/>
 <area shape="rect" href="boss__slime_8c.html#ae5041c65c23c41b5bfe6fdcb6cb735b9" title=" " alt="" coords="521,1085,683,1112"/>
-<area shape="rect" href="boss__slime_8c.html#ab5e6e01341858afe461d30b51e710eb8" title=" " alt="" coords="521,1288,683,1315"/>
-<area shape="rect" href="boss__slime_8c.html#a8768ef942c5ec6dfaa0aa1f43012bca3" title=" " alt="" coords="522,1491,682,1517"/>
-<area shape="rect" href="particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="522,1339,682,1365"/>
-<area shape="rect" href="physics_8c.html#a63880ca4246528d2b4a1e1fec0d9c661" title=" " alt="" coords="529,1389,675,1416"/>
-<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="1071,1592,1184,1619"/>
+<area shape="rect" href="boss__slime_8c.html#ab5e6e01341858afe461d30b51e710eb8" title=" " alt="" coords="521,1339,683,1365"/>
+<area shape="rect" href="boss__slime_8c.html#a8768ef942c5ec6dfaa0aa1f43012bca3" title=" " alt="" coords="522,1440,682,1467"/>
+<area shape="rect" href="particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="522,1136,682,1163"/>
+<area shape="rect" href="physics_8c.html#a63880ca4246528d2b4a1e1fec0d9c661" title=" " alt="" coords="529,1187,675,1213"/>
 </map>
 </div>
 <div class="dynheader">
@@ -742,12 +758,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_afa7fc5b4ed8d914bfb5622f23692946e_icgraph.png" border="0" usemap="#aboss__slime_8c_afa7fc5b4ed8d914bfb5622f23692946e_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_afa7fc5b4ed8d914bfb5622f23692946e_icgraph" id="aboss__slime_8c_afa7fc5b4ed8d914bfb5622f23692946e_icgraph">
-<area shape="rect" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Crée un nouveau boss slime." alt="" coords="960,5,1091,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -778,18 +794,18 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l01075">1075</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l01060">1060</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_ad4852cfa77648628db902cb7bf56a7fd_icgraph.png" border="0" usemap="#aboss__slime_8c_ad4852cfa77648628db902cb7bf56a7fd_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_ad4852cfa77648628db902cb7bf56a7fd_icgraph" id="aboss__slime_8c_ad4852cfa77648628db902cb7bf56a7fd_icgraph">
-<area shape="rect" title="Libère les ressources associées à la barre de vie." alt="" coords="991,5,1135,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Libère les ressources associées à la barre de vie." alt="" coords="960,5,1104,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -812,7 +828,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00765">765</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00750">750</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -837,14 +853,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a69ec37228f33716636b841a2e0b801e6_icgraph.png" border="0" usemap="#aboss__slime_8c_a69ec37228f33716636b841a2e0b801e6_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_a69ec37228f33716636b841a2e0b801e6_icgraph" id="aboss__slime_8c_a69ec37228f33716636b841a2e0b801e6_icgraph">
-<area shape="rect" title=" " alt="" coords="1352,5,1560,47"/>
-<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1169,13,1304,39"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,13,1121,39"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,13,943,39"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,13,772,39"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,13,612,39"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,13,453,39"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,13,239,39"/>
+<area shape="rect" title=" " alt="" coords="1321,5,1529,47"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1139,13,1273,39"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,13,1091,39"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,13,912,39"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,13,741,39"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,13,581,39"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,13,423,39"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,13,208,39"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,13,60,39"/>
 </map>
 </div>
@@ -883,7 +899,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00734">734</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00721">721</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -909,14 +925,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a34934ad2cfefc6f7727719ddaffa6d5a_icgraph.png" border="0" usemap="#aboss__slime_8c_a34934ad2cfefc6f7727719ddaffa6d5a_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_a34934ad2cfefc6f7727719ddaffa6d5a_icgraph" id="aboss__slime_8c_a34934ad2cfefc6f7727719ddaffa6d5a_icgraph">
-<area shape="rect" title=" " alt="" coords="1352,5,1564,32"/>
-<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1169,5,1304,32"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title=" " alt="" coords="1321,5,1533,32"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1139,5,1273,32"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,5,1091,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -955,7 +971,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00716">716</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00703">703</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -977,14 +993,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a54688fe2dfac8aaa4a5d2b4164cde160_icgraph.png" border="0" usemap="#aboss__slime_8c_a54688fe2dfac8aaa4a5d2b4164cde160_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_a54688fe2dfac8aaa4a5d2b4164cde160_icgraph" id="aboss__slime_8c_a54688fe2dfac8aaa4a5d2b4164cde160_icgraph">
-<area shape="rect" title=" " alt="" coords="1352,5,1507,32"/>
-<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1169,5,1304,32"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title=" " alt="" coords="1321,5,1476,32"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1139,5,1273,32"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,5,1091,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1023,7 +1039,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00817">817</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00802">802</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1049,14 +1065,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_ab62e052c9f0b507029ffc0ddde6e8410_icgraph.png" border="0" usemap="#aboss__slime_8c_ab62e052c9f0b507029ffc0ddde6e8410_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_ab62e052c9f0b507029ffc0ddde6e8410_icgraph" id="aboss__slime_8c_ab62e052c9f0b507029ffc0ddde6e8410_icgraph">
-<area shape="rect" title=" " alt="" coords="1352,5,1519,32"/>
-<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1169,5,1304,32"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title=" " alt="" coords="1321,5,1488,32"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1139,5,1273,32"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,5,1091,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1095,7 +1111,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00791">791</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00776">776</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1121,14 +1137,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a40b528cc711a2722b90ac87337648161_icgraph.png" border="0" usemap="#aboss__slime_8c_a40b528cc711a2722b90ac87337648161_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_a40b528cc711a2722b90ac87337648161_icgraph" id="aboss__slime_8c_a40b528cc711a2722b90ac87337648161_icgraph">
-<area shape="rect" title=" " alt="" coords="1352,5,1505,32"/>
-<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1169,5,1304,32"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title=" " alt="" coords="1321,5,1475,32"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1139,5,1273,32"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,5,1091,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1167,7 +1183,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00163">163</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00161">161</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1185,18 +1201,18 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a087265293c2643217f2577a96c177825_icgraph.png" border="0" usemap="#aboss__slime_8c_a087265293c2643217f2577a96c177825_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_a087265293c2643217f2577a96c177825_icgraph" id="aboss__slime_8c_a087265293c2643217f2577a96c177825_icgraph">
-<area shape="rect" title=" " alt="" coords="1612,122,1744,149"/>
-<area shape="rect" href="boss__slime_8c.html#a69ec37228f33716636b841a2e0b801e6" title=" " alt="" coords="1354,5,1562,47"/>
-<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1169,122,1304,149"/>
-<area shape="rect" href="boss__slime_8c.html#a34934ad2cfefc6f7727719ddaffa6d5a" title=" " alt="" coords="1352,122,1564,149"/>
-<area shape="rect" href="boss__slime_8c.html#ab62e052c9f0b507029ffc0ddde6e8410" title=" " alt="" coords="1375,173,1541,199"/>
-<area shape="rect" href="boss__slime_8c.html#a40b528cc711a2722b90ac87337648161" title=" " alt="" coords="1381,223,1535,250"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,122,1121,149"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,122,943,149"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,122,772,149"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,122,612,149"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,122,453,149"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,122,239,149"/>
+<area shape="rect" title=" " alt="" coords="1581,122,1713,149"/>
+<area shape="rect" href="boss__slime_8c.html#a69ec37228f33716636b841a2e0b801e6" title=" " alt="" coords="1323,5,1531,47"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1139,122,1273,149"/>
+<area shape="rect" href="boss__slime_8c.html#a34934ad2cfefc6f7727719ddaffa6d5a" title=" " alt="" coords="1321,122,1533,149"/>
+<area shape="rect" href="boss__slime_8c.html#ab62e052c9f0b507029ffc0ddde6e8410" title=" " alt="" coords="1344,173,1511,199"/>
+<area shape="rect" href="boss__slime_8c.html#a40b528cc711a2722b90ac87337648161" title=" " alt="" coords="1351,223,1504,250"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,122,1091,149"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,122,912,149"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,122,741,149"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,122,581,149"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,122,423,149"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,122,208,149"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,122,60,149"/>
 </map>
 </div>
@@ -1229,19 +1245,23 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00064">64</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00063">63</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a0ce1840df2e8fdb6ab525023819624f8_cgraph.png" border="0" usemap="#aboss__slime_8c_a0ce1840df2e8fdb6ab525023819624f8_cgraph" alt=""/></div>
 <map name="aboss__slime_8c_a0ce1840df2e8fdb6ab525023819624f8_cgraph" id="aboss__slime_8c_a0ce1840df2e8fdb6ab525023819624f8_cgraph">
-<area shape="rect" title=" " alt="" coords="5,31,151,57"/>
-<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="199,5,303,32"/>
-<area shape="rect" href="fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="210,56,291,83"/>
-<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="351,5,539,32"/>
-<area shape="rect" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="357,56,532,83"/>
-<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="402,107,487,133"/>
-<area shape="rect" href="fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="587,56,687,83"/>
+<area shape="rect" title=" " alt="" coords="5,107,151,133"/>
+<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="199,81,303,108"/>
+<area shape="rect" href="fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="210,132,291,159"/>
+<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="351,81,539,108"/>
+<area shape="rect" href="particules_8c.html#aea0223a544ee988ed39eafc6faed78ce" title="Émet des particules de soin pour le sorcier." alt="" coords="619,31,756,57"/>
+<area shape="rect" href="equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="587,81,788,108"/>
+<area shape="rect" href="particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="836,5,987,32"/>
+<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="851,56,972,83"/>
+<area shape="rect" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="357,132,532,159"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="402,183,487,209"/>
+<area shape="rect" href="fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="637,132,737,159"/>
 </map>
 </div>
 <div class="dynheader">
@@ -1249,13 +1269,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a0ce1840df2e8fdb6ab525023819624f8_icgraph.png" border="0" usemap="#aboss__slime_8c_a0ce1840df2e8fdb6ab525023819624f8_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_a0ce1840df2e8fdb6ab525023819624f8_icgraph" id="aboss__slime_8c_a0ce1840df2e8fdb6ab525023819624f8_icgraph">
-<area shape="rect" title=" " alt="" coords="1169,5,1315,32"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title=" " alt="" coords="1139,5,1284,32"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,5,1091,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1294,7 +1314,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00551">551</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00541">541</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1316,14 +1336,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_ae5041c65c23c41b5bfe6fdcb6cb735b9_icgraph.png" border="0" usemap="#aboss__slime_8c_ae5041c65c23c41b5bfe6fdcb6cb735b9_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_ae5041c65c23c41b5bfe6fdcb6cb735b9_icgraph" id="aboss__slime_8c_ae5041c65c23c41b5bfe6fdcb6cb735b9_icgraph">
-<area shape="rect" title=" " alt="" coords="1352,5,1515,32"/>
-<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1169,5,1304,32"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title=" " alt="" coords="1321,5,1484,32"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1139,5,1273,32"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,5,1091,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1362,7 +1382,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00217">217</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00213">213</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1391,14 +1411,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_ab5e6e01341858afe461d30b51e710eb8_icgraph.png" border="0" usemap="#aboss__slime_8c_ab5e6e01341858afe461d30b51e710eb8_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_ab5e6e01341858afe461d30b51e710eb8_icgraph" id="aboss__slime_8c_ab5e6e01341858afe461d30b51e710eb8_icgraph">
-<area shape="rect" title=" " alt="" coords="1352,5,1513,32"/>
-<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1169,5,1304,32"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title=" " alt="" coords="1321,5,1483,32"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1139,5,1273,32"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,5,1091,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1437,13 +1457,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a59da355f4cb3eee3b9f70cd66e856102_icgraph.png" border="0" usemap="#aboss__slime_8c_a59da355f4cb3eee3b9f70cd66e856102_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_a59da355f4cb3eee3b9f70cd66e856102_icgraph" id="aboss__slime_8c_a59da355f4cb3eee3b9f70cd66e856102_icgraph">
-<area shape="rect" title=" " alt="" coords="1169,5,1433,32"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title=" " alt="" coords="1139,5,1403,32"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,5,1091,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1499,7 +1519,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00981">981</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00966">966</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1515,13 +1535,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a81ccd0abdd116ce9abfeb9852237de51_icgraph.png" border="0" usemap="#aboss__slime_8c_a81ccd0abdd116ce9abfeb9852237de51_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_a81ccd0abdd116ce9abfeb9852237de51_icgraph" id="aboss__slime_8c_a81ccd0abdd116ce9abfeb9852237de51_icgraph">
-<area shape="rect" title="Affiche la barre de vie du boss." alt="" coords="1253,5,1413,32"/>
-<area shape="rect" href="boss__slime_8c.html#ad680bb14cc102a6fc5b2282894f399b1" title="Wrapper pour le rendu de la barre de vie (compatible avec fonctionManager)" alt="" coords="991,5,1205,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Affiche la barre de vie du boss." alt="" coords="1223,5,1383,32"/>
+<area shape="rect" href="boss__slime_8c.html#ad680bb14cc102a6fc5b2282894f399b1" title="Wrapper pour le rendu de la barre de vie (compatible avec fonctionManager)" alt="" coords="960,5,1175,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1552,7 +1572,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l01094">1094</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l01079">1079</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1569,12 +1589,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_ad680bb14cc102a6fc5b2282894f399b1_icgraph.png" border="0" usemap="#aboss__slime_8c_ad680bb14cc102a6fc5b2282894f399b1_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_ad680bb14cc102a6fc5b2282894f399b1_icgraph" id="aboss__slime_8c_ad680bb14cc102a6fc5b2282894f399b1_icgraph">
-<area shape="rect" title="Wrapper pour le rendu de la barre de vie (compatible avec fonctionManager)" alt="" coords="991,5,1205,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Wrapper pour le rendu de la barre de vie (compatible avec fonctionManager)" alt="" coords="960,5,1175,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1613,7 +1633,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00044">44</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00043">43</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1636,13 +1656,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a29432ff6afd8bf8895d14675c4f822c3_icgraph.png" border="0" usemap="#aboss__slime_8c_a29432ff6afd8bf8895d14675c4f822c3_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_a29432ff6afd8bf8895d14675c4f822c3_icgraph" id="aboss__slime_8c_a29432ff6afd8bf8895d14675c4f822c3_icgraph">
-<area shape="rect" title=" " alt="" coords="1169,5,1301,32"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title=" " alt="" coords="1139,5,1271,32"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,5,1091,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1684,7 +1704,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00958">958</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00943">943</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1701,13 +1721,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a4ef4bb86f51ee9f115988b43358d9402_icgraph.png" border="0" usemap="#aboss__slime_8c_a4ef4bb86f51ee9f115988b43358d9402_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_a4ef4bb86f51ee9f115988b43358d9402_icgraph" id="aboss__slime_8c_a4ef4bb86f51ee9f115988b43358d9402_icgraph">
-<area shape="rect" title="Met à jour la barre de vie du boss." alt="" coords="1257,5,1420,32"/>
-<area shape="rect" href="boss__slime_8c.html#a39276f5b220a535bc957555b862f6a81" title="Wrapper pour la mise à jour de la barre de vie (compatible avec fonctionManager)" alt="" coords="991,5,1209,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Met à jour la barre de vie du boss." alt="" coords="1227,5,1389,32"/>
+<area shape="rect" href="boss__slime_8c.html#a39276f5b220a535bc957555b862f6a81" title="Wrapper pour la mise à jour de la barre de vie (compatible avec fonctionManager)" alt="" coords="960,5,1179,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1738,7 +1758,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l01090">1090</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l01075">1075</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1756,12 +1776,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a39276f5b220a535bc957555b862f6a81_icgraph.png" border="0" usemap="#aboss__slime_8c_a39276f5b220a535bc957555b862f6a81_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_a39276f5b220a535bc957555b862f6a81_icgraph" id="aboss__slime_8c_a39276f5b220a535bc957555b862f6a81_icgraph">
-<area shape="rect" title="Wrapper pour la mise à jour de la barre de vie (compatible avec fonctionManager)" alt="" coords="991,5,1209,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Wrapper pour la mise à jour de la barre de vie (compatible avec fonctionManager)" alt="" coords="960,5,1179,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1817,7 +1837,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00868">868</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00853">853</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1870,13 +1890,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_aeba34d9ac36546820051b77f67ca7606_icgraph.png" border="0" usemap="#aboss__slime_8c_aeba34d9ac36546820051b77f67ca7606_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_aeba34d9ac36546820051b77f67ca7606_icgraph" id="aboss__slime_8c_aeba34d9ac36546820051b77f67ca7606_icgraph">
-<area shape="rect" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1169,5,1304,32"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1139,5,1273,32"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,5,1091,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1915,7 +1935,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00852">852</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="boss__slime_8c_source.html#l00837">837</a> of file <a class="el" href="boss__slime_8c_source.html">boss_slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1931,14 +1951,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="boss__slime_8c_a8768ef942c5ec6dfaa0aa1f43012bca3_icgraph.png" border="0" usemap="#aboss__slime_8c_a8768ef942c5ec6dfaa0aa1f43012bca3_icgraph" alt=""/></div>
 <map name="aboss__slime_8c_a8768ef942c5ec6dfaa0aa1f43012bca3_icgraph" id="aboss__slime_8c_a8768ef942c5ec6dfaa0aa1f43012bca3_icgraph">
-<area shape="rect" title=" " alt="" coords="1352,5,1512,32"/>
-<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1169,5,1304,32"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="991,5,1121,32"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="820,5,943,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title=" " alt="" coords="1321,5,1481,32"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1139,5,1273,32"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="960,5,1091,32"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="789,5,912,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -1946,9 +1966,13 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_1ca600b48b2e9612787975e781d8be10.html">mobs</a></li><li class="navelem"><a class="el" href="boss__slime_8c.html">boss_slime.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

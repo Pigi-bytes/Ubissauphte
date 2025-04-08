@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('enemy_8c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
@@ -136,13 +152,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="enemy_8c_ad1a4da7343608052f2a50b7a4a554931_icgraph.png" border="0" usemap="#aenemy_8c_ad1a4da7343608052f2a50b7a4a554931_icgraph" alt=""/></div>
 <map name="aenemy_8c_ad1a4da7343608052f2a50b7a4a554931_icgraph" id="aenemy_8c_ad1a4da7343608052f2a50b7a4a554931_icgraph">
-<area shape="rect" title="Libère la mémoire utilisée par un ennemi." alt="" coords="996,31,1089,57"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="823,5,945,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,56,948,83"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,31,772,57"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,31,612,57"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,31,453,57"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,31,239,57"/>
+<area shape="rect" title="Libère la mémoire utilisée par un ennemi." alt="" coords="965,31,1059,57"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="792,5,915,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,56,917,83"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,31,741,57"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,31,581,57"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,31,423,57"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,31,208,57"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
 </map>
 </div>
@@ -204,18 +220,23 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="enemy_8c_ae9a6941e9e9f049928d9eaa130a8305a_cgraph.png" border="0" usemap="#aenemy_8c_ae9a6941e9e9f049928d9eaa130a8305a_cgraph" alt=""/></div>
 <map name="aenemy_8c_ae9a6941e9e9f049928d9eaa130a8305a_cgraph" id="aenemy_8c_ae9a6941e9e9f049928d9eaa130a8305a_cgraph">
-<area shape="rect" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="5,233,125,260"/>
-<area shape="rect" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="173,81,348,108"/>
-<area shape="rect" href="health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="193,208,328,235"/>
-<area shape="rect" href="health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="396,259,583,285"/>
-<area shape="rect" href="enemy_8c.html#ab8b2a078480e90346c66bfe478a428d4" title=" " alt="" coords="199,309,322,336"/>
+<area shape="rect" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="5,284,125,311"/>
+<area shape="rect" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="173,107,348,133"/>
+<area shape="rect" href="health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="193,259,328,285"/>
+<area shape="rect" href="health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="396,309,583,336"/>
+<area shape="rect" href="enemy_8c.html#ab8b2a078480e90346c66bfe478a428d4" title=" " alt="" coords="199,360,322,387"/>
 <area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="416,5,563,32"/>
-<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="418,56,561,83"/>
-<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="438,107,541,133"/>
-<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="431,157,547,184"/>
-<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="427,208,552,235"/>
-<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="437,309,541,336"/>
-<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="631,309,819,336"/>
+<area shape="rect" href="animation_8c.html#ae6819740180def325e96797c282287a6" title=" " alt="" coords="432,56,547,83"/>
+<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="418,107,561,133"/>
+<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="438,157,541,184"/>
+<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="431,208,547,235"/>
+<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="427,259,552,285"/>
+<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="437,360,541,387"/>
+<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="631,360,819,387"/>
+<area shape="rect" href="particules_8c.html#aea0223a544ee988ed39eafc6faed78ce" title="Émet des particules de soin pour le sorcier." alt="" coords="899,335,1036,361"/>
+<area shape="rect" href="equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="867,385,1068,412"/>
+<area shape="rect" href="particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="1116,309,1267,336"/>
+<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="1131,360,1252,387"/>
 </map>
 </div>
 <div class="dynheader">
@@ -223,17 +244,18 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="enemy_8c_ae9a6941e9e9f049928d9eaa130a8305a_icgraph.png" border="0" usemap="#aenemy_8c_ae9a6941e9e9f049928d9eaa130a8305a_icgraph" alt=""/></div>
 <map name="aenemy_8c_ae9a6941e9e9f049928d9eaa130a8305a_icgraph" id="aenemy_8c_ae9a6941e9e9f049928d9eaa130a8305a_icgraph">
-<area shape="rect" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="1175,56,1295,83"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="996,5,1127,32"/>
-<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1011,56,1112,83"/>
-<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1011,107,1111,133"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="823,5,945,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,31,772,57"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,31,612,57"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,31,453,57"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,31,239,57"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,56,948,83"/>
+<area shape="rect" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="1144,81,1264,108"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="965,5,1096,32"/>
+<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="980,56,1081,83"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="981,107,1081,133"/>
+<area shape="rect" href="mobs_2wizard_8c.html#a9cf3a13d8474f8728fd4aaf80458a51b" title="Crée et initialise un sorcier." alt="" coords="977,157,1085,184"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="792,19,915,45"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,81,917,108"/>
 </map>
 </div>
 
@@ -271,9 +293,13 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="enemy_8c_ab8b2a078480e90346c66bfe478a428d4_cgraph.png" border="0" usemap="#aenemy_8c_ab8b2a078480e90346c66bfe478a428d4_cgraph" alt=""/></div>
 <map name="aenemy_8c_ab8b2a078480e90346c66bfe478a428d4_cgraph" id="aenemy_8c_ab8b2a078480e90346c66bfe478a428d4_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,128,32"/>
-<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="176,5,280,32"/>
-<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="328,5,516,32"/>
+<area shape="rect" title=" " alt="" coords="5,56,128,83"/>
+<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="176,56,280,83"/>
+<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="328,56,516,83"/>
+<area shape="rect" href="particules_8c.html#aea0223a544ee988ed39eafc6faed78ce" title="Émet des particules de soin pour le sorcier." alt="" coords="596,31,733,57"/>
+<area shape="rect" href="equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="564,81,765,108"/>
+<area shape="rect" href="particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="813,5,964,32"/>
+<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="828,56,949,83"/>
 </map>
 </div>
 <div class="dynheader">
@@ -281,18 +307,19 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="enemy_8c_ab8b2a078480e90346c66bfe478a428d4_icgraph.png" border="0" usemap="#aenemy_8c_ab8b2a078480e90346c66bfe478a428d4_icgraph" alt=""/></div>
 <map name="aenemy_8c_ab8b2a078480e90346c66bfe478a428d4_icgraph" id="aenemy_8c_ab8b2a078480e90346c66bfe478a428d4_icgraph">
-<area shape="rect" title=" " alt="" coords="1343,56,1465,83"/>
-<area shape="rect" href="enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="1175,56,1295,83"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="996,5,1127,32"/>
-<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1011,56,1112,83"/>
-<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1011,107,1111,133"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="823,5,945,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,31,772,57"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,31,612,57"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,31,453,57"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,31,239,57"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,56,948,83"/>
+<area shape="rect" title=" " alt="" coords="1312,81,1435,108"/>
+<area shape="rect" href="enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="1144,81,1264,108"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="965,5,1096,32"/>
+<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="980,56,1081,83"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="981,107,1081,133"/>
+<area shape="rect" href="mobs_2wizard_8c.html#a9cf3a13d8474f8728fd4aaf80458a51b" title="Crée et initialise un sorcier." alt="" coords="977,157,1085,184"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="792,19,915,45"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,81,917,108"/>
 </map>
 </div>
 
@@ -363,14 +390,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="enemy_8c_a3152517f6464ffba178ae9c2ba7be98b_icgraph.png" border="0" usemap="#aenemy_8c_a3152517f6464ffba178ae9c2ba7be98b_icgraph" alt=""/></div>
 <map name="aenemy_8c_a3152517f6464ffba178ae9c2ba7be98b_icgraph" id="aenemy_8c_a3152517f6464ffba178ae9c2ba7be98b_icgraph">
-<area shape="rect" title="Affiche un ennemi à l&#39;écran." alt="" coords="1208,31,1317,57"/>
-<area shape="rect" href="enemy_8c.html#ae8b9c9cabe6fb5d0fb9eee9f92d1e1a9" title="Wrapper pour le rendu d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="996,31,1160,57"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="823,5,945,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,56,948,83"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,31,772,57"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,31,612,57"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,31,453,57"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,31,239,57"/>
+<area shape="rect" title="Affiche un ennemi à l&#39;écran." alt="" coords="1177,31,1287,57"/>
+<area shape="rect" href="enemy_8c.html#ae8b9c9cabe6fb5d0fb9eee9f92d1e1a9" title="Wrapper pour le rendu d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="965,31,1129,57"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="792,5,915,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,56,917,83"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,31,741,57"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,31,581,57"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,31,423,57"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,31,208,57"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
 </map>
 </div>
@@ -425,13 +452,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="enemy_8c_ae8b9c9cabe6fb5d0fb9eee9f92d1e1a9_icgraph.png" border="0" usemap="#aenemy_8c_ae8b9c9cabe6fb5d0fb9eee9f92d1e1a9_icgraph" alt=""/></div>
 <map name="aenemy_8c_ae8b9c9cabe6fb5d0fb9eee9f92d1e1a9_icgraph" id="aenemy_8c_ae8b9c9cabe6fb5d0fb9eee9f92d1e1a9_icgraph">
-<area shape="rect" title="Wrapper pour le rendu d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="996,31,1160,57"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="823,5,945,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,56,948,83"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,31,772,57"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,31,612,57"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,31,453,57"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,31,239,57"/>
+<area shape="rect" title="Wrapper pour le rendu d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="965,31,1129,57"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="792,5,915,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,56,917,83"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,31,741,57"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,31,581,57"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,31,423,57"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,31,208,57"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
 </map>
 </div>
@@ -510,17 +537,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="enemy_8c_ae756d207dddebceef48dfd1ad481cf4e_icgraph.png" border="0" usemap="#aenemy_8c_ae756d207dddebceef48dfd1ad481cf4e_icgraph" alt=""/></div>
 <map name="aenemy_8c_ae756d207dddebceef48dfd1ad481cf4e_icgraph" id="aenemy_8c_ae756d207dddebceef48dfd1ad481cf4e_icgraph">
-<area shape="rect" title="Applique des dégâts à un ennemi." alt="" coords="1544,56,1723,83"/>
-<area shape="rect" href="player_8c.html#aea2580dd56e7113d24936f6b09a66192" title=" " alt="" coords="1387,56,1496,83"/>
-<area shape="rect" href="player_8c.html#a19c9b26bd5ea417615cd19e9ce4c46f4" title="Met à jour l&#39;état et le comportement du joueur." alt="" coords="1231,56,1339,83"/>
-<area shape="rect" href="commun_8c.html#a32d90a8046d05096f3ea9453c8c56797" title="Wrapper pour la mise à jour du joueur." alt="" coords="1020,56,1183,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Applique des dégâts à un ennemi." alt="" coords="1513,56,1692,83"/>
+<area shape="rect" href="player_8c.html#aea2580dd56e7113d24936f6b09a66192" title=" " alt="" coords="1356,56,1465,83"/>
+<area shape="rect" href="player_8c.html#a19c9b26bd5ea417615cd19e9ce4c46f4" title="Met à jour l&#39;état et le comportement du joueur." alt="" coords="1200,56,1308,83"/>
+<area shape="rect" href="commun_8c.html#a32d90a8046d05096f3ea9453c8c56797" title="Wrapper pour la mise à jour du joueur." alt="" coords="989,56,1152,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -596,14 +623,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="enemy_8c_a025690b31b4fe58df00af903db6a9368_icgraph.png" border="0" usemap="#aenemy_8c_a025690b31b4fe58df00af903db6a9368_icgraph" alt=""/></div>
 <map name="aenemy_8c_a025690b31b4fe58df00af903db6a9368_icgraph" id="aenemy_8c_a025690b31b4fe58df00af903db6a9368_icgraph">
-<area shape="rect" title="Met à jour l&#39;état d&#39;un ennemi." alt="" coords="1211,31,1323,57"/>
-<area shape="rect" href="enemy_8c.html#a1984c1627c588895da06920e804c6d63" title="Wrapper pour la mise à jour d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="996,31,1163,57"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="823,5,945,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,56,948,83"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,31,772,57"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,31,612,57"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,31,453,57"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,31,239,57"/>
+<area shape="rect" title="Met à jour l&#39;état d&#39;un ennemi." alt="" coords="1180,31,1292,57"/>
+<area shape="rect" href="enemy_8c.html#a1984c1627c588895da06920e804c6d63" title="Wrapper pour la mise à jour d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="965,31,1132,57"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="792,5,915,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,56,917,83"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,31,741,57"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,31,581,57"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,31,423,57"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,31,208,57"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
 </map>
 </div>
@@ -655,13 +682,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="enemy_8c_a1984c1627c588895da06920e804c6d63_icgraph.png" border="0" usemap="#aenemy_8c_a1984c1627c588895da06920e804c6d63_icgraph" alt=""/></div>
 <map name="aenemy_8c_a1984c1627c588895da06920e804c6d63_icgraph" id="aenemy_8c_a1984c1627c588895da06920e804c6d63_icgraph">
-<area shape="rect" title="Wrapper pour la mise à jour d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="996,31,1163,57"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="823,5,945,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,56,948,83"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,31,772,57"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,31,612,57"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,31,453,57"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,31,239,57"/>
+<area shape="rect" title="Wrapper pour la mise à jour d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="965,31,1132,57"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="792,5,915,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,56,917,83"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,31,741,57"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,31,581,57"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,31,423,57"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,31,208,57"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,31,60,57"/>
 </map>
 </div>
@@ -669,9 +696,13 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="enemy_8c.html">enemy.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

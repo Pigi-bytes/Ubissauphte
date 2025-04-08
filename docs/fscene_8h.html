@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('fscene_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
@@ -88,56 +104,56 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="fscene_8h__dep__incl.png" border="0" usemap="#asrc_2utils_2fscene_8hdep" alt=""/></div>
 <map name="asrc_2utils_2fscene_8hdep" id="asrc_2utils_2fscene_8hdep">
-<area shape="rect" title=" " alt="" coords="2069,5,2201,32"/>
-<area shape="rect" href="commun_8h.html" title="Gestion du contenu utile pour le fonctionnement des différentes scènes." alt="" coords="2200,594,2315,621"/>
-<area shape="rect" href="context_8h.html" title="Gestion du contexte global du jeu." alt="" coords="1824,155,1931,181"/>
-<area shape="rect" href="enemy_8h.html" title="Définition de la structure de base pour les ennemis." alt="" coords="1393,319,1535,360"/>
-<area shape="rect" href="tiles_entity_8h.html" title="Système d&#39;entités basées sur les tuiles." alt="" coords="781,408,923,449"/>
-<area shape="rect" href="affichage_8h.html" title="Gestionnaire de l&#39;interface d&#39;inventaire et d&#39;équipement." alt="" coords="2031,415,2164,442"/>
-<area shape="rect" href="genmap_8h.html" title=" " alt="" coords="2254,80,2453,107"/>
-<area shape="rect" href="fscene_8c.html" title=" " alt="" coords="2755,80,2885,107"/>
-<area shape="rect" href="commande_menu_8c.html" title=" " alt="" coords="2838,758,3053,785"/>
-<area shape="rect" href="commande_menu_8h.html" title=" " alt="" coords="2721,676,2935,703"/>
-<area shape="rect" href="fps_menu_8h.html" title=" " alt="" coords="3011,676,3173,703"/>
-<area shape="rect" href="game_over_8h.html" title=" " alt="" coords="1612,676,1785,703"/>
-<area shape="rect" href="main_menu_8h.html" title=" " alt="" coords="1363,758,1538,785"/>
-<area shape="rect" href="main_world_8h.html" title=" " alt="" coords="1237,676,1413,703"/>
-<area shape="rect" href="option2_8h.html" title=" " alt="" coords="1809,676,1964,703"/>
-<area shape="rect" href="option_menu_8h.html" title=" " alt="" coords="1989,676,2171,703"/>
-<area shape="rect" href="scene_inventaire_8h.html" title=" " alt="" coords="2196,676,2407,703"/>
-<area shape="rect" href="win_8h.html" title=" " alt="" coords="2430,676,2559,703"/>
-<area shape="rect" href="commun_8c.html" title=" " alt="" coords="2583,676,2697,703"/>
-<area shape="rect" href="main_8c.html" title=" " alt="" coords="1894,840,1983,867"/>
-<area shape="rect" href="fps_menu_8c.html" title=" " alt="" coords="3129,758,3290,785"/>
-<area shape="rect" href="game_over_8c.html" title=" " alt="" coords="1614,758,1786,785"/>
-<area shape="rect" href="main_menu_8c.html" title=" " alt="" coords="1363,840,1538,867"/>
-<area shape="rect" href="main_world_8c.html" title=" " alt="" coords="1113,758,1287,785"/>
-<area shape="rect" href="boss__slime_8h.html" title="Définition et comportement du boss slime." alt="" coords="938,751,1089,792"/>
-<area shape="rect" href="option2_8c.html" title=" " alt="" coords="1861,758,2016,785"/>
-<area shape="rect" href="option_menu_8c.html" title=" " alt="" coords="2091,758,2274,785"/>
-<area shape="rect" href="scene_inventaire_8c.html" title=" " alt="" coords="2350,758,2559,785"/>
-<area shape="rect" href="win_8c.html" title=" " alt="" coords="2635,758,2763,785"/>
-<area shape="rect" href="context_8c.html" title=" " alt="" coords="1941,237,2046,263"/>
-<area shape="rect" href="health_8h.html" title="Système de gestion de la santé des entités." alt="" coords="1559,229,1767,271"/>
-<area shape="rect" href="player_8h.html" title="Définition et comportement du joueur principal." alt="" coords="1790,319,1933,360"/>
-<area shape="rect" href="barrel_8h.html" title="Définition et comportement du baril destructible." alt="" coords="1053,497,1200,539"/>
-<area shape="rect" href="spike_8h.html" title="Définition et comportement des pièges à pointes." alt="" coords="43,497,186,539"/>
-<area shape="rect" href="button_8h.html" title="Système de gestion des boutons pour l&#39;interface utilisateur." alt="" coords="2156,326,2271,353"/>
-<area shape="rect" href="health_8c.html" title=" " alt="" coords="1559,319,1766,360"/>
-<area shape="rect" href="enemy_8c.html" title=" " alt="" coords="1762,408,1905,449"/>
-<area shape="rect" href="ghost_8h.html" title="Définition et comportement de l&#39;ennemi fantôme." alt="" coords="1250,587,1393,628"/>
-<area shape="rect" href="slime_8h.html" title="Définition et comportement de l&#39;ennemi slime." alt="" coords="1326,408,1469,449"/>
-<area shape="rect" href="player_8c.html" title=" " alt="" coords="1595,408,1738,449"/>
-<area shape="rect" href="minimap_8h.html" title="Gestion de la minimap (affichage et mise a jour)" alt="" coords="1685,505,1816,531"/>
-<area shape="rect" href="mapview_8h.html" title="Gestion de l&#39;affichage de la carte du niveau." alt="" coords="2239,415,2371,442"/>
-<area shape="rect" href="tiles_entity_8c.html" title=" " alt="" coords="595,587,738,628"/>
-<area shape="rect" href="blacksmith_8h.html" title="Définition et comportement du forgeron." alt="" coords="210,497,390,539"/>
-<area shape="rect" href="chest_8h.html" title="Définition et comportement du coffre à trésor." alt="" coords="414,497,557,539"/>
-<area shape="rect" href="merchant_8h.html" title="Définition et comportement du marchand." alt="" coords="581,497,752,539"/>
-<area shape="rect" href="wizard_8h.html" title="Définition et comportement du sorcier." alt="" coords="777,497,927,539"/>
-<area shape="rect" href="affichage_8c.html" title=" " alt="" coords="2082,505,2214,531"/>
-<area shape="rect" href="gene_room_8h.html" title="Générateur de salles procédurales." alt="" coords="2477,229,2680,271"/>
-<area shape="rect" href="genmap_8c.html" title=" " alt="" coords="2483,155,2680,181"/>
+<area shape="rect" title=" " alt="" coords="2205,5,2337,32"/>
+<area shape="rect" href="commun_8h.html" title="Gestion du contenu utile pour le fonctionnement des différentes scènes." alt="" coords="2162,594,2277,621"/>
+<area shape="rect" href="context_8h.html" title="Gestion du contexte global du jeu." alt="" coords="2011,155,2118,181"/>
+<area shape="rect" href="enemy_8h.html" title="Définition de la structure de base pour les ennemis." alt="" coords="1592,408,1735,449"/>
+<area shape="rect" href="tiles_entity_8h.html" title="Système d&#39;entités basées sur les tuiles." alt="" coords="856,408,999,449"/>
+<area shape="rect" href="affichage_8h.html" title="Gestionnaire de l&#39;interface d&#39;inventaire et d&#39;équipement." alt="" coords="2147,415,2281,442"/>
+<area shape="rect" href="genmap_8h.html" title=" " alt="" coords="2361,80,2560,107"/>
+<area shape="rect" href="fscene_8c.html" title=" " alt="" coords="2862,80,2993,107"/>
+<area shape="rect" href="commande_menu_8c.html" title=" " alt="" coords="2345,758,2560,785"/>
+<area shape="rect" href="commande_menu_8h.html" title=" " alt="" coords="2347,676,2561,703"/>
+<area shape="rect" href="fps_menu_8h.html" title=" " alt="" coords="1423,676,1586,703"/>
+<area shape="rect" href="game_over_8h.html" title=" " alt="" coords="1661,676,1834,703"/>
+<area shape="rect" href="main_menu_8h.html" title=" " alt="" coords="1173,758,1348,785"/>
+<area shape="rect" href="main_world_8h.html" title=" " alt="" coords="1110,676,1286,703"/>
+<area shape="rect" href="option2_8h.html" title=" " alt="" coords="1909,676,2063,703"/>
+<area shape="rect" href="option_menu_8h.html" title=" " alt="" coords="2088,676,2271,703"/>
+<area shape="rect" href="scene_inventaire_8h.html" title=" " alt="" coords="2586,676,2797,703"/>
+<area shape="rect" href="win_8h.html" title=" " alt="" coords="2827,676,2956,703"/>
+<area shape="rect" href="commun_8c.html" title=" " alt="" coords="2980,676,3093,703"/>
+<area shape="rect" href="main_8c.html" title=" " alt="" coords="2031,840,2120,867"/>
+<area shape="rect" href="fps_menu_8c.html" title=" " alt="" coords="1424,758,1585,785"/>
+<area shape="rect" href="game_over_8c.html" title=" " alt="" coords="1661,758,1833,785"/>
+<area shape="rect" href="main_menu_8c.html" title=" " alt="" coords="1173,840,1348,867"/>
+<area shape="rect" href="main_world_8c.html" title=" " alt="" coords="923,758,1097,785"/>
+<area shape="rect" href="boss__slime_8h.html" title="Définition et comportement du boss slime." alt="" coords="748,751,899,792"/>
+<area shape="rect" href="option2_8c.html" title=" " alt="" coords="1858,758,2013,785"/>
+<area shape="rect" href="option_menu_8c.html" title=" " alt="" coords="2139,758,2321,785"/>
+<area shape="rect" href="scene_inventaire_8c.html" title=" " alt="" coords="2687,758,2896,785"/>
+<area shape="rect" href="win_8c.html" title=" " alt="" coords="2971,758,3099,785"/>
+<area shape="rect" href="context_8c.html" title=" " alt="" coords="2128,237,2233,263"/>
+<area shape="rect" href="health_8h.html" title="Système de gestion de la santé des entités." alt="" coords="1743,229,1951,271"/>
+<area shape="rect" href="player_8h.html" title="Définition et comportement du joueur principal." alt="" coords="1815,319,1957,360"/>
+<area shape="rect" href="barrel_8h.html" title="Définition et comportement du baril destructible." alt="" coords="1015,497,1162,539"/>
+<area shape="rect" href="spike_8h.html" title="Définition et comportement des pièges à pointes." alt="" coords="5,497,148,539"/>
+<area shape="rect" href="button_8h.html" title="Système de gestion des boutons pour l&#39;interface utilisateur." alt="" coords="1982,326,2097,353"/>
+<area shape="rect" href="enemy_8c.html" title=" " alt="" coords="1879,497,2021,539"/>
+<area shape="rect" href="ghost_8h.html" title="Définition et comportement de l&#39;ennemi fantôme." alt="" coords="1289,587,1432,628"/>
+<area shape="rect" href="slime_8h.html" title="Définition et comportement de l&#39;ennemi slime." alt="" coords="1493,497,1636,539"/>
+<area shape="rect" href="mobs_2wizard_8h.html" title=" " alt="" coords="1123,587,1265,628"/>
+<area shape="rect" href="player_8c.html" title=" " alt="" coords="1712,497,1855,539"/>
+<area shape="rect" href="minimap_8h.html" title="Gestion de la minimap (affichage et mise a jour)" alt="" coords="1338,505,1469,531"/>
+<area shape="rect" href="mapview_8h.html" title="Gestion de l&#39;affichage de la carte du niveau." alt="" coords="2360,415,2492,442"/>
+<area shape="rect" href="tiles_entity_8c.html" title=" " alt="" coords="557,587,700,628"/>
+<area shape="rect" href="blacksmith_8h.html" title="Définition et comportement du forgeron." alt="" coords="172,497,352,539"/>
+<area shape="rect" href="chest_8h.html" title="Définition et comportement du coffre à trésor." alt="" coords="376,497,519,539"/>
+<area shape="rect" href="merchant_8h.html" title="Définition et comportement du marchand." alt="" coords="543,497,714,539"/>
+<area shape="rect" href="tiles_entity_2wizard_8h.html" title="Définition et comportement du sorcier." alt="" coords="739,497,889,539"/>
+<area shape="rect" href="affichage_8c.html" title=" " alt="" coords="2148,505,2280,531"/>
+<area shape="rect" href="gene_room_8h.html" title="Générateur de salles procédurales." alt="" coords="2585,229,2787,271"/>
+<area shape="rect" href="genmap_8c.html" title=" " alt="" coords="2590,155,2787,181"/>
 </map>
 </div>
 </div>
@@ -391,12 +407,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="fscene_8h_a39d0e7fbc78f3ff2fbd207962ff6ab42_icgraph.png" border="0" usemap="#afscene_8h_a39d0e7fbc78f3ff2fbd207962ff6ab42_icgraph" alt=""/></div>
 <map name="afscene_8h_a39d0e7fbc78f3ff2fbd207962ff6ab42_icgraph" id="afscene_8h_a39d0e7fbc78f3ff2fbd207962ff6ab42_icgraph">
-<area shape="rect" title="Ajoute une scène au contrôleur." alt="" coords="820,22,905,49"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,22,612,49"/>
+<area shape="rect" title="Ajoute une scène au contrôleur." alt="" coords="789,22,875,49"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,22,581,49"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,48,60,74"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,22,772,49"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,22,453,49"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,22,239,49"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,22,741,49"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,22,423,49"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,22,208,49"/>
 </map>
 </div>
 
@@ -444,23 +460,24 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="fscene_8h_afee9b24c13757d42115fdd0cce90c9c4_icgraph.png" border="0" usemap="#afscene_8h_afee9b24c13757d42115fdd0cce90c9c4_icgraph" alt=""/></div>
 <map name="afscene_8h_afee9b24c13757d42115fdd0cce90c9c4_icgraph" id="afscene_8h_afee9b24c13757d42115fdd0cce90c9c4_icgraph">
-<area shape="rect" title="Crée une nouvelle scène." alt="" coords="1115,285,1217,312"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="929,158,1052,185"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,208,239,234"/>
-<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="692,6,867,33"/>
-<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="511,310,634,337"/>
-<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="303,361,437,388"/>
-<area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="116,412,231,438"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="927,209,1055,236"/>
-<area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="717,246,841,273"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="915,108,1067,134"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="704,462,855,489"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="501,513,644,540"/>
-<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="325,564,415,590"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="723,170,835,197"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="517,208,628,234"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,208,453,234"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,386,60,413"/>
+<area shape="rect" title="Crée une nouvelle scène." alt="" coords="1107,300,1209,327"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="115,250,215,276"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="921,47,1044,74"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="684,35,859,62"/>
+<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="499,300,622,327"/>
+<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="287,351,421,378"/>
+<area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="108,402,223,428"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="706,452,837,479"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="919,98,1047,124"/>
+<area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="709,199,833,226"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="907,148,1059,175"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="485,503,636,530"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="283,554,425,580"/>
+<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="120,604,211,631"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,402,60,428"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="715,123,827,150"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="505,199,616,226"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="271,199,437,226"/>
 </map>
 </div>
 
@@ -516,39 +533,40 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="fscene_8h_a11d7d5a9fbddf09cdc522707e4815ed1_icgraph.png" border="0" usemap="#afscene_8h_a11d7d5a9fbddf09cdc522707e4815ed1_icgraph" alt=""/></div>
 <map name="afscene_8h_a11d7d5a9fbddf09cdc522707e4815ed1_icgraph" id="afscene_8h_a11d7d5a9fbddf09cdc522707e4815ed1_icgraph">
-<area shape="rect" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="1849,106,2024,133"/>
-<area shape="rect" href="fscene_8c.html#a30e466cad04c05ed83227c9f7f99bb29" title="Récupère la scène courante." alt="" coords="1671,55,1801,82"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,207,60,234"/>
-<area shape="rect" href="fscene_8c.html#a5a7ba8ae4552319c04444654620c392e" title="Revient au menu précédent." alt="" coords="1673,106,1799,133"/>
-<area shape="rect" href="fscene_8c.html#a8d96eeeaa02433587861a66a7cc8b24f" title="Revient à la scène précédente." alt="" coords="1485,182,1615,209"/>
-<area shape="rect" href="fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="1695,435,1777,462"/>
-<area shape="rect" href="commun_8c.html#a6bbf1bdb0102d7034c73bbf597bc7474" title="Wrapper pour revenir au menu précédent." alt="" coords="331,131,513,158"/>
-<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,157,283,183"/>
-<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,106,257,133"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,258,267,285"/>
-<area shape="rect" href="commun_8c.html#a0f34c9d599d0ada8fba5d1b32c961d75" title="Wrapper pour revenir à la scène précédente." alt="" coords="561,258,747,285"/>
-<area shape="rect" href="affichage_8c.html#a97b3d1c61a1bb1026211fb94191e5485" title="Gère les entrées de l&#39;inventaire." alt="" coords="1249,157,1415,183"/>
-<area shape="rect" href="mapview_8c.html#accf55e351452252df51157768a5c9657" title="Gère les entrées utilisateur dans la vue carte." alt="" coords="1269,258,1395,285"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,309,271,335"/>
-<area shape="rect" href="commun_8c.html#a4f591af27004d405467a54fe1492e4e3" title="Wrapper pour la gestion de l&#39;inventaire." alt="" coords="967,157,1187,183"/>
-<area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="799,157,914,183"/>
-<area shape="rect" href="commun_8c.html#a3c58046d1cbb0700448c2967b7576171" title="Wrapper pour la gestion de la carte." alt="" coords="985,258,1168,285"/>
-<area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="795,258,919,285"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="599,371,709,398"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="339,371,505,398"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,359,261,386"/>
-<area shape="rect" href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f" title="Traite les entrées utilisateur pour le joueur." alt="" coords="1480,359,1620,386"/>
-<area shape="rect" href="boss__slime_8c.html#a0ce1840df2e8fdb6ab525023819624f8" title=" " alt="" coords="1477,461,1623,487"/>
-<area shape="rect" href="main_world_8c.html#a450f0cf0cb1b7658e24da51e56db4122" title=" " alt="" coords="1495,562,1605,589"/>
-<area shape="rect" href="commun_8c.html#af39fec5ad765195e1944399733fb4faa" title="Wrapper pour changer de scène." alt="" coords="354,309,490,335"/>
-<area shape="rect" href="player_8c.html#a19c9b26bd5ea417615cd19e9ce4c46f4" title="Met à jour l&#39;état et le comportement du joueur." alt="" coords="1496,410,1604,437"/>
-<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="1235,359,1429,386"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="1015,461,1138,487"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="1013,359,1141,386"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="1001,410,1153,437"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="801,385,913,411"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1267,461,1397,487"/>
-<area shape="rect" href="commun_8c.html#a32d90a8046d05096f3ea9453c8c56797" title="Wrapper pour la mise à jour du joueur." alt="" coords="1251,410,1413,437"/>
+<area shape="rect" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="1849,108,2024,135"/>
+<area shape="rect" href="fscene_8c.html#a30e466cad04c05ed83227c9f7f99bb29" title="Récupère la scène courante." alt="" coords="1671,57,1801,84"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,235,60,261"/>
+<area shape="rect" href="fscene_8c.html#a5a7ba8ae4552319c04444654620c392e" title="Revient au menu précédent." alt="" coords="1673,108,1799,135"/>
+<area shape="rect" href="fscene_8c.html#a8d96eeeaa02433587861a66a7cc8b24f" title="Revient à la scène précédente." alt="" coords="1485,196,1615,223"/>
+<area shape="rect" href="fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="1695,437,1777,464"/>
+<area shape="rect" href="commun_8c.html#a6bbf1bdb0102d7034c73bbf597bc7474" title="Wrapper pour revenir au menu précédent." alt="" coords="331,133,513,160"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,108,283,135"/>
+<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,159,257,185"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,260,267,287"/>
+<area shape="rect" href="commun_8c.html#a0f34c9d599d0ada8fba5d1b32c961d75" title="Wrapper pour revenir à la scène précédente." alt="" coords="561,260,747,287"/>
+<area shape="rect" href="affichage_8c.html#a97b3d1c61a1bb1026211fb94191e5485" title="Gère les entrées de l&#39;inventaire." alt="" coords="1249,159,1415,185"/>
+<area shape="rect" href="mapview_8c.html#accf55e351452252df51157768a5c9657" title="Gère les entrées utilisateur dans la vue carte." alt="" coords="1269,260,1395,287"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,311,271,337"/>
+<area shape="rect" href="commun_8c.html#a4f591af27004d405467a54fe1492e4e3" title="Wrapper pour la gestion de l&#39;inventaire." alt="" coords="967,159,1187,185"/>
+<area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="799,159,914,185"/>
+<area shape="rect" href="commun_8c.html#a3c58046d1cbb0700448c2967b7576171" title="Wrapper pour la gestion de la carte." alt="" coords="985,260,1168,287"/>
+<area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="795,260,919,287"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="599,412,709,439"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="339,412,505,439"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="145,412,245,439"/>
+<area shape="rect" href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f" title="Traite les entrées utilisateur pour le joueur." alt="" coords="1480,361,1620,388"/>
+<area shape="rect" href="boss__slime_8c.html#a0ce1840df2e8fdb6ab525023819624f8" title=" " alt="" coords="1477,463,1623,489"/>
+<area shape="rect" href="main_world_8c.html#a450f0cf0cb1b7658e24da51e56db4122" title=" " alt="" coords="1495,564,1605,591"/>
+<area shape="rect" href="commun_8c.html#af39fec5ad765195e1944399733fb4faa" title="Wrapper pour changer de scène." alt="" coords="354,311,490,337"/>
+<area shape="rect" href="player_8c.html#a19c9b26bd5ea417615cd19e9ce4c46f4" title="Met à jour l&#39;état et le comportement du joueur." alt="" coords="1496,412,1604,439"/>
+<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="1235,361,1429,388"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="1015,463,1138,489"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="1013,361,1141,388"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="1001,412,1153,439"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="801,412,913,439"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1267,463,1397,489"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,361,261,388"/>
+<area shape="rect" href="commun_8c.html#a32d90a8046d05096f3ea9453c8c56797" title="Wrapper pour la mise à jour du joueur." alt="" coords="1251,412,1413,439"/>
 </map>
 </div>
 
@@ -590,7 +608,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Index de l'objet ou -1 si non trouvé </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00205">205</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00204">204</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -695,7 +713,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00172">172</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00171">171</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -743,7 +761,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00193">193</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00192">192</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -790,7 +808,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Scène actuellement active </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00166">166</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00165">165</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -838,7 +856,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00157">157</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00156">156</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -891,7 +909,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00151">151</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00150">150</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -909,19 +927,19 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="fscene_8h_a8d96eeeaa02433587861a66a7cc8b24f_icgraph.png" border="0" usemap="#afscene_8h_a8d96eeeaa02433587861a66a7cc8b24f_icgraph" alt=""/></div>
 <map name="afscene_8h_a8d96eeeaa02433587861a66a7cc8b24f_icgraph" id="afscene_8h_a8d96eeeaa02433587861a66a7cc8b24f_icgraph">
-<area shape="rect" title="Revient à la scène précédente." alt="" coords="1373,56,1504,83"/>
-<area shape="rect" href="commun_8c.html#a0f34c9d599d0ada8fba5d1b32c961d75" title="Wrapper pour revenir à la scène précédente." alt="" coords="1140,5,1325,32"/>
-<area shape="rect" href="affichage_8c.html#a97b3d1c61a1bb1026211fb94191e5485" title="Gère les entrées de l&#39;inventaire." alt="" coords="1150,56,1315,83"/>
-<area shape="rect" href="mapview_8c.html#accf55e351452252df51157768a5c9657" title="Gère les entrées utilisateur dans la vue carte." alt="" coords="1169,107,1296,133"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="501,5,652,32"/>
+<area shape="rect" title="Revient à la scène précédente." alt="" coords="1343,56,1473,83"/>
+<area shape="rect" href="commun_8c.html#a0f34c9d599d0ada8fba5d1b32c961d75" title="Wrapper pour revenir à la scène précédente." alt="" coords="1109,5,1295,32"/>
+<area shape="rect" href="affichage_8c.html#a97b3d1c61a1bb1026211fb94191e5485" title="Gère les entrées de l&#39;inventaire." alt="" coords="1119,56,1285,83"/>
+<area shape="rect" href="mapview_8c.html#accf55e351452252df51157768a5c9657" title="Gère les entrées utilisateur dans la vue carte." alt="" coords="1139,107,1265,133"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="471,5,621,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
-<area shape="rect" href="commun_8c.html#a4f591af27004d405467a54fe1492e4e3" title="Wrapper pour la gestion de l&#39;inventaire." alt="" coords="872,56,1092,83"/>
-<area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="313,56,427,83"/>
-<area shape="rect" href="commun_8c.html#a3c58046d1cbb0700448c2967b7576171" title="Wrapper pour la gestion de la carte." alt="" coords="891,107,1073,133"/>
-<area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="700,107,824,133"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="521,107,632,133"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,107,453,133"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,107,239,133"/>
+<area shape="rect" href="commun_8c.html#a4f591af27004d405467a54fe1492e4e3" title="Wrapper pour la gestion de l&#39;inventaire." alt="" coords="841,56,1061,83"/>
+<area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="282,56,397,83"/>
+<area shape="rect" href="commun_8c.html#a3c58046d1cbb0700448c2967b7576171" title="Wrapper pour la gestion de la carte." alt="" coords="860,107,1043,133"/>
+<area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="669,107,793,133"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="491,107,601,133"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,107,423,133"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,107,208,133"/>
 </map>
 </div>
 
@@ -963,7 +981,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Scène trouvée ou NULL </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00132">132</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00131">131</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1012,7 +1030,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Index de la scène ou -1 si non trouvée </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00142">142</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00141">141</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1046,7 +1064,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="760,259,884,285"/>
 <area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="581,259,692,285"/>
 <area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="339,259,505,285"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,259,261,285"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="145,259,245,285"/>
 <area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1433,323,1569,349"/>
 <area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1217,335,1368,361"/>
 <area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="981,309,1103,336"/>
@@ -1173,7 +1191,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00223">223</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00222">222</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
 
 </div>
 </div>
@@ -1220,7 +1238,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointeur vers l'objet ajouté </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00214">214</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00213">213</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1312,23 +1330,24 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="fscene_8h_accbd14eb8c93d348b61a8cb09bbbf489_icgraph.png" border="0" usemap="#afscene_8h_accbd14eb8c93d348b61a8cb09bbbf489_icgraph" alt=""/></div>
 <map name="afscene_8h_accbd14eb8c93d348b61a8cb09bbbf489_icgraph" id="afscene_8h_accbd14eb8c93d348b61a8cb09bbbf489_icgraph">
-<area shape="rect" title="Enregistre une fonction pour une scène." alt="" coords="1115,285,1284,312"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="929,158,1052,185"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,208,239,234"/>
-<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="692,6,867,33"/>
-<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="511,310,634,337"/>
-<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="303,361,437,388"/>
-<area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="116,412,231,438"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="927,209,1055,236"/>
-<area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="717,246,841,273"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="915,108,1067,134"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="704,462,855,489"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="501,513,644,540"/>
-<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="325,564,415,590"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="723,170,835,197"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="517,208,628,234"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,208,453,234"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,386,60,413"/>
+<area shape="rect" title="Enregistre une fonction pour une scène." alt="" coords="1107,298,1276,325"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="115,247,215,274"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="921,45,1044,71"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="684,33,859,59"/>
+<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="499,298,622,325"/>
+<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="287,349,421,375"/>
+<area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="108,399,223,426"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="706,450,837,477"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="919,95,1047,122"/>
+<area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="709,197,833,223"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="907,146,1059,173"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="485,501,636,527"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="283,551,425,578"/>
+<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="120,602,211,629"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,399,60,426"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="715,121,827,147"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="505,197,616,223"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="271,197,437,223"/>
 </map>
 </div>
 
@@ -1369,7 +1388,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00267">267</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="fscene_8c_source.html#l00266">266</a> of file <a class="el" href="fscene_8c_source.html">fscene.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1440,22 +1459,23 @@ Here is the caller graph for this function:</div>
 <map name="afscene_8h_a41cb33c742203a83f3b38ad344168917_icgraph" id="afscene_8h_a41cb33c742203a83f3b38ad344168917_icgraph">
 <area shape="rect" title="Change la scène courante." alt="" coords="1476,148,1557,175"/>
 <area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="521,84,632,111"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,110,60,136"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,135,60,162"/>
 <area shape="rect" href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f" title="Traite les entrées utilisateur pour le joueur." alt="" coords="1285,148,1425,175"/>
 <area shape="rect" href="boss__slime_8c.html#a0ce1840df2e8fdb6ab525023819624f8" title=" " alt="" coords="1283,98,1428,124"/>
 <area shape="rect" href="main_world_8c.html#a450f0cf0cb1b7658e24da51e56db4122" title=" " alt="" coords="1300,300,1411,327"/>
-<area shape="rect" href="commun_8c.html#af39fec5ad765195e1944399733fb4faa" title="Wrapper pour changer de scène." alt="" coords="322,160,458,187"/>
+<area shape="rect" href="commun_8c.html#af39fec5ad765195e1944399733fb4faa" title="Wrapper pour changer de scène." alt="" coords="322,186,458,212"/>
 <area shape="rect" href="player_8c.html#a19c9b26bd5ea417615cd19e9ce4c46f4" title="Met à jour l&#39;état et le comportement du joueur." alt="" coords="1301,199,1409,226"/>
 <area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="307,84,473,111"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="118,84,249,111"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="133,84,233,111"/>
 <area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="1040,148,1235,175"/>
 <area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="855,98,977,124"/>
 <area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="852,148,980,175"/>
 <area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="840,199,992,226"/>
 <area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="680,123,792,150"/>
 <area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1072,98,1203,124"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="108,135,259,162"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="112,186,255,212"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="118,135,249,162"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="108,186,259,212"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="112,236,255,263"/>
 <area shape="rect" href="commun_8c.html#a32d90a8046d05096f3ea9453c8c56797" title="Wrapper pour la mise à jour du joueur." alt="" coords="1056,199,1219,226"/>
 </map>
 </div>
@@ -1463,9 +1483,13 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li><li class="navelem"><a class="el" href="fscene_8h.html">fscene.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

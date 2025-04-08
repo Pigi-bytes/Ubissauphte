@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('slime_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_1ca600b48b2e9612787975e781d8be10.html">mobs</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
@@ -232,62 +248,62 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointeur vers l'ennemi créé </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="slime_8c_source.html#l00081">81</a> of file <a class="el" href="slime_8c_source.html">slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="slime_8c_source.html#l00090">90</a> of file <a class="el" href="slime_8c_source.html">slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="slime_8h_a914090229f0e8ffc9c36340e28ba0ba3_cgraph.png" border="0" usemap="#aslime_8h_a914090229f0e8ffc9c36340e28ba0ba3_cgraph" alt=""/></div>
 <map name="aslime_8h_a914090229f0e8ffc9c36340e28ba0ba3_cgraph" id="aslime_8h_a914090229f0e8ffc9c36340e28ba0ba3_cgraph">
-<area shape="rect" title="Crée un nouvel ennemi de type slime." alt="" coords="5,968,105,995"/>
+<area shape="rect" title="Crée un nouvel ennemi de type slime." alt="" coords="5,512,105,539"/>
 <area shape="rect" href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa" title="Ajoute une animation au contrôleur." alt="" coords="213,56,327,83"/>
-<area shape="rect" href="animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="205,309,335,336"/>
-<area shape="rect" href="particules_8c.html#ae582018b7ea20710f9845936d0b82cb5" title="Crée un nouvel émetteur de particules." alt="" coords="191,968,349,995"/>
-<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="731,1272,847,1299"/>
-<area shape="rect" href="enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="210,1120,330,1147"/>
-<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="726,1323,851,1349"/>
-<area shape="rect" href="slime_8c.html#a6020acb25a55f92cdb2e04ed979259d7" title="Fonction appelée lors de la mort d&#39;un slime." alt="" coords="483,1019,597,1045"/>
-<area shape="rect" href="slime_8c.html#aae5fa97d81432ab60dba583b55c0b803" title=" " alt="" coords="153,1373,387,1400"/>
-<area shape="rect" href="slime_8c.html#a5b55d202d77ccbbf84941a31d49d8e1a" title=" " alt="" coords="219,183,321,209"/>
-<area shape="rect" href="slime_8c.html#af298c4a3bdcf3d498a814d2c4b8091c0" title=" " alt="" coords="469,917,611,944"/>
-<area shape="rect" href="slime_8c.html#acba619e9a41f0f5d6a3e728db9aea2c3" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="218,639,322,665"/>
+<area shape="rect" href="animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="205,563,335,589"/>
+<area shape="rect" href="particules_8c.html#ae582018b7ea20710f9845936d0b82cb5" title="Crée un nouvel émetteur de particules." alt="" coords="191,512,349,539"/>
+<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="731,107,847,133"/>
+<area shape="rect" href="enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="210,335,330,361"/>
+<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="726,157,851,184"/>
+<area shape="rect" href="slime_8c.html#a6020acb25a55f92cdb2e04ed979259d7" title="Fonction appelée lors de la mort d&#39;un slime." alt="" coords="483,461,597,488"/>
+<area shape="rect" href="slime_8c.html#aae5fa97d81432ab60dba583b55c0b803" title=" " alt="" coords="153,613,387,640"/>
+<area shape="rect" href="slime_8c.html#a5b55d202d77ccbbf84941a31d49d8e1a" title=" " alt="" coords="219,727,321,753"/>
+<area shape="rect" href="slime_8c.html#af298c4a3bdcf3d498a814d2c4b8091c0" title=" " alt="" coords="469,1411,611,1437"/>
+<area shape="rect" href="slime_8c.html#acba619e9a41f0f5d6a3e728db9aea2c3" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="218,1056,322,1083"/>
 <area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="496,5,584,32"/>
 <area shape="rect" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="469,56,611,83"/>
-<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="983,309,1069,336"/>
-<area shape="rect" href="timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2" title="Initialise un nouveau timer." alt="" coords="499,309,581,336"/>
-<area shape="rect" href="particules_8c.html#a61fa4b7a83f49df939133c298c2a4dab" title="Réinitialise un émetteur de particules." alt="" coords="713,917,864,944"/>
-<area shape="rect" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="453,1120,627,1147"/>
-<area shape="rect" href="health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="473,1221,607,1248"/>
-<area shape="rect" href="health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="695,1221,882,1248"/>
-<area shape="rect" href="enemy_8c.html#ab8b2a078480e90346c66bfe478a428d4" title=" " alt="" coords="479,1069,601,1096"/>
-<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="715,1171,862,1197"/>
-<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="717,1069,860,1096"/>
-<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="737,1120,840,1147"/>
-<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="737,1019,841,1045"/>
-<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="932,1019,1120,1045"/>
-<area shape="rect" href="particules_8c.html#ac20bc3614a107eaf746b683fd7b73bb1" title="Émet des particules de mort." alt="" coords="715,968,862,995"/>
-<area shape="rect" href="particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="973,917,1079,944"/>
-<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="1168,917,1289,944"/>
-<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="731,563,847,589"/>
-<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="489,157,591,184"/>
-<area shape="rect" href="particules_8c.html#a4649283fd9dfa8005ebd85d1ef3a771e" title="Affiche toutes les particules actives." alt="" coords="461,107,619,133"/>
-<area shape="rect" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="709,208,868,235"/>
-<area shape="rect" href="camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="723,157,854,184"/>
-<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="721,107,856,133"/>
-<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="732,816,845,843"/>
-<area shape="rect" href="particules_8c.html#a5daf89ca83b59eabf3cd8d2d5195f529" title="Émet des particules d&#39;impact." alt="" coords="713,867,865,893"/>
-<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="962,613,1090,640"/>
-<area shape="rect" href="physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="693,740,884,767"/>
-<area shape="rect" href="slime_8c.html#a5649e17000637f8d7f2ad5c9e1f2f5a5" title=" " alt="" coords="435,613,645,640"/>
-<area shape="rect" href="slime_8c.html#a96ec4eb4d94312660c0d2b3dc7e850ac" title=" " alt="" coords="449,664,631,691"/>
-<area shape="rect" href="slime_8c.html#a9dba0db999d3dd30de3b4c5e1bfa72ad" title=" " alt="" coords="478,411,602,437"/>
-<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="719,512,859,539"/>
-<area shape="rect" href="slime_8c.html#aacee71da27c3b5353779dcda60d72458" title=" " alt="" coords="471,563,609,589"/>
-<area shape="rect" href="slime_8c.html#a0a5435c58ff0fbbb7936ba38d9b2b0a2" title="Inflige des dégâts au joueur lors d&#39;une collision." alt="" coords="441,867,639,893"/>
-<area shape="rect" href="particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="460,461,620,488"/>
-<area shape="rect" href="physics_8c.html#a63880ca4246528d2b4a1e1fec0d9c661" title=" " alt="" coords="467,765,613,792"/>
-<area shape="rect" href="slime_8c.html#a6d35a0cce47f4616e91d377513559b89" title=" " alt="" coords="475,816,605,843"/>
-<area shape="rect" href="slime_8c.html#a12bab3fae6c9885a2cb3db522d6fc110" title=" " alt="" coords="719,613,858,640"/>
-<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="734,411,843,437"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="983,664,1069,691"/>
+<area shape="rect" href="timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2" title="Initialise un nouveau timer." alt="" coords="499,563,581,589"/>
+<area shape="rect" href="particules_8c.html#a61fa4b7a83f49df939133c298c2a4dab" title="Réinitialise un émetteur de particules." alt="" coords="713,563,864,589"/>
+<area shape="rect" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="453,335,627,361"/>
+<area shape="rect" href="health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="473,208,607,235"/>
+<area shape="rect" href="health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="695,208,882,235"/>
+<area shape="rect" href="enemy_8c.html#ab8b2a078480e90346c66bfe478a428d4" title=" " alt="" coords="479,397,601,424"/>
+<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="715,360,862,387"/>
+<area shape="rect" href="animation_8c.html#ae6819740180def325e96797c282287a6" title=" " alt="" coords="731,411,846,437"/>
+<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="717,259,860,285"/>
+<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="737,309,840,336"/>
+<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="737,461,841,488"/>
+<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="932,461,1120,488"/>
+<area shape="rect" href="particules_8c.html#ac20bc3614a107eaf746b683fd7b73bb1" title="Émet des particules de mort." alt="" coords="715,512,862,539"/>
+<area shape="rect" href="particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="973,600,1079,627"/>
+<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="1168,600,1289,627"/>
+<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="731,1107,847,1133"/>
+<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="489,701,591,728"/>
+<area shape="rect" href="particules_8c.html#a4649283fd9dfa8005ebd85d1ef3a771e" title="Affiche toutes les particules actives." alt="" coords="461,752,619,779"/>
+<area shape="rect" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="709,664,868,691"/>
+<area shape="rect" href="camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="723,715,854,741"/>
+<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="721,765,856,792"/>
+<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="732,1335,845,1361"/>
+<area shape="rect" href="particules_8c.html#a5daf89ca83b59eabf3cd8d2d5195f529" title="Émet des particules d&#39;impact." alt="" coords="713,1284,865,1311"/>
+<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="962,1157,1090,1184"/>
+<area shape="rect" href="physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="693,879,884,905"/>
+<area shape="rect" href="slime_8c.html#a5649e17000637f8d7f2ad5c9e1f2f5a5" title=" " alt="" coords="435,1107,645,1133"/>
+<area shape="rect" href="slime_8c.html#a96ec4eb4d94312660c0d2b3dc7e850ac" title=" " alt="" coords="449,1208,631,1235"/>
+<area shape="rect" href="slime_8c.html#a9dba0db999d3dd30de3b4c5e1bfa72ad" title=" " alt="" coords="478,1005,602,1032"/>
+<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="719,955,859,981"/>
+<area shape="rect" href="slime_8c.html#aacee71da27c3b5353779dcda60d72458" title=" " alt="" coords="471,1157,609,1184"/>
+<area shape="rect" href="slime_8c.html#a0a5435c58ff0fbbb7936ba38d9b2b0a2" title="Inflige des dégâts au joueur lors d&#39;une collision." alt="" coords="441,1360,639,1387"/>
+<area shape="rect" href="particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="460,1259,620,1285"/>
+<area shape="rect" href="physics_8c.html#a63880ca4246528d2b4a1e1fec0d9c661" title=" " alt="" coords="467,1309,613,1336"/>
+<area shape="rect" href="slime_8c.html#a6d35a0cce47f4616e91d377513559b89" title=" " alt="" coords="475,904,605,931"/>
+<area shape="rect" href="slime_8c.html#a12bab3fae6c9885a2cb3db522d6fc110" title=" " alt="" coords="719,1157,858,1184"/>
 </map>
 </div>
 <div class="dynheader">
@@ -295,12 +311,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="slime_8h_a914090229f0e8ffc9c36340e28ba0ba3_icgraph.png" border="0" usemap="#aslime_8h_a914090229f0e8ffc9c36340e28ba0ba3_icgraph" alt=""/></div>
 <map name="aslime_8h_a914090229f0e8ffc9c36340e28ba0ba3_icgraph" id="aslime_8h_a914090229f0e8ffc9c36340e28ba0ba3_icgraph">
-<area shape="rect" title="Crée un nouvel ennemi de type slime." alt="" coords="996,5,1096,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Crée un nouvel ennemi de type slime." alt="" coords="965,5,1065,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -348,14 +364,16 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="slime_8h_a6020acb25a55f92cdb2e04ed979259d7_cgraph.png" border="0" usemap="#aslime_8h_a6020acb25a55f92cdb2e04ed979259d7_cgraph" alt=""/></div>
 <map name="aslime_8h_a6020acb25a55f92cdb2e04ed979259d7_cgraph" id="aslime_8h_a6020acb25a55f92cdb2e04ed979259d7_cgraph">
-<area shape="rect" title="Fonction appelée lors de la mort d&#39;un slime." alt="" coords="5,56,120,83"/>
-<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="191,5,295,32"/>
-<area shape="rect" href="particules_8c.html#ac20bc3614a107eaf746b683fd7b73bb1" title="Émet des particules de mort." alt="" coords="170,56,317,83"/>
-<area shape="rect" href="particules_8c.html#a61fa4b7a83f49df939133c298c2a4dab" title="Réinitialise un émetteur de particules." alt="" coords="168,107,319,133"/>
-<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="367,5,555,32"/>
-<area shape="rect" href="particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="407,56,514,83"/>
-<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="617,107,739,133"/>
-<area shape="rect" href="particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="603,56,753,83"/>
+<area shape="rect" title="Fonction appelée lors de la mort d&#39;un slime." alt="" coords="5,107,120,133"/>
+<area shape="rect" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="191,56,295,83"/>
+<area shape="rect" href="particules_8c.html#ac20bc3614a107eaf746b683fd7b73bb1" title="Émet des particules de mort." alt="" coords="387,107,534,133"/>
+<area shape="rect" href="particules_8c.html#a61fa4b7a83f49df939133c298c2a4dab" title="Réinitialise un émetteur de particules." alt="" coords="168,157,319,184"/>
+<area shape="rect" href="player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="367,56,555,83"/>
+<area shape="rect" href="particules_8c.html#aea0223a544ee988ed39eafc6faed78ce" title="Émet des particules de soin pour le sorcier." alt="" coords="635,5,772,32"/>
+<area shape="rect" href="equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="603,56,804,83"/>
+<area shape="rect" href="particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="852,31,1003,57"/>
+<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="867,107,988,133"/>
+<area shape="rect" href="particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="650,107,757,133"/>
 </map>
 </div>
 <div class="dynheader">
@@ -363,13 +381,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="slime_8h_a6020acb25a55f92cdb2e04ed979259d7_icgraph.png" border="0" usemap="#aslime_8h_a6020acb25a55f92cdb2e04ed979259d7_icgraph" alt=""/></div>
 <map name="aslime_8h_a6020acb25a55f92cdb2e04ed979259d7_icgraph" id="aslime_8h_a6020acb25a55f92cdb2e04ed979259d7_icgraph">
-<area shape="rect" title="Fonction appelée lors de la mort d&#39;un slime." alt="" coords="1144,5,1259,32"/>
-<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="996,5,1096,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Fonction appelée lors de la mort d&#39;un slime." alt="" coords="1113,5,1228,32"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="965,5,1065,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -418,19 +436,20 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="slime_8c_source.html#l00039">39</a> of file <a class="el" href="slime_8c_source.html">slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="slime_8c_source.html#l00038">38</a> of file <a class="el" href="slime_8c_source.html">slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="slime_8h_a0a5435c58ff0fbbb7936ba38d9b2b0a2_cgraph.png" border="0" usemap="#aslime_8h_a0a5435c58ff0fbbb7936ba38d9b2b0a2_cgraph" alt=""/></div>
 <map name="aslime_8h_a0a5435c58ff0fbbb7936ba38d9b2b0a2_cgraph" id="aslime_8h_a0a5435c58ff0fbbb7936ba38d9b2b0a2_cgraph">
-<area shape="rect" title="Inflige des dégâts au joueur lors d&#39;une collision." alt="" coords="5,31,204,57"/>
-<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="271,5,385,32"/>
-<area shape="rect" href="particules_8c.html#a5daf89ca83b59eabf3cd8d2d5195f529" title="Émet des particules d&#39;impact." alt="" coords="252,56,404,83"/>
-<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="452,5,580,32"/>
-<area shape="rect" href="particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="463,56,569,83"/>
-<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="643,107,764,133"/>
-<area shape="rect" href="particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="628,56,779,83"/>
+<area shape="rect" title="Inflige des dégâts au joueur lors d&#39;une collision." alt="" coords="5,81,204,108"/>
+<area shape="rect" href="particules_8c.html#a5daf89ca83b59eabf3cd8d2d5195f529" title="Émet des particules d&#39;impact." alt="" coords="447,56,599,83"/>
+<area shape="rect" href="player_8c.html#a8e7629b549bd463358aee9ef316f412c" title=" " alt="" coords="252,107,399,133"/>
+<area shape="rect" href="particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="657,5,764,32"/>
+<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="837,56,959,83"/>
+<area shape="rect" href="particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="823,5,973,32"/>
+<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="466,107,579,133"/>
+<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="647,107,775,133"/>
 </map>
 </div>
 <div class="dynheader">
@@ -438,14 +457,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="slime_8h_a0a5435c58ff0fbbb7936ba38d9b2b0a2_icgraph.png" border="0" usemap="#aslime_8h_a0a5435c58ff0fbbb7936ba38d9b2b0a2_icgraph" alt=""/></div>
 <map name="aslime_8h_a0a5435c58ff0fbbb7936ba38d9b2b0a2_icgraph" id="aslime_8h_a0a5435c58ff0fbbb7936ba38d9b2b0a2_icgraph">
-<area shape="rect" title="Inflige des dégâts au joueur lors d&#39;une collision." alt="" coords="1296,5,1495,32"/>
-<area shape="rect" href="slime_8c.html#acba619e9a41f0f5d6a3e728db9aea2c3" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="1144,5,1248,32"/>
-<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="996,5,1096,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Inflige des dégâts au joueur lors d&#39;une collision." alt="" coords="1265,5,1464,32"/>
+<area shape="rect" href="slime_8c.html#acba619e9a41f0f5d6a3e728db9aea2c3" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="1113,5,1217,32"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="965,5,1065,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -501,45 +520,46 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="slime_8c_source.html#l00230">230</a> of file <a class="el" href="slime_8c_source.html">slime.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="slime_8c_source.html#l00239">239</a> of file <a class="el" href="slime_8c_source.html">slime.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="slime_8h_acba619e9a41f0f5d6a3e728db9aea2c3_cgraph.png" border="0" usemap="#aslime_8h_acba619e9a41f0f5d6a3e728db9aea2c3_cgraph" alt=""/></div>
 <map name="aslime_8h_acba619e9a41f0f5d6a3e728db9aea2c3_cgraph" id="aslime_8h_acba619e9a41f0f5d6a3e728db9aea2c3_cgraph">
-<area shape="rect" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="5,338,109,364"/>
-<area shape="rect" href="physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="839,34,1030,60"/>
-<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="892,287,977,314"/>
-<area shape="rect" href="slime_8c.html#a5649e17000637f8d7f2ad5c9e1f2f5a5" title=" " alt="" coords="157,388,368,415"/>
-<area shape="rect" href="slime_8c.html#a96ec4eb4d94312660c0d2b3dc7e850ac" title=" " alt="" coords="172,439,353,466"/>
-<area shape="rect" href="slime_8c.html#a9dba0db999d3dd30de3b4c5e1bfa72ad" title=" " alt="" coords="201,287,325,314"/>
-<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="422,388,562,415"/>
-<area shape="rect" href="slime_8c.html#aacee71da27c3b5353779dcda60d72458" title=" " alt="" coords="194,490,331,516"/>
-<area shape="rect" href="slime_8c.html#a0a5435c58ff0fbbb7936ba38d9b2b0a2" title="Inflige des dégâts au joueur lors d&#39;une collision." alt="" coords="163,540,362,567"/>
-<area shape="rect" href="particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="183,591,343,618"/>
-<area shape="rect" href="physics_8c.html#a63880ca4246528d2b4a1e1fec0d9c661" title=" " alt="" coords="189,186,336,212"/>
-<area shape="rect" href="slime_8c.html#a6d35a0cce47f4616e91d377513559b89" title=" " alt="" coords="198,135,327,162"/>
-<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="434,439,550,466"/>
-<area shape="rect" href="slime_8c.html#a12bab3fae6c9885a2cb3db522d6fc110" title=" " alt="" coords="423,490,561,516"/>
-<area shape="rect" href="particules_8c.html#a2f7d707376daa108a99efec11236f2c2" title="Émet des particules d&#39;atterrissage." alt="" coords="622,464,781,491"/>
-<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="637,515,765,542"/>
-<area shape="rect" href="particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="859,490,1010,516"/>
-<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="874,566,995,592"/>
-<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="437,287,547,314"/>
-<area shape="rect" href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="642,338,761,364"/>
-<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="643,388,760,415"/>
-<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="889,338,980,364"/>
-<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="435,540,549,567"/>
-<area shape="rect" href="particules_8c.html#a5daf89ca83b59eabf3cd8d2d5195f529" title="Émet des particules d&#39;impact." alt="" coords="416,591,568,618"/>
-<area shape="rect" href="particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="648,566,755,592"/>
-<area shape="rect" href="physics_8c.html#a762abc05fd3932fd770b6669536c6a39" title=" " alt="" coords="429,186,555,212"/>
-<area shape="rect" href="physics_8c.html#a49535bbd051fba95b354c0b799aeaecd" title=" " alt="" coords="616,135,787,162"/>
-<area shape="rect" href="physics_8c.html#aa4c391b6039023d72360858573598931" title=" " alt="" coords="621,186,781,212"/>
-<area shape="rect" href="physics_8c.html#a939ce6d2a8a36cf8aa70ca659cca1cb5" title=" " alt="" coords="835,84,1035,111"/>
-<area shape="rect" href="physics_8c.html#aea0d92f868946fd053a28534a3f7cbf4" title="Détecte collision entre un cercle et un rectangle." alt="" coords="843,135,1026,162"/>
-<area shape="rect" href="tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="901,186,968,212"/>
-<area shape="rect" href="physics_8c.html#a3b50b7ed91abcb9306aaa9fd47b98e8a" title=" " alt="" coords="839,236,1031,263"/>
-<area shape="rect" href="physics_8c.html#a1948cf93821271dece76ca4022f7b25d" title="Lance un rayon à travers la grille et détecte la première obstruction." alt="" coords="443,135,541,162"/>
+<area shape="rect" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="5,487,109,513"/>
+<area shape="rect" href="physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="834,208,1025,235"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="887,309,972,336"/>
+<area shape="rect" href="slime_8c.html#a5649e17000637f8d7f2ad5c9e1f2f5a5" title=" " alt="" coords="157,639,368,665"/>
+<area shape="rect" href="slime_8c.html#a96ec4eb4d94312660c0d2b3dc7e850ac" title=" " alt="" coords="172,689,353,716"/>
+<area shape="rect" href="slime_8c.html#a9dba0db999d3dd30de3b4c5e1bfa72ad" title=" " alt="" coords="201,487,325,513"/>
+<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="419,588,559,615"/>
+<area shape="rect" href="slime_8c.html#aacee71da27c3b5353779dcda60d72458" title=" " alt="" coords="194,588,331,615"/>
+<area shape="rect" href="slime_8c.html#a0a5435c58ff0fbbb7936ba38d9b2b0a2" title="Inflige des dégâts au joueur lors d&#39;une collision." alt="" coords="163,429,362,456"/>
+<area shape="rect" href="particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="183,740,343,767"/>
+<area shape="rect" href="physics_8c.html#a63880ca4246528d2b4a1e1fec0d9c661" title=" " alt="" coords="189,208,336,235"/>
+<area shape="rect" href="slime_8c.html#a6d35a0cce47f4616e91d377513559b89" title=" " alt="" coords="198,157,327,184"/>
+<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="431,639,547,665"/>
+<area shape="rect" href="slime_8c.html#a12bab3fae6c9885a2cb3db522d6fc110" title=" " alt="" coords="420,689,559,716"/>
+<area shape="rect" href="particules_8c.html#a2f7d707376daa108a99efec11236f2c2" title="Émet des particules d&#39;atterrissage." alt="" coords="850,639,1009,665"/>
+<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="865,588,993,615"/>
+<area shape="rect" href="particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="1077,551,1228,577"/>
+<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="1092,449,1213,476"/>
+<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="435,487,544,513"/>
+<area shape="rect" href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="637,512,755,539"/>
+<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="637,563,755,589"/>
+<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="884,512,975,539"/>
+<area shape="rect" href="particules_8c.html#a5daf89ca83b59eabf3cd8d2d5195f529" title="Émet des particules d&#39;impact." alt="" coords="620,360,772,387"/>
+<area shape="rect" href="player_8c.html#a8e7629b549bd463358aee9ef316f412c" title=" " alt="" coords="416,429,563,456"/>
+<area shape="rect" href="particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="876,449,983,476"/>
+<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="639,461,753,488"/>
+<area shape="rect" href="physics_8c.html#a762abc05fd3932fd770b6669536c6a39" title=" " alt="" coords="426,208,553,235"/>
+<area shape="rect" href="physics_8c.html#a49535bbd051fba95b354c0b799aeaecd" title=" " alt="" coords="611,259,781,285"/>
+<area shape="rect" href="physics_8c.html#aa4c391b6039023d72360858573598931" title=" " alt="" coords="616,56,776,83"/>
+<area shape="rect" href="physics_8c.html#a939ce6d2a8a36cf8aa70ca659cca1cb5" title=" " alt="" coords="829,259,1029,285"/>
+<area shape="rect" href="physics_8c.html#aea0d92f868946fd053a28534a3f7cbf4" title="Détecte collision entre un cercle et un rectangle." alt="" coords="838,107,1021,133"/>
+<area shape="rect" href="tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="896,5,963,32"/>
+<area shape="rect" href="physics_8c.html#a3b50b7ed91abcb9306aaa9fd47b98e8a" title=" " alt="" coords="833,56,1025,83"/>
+<area shape="rect" href="physics_8c.html#a1948cf93821271dece76ca4022f7b25d" title="Lance un rayon à travers la grille et détecte la première obstruction." alt="" coords="440,157,539,184"/>
 </map>
 </div>
 <div class="dynheader">
@@ -547,13 +567,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="slime_8h_acba619e9a41f0f5d6a3e728db9aea2c3_icgraph.png" border="0" usemap="#aslime_8h_acba619e9a41f0f5d6a3e728db9aea2c3_icgraph" alt=""/></div>
 <map name="aslime_8h_acba619e9a41f0f5d6a3e728db9aea2c3_icgraph" id="aslime_8h_acba619e9a41f0f5d6a3e728db9aea2c3_icgraph">
-<area shape="rect" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="1144,5,1248,32"/>
-<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="996,5,1096,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="820,5,948,32"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,5,772,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="1113,5,1217,32"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="965,5,1065,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="789,5,917,32"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,5,741,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -561,9 +581,13 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_1ca600b48b2e9612787975e781d8be10.html">mobs</a></li><li class="navelem"><a class="el" href="slime_8h.html">slime.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xyminmax_2050',['XYMinMax',['../mapview_8c.html#a8cf36049c7d8cffd14321df249e73f55',1,'XYMinMax(int *zoneAffichage, SDL_Rect *roomCoords, int numberRoom):&#160;mapview.c'],['../mapview_8h.html#ad6e9798ed4cf9ff2d630544ca75f84ed',1,'XYMinMax(int *zonneAff, SDL_Rect *roomCoords, int numberRoom):&#160;mapview.c']]]
+  ['wizardtakedamage_2099',['wizardTakeDamage',['../mobs_2wizard_8c.html#adae3f134659eb198ec882f031084dacf',1,'wizardTakeDamage(t_enemy *enemy, int damage, t_joueur *player, t_context *context, SDL_FPoint hitDirection):&#160;wizard.c'],['../mobs_2wizard_8h.html#adae3f134659eb198ec882f031084dacf',1,'wizardTakeDamage(t_enemy *enemy, int damage, t_joueur *player, t_context *context, SDL_FPoint hitDirection):&#160;wizard.c']]]
 ];

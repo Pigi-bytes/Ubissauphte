@@ -1,12 +1,13 @@
 <map id="renderGhost" name="renderGhost">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,108,57"/>
-<area shape="rect" id="node2" href="$timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="156,5,272,32"/>
-<area shape="rect" id="node3" href="$entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="163,56,265,83"/>
-<area shape="rect" id="node4" href="$animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="320,5,479,32"/>
-<area shape="rect" id="node6" href="$camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="334,56,465,83"/>
-<area shape="rect" id="node7" href="$animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="332,107,467,133"/>
-<area shape="rect" id="node5" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="543,5,628,32"/>
-<area shape="rect" id="node8" href="$timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="547,56,624,83"/>
-<area shape="rect" id="node9" href="$timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="540,107,631,133"/>
-<area shape="rect" id="node10" href="$animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="527,157,644,184"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,108,83"/>
+<area shape="rect" id="node2" href="$timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="177,5,293,32"/>
+<area shape="rect" id="node3" href="$entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="183,56,286,83"/>
+<area shape="rect" id="node11" href="$particules_8c.html#a4649283fd9dfa8005ebd85d1ef3a771e" title="Affiche toutes les particules actives." alt="" coords="156,107,313,133"/>
+<area shape="rect" id="node4" href="$animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="361,5,520,32"/>
+<area shape="rect" id="node6" href="$camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="375,56,506,83"/>
+<area shape="rect" id="node7" href="$animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="373,107,508,133"/>
+<area shape="rect" id="node5" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="584,5,669,32"/>
+<area shape="rect" id="node8" href="$timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="588,56,665,83"/>
+<area shape="rect" id="node9" href="$timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="581,107,672,133"/>
+<area shape="rect" id="node10" href="$animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="568,157,685,184"/>
 </map>

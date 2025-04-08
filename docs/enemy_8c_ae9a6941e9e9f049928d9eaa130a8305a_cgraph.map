@@ -1,14 +1,19 @@
 <map id="initEnemyBase" name="initEnemyBase">
-<area shape="rect" id="node1" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="5,233,125,260"/>
-<area shape="rect" id="node2" href="$animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="173,81,348,108"/>
-<area shape="rect" id="node6" href="$health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="193,208,328,235"/>
-<area shape="rect" id="node8" href="$health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="396,259,583,285"/>
-<area shape="rect" id="node10" href="$enemy_8c.html#ab8b2a078480e90346c66bfe478a428d4" title=" " alt="" coords="199,309,322,336"/>
+<area shape="rect" id="node1" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="5,284,125,311"/>
+<area shape="rect" id="node2" href="$animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="173,107,348,133"/>
+<area shape="rect" id="node7" href="$health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="193,259,328,285"/>
+<area shape="rect" id="node9" href="$health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="396,309,583,336"/>
+<area shape="rect" id="node11" href="$enemy_8c.html#ab8b2a078480e90346c66bfe478a428d4" title=" " alt="" coords="199,360,322,387"/>
 <area shape="rect" id="node3" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="416,5,563,32"/>
-<area shape="rect" id="node4" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="418,56,561,83"/>
-<area shape="rect" id="node5" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="438,107,541,133"/>
-<area shape="rect" id="node7" href="$timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="431,157,547,184"/>
-<area shape="rect" id="node9" href="$timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="427,208,552,235"/>
-<area shape="rect" id="node11" href="$player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="437,309,541,336"/>
-<area shape="rect" id="node12" href="$player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="631,309,819,336"/>
+<area shape="rect" id="node4" href="$animation_8c.html#ae6819740180def325e96797c282287a6" title=" " alt="" coords="432,56,547,83"/>
+<area shape="rect" id="node5" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="418,107,561,133"/>
+<area shape="rect" id="node6" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="438,157,541,184"/>
+<area shape="rect" id="node8" href="$timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="431,208,547,235"/>
+<area shape="rect" id="node10" href="$timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="427,259,552,285"/>
+<area shape="rect" id="node12" href="$player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="437,360,541,387"/>
+<area shape="rect" id="node13" href="$player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="631,360,819,387"/>
+<area shape="rect" id="node14" href="$particules_8c.html#aea0223a544ee988ed39eafc6faed78ce" title="Émet des particules de soin pour le sorcier." alt="" coords="899,335,1036,361"/>
+<area shape="rect" id="node17" href="$equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="867,385,1068,412"/>
+<area shape="rect" id="node15" href="$particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="1116,309,1267,336"/>
+<area shape="rect" id="node16" href="$particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="1131,360,1252,387"/>
 </map>

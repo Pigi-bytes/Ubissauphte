@@ -1,16 +1,30 @@
 <map id="t_wizard" name="t_wizard">
-<area shape="rect" id="node1" title="Entité sorcier qui vend des objets épiques." alt="" coords="444,424,521,451"/>
-<area shape="rect" id="node2" href="$structt__text.html" title="Structure représentant un élément textuel dans l&#39;interface." alt="" coords="301,320,361,347"/>
-<area shape="rect" id="node3" href="$structs__tile_entity.html" title="Entité spéciale placée sur une tuile avec des comportements spécifiques." alt="" coords="542,320,637,347"/>
-<area shape="rect" id="node4" href="$structs__entity.html" title="Structure de base pour toutes les entités du jeu." alt="" coords="552,231,627,257"/>
-<area shape="rect" id="node5" href="$structt__scene.html" title="Représente une scène composée d&#39;objets." alt="" coords="345,140,417,167"/>
-<area shape="rect" id="node6" href="$structt__fonction_param.html" title="Structure contenant les informations d&#39;une fonction." alt="" coords="141,5,269,32"/>
-<area shape="rect" id="node11" href="$structt__item.html" title="Définition d&#39;un item." alt="" coords="153,231,217,257"/>
-<area shape="rect" id="node14" href="$structt__arme.html" title="Représente une arme avec ses propriétés et attributs." alt="" coords="251,140,319,167"/>
-<area shape="rect" id="node7" href="$structt__object_manager.html" title="Gestionnaire des objets." alt="" coords="396,5,527,32"/>
-<area shape="rect" id="node9" href="$structt__animation_controller.html" title="Gère plusieurs animations pour une entité" alt="" coords="442,140,606,167"/>
-<area shape="rect" id="node8" href="$structt__physics.html" title="Composant de physique pour les entités." alt="" coords="631,140,713,167"/>
-<area shape="rect" id="node10" href="$structt__circle.html" title="Représente un cercle pour les collisions circulaires." alt="" coords="788,140,857,167"/>
-<area shape="rect" id="node12" href="$structt__stats.html" title="Statistiques d&#39;un personnage ou item." alt="" coords="33,140,100,167"/>
-<area shape="rect" id="node13" href="$structt__stat_modifier.html" title="Modificateurs de statistiques." alt="" coords="5,5,117,32"/>
+<area shape="rect" id="node1" title="Ennemi de type sorcier, capable de soigner les autres ennemis dans un rayon." alt="" coords="1853,429,1931,456"/>
+<area shape="rect" id="node2" href="$structs__particle_emitter.html" title="Émetteur gérant un ensemble de particules." alt="" coords="1082,565,1215,592"/>
+<area shape="rect" id="node15" href="$structs__joueur.html" title="Référence au type joueur pour éviter les inclusions circulaires." alt="" coords="1396,429,1473,456"/>
+<area shape="rect" id="node3" href="$structs__entity_particle.html" title="Représente une particule individuelle." alt="" coords="739,549,862,576"/>
+<area shape="rect" id="node4" href="$structt__text.html" title="Structure représentant un élément textuel dans l&#39;interface." alt="" coords="1655,783,1715,809"/>
+<area shape="rect" id="node5" href="$structt__delta_timer.html" title="Timer accumulant un temps delta." alt="" coords="748,711,853,737"/>
+<area shape="rect" id="node26" href="$structs__health_system.html" title="Gère la santé, les dégâts et les effets visuels associés." alt="" coords="1085,681,1212,708"/>
+<area shape="rect" id="node6" href="$structs__tile_entity.html" title="Entité spéciale placée sur une tuile avec des comportements spécifiques." alt="" coords="1519,135,1614,161"/>
+<area shape="rect" id="node7" href="$structs__entity.html" title="Structure de base pour toutes les entités du jeu." alt="" coords="1111,169,1186,196"/>
+<area shape="rect" id="node14" href="$structt__enemy.html" title="Structure de base pour tous les ennemis." alt="" coords="1645,429,1724,456"/>
+<area shape="rect" id="node8" href="$structt__scene.html" title="Représente une scène composée d&#39;objets." alt="" coords="765,108,837,135"/>
+<area shape="rect" id="node9" href="$structt__fonction_param.html" title="Structure contenant les informations d&#39;une fonction." alt="" coords="5,183,133,209"/>
+<area shape="rect" id="node18" href="$structt__item.html" title="Définition d&#39;un item." alt="" coords="472,200,536,227"/>
+<area shape="rect" id="node21" href="$structt__arme.html" title="Représente une arme avec ses propriétés et attributs." alt="" coords="254,244,322,271"/>
+<area shape="rect" id="node10" href="$structt__object_manager.html" title="Gestionnaire des objets." alt="" coords="439,251,569,277"/>
+<area shape="rect" id="node12" href="$structt__animation_controller.html" title="Gère plusieurs animations pour une entité" alt="" coords="719,159,883,185"/>
+<area shape="rect" id="node24" href="$structt__inventaire.html" title="Inventaire contenant les items." alt="" coords="924,307,1024,333"/>
+<area shape="rect" id="node11" href="$structt__physics.html" title="Composant de physique pour les entités." alt="" coords="759,209,842,236"/>
+<area shape="rect" id="node13" href="$structt__circle.html" title="Représente un cercle pour les collisions circulaires." alt="" coords="766,57,835,84"/>
+<area shape="rect" id="node16" href="$structt__equipement_slot_type.html" title="Emplacement d&#39;équipement." alt="" coords="1065,249,1232,276"/>
+<area shape="rect" id="node17" href="$structt__items_stack.html" title="Pile d&#39;items identiques." alt="" coords="747,260,854,287"/>
+<area shape="rect" id="node19" href="$structt__stats.html" title="Statistiques d&#39;un personnage ou item." alt="" coords="255,549,321,576"/>
+<area shape="rect" id="node20" href="$structt__stat_modifier.html" title="Modificateurs de statistiques." alt="" coords="13,549,125,576"/>
+<area shape="rect" id="node22" href="$structt__attack.html" title="Gère l&#39;état et les propriétés d&#39;une attaque du joueur." alt="" coords="1111,464,1186,491"/>
+<area shape="rect" id="node23" href="$structt__sector.html" title="Représente un secteur angulaire pour les détections dans un cône." alt="" coords="763,448,838,475"/>
+<area shape="rect" id="node25" href="$structt__control.html" title="Contient les configurations des touches de contrôle." alt="" coords="1109,413,1188,440"/>
+<area shape="rect" id="node27" href="$structt__dash.html" title="Gère l&#39;état et les propriétés d&#39;un dash (esquive rapide)" alt="" coords="1116,515,1181,541"/>
+<area shape="rect" id="node28" href="$structt__timer.html" title="Timer basé sur les ticks SDL." alt="" coords="766,499,835,525"/>
 </map>

@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('merchant_8c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_7d056440595eb1d73063e62f754f7138.html">tilesEntity</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
@@ -134,50 +150,51 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointeur vers l'entité créée </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="merchant_8c_source.html#l00087">87</a> of file <a class="el" href="merchant_8c_source.html">merchant.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="merchant_8c_source.html#l00084">84</a> of file <a class="el" href="merchant_8c_source.html">merchant.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="merchant_8c_a53f83d4680e665775b78a9669092279a_cgraph.png" border="0" usemap="#amerchant_8c_a53f83d4680e665775b78a9669092279a_cgraph" alt=""/></div>
 <map name="amerchant_8c_a53f83d4680e665775b78a9669092279a_cgraph" id="amerchant_8c_a53f83d4680e665775b78a9669092279a_cgraph">
-<area shape="rect" title="Crée une nouvelle entité marchand." alt="" coords="5,651,168,677"/>
-<area shape="rect" href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa" title="Ajoute une animation au contrôleur." alt="" coords="673,31,787,57"/>
-<area shape="rect" href="animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="219,625,350,652"/>
-<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="885,524,971,551"/>
-<area shape="rect" href="equipements_manager_8c.html#a48783b770b3a170aa95d048d02dcb573" title="Récupère un item aléatoire d&#39;une rareté donnée." alt="" coords="220,777,349,804"/>
-<area shape="rect" href="tiles_entity_8c.html#aab887fa625ebafb48717f3a50359f61a" title="Initialise les propriétés de base d&#39;une entité de tuile." alt="" coords="216,904,353,931"/>
-<area shape="rect" href="merchant_8c.html#ae41f37048288f6c61f3e29874c4b18a6" title="Affiche le marchand et son interface." alt="" coords="222,676,347,703"/>
-<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="447,803,557,829"/>
-<area shape="rect" href="merchant_8c.html#a2327237b68bc5eb3a06b5c1d4ba522ad" title="Met à jour l&#39;état et le comportement du marchand." alt="" coords="221,321,349,348"/>
-<area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="884,31,972,57"/>
+<area shape="rect" title="Crée une nouvelle entité marchand." alt="" coords="5,639,168,665"/>
+<area shape="rect" href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa" title="Ajoute une animation au contrôleur." alt="" coords="673,5,787,32"/>
+<area shape="rect" href="animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="219,563,350,589"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="885,512,971,539"/>
+<area shape="rect" href="equipements_manager_8c.html#a48783b770b3a170aa95d048d02dcb573" title="Récupère un item aléatoire d&#39;une rareté donnée." alt="" coords="220,765,349,792"/>
+<area shape="rect" href="tiles_entity_8c.html#aab887fa625ebafb48717f3a50359f61a" title="Initialise les propriétés de base d&#39;une entité de tuile." alt="" coords="216,892,353,919"/>
+<area shape="rect" href="merchant_8c.html#ae41f37048288f6c61f3e29874c4b18a6" title="Affiche le marchand et son interface." alt="" coords="222,664,347,691"/>
+<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="447,791,557,817"/>
+<area shape="rect" href="merchant_8c.html#a2327237b68bc5eb3a06b5c1d4ba522ad" title="Met à jour l&#39;état et le comportement du marchand." alt="" coords="221,309,349,336"/>
+<area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="884,56,972,83"/>
 <area shape="rect" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="857,157,999,184"/>
-<area shape="rect" href="timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2" title="Initialise un nouveau timer." alt="" coords="461,575,543,601"/>
-<area shape="rect" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="415,955,589,981"/>
-<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="657,929,803,956"/>
-<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="659,980,801,1007"/>
-<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="679,1031,781,1057"/>
-<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="451,676,553,703"/>
-<area shape="rect" href="text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="457,727,547,753"/>
-<area shape="rect" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="651,625,809,652"/>
-<area shape="rect" href="camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="665,676,795,703"/>
-<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="663,777,797,804"/>
-<area shape="rect" href="timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="889,777,967,804"/>
-<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="883,879,973,905"/>
-<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="869,828,987,855"/>
-<area shape="rect" href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="671,879,789,905"/>
-<area shape="rect" href="physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="407,321,597,348"/>
+<area shape="rect" href="timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2" title="Initialise un nouveau timer." alt="" coords="461,563,543,589"/>
+<area shape="rect" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="415,968,589,995"/>
+<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="657,917,803,944"/>
+<area shape="rect" href="animation_8c.html#ae6819740180def325e96797c282287a6" title=" " alt="" coords="673,968,787,995"/>
+<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="659,1019,801,1045"/>
+<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="679,1069,781,1096"/>
+<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="451,664,553,691"/>
+<area shape="rect" href="text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="457,715,547,741"/>
+<area shape="rect" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="651,613,809,640"/>
+<area shape="rect" href="camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="665,664,795,691"/>
+<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="663,765,797,792"/>
+<area shape="rect" href="timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="889,765,967,792"/>
+<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="883,816,973,843"/>
+<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="869,867,987,893"/>
+<area shape="rect" href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="671,816,789,843"/>
+<area shape="rect" href="physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="407,309,597,336"/>
 <area shape="rect" href="text_8c.html#aeb2abb74af73c1c4372b43db48c96d3e" title="Crée un texte simple sans contour." alt="" coords="685,411,775,437"/>
-<area shape="rect" href="equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="401,220,603,247"/>
-<area shape="rect" href="equipements_manager_8c.html#aee54a2c5f88bf08ed74e4c1c016f773a" title="Ajoute un objet à l&#39;inventaire." alt="" coords="423,119,581,145"/>
-<area shape="rect" href="audio_manager_8c.html#a9f819b827499e9c2eadb4f276dea5e29" title=" " alt="" coords="462,169,542,196"/>
-<area shape="rect" href="input_8c.html#a5dbfa0b962c1dde73b323300bc05034c" title="Détecte un appui unique sur une touche malgrés les frames." alt="" coords="445,271,559,297"/>
-<area shape="rect" href="text_8c.html#a6aad28e2d5f69d57937dae840fa9a915" title="Met à jour un texte simple existant." alt="" coords="455,423,549,449"/>
-<area shape="rect" href="equipements_manager_8c.html#a0a7ab9c085d79cdb4ab665c5d7095e8a" title="Vérifie si un item possède un flag donné" alt="" coords="693,81,767,108"/>
-<area shape="rect" href="equipements_manager_8c.html#aeb66c8d0b70efa9056e84b0e77331878" title="Trouve une pile d&#39;items dans l&#39;inventaire." alt="" coords="655,284,805,311"/>
-<area shape="rect" href="audio_manager_8c.html#a4ec64f2ae737ce1bd28ad405a07c7743" title=" " alt="" coords="695,183,765,209"/>
-<area shape="rect" href="audio_manager_8c.html#a0e16a111c05fb5ec00fd8abd413251e9" title=" " alt="" coords="681,233,779,260"/>
-<area shape="rect" href="audio_manager_8c.html#a55db07928385383549ca67bb3062f2ce" title=" " alt="" coords="696,335,764,361"/>
-<area shape="rect" href="object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="865,233,991,260"/>
+<area shape="rect" href="equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="401,208,603,235"/>
+<area shape="rect" href="equipements_manager_8c.html#aee54a2c5f88bf08ed74e4c1c016f773a" title="Ajoute un objet à l&#39;inventaire." alt="" coords="423,157,581,184"/>
+<area shape="rect" href="audio_manager_8c.html#a9f819b827499e9c2eadb4f276dea5e29" title=" " alt="" coords="462,107,542,133"/>
+<area shape="rect" href="input_8c.html#a5dbfa0b962c1dde73b323300bc05034c" title="Détecte un appui unique sur une touche malgrés les frames." alt="" coords="445,259,559,285"/>
+<area shape="rect" href="text_8c.html#a6aad28e2d5f69d57937dae840fa9a915" title="Met à jour un texte simple existant." alt="" coords="455,360,549,387"/>
+<area shape="rect" href="equipements_manager_8c.html#a0a7ab9c085d79cdb4ab665c5d7095e8a" title="Vérifie si un item possède un flag donné" alt="" coords="693,309,767,336"/>
+<area shape="rect" href="equipements_manager_8c.html#aeb66c8d0b70efa9056e84b0e77331878" title="Trouve une pile d&#39;items dans l&#39;inventaire." alt="" coords="655,360,805,387"/>
+<area shape="rect" href="audio_manager_8c.html#a4ec64f2ae737ce1bd28ad405a07c7743" title=" " alt="" coords="695,56,765,83"/>
+<area shape="rect" href="audio_manager_8c.html#a0e16a111c05fb5ec00fd8abd413251e9" title=" " alt="" coords="681,259,779,285"/>
+<area shape="rect" href="audio_manager_8c.html#a55db07928385383549ca67bb3062f2ce" title=" " alt="" coords="696,107,764,133"/>
+<area shape="rect" href="object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="865,259,991,285"/>
 </map>
 </div>
 <div class="dynheader">
@@ -185,15 +202,15 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="merchant_8c_a53f83d4680e665775b78a9669092279a_icgraph.png" border="0" usemap="#amerchant_8c_a53f83d4680e665775b78a9669092279a_icgraph" alt=""/></div>
 <map name="amerchant_8c_a53f83d4680e665775b78a9669092279a_icgraph" id="amerchant_8c_a53f83d4680e665775b78a9669092279a_icgraph">
-<area shape="rect" title="Crée une nouvelle entité marchand." alt="" coords="1219,56,1381,83"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1020,56,1171,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Crée une nouvelle entité marchand." alt="" coords="1188,56,1351,83"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="989,56,1140,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -242,7 +259,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="merchant_8c_source.html#l00067">67</a> of file <a class="el" href="merchant_8c_source.html">merchant.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="merchant_8c_source.html#l00064">64</a> of file <a class="el" href="merchant_8c_source.html">merchant.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -265,16 +282,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="merchant_8c_ae41f37048288f6c61f3e29874c4b18a6_icgraph.png" border="0" usemap="#amerchant_8c_ae41f37048288f6c61f3e29874c4b18a6_icgraph" alt=""/></div>
 <map name="amerchant_8c_ae41f37048288f6c61f3e29874c4b18a6_icgraph" id="amerchant_8c_ae41f37048288f6c61f3e29874c4b18a6_icgraph">
-<area shape="rect" title="Affiche le marchand et son interface." alt="" coords="1429,56,1555,83"/>
-<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1219,56,1381,83"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1020,56,1171,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Affiche le marchand et son interface." alt="" coords="1399,56,1524,83"/>
+<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1188,56,1351,83"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="989,56,1140,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -360,16 +377,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="merchant_8c_a2327237b68bc5eb3a06b5c1d4ba522ad_icgraph.png" border="0" usemap="#amerchant_8c_a2327237b68bc5eb3a06b5c1d4ba522ad_icgraph" alt=""/></div>
 <map name="amerchant_8c_a2327237b68bc5eb3a06b5c1d4ba522ad_icgraph" id="amerchant_8c_a2327237b68bc5eb3a06b5c1d4ba522ad_icgraph">
-<area shape="rect" title="Met à jour l&#39;état et le comportement du marchand." alt="" coords="1429,56,1557,83"/>
-<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1219,56,1381,83"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1020,56,1171,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Met à jour l&#39;état et le comportement du marchand." alt="" coords="1399,56,1527,83"/>
+<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1188,56,1351,83"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="989,56,1140,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -377,9 +394,13 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_7d056440595eb1d73063e62f754f7138.html">tilesEntity</a></li><li class="navelem"><a class="el" href="merchant_8c.html">merchant.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

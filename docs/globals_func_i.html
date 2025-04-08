@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -49,6 +53,22 @@ $(function() {
 /* @license-end */</script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('globals_func_i.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -67,17 +87,20 @@ $(function() {
 &#160;
 
 <h3><a id="index_i"></a>- i -</h3><ul>
+<li>incrementPlayerOffset()
+: <a class="el" href="main_menu_8c.html#ade3e30a23c5edf2f0d3f239d1c010b43">mainMenu.c</a>
+</li>
 <li>indiceByscene()
-: <a class="el" href="fscene_8h.html#a203dc7420436877b66bbcc6e559483af">fscene.h</a>
-, <a class="el" href="fscene_8c.html#a203dc7420436877b66bbcc6e559483af">fscene.c</a>
+: <a class="el" href="fscene_8c.html#a203dc7420436877b66bbcc6e559483af">fscene.c</a>
+, <a class="el" href="fscene_8h.html#a203dc7420436877b66bbcc6e559483af">fscene.h</a>
 </li>
 <li>indiceFromDifficulty()
-: <a class="el" href="main_menu_8h.html#a27a9ef787739b86e4145651faee87593">mainMenu.h</a>
-, <a class="el" href="main_menu_8c.html#a27a9ef787739b86e4145651faee87593">mainMenu.c</a>
+: <a class="el" href="main_menu_8c.html#a27a9ef787739b86e4145651faee87593">mainMenu.c</a>
+, <a class="el" href="main_menu_8h.html#a27a9ef787739b86e4145651faee87593">mainMenu.h</a>
 </li>
 <li>indiceToucheCliquer()
-: <a class="el" href="input_8h.html#a52996147ab518a8d16b94287a140c7ee">input.h</a>
-, <a class="el" href="input_8c.html#a52996147ab518a8d16b94287a140c7ee">input.c</a>
+: <a class="el" href="input_8c.html#a52996147ab518a8d16b94287a140c7ee">input.c</a>
+, <a class="el" href="input_8h.html#a52996147ab518a8d16b94287a140c7ee">input.h</a>
 </li>
 <li>InitAllBlock()
 : <a class="el" href="liste_block_8c.html#a0374925ca137cff516ff1e935215c63b">listeBlock.c</a>
@@ -96,8 +119,8 @@ $(function() {
 , <a class="el" href="audio_manager_8h.html#a97c0cf97a269d373ccbbcc21424e7721">audioManager.h</a>
 </li>
 <li>initCase()
-: <a class="el" href="group__type__case__constants.html#ga2b120790d7e25547b735afe2a069367f">grille.h</a>
-, <a class="el" href="group__type__case__constants.html#ga2b120790d7e25547b735afe2a069367f">grille.c</a>
+: <a class="el" href="group__type__case__constants.html#ga2b120790d7e25547b735afe2a069367f">grille.c</a>
+, <a class="el" href="group__type__case__constants.html#ga2b120790d7e25547b735afe2a069367f">grille.h</a>
 </li>
 <li>initDeltaTimer()
 : <a class="el" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638">timer.c</a>
@@ -116,8 +139,8 @@ $(function() {
 , <a class="el" href="frame_8h.html#ad2a5b5c041395e6cfa3798c420377f88">frame.h</a>
 </li>
 <li>initGrille()
-: <a class="el" href="group__type__case__constants.html#ga6e4aa5870831bf3b631ed8cd25c458ae">grille.c</a>
-, <a class="el" href="group__type__case__constants.html#ga6e4aa5870831bf3b631ed8cd25c458ae">grille.h</a>
+: <a class="el" href="group__type__case__constants.html#ga6e4aa5870831bf3b631ed8cd25c458ae">grille.h</a>
+, <a class="el" href="group__type__case__constants.html#ga6e4aa5870831bf3b631ed8cd25c458ae">grille.c</a>
 </li>
 <li>initHealthSystem()
 : <a class="el" href="health_8c.html#af78dc016d45f39fbd4f2075eb603353f">health.c</a>
@@ -142,12 +165,12 @@ $(function() {
 , <a class="el" href="object_manager_8h.html#a23e66daef97e93e6873108dd50e97f83">objectManager.h</a>
 </li>
 <li>initPile()
-: <a class="el" href="fill_gaps_8c.html#a5a1632c9a205c9605994d786b4d227d6">fillGaps.c</a>
-, <a class="el" href="fill_gaps_8h.html#a5a1632c9a205c9605994d786b4d227d6">fillGaps.h</a>
+: <a class="el" href="fill_gaps_8h.html#a5a1632c9a205c9605994d786b4d227d6">fillGaps.h</a>
+, <a class="el" href="fill_gaps_8c.html#a5a1632c9a205c9605994d786b4d227d6">fillGaps.c</a>
 </li>
 <li>initRoom()
-: <a class="el" href="genmap_8h.html#ac50fbce591c797fbf374390298a701e0">genmap.h</a>
-, <a class="el" href="genmap_8c.html#ac50fbce591c797fbf374390298a701e0">genmap.c</a>
+: <a class="el" href="genmap_8c.html#ac50fbce591c797fbf374390298a701e0">genmap.c</a>
+, <a class="el" href="genmap_8h.html#ac50fbce591c797fbf374390298a701e0">genmap.h</a>
 </li>
 <li>initSceneController()
 : <a class="el" href="fscene_8c.html#ae4a7b0eb8dc4ab3d4461975955cba83d">fscene.c</a>
@@ -166,8 +189,8 @@ $(function() {
 , <a class="el" href="tiles_entity_8h.html#aab887fa625ebafb48717f3a50359f61a">tilesEntity.h</a>
 </li>
 <li>initTileset()
-: <a class="el" href="tileset_8c.html#ab041e3b90591cb42626107fb85289c09">tileset.c</a>
-, <a class="el" href="tileset_8h.html#ab041e3b90591cb42626107fb85289c09">tileset.h</a>
+: <a class="el" href="tileset_8h.html#ab041e3b90591cb42626107fb85289c09">tileset.h</a>
+, <a class="el" href="tileset_8c.html#ab041e3b90591cb42626107fb85289c09">tileset.c</a>
 </li>
 <li>initTimer()
 : <a class="el" href="timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2">timer.c</a>
@@ -194,8 +217,8 @@ $(function() {
 , <a class="el" href="equipements_manager_8h.html#aeb66c8d0b70efa9056e84b0e77331878">equipementsManager.h</a>
 </li>
 <li>inventory_load()
-: <a class="el" href="equipements_manager_8c.html#aca8ce83f7015926bf430cb136bb605f3">equipementsManager.c</a>
-, <a class="el" href="equipements_manager_8h.html#aca8ce83f7015926bf430cb136bb605f3">equipementsManager.h</a>
+: <a class="el" href="equipements_manager_8h.html#aca8ce83f7015926bf430cb136bb605f3">equipementsManager.h</a>
+, <a class="el" href="equipements_manager_8c.html#aca8ce83f7015926bf430cb136bb605f3">equipementsManager.c</a>
 </li>
 <li>inventory_print()
 : <a class="el" href="equipements_manager_8c.html#a1916604b13040bee605bcf11f6a7dc76">equipementsManager.c</a>
@@ -218,8 +241,8 @@ $(function() {
 , <a class="el" href="commun_8h.html#a1ada1938c96f85c840f6c4ef88aca8b6">commun.h</a>
 </li>
 <li>inventoryUI_Update()
-: <a class="el" href="affichage_8h.html#acac6e41a22a08962af5736bb23e8026e">affichage.h</a>
-, <a class="el" href="affichage_8c.html#acac6e41a22a08962af5736bb23e8026e">affichage.c</a>
+: <a class="el" href="affichage_8c.html#acac6e41a22a08962af5736bb23e8026e">affichage.c</a>
+, <a class="el" href="affichage_8h.html#acac6e41a22a08962af5736bb23e8026e">affichage.h</a>
 </li>
 <li>inventoryUI_UpdateWrapper()
 : <a class="el" href="commun_8c.html#abc60ca3fcbf54c897b7cea3dedde3150">commun.c</a>
@@ -271,9 +294,12 @@ $(function() {
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

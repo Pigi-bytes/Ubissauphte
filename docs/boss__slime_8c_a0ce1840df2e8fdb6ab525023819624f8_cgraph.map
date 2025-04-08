@@ -1,9 +1,13 @@
 <map id="onBossSlimeDeath" name="onBossSlimeDeath">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,151,57"/>
-<area shape="rect" id="node2" href="$player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="199,5,303,32"/>
-<area shape="rect" id="node4" href="$fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="210,56,291,83"/>
-<area shape="rect" id="node3" href="$player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="351,5,539,32"/>
-<area shape="rect" id="node5" href="$fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="357,56,532,83"/>
-<area shape="rect" id="node7" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="402,107,487,133"/>
-<area shape="rect" id="node6" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="587,56,687,83"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,151,133"/>
+<area shape="rect" id="node2" href="$player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="199,81,303,108"/>
+<area shape="rect" id="node8" href="$fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="210,132,291,159"/>
+<area shape="rect" id="node3" href="$player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="351,81,539,108"/>
+<area shape="rect" id="node4" href="$particules_8c.html#aea0223a544ee988ed39eafc6faed78ce" title="Émet des particules de soin pour le sorcier." alt="" coords="619,31,756,57"/>
+<area shape="rect" id="node7" href="$equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="587,81,788,108"/>
+<area shape="rect" id="node5" href="$particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="836,5,987,32"/>
+<area shape="rect" id="node6" href="$particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="851,56,972,83"/>
+<area shape="rect" id="node9" href="$fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="357,132,532,159"/>
+<area shape="rect" id="node11" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="402,183,487,209"/>
+<area shape="rect" id="node10" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="637,132,737,159"/>
 </map>

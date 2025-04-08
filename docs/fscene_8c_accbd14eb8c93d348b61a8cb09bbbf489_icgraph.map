@@ -1,19 +1,20 @@
 <map id="sceneRegisterFunction" name="sceneRegisterFunction">
-<area shape="rect" id="node1" title="Enregistre une fonction pour une scène." alt="" coords="1115,285,1284,312"/>
-<area shape="rect" id="node2" href="$main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="929,158,1052,185"/>
-<area shape="rect" id="node6" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,208,239,234"/>
-<area shape="rect" id="node8" href="$commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="692,6,867,33"/>
-<area shape="rect" id="node9" href="$fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="511,310,634,337"/>
-<area shape="rect" id="node10" href="$game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="303,361,437,388"/>
-<area shape="rect" id="node11" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="116,412,231,438"/>
-<area shape="rect" id="node12" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="927,209,1055,236"/>
-<area shape="rect" id="node13" href="$main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="717,246,841,273"/>
-<area shape="rect" id="node14" href="$main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="915,108,1067,134"/>
-<area shape="rect" id="node15" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="704,462,855,489"/>
-<area shape="rect" id="node16" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="501,513,644,540"/>
-<area shape="rect" id="node17" href="$win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="325,564,415,590"/>
-<area shape="rect" id="node3" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="723,170,835,197"/>
-<area shape="rect" id="node4" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="517,208,628,234"/>
-<area shape="rect" id="node5" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,208,453,234"/>
-<area shape="rect" id="node7" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,386,60,413"/>
+<area shape="rect" id="node1" title="Enregistre une fonction pour une scène." alt="" coords="1107,298,1276,325"/>
+<area shape="rect" id="node2" href="$main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="115,247,215,274"/>
+<area shape="rect" id="node4" href="$main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="921,45,1044,71"/>
+<area shape="rect" id="node8" href="$commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="684,33,859,59"/>
+<area shape="rect" id="node9" href="$fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="499,298,622,325"/>
+<area shape="rect" id="node10" href="$game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="287,349,421,375"/>
+<area shape="rect" id="node11" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="108,399,223,426"/>
+<area shape="rect" id="node12" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="706,450,837,477"/>
+<area shape="rect" id="node13" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="919,95,1047,122"/>
+<area shape="rect" id="node14" href="$main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="709,197,833,223"/>
+<area shape="rect" id="node15" href="$main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="907,146,1059,173"/>
+<area shape="rect" id="node16" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="485,501,636,527"/>
+<area shape="rect" id="node17" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="283,551,425,578"/>
+<area shape="rect" id="node18" href="$win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="120,602,211,629"/>
+<area shape="rect" id="node3" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,399,60,426"/>
+<area shape="rect" id="node5" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="715,121,827,147"/>
+<area shape="rect" id="node6" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="505,197,616,223"/>
+<area shape="rect" id="node7" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="271,197,437,223"/>
 </map>

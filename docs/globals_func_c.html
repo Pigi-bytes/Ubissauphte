@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -49,6 +53,22 @@ $(function() {
 /* @license-end */</script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('globals_func_c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -115,8 +135,8 @@ $(function() {
 , <a class="el" href="camera_8h.html#a9477257358163a9f4067a6a359692e71">camera.h</a>
 </li>
 <li>cameraHandleZoomWrapper()
-: <a class="el" href="commun_8c.html#ab20f8d2e1580b37c1916e19726b8c50f">commun.c</a>
-, <a class="el" href="commun_8h.html#ab20f8d2e1580b37c1916e19726b8c50f">commun.h</a>
+: <a class="el" href="commun_8h.html#ab20f8d2e1580b37c1916e19726b8c50f">commun.h</a>
+, <a class="el" href="commun_8c.html#ab20f8d2e1580b37c1916e19726b8c50f">commun.c</a>
 </li>
 <li>cameraUpdateShake()
 : <a class="el" href="camera_8c.html#a58b8c8fc7c7b6b734b86acccaade2f05">camera.c</a>
@@ -135,8 +155,8 @@ $(function() {
 , <a class="el" href="lissage_8h.html#a4cb665eeb015afb3aeab764f6def7070">lissage.h</a>
 </li>
 <li>caseSansVoisins()
-: <a class="el" href="lissage_8c.html#aefe3b51685f373ee6284833b2e6780c6">lissage.c</a>
-, <a class="el" href="lissage_8h.html#aefe3b51685f373ee6284833b2e6780c6">lissage.h</a>
+: <a class="el" href="lissage_8h.html#aefe3b51685f373ee6284833b2e6780c6">lissage.h</a>
+, <a class="el" href="lissage_8c.html#aefe3b51685f373ee6284833b2e6780c6">lissage.c</a>
 </li>
 <li>centerCameraOn()
 : <a class="el" href="camera_8c.html#aa3a432661215176d117ac6e26e36564e">camera.c</a>
@@ -151,8 +171,12 @@ $(function() {
 , <a class="el" href="physics_8h.html#a7bdb858968c7b571e6577d1a30af9888">physics.h</a>
 </li>
 <li>changementAffichage()
-: <a class="el" href="commun_8h.html#a3f79757dddc565febc8dfe47e3eee431">commun.h</a>
-, <a class="el" href="commun_8c.html#a3f79757dddc565febc8dfe47e3eee431">commun.c</a>
+: <a class="el" href="commun_8c.html#a3f79757dddc565febc8dfe47e3eee431">commun.c</a>
+, <a class="el" href="commun_8h.html#a3f79757dddc565febc8dfe47e3eee431">commun.h</a>
+</li>
+<li>chargement()
+: <a class="el" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8">mainMenu.c</a>
+, <a class="el" href="main_menu_8h.html#a363c8e9903129c82f287c7dc477651e8">mainMenu.h</a>
 </li>
 <li>chargerFichier()
 : <a class="el" href="fichier_loader_8c.html#ae867be5f0e2327d83dfc93cb1ac8e8b3">fichierLoader.c</a>
@@ -318,16 +342,16 @@ $(function() {
 , <a class="el" href="option_menu_8h.html#a90d5683136c70669c086ad20b933b133">optionMenu.h</a>
 </li>
 <li>createPairData()
-: <a class="el" href="fichier_loader_8c.html#ad07cd6d979d38d3f0e411c4dcd3444c7">fichierLoader.c</a>
-, <a class="el" href="fichier_loader_8h.html#ad07cd6d979d38d3f0e411c4dcd3444c7">fichierLoader.h</a>
+: <a class="el" href="fichier_loader_8h.html#ad07cd6d979d38d3f0e411c4dcd3444c7">fichierLoader.h</a>
+, <a class="el" href="fichier_loader_8c.html#ad07cd6d979d38d3f0e411c4dcd3444c7">fichierLoader.c</a>
 </li>
 <li>createParticleEmitter()
 : <a class="el" href="particules_8c.html#ae582018b7ea20710f9845936d0b82cb5">particules.c</a>
 , <a class="el" href="particules_8h.html#ae582018b7ea20710f9845936d0b82cb5">particules.h</a>
 </li>
 <li>createPlayer()
-: <a class="el" href="player_8c.html#a25a5b9b1991ba50388e6c3b0eab41d6c">player.c</a>
-, <a class="el" href="player_8h.html#a25a5b9b1991ba50388e6c3b0eab41d6c">player.h</a>
+: <a class="el" href="player_8c.html#a81ad3e4fcd0e3686c7076cb022b61129">player.c</a>
+, <a class="el" href="player_8h.html#a81ad3e4fcd0e3686c7076cb022b61129">player.h</a>
 </li>
 <li>createScene()
 : <a class="el" href="fscene_8c.html#a4b143d78504ee5f7584a44fb6479e3f0">fscene.c</a>
@@ -342,8 +366,8 @@ $(function() {
 , <a class="el" href="spike_8h.html#aabf75a7fe1fdc366920cbd7f87556464">spike.h</a>
 </li>
 <li>createStackCountText()
-: <a class="el" href="affichage_8c.html#a2066dcaf9ebb545d26aea7e391b0a997">affichage.c</a>
-, <a class="el" href="affichage_8h.html#a2066dcaf9ebb545d26aea7e391b0a997">affichage.h</a>
+: <a class="el" href="affichage_8h.html#a2066dcaf9ebb545d26aea7e391b0a997">affichage.h</a>
+, <a class="el" href="affichage_8c.html#a2066dcaf9ebb545d26aea7e391b0a997">affichage.c</a>
 </li>
 <li>createStatLine()
 : <a class="el" href="affichage_8c.html#a89792fe0f90bf5107fe4dc53a0d72260">affichage.c</a>
@@ -358,8 +382,8 @@ $(function() {
 , <a class="el" href="text_8h.html#a92567a5bf04e06ed469717198d991136">text.h</a>
 </li>
 <li>createTouche()
-: <a class="el" href="touche_8h.html#ab22adbe41d10d69d091bd9bb52b36201">touche.h</a>
-, <a class="el" href="touche_8c.html#ab22adbe41d10d69d091bd9bb52b36201">touche.c</a>
+: <a class="el" href="touche_8c.html#ab22adbe41d10d69d091bd9bb52b36201">touche.c</a>
+, <a class="el" href="touche_8h.html#ab22adbe41d10d69d091bd9bb52b36201">touche.h</a>
 </li>
 <li>createTypeRegistry()
 : <a class="el" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b">objectManager.c</a>
@@ -373,9 +397,13 @@ $(function() {
 : <a class="el" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1">win.c</a>
 , <a class="el" href="win_8h.html#a3a67f7bb4a46cfb0df19e857e84348b1">win.h</a>
 </li>
+<li>createWizard()
+: <a class="el" href="mobs_2wizard_8c.html#a9cf3a13d8474f8728fd4aaf80458a51b">wizard.c</a>
+, <a class="el" href="mobs_2wizard_8h.html#a9cf3a13d8474f8728fd4aaf80458a51b">wizard.h</a>
+</li>
 <li>createWizardEntity()
-: <a class="el" href="wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131">wizard.c</a>
-, <a class="el" href="wizard_8h.html#a90c244d8ccc91c4e369d4d755daad131">wizard.h</a>
+: <a class="el" href="tiles_entity_2wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131">wizard.c</a>
+, <a class="el" href="tiles_entity_2wizard_8h.html#a90c244d8ccc91c4e369d4d755daad131">wizard.h</a>
 </li>
 <li>creeOption()
 : <a class="el" href="context_8h.html#a6b121ad300027d4e1233edf8c0d26d40">context.h</a>
@@ -402,9 +430,12 @@ $(function() {
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('particules_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_ba98abd8171b4a3dbca90a24706ac331.html">components</a></li><li class="navelem"><a class="el" href="dir_2c7bcc74cd7df363bc214779f70aef32.html">particules</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">particules.h</div>  </div>
@@ -136,17 +152,25 @@ $(function() {
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="keywordtype">float</span> <a class="code" href="particules_8h.html#a3e493e35de3bbae2d3c79d5c8471b360">randomRangeF</a>(<span class="keywordtype">float</span> min, <span class="keywordtype">float</span> max);</div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="keywordtype">void</span> <a class="code" href="particules_8h.html#aea0223a544ee988ed39eafc6faed78ce">emitHealParticles</a>(<a class="code" href="structs__particle_emitter.html">t_particleEmitter</a>* emitter, SDL_FPoint position, <span class="keywordtype">float</span> radius, SDL_Color baseColor);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="keywordtype">void</span> <a class="code" href="particules_8h.html#a026aad71acf507e709303ae04177dd51">emitHealConnectionParticles</a>(<a class="code" href="structs__particle_emitter.html">t_particleEmitter</a>* emitter, SDL_FPoint sourcePos, SDL_FPoint targetPos, SDL_Color baseColor);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="keywordtype">void</span> <a class="code" href="particules_8h.html#a38fd5b27a407a9e014292f1cd33c7190">emitSpellCastParticles</a>(<a class="code" href="structs__particle_emitter.html">t_particleEmitter</a>* emitter, SDL_FPoint position, <span class="keywordtype">float</span> radius, SDL_Color baseColor);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aparticules_8h_html_a026aad71acf507e709303ae04177dd51"><div class="ttname"><a href="particules_8h.html#a026aad71acf507e709303ae04177dd51">emitHealConnectionParticles</a></div><div class="ttdeci">void emitHealConnectionParticles(t_particleEmitter *emitter, SDL_FPoint sourcePos, SDL_FPoint targetPos, SDL_Color baseColor)</div><div class="ttdoc">Émet des particules pour la connexion de soin entre le sorcier et l'allié soigné</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l01018">particules.c:1018</a></div></div>
 <div class="ttc" id="aparticules_8h_html_a2f7d707376daa108a99efec11236f2c2"><div class="ttname"><a href="particules_8h.html#a2f7d707376daa108a99efec11236f2c2">emitLandingParticles</a></div><div class="ttdeci">void emitLandingParticles(t_particleEmitter *emitter, SDL_FPoint position, float radius, SDL_Color baseColor)</div><div class="ttdoc">Émet des particules d'atterrissage.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00681">particules.c:681</a></div></div>
+<div class="ttc" id="aparticules_8h_html_a38fd5b27a407a9e014292f1cd33c7190"><div class="ttname"><a href="particules_8h.html#a38fd5b27a407a9e014292f1cd33c7190">emitSpellCastParticles</a></div><div class="ttdeci">void emitSpellCastParticles(t_particleEmitter *emitter, SDL_FPoint position, float radius, SDL_Color baseColor)</div><div class="ttdoc">Émet des particules pour le lancement de sort du sorcier.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00926">particules.c:926</a></div></div>
 <div class="ttc" id="aparticules_8h_html_a3e493e35de3bbae2d3c79d5c8471b360"><div class="ttname"><a href="particules_8h.html#a3e493e35de3bbae2d3c79d5c8471b360">randomRangeF</a></div><div class="ttdeci">float randomRangeF(float min, float max)</div><div class="ttdoc">Génère un nombre aléatoire dans une plage.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00010">particules.c:10</a></div></div>
-<div class="ttc" id="aparticules_8h_html_a4649283fd9dfa8005ebd85d1ef3a771e"><div class="ttname"><a href="particules_8h.html#a4649283fd9dfa8005ebd85d1ef3a771e">renderEntityParticles</a></div><div class="ttdeci">void renderEntityParticles(SDL_Renderer *renderer, t_particleEmitter *emitter)</div><div class="ttdoc">Affiche toutes les particules actives.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00949">particules.c:949</a></div></div>
+<div class="ttc" id="aparticules_8h_html_a4649283fd9dfa8005ebd85d1ef3a771e"><div class="ttname"><a href="particules_8h.html#a4649283fd9dfa8005ebd85d1ef3a771e">renderEntityParticles</a></div><div class="ttdeci">void renderEntityParticles(SDL_Renderer *renderer, t_particleEmitter *emitter)</div><div class="ttdoc">Affiche toutes les particules actives.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l01104">particules.c:1104</a></div></div>
 <div class="ttc" id="aparticules_8h_html_a5daf89ca83b59eabf3cd8d2d5195f529"><div class="ttname"><a href="particules_8h.html#a5daf89ca83b59eabf3cd8d2d5195f529">emitImpactParticles</a></div><div class="ttdeci">void emitImpactParticles(t_particleEmitter *emitter, SDL_FPoint position, SDL_FPoint hitDirection, float radius, SDL_Color baseColor)</div><div class="ttdoc">Émet des particules d'impact.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00728">particules.c:728</a></div></div>
 <div class="ttc" id="aparticules_8h_html_a60f0ce961cc85e715295bef28126c04d"><div class="ttname"><a href="particules_8h.html#a60f0ce961cc85e715295bef28126c04d">emitMovementParticles</a></div><div class="ttdeci">void emitMovementParticles(t_particleEmitter *emitter, float x, float y, SDL_Color color)</div><div class="ttdoc">Émet des particules de mouvement.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00070">particules.c:70</a></div></div>
 <div class="ttc" id="aparticules_8h_html_a61fa4b7a83f49df939133c298c2a4dab"><div class="ttname"><a href="particules_8h.html#a61fa4b7a83f49df939133c298c2a4dab">resetParticleEmitter</a></div><div class="ttdeci">void resetParticleEmitter(t_particleEmitter *emitter)</div><div class="ttdoc">Réinitialise un émetteur de particules.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00022">particules.c:22</a></div></div>
 <div class="ttc" id="aparticules_8h_html_a6c99f1cfe6a58e4d007422917f3f1bdd"><div class="ttname"><a href="particules_8h.html#a6c99f1cfe6a58e4d007422917f3f1bdd">emitPhaseChangeParticles</a></div><div class="ttdeci">void emitPhaseChangeParticles(t_particleEmitter *emitter, SDL_FPoint position, float radius, SDL_Color baseColor)</div><div class="ttdoc">Émet des particules pour un changement de phase.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00077">particules.c:77</a></div></div>
 <div class="ttc" id="aparticules_8h_html_a6f9b02e2f494e301b0cd67ce54580088"><div class="ttname"><a href="particules_8h.html#a6f9b02e2f494e301b0cd67ce54580088">emitGroundPoundParticles</a></div><div class="ttdeci">void emitGroundPoundParticles(t_particleEmitter *emitter, SDL_FPoint position, float radius, SDL_Color baseColor, float phaseProgress)</div><div class="ttdoc">Émet des particules pour un coup au sol.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00440">particules.c:440</a></div></div>
 <div class="ttc" id="aparticules_8h_html_a6fb205305b8df39e9fa9c99114458158"><div class="ttname"><a href="particules_8h.html#a6fb205305b8df39e9fa9c99114458158">getNextFreeParticle</a></div><div class="ttdeci">t_entityParticle * getNextFreeParticle(t_particleEmitter *emitter)</div><div class="ttdoc">Obtient la prochaine particule libre de l'émetteur.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00039">particules.c:39</a></div></div>
-<div class="ttc" id="aparticules_8h_html_a731d5988acb255457e0deb3233f1e4e7"><div class="ttname"><a href="particules_8h.html#a731d5988acb255457e0deb3233f1e4e7">updateEntityParticles</a></div><div class="ttdeci">void updateEntityParticles(t_particleEmitter *emitter, float deltaTime)</div><div class="ttdoc">Met à jour toutes les particules actives.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00926">particules.c:926</a></div></div>
+<div class="ttc" id="aparticules_8h_html_a731d5988acb255457e0deb3233f1e4e7"><div class="ttname"><a href="particules_8h.html#a731d5988acb255457e0deb3233f1e4e7">updateEntityParticles</a></div><div class="ttdeci">void updateEntityParticles(t_particleEmitter *emitter, float deltaTime)</div><div class="ttdoc">Met à jour toutes les particules actives.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l01081">particules.c:1081</a></div></div>
 <div class="ttc" id="aparticules_8h_html_a7f1ed5ab81fd8ccf63bf08dd9e90f0b3"><div class="ttname"><a href="particules_8h.html#a7f1ed5ab81fd8ccf63bf08dd9e90f0b3">emitBossMovementParticles</a></div><div class="ttdeci">void emitBossMovementParticles(t_particleEmitter *emitter, SDL_FPoint position, float radius, SDL_Color baseColor)</div><div class="ttdoc">Émet des particules de mouvement pour un boss.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00591">particules.c:591</a></div></div>
 <div class="ttc" id="aparticules_8h_html_a89f67e1478d40bbcd7694b64a37ffa59"><div class="ttname"><a href="particules_8h.html#a89f67e1478d40bbcd7694b64a37ffa59">emitBarrelExplosionParticles</a></div><div class="ttdeci">void emitBarrelExplosionParticles(t_particleEmitter *emitter, SDL_FPoint position, float radius)</div><div class="ttdoc">Émet des particules pour l'explosion d'un baril.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00842">particules.c:842</a></div></div>
 <div class="ttc" id="aparticules_8h_html_a8b1ce0efa2525e17be9f8a83af5085ac"><div class="ttname"><a href="particules_8h.html#a8b1ce0efa2525e17be9f8a83af5085ac">emitParticles</a></div><div class="ttdeci">void emitParticles(t_particleEmitter *emitter, float x, float y, SDL_Color color, int count, float sizeMin, float sizeMax, float speedMin, float speedMax, float lifetimeMin, float lifetimeMax)</div><div class="ttdoc">Émet des particules génériques.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00052">particules.c:52</a></div></div>
@@ -157,6 +181,7 @@ $(function() {
 <div class="ttc" id="aparticules_8h_html_ad1e129d06392e8f5d952d9ea125d9731"><div class="ttname"><a href="particules_8h.html#ad1e129d06392e8f5d952d9ea125d9731">t_entityParticle</a></div><div class="ttdeci">struct s_entityParticle t_entityParticle</div></div>
 <div class="ttc" id="aparticules_8h_html_adc14381a3ee4c0520b01afcc356ab776"><div class="ttname"><a href="particules_8h.html#adc14381a3ee4c0520b01afcc356ab776">t_particleEmitter</a></div><div class="ttdeci">struct s_particleEmitter t_particleEmitter</div></div>
 <div class="ttc" id="aparticules_8h_html_ae582018b7ea20710f9845936d0b82cb5"><div class="ttname"><a href="particules_8h.html#ae582018b7ea20710f9845936d0b82cb5">createParticleEmitter</a></div><div class="ttdeci">t_particleEmitter * createParticleEmitter()</div><div class="ttdoc">Crée un nouvel émetteur de particules.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00014">particules.c:14</a></div></div>
+<div class="ttc" id="aparticules_8h_html_aea0223a544ee988ed39eafc6faed78ce"><div class="ttname"><a href="particules_8h.html#aea0223a544ee988ed39eafc6faed78ce">emitHealParticles</a></div><div class="ttdeci">void emitHealParticles(t_particleEmitter *emitter, SDL_FPoint position, float radius, SDL_Color baseColor)</div><div class="ttdoc">Émet des particules de soin pour le sorcier.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00973">particules.c:973</a></div></div>
 <div class="ttc" id="aparticules_8h_html_af1eeb969df6b2634ae6000dd216163f1"><div class="ttname"><a href="particules_8h.html#af1eeb969df6b2634ae6000dd216163f1">emitChargeAttackParticles</a></div><div class="ttdeci">void emitChargeAttackParticles(t_particleEmitter *emitter, SDL_FPoint position, float radius, SDL_Color baseColor, float phaseProgress, SDL_FPoint chargeDirection)</div><div class="ttdoc">Émet des particules pour une attaque chargée.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8c_source.html#l00186">particules.c:186</a></div></div>
 <div class="ttc" id="astructs__entity_particle_html"><div class="ttname"><a href="structs__entity_particle.html">s_entityParticle</a></div><div class="ttdoc">Représente une particule individuelle.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8h_source.html#l00023">particules.h:23</a></div></div>
 <div class="ttc" id="astructs__entity_particle_html_a22c7754bedd740972b980b56e182bb93"><div class="ttname"><a href="structs__entity_particle.html#a22c7754bedd740972b980b56e182bb93">s_entityParticle::position</a></div><div class="ttdeci">SDL_FPoint position</div><div class="ttdoc">Position en x,y.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8h_source.html#l00025">particules.h:25</a></div></div>
@@ -173,9 +198,13 @@ $(function() {
 <div class="ttc" id="astructs__particle_emitter_html_a86d4456b98f0ce3b935abfa3f665ecbf"><div class="ttname"><a href="structs__particle_emitter.html#a86d4456b98f0ce3b935abfa3f665ecbf">s_particleEmitter::firstFree</a></div><div class="ttdeci">int firstFree</div><div class="ttdoc">Index de la première particule libre.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8h_source.html#l00042">particules.h:42</a></div></div>
 <div class="ttc" id="astructs__particle_emitter_html_ad43c3812e6d13e0518d9f8b8f463ffcf"><div class="ttname"><a href="structs__particle_emitter.html#ad43c3812e6d13e0518d9f8b8f463ffcf">s_particleEmitter::count</a></div><div class="ttdeci">int count</div><div class="ttdoc">Nombre de particules actives.</div><div class="ttdef"><b>Definition:</b> <a href="particules_8h_source.html#l00041">particules.h:41</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_ba98abd8171b4a3dbca90a24706ac331.html">components</a></li><li class="navelem"><a class="el" href="dir_2c7bcc74cd7df363bc214779f70aef32.html">particules</a></li><li class="navelem"><a class="el" href="particules_8h.html">particules.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

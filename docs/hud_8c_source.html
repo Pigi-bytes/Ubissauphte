@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('hud_8c_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_da5c6b39c0a2f54e57df6799511cd3ab.html">ui</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">hud.c</div>  </div>
@@ -321,17 +337,17 @@ $(function() {
 <div class="ttc" id="ahud_8c_html_af388a8b4e2bda7685c3acb216ffc73ce"><div class="ttname"><a href="hud_8c.html#af388a8b4e2bda7685c3acb216ffc73ce">renderHUD</a></div><div class="ttdeci">void renderHUD(SDL_Renderer *renderer, t_hud *hud)</div><div class="ttdoc">Affiche le HUD à l'écran.</div><div class="ttdef"><b>Definition:</b> <a href="hud_8c_source.html#l00166">hud.c:166</a></div></div>
 <div class="ttc" id="ahud_8h_html"><div class="ttname"><a href="hud_8h.html">hud.h</a></div><div class="ttdoc">Gestion de l'interface utilisateur en jeu (HUD)</div></div>
 <div class="ttc" id="aobject_manager_8c_html_ad54381aaf28c8563e5faafa52728a115"><div class="ttname"><a href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a></div><div class="ttdeci">void * getObject(t_objectManager *manager, int index)</div><div class="ttdoc">Récupère un objet à partir de son index dans le gestionnaire d'objets.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8c_source.html#l00077">objectManager.c:77</a></div></div>
-<div class="ttc" id="aplayer_8c_html_acecd15b6ea9287bbc4a1ef451e535fb9"><div class="ttname"><a href="player_8c.html#acecd15b6ea9287bbc4a1ef451e535fb9">getPlayerXPProgress</a></div><div class="ttdeci">float getPlayerXPProgress(t_joueur *player)</div><div class="ttdoc">Calcule la progression vers le niveau suivant.</div><div class="ttdef"><b>Definition:</b> <a href="player_8c_source.html#l00595">player.c:595</a></div></div>
+<div class="ttc" id="aplayer_8c_html_acecd15b6ea9287bbc4a1ef451e535fb9"><div class="ttname"><a href="player_8c.html#acecd15b6ea9287bbc4a1ef451e535fb9">getPlayerXPProgress</a></div><div class="ttdeci">float getPlayerXPProgress(t_joueur *player)</div><div class="ttdoc">Calcule la progression vers le niveau suivant.</div><div class="ttdef"><b>Definition:</b> <a href="player_8c_source.html#l00608">player.c:608</a></div></div>
 <div class="ttc" id="astructs__entity_html_a859b8efbf9abe8e82757ee5c75a0c97c"><div class="ttname"><a href="structs__entity.html#a859b8efbf9abe8e82757ee5c75a0c97c">s_entity::texture</a></div><div class="ttdeci">SDL_Texture * texture</div><div class="ttdoc">Texture principale de l'entité</div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00033">entity.h:33</a></div></div>
 <div class="ttc" id="astructs__health_system_html_af8c04013cfb0444c405822e9939d8ae6"><div class="ttname"><a href="structs__health_system.html#af8c04013cfb0444c405822e9939d8ae6">s_healthSystem::currentHealth</a></div><div class="ttdeci">int currentHealth</div><div class="ttdoc">Points de vie actuels.</div><div class="ttdef"><b>Definition:</b> <a href="health_8h_source.html#l00020">health.h:20</a></div></div>
 <div class="ttc" id="astructs__health_system_html_afa3c4cbe95c95ff9cd8bdc9e4cec4a5f"><div class="ttname"><a href="structs__health_system.html#afa3c4cbe95c95ff9cd8bdc9e4cec4a5f">s_healthSystem::maxHealth</a></div><div class="ttdeci">int maxHealth</div><div class="ttdoc">Points de vie maximum.</div><div class="ttdef"><b>Definition:</b> <a href="health_8h_source.html#l00021">health.h:21</a></div></div>
 <div class="ttc" id="astructs__joueur_html"><div class="ttname"><a href="structs__joueur.html">s_joueur</a></div><div class="ttdoc">Référence au type joueur pour éviter les inclusions circulaires.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00080">player.h:80</a></div></div>
-<div class="ttc" id="astructs__joueur_html_a0ca625a4d261647f9aab3d35cb104080"><div class="ttname"><a href="structs__joueur.html#a0ca625a4d261647f9aab3d35cb104080">s_joueur::attack</a></div><div class="ttdeci">t_attack attack</div><div class="ttdoc">État de l'attaque en cours.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00101">player.h:101</a></div></div>
-<div class="ttc" id="astructs__joueur_html_a12351b93415a5c2dd94a9cf2413d18b7"><div class="ttname"><a href="structs__joueur.html#a12351b93415a5c2dd94a9cf2413d18b7">s_joueur::gold</a></div><div class="ttdeci">int gold</div><div class="ttdoc">Or possédé</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00096">player.h:96</a></div></div>
+<div class="ttc" id="astructs__joueur_html_a0ca625a4d261647f9aab3d35cb104080"><div class="ttname"><a href="structs__joueur.html#a0ca625a4d261647f9aab3d35cb104080">s_joueur::attack</a></div><div class="ttdeci">t_attack attack</div><div class="ttdoc">État de l'attaque en cours.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00102">player.h:102</a></div></div>
+<div class="ttc" id="astructs__joueur_html_a12351b93415a5c2dd94a9cf2413d18b7"><div class="ttname"><a href="structs__joueur.html#a12351b93415a5c2dd94a9cf2413d18b7">s_joueur::gold</a></div><div class="ttdeci">int gold</div><div class="ttdoc">Or possédé</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00097">player.h:97</a></div></div>
 <div class="ttc" id="astructs__joueur_html_a17bef51545f242d210cb157423f42c96"><div class="ttname"><a href="structs__joueur.html#a17bef51545f242d210cb157423f42c96">s_joueur::entity</a></div><div class="ttdeci">t_entity entity</div><div class="ttdoc">Entité de base héritée.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00081">player.h:81</a></div></div>
-<div class="ttc" id="astructs__joueur_html_aa1f0e0b0b5cde6070983b7210b25e0ec"><div class="ttname"><a href="structs__joueur.html#aa1f0e0b0b5cde6070983b7210b25e0ec">s_joueur::currentWeapon</a></div><div class="ttdeci">t_arme * currentWeapon</div><div class="ttdoc">Arme actuellement équipée.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00098">player.h:98</a></div></div>
+<div class="ttc" id="astructs__joueur_html_aa1f0e0b0b5cde6070983b7210b25e0ec"><div class="ttname"><a href="structs__joueur.html#aa1f0e0b0b5cde6070983b7210b25e0ec">s_joueur::currentWeapon</a></div><div class="ttdeci">t_arme * currentWeapon</div><div class="ttdoc">Arme actuellement équipée.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00099">player.h:99</a></div></div>
 <div class="ttc" id="astructs__joueur_html_aae000252c0ccd4fa057448d2c3b79bdf"><div class="ttname"><a href="structs__joueur.html#aae000252c0ccd4fa057448d2c3b79bdf">s_joueur::dash</a></div><div class="ttdeci">t_dash dash</div><div class="ttdoc">Système de dash (esquive)</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00083">player.h:83</a></div></div>
-<div class="ttc" id="astructs__joueur_html_acf4d33ee4cff36f69b924471174dcb11"><div class="ttname"><a href="structs__joueur.html#acf4d33ee4cff36f69b924471174dcb11">s_joueur::level</a></div><div class="ttdeci">int level</div><div class="ttdoc">Niveau actuel du joueur.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00093">player.h:93</a></div></div>
+<div class="ttc" id="astructs__joueur_html_acf4d33ee4cff36f69b924471174dcb11"><div class="ttname"><a href="structs__joueur.html#acf4d33ee4cff36f69b924471174dcb11">s_joueur::level</a></div><div class="ttdeci">int level</div><div class="ttdoc">Niveau actuel du joueur.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00094">player.h:94</a></div></div>
 <div class="ttc" id="astructs__joueur_html_af5ceaecdf647be5c8b1225682d0a3635"><div class="ttname"><a href="structs__joueur.html#af5ceaecdf647be5c8b1225682d0a3635">s_joueur::health</a></div><div class="ttdeci">t_healthSystem health</div><div class="ttdoc">Système de gestion de la santé</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00084">player.h:84</a></div></div>
 <div class="ttc" id="astructt__animation_html_a55b5be9b8cb52e1823a78ec875480cdd"><div class="ttname"><a href="structt__animation.html#a55b5be9b8cb52e1823a78ec875480cdd">t_animation::frames</a></div><div class="ttdeci">SDL_Texture ** frames</div><div class="ttdoc">Textures de l'animation.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8h_source.html#l00022">animation.h:22</a></div></div>
 <div class="ttc" id="astructt__animation_html_ad7b94139e16da2759ff942c971b0bc90"><div class="ttname"><a href="structt__animation.html#ad7b94139e16da2759ff942c971b0bc90">t_animation::currentFrame</a></div><div class="ttdeci">int currentFrame</div><div class="ttdoc">Frame actuelle.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8h_source.html#l00024">animation.h:24</a></div></div>
@@ -377,9 +393,13 @@ $(function() {
 <div class="ttc" id="atext_8c_html_ab9b7064da4ef9403241f3d40389af46a"><div class="ttname"><a href="text_8c.html#ab9b7064da4ef9403241f3d40389af46a">freeText</a></div><div class="ttdeci">void freeText(void *objet)</div><div class="ttdoc">Libère la mémoire utilisée par un élément textuel.</div><div class="ttdef"><b>Definition:</b> <a href="text_8c_source.html#l00186">text.c:186</a></div></div>
 <div class="ttc" id="atimer_8c_html_a425192221cbecd593f3a398c14c18def"><div class="ttname"><a href="timer_8c.html#a425192221cbecd593f3a398c14c18def">getTicks</a></div><div class="ttdeci">Uint32 getTicks(t_timer *timer)</div><div class="ttdoc">Récupère le temps écoulé depuis le démarrage du timer.</div><div class="ttdef"><b>Definition:</b> <a href="timer_8c_source.html#l00017">timer.c:17</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_da5c6b39c0a2f54e57df6799511cd3ab.html">ui</a></li><li class="navelem"><a class="el" href="hud_8c.html">hud.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

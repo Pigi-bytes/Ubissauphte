@@ -1,25 +1,26 @@
 <map id="inventaireFindStack" name="inventaireFindStack">
-<area shape="rect" id="node1" title="Trouve une pile d&#39;items dans l&#39;inventaire." alt="" coords="1837,157,1988,184"/>
-<area shape="rect" id="node2" href="$equipements_manager_8c.html#a1cb5859f90813553e5363f13bc669187" title="Fonction de soin." alt="" coords="1673,69,1749,96"/>
-<area shape="rect" id="node5" href="$equipements_manager_8c.html#aee54a2c5f88bf08ed74e4c1c016f773a" title="Ajoute un objet à l&#39;inventaire." alt="" coords="1632,183,1789,209"/>
-<area shape="rect" id="node3" href="$equipements_manager_8c.html#af526de5db1591532940e76eb6de0e04e" title="Charge des items depuis un fichier." alt="" coords="1055,5,1141,32"/>
-<area shape="rect" id="node4" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,81,60,108"/>
-<area shape="rect" id="node6" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="660,107,775,133"/>
-<area shape="rect" id="node7" href="$equipements_manager_8c.html#aca8ce83f7015926bf430cb136bb605f3" title="Charge un inventaire depuis un fichier." alt="" coords="1455,157,1573,184"/>
-<area shape="rect" id="node8" href="$blacksmith_8c.html#ad0f86fd1caafea8c947e960f2d8d3b5a" title="Met à jour l&#39;état et le comportement du forgeron." alt="" coords="1444,208,1584,235"/>
-<area shape="rect" id="node18" href="$chest_8c.html#a1a123992315c67f40cd6b50322b319fd" title="Met à jour l&#39;état et le comportement du coffre." alt="" coords="1462,259,1566,285"/>
-<area shape="rect" id="node20" href="$merchant_8c.html#a2327237b68bc5eb3a06b5c1d4ba522ad" title="Met à jour l&#39;état et le comportement du marchand." alt="" coords="1450,309,1578,336"/>
-<area shape="rect" id="node22" href="$wizard_8c.html#a33e12f0b600e2edcbd5b3db83f9c86ae" title="Met à jour l&#39;état et le comportement du sorcier." alt="" coords="1458,360,1570,387"/>
-<area shape="rect" id="node9" href="$blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1221,208,1396,235"/>
-<area shape="rect" id="node10" href="$tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1023,259,1173,285"/>
-<area shape="rect" id="node11" href="$main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="837,183,960,209"/>
-<area shape="rect" id="node16" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="835,233,963,260"/>
-<area shape="rect" id="node17" href="$main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="823,284,975,311"/>
-<area shape="rect" id="node12" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="661,228,773,255"/>
-<area shape="rect" id="node13" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,223,612,249"/>
-<area shape="rect" id="node14" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,185,453,212"/>
-<area shape="rect" id="node15" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,167,239,193"/>
-<area shape="rect" id="node19" href="$chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1239,259,1378,285"/>
-<area shape="rect" id="node21" href="$merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1227,309,1390,336"/>
-<area shape="rect" id="node23" href="$wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1235,360,1382,387"/>
+<area shape="rect" id="node1" title="Trouve une pile d&#39;items dans l&#39;inventaire." alt="" coords="1807,132,1957,159"/>
+<area shape="rect" id="node2" href="$equipements_manager_8c.html#a1cb5859f90813553e5363f13bc669187" title="Fonction de soin." alt="" coords="1642,56,1718,83"/>
+<area shape="rect" id="node5" href="$equipements_manager_8c.html#aee54a2c5f88bf08ed74e4c1c016f773a" title="Ajoute un objet à l&#39;inventaire." alt="" coords="1601,157,1759,184"/>
+<area shape="rect" id="node3" href="$equipements_manager_8c.html#af526de5db1591532940e76eb6de0e04e" title="Charge des items depuis un fichier." alt="" coords="1024,5,1111,32"/>
+<area shape="rect" id="node4" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+<area shape="rect" id="node6" href="$scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="629,56,744,83"/>
+<area shape="rect" id="node7" href="$equipements_manager_8c.html#aca8ce83f7015926bf430cb136bb605f3" title="Charge un inventaire depuis un fichier." alt="" coords="1424,107,1543,133"/>
+<area shape="rect" id="node8" href="$blacksmith_8c.html#ad0f86fd1caafea8c947e960f2d8d3b5a" title="Met à jour l&#39;état et le comportement du forgeron." alt="" coords="1413,157,1553,184"/>
+<area shape="rect" id="node18" href="$chest_8c.html#a1a123992315c67f40cd6b50322b319fd" title="Met à jour l&#39;état et le comportement du coffre." alt="" coords="1431,208,1535,235"/>
+<area shape="rect" id="node20" href="$merchant_8c.html#a2327237b68bc5eb3a06b5c1d4ba522ad" title="Met à jour l&#39;état et le comportement du marchand." alt="" coords="1419,259,1547,285"/>
+<area shape="rect" id="node22" href="$tiles_entity_2wizard_8c.html#a33e12f0b600e2edcbd5b3db83f9c86ae" title="Met à jour l&#39;état et le comportement du sorcier." alt="" coords="1427,309,1539,336"/>
+<area shape="rect" id="node9" href="$blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1191,157,1365,184"/>
+<area shape="rect" id="node10" href="$tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="992,233,1143,260"/>
+<area shape="rect" id="node11" href="$main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="807,183,929,209"/>
+<area shape="rect" id="node16" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="804,284,932,311"/>
+<area shape="rect" id="node17" href="$main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="792,233,944,260"/>
+<area shape="rect" id="node12" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="631,227,743,253"/>
+<area shape="rect" id="node13" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,195,581,221"/>
+<area shape="rect" id="node14" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,144,423,171"/>
+<area shape="rect" id="node15" href="$main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,119,208,145"/>
+<area shape="rect" id="node19" href="$chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1209,208,1347,235"/>
+<area shape="rect" id="node21" href="$merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1197,259,1359,285"/>
+<area shape="rect" id="node23" href="$mobs_2wizard_8c.html#a9cf3a13d8474f8728fd4aaf80458a51b" title="Crée et initialise un sorcier." alt="" coords="1013,321,1121,348"/>
+<area shape="rect" id="node24" href="$tiles_entity_2wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1205,309,1351,336"/>
 </map>

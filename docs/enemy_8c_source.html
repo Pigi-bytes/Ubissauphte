@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('enemy_8c_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">enemy.c</div>  </div>
@@ -81,7 +97,7 @@ $(function() {
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    enemy-&gt;<a class="code" href="structt__enemy.html#a17bef51545f242d210cb157423f42c96">entity</a>.<a class="code" href="structs__entity.html#ae878f8bd76f99e1e7d7ee00f6345dbca">useCircleCollision</a> = SDL_FALSE;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    printf(<span class="stringliteral">&quot;Ennemi détruit !\n&quot;</span>);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordflow">if</span> (enemy-&gt;<a class="code" href="structt__enemy.html#aacbaaa21963216ccf251fe6c35e15831">lastDamagedBy</a> != NULL) {</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <a class="code" href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13">addPlayerXP</a>(enemy-&gt;<a class="code" href="structt__enemy.html#aacbaaa21963216ccf251fe6c35e15831">lastDamagedBy</a>, enemy-&gt;<a class="code" href="structt__enemy.html#a67ff12f3155beab580a3f7c78f7dee92">xpReward</a>);</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    }</div>
@@ -184,7 +200,7 @@ $(function() {
 <div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="enemy_8c.html#a1984c1627c588895da06920e804c6d63">  110</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="enemy_8c.html#a1984c1627c588895da06920e804c6d63">updateEnemyWrapper</a>(<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>* f) {</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <a class="code" href="enemy_8c.html#a025690b31b4fe58df00af903db6a9368">updateEnemy</a>(((<a class="code" href="structt__enemy.html">t_enemy</a>*)(f)-&gt;param[0]), ((<span class="keywordtype">float</span>*)(f)-&gt;param[1]), ((<a class="code" href="structt__salle.html">t_salle</a>*)(f)-&gt;param[2]), ((<a class="code" href="structt__object_manager.html">t_objectManager</a>*)(f)-&gt;param[3]));</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;}</div>
-<div class="ttc" id="aanimation_8c_html_a898f3e487ffd9a824e2fa2a11c03a093"><div class="ttname"><a href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093">initAnimationController</a></div><div class="ttdeci">t_animationController * initAnimationController()</div><div class="ttdoc">Initialise un contrôleur d'animations.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00047">animation.c:47</a></div></div>
+<div class="ttc" id="aanimation_8c_html_a898f3e487ffd9a824e2fa2a11c03a093"><div class="ttname"><a href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093">initAnimationController</a></div><div class="ttdeci">t_animationController * initAnimationController()</div><div class="ttdoc">Initialise un contrôleur d'animations.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00065">animation.c:65</a></div></div>
 <div class="ttc" id="aenemy_8c_html_a025690b31b4fe58df00af903db6a9368"><div class="ttname"><a href="enemy_8c.html#a025690b31b4fe58df00af903db6a9368">updateEnemy</a></div><div class="ttdeci">void updateEnemy(t_enemy *enemy, float *deltaTime, t_salle *salle, t_objectManager *entities)</div><div class="ttdoc">Met à jour l'état d'un ennemi.</div><div class="ttdef"><b>Definition:</b> <a href="enemy_8c_source.html#l00070">enemy.c:70</a></div></div>
 <div class="ttc" id="aenemy_8c_html_a1984c1627c588895da06920e804c6d63"><div class="ttname"><a href="enemy_8c.html#a1984c1627c588895da06920e804c6d63">updateEnemyWrapper</a></div><div class="ttdeci">void updateEnemyWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour la mise à jour d'ennemi (compatible avec fonctionManager)</div><div class="ttdef"><b>Definition:</b> <a href="enemy_8c_source.html#l00110">enemy.c:110</a></div></div>
 <div class="ttc" id="aenemy_8c_html_a3152517f6464ffba178ae9c2ba7be98b"><div class="ttname"><a href="enemy_8c.html#a3152517f6464ffba178ae9c2ba7be98b">renderEnemy</a></div><div class="ttdeci">void renderEnemy(SDL_Renderer *renderer, t_enemy *enemy, t_camera *camera)</div><div class="ttdoc">Affiche un ennemi à l'écran.</div><div class="ttdef"><b>Definition:</b> <a href="enemy_8c_source.html#l00042">enemy.c:42</a></div></div>
@@ -201,7 +217,7 @@ $(function() {
 <div class="ttc" id="ahealth_8c_html_af78dc016d45f39fbd4f2075eb603353f"><div class="ttname"><a href="health_8c.html#af78dc016d45f39fbd4f2075eb603353f">initHealthSystem</a></div><div class="ttdeci">void initHealthSystem(t_healthSystem *health, int maxHealth)</div><div class="ttdoc">Initialise un système de santé</div><div class="ttdef"><b>Definition:</b> <a href="health_8c_source.html#l00008">health.c:8</a></div></div>
 <div class="ttc" id="aobject_manager_8c_html_a4d5bf4f0d7276c3548a4a135ebda92e9"><div class="ttname"><a href="object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9">deleteObject</a></div><div class="ttdeci">void deleteObject(t_objectManager *manager, int index)</div><div class="ttdoc">Supprime un objet du gestionnaire à l'index spécifié</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8c_source.html#l00095">objectManager.c:95</a></div></div>
 <div class="ttc" id="aobject_manager_8c_html_ad54381aaf28c8563e5faafa52728a115"><div class="ttname"><a href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a></div><div class="ttdeci">void * getObject(t_objectManager *manager, int index)</div><div class="ttdoc">Récupère un objet à partir de son index dans le gestionnaire d'objets.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8c_source.html#l00077">objectManager.c:77</a></div></div>
-<div class="ttc" id="aplayer_8c_html_ada3f1cfedc47c0c89696ca597444ef13"><div class="ttname"><a href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13">addPlayerXP</a></div><div class="ttdeci">void addPlayerXP(t_joueur *player, int xpAmount)</div><div class="ttdoc">Ajoute des points d'expérience au joueur.</div><div class="ttdef"><b>Definition:</b> <a href="player_8c_source.html#l00589">player.c:589</a></div></div>
+<div class="ttc" id="aplayer_8c_html_ada3f1cfedc47c0c89696ca597444ef13"><div class="ttname"><a href="player_8c.html#ada3f1cfedc47c0c89696ca597444ef13">addPlayerXP</a></div><div class="ttdeci">void addPlayerXP(t_joueur *player, int xpAmount)</div><div class="ttdoc">Ajoute des points d'expérience au joueur.</div><div class="ttdef"><b>Definition:</b> <a href="player_8c_source.html#l00603">player.c:603</a></div></div>
 <div class="ttc" id="aplayer_8h_html"><div class="ttname"><a href="player_8h.html">player.h</a></div><div class="ttdoc">Définition et comportement du joueur principal.</div></div>
 <div class="ttc" id="astructs__entity_html_a53e571e5a895ca006bf1ca38cd681ab1"><div class="ttname"><a href="structs__entity.html#a53e571e5a895ca006bf1ca38cd681ab1">s_entity::flip</a></div><div class="ttdeci">SDL_RendererFlip flip</div><div class="ttdoc">Direction de rendu (retournement horizontal/vertical)</div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00035">entity.h:35</a></div></div>
 <div class="ttc" id="astructs__entity_html_a859b8efbf9abe8e82757ee5c75a0c97c"><div class="ttname"><a href="structs__entity.html#a859b8efbf9abe8e82757ee5c75a0c97c">s_entity::texture</a></div><div class="ttdeci">SDL_Texture * texture</div><div class="ttdoc">Texture principale de l'entité</div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00033">entity.h:33</a></div></div>
@@ -241,9 +257,13 @@ $(function() {
 <div class="ttc" id="astructt__scene_html"><div class="ttname"><a href="structt__scene.html">t_scene</a></div><div class="ttdoc">Représente une scène composée d'objets.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8h_source.html#l00061">fscene.h:61</a></div></div>
 <div class="ttc" id="atimer_8c_html_aa6a4620337b2d374bffb66ac27b96efe"><div class="ttname"><a href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe">getDeltaTimer</a></div><div class="ttdeci">float getDeltaTimer(t_deltaTimer *timer)</div><div class="ttdoc">Récupère le temps accumulé par le timer delta.</div><div class="ttdef"><b>Definition:</b> <a href="timer_8c_source.html#l00056">timer.c:56</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="enemy_8c.html">enemy.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,19 +1,20 @@
 <map id="renderStandardHealthBar" name="renderStandardHealthBar">
-<area shape="rect" id="node1" title="Affiche une barre de vie standard." alt="" coords="1589,157,1776,184"/>
-<area shape="rect" id="node2" href="$barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1219,259,1359,285"/>
-<area shape="rect" id="node12" href="$enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="1229,56,1349,83"/>
-<area shape="rect" id="node16" href="$health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="1407,157,1541,184"/>
-<area shape="rect" id="node3" href="$tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1020,157,1171,184"/>
-<area shape="rect" id="node4" href="$main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,107,957,133"/>
-<area shape="rect" id="node10" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" id="node11" href="$main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,157,972,184"/>
-<area shape="rect" id="node5" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,108,772,135"/>
-<area shape="rect" id="node6" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,109,612,136"/>
-<area shape="rect" id="node7" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,111,453,137"/>
-<area shape="rect" id="node8" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,113,239,140"/>
-<area shape="rect" id="node9" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,145,60,172"/>
-<area shape="rect" id="node13" href="$boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1030,107,1161,133"/>
-<area shape="rect" id="node14" href="$ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1045,56,1146,83"/>
-<area shape="rect" id="node15" href="$slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1045,5,1145,32"/>
-<area shape="rect" id="node17" href="$player_8c.html#a25a5b9b1991ba50388e6c3b0eab41d6c" title="Crée un nouveau joueur." alt="" coords="664,183,768,209"/>
+<area shape="rect" id="node1" title="Affiche une barre de vie standard." alt="" coords="1559,144,1745,171"/>
+<area shape="rect" id="node2" href="$barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1188,296,1328,323"/>
+<area shape="rect" id="node12" href="$enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="1198,68,1318,95"/>
+<area shape="rect" id="node17" href="$health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="1376,144,1511,171"/>
+<area shape="rect" id="node3" href="$tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="989,208,1140,235"/>
+<area shape="rect" id="node4" href="$main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,157,927,184"/>
+<area shape="rect" id="node10" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,107,929,133"/>
+<area shape="rect" id="node11" href="$main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,208,941,235"/>
+<area shape="rect" id="node5" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,159,741,185"/>
+<area shape="rect" id="node6" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,160,581,187"/>
+<area shape="rect" id="node7" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,161,423,188"/>
+<area shape="rect" id="node8" href="$main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,164,208,191"/>
+<area shape="rect" id="node9" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,196,60,223"/>
+<area shape="rect" id="node13" href="$boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="999,157,1130,184"/>
+<area shape="rect" id="node14" href="$ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1014,5,1115,32"/>
+<area shape="rect" id="node15" href="$slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1015,56,1115,83"/>
+<area shape="rect" id="node16" href="$mobs_2wizard_8c.html#a9cf3a13d8474f8728fd4aaf80458a51b" title="Crée et initialise un sorcier." alt="" coords="1011,107,1119,133"/>
+<area shape="rect" id="node18" href="$player_8c.html#a81ad3e4fcd0e3686c7076cb022b61129" title="Crée un nouveau joueur." alt="" coords="633,233,737,260"/>
 </map>

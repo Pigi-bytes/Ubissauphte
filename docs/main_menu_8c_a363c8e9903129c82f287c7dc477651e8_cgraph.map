@@ -1,0 +1,52 @@
+<map id="chargement" name="chargement">
+<area shape="rect" id="node1" title=" " alt="" coords="5,639,105,665"/>
+<area shape="rect" id="node2" href="$button_8c.html#a27a05bc9ac9288cc041454d2765d0c50" title="Crée un nouveau bouton." alt="" coords="199,208,305,235"/>
+<area shape="rect" id="node3" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="169,563,335,589"/>
+<area shape="rect" id="node10" href="$fscene_8c.html#a4b143d78504ee5f7584a44fb6479e3f0" title="Crée une nouvelle scène." alt="" coords="1097,360,1200,387"/>
+<area shape="rect" id="node11" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="1075,411,1222,437"/>
+<area shape="rect" id="node15" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="1077,461,1220,488"/>
+<area shape="rect" id="node16" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="1097,512,1200,539"/>
+<area shape="rect" id="node17" href="$fscene_8c.html#accbd14eb8c93d348b61a8cb09bbbf489" title="Enregistre une fonction pour une scène." alt="" coords="1064,613,1233,640"/>
+<area shape="rect" id="node32" href="$text_8c.html#a92567a5bf04e06ed469717198d991136" title="Crée un texte avec contour." alt="" coords="183,613,321,640"/>
+<area shape="rect" id="node33" href="$fonction_manager_8c.html#a594fab892bbe8bced787e56601ddd16a" title="Crée un t_fonctionParam." alt="" coords="197,664,307,691"/>
+<area shape="rect" id="node35" href="$commun_8c.html#a3f7f7669a8c87d15c76eb990a07fc8e0" title="fonction de création d&#39;un SDL_Rectangle" alt="" coords="210,715,294,741"/>
+<area shape="rect" id="node36" href="$button_8c.html#a444d02738d087dbd280f7b8848284ae9" title="Libère la mémoire utilisée par un bouton." alt="" coords="207,765,297,792"/>
+<area shape="rect" id="node38" href="$text_8c.html#ab9b7064da4ef9403241f3d40389af46a" title="Libère la mémoire utilisée par un élément textuel." alt="" coords="456,816,531,843"/>
+<area shape="rect" id="node39" href="$commun_8c.html#a9f60e865d0db40e46255669456e7ecd8" title="Wrapper pour la gestion des entrées boutons." alt="" coords="153,924,351,951"/>
+<area shape="rect" id="node45" href="$commun_8c.html#aa7943250e7e111ee38f3a8b0e3be002f" title="Wrapper pour le rendu des boutons UI." alt="" coords="171,987,333,1013"/>
+<area shape="rect" id="node49" href="$commun_8c.html#a8daf30ec672eefaca3e824d1bc7dfb02" title="Wrapper pour le rendu de texte." alt="" coords="420,1113,567,1140"/>
+<area shape="rect" id="node50" href="$commun_8c.html#af39fec5ad765195e1944399733fb4faa" title="Wrapper pour changer de scène." alt="" coords="425,512,561,539"/>
+<area shape="rect" id="node4" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="438,563,549,589"/>
+<area shape="rect" id="node5" href="$fscene_8c.html#a39d0e7fbc78f3ff2fbd207962ff6ab42" title="Ajoute une scène au contrôleur." alt="" coords="879,664,965,691"/>
+<area shape="rect" id="node8" href="$main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="860,309,984,336"/>
+<area shape="rect" id="node20" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="655,563,767,589"/>
+<area shape="rect" id="node22" href="$tiles_8c.html#ab4e8adeba82f1c41f904963ffa7260e8" title="Place une entité sur une tuile libre aléatoire." alt="" coords="1072,765,1225,792"/>
+<area shape="rect" id="node26" href="$genmap_8c.html#a8cc62c2ec750666aff9cbdac83f72102" title=" " alt="" coords="674,56,749,83"/>
+<area shape="rect" id="node29" href="$fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="671,512,752,539"/>
+<area shape="rect" id="node6" href="$object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="1105,664,1193,691"/>
+<area shape="rect" id="node7" href="$object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="1078,816,1219,843"/>
+<area shape="rect" id="node9" href="$commun_8c.html#ad908d5c383621415ac3303b78f098812" title="Wrapper générique d&#39;affichage." alt="" coords="1080,259,1217,285"/>
+<area shape="rect" id="node12" href="$mapview_8c.html#af13e3afed524e2cb61d969acf1042011" title="Libère la mémoire utilisée par la structure d&#39;affichage de carte." alt="" coords="1088,309,1209,336"/>
+<area shape="rect" id="node13" href="$mapview_8c.html#a88fc166e98c5406a3d4fb5d5a5fb3263" title="Génère la représentation visuelle de la carte." alt="" coords="1095,157,1203,184"/>
+<area shape="rect" id="node14" href="$commun_8c.html#a3c58046d1cbb0700448c2967b7576171" title="Wrapper pour la gestion de la carte." alt="" coords="1057,208,1240,235"/>
+<area shape="rect" id="node18" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="1309,664,1394,691"/>
+<area shape="rect" id="node19" href="$object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="1288,867,1415,893"/>
+<area shape="rect" id="node21" href="$main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="861,613,983,640"/>
+<area shape="rect" id="node24" href="$main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="858,563,986,589"/>
+<area shape="rect" id="node25" href="$main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="846,461,998,488"/>
+<area shape="rect" id="node23" href="$tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="1318,765,1385,792"/>
+<area shape="rect" id="node27" href="$genmap_8c.html#a782542f234d59803605c4d24d7cc48a9" title=" " alt="" coords="867,5,977,32"/>
+<area shape="rect" id="node28" href="$genmap_8c.html#ac50fbce591c797fbf374390298a701e0" title=" " alt="" coords="881,56,963,83"/>
+<area shape="rect" id="node30" href="$fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="835,917,1009,944"/>
+<area shape="rect" id="node31" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="1099,968,1199,995"/>
+<area shape="rect" id="node34" href="$fonction_manager_8c.html#a3fdc9fb7992919f32229e99affe0ea71" title="ajout des paramètres dans le t_fonctionParam" alt="" coords="399,664,588,691"/>
+<area shape="rect" id="node37" href="$fonction_manager_8c.html#aa61a39c82b2044678dea685d75cdd8a9" title="Libere la mémoire d&#39;une fonctionParametrable." alt="" coords="442,765,545,792"/>
+<area shape="rect" id="node40" href="$button_8c.html#a0b17babfe6275495728adc3e4ce2cb18" title="Traite les entrées utilisateur pour un bouton." alt="" coords="422,936,565,963"/>
+<area shape="rect" id="node41" href="$button_8c.html#a279965621a6b64d1a4f58eac1f1a9a14" title="Vérifie si le curseur se trouve à l&#39;intérieur d&#39;un rectangle." alt="" coords="639,1012,783,1039"/>
+<area shape="rect" id="node42" href="$audio_manager_8c.html#a9f819b827499e9c2eadb4f276dea5e29" title=" " alt="" coords="671,867,751,893"/>
+<area shape="rect" id="node43" href="$audio_manager_8c.html#a4ec64f2ae737ce1bd28ad405a07c7743" title=" " alt="" coords="887,816,957,843"/>
+<area shape="rect" id="node44" href="$audio_manager_8c.html#a0e16a111c05fb5ec00fd8abd413251e9" title=" " alt="" coords="873,867,971,893"/>
+<area shape="rect" id="node46" href="$button_8c.html#a57726e67186d9103bd5627f07a2557d4" title="Affiche un bouton à l&#39;écran." alt="" coords="440,1063,547,1089"/>
+<area shape="rect" id="node47" href="$button_8c.html#a289805f0c618adfd4a051e912198f3f7" title=" " alt="" coords="636,1063,787,1089"/>
+<area shape="rect" id="node48" href="$text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="666,1113,757,1140"/>
+</map>

@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('weapon_8c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_b57b442d877ecd6884e02e1ed1363c51.html">items</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
@@ -130,16 +146,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="weapon_8c_a48d647ca61cdab6aee094d0420874f9e_icgraph.png" border="0" usemap="#aweapon_8c_a48d647ca61cdab6aee094d0420874f9e_icgraph" alt=""/></div>
 <map name="aweapon_8c_a48d647ca61cdab6aee094d0420874f9e_icgraph" id="aweapon_8c_a48d647ca61cdab6aee094d0420874f9e_icgraph">
-<area shape="rect" title="Calcule l&#39;échelle de l&#39;arme en fonction des attributs du joueur." alt="" coords="1381,56,1549,83"/>
-<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1228,56,1333,83"/>
-<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="1020,56,1180,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Calcule l&#39;échelle de l&#39;arme en fonction des attributs du joueur." alt="" coords="1351,56,1519,83"/>
+<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1197,56,1303,83"/>
+<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="989,56,1149,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -176,16 +192,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="weapon_8c_ad7e876fe31beedb31fd0e933a5061c09_icgraph.png" border="0" usemap="#aweapon_8c_ad7e876fe31beedb31fd0e933a5061c09_icgraph" alt=""/></div>
 <map name="aweapon_8c_ad7e876fe31beedb31fd0e933a5061c09_icgraph" id="aweapon_8c_ad7e876fe31beedb31fd0e933a5061c09_icgraph">
-<area shape="rect" title="Affiche un cône de débogage pour visualiser la zone d&#39;attaque." alt="" coords="1381,56,1563,83"/>
-<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1228,56,1333,83"/>
-<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="1020,56,1180,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Affiche un cône de débogage pour visualiser la zone d&#39;attaque." alt="" coords="1351,56,1532,83"/>
+<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1197,56,1303,83"/>
+<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="989,56,1149,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -277,16 +293,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="weapon_8c_af96a799be749a80ec78faad1a28bc755_icgraph.png" border="0" usemap="#aweapon_8c_af96a799be749a80ec78faad1a28bc755_icgraph" alt=""/></div>
 <map name="aweapon_8c_af96a799be749a80ec78faad1a28bc755_icgraph" id="aweapon_8c_af96a799be749a80ec78faad1a28bc755_icgraph">
-<area shape="rect" title="Affiche l&#39;arme pendant une attaque." alt="" coords="1381,56,1583,83"/>
-<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1228,56,1333,83"/>
-<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="1020,56,1180,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Affiche l&#39;arme pendant une attaque." alt="" coords="1351,56,1552,83"/>
+<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1197,56,1303,83"/>
+<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="989,56,1149,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -369,16 +385,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="weapon_8c_a5d53a807540e29196d6a6626c870ece5_icgraph.png" border="0" usemap="#aweapon_8c_a5d53a807540e29196d6a6626c870ece5_icgraph" alt=""/></div>
 <map name="aweapon_8c_a5d53a807540e29196d6a6626c870ece5_icgraph" id="aweapon_8c_a5d53a807540e29196d6a6626c870ece5_icgraph">
-<area shape="rect" title="Affiche l&#39;arme en position de repos." alt="" coords="1381,56,1521,83"/>
-<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1228,56,1333,83"/>
-<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="1020,56,1180,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Affiche l&#39;arme en position de repos." alt="" coords="1351,56,1491,83"/>
+<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1197,56,1303,83"/>
+<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="989,56,1149,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -426,16 +442,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="weapon_8c_a009bd4a508cff4e6e45bec4591379aab_icgraph.png" border="0" usemap="#aweapon_8c_a009bd4a508cff4e6e45bec4591379aab_icgraph" alt=""/></div>
 <map name="aweapon_8c_a009bd4a508cff4e6e45bec4591379aab_icgraph" id="aweapon_8c_a009bd4a508cff4e6e45bec4591379aab_icgraph">
-<area shape="rect" title="Affiche l&#39;indicateur de portée de l&#39;arme dans l&#39;interface." alt="" coords="1381,56,1552,83"/>
-<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1228,56,1333,83"/>
-<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="1020,56,1180,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Affiche l&#39;indicateur de portée de l&#39;arme dans l&#39;interface." alt="" coords="1351,56,1521,83"/>
+<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1197,56,1303,83"/>
+<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="989,56,1149,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -443,9 +459,13 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_b57b442d877ecd6884e02e1ed1363c51.html">items</a></li><li class="navelem"><a class="el" href="weapon_8c.html">weapon.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

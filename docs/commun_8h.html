@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('commun_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#define-members">Macros</a> &#124;
@@ -329,11 +345,11 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_ad908d5c383621415ac3303b78f098812_icgraph.png" border="0" usemap="#acommun_8h_ad908d5c383621415ac3303b78f098812_icgraph" alt=""/></div>
 <map name="acommun_8h_ad908d5c383621415ac3303b78f098812_icgraph" id="acommun_8h_ad908d5c383621415ac3303b78f098812_icgraph">
-<area shape="rect" title="Wrapper générique d&#39;affichage." alt="" coords="832,5,969,32"/>
-<area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="660,5,784,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Wrapper générique d&#39;affichage." alt="" coords="801,5,939,32"/>
+<area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="629,5,753,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -364,7 +380,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="commun_8c_source.html#l00131">131</a> of file <a class="el" href="commun_8c_source.html">commun.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="commun_8c_source.html#l00130">130</a> of file <a class="el" href="commun_8c_source.html">commun.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -421,14 +437,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_ab20f8d2e1580b37c1916e19726b8c50f_icgraph.png" border="0" usemap="#acommun_8h_ab20f8d2e1580b37c1916e19726b8c50f_icgraph" alt=""/></div>
 <map name="acommun_8h_ab20f8d2e1580b37c1916e19726b8c50f_icgraph" id="acommun_8h_ab20f8d2e1580b37c1916e19726b8c50f_icgraph">
-<area shape="rect" title="Wrapper pour la gestion du zoom de la caméra." alt="" coords="1020,56,1231,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Wrapper pour la gestion du zoom de la caméra." alt="" coords="989,56,1200,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -478,14 +494,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_a2f230d2752707af35e4081358841f4bb_icgraph.png" border="0" usemap="#acommun_8h_a2f230d2752707af35e4081358841f4bb_icgraph" alt=""/></div>
 <map name="acommun_8h_a2f230d2752707af35e4081358841f4bb_icgraph" id="acommun_8h_a2f230d2752707af35e4081358841f4bb_icgraph">
-<area shape="rect" title="Wrapper pour centrer la caméra." alt="" coords="1020,56,1207,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Wrapper pour centrer la caméra." alt="" coords="989,56,1176,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -516,7 +532,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="commun_8c_source.html#l00136">136</a> of file <a class="el" href="commun_8c_source.html">commun.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="commun_8c_source.html#l00135">135</a> of file <a class="el" href="commun_8c_source.html">commun.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -591,21 +607,22 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>un SDL_rect </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="commun_8c_source.html#l00128">128</a> of file <a class="el" href="commun_8c_source.html">commun.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="commun_8c_source.html#l00127">127</a> of file <a class="el" href="commun_8c_source.html">commun.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_a3f7f7669a8c87d15c76eb990a07fc8e0_icgraph.png" border="0" usemap="#acommun_8h_a3f7f7669a8c87d15c76eb990a07fc8e0_icgraph" alt=""/></div>
 <map name="acommun_8h_a3f7f7669a8c87d15c76eb990a07fc8e0_icgraph" id="acommun_8h_a3f7f7669a8c87d15c76eb990a07fc8e0_icgraph">
-<area shape="rect" title="fonction de création d&#39;un SDL_Rectangle" alt="" coords="331,157,415,184"/>
-<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,5,283,32"/>
-<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,56,257,83"/>
-<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,107,263,133"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,157,261,184"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,208,271,235"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,259,267,285"/>
-<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,309,241,336"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,157,60,184"/>
+<area shape="rect" title="fonction de création d&#39;un SDL_Rectangle" alt="" coords="331,183,415,209"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="145,5,245,32"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,56,283,83"/>
+<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,107,257,133"/>
+<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,157,263,184"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,208,261,235"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,259,271,285"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,309,267,336"/>
+<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,360,241,387"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,183,60,209"/>
 </map>
 </div>
 
@@ -813,15 +830,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_a9f60e865d0db40e46255669456e7ecd8_icgraph.png" border="0" usemap="#acommun_8h_a9f60e865d0db40e46255669456e7ecd8_icgraph" alt=""/></div>
 <map name="acommun_8h_a9f60e865d0db40e46255669456e7ecd8_icgraph" id="acommun_8h_a9f60e865d0db40e46255669456e7ecd8_icgraph">
-<area shape="rect" title="Wrapper pour la gestion des entrées boutons." alt="" coords="331,157,528,184"/>
-<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,5,283,32"/>
-<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,56,257,83"/>
-<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,107,263,133"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,157,261,184"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,208,271,235"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,259,267,285"/>
-<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,309,241,336"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,157,60,184"/>
+<area shape="rect" title="Wrapper pour la gestion des entrées boutons." alt="" coords="331,183,528,209"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="145,5,245,32"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,56,283,83"/>
+<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,107,257,133"/>
+<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,157,263,184"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,208,261,235"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,259,271,285"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,309,267,336"/>
+<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,360,241,387"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,183,60,209"/>
 </map>
 </div>
 
@@ -923,11 +941,11 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_a3c58046d1cbb0700448c2967b7576171_icgraph.png" border="0" usemap="#acommun_8h_a3c58046d1cbb0700448c2967b7576171_icgraph" alt=""/></div>
 <map name="acommun_8h_a3c58046d1cbb0700448c2967b7576171_icgraph" id="acommun_8h_a3c58046d1cbb0700448c2967b7576171_icgraph">
-<area shape="rect" title="Wrapper pour la gestion de la carte." alt="" coords="832,5,1015,32"/>
-<area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="660,5,784,32"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,5,612,32"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,5,453,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,5,239,32"/>
+<area shape="rect" title="Wrapper pour la gestion de la carte." alt="" coords="801,5,984,32"/>
+<area shape="rect" href="main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="629,5,753,32"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,5,581,32"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,5,423,32"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,5,208,32"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
 </map>
 </div>
@@ -987,14 +1005,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_a292ed0e58e991bb313bde8ec68676f7b_icgraph.png" border="0" usemap="#acommun_8h_a292ed0e58e991bb313bde8ec68676f7b_icgraph" alt=""/></div>
 <map name="acommun_8h_a292ed0e58e991bb313bde8ec68676f7b_icgraph" id="acommun_8h_a292ed0e58e991bb313bde8ec68676f7b_icgraph">
-<area shape="rect" title="Wrapper pour la gestion des entrées joueur." alt="" coords="1020,56,1215,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Wrapper pour la gestion des entrées joueur." alt="" coords="989,56,1184,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -1284,15 +1302,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_aa7943250e7e111ee38f3a8b0e3be002f_icgraph.png" border="0" usemap="#acommun_8h_aa7943250e7e111ee38f3a8b0e3be002f_icgraph" alt=""/></div>
 <map name="acommun_8h_aa7943250e7e111ee38f3a8b0e3be002f_icgraph" id="acommun_8h_aa7943250e7e111ee38f3a8b0e3be002f_icgraph">
-<area shape="rect" title="Wrapper pour le rendu des boutons UI." alt="" coords="331,157,493,184"/>
-<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,5,283,32"/>
-<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,56,257,83"/>
-<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,107,263,133"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,157,261,184"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,208,271,235"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,259,267,285"/>
-<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,309,241,336"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,157,60,184"/>
+<area shape="rect" title="Wrapper pour le rendu des boutons UI." alt="" coords="331,183,493,209"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="145,5,245,32"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,56,283,83"/>
+<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,107,257,133"/>
+<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,157,263,184"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,208,261,235"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,259,271,285"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,309,267,336"/>
+<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,360,241,387"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,183,60,209"/>
 </map>
 </div>
 
@@ -1338,19 +1357,20 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_ae0721a23bab2cb039c5a0bdbe8965ae1_icgraph.png" border="0" usemap="#acommun_8h_ae0721a23bab2cb039c5a0bdbe8965ae1_icgraph" alt=""/></div>
 <map name="acommun_8h_ae0721a23bab2cb039c5a0bdbe8965ae1_icgraph" id="acommun_8h_ae0721a23bab2cb039c5a0bdbe8965ae1_icgraph">
-<area shape="rect" title="Wrapper pour l&#39;affichage du compteur FPS." alt="" coords="1107,183,1299,209"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="921,5,1044,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="114,157,245,184"/>
-<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="684,208,859,235"/>
-<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="513,259,636,285"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="919,56,1047,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="907,107,1059,133"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="307,309,457,336"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="108,360,251,387"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="715,63,827,89"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="519,69,630,96"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="299,81,465,108"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,259,60,285"/>
+<area shape="rect" title="Wrapper pour l&#39;affichage du compteur FPS." alt="" coords="1115,183,1307,209"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="929,5,1052,32"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="692,157,867,184"/>
+<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="521,208,644,235"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="325,259,455,285"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="927,56,1055,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="915,107,1067,133"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="108,309,259,336"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="708,360,851,387"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="723,60,835,87"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="527,63,638,89"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="307,69,473,96"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="133,81,233,108"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,233,60,260"/>
 </map>
 </div>
 
@@ -1404,14 +1424,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_aa3de3a6f246b611ffa81f4f52cb12ff7_icgraph.png" border="0" usemap="#acommun_8h_aa3de3a6f246b611ffa81f4f52cb12ff7_icgraph" alt=""/></div>
 <map name="acommun_8h_aa3de3a6f246b611ffa81f4f52cb12ff7_icgraph" id="acommun_8h_aa3de3a6f246b611ffa81f4f52cb12ff7_icgraph">
-<area shape="rect" title="Wrapper pour le rendu de la grille de debug." alt="" coords="1020,56,1167,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Wrapper pour le rendu de la grille de debug." alt="" coords="989,56,1136,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -1457,14 +1477,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_a814524bc2b681e2fdb9684fe2f852fa4_icgraph.png" border="0" usemap="#acommun_8h_a814524bc2b681e2fdb9684fe2f852fa4_icgraph" alt=""/></div>
 <map name="acommun_8h_a814524bc2b681e2fdb9684fe2f852fa4_icgraph" id="acommun_8h_a814524bc2b681e2fdb9684fe2f852fa4_icgraph">
-<area shape="rect" title="Wrapper pour le rendu de la minimap." alt="" coords="1020,56,1196,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Wrapper pour le rendu de la minimap." alt="" coords="989,56,1165,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -1501,26 +1521,27 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_aeeaad6c85aeeabd9a1aadb8b74670ba0_cgraph.png" border="0" usemap="#acommun_8h_aeeaad6c85aeeabd9a1aadb8b74670ba0_cgraph" alt=""/></div>
 <map name="acommun_8h_aeeaad6c85aeeabd9a1aadb8b74670ba0_cgraph" id="acommun_8h_aeeaad6c85aeeabd9a1aadb8b74670ba0_cgraph">
-<area shape="rect" title="Wrapper pour le rendu du joueur." alt="" coords="5,208,165,235"/>
-<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="213,208,319,235"/>
+<area shape="rect" title="Wrapper pour le rendu du joueur." alt="" coords="5,233,165,260"/>
+<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="213,233,319,260"/>
 <area shape="rect" href="player_8c.html#a68aa7bf08e883fd2ccdf5e65f3c4cc11" title=" " alt="" coords="384,5,551,32"/>
 <area shape="rect" href="weapon_8c.html#a48d647ca61cdab6aee094d0420874f9e" title="Calcule l&#39;échelle de l&#39;arme en fonction des attributs du joueur." alt="" coords="383,56,551,83"/>
-<area shape="rect" href="weapon_8c.html#ad7e876fe31beedb31fd0e933a5061c09" title="Affiche un cône de débogage pour visualiser la zone d&#39;attaque." alt="" coords="377,107,558,133"/>
-<area shape="rect" href="player_8c.html#ade88ef9b08cd5f904aaf3da1e9292fd2" title=" " alt="" coords="405,157,529,184"/>
-<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="416,208,519,235"/>
-<area shape="rect" href="particules_8c.html#a4649283fd9dfa8005ebd85d1ef3a771e" title="Affiche toutes les particules actives." alt="" coords="389,259,546,285"/>
-<area shape="rect" href="weapon_8c.html#af96a799be749a80ec78faad1a28bc755" title="Affiche l&#39;arme pendant une attaque." alt="" coords="367,309,568,336"/>
-<area shape="rect" href="weapon_8c.html#a5d53a807540e29196d6a6626c870ece5" title="Affiche l&#39;arme en position de repos." alt="" coords="397,360,537,387"/>
-<area shape="rect" href="weapon_8c.html#a009bd4a508cff4e6e45bec4591379aab" title="Affiche l&#39;indicateur de portée de l&#39;arme dans l&#39;interface." alt="" coords="382,411,553,437"/>
+<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="409,107,525,133"/>
+<area shape="rect" href="weapon_8c.html#ad7e876fe31beedb31fd0e933a5061c09" title="Affiche un cône de débogage pour visualiser la zone d&#39;attaque." alt="" coords="377,157,558,184"/>
+<area shape="rect" href="player_8c.html#ade88ef9b08cd5f904aaf3da1e9292fd2" title=" " alt="" coords="405,208,529,235"/>
+<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="416,259,519,285"/>
+<area shape="rect" href="particules_8c.html#a4649283fd9dfa8005ebd85d1ef3a771e" title="Affiche toutes les particules actives." alt="" coords="389,309,546,336"/>
+<area shape="rect" href="weapon_8c.html#af96a799be749a80ec78faad1a28bc755" title="Affiche l&#39;arme pendant une attaque." alt="" coords="367,360,568,387"/>
+<area shape="rect" href="weapon_8c.html#a5d53a807540e29196d6a6626c870ece5" title="Affiche l&#39;arme en position de repos." alt="" coords="397,411,537,437"/>
+<area shape="rect" href="weapon_8c.html#a009bd4a508cff4e6e45bec4591379aab" title="Affiche l&#39;indicateur de portée de l&#39;arme dans l&#39;interface." alt="" coords="382,461,553,488"/>
 <area shape="rect" href="camera_8c.html#aa33df647efea80a9d6ba2d01184a714d" title="Ajoute un effet de tremblement à la caméra." alt="" coords="628,5,763,32"/>
-<area shape="rect" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="616,157,775,184"/>
-<area shape="rect" href="camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="630,208,761,235"/>
-<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="628,259,763,285"/>
-<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="839,157,924,184"/>
-<area shape="rect" href="timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="843,208,920,235"/>
-<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="836,259,927,285"/>
-<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="823,309,940,336"/>
-<area shape="rect" href="core_8c.html#af285790c31a2afabd9332560b8249f5e" title="Interpole linéairement entre deux angles." alt="" coords="653,309,737,336"/>
+<area shape="rect" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="616,208,775,235"/>
+<area shape="rect" href="camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="630,259,761,285"/>
+<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="628,309,763,336"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="839,208,924,235"/>
+<area shape="rect" href="timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="843,259,920,285"/>
+<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="836,309,927,336"/>
+<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="823,360,940,387"/>
+<area shape="rect" href="core_8c.html#af285790c31a2afabd9332560b8249f5e" title="Interpole linéairement entre deux angles." alt="" coords="653,360,737,387"/>
 </map>
 </div>
 <div class="dynheader">
@@ -1528,14 +1549,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_aeeaad6c85aeeabd9a1aadb8b74670ba0_icgraph.png" border="0" usemap="#acommun_8h_aeeaad6c85aeeabd9a1aadb8b74670ba0_icgraph" alt=""/></div>
 <map name="acommun_8h_aeeaad6c85aeeabd9a1aadb8b74670ba0_icgraph" id="acommun_8h_aeeaad6c85aeeabd9a1aadb8b74670ba0_icgraph">
-<area shape="rect" title="Wrapper pour le rendu du joueur." alt="" coords="1020,56,1180,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Wrapper pour le rendu du joueur." alt="" coords="989,56,1149,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -1581,15 +1602,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_a8daf30ec672eefaca3e824d1bc7dfb02_icgraph.png" border="0" usemap="#acommun_8h_a8daf30ec672eefaca3e824d1bc7dfb02_icgraph" alt=""/></div>
 <map name="acommun_8h_a8daf30ec672eefaca3e824d1bc7dfb02_icgraph" id="acommun_8h_a8daf30ec672eefaca3e824d1bc7dfb02_icgraph">
-<area shape="rect" title="Wrapper pour le rendu de texte." alt="" coords="331,157,477,184"/>
-<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,5,283,32"/>
-<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,56,257,83"/>
-<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,107,263,133"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,157,261,184"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,208,271,235"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,259,267,285"/>
-<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,309,241,336"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,157,60,184"/>
+<area shape="rect" title="Wrapper pour le rendu de texte." alt="" coords="331,183,477,209"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="145,5,245,32"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,56,283,83"/>
+<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,107,257,133"/>
+<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,157,263,184"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,208,261,235"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,259,271,285"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,309,267,336"/>
+<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,360,241,387"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,183,60,209"/>
 </map>
 </div>
 
@@ -1686,14 +1708,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_a20db884ef4960b526684a6c07adad6eb_icgraph.png" border="0" usemap="#acommun_8h_a20db884ef4960b526684a6c07adad6eb_icgraph" alt=""/></div>
 <map name="acommun_8h_a20db884ef4960b526684a6c07adad6eb_icgraph" id="acommun_8h_a20db884ef4960b526684a6c07adad6eb_icgraph">
-<area shape="rect" title="Wrapper pour le rendu du viewport principal." alt="" coords="1020,56,1197,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Wrapper pour le rendu du viewport principal." alt="" coords="989,56,1167,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -1739,14 +1761,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_a591150d6ecef911a5e8de6101893a228_icgraph.png" border="0" usemap="#acommun_8h_a591150d6ecef911a5e8de6101893a228_icgraph" alt=""/></div>
 <map name="acommun_8h_a591150d6ecef911a5e8de6101893a228_icgraph" id="acommun_8h_a591150d6ecef911a5e8de6101893a228_icgraph">
-<area shape="rect" title="Wrapper pour redimensionner la minimap." alt="" coords="1020,56,1193,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Wrapper pour redimensionner la minimap." alt="" coords="989,56,1163,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -1792,14 +1814,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_a0fdd01f50c34f4db33bfa1808f3e36d5_icgraph.png" border="0" usemap="#acommun_8h_a0fdd01f50c34f4db33bfa1808f3e36d5_icgraph" alt=""/></div>
 <map name="acommun_8h_a0fdd01f50c34f4db33bfa1808f3e36d5_icgraph" id="acommun_8h_a0fdd01f50c34f4db33bfa1808f3e36d5_icgraph">
-<area shape="rect" title="Wrapper pour redimensionner le viewport." alt="" coords="1020,56,1195,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Wrapper pour redimensionner le viewport." alt="" coords="989,56,1164,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -1845,14 +1867,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_a16ec2c51f6724544166f735343bd8c56_icgraph.png" border="0" usemap="#acommun_8h_a16ec2c51f6724544166f735343bd8c56_icgraph" alt=""/></div>
 <map name="acommun_8h_a16ec2c51f6724544166f735343bd8c56_icgraph" id="acommun_8h_a16ec2c51f6724544166f735343bd8c56_icgraph">
-<area shape="rect" title="Wrapper pour définir la cible de rendu." alt="" coords="1020,56,1203,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Wrapper pour définir la cible de rendu." alt="" coords="989,56,1172,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -1901,11 +1923,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_af39fec5ad765195e1944399733fb4faa_icgraph.png" border="0" usemap="#acommun_8h_af39fec5ad765195e1944399733fb4faa_icgraph" alt=""/></div>
 <map name="acommun_8h_af39fec5ad765195e1944399733fb4faa_icgraph" id="acommun_8h_af39fec5ad765195e1944399733fb4faa_icgraph">
-<area shape="rect" title="Wrapper pour changer de scène." alt="" coords="307,56,443,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="118,5,249,32"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="108,56,259,83"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="112,107,255,133"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+<area shape="rect" title="Wrapper pour changer de scène." alt="" coords="307,81,443,108"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="133,5,233,32"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="118,56,249,83"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="108,107,259,133"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="112,157,255,184"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,81,60,108"/>
 </map>
 </div>
 
@@ -1952,19 +1975,20 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_a3d7ceef02fbf5954ffd809f4bf8c40c3_icgraph.png" border="0" usemap="#acommun_8h_a3d7ceef02fbf5954ffd809f4bf8c40c3_icgraph" alt=""/></div>
 <map name="acommun_8h_a3d7ceef02fbf5954ffd809f4bf8c40c3_icgraph" id="acommun_8h_a3d7ceef02fbf5954ffd809f4bf8c40c3_icgraph">
-<area shape="rect" title="Wrapper pour la mise à jour du compteur FPS." alt="" coords="1107,183,1301,209"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="921,5,1044,32"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="114,157,245,184"/>
-<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="684,208,859,235"/>
-<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="513,259,636,285"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="919,56,1047,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="907,107,1059,133"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="307,309,457,336"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="108,360,251,387"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="715,63,827,89"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="519,69,630,96"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="299,81,465,108"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,259,60,285"/>
+<area shape="rect" title="Wrapper pour la mise à jour du compteur FPS." alt="" coords="1115,183,1309,209"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="929,5,1052,32"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="692,157,867,184"/>
+<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="521,208,644,235"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="325,259,455,285"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="927,56,1055,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="915,107,1067,133"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="108,309,259,336"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="708,360,851,387"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="723,60,835,87"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="527,63,638,89"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="307,69,473,96"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="133,81,233,108"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,233,60,260"/>
 </map>
 </div>
 
@@ -2013,14 +2037,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_ad528a6e4bc07397f718d5f9c153939fc_icgraph.png" border="0" usemap="#acommun_8h_ad528a6e4bc07397f718d5f9c153939fc_icgraph" alt=""/></div>
 <map name="acommun_8h_ad528a6e4bc07397f718d5f9c153939fc_icgraph" id="acommun_8h_ad528a6e4bc07397f718d5f9c153939fc_icgraph">
-<area shape="rect" title="Wrapper pour la mise à jour de la minimap." alt="" coords="1020,56,1199,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Wrapper pour la mise à jour de la minimap." alt="" coords="989,56,1168,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -2097,14 +2121,14 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="commun_8h_a32d90a8046d05096f3ea9453c8c56797_icgraph.png" border="0" usemap="#acommun_8h_a32d90a8046d05096f3ea9453c8c56797_icgraph" alt=""/></div>
 <map name="acommun_8h_a32d90a8046d05096f3ea9453c8c56797_icgraph" id="acommun_8h_a32d90a8046d05096f3ea9453c8c56797_icgraph">
-<area shape="rect" title="Wrapper pour la mise à jour du joueur." alt="" coords="1020,56,1183,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Wrapper pour la mise à jour du joueur." alt="" coords="989,56,1152,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -2206,9 +2230,13 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="commun_8h.html">commun.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

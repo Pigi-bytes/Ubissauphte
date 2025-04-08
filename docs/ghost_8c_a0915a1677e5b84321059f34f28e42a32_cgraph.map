@@ -1,5 +1,12 @@
 <map id="onGhostDeath" name="onGhostDeath">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,120,32"/>
-<area shape="rect" id="node2" href="$player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="168,5,272,32"/>
-<area shape="rect" id="node3" href="$player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="320,5,508,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,120,133"/>
+<area shape="rect" id="node2" href="$player_8c.html#ada3f1cfedc47c0c89696ca597444ef13" title="Ajoute des points d&#39;expérience au joueur." alt="" coords="191,56,295,83"/>
+<area shape="rect" id="node8" href="$particules_8c.html#ac20bc3614a107eaf746b683fd7b73bb1" title="Émet des particules de mort." alt="" coords="387,107,534,133"/>
+<area shape="rect" id="node10" href="$particules_8c.html#a61fa4b7a83f49df939133c298c2a4dab" title="Réinitialise un émetteur de particules." alt="" coords="168,157,319,184"/>
+<area shape="rect" id="node3" href="$player_8c.html#a76ce13fbd671cedc0fe37b4790c7fd4d" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="367,56,555,83"/>
+<area shape="rect" id="node4" href="$particules_8c.html#aea0223a544ee988ed39eafc6faed78ce" title="Émet des particules de soin pour le sorcier." alt="" coords="635,5,772,32"/>
+<area shape="rect" id="node7" href="$equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="603,56,804,83"/>
+<area shape="rect" id="node5" href="$particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="852,31,1003,57"/>
+<area shape="rect" id="node6" href="$particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="867,107,988,133"/>
+<area shape="rect" id="node9" href="$particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="650,107,757,133"/>
 </map>

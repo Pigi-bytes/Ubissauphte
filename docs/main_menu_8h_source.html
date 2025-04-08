@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('main_menu_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7ecf341207a704509dc0db07e1771050.html">_scene</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">mainMenu.h</div>  </div>
@@ -85,18 +101,25 @@ $(function() {
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">char</span>* <a class="code" href="main_menu_8h.html#a27a9ef787739b86e4145651faee87593">indiceFromDifficulty</a>(<a class="code" href="context_8h.html#a6bdf1adf0ba98c2dad6d1e5b19e5a897">difficulty</a> d);</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<a class="code" href="structt__scene.html">t_scene</a>* <a class="code" href="main_menu_8h.html#a363c8e9903129c82f287c7dc477651e8">chargement</a>(<a class="code" href="structt__context.html">t_context</a>* context, <a class="code" href="structs__joueur.html">t_joueur</a>** player);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="acontext_8h_html_a6bdf1adf0ba98c2dad6d1e5b19e5a897"><div class="ttname"><a href="context_8h.html#a6bdf1adf0ba98c2dad6d1e5b19e5a897">difficulty</a></div><div class="ttdeci">difficulty</div><div class="ttdoc">Définit les différents niveaux de difficulté du jeu.</div><div class="ttdef"><b>Definition:</b> <a href="context_8h_source.html#l00033">context.h:33</a></div></div>
-<div class="ttc" id="amain_menu_8h_html_a27a9ef787739b86e4145651faee87593"><div class="ttname"><a href="main_menu_8h.html#a27a9ef787739b86e4145651faee87593">indiceFromDifficulty</a></div><div class="ttdeci">char * indiceFromDifficulty(difficulty d)</div><div class="ttdoc">Convertit une difficulté en chaîne de caractères.</div><div class="ttdef"><b>Definition:</b> <a href="main_menu_8c_source.html#l00099">mainMenu.c:99</a></div></div>
-<div class="ttc" id="amain_menu_8h_html_ab061a1172135786f5c980328c2128e75"><div class="ttname"><a href="main_menu_8h.html#ab061a1172135786f5c980328c2128e75">createMainMenu</a></div><div class="ttdeci">t_scene * createMainMenu(t_context *context, t_joueur **player)</div><div class="ttdoc">Crée et initialise le menu principal.</div><div class="ttdef"><b>Definition:</b> <a href="main_menu_8c_source.html#l00060">mainMenu.c:60</a></div></div>
+<div class="ttc" id="amain_menu_8h_html_a27a9ef787739b86e4145651faee87593"><div class="ttname"><a href="main_menu_8h.html#a27a9ef787739b86e4145651faee87593">indiceFromDifficulty</a></div><div class="ttdeci">char * indiceFromDifficulty(difficulty d)</div><div class="ttdoc">Convertit une difficulté en chaîne de caractères.</div><div class="ttdef"><b>Definition:</b> <a href="main_menu_8c_source.html#l00128">mainMenu.c:128</a></div></div>
+<div class="ttc" id="amain_menu_8h_html_a363c8e9903129c82f287c7dc477651e8"><div class="ttname"><a href="main_menu_8h.html#a363c8e9903129c82f287c7dc477651e8">chargement</a></div><div class="ttdeci">t_scene * chargement(t_context *context, t_joueur **player)</div><div class="ttdef"><b>Definition:</b> <a href="main_menu_8c_source.html#l00144">mainMenu.c:144</a></div></div>
+<div class="ttc" id="amain_menu_8h_html_ab061a1172135786f5c980328c2128e75"><div class="ttname"><a href="main_menu_8h.html#ab061a1172135786f5c980328c2128e75">createMainMenu</a></div><div class="ttdeci">t_scene * createMainMenu(t_context *context, t_joueur **player)</div><div class="ttdoc">Crée et initialise le menu principal.</div><div class="ttdef"><b>Definition:</b> <a href="main_menu_8c_source.html#l00082">mainMenu.c:82</a></div></div>
 <div class="ttc" id="amain_world_8h_html"><div class="ttname"><a href="main_world_8h.html">mainWorld.h</a></div></div>
 <div class="ttc" id="astructs__joueur_html"><div class="ttname"><a href="structs__joueur.html">s_joueur</a></div><div class="ttdoc">Référence au type joueur pour éviter les inclusions circulaires.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00080">player.h:80</a></div></div>
 <div class="ttc" id="astructt__context_html"><div class="ttname"><a href="structt__context.html">t_context</a></div><div class="ttdoc">Contient le contexte global du jeu.</div><div class="ttdef"><b>Definition:</b> <a href="context_8h_source.html#l00072">context.h:72</a></div></div>
 <div class="ttc" id="astructt__scene_html"><div class="ttname"><a href="structt__scene.html">t_scene</a></div><div class="ttdoc">Représente une scène composée d'objets.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8h_source.html#l00061">fscene.h:61</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7ecf341207a704509dc0db07e1771050.html">_scene</a></li><li class="navelem"><a class="el" href="main_menu_8h.html">mainMenu.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

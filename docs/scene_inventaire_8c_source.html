@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('scene_inventaire_8c_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7ecf341207a704509dc0db07e1771050.html">_scene</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">sceneInventaire.c</div>  </div>
@@ -100,58 +116,15 @@ $(function() {
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">return</span> scene;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// int main() {</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">//     SDL_Window *window = SDL_CreateWindow(&quot;SDL2&quot;, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_SHOWN);</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">//     t_input *input = initInput(window_width, window_height);</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">//     t_fichier *fichier = chargerFichier(&quot;src/test.txt&quot;);</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">//     printf(&quot;yes\n&quot;);</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//     t_tileset *tileset = initTileset(renderer, 192, 240, 16, &quot;./assets/imgs/tileMapDungeon.bmp&quot;);</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">//     t_item **itemListe = item_load(fichier, tileset);</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//     t_character *c = createCharactere(tileset, 98);</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//     for (int i = 0; i &lt; 40; i++) {</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">//         inventaireAjoutObjet(c-&gt;inventaire, itemListe[i], 1);</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">//     }</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">//     InventoryUI *ui = inventoryUI_Init(NULL, renderer, c, input);</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">//     ;</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">//     /* const uint8 Case_TYpe = (registre,null,&quot;case&quot;)</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">//     init (ui,) */</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">//     while (!input-&gt;quit) {</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">//         update(input, ui);</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">//         updateInput(input);</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">//         updateScroll(ui, input);</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">//         inventoryUI_Update(ui, renderer, input);</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">//         inventoryUI_Render(ui, renderer, input);</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">//         SDL_RenderPresent(renderer);</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">//     }</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">//     SDL_DestroyWindow(window);</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">//     SDL_DestroyRenderer(renderer);</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">//     SDL_Quit();</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">//     return EXIT_SUCCESS;</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">// }</span></div>
-<div class="ttc" id="aaffichage_8c_html_a96c4589074dbafb252edc8af036d2e43"><div class="ttname"><a href="affichage_8c.html#a96c4589074dbafb252edc8af036d2e43">freeInv</a></div><div class="ttdeci">void freeInv(void *elt)</div><div class="ttdoc">Libère la mémoire de l'interface.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00605">affichage.c:605</a></div></div>
-<div class="ttc" id="aaffichage_8c_html_ab52cfc1609e782c407e667fde05707e3"><div class="ttname"><a href="affichage_8c.html#ab52cfc1609e782c407e667fde05707e3">inventoryUI_Init</a></div><div class="ttdeci">InventoryUI * inventoryUI_Init(InventoryUI *ui2, t_joueur *c, t_context *context)</div><div class="ttdoc">Initialise ou met à jour l'interface d'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00230">affichage.c:230</a></div></div>
+<div class="ttc" id="aaffichage_8c_html_a96c4589074dbafb252edc8af036d2e43"><div class="ttname"><a href="affichage_8c.html#a96c4589074dbafb252edc8af036d2e43">freeInv</a></div><div class="ttdeci">void freeInv(void *elt)</div><div class="ttdoc">Libère la mémoire de l'interface.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00602">affichage.c:602</a></div></div>
+<div class="ttc" id="aaffichage_8c_html_ab52cfc1609e782c407e667fde05707e3"><div class="ttname"><a href="affichage_8c.html#ab52cfc1609e782c407e667fde05707e3">inventoryUI_Init</a></div><div class="ttdeci">InventoryUI * inventoryUI_Init(InventoryUI *ui2, t_joueur *c, t_context *context)</div><div class="ttdoc">Initialise ou met à jour l'interface d'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00229">affichage.c:229</a></div></div>
 <div class="ttc" id="acommun_8c_html_a1ada1938c96f85c840f6c4ef88aca8b6"><div class="ttname"><a href="commun_8c.html#a1ada1938c96f85c840f6c4ef88aca8b6">inventoryUI_RenderWrapper</a></div><div class="ttdeci">void inventoryUI_RenderWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour le rendu de l'UI d'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00111">commun.c:111</a></div></div>
 <div class="ttc" id="acommun_8c_html_a4f591af27004d405467a54fe1492e4e3"><div class="ttname"><a href="commun_8c.html#a4f591af27004d405467a54fe1492e4e3">handleInputInventaireWrapper</a></div><div class="ttdeci">void handleInputInventaireWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour la gestion de l'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00115">commun.c:115</a></div></div>
 <div class="ttc" id="acommun_8c_html_a7619dfcb283250b3b1ce3707c7063c67"><div class="ttname"><a href="commun_8c.html#a7619dfcb283250b3b1ce3707c7063c67">updateScrollWrapper</a></div><div class="ttdeci">void updateScrollWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour la gestion du scrolling.</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00103">commun.c:103</a></div></div>
 <div class="ttc" id="acommun_8c_html_a94d31ddf61fd4570a1d88e45c0272400"><div class="ttname"><a href="commun_8c.html#a94d31ddf61fd4570a1d88e45c0272400">updateWrapper</a></div><div class="ttdeci">void updateWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper générique de mise à jour.</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00099">commun.c:99</a></div></div>
 <div class="ttc" id="acommun_8c_html_abc60ca3fcbf54c897b7cea3dedde3150"><div class="ttname"><a href="commun_8c.html#abc60ca3fcbf54c897b7cea3dedde3150">inventoryUI_UpdateWrapper</a></div><div class="ttdeci">void inventoryUI_UpdateWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour la mise à jour de l'UI d'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00107">commun.c:107</a></div></div>
-<div class="ttc" id="aequipements_manager_8c_html_a25f46091d53834a778e3659f9f3b8772"><div class="ttname"><a href="equipements_manager_8c.html#a25f46091d53834a778e3659f9f3b8772">equiperEquipement</a></div><div class="ttdeci">void equiperEquipement(t_joueur **c, int inventoryIndex, equipementSlotType slot)</div><div class="ttdoc">Équipe un item depuis l'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="equipements_manager_8c_source.html#l00453">equipementsManager.c:453</a></div></div>
-<div class="ttc" id="aequipements_manager_8c_html_aee54a2c5f88bf08ed74e4c1c016f773a"><div class="ttname"><a href="equipements_manager_8c.html#aee54a2c5f88bf08ed74e4c1c016f773a">inventaireAjoutObjet</a></div><div class="ttdeci">void inventaireAjoutObjet(t_inventaire *inv, t_item *item, int quantite)</div><div class="ttdoc">Ajoute un objet à l'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="equipements_manager_8c_source.html#l00398">equipementsManager.c:398</a></div></div>
+<div class="ttc" id="aequipements_manager_8c_html_a25f46091d53834a778e3659f9f3b8772"><div class="ttname"><a href="equipements_manager_8c.html#a25f46091d53834a778e3659f9f3b8772">equiperEquipement</a></div><div class="ttdeci">void equiperEquipement(t_joueur **c, int inventoryIndex, equipementSlotType slot)</div><div class="ttdoc">Équipe un item depuis l'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="equipements_manager_8c_source.html#l00452">equipementsManager.c:452</a></div></div>
+<div class="ttc" id="aequipements_manager_8c_html_aee54a2c5f88bf08ed74e4c1c016f773a"><div class="ttname"><a href="equipements_manager_8c.html#aee54a2c5f88bf08ed74e4c1c016f773a">inventaireAjoutObjet</a></div><div class="ttdeci">void inventaireAjoutObjet(t_inventaire *inv, t_item *item, int quantite)</div><div class="ttdoc">Ajoute un objet à l'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="equipements_manager_8c_source.html#l00397">equipementsManager.c:397</a></div></div>
 <div class="ttc" id="aequipements_manager_8h_html_a948fe8a38a964870463f87c1ffebb66ba483b09cf2bdd38b012390e1b31004cda"><div class="ttname"><a href="equipements_manager_8h.html#a948fe8a38a964870463f87c1ffebb66ba483b09cf2bdd38b012390e1b31004cda">SLOT_ARME</a></div><div class="ttdeci">@ SLOT_ARME</div><div class="ttdoc">Emplacement pour les armes.</div><div class="ttdef"><b>Definition:</b> <a href="equipements_manager_8h_source.html#l00029">equipementsManager.h:29</a></div></div>
 <div class="ttc" id="afonction_manager_8h_html_abaa9ce64f975e79556e8cac95dccbdc7"><div class="ttname"><a href="fonction_manager_8h.html#abaa9ce64f975e79556e8cac95dccbdc7">FONCTION_PARAMS</a></div><div class="ttdeci">#define FONCTION_PARAMS(...)</div><div class="ttdoc">Ajoute automatiquement un NULL à la fin d'une liste d'arguments.</div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8h_source.html#l00032">fonctionManager.h:32</a></div></div>
 <div class="ttc" id="afscene_8c_html_a4b143d78504ee5f7584a44fb6479e3f0"><div class="ttname"><a href="fscene_8c.html#a4b143d78504ee5f7584a44fb6479e3f0">createScene</a></div><div class="ttdeci">t_scene * createScene(t_objectManager *manager, char *name)</div><div class="ttdoc">Crée une nouvelle scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00005">fscene.c:5</a></div></div>
@@ -167,7 +140,7 @@ $(function() {
 <div class="ttc" id="ascene_inventaire_8h_html"><div class="ttname"><a href="scene_inventaire_8h.html">sceneInventaire.h</a></div></div>
 <div class="ttc" id="astruct_inventory_u_i_html"><div class="ttname"><a href="struct_inventory_u_i.html">InventoryUI</a></div><div class="ttdoc">Structure principale de l'interface d'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8h_source.html#l00117">affichage.h:117</a></div></div>
 <div class="ttc" id="astructs__joueur_html"><div class="ttname"><a href="structs__joueur.html">s_joueur</a></div><div class="ttdoc">Référence au type joueur pour éviter les inclusions circulaires.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00080">player.h:80</a></div></div>
-<div class="ttc" id="astructs__joueur_html_aacb46876904d592518623fabf006b5c2"><div class="ttname"><a href="structs__joueur.html#aacb46876904d592518623fabf006b5c2">s_joueur::inventaire</a></div><div class="ttdeci">t_inventaire * inventaire</div><div class="ttdoc">Inventaire du joueur.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00091">player.h:91</a></div></div>
+<div class="ttc" id="astructs__joueur_html_aacb46876904d592518623fabf006b5c2"><div class="ttname"><a href="structs__joueur.html#aacb46876904d592518623fabf006b5c2">s_joueur::inventaire</a></div><div class="ttdeci">t_inventaire * inventaire</div><div class="ttdoc">Inventaire du joueur.</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00092">player.h:92</a></div></div>
 <div class="ttc" id="astructt__context_html"><div class="ttname"><a href="structt__context.html">t_context</a></div><div class="ttdoc">Contient le contexte global du jeu.</div><div class="ttdef"><b>Definition:</b> <a href="context_8h_source.html#l00072">context.h:72</a></div></div>
 <div class="ttc" id="astructt__context_html_a6e6cf7fc10c0cc1ef1855bbf85fbf880"><div class="ttname"><a href="structt__context.html#a6e6cf7fc10c0cc1ef1855bbf85fbf880">t_context::itemListe</a></div><div class="ttdeci">t_item ** itemListe</div><div class="ttdoc">Liste des objets du jeu.</div><div class="ttdef"><b>Definition:</b> <a href="context_8h_source.html#l00087">context.h:87</a></div></div>
 <div class="ttc" id="astructt__context_html_a922f92cbdc4ee6e7863f5464d47cebd7"><div class="ttname"><a href="structt__context.html#a922f92cbdc4ee6e7863f5464d47cebd7">t_context::sceneController</a></div><div class="ttdeci">t_sceneController * sceneController</div><div class="ttdoc">Contrôleur de scènes.</div><div class="ttdef"><b>Definition:</b> <a href="context_8h_source.html#l00080">context.h:80</a></div></div>
@@ -178,9 +151,13 @@ $(function() {
 <div class="ttc" id="astructt__type_registry_html"><div class="ttname"><a href="structt__type_registry.html">t_typeRegistry</a></div><div class="ttdoc">Registre central des types.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8h_source.html#l00049">objectManager.h:49</a></div></div>
 <div class="ttc" id="atileset_8c_html_ab041e3b90591cb42626107fb85289c09"><div class="ttname"><a href="tileset_8c.html#ab041e3b90591cb42626107fb85289c09">initTileset</a></div><div class="ttdeci">t_tileset * initTileset(SDL_Renderer *renderer, int width, int height, int tileSize, char *filename)</div><div class="ttdoc">Initialise un nouveau tileset à partir d'une image.</div><div class="ttdef"><b>Definition:</b> <a href="tileset_8c_source.html#l00004">tileset.c:4</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7ecf341207a704509dc0db07e1771050.html">_scene</a></li><li class="navelem"><a class="el" href="scene_inventaire_8c.html">sceneInventaire.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

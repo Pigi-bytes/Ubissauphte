@@ -1,8 +1,8 @@
 <map id="addScene" name="addScene">
-<area shape="rect" id="node1" title="Ajoute une scène au contrôleur." alt="" coords="820,22,905,49"/>
-<area shape="rect" id="node2" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,22,612,49"/>
+<area shape="rect" id="node1" title="Ajoute une scène au contrôleur." alt="" coords="789,22,875,49"/>
+<area shape="rect" id="node2" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,22,581,49"/>
 <area shape="rect" id="node5" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,48,60,74"/>
-<area shape="rect" id="node6" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,22,772,49"/>
-<area shape="rect" id="node3" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,22,453,49"/>
-<area shape="rect" id="node4" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,22,239,49"/>
+<area shape="rect" id="node6" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,22,741,49"/>
+<area shape="rect" id="node3" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,22,423,49"/>
+<area shape="rect" id="node4" href="$main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,22,208,49"/>
 </map>

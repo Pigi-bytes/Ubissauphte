@@ -1,11 +1,12 @@
 <map id="handleInputButtonWrapper" name="handleInputButtonWrapper">
-<area shape="rect" id="node1" title="Wrapper pour la gestion des entrées boutons." alt="" coords="331,157,528,184"/>
-<area shape="rect" id="node2" href="$commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,5,283,32"/>
-<area shape="rect" id="node4" href="$fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,56,257,83"/>
-<area shape="rect" id="node5" href="$game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,107,263,133"/>
-<area shape="rect" id="node6" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,157,261,184"/>
-<area shape="rect" id="node7" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,208,271,235"/>
-<area shape="rect" id="node8" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,259,267,285"/>
-<area shape="rect" id="node9" href="$win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,309,241,336"/>
-<area shape="rect" id="node3" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,157,60,184"/>
+<area shape="rect" id="node1" title="Wrapper pour la gestion des entrées boutons." alt="" coords="331,183,528,209"/>
+<area shape="rect" id="node2" href="$main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="145,5,245,32"/>
+<area shape="rect" id="node4" href="$commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,56,283,83"/>
+<area shape="rect" id="node5" href="$fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,107,257,133"/>
+<area shape="rect" id="node6" href="$game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,157,263,184"/>
+<area shape="rect" id="node7" href="$main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,208,261,235"/>
+<area shape="rect" id="node8" href="$option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,259,271,285"/>
+<area shape="rect" id="node9" href="$option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,309,267,336"/>
+<area shape="rect" id="node10" href="$win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,360,241,387"/>
+<area shape="rect" id="node3" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,183,60,209"/>
 </map>

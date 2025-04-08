@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('health_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_ba98abd8171b4a3dbca90a24706ac331.html">components</a></li><li class="navelem"><a class="el" href="dir_aae5aa2ccf9df890b95e2200f09904d9.html">health</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">health.h</div>  </div>
@@ -116,10 +132,13 @@ $(function() {
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">void</span> <a class="code" href="health_8h.html#ae977bc5281553c4129bc7e533162b160">renderStandardHealthBar</a>(SDL_Renderer* renderer, <a class="code" href="structs__health_system.html">t_healthSystem</a>* health, SDL_Rect entityRect, <a class="code" href="structt__camera.html">t_camera</a>* camera);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keywordtype">int</span> <a class="code" href="health_8h.html#a9218aa8c88d236422704b6003c134fc1">applyHealing</a>(<a class="code" href="structs__health_system.html">t_healthSystem</a>* health, <span class="keywordtype">int</span> healAmount, <span class="keywordtype">void</span>* entity);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="ahealth_8h_html_a0785e98f299a0efc4d634d618c7f9f75"><div class="ttname"><a href="health_8h.html#a0785e98f299a0efc4d634d618c7f9f75">updateHealthSystem</a></div><div class="ttdeci">void updateHealthSystem(t_healthSystem *health, float deltaTime)</div><div class="ttdoc">Met à jour le système de santé</div><div class="ttdef"><b>Definition:</b> <a href="health_8c_source.html#l00112">health.c:112</a></div></div>
 <div class="ttc" id="ahealth_8h_html_a1670986d96416cfe44a7170d254e1521"><div class="ttname"><a href="health_8h.html#a1670986d96416cfe44a7170d254e1521">t_healthSystem</a></div><div class="ttdeci">struct s_healthSystem t_healthSystem</div></div>
 <div class="ttc" id="ahealth_8h_html_a5eeeca2dbbb6cecceaf19152d90812bf"><div class="ttname"><a href="health_8h.html#a5eeeca2dbbb6cecceaf19152d90812bf">freeHealthSystem</a></div><div class="ttdeci">void freeHealthSystem(t_healthSystem *health)</div><div class="ttdoc">Libère les ressources du système de santé</div><div class="ttdef"><b>Definition:</b> <a href="health_8c_source.html#l00142">health.c:142</a></div></div>
+<div class="ttc" id="ahealth_8h_html_a9218aa8c88d236422704b6003c134fc1"><div class="ttname"><a href="health_8h.html#a9218aa8c88d236422704b6003c134fc1">applyHealing</a></div><div class="ttdeci">int applyHealing(t_healthSystem *health, int healAmount, void *entity)</div><div class="ttdoc">Applique un soin à une entité</div><div class="ttdef"><b>Definition:</b> <a href="health_8c_source.html#l00150">health.c:150</a></div></div>
 <div class="ttc" id="ahealth_8h_html_a99890adcfd69b9d90a178d967a70f347"><div class="ttname"><a href="health_8h.html#a99890adcfd69b9d90a178d967a70f347">applyDamage</a></div><div class="ttdeci">void applyDamage(t_healthSystem *health, int damage, void *entity, t_context *context)</div><div class="ttdoc">Applique des dégâts à une entité</div><div class="ttdef"><b>Definition:</b> <a href="health_8c_source.html#l00035">health.c:35</a></div></div>
 <div class="ttc" id="ahealth_8h_html_ae977bc5281553c4129bc7e533162b160"><div class="ttname"><a href="health_8h.html#ae977bc5281553c4129bc7e533162b160">renderStandardHealthBar</a></div><div class="ttdeci">void renderStandardHealthBar(SDL_Renderer *renderer, t_healthSystem *health, SDL_Rect entityRect, t_camera *camera)</div><div class="ttdoc">Affiche une barre de vie standard.</div><div class="ttdef"><b>Definition:</b> <a href="health_8c_source.html#l00064">health.c:64</a></div></div>
 <div class="ttc" id="ahealth_8h_html_af78dc016d45f39fbd4f2075eb603353f"><div class="ttname"><a href="health_8h.html#af78dc016d45f39fbd4f2075eb603353f">initHealthSystem</a></div><div class="ttdeci">void initHealthSystem(t_healthSystem *health, int maxHealth)</div><div class="ttdoc">Initialise un système de santé</div><div class="ttdef"><b>Definition:</b> <a href="health_8c_source.html#l00008">health.c:8</a></div></div>
@@ -144,9 +163,13 @@ $(function() {
 <div class="ttc" id="astructt__context_html"><div class="ttname"><a href="structt__context.html">t_context</a></div><div class="ttdoc">Contient le contexte global du jeu.</div><div class="ttdef"><b>Definition:</b> <a href="context_8h_source.html#l00072">context.h:72</a></div></div>
 <div class="ttc" id="astructt__delta_timer_html"><div class="ttname"><a href="structt__delta_timer.html">t_deltaTimer</a></div><div class="ttdoc">Timer accumulant un temps delta.</div><div class="ttdef"><b>Definition:</b> <a href="timer_8h_source.html#l00019">timer.h:19</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_ba98abd8171b4a3dbca90a24706ac331.html">components</a></li><li class="navelem"><a class="el" href="dir_aae5aa2ccf9df890b95e2200f09904d9.html">health</a></li><li class="navelem"><a class="el" href="health_8h.html">health.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

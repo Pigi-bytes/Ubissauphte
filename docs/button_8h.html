@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('button_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_da5c6b39c0a2f54e57df6799511cd3ab.html">ui</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
@@ -245,21 +261,22 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="button_8h_a27a05bc9ac9288cc041454d2765d0c50_icgraph.png" border="0" usemap="#abutton_8h_a27a05bc9ac9288cc041454d2765d0c50_icgraph" alt=""/></div>
 <map name="abutton_8h_a27a05bc9ac9288cc041454d2765d0c50_icgraph" id="abutton_8h_a27a05bc9ac9288cc041454d2765d0c50_icgraph">
-<area shape="rect" title="Crée un nouveau bouton." alt="" coords="960,218,1067,244"/>
-<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="553,40,728,67"/>
-<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="341,91,463,118"/>
-<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="112,142,247,168"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="575,192,706,219"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="327,243,477,270"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="108,294,251,320"/>
-<area shape="rect" href="touche_8c.html#ab22adbe41d10d69d091bd9bb52b36201" title="Crée une nouvelle touche interactive." alt="" coords="790,40,898,67"/>
-<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="595,344,686,371"/>
-<area shape="rect" href="affichage_8c.html#ab52cfc1609e782c407e667fde05707e3" title="Initialise ou met à jour l&#39;interface d&#39;inventaire." alt="" coords="781,395,907,422"/>
-<area shape="rect" href="affichage_8c.html#a871024c819663e324e301b442b147b95" title=" " alt="" coords="776,446,912,472"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,218,60,244"/>
-<area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="122,395,237,422"/>
-<area shape="rect" href="affichage_8c.html#acac6e41a22a08962af5736bb23e8026e" title="Met à jour la logique de l&#39;interface." alt="" coords="565,446,717,472"/>
-<area shape="rect" href="commun_8c.html#abc60ca3fcbf54c897b7cea3dedde3150" title="Wrapper pour la mise à jour de l&#39;UI d&#39;inventaire." alt="" coords="299,446,505,472"/>
+<area shape="rect" title="Crée un nouveau bouton." alt="" coords="968,266,1075,293"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="360,25,460,51"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="561,114,736,141"/>
+<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="122,165,245,191"/>
+<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="581,215,716,242"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="345,266,475,293"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="108,317,259,343"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="577,367,720,394"/>
+<area shape="rect" href="touche_8c.html#ab22adbe41d10d69d091bd9bb52b36201" title="Crée une nouvelle touche interactive." alt="" coords="798,114,906,141"/>
+<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="365,418,455,445"/>
+<area shape="rect" href="affichage_8c.html#ab52cfc1609e782c407e667fde05707e3" title="Initialise ou met à jour l&#39;interface d&#39;inventaire." alt="" coords="789,469,915,495"/>
+<area shape="rect" href="affichage_8c.html#a871024c819663e324e301b442b147b95" title=" " alt="" coords="784,519,920,546"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,266,60,293"/>
+<area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="126,469,241,495"/>
+<area shape="rect" href="affichage_8c.html#acac6e41a22a08962af5736bb23e8026e" title="Met à jour la logique de l&#39;interface." alt="" coords="573,519,725,546"/>
+<area shape="rect" href="commun_8c.html#abc60ca3fcbf54c897b7cea3dedde3150" title="Wrapper pour la mise à jour de l&#39;UI d&#39;inventaire." alt="" coords="307,519,513,546"/>
 </map>
 </div>
 
@@ -305,17 +322,18 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="button_8h_a444d02738d087dbd280f7b8848284ae9_icgraph.png" border="0" usemap="#abutton_8h_a444d02738d087dbd280f7b8848284ae9_icgraph" alt=""/></div>
 <map name="abutton_8h_a444d02738d087dbd280f7b8848284ae9_icgraph" id="abutton_8h_a444d02738d087dbd280f7b8848284ae9_icgraph">
-<area shape="rect" title="Libère la mémoire utilisée par un bouton." alt="" coords="521,208,612,235"/>
-<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,157,283,184"/>
-<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,5,257,32"/>
-<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,56,263,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="337,107,467,133"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,208,271,235"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,259,267,285"/>
-<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="357,360,447,387"/>
-<area shape="rect" href="affichage_8c.html#a450567ff27960688d155df65b947ab62" title=" " alt="" coords="331,411,473,437"/>
+<area shape="rect" title="Libère la mémoire utilisée par un bouton." alt="" coords="521,233,612,260"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="145,5,245,32"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,208,283,235"/>
+<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,56,257,83"/>
+<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="335,107,469,133"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="337,157,467,184"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,259,271,285"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,309,267,336"/>
+<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="357,411,447,437"/>
+<area shape="rect" href="affichage_8c.html#a450567ff27960688d155df65b947ab62" title=" " alt="" coords="331,461,473,488"/>
 <area shape="rect" href="touche_8c.html#a35460666a6f7088a59aa2814c8aa85a0" title="Libère une touche de la mémoire." alt="" coords="355,259,449,285"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,157,60,184"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,183,60,209"/>
 </map>
 </div>
 
@@ -380,19 +398,20 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="button_8h_a0b17babfe6275495728adc3e4ce2cb18_icgraph.png" border="0" usemap="#abutton_8h_a0b17babfe6275495728adc3e4ce2cb18_icgraph" alt=""/></div>
 <map name="abutton_8h_a0b17babfe6275495728adc3e4ce2cb18_icgraph" id="abutton_8h_a0b17babfe6275495728adc3e4ce2cb18_icgraph">
-<area shape="rect" title="Traite les entrées utilisateur pour un bouton." alt="" coords="785,284,928,311"/>
-<area shape="rect" href="commun_8c.html#a9f60e865d0db40e46255669456e7ecd8" title="Wrapper pour la gestion des entrées boutons." alt="" coords="335,183,533,209"/>
-<area shape="rect" href="affichage_8c.html#acac6e41a22a08962af5736bb23e8026e" title="Met à jour la logique de l&#39;interface." alt="" coords="585,309,737,336"/>
-<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,5,283,32"/>
-<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,56,257,83"/>
-<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,107,263,133"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,157,261,184"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,208,271,235"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,259,267,285"/>
-<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,309,241,336"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,183,60,209"/>
-<area shape="rect" href="commun_8c.html#abc60ca3fcbf54c897b7cea3dedde3150" title="Wrapper pour la mise à jour de l&#39;UI d&#39;inventaire." alt="" coords="331,348,537,375"/>
-<area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="138,360,253,387"/>
+<area shape="rect" title="Traite les entrées utilisateur pour un bouton." alt="" coords="785,347,928,373"/>
+<area shape="rect" href="commun_8c.html#a9f60e865d0db40e46255669456e7ecd8" title="Wrapper pour la gestion des entrées boutons." alt="" coords="335,208,533,235"/>
+<area shape="rect" href="affichage_8c.html#acac6e41a22a08962af5736bb23e8026e" title="Met à jour la logique de l&#39;interface." alt="" coords="585,372,737,399"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="145,5,245,32"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,56,283,83"/>
+<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,107,257,133"/>
+<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,157,263,184"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,208,261,235"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,259,271,285"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,309,267,336"/>
+<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,360,241,387"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,208,60,235"/>
+<area shape="rect" href="commun_8c.html#abc60ca3fcbf54c897b7cea3dedde3150" title="Wrapper pour la mise à jour de l&#39;UI d&#39;inventaire." alt="" coords="331,392,537,419"/>
+<area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="138,411,253,437"/>
 </map>
 </div>
 
@@ -447,24 +466,25 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="button_8h_a279965621a6b64d1a4f58eac1f1a9a14_icgraph.png" border="0" usemap="#abutton_8h_a279965621a6b64d1a4f58eac1f1a9a14_icgraph" alt=""/></div>
 <map name="abutton_8h_a279965621a6b64d1a4f58eac1f1a9a14_icgraph" id="abutton_8h_a279965621a6b64d1a4f58eac1f1a9a14_icgraph">
-<area shape="rect" title="Vérifie si le curseur se trouve à l&#39;intérieur d&#39;un rectangle." alt="" coords="1037,244,1181,271"/>
-<area shape="rect" href="button_8c.html#a0b17babfe6275495728adc3e4ce2cb18" title="Traite les entrées utilisateur pour un bouton." alt="" coords="816,193,959,220"/>
-<area shape="rect" href="slider_8c.html#a29af67b33ed115856fafa8953b577a8c" title="Gère les entrées pour un curseur de volume." alt="" coords="785,296,989,323"/>
-<area shape="rect" href="touche_8c.html#ab7804f17c8e030cc35e5ad4a66b53c04" title="Gère les interactions avec une touche." alt="" coords="815,244,959,271"/>
-<area shape="rect" href="commun_8c.html#a9f60e865d0db40e46255669456e7ecd8" title="Wrapper pour la gestion des entrées boutons." alt="" coords="335,175,533,201"/>
-<area shape="rect" href="affichage_8c.html#acac6e41a22a08962af5736bb23e8026e" title="Met à jour la logique de l&#39;interface." alt="" coords="585,355,737,381"/>
-<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,208,283,235"/>
-<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,5,257,32"/>
-<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,56,263,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,107,261,133"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,259,271,285"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,309,267,336"/>
-<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,157,241,184"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,183,60,209"/>
-<area shape="rect" href="commun_8c.html#abc60ca3fcbf54c897b7cea3dedde3150" title="Wrapper pour la mise à jour de l&#39;UI d&#39;inventaire." alt="" coords="331,360,537,387"/>
-<area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="138,360,253,387"/>
-<area shape="rect" href="commun_8c.html#a1975aaa807c02f9cadfd71949d825ea0" title="Wrapper pour la gestion du volume." alt="" coords="332,294,536,335"/>
-<area shape="rect" href="commun_8c.html#a3e5017757de7e251a0cfa2f2b4d2fdf5" title="Wrapper pour la gestion des contrôles affichés." alt="" coords="335,243,533,269"/>
+<area shape="rect" title="Vérifie si le curseur se trouve à l&#39;intérieur d&#39;un rectangle." alt="" coords="1037,295,1181,321"/>
+<area shape="rect" href="button_8c.html#a0b17babfe6275495728adc3e4ce2cb18" title="Traite les entrées utilisateur pour un bouton." alt="" coords="816,244,959,271"/>
+<area shape="rect" href="slider_8c.html#a29af67b33ed115856fafa8953b577a8c" title="Gère les entrées pour un curseur de volume." alt="" coords="785,347,989,373"/>
+<area shape="rect" href="touche_8c.html#ab7804f17c8e030cc35e5ad4a66b53c04" title="Gère les interactions avec une touche." alt="" coords="815,295,959,321"/>
+<area shape="rect" href="commun_8c.html#a9f60e865d0db40e46255669456e7ecd8" title="Wrapper pour la gestion des entrées boutons." alt="" coords="335,208,533,235"/>
+<area shape="rect" href="affichage_8c.html#acac6e41a22a08962af5736bb23e8026e" title="Met à jour la logique de l&#39;interface." alt="" coords="585,405,737,432"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="145,5,245,32"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,259,283,285"/>
+<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,56,257,83"/>
+<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,107,263,133"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,157,261,184"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,309,271,336"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,360,267,387"/>
+<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,208,241,235"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,208,60,235"/>
+<area shape="rect" href="commun_8c.html#abc60ca3fcbf54c897b7cea3dedde3150" title="Wrapper pour la mise à jour de l&#39;UI d&#39;inventaire." alt="" coords="331,411,537,437"/>
+<area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="138,411,253,437"/>
+<area shape="rect" href="commun_8c.html#a1975aaa807c02f9cadfd71949d825ea0" title="Wrapper pour la gestion du volume." alt="" coords="332,345,536,386"/>
+<area shape="rect" href="commun_8c.html#a3e5017757de7e251a0cfa2f2b4d2fdf5" title="Wrapper pour la gestion des contrôles affichés." alt="" coords="335,293,533,320"/>
 </map>
 </div>
 
@@ -521,30 +541,35 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="button_8h_a57726e67186d9103bd5627f07a2557d4_icgraph.png" border="0" usemap="#abutton_8h_a57726e67186d9103bd5627f07a2557d4_icgraph" alt=""/></div>
 <map name="abutton_8h_a57726e67186d9103bd5627f07a2557d4_icgraph" id="abutton_8h_a57726e67186d9103bd5627f07a2557d4_icgraph">
-<area shape="rect" title="Affiche un bouton à l&#39;écran." alt="" coords="784,208,891,235"/>
-<area shape="rect" href="affichage_8c.html#a37a0b209c2ead72efaf0ae0c98c4af2c" title="Effectue le rendu de l&#39;interface." alt="" coords="585,119,736,145"/>
-<area shape="rect" href="commun_8c.html#aa7943250e7e111ee38f3a8b0e3be002f" title="Wrapper pour le rendu des boutons UI." alt="" coords="353,208,515,235"/>
-<area shape="rect" href="touche_8c.html#aca735160ae65c1cae3a84690a11373ed" title="Affiche une touche à l&#39;écran." alt="" coords="606,284,715,311"/>
-<area shape="rect" href="commun_8c.html#a1ada1938c96f85c840f6c4ef88aca8b6" title="Wrapper pour le rendu de l&#39;UI d&#39;inventaire." alt="" coords="331,81,537,108"/>
+<area shape="rect" title="Affiche un bouton à l&#39;écran." alt="" coords="784,233,891,260"/>
+<area shape="rect" href="affichage_8c.html#a37a0b209c2ead72efaf0ae0c98c4af2c" title="Effectue le rendu de l&#39;interface." alt="" coords="585,139,736,165"/>
+<area shape="rect" href="commun_8c.html#aa7943250e7e111ee38f3a8b0e3be002f" title="Wrapper pour le rendu des boutons UI." alt="" coords="353,233,515,260"/>
+<area shape="rect" href="touche_8c.html#aca735160ae65c1cae3a84690a11373ed" title="Affiche une touche à l&#39;écran." alt="" coords="606,335,715,361"/>
+<area shape="rect" href="commun_8c.html#a1ada1938c96f85c840f6c4ef88aca8b6" title="Wrapper pour le rendu de l&#39;UI d&#39;inventaire." alt="" coords="331,95,537,121"/>
 <area shape="rect" href="scene_inventaire_8c.html#aff14c177d9a5c54a71539e53c0c49882" title="Crée et initialise le menu d&#39;inventaire principal." alt="" coords="138,5,253,32"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,183,60,209"/>
-<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,259,283,285"/>
-<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,56,257,83"/>
-<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,107,263,133"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,157,261,184"/>
-<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,309,271,336"/>
-<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,360,267,387"/>
-<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,208,241,235"/>
-<area shape="rect" href="commun_8c.html#a6f136ac659e6de6d72e1bf97e2e78ac6" title="Wrapper pour le rendu des contrôles affichés." alt="" coords="352,284,516,311"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,208,60,235"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="145,157,245,184"/>
+<area shape="rect" href="commande_menu_8c.html#a027bf8c68fd0b8fc16b92aff73be813a" title="Crée et initialise le menu des commandes." alt="" coords="108,309,283,336"/>
+<area shape="rect" href="fps_menu_8c.html#a886c6fb0d8f83c6546f362e184889eb2" title="Crée et initialise le menu des FPS." alt="" coords="134,208,257,235"/>
+<area shape="rect" href="game_over_8c.html#a4ea7cf09cdbca8ac72a8c14e910c83e1" title="Crée et initialise l&#39;écran de Game Over." alt="" coords="128,259,263,285"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="130,56,261,83"/>
+<area shape="rect" href="option2_8c.html#ad64b14f31f8c7afed72b7cabcf00cccd" title="Crée et initialise le menu des options avancées." alt="" coords="120,360,271,387"/>
+<area shape="rect" href="option_menu_8c.html#a90d5683136c70669c086ad20b933b133" title="Crée et initialise le menu des options principales." alt="" coords="124,411,267,437"/>
+<area shape="rect" href="win_8c.html#a3a67f7bb4a46cfb0df19e857e84348b1" title=" " alt="" coords="150,107,241,133"/>
+<area shape="rect" href="commun_8c.html#a6f136ac659e6de6d72e1bf97e2e78ac6" title="Wrapper pour le rendu des contrôles affichés." alt="" coords="352,335,516,361"/>
 </map>
 </div>
 
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_da5c6b39c0a2f54e57df6799511cd3ab.html">ui</a></li><li class="navelem"><a class="el" href="button_8h.html">button.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

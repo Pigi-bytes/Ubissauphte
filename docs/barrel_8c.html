@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('barrel_8c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_7d056440595eb1d73063e62f754f7138.html">tilesEntity</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
@@ -133,62 +149,62 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointeur vers l'entité créée </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="barrel_8c_source.html#l00099">99</a> of file <a class="el" href="barrel_8c_source.html">barrel.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="barrel_8c_source.html#l00098">98</a> of file <a class="el" href="barrel_8c_source.html">barrel.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="barrel_8c_ab869ddb8a5343a5384f21b6c1004b55a_cgraph.png" border="0" usemap="#abarrel_8c_ab869ddb8a5343a5384f21b6c1004b55a_cgraph" alt=""/></div>
 <map name="abarrel_8c_ab869ddb8a5343a5384f21b6c1004b55a_cgraph" id="abarrel_8c_ab869ddb8a5343a5384f21b6c1004b55a_cgraph">
-<area shape="rect" title="Crée une nouvelle entité baril." alt="" coords="5,233,145,260"/>
-<area shape="rect" href="particules_8c.html#ae582018b7ea20710f9845936d0b82cb5" title="Crée un nouvel émetteur de particules." alt="" coords="193,19,352,45"/>
-<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="1139,487,1224,513"/>
-<area shape="rect" href="health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="205,157,340,184"/>
-<area shape="rect" href="health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="400,208,587,235"/>
-<area shape="rect" href="tiles_entity_8c.html#aab887fa625ebafb48717f3a50359f61a" title="Initialise les propriétés de base d&#39;une entité de tuile." alt="" coords="204,81,341,108"/>
-<area shape="rect" href="barrel_8c.html#ae3782096e95475fc398e60919d5447f4" title="Fonction appelée lors de la destruction du baril." alt="" coords="429,411,557,437"/>
-<area shape="rect" href="barrel_8c.html#a14b30fc367591d33581261cf7a4f7a1d" title="Affiche le baril et ses effets de particules." alt="" coords="221,259,324,285"/>
-<area shape="rect" href="barrel_8c.html#a8cdf392d002fe08f4e7b8fab7da3a803" title="Met à jour l&#39;état et le comportement du baril." alt="" coords="219,664,326,691"/>
+<area shape="rect" title="Crée une nouvelle entité baril." alt="" coords="5,424,145,451"/>
+<area shape="rect" href="particules_8c.html#ae582018b7ea20710f9845936d0b82cb5" title="Crée un nouvel émetteur de particules." alt="" coords="193,56,352,83"/>
+<area shape="rect" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="905,360,990,387"/>
+<area shape="rect" href="health_8c.html#af78dc016d45f39fbd4f2075eb603353f" title="Initialise un système de santé" alt="" coords="205,689,340,716"/>
+<area shape="rect" href="health_8c.html#ae977bc5281553c4129bc7e533162b160" title="Affiche une barre de vie standard." alt="" coords="400,765,587,792"/>
+<area shape="rect" href="tiles_entity_8c.html#aab887fa625ebafb48717f3a50359f61a" title="Initialise les propriétés de base d&#39;une entité de tuile." alt="" coords="204,917,341,944"/>
+<area shape="rect" href="barrel_8c.html#ae3782096e95475fc398e60919d5447f4" title="Fonction appelée lors de la destruction du baril." alt="" coords="209,157,337,184"/>
+<area shape="rect" href="barrel_8c.html#a14b30fc367591d33581261cf7a4f7a1d" title="Affiche le baril et ses effets de particules." alt="" coords="221,392,324,419"/>
+<area shape="rect" href="barrel_8c.html#a8cdf392d002fe08f4e7b8fab7da3a803" title="Met à jour l&#39;état et le comportement du baril." alt="" coords="440,613,547,640"/>
 <area shape="rect" href="particules_8c.html#a61fa4b7a83f49df939133c298c2a4dab" title="Réinitialise un émetteur de particules." alt="" coords="418,5,569,32"/>
-<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="435,157,551,184"/>
-<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="431,107,556,133"/>
-<area shape="rect" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="406,56,581,83"/>
-<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="666,5,813,32"/>
-<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="668,56,811,83"/>
-<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="688,107,791,133"/>
-<area shape="rect" href="particules_8c.html#a89f67e1478d40bbcd7694b64a37ffa59" title="Émet des particules pour l&#39;explosion d&#39;un baril." alt="" coords="635,512,844,539"/>
-<area shape="rect" href="audio_manager_8c.html#a9f819b827499e9c2eadb4f276dea5e29" title=" " alt="" coords="699,411,779,437"/>
-<area shape="rect" href="particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="902,563,1053,589"/>
-<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="917,613,1038,640"/>
-<area shape="rect" href="audio_manager_8c.html#a4ec64f2ae737ce1bd28ad405a07c7743" title=" " alt="" coords="942,259,1013,285"/>
-<area shape="rect" href="audio_manager_8c.html#a0e16a111c05fb5ec00fd8abd413251e9" title=" " alt="" coords="929,461,1026,488"/>
-<area shape="rect" href="audio_manager_8c.html#a55db07928385383549ca67bb3062f2ce" title=" " alt="" coords="943,411,1011,437"/>
-<area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="1137,259,1225,285"/>
-<area shape="rect" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="1111,372,1252,399"/>
-<area shape="rect" href="object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="1118,715,1245,741"/>
-<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="442,309,545,336"/>
-<area shape="rect" href="particules_8c.html#a4649283fd9dfa8005ebd85d1ef3a771e" title="Affiche toutes les particules actives." alt="" coords="415,259,572,285"/>
-<area shape="rect" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="898,309,1057,336"/>
-<area shape="rect" href="camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="674,309,805,336"/>
-<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="672,183,807,209"/>
-<area shape="rect" href="timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="939,208,1016,235"/>
-<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="932,107,1023,133"/>
-<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="919,157,1036,184"/>
-<area shape="rect" href="physics_8c.html#a7bdb858968c7b571e6577d1a30af9888" title="Vérifie si un cercle est dans un secteur angulaire." alt="" coords="436,917,551,944"/>
-<area shape="rect" href="object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9" title="Supprime un objet du gestionnaire à l&#39;index spécifié" alt="" coords="925,867,1030,893"/>
-<area shape="rect" href="particules_8c.html#a5daf89ca83b59eabf3cd8d2d5195f529" title="Émet des particules d&#39;impact." alt="" coords="417,613,569,640"/>
-<area shape="rect" href="core_8c.html#af285790c31a2afabd9332560b8249f5e" title="Interpole linéairement entre deux angles." alt="" coords="451,512,535,539"/>
-<area shape="rect" href="core_8c.html#a94ac75d81eceed79e81da71bcb7dbda7" title="Applique une fonction de lissage à une valeur." alt="" coords="441,563,546,589"/>
-<area shape="rect" href="barrel_8c.html#afd043e40ae36567695fb2a4c8cc692fa" title="Inflige des dégâts au baril." alt="" coords="421,715,565,741"/>
-<area shape="rect" href="particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="413,664,573,691"/>
-<area shape="rect" href="health_8c.html#a0785e98f299a0efc4d634d618c7f9f75" title="Met à jour le système de santé" alt="" coords="414,765,573,792"/>
-<area shape="rect" href="physics_8c.html#a63880ca4246528d2b4a1e1fec0d9c661" title=" " alt="" coords="420,461,567,488"/>
-<area shape="rect" href="particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="686,563,793,589"/>
-<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="683,664,796,691"/>
-<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="913,664,1041,691"/>
-<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="681,765,797,792"/>
-<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="669,715,809,741"/>
-<area shape="rect" href="physics_8c.html#a762abc05fd3932fd770b6669536c6a39" title=" " alt="" coords="676,461,803,488"/>
-<area shape="rect" href="physics_8c.html#a49535bbd051fba95b354c0b799aeaecd" title=" " alt="" coords="892,512,1063,539"/>
+<area shape="rect" href="timer_8c.html#a5c810de7a1454a6e6d2f712d76ca8638" title="Initialise un nouveau timer delta." alt="" coords="435,715,551,741"/>
+<area shape="rect" href="timer_8c.html#afcd9e0c39d3bacfca18687e89eec26fb" title="Démarre le timer delta et réinitialise son temps accumulé" alt="" coords="431,664,556,691"/>
+<area shape="rect" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="406,1019,581,1045"/>
+<area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="641,1069,788,1096"/>
+<area shape="rect" href="animation_8c.html#ae6819740180def325e96797c282287a6" title=" " alt="" coords="657,1120,772,1147"/>
+<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="643,968,786,995"/>
+<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="663,1019,766,1045"/>
+<area shape="rect" href="particules_8c.html#a89f67e1478d40bbcd7694b64a37ffa59" title="Émet des particules pour l&#39;explosion d&#39;un baril." alt="" coords="843,56,1052,83"/>
+<area shape="rect" href="audio_manager_8c.html#a9f819b827499e9c2eadb4f276dea5e29" title=" " alt="" coords="453,157,533,184"/>
+<area shape="rect" href="particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="1100,360,1251,387"/>
+<area shape="rect" href="particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="1115,715,1236,741"/>
+<area shape="rect" href="audio_manager_8c.html#a4ec64f2ae737ce1bd28ad405a07c7743" title=" " alt="" coords="679,107,750,133"/>
+<area shape="rect" href="audio_manager_8c.html#a0e16a111c05fb5ec00fd8abd413251e9" title=" " alt="" coords="666,157,763,184"/>
+<area shape="rect" href="audio_manager_8c.html#a55db07928385383549ca67bb3062f2ce" title=" " alt="" coords="681,208,749,235"/>
+<area shape="rect" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86" title="Ajoute un objet au gestionnaire." alt="" coords="903,107,991,133"/>
+<area shape="rect" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041" title="Recure un id avec son nom depuis un registre." alt="" coords="877,157,1018,184"/>
+<area shape="rect" href="object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="884,259,1011,285"/>
+<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="442,392,545,419"/>
+<area shape="rect" href="particules_8c.html#a4649283fd9dfa8005ebd85d1ef3a771e" title="Affiche toutes les particules actives." alt="" coords="415,341,572,368"/>
+<area shape="rect" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6" title="Récupère l&#39;animation active." alt="" coords="635,360,794,387"/>
+<area shape="rect" href="camera_8c.html#a6c0c6baf83d08a94122968b670877ea9" title="Vérifie si un rectangle est visible dans la caméra." alt="" coords="649,309,780,336"/>
+<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="647,512,782,539"/>
+<area shape="rect" href="timer_8c.html#a425192221cbecd593f3a398c14c18def" title="Récupère le temps écoulé depuis le démarrage du timer." alt="" coords="909,512,986,539"/>
+<area shape="rect" href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="902,411,993,437"/>
+<area shape="rect" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="889,461,1006,488"/>
+<area shape="rect" href="physics_8c.html#a7bdb858968c7b571e6577d1a30af9888" title="Vérifie si un cercle est dans un secteur angulaire." alt="" coords="657,664,772,691"/>
+<area shape="rect" href="object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9" title="Supprime un objet du gestionnaire à l&#39;index spécifié" alt="" coords="662,411,767,437"/>
+<area shape="rect" href="particules_8c.html#a5daf89ca83b59eabf3cd8d2d5195f529" title="Émet des particules d&#39;impact." alt="" coords="639,765,791,792"/>
+<area shape="rect" href="core_8c.html#af285790c31a2afabd9332560b8249f5e" title="Interpole linéairement entre deux angles." alt="" coords="673,715,757,741"/>
+<area shape="rect" href="core_8c.html#a94ac75d81eceed79e81da71bcb7dbda7" title="Applique une fonction de lissage à une valeur." alt="" coords="662,816,767,843"/>
+<area shape="rect" href="barrel_8c.html#afd043e40ae36567695fb2a4c8cc692fa" title="Inflige des dégâts au baril." alt="" coords="643,867,787,893"/>
+<area shape="rect" href="particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="635,917,795,944"/>
+<area shape="rect" href="health_8c.html#a0785e98f299a0efc4d634d618c7f9f75" title="Met à jour le système de santé" alt="" coords="635,563,794,589"/>
+<area shape="rect" href="physics_8c.html#a63880ca4246528d2b4a1e1fec0d9c661" title=" " alt="" coords="641,613,788,640"/>
+<area shape="rect" href="particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="894,715,1001,741"/>
+<area shape="rect" href="health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="891,867,1004,893"/>
+<area shape="rect" href="timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="1111,867,1239,893"/>
+<area shape="rect" href="timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="889,613,1005,640"/>
+<area shape="rect" href="timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="877,563,1017,589"/>
+<area shape="rect" href="physics_8c.html#a762abc05fd3932fd770b6669536c6a39" title=" " alt="" coords="884,664,1011,691"/>
 </map>
 </div>
 <div class="dynheader">
@@ -196,15 +212,15 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="barrel_8c_ab869ddb8a5343a5384f21b6c1004b55a_icgraph.png" border="0" usemap="#abarrel_8c_ab869ddb8a5343a5384f21b6c1004b55a_icgraph" alt=""/></div>
 <map name="abarrel_8c_ab869ddb8a5343a5384f21b6c1004b55a_icgraph" id="abarrel_8c_ab869ddb8a5343a5384f21b6c1004b55a_icgraph">
-<area shape="rect" title="Crée une nouvelle entité baril." alt="" coords="1219,56,1359,83"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1020,56,1171,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Crée une nouvelle entité baril." alt="" coords="1188,56,1328,83"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="989,56,1140,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -271,16 +287,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="barrel_8c_ae3782096e95475fc398e60919d5447f4_icgraph.png" border="0" usemap="#abarrel_8c_ae3782096e95475fc398e60919d5447f4_icgraph" alt=""/></div>
 <map name="abarrel_8c_ae3782096e95475fc398e60919d5447f4_icgraph" id="abarrel_8c_ae3782096e95475fc398e60919d5447f4_icgraph">
-<area shape="rect" title="Fonction appelée lors de la destruction du baril." alt="" coords="1407,56,1535,83"/>
-<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1219,56,1359,83"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1020,56,1171,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Fonction appelée lors de la destruction du baril." alt="" coords="1376,56,1504,83"/>
+<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1188,56,1328,83"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="989,56,1140,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -329,7 +345,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="barrel_8c_source.html#l00076">76</a> of file <a class="el" href="barrel_8c_source.html">barrel.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="barrel_8c_source.html#l00075">75</a> of file <a class="el" href="barrel_8c_source.html">barrel.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -352,16 +368,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="barrel_8c_a14b30fc367591d33581261cf7a4f7a1d_icgraph.png" border="0" usemap="#abarrel_8c_a14b30fc367591d33581261cf7a4f7a1d_icgraph" alt=""/></div>
 <map name="abarrel_8c_a14b30fc367591d33581261cf7a4f7a1d_icgraph" id="abarrel_8c_a14b30fc367591d33581261cf7a4f7a1d_icgraph">
-<area shape="rect" title="Affiche le baril et ses effets de particules." alt="" coords="1407,56,1509,83"/>
-<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1219,56,1359,83"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1020,56,1171,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Affiche le baril et ses effets de particules." alt="" coords="1376,56,1479,83"/>
+<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1188,56,1328,83"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="989,56,1140,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -410,7 +426,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="barrel_8c_source.html#l00020">20</a> of file <a class="el" href="barrel_8c_source.html">barrel.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="barrel_8c_source.html#l00019">19</a> of file <a class="el" href="barrel_8c_source.html">barrel.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -426,17 +442,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="barrel_8c_afd043e40ae36567695fb2a4c8cc692fa_icgraph.png" border="0" usemap="#abarrel_8c_afd043e40ae36567695fb2a4c8cc692fa_icgraph" alt=""/></div>
 <map name="abarrel_8c_afd043e40ae36567695fb2a4c8cc692fa_icgraph" id="abarrel_8c_afd043e40ae36567695fb2a4c8cc692fa_icgraph">
-<area shape="rect" title="Inflige des dégâts au baril." alt="" coords="1561,56,1705,83"/>
-<area shape="rect" href="barrel_8c.html#a8cdf392d002fe08f4e7b8fab7da3a803" title="Met à jour l&#39;état et le comportement du baril." alt="" coords="1407,56,1513,83"/>
-<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1219,56,1359,83"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1020,56,1171,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Inflige des dégâts au baril." alt="" coords="1531,56,1675,83"/>
+<area shape="rect" href="barrel_8c.html#a8cdf392d002fe08f4e7b8fab7da3a803" title="Met à jour l&#39;état et le comportement du baril." alt="" coords="1376,56,1483,83"/>
+<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1188,56,1328,83"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="989,56,1140,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -492,7 +508,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="barrel_8c_source.html#l00028">28</a> of file <a class="el" href="barrel_8c_source.html">barrel.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="barrel_8c_source.html#l00027">27</a> of file <a class="el" href="barrel_8c_source.html">barrel.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -532,16 +548,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="barrel_8c_a8cdf392d002fe08f4e7b8fab7da3a803_icgraph.png" border="0" usemap="#abarrel_8c_a8cdf392d002fe08f4e7b8fab7da3a803_icgraph" alt=""/></div>
 <map name="abarrel_8c_a8cdf392d002fe08f4e7b8fab7da3a803_icgraph" id="abarrel_8c_a8cdf392d002fe08f4e7b8fab7da3a803_icgraph">
-<area shape="rect" title="Met à jour l&#39;état et le comportement du baril." alt="" coords="1407,56,1513,83"/>
-<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1219,56,1359,83"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1020,56,1171,83"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,5,957,32"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,56,960,83"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,107,972,133"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,56,772,83"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,56,612,83"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,56,453,83"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
+<area shape="rect" title="Met à jour l&#39;état et le comportement du baril." alt="" coords="1376,56,1483,83"/>
+<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1188,56,1328,83"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="989,56,1140,83"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,5,927,32"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,56,929,83"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,107,941,133"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,56,741,83"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,56,581,83"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,56,423,83"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,56,208,83"/>
 <area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
 </map>
 </div>
@@ -549,9 +565,13 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_7d056440595eb1d73063e62f754f7138.html">tilesEntity</a></li><li class="navelem"><a class="el" href="barrel_8c.html">barrel.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

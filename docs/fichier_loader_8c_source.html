@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('fichier_loader_8c_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_c184e51c84f2c3f0345bbc8a0d75d3e1.html">io</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">fichierLoader.c</div>  </div>
@@ -121,10 +137,10 @@ $(function() {
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    fichier-&gt;<a class="code" href="structt__fichier.html#ad8c98f4e95e7376510d21da30756036d">blockManager</a> = <a class="code" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83">initObjectManager</a>(registre);</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="structt__block_data.html">t_blockData</a> *currentBlock = NULL;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">char</span> line[<a class="code" href="tiles_8h.html#af0f2173e3b202ddf5756531b4471dcb2">MAX_LINE_LENGTH</a>];</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">char</span> line[<a class="code" href="fichier_loader_8h.html#afd085da9ab61a244f9088a46cc770683">MAX_LINE_LENGTH_FILE</a>];</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// Lecture du fichier</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">while</span> (fgets(line, <a class="code" href="tiles_8h.html#af0f2173e3b202ddf5756531b4471dcb2">MAX_LINE_LENGTH</a>, file)) {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">while</span> (fgets(line, <a class="code" href="fichier_loader_8h.html#afd085da9ab61a244f9088a46cc770683">MAX_LINE_LENGTH_FILE</a>, file)) {</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        line[strcspn(line, <span class="stringliteral">&quot;\n&quot;</span>)] = 0;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="comment">// Fin du block en cas de ligne vide puis stockage dans la zone prévu pour</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">if</span> (strlen(line) == 0) {</div>
@@ -238,6 +254,7 @@ $(function() {
 <div class="ttc" id="afichier_loader_8h_html_a635988d80b4892662ba31826269279d2a9cf4a0866224b0bb4a7a895da27c9c4c"><div class="ttname"><a href="fichier_loader_8h.html#a635988d80b4892662ba31826269279d2a9cf4a0866224b0bb4a7a895da27c9c4c">FLOAT</a></div><div class="ttdeci">@ FLOAT</div><div class="ttdoc">Recherche de flottant.</div><div class="ttdef"><b>Definition:</b> <a href="fichier_loader_8h_source.html#l00052">fichierLoader.h:52</a></div></div>
 <div class="ttc" id="afichier_loader_8h_html_a635988d80b4892662ba31826269279d2aee847e634a4297b274316de8a8ca9921"><div class="ttname"><a href="fichier_loader_8h.html#a635988d80b4892662ba31826269279d2aee847e634a4297b274316de8a8ca9921">STRING</a></div><div class="ttdeci">@ STRING</div><div class="ttdoc">Recherche d'une chaine de caractère.</div><div class="ttdef"><b>Definition:</b> <a href="fichier_loader_8h_source.html#l00054">fichierLoader.h:54</a></div></div>
 <div class="ttc" id="afichier_loader_8h_html_a635988d80b4892662ba31826269279d2afd5a5f51ce25953f3db2c7e93eb7864a"><div class="ttname"><a href="fichier_loader_8h.html#a635988d80b4892662ba31826269279d2afd5a5f51ce25953f3db2c7e93eb7864a">INT</a></div><div class="ttdeci">@ INT</div><div class="ttdoc">Recherche d'entier.</div><div class="ttdef"><b>Definition:</b> <a href="fichier_loader_8h_source.html#l00051">fichierLoader.h:51</a></div></div>
+<div class="ttc" id="afichier_loader_8h_html_afd085da9ab61a244f9088a46cc770683"><div class="ttname"><a href="fichier_loader_8h.html#afd085da9ab61a244f9088a46cc770683">MAX_LINE_LENGTH_FILE</a></div><div class="ttdeci">#define MAX_LINE_LENGTH_FILE</div><div class="ttdoc">Taille maximal pour une ligne.</div><div class="ttdef"><b>Definition:</b> <a href="fichier_loader_8h_source.html#l00019">fichierLoader.h:19</a></div></div>
 <div class="ttc" id="aobject_manager_8c_html_a23e66daef97e93e6873108dd50e97f83"><div class="ttname"><a href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83">initObjectManager</a></div><div class="ttdeci">t_objectManager * initObjectManager(t_typeRegistry *registre)</div><div class="ttdoc">Initialise un nouveau gestionnaire de memoire.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8c_source.html#l00028">objectManager.c:28</a></div></div>
 <div class="ttc" id="aobject_manager_8c_html_a2aa55325cfca978689146f3fc4479062"><div class="ttname"><a href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062">registerType</a></div><div class="ttdeci">uint8_t registerType(t_typeRegistry *registre, freeFunc freeFunc, char *name)</div><div class="ttdoc">Enregistre un nouveau type dans le registre.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8c_source.html#l00011">objectManager.c:11</a></div></div>
 <div class="ttc" id="aobject_manager_8c_html_aa17aa9d46c431f4b91114108468b73f3"><div class="ttname"><a href="object_manager_8c.html#aa17aa9d46c431f4b91114108468b73f3">freeObjectManager</a></div><div class="ttdeci">void freeObjectManager(t_objectManager *manager)</div><div class="ttdoc">Libere toute la memoire du gestionnaire et ses objets.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8c_source.html#l00169">objectManager.c:169</a></div></div>
@@ -253,11 +270,14 @@ $(function() {
 <div class="ttc" id="astructt__pair_data_html_a4e9aec275e566b978a3ccb4e043d8c61"><div class="ttname"><a href="structt__pair_data.html#a4e9aec275e566b978a3ccb4e043d8c61">t_pairData::value</a></div><div class="ttdeci">char * value</div><div class="ttdoc">chaine de caractère pour la valeur</div><div class="ttdef"><b>Definition:</b> <a href="fichier_loader_8h_source.html#l00027">fichierLoader.h:27</a></div></div>
 <div class="ttc" id="astructt__pair_data_html_a5892a9181e6a332f84d27aecd41dcd12"><div class="ttname"><a href="structt__pair_data.html#a5892a9181e6a332f84d27aecd41dcd12">t_pairData::key</a></div><div class="ttdeci">char * key</div><div class="ttdoc">chaine de caractère pour la cle</div><div class="ttdef"><b>Definition:</b> <a href="fichier_loader_8h_source.html#l00026">fichierLoader.h:26</a></div></div>
 <div class="ttc" id="astructt__type_registry_html"><div class="ttname"><a href="structt__type_registry.html">t_typeRegistry</a></div><div class="ttdoc">Registre central des types.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8h_source.html#l00049">objectManager.h:49</a></div></div>
-<div class="ttc" id="atiles_8h_html_af0f2173e3b202ddf5756531b4471dcb2"><div class="ttname"><a href="tiles_8h.html#af0f2173e3b202ddf5756531b4471dcb2">MAX_LINE_LENGTH</a></div><div class="ttdeci">#define MAX_LINE_LENGTH</div><div class="ttdoc">Longueur maximale d'une ligne lors de la lecture de fichiers de carte.</div><div class="ttdef"><b>Definition:</b> <a href="tiles_8h_source.html#l00023">tiles.h:23</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_c184e51c84f2c3f0345bbc8a0d75d3e1.html">io</a></li><li class="navelem"><a class="el" href="fichier_loader_8c.html">fichierLoader.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

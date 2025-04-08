@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('option2_8c_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7ecf341207a704509dc0db07e1771050.html">_scene</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">option2.c</div>  </div>
@@ -129,8 +145,8 @@ $(function() {
 <div class="ttc" id="acommun_8c_html_a1975aaa807c02f9cadfd71949d825ea0"><div class="ttname"><a href="commun_8c.html#a1975aaa807c02f9cadfd71949d825ea0">handleInputButtonVolummeWrapper</a></div><div class="ttdeci">void handleInputButtonVolummeWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour la gestion du volume.</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00071">commun.c:71</a></div></div>
 <div class="ttc" id="acommun_8c_html_a3d7ceef02fbf5954ffd809f4bf8c40c3"><div class="ttname"><a href="commun_8c.html#a3d7ceef02fbf5954ffd809f4bf8c40c3">updateFPSDisplayWrapper</a></div><div class="ttdeci">void updateFPSDisplayWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour la mise à jour du compteur FPS.</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00031">commun.c:31</a></div></div>
 <div class="ttc" id="acommun_8c_html_a3e5017757de7e251a0cfa2f2b4d2fdf5"><div class="ttname"><a href="commun_8c.html#a3e5017757de7e251a0cfa2f2b4d2fdf5">handleInputToucheWrapper</a></div><div class="ttdeci">void handleInputToucheWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour la gestion des contrôles affichés.</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00087">commun.c:87</a></div></div>
-<div class="ttc" id="acommun_8c_html_a3f79757dddc565febc8dfe47e3eee431"><div class="ttname"><a href="commun_8c.html#a3f79757dddc565febc8dfe47e3eee431">changementAffichage</a></div><div class="ttdeci">void changementAffichage(t_fonctionParam *fonction)</div><div class="ttdoc">fonction de changer la résolution de l'écran si le boutton l'utilisant est cliqué</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00136">commun.c:136</a></div></div>
-<div class="ttc" id="acommun_8c_html_a3f7f7669a8c87d15c76eb990a07fc8e0"><div class="ttname"><a href="commun_8c.html#a3f7f7669a8c87d15c76eb990a07fc8e0">creerRect</a></div><div class="ttdeci">SDL_Rect creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio)</div><div class="ttdoc">fonction de création d'un SDL_Rectangle</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00128">commun.c:128</a></div></div>
+<div class="ttc" id="acommun_8c_html_a3f79757dddc565febc8dfe47e3eee431"><div class="ttname"><a href="commun_8c.html#a3f79757dddc565febc8dfe47e3eee431">changementAffichage</a></div><div class="ttdeci">void changementAffichage(t_fonctionParam *fonction)</div><div class="ttdoc">fonction de changer la résolution de l'écran si le boutton l'utilisant est cliqué</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00135">commun.c:135</a></div></div>
+<div class="ttc" id="acommun_8c_html_a3f7f7669a8c87d15c76eb990a07fc8e0"><div class="ttname"><a href="commun_8c.html#a3f7f7669a8c87d15c76eb990a07fc8e0">creerRect</a></div><div class="ttdeci">SDL_Rect creerRect(float x_ratio, float y_ratio, float w_ratio, float h_ratio)</div><div class="ttdoc">fonction de création d'un SDL_Rectangle</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00127">commun.c:127</a></div></div>
 <div class="ttc" id="acommun_8c_html_a4435d134f7d84d3e13b3cd0a531d62cd"><div class="ttname"><a href="commun_8c.html#a4435d134f7d84d3e13b3cd0a531d62cd">renderBarreVolummeWrapper</a></div><div class="ttdeci">void renderBarreVolummeWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour le rendu de la barre de volume.</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00067">commun.c:67</a></div></div>
 <div class="ttc" id="acommun_8c_html_a6f136ac659e6de6d72e1bf97e2e78ac6"><div class="ttname"><a href="commun_8c.html#a6f136ac659e6de6d72e1bf97e2e78ac6">renderToucheWrapper</a></div><div class="ttdeci">void renderToucheWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour le rendu des contrôles affichés.</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00083">commun.c:83</a></div></div>
 <div class="ttc" id="acommun_8c_html_a8daf30ec672eefaca3e824d1bc7dfb02"><div class="ttname"><a href="commun_8c.html#a8daf30ec672eefaca3e824d1bc7dfb02">renderTextWrapper</a></div><div class="ttdeci">void renderTextWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour le rendu de texte.</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00003">commun.c:3</a></div></div>
@@ -138,7 +154,7 @@ $(function() {
 <div class="ttc" id="acommun_8c_html_aa7943250e7e111ee38f3a8b0e3be002f"><div class="ttname"><a href="commun_8c.html#aa7943250e7e111ee38f3a8b0e3be002f">renderButtonWrapper</a></div><div class="ttdeci">void renderButtonWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour le rendu des boutons UI.</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00007">commun.c:7</a></div></div>
 <div class="ttc" id="acommun_8c_html_ae0721a23bab2cb039c5a0bdbe8965ae1"><div class="ttname"><a href="commun_8c.html#ae0721a23bab2cb039c5a0bdbe8965ae1">renderFPSDisplayWrapper</a></div><div class="ttdeci">void renderFPSDisplayWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour l'affichage du compteur FPS.</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00011">commun.c:11</a></div></div>
 <div class="ttc" id="acommun_8c_html_af39fec5ad765195e1944399733fb4faa"><div class="ttname"><a href="commun_8c.html#af39fec5ad765195e1944399733fb4faa">setSceneWrapper</a></div><div class="ttdeci">void setSceneWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour changer de scène.</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00079">commun.c:79</a></div></div>
-<div class="ttc" id="acommun_8c_html_af57090ad21e5258dd5ca53844d694e0e"><div class="ttname"><a href="commun_8c.html#af57090ad21e5258dd5ca53844d694e0e">bouttonClickQuit</a></div><div class="ttdeci">void bouttonClickQuit(t_fonctionParam *fonction)</div><div class="ttdoc">fonction de ferme le programe si le boutton l'utilisant est cliqué</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00131">commun.c:131</a></div></div>
+<div class="ttc" id="acommun_8c_html_af57090ad21e5258dd5ca53844d694e0e"><div class="ttname"><a href="commun_8c.html#af57090ad21e5258dd5ca53844d694e0e">bouttonClickQuit</a></div><div class="ttdeci">void bouttonClickQuit(t_fonctionParam *fonction)</div><div class="ttdoc">fonction de ferme le programe si le boutton l'utilisant est cliqué</div><div class="ttdef"><b>Definition:</b> <a href="commun_8c_source.html#l00130">commun.c:130</a></div></div>
 <div class="ttc" id="afonction_manager_8c_html_a594fab892bbe8bced787e56601ddd16a"><div class="ttname"><a href="fonction_manager_8c.html#a594fab892bbe8bced787e56601ddd16a">creerFonction</a></div><div class="ttdeci">t_fonctionParam * creerFonction(void(*f)(t_fonctionParam *),...)</div><div class="ttdoc">Crée un t_fonctionParam.</div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8c_source.html#l00018">fonctionManager.c:18</a></div></div>
 <div class="ttc" id="afonction_manager_8c_html_a94d22af965333b1cc59cc33e393b95c9"><div class="ttname"><a href="fonction_manager_8c.html#a94d22af965333b1cc59cc33e393b95c9">addPamaretre</a></div><div class="ttdeci">void addPamaretre(t_fonctionParam *funct,...)</div><div class="ttdoc">ajoute des paramètre dans un t_fonctionParam</div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8c_source.html#l00003">fonctionManager.c:3</a></div></div>
 <div class="ttc" id="afonction_manager_8h_html_abaa9ce64f975e79556e8cac95dccbdc7"><div class="ttname"><a href="fonction_manager_8h.html#abaa9ce64f975e79556e8cac95dccbdc7">FONCTION_PARAMS</a></div><div class="ttdeci">#define FONCTION_PARAMS(...)</div><div class="ttdoc">Ajoute automatiquement un NULL à la fin d'une liste d'arguments.</div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8h_source.html#l00032">fonctionManager.h:32</a></div></div>
@@ -177,9 +193,13 @@ $(function() {
 <div class="ttc" id="atext_8c_html_aeb2abb74af73c1c4372b43db48c96d3e"><div class="ttname"><a href="text_8c.html#aeb2abb74af73c1c4372b43db48c96d3e">createText</a></div><div class="ttdeci">t_text * createText(SDL_Renderer *renderer, char *text, TTF_Font *font, SDL_Color color)</div><div class="ttdoc">Crée un texte simple sans contour.</div><div class="ttdef"><b>Definition:</b> <a href="text_8c_source.html#l00091">text.c:91</a></div></div>
 <div class="ttc" id="atouche_8c_html_a35460666a6f7088a59aa2814c8aa85a0"><div class="ttname"><a href="touche_8c.html#a35460666a6f7088a59aa2814c8aa85a0">freeTouche</a></div><div class="ttdeci">void freeTouche(void *elt)</div><div class="ttdoc">Libère une touche de la mémoire.</div><div class="ttdef"><b>Definition:</b> <a href="touche_8c_source.html#l00073">touche.c:73</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7ecf341207a704509dc0db07e1771050.html">_scene</a></li><li class="navelem"><a class="el" href="option2_8c.html">option2.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

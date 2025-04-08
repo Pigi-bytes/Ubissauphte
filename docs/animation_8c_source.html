@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('animation_8c_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_ba98abd8171b4a3dbca90a24706ac331.html">components</a></li><li class="navelem"><a class="el" href="dir_4cb84d1b63024f1abd9c85761b5454b4.html">animation</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">animation.c</div>  </div>
@@ -118,69 +134,100 @@ $(function() {
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    animation-&gt;<a class="code" href="structt__animation.html#a6b273a647bfe2b739c6c4af21a8f9fc3">isActive</a> = SDL_FALSE;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093">   47</a></span>&#160;<a class="code" href="structt__animation_controller.html">t_animationController</a>* <a class="code" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093">initAnimationController</a>() {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="structt__animation_controller.html">t_animationController</a>* controller = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structt__animation_controller.html">t_animationController</a>));</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="animation_8c.html#ae6819740180def325e96797c282287a6">   47</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="animation_8c.html#ae6819740180def325e96797c282287a6">freeAnimation</a>(<span class="keywordtype">void</span>* <span class="keywordtype">object</span>) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> (!<span class="keywordtype">object</span>) <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="structt__type_registry.html">t_typeRegistry</a>* registre = <a class="code" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b">createTypeRegistry</a>();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062">registerType</a>(registre, NULL, <span class="stringliteral">&quot;ANIMATION_TYPE&quot;</span>);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a> = <a class="code" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83">initObjectManager</a>(registre);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    controller-&gt;<a class="code" href="structt__animation_controller.html#a6698e4697e1783b22d1c2a7cbcd46e63">currentAnim</a> = -1;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    controller-&gt;<a class="code" href="structt__animation_controller.html#ab946efd3406dc8cca0ebfb84554f8a0f">haveAnimation</a> = SDL_FALSE;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">return</span> controller;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa">   60</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa">addAnimation</a>(<a class="code" href="structt__animation_controller.html">t_animationController</a>* controller, <a class="code" href="structt__animation.html">t_animation</a>* animation) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86">addObject</a>(controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>, animation, <a class="code" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041">getTypeIdByName</a>(controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>-&gt;registry, <span class="stringliteral">&quot;ANIMATION_TYPE&quot;</span>));</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    controller-&gt;<a class="code" href="structt__animation_controller.html#ab946efd3406dc8cca0ebfb84554f8a0f">haveAnimation</a> = SDL_TRUE;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="structt__animation.html">t_animation</a>* animation = (<a class="code" href="structt__animation.html">t_animation</a>*)<span class="keywordtype">object</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// Libérer les frames de l&#39;animation</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    free(animation-&gt;<a class="code" href="structt__animation.html#a55b5be9b8cb52e1823a78ec875480cdd">frames</a>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">// Libérer le nom de l&#39;animation</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    free(animation-&gt;<a class="code" href="structt__animation.html#a5ac083a645d964373f022d03df4849c8">name</a>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">// Libérer le timer de l&#39;animation</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    free(animation-&gt;<a class="code" href="structt__animation.html#a04b08ab1a885cae0b12416060c73efbd">frameTimer</a>);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">// Libérer l&#39;animation elle-même</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    free(animation);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611">   65</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611">setAnimation</a>(<a class="code" href="structt__animation_controller.html">t_animationController</a>* controller, <span class="keywordtype">char</span>* name) {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">if</span> (!controller-&gt;<a class="code" href="structt__animation_controller.html#ab946efd3406dc8cca0ebfb84554f8a0f">haveAnimation</a>) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093">   65</a></span>&#160;<a class="code" href="structt__animation_controller.html">t_animationController</a>* <a class="code" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093">initAnimationController</a>() {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="structt__animation_controller.html">t_animationController</a>* controller = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structt__animation_controller.html">t_animationController</a>));</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>-&gt;count; i++) {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="structt__animation.html">t_animation</a>* anim = (<a class="code" href="structt__animation.html">t_animation</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>, i);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">if</span> (strcmp(anim-&gt;<a class="code" href="structt__animation.html#a5ac083a645d964373f022d03df4849c8">name</a>, name) == 0) {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordflow">if</span> (i == controller-&gt;<a class="code" href="structt__animation_controller.html#a6698e4697e1783b22d1c2a7cbcd46e63">currentAnim</a>) <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>-&gt;count; j++) {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                <a class="code" href="structt__animation.html">t_animation</a>* anim2 = (<a class="code" href="structt__animation.html">t_animation</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>, j);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <span class="keywordflow">if</span> (j == controller-&gt;<a class="code" href="structt__animation_controller.html#a6698e4697e1783b22d1c2a7cbcd46e63">currentAnim</a>) {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    <a class="code" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053">stopAnimation</a>(anim2);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <a class="code" href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd">startAnimation</a>(anim);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            controller-&gt;<a class="code" href="structt__animation_controller.html#a6698e4697e1783b22d1c2a7cbcd46e63">currentAnim</a> = i;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6">   89</a></span>&#160;<a class="code" href="structt__animation.html">t_animation</a>* <a class="code" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6">getCurrentAnimation</a>(<a class="code" href="structt__animation_controller.html">t_animationController</a>* controller) {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">if</span> (!controller-&gt;<a class="code" href="structt__animation_controller.html#ab946efd3406dc8cca0ebfb84554f8a0f">haveAnimation</a>) <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="structt__animation.html">t_animation</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>, controller-&gt;<a class="code" href="structt__animation_controller.html#a6698e4697e1783b22d1c2a7cbcd46e63">currentAnim</a>);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="animation_8c.html#a7a4a59eeb481bdda4aea72f49acbb153">   95</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="animation_8c.html#a7a4a59eeb481bdda4aea72f49acbb153">updateController</a>(<a class="code" href="structt__animation_controller.html">t_animationController</a>* controller) {</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e">updateAnimation</a>(<a class="code" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6">getCurrentAnimation</a>(controller));</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="structt__type_registry.html">t_typeRegistry</a>* registre = <a class="code" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b">createTypeRegistry</a>();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062">registerType</a>(registre, <a class="code" href="animation_8c.html#ae6819740180def325e96797c282287a6">freeAnimation</a>, <span class="stringliteral">&quot;ANIMATION_TYPE&quot;</span>);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a> = <a class="code" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83">initObjectManager</a>(registre);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    controller-&gt;<a class="code" href="structt__animation_controller.html#a6698e4697e1783b22d1c2a7cbcd46e63">currentAnim</a> = -1;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    controller-&gt;<a class="code" href="structt__animation_controller.html#ab946efd3406dc8cca0ebfb84554f8a0f">haveAnimation</a> = SDL_FALSE;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> controller;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa">   78</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa">addAnimation</a>(<a class="code" href="structt__animation_controller.html">t_animationController</a>* controller, <a class="code" href="structt__animation.html">t_animation</a>* animation) {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86">addObject</a>(controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>, animation, <a class="code" href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041">getTypeIdByName</a>(controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>-&gt;registry, <span class="stringliteral">&quot;ANIMATION_TYPE&quot;</span>));</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    controller-&gt;<a class="code" href="structt__animation_controller.html#ab946efd3406dc8cca0ebfb84554f8a0f">haveAnimation</a> = SDL_TRUE;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611">   83</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611">setAnimation</a>(<a class="code" href="structt__animation_controller.html">t_animationController</a>* controller, <span class="keywordtype">char</span>* name) {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">if</span> (!controller-&gt;<a class="code" href="structt__animation_controller.html#ab946efd3406dc8cca0ebfb84554f8a0f">haveAnimation</a>) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>-&gt;count; i++) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <a class="code" href="structt__animation.html">t_animation</a>* anim = (<a class="code" href="structt__animation.html">t_animation</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>, i);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">if</span> (strcmp(anim-&gt;<a class="code" href="structt__animation.html#a5ac083a645d964373f022d03df4849c8">name</a>, name) == 0) {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="keywordflow">if</span> (i == controller-&gt;<a class="code" href="structt__animation_controller.html#a6698e4697e1783b22d1c2a7cbcd46e63">currentAnim</a>) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>-&gt;count; j++) {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <a class="code" href="structt__animation.html">t_animation</a>* anim2 = (<a class="code" href="structt__animation.html">t_animation</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>, j);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                <span class="keywordflow">if</span> (j == controller-&gt;<a class="code" href="structt__animation_controller.html#a6698e4697e1783b22d1c2a7cbcd46e63">currentAnim</a>) {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    <a class="code" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053">stopAnimation</a>(anim2);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                }</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <a class="code" href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd">startAnimation</a>(anim);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            controller-&gt;<a class="code" href="structt__animation_controller.html#a6698e4697e1783b22d1c2a7cbcd46e63">currentAnim</a> = i;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6">  107</a></span>&#160;<a class="code" href="structt__animation.html">t_animation</a>* <a class="code" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6">getCurrentAnimation</a>(<a class="code" href="structt__animation_controller.html">t_animationController</a>* controller) {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordflow">if</span> (!controller-&gt;<a class="code" href="structt__animation_controller.html#ab946efd3406dc8cca0ebfb84554f8a0f">haveAnimation</a>) <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="structt__animation.html">t_animation</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>, controller-&gt;<a class="code" href="structt__animation_controller.html#a6698e4697e1783b22d1c2a7cbcd46e63">currentAnim</a>);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="animation_8c.html#a7a4a59eeb481bdda4aea72f49acbb153">  113</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="animation_8c.html#a7a4a59eeb481bdda4aea72f49acbb153">updateController</a>(<a class="code" href="structt__animation_controller.html">t_animationController</a>* controller) {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <a class="code" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e">updateAnimation</a>(<a class="code" href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6">getCurrentAnimation</a>(controller));</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;}</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="animation_8c.html#a6d9d79f7c88ff57d79aa88a7193f00f2">  117</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="animation_8c.html#a6d9d79f7c88ff57d79aa88a7193f00f2">freeAnimationController</a>(<a class="code" href="structt__animation_controller.html">t_animationController</a>* controller) {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">if</span> (!controller) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="comment">// Libérer le gestionnaire d&#39;animations</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <a class="code" href="object_manager_8c.html#aa17aa9d46c431f4b91114108468b73f3">freeObjectManager</a>(controller-&gt;<a class="code" href="structt__animation_controller.html#a342ca809f597e5e6620fd860cac5731d">animations</a>);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="comment">// Libérer le contrôleur lui-même</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    free(controller);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;}</div>
 <div class="ttc" id="aanimation_8c_html_a02019ad4265cc54a504cfe1444592053"><div class="ttname"><a href="animation_8c.html#a02019ad4265cc54a504cfe1444592053">stopAnimation</a></div><div class="ttdeci">void stopAnimation(t_animation *animation)</div><div class="ttdoc">Arrête une animation.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00043">animation.c:43</a></div></div>
-<div class="ttc" id="aanimation_8c_html_a369848a8494a151c4d5d75f6f60e61e6"><div class="ttname"><a href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6">getCurrentAnimation</a></div><div class="ttdeci">t_animation * getCurrentAnimation(t_animationController *controller)</div><div class="ttdoc">Récupère l'animation active.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00089">animation.c:89</a></div></div>
+<div class="ttc" id="aanimation_8c_html_a369848a8494a151c4d5d75f6f60e61e6"><div class="ttname"><a href="animation_8c.html#a369848a8494a151c4d5d75f6f60e61e6">getCurrentAnimation</a></div><div class="ttdeci">t_animation * getCurrentAnimation(t_animationController *controller)</div><div class="ttdoc">Récupère l'animation active.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00107">animation.c:107</a></div></div>
 <div class="ttc" id="aanimation_8c_html_a3ee5636cb3b7f475322966e14f97e27e"><div class="ttname"><a href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e">updateAnimation</a></div><div class="ttdeci">void updateAnimation(t_animation *animation)</div><div class="ttdoc">Met à jour l'état d'une animation (passe à la frame suivante si nécessaire)</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00022">animation.c:22</a></div></div>
-<div class="ttc" id="aanimation_8c_html_a558f44850e43c0e5f4673279e0e58611"><div class="ttname"><a href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611">setAnimation</a></div><div class="ttdeci">void setAnimation(t_animationController *controller, char *name)</div><div class="ttdoc">Change l'animation active.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00065">animation.c:65</a></div></div>
-<div class="ttc" id="aanimation_8c_html_a7a4a59eeb481bdda4aea72f49acbb153"><div class="ttname"><a href="animation_8c.html#a7a4a59eeb481bdda4aea72f49acbb153">updateController</a></div><div class="ttdeci">void updateController(t_animationController *controller)</div><div class="ttdoc">Met à jour l'animation active.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00095">animation.c:95</a></div></div>
-<div class="ttc" id="aanimation_8c_html_a86e4f6cbeb644344e22ddf9c6f0cf3fa"><div class="ttname"><a href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa">addAnimation</a></div><div class="ttdeci">void addAnimation(t_animationController *controller, t_animation *animation)</div><div class="ttdoc">Ajoute une animation au contrôleur.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00060">animation.c:60</a></div></div>
-<div class="ttc" id="aanimation_8c_html_a898f3e487ffd9a824e2fa2a11c03a093"><div class="ttname"><a href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093">initAnimationController</a></div><div class="ttdeci">t_animationController * initAnimationController()</div><div class="ttdoc">Initialise un contrôleur d'animations.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00047">animation.c:47</a></div></div>
+<div class="ttc" id="aanimation_8c_html_a558f44850e43c0e5f4673279e0e58611"><div class="ttname"><a href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611">setAnimation</a></div><div class="ttdeci">void setAnimation(t_animationController *controller, char *name)</div><div class="ttdoc">Change l'animation active.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00083">animation.c:83</a></div></div>
+<div class="ttc" id="aanimation_8c_html_a6d9d79f7c88ff57d79aa88a7193f00f2"><div class="ttname"><a href="animation_8c.html#a6d9d79f7c88ff57d79aa88a7193f00f2">freeAnimationController</a></div><div class="ttdeci">void freeAnimationController(t_animationController *controller)</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00117">animation.c:117</a></div></div>
+<div class="ttc" id="aanimation_8c_html_a7a4a59eeb481bdda4aea72f49acbb153"><div class="ttname"><a href="animation_8c.html#a7a4a59eeb481bdda4aea72f49acbb153">updateController</a></div><div class="ttdeci">void updateController(t_animationController *controller)</div><div class="ttdoc">Met à jour l'animation active.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00113">animation.c:113</a></div></div>
+<div class="ttc" id="aanimation_8c_html_a86e4f6cbeb644344e22ddf9c6f0cf3fa"><div class="ttname"><a href="animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa">addAnimation</a></div><div class="ttdeci">void addAnimation(t_animationController *controller, t_animation *animation)</div><div class="ttdoc">Ajoute une animation au contrôleur.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00078">animation.c:78</a></div></div>
+<div class="ttc" id="aanimation_8c_html_a898f3e487ffd9a824e2fa2a11c03a093"><div class="ttname"><a href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093">initAnimationController</a></div><div class="ttdeci">t_animationController * initAnimationController()</div><div class="ttdoc">Initialise un contrôleur d'animations.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00065">animation.c:65</a></div></div>
 <div class="ttc" id="aanimation_8c_html_aa7621b37ce4e22d8f57f39c38970a052"><div class="ttname"><a href="animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052">createAnimation</a></div><div class="ttdeci">t_animation * createAnimation(t_tileset *tileset, int *frameIndices, int numFrames, int speed, SDL_bool looping, char *name)</div><div class="ttdoc">Crée une nouvelle animation.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00003">animation.c:3</a></div></div>
+<div class="ttc" id="aanimation_8c_html_ae6819740180def325e96797c282287a6"><div class="ttname"><a href="animation_8c.html#ae6819740180def325e96797c282287a6">freeAnimation</a></div><div class="ttdeci">void freeAnimation(void *object)</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00047">animation.c:47</a></div></div>
 <div class="ttc" id="aanimation_8c_html_af2676318d90db45ea3dc16410c517cbd"><div class="ttname"><a href="animation_8c.html#af2676318d90db45ea3dc16410c517cbd">startAnimation</a></div><div class="ttdeci">void startAnimation(t_animation *animation)</div><div class="ttdoc">Démarre une animation.</div><div class="ttdef"><b>Definition:</b> <a href="animation_8c_source.html#l00037">animation.c:37</a></div></div>
 <div class="ttc" id="aanimation_8h_html"><div class="ttname"><a href="animation_8h.html">animation.h</a></div><div class="ttdoc">Système d'animation pour les entités.</div></div>
 <div class="ttc" id="aobject_manager_8c_html_a23e66daef97e93e6873108dd50e97f83"><div class="ttname"><a href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83">initObjectManager</a></div><div class="ttdeci">t_objectManager * initObjectManager(t_typeRegistry *registre)</div><div class="ttdoc">Initialise un nouveau gestionnaire de memoire.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8c_source.html#l00028">objectManager.c:28</a></div></div>
 <div class="ttc" id="aobject_manager_8c_html_a2aa55325cfca978689146f3fc4479062"><div class="ttname"><a href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062">registerType</a></div><div class="ttdeci">uint8_t registerType(t_typeRegistry *registre, freeFunc freeFunc, char *name)</div><div class="ttdoc">Enregistre un nouveau type dans le registre.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8c_source.html#l00011">objectManager.c:11</a></div></div>
+<div class="ttc" id="aobject_manager_8c_html_aa17aa9d46c431f4b91114108468b73f3"><div class="ttname"><a href="object_manager_8c.html#aa17aa9d46c431f4b91114108468b73f3">freeObjectManager</a></div><div class="ttdeci">void freeObjectManager(t_objectManager *manager)</div><div class="ttdoc">Libere toute la memoire du gestionnaire et ses objets.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8c_source.html#l00169">objectManager.c:169</a></div></div>
 <div class="ttc" id="aobject_manager_8c_html_aa270514a28f6e518cde770b1ec098d86"><div class="ttname"><a href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86">addObject</a></div><div class="ttdeci">void addObject(t_objectManager *manager, void *data, uint8_t typeId)</div><div class="ttdoc">Ajoute un objet au gestionnaire.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8c_source.html#l00059">objectManager.c:59</a></div></div>
 <div class="ttc" id="aobject_manager_8c_html_aba826a5b8e7b3641e82577bfc3542041"><div class="ttname"><a href="object_manager_8c.html#aba826a5b8e7b3641e82577bfc3542041">getTypeIdByName</a></div><div class="ttdeci">uint8_t getTypeIdByName(t_typeRegistry *registry, char *name)</div><div class="ttdoc">Recure un id avec son nom depuis un registre.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8c_source.html#l00018">objectManager.c:18</a></div></div>
 <div class="ttc" id="aobject_manager_8c_html_acc0212baea8ea823c7a51b9722c53a8b"><div class="ttname"><a href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b">createTypeRegistry</a></div><div class="ttdeci">t_typeRegistry * createTypeRegistry()</div><div class="ttdoc">Initialise un registre de types.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8c_source.html#l00003">objectManager.c:3</a></div></div>
@@ -205,9 +252,13 @@ $(function() {
 <div class="ttc" id="atimer_8c_html_a7d157e28b7dc56888e25fb39a8da9776"><div class="ttname"><a href="timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776">startTimer</a></div><div class="ttdeci">void startTimer(t_timer *timer)</div><div class="ttdoc">Démarre le timer.</div><div class="ttdef"><b>Definition:</b> <a href="timer_8c_source.html#l00012">timer.c:12</a></div></div>
 <div class="ttc" id="atimer_8c_html_aecdaaaeb2277a6a97e620e7c19422dc2"><div class="ttname"><a href="timer_8c.html#aecdaaaeb2277a6a97e620e7c19422dc2">initTimer</a></div><div class="ttdeci">t_timer * initTimer()</div><div class="ttdoc">Initialise un nouveau timer.</div><div class="ttdef"><b>Definition:</b> <a href="timer_8c_source.html#l00005">timer.c:5</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_ba98abd8171b4a3dbca90a24706ac331.html">components</a></li><li class="navelem"><a class="el" href="dir_4cb84d1b63024f1abd9c85761b5454b4.html">animation</a></li><li class="navelem"><a class="el" href="animation_8c.html">animation.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

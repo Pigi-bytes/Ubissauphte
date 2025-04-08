@@ -4,49 +4,49 @@
 <area shape="rect" id="node4" href="$main_menu_8c.html#a6f6d129bf242e634e003667ee26a1657" title=" " alt="" coords="229,56,336,83"/>
 <area shape="rect" id="node5" href="$commun_8c.html#af57090ad21e5258dd5ca53844d694e0e" title="fonction de ferme le programe si le boutton l&#39;utilisant est cliqué" alt="" coords="217,107,348,133"/>
 <area shape="rect" id="node6" href="$button_8c.html#a27a05bc9ac9288cc041454d2765d0c50" title="Crée un nouveau bouton." alt="" coords="229,157,336,184"/>
-<area shape="rect" id="node7" href="$main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="199,563,366,589"/>
-<area shape="rect" id="node11" href="$fscene_8c.html#a4b143d78504ee5f7584a44fb6479e3f0" title="Crée une nouvelle scène." alt="" coords="901,360,1004,387"/>
-<area shape="rect" id="node12" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="879,411,1026,437"/>
-<area shape="rect" id="node13" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="881,461,1024,488"/>
-<area shape="rect" id="node14" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="901,512,1004,539"/>
-<area shape="rect" id="node15" href="$fscene_8c.html#accbd14eb8c93d348b61a8cb09bbbf489" title="Enregistre une fonction pour une scène." alt="" coords="868,309,1037,336"/>
-<area shape="rect" id="node24" href="$text_8c.html#a92567a5bf04e06ed469717198d991136" title="Crée un texte avec contour." alt="" coords="673,929,811,956"/>
-<area shape="rect" id="node25" href="$fonction_manager_8c.html#a594fab892bbe8bced787e56601ddd16a" title="Crée un t_fonctionParam." alt="" coords="227,208,338,235"/>
-<area shape="rect" id="node26" href="$commun_8c.html#a3f7f7669a8c87d15c76eb990a07fc8e0" title="fonction de création d&#39;un SDL_Rectangle" alt="" coords="241,664,325,691"/>
-<area shape="rect" id="node27" href="$button_8c.html#a444d02738d087dbd280f7b8848284ae9" title="Libère la mémoire utilisée par un bouton." alt="" coords="237,715,328,741"/>
-<area shape="rect" id="node29" href="$text_8c.html#ab9b7064da4ef9403241f3d40389af46a" title="Libère la mémoire utilisée par un élément textuel." alt="" coords="487,765,561,792"/>
-<area shape="rect" id="node30" href="$fps_display_8c.html#a0fb9bb2a14f4944c0301375c3acd1243" title="Libère la mémoire utilisée par l&#39;affichage des FPS." alt="" coords="222,765,343,792"/>
-<area shape="rect" id="node31" href="$main_menu_8c.html#a210a3357aed99cd8ea653eee4e88e7f7" title=" " alt="" coords="235,867,331,893"/>
-<area shape="rect" id="node32" href="$commun_8c.html#a9f60e865d0db40e46255669456e7ecd8" title="Wrapper pour la gestion des entrées boutons." alt="" coords="184,1120,381,1147"/>
-<area shape="rect" id="node36" href="$main_menu_8c.html#a27a9ef787739b86e4145651faee87593" title="Convertit une difficulté en chaîne de caractères." alt="" coords="206,968,359,995"/>
-<area shape="rect" id="node37" href="$image_loader_8c.html#ad024f7b25128f491abc766b2831a828c" title="Charge une image depuis un fichier dans une texture SDL." alt="" coords="237,1019,328,1045"/>
-<area shape="rect" id="node38" href="$main_menu_8c.html#a857fa7fa199800c2cc69f064aaadda2b" title=" " alt="" coords="215,1069,350,1096"/>
-<area shape="rect" id="node40" href="$commun_8c.html#aa7943250e7e111ee38f3a8b0e3be002f" title="Wrapper pour le rendu des boutons UI." alt="" coords="201,1171,364,1197"/>
-<area shape="rect" id="node44" href="$commun_8c.html#ae0721a23bab2cb039c5a0bdbe8965ae1" title="Wrapper pour l&#39;affichage du compteur FPS." alt="" coords="187,1221,379,1248"/>
-<area shape="rect" id="node46" href="$commun_8c.html#a8daf30ec672eefaca3e824d1bc7dfb02" title="Wrapper pour le rendu de texte." alt="" coords="451,1272,597,1299"/>
-<area shape="rect" id="node47" href="$commun_8c.html#af39fec5ad765195e1944399733fb4faa" title="Wrapper pour changer de scène." alt="" coords="456,664,592,691"/>
-<area shape="rect" id="node48" href="$commun_8c.html#a3d7ceef02fbf5954ffd809f4bf8c40c3" title="Wrapper pour la mise à jour du compteur FPS." alt="" coords="185,1323,380,1349"/>
-<area shape="rect" id="node3" href="$fonction_manager_8c.html#a3fdc9fb7992919f32229e99affe0ea71" title="ajout des paramètres dans le t_fonctionParam" alt="" coords="429,107,619,133"/>
-<area shape="rect" id="node8" href="$main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="469,613,579,640"/>
-<area shape="rect" id="node9" href="$fscene_8c.html#a39d0e7fbc78f3ff2fbd207962ff6ab42" title="Ajoute une scène au contrôleur." alt="" coords="910,588,995,615"/>
-<area shape="rect" id="node10" href="$main_world_8c.html#a7d6d1191cb113070340022cda0f7f5e7" title="Crée une carte à partir d&#39;une configuration." alt="" coords="680,411,804,437"/>
-<area shape="rect" id="node18" href="$main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="686,563,798,589"/>
-<area shape="rect" id="node19" href="$genmap_8c.html#a8cc62c2ec750666aff9cbdac83f72102" title=" " alt="" coords="705,664,779,691"/>
-<area shape="rect" id="node20" href="$tiles_8c.html#ab4e8adeba82f1c41f904963ffa7260e8" title="Place une entité sur une tuile libre aléatoire." alt="" coords="876,715,1029,741"/>
-<area shape="rect" id="node21" href="$fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="701,765,783,792"/>
-<area shape="rect" id="node16" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="1109,715,1194,741"/>
-<area shape="rect" id="node17" href="$object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="1088,309,1215,336"/>
-<area shape="rect" id="node22" href="$fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1" title="Exécute toutes les fonctions d&#39;un type donné" alt="" coords="865,876,1040,903"/>
-<area shape="rect" id="node23" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="1101,932,1201,959"/>
-<area shape="rect" id="node28" href="$fonction_manager_8c.html#aa61a39c82b2044678dea685d75cdd8a9" title="Libere la mémoire d&#39;une fonctionParametrable." alt="" coords="473,715,575,741"/>
-<area shape="rect" id="node33" href="$button_8c.html#a0b17babfe6275495728adc3e4ce2cb18" title="Traite les entrées utilisateur pour un bouton." alt="" coords="453,1069,595,1096"/>
-<area shape="rect" id="node34" href="$button_8c.html#a279965621a6b64d1a4f58eac1f1a9a14" title="Vérifie si le curseur se trouve à l&#39;intérieur d&#39;un rectangle." alt="" coords="670,1044,814,1071"/>
-<area shape="rect" id="node35" href="$audio_manager_8c.html#a9f819b827499e9c2eadb4f276dea5e29" title=" " alt="" coords="702,1095,782,1121"/>
-<area shape="rect" id="node39" href="$text_8c.html#a188a5e1361d94e2517bacbc2a6f39509" title="Met à jour un texte avec contour existant." alt="" coords="453,993,595,1020"/>
-<area shape="rect" id="node41" href="$button_8c.html#a57726e67186d9103bd5627f07a2557d4" title="Affiche un bouton à l&#39;écran." alt="" coords="471,1171,577,1197"/>
-<area shape="rect" id="node42" href="$button_8c.html#a289805f0c618adfd4a051e912198f3f7" title=" " alt="" coords="667,1171,817,1197"/>
-<area shape="rect" id="node43" href="$text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="697,1221,787,1248"/>
-<area shape="rect" id="node45" href="$fps_display_8c.html#ab11eb3cfbb39ee3e14f3b1cedf0f6125" title="Affiche le compteur de FPS à l&#39;écran." alt="" coords="455,1221,593,1248"/>
-<area shape="rect" id="node49" href="$fps_display_8c.html#a9dcc13543c4699deb3a644de85384005" title="Met à jour l&#39;affichage des FPS." alt="" coords="454,1323,594,1349"/>
-<area shape="rect" id="node50" href="$text_8c.html#a6aad28e2d5f69d57937dae840fa9a915" title="Met à jour un texte simple existant." alt="" coords="695,1323,789,1349"/>
+<area shape="rect" id="node7" href="$fscene_8c.html#a4b143d78504ee5f7584a44fb6479e3f0" title="Crée une nouvelle scène." alt="" coords="231,208,334,235"/>
+<area shape="rect" id="node8" href="$text_8c.html#a92567a5bf04e06ed469717198d991136" title="Crée un texte avec contour." alt="" coords="687,411,825,437"/>
+<area shape="rect" id="node9" href="$object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="893,399,1040,425"/>
+<area shape="rect" id="node10" href="$fonction_manager_8c.html#a594fab892bbe8bced787e56601ddd16a" title="Crée un t_fonctionParam." alt="" coords="227,259,338,285"/>
+<area shape="rect" id="node11" href="$commun_8c.html#a3f7f7669a8c87d15c76eb990a07fc8e0" title="fonction de création d&#39;un SDL_Rectangle" alt="" coords="241,411,325,437"/>
+<area shape="rect" id="node12" href="$main_menu_8c.html#a662a60d31691d89025bc498c6bffaab0" title=" " alt="" coords="197,867,369,893"/>
+<area shape="rect" id="node19" href="$object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="895,537,1038,564"/>
+<area shape="rect" id="node20" href="$object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="915,588,1018,615"/>
+<area shape="rect" id="node22" href="$button_8c.html#a444d02738d087dbd280f7b8848284ae9" title="Libère la mémoire utilisée par un bouton." alt="" coords="237,613,328,640"/>
+<area shape="rect" id="node24" href="$text_8c.html#ab9b7064da4ef9403241f3d40389af46a" title="Libère la mémoire utilisée par un élément textuel." alt="" coords="487,664,561,691"/>
+<area shape="rect" id="node25" href="$fps_display_8c.html#a0fb9bb2a14f4944c0301375c3acd1243" title="Libère la mémoire utilisée par l&#39;affichage des FPS." alt="" coords="222,664,343,691"/>
+<area shape="rect" id="node26" href="$main_menu_8c.html#a210a3357aed99cd8ea653eee4e88e7f7" title=" " alt="" coords="235,765,331,792"/>
+<area shape="rect" id="node27" href="$commun_8c.html#a9f60e865d0db40e46255669456e7ecd8" title="Wrapper pour la gestion des entrées boutons." alt="" coords="184,1120,381,1147"/>
+<area shape="rect" id="node32" href="$main_menu_8c.html#ade3e30a23c5edf2f0d3f239d1c010b43" title=" " alt="" coords="199,816,367,843"/>
+<area shape="rect" id="node33" href="$main_menu_8c.html#a27a9ef787739b86e4145651faee87593" title="Convertit une difficulté en chaîne de caractères." alt="" coords="206,917,359,944"/>
+<area shape="rect" id="node34" href="$image_loader_8c.html#ad024f7b25128f491abc766b2831a828c" title="Charge une image depuis un fichier dans une texture SDL." alt="" coords="237,968,328,995"/>
+<area shape="rect" id="node35" href="$main_menu_8c.html#a857fa7fa199800c2cc69f064aaadda2b" title=" " alt="" coords="215,360,350,387"/>
+<area shape="rect" id="node37" href="$commun_8c.html#aa7943250e7e111ee38f3a8b0e3be002f" title="Wrapper pour le rendu des boutons UI." alt="" coords="201,1221,364,1248"/>
+<area shape="rect" id="node41" href="$commun_8c.html#ae0721a23bab2cb039c5a0bdbe8965ae1" title="Wrapper pour l&#39;affichage du compteur FPS." alt="" coords="187,1323,379,1349"/>
+<area shape="rect" id="node43" href="$main_menu_8c.html#a51f44f46d5eef92ae2bb2eedcaeee5a7" title=" " alt="" coords="214,1171,351,1197"/>
+<area shape="rect" id="node44" href="$commun_8c.html#a8daf30ec672eefaca3e824d1bc7dfb02" title="Wrapper pour le rendu de texte." alt="" coords="451,1272,597,1299"/>
+<area shape="rect" id="node45" href="$fscene_8c.html#accbd14eb8c93d348b61a8cb09bbbf489" title="Enregistre une fonction pour une scène." alt="" coords="198,1069,367,1096"/>
+<area shape="rect" id="node47" href="$commun_8c.html#af39fec5ad765195e1944399733fb4faa" title="Wrapper pour changer de scène." alt="" coords="215,1019,351,1045"/>
+<area shape="rect" id="node49" href="$commun_8c.html#a3d7ceef02fbf5954ffd809f4bf8c40c3" title="Wrapper pour la mise à jour du compteur FPS." alt="" coords="185,1373,380,1400"/>
+<area shape="rect" id="node3" href="$fonction_manager_8c.html#a3fdc9fb7992919f32229e99affe0ea71" title="ajout des paramètres dans le t_fonctionParam" alt="" coords="429,132,619,159"/>
+<area shape="rect" id="node13" href="$player_8c.html#a3adff23aec4ff9cdf14e365c8ef60eb4" title=" " alt="" coords="435,816,613,843"/>
+<area shape="rect" id="node14" href="$animation_8c.html#a86e4f6cbeb644344e22ddf9c6f0cf3fa" title="Ajoute une animation au contrôleur." alt="" coords="699,765,813,792"/>
+<area shape="rect" id="node15" href="$animation_8c.html#aa7621b37ce4e22d8f57f39c38970a052" title="Crée une nouvelle animation." alt="" coords="691,917,821,944"/>
+<area shape="rect" id="node16" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="924,917,1009,944"/>
+<area shape="rect" id="node17" href="$animation_8c.html#a6d9d79f7c88ff57d79aa88a7193f00f2" title=" " alt="" coords="667,715,845,741"/>
+<area shape="rect" id="node18" href="$animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="669,563,843,589"/>
+<area shape="rect" id="node21" href="$animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="701,867,811,893"/>
+<area shape="rect" id="node23" href="$fonction_manager_8c.html#aa61a39c82b2044678dea685d75cdd8a9" title="Libere la mémoire d&#39;une fonctionParametrable." alt="" coords="473,613,575,640"/>
+<area shape="rect" id="node28" href="$button_8c.html#a0b17babfe6275495728adc3e4ce2cb18" title="Traite les entrées utilisateur pour un bouton." alt="" coords="453,1120,595,1147"/>
+<area shape="rect" id="node29" href="$fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e" title="Execute la fonctionParam." alt="" coords="706,1069,806,1096"/>
+<area shape="rect" id="node30" href="$button_8c.html#a279965621a6b64d1a4f58eac1f1a9a14" title="Vérifie si le curseur se trouve à l&#39;intérieur d&#39;un rectangle." alt="" coords="684,1120,828,1147"/>
+<area shape="rect" id="node31" href="$audio_manager_8c.html#a9f819b827499e9c2eadb4f276dea5e29" title=" " alt="" coords="716,1171,796,1197"/>
+<area shape="rect" id="node36" href="$text_8c.html#a188a5e1361d94e2517bacbc2a6f39509" title="Met à jour un texte avec contour existant." alt="" coords="453,385,595,412"/>
+<area shape="rect" id="node38" href="$button_8c.html#a57726e67186d9103bd5627f07a2557d4" title="Affiche un bouton à l&#39;écran." alt="" coords="471,1221,577,1248"/>
+<area shape="rect" id="node39" href="$button_8c.html#a289805f0c618adfd4a051e912198f3f7" title=" " alt="" coords="681,1221,831,1248"/>
+<area shape="rect" id="node40" href="$text_8c.html#a0377eac5e5c2dd29e4e28920be02b31a" title="Affiche un texte à l&#39;écran." alt="" coords="711,1272,801,1299"/>
+<area shape="rect" id="node42" href="$fps_display_8c.html#ab11eb3cfbb39ee3e14f3b1cedf0f6125" title="Affiche le compteur de FPS à l&#39;écran." alt="" coords="455,1323,593,1349"/>
+<area shape="rect" id="node46" href="$object_manager_8c.html#aead2248cbf6dfb86e2b89f07c1bf51ac" title="Récupère l&#39;identifiant de type d&#39;un objet à partir de son index." alt="" coords="461,1069,587,1096"/>
+<area shape="rect" id="node48" href="$fscene_8c.html#a41cb33c742203a83f3b38ad344168917" title="Change la scène courante." alt="" coords="715,968,797,995"/>
+<area shape="rect" id="node50" href="$fps_display_8c.html#a9dcc13543c4699deb3a644de85384005" title="Met à jour l&#39;affichage des FPS." alt="" coords="454,1373,594,1400"/>
 </map>

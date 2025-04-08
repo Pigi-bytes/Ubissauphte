@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('animation_8c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_ba98abd8171b4a3dbca90a24706ac331.html">components</a></li><li class="navelem"><a class="el" href="dir_4cb84d1b63024f1abd9c85761b5454b4.html">animation</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
@@ -92,6 +108,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a02019ad4265cc54a504cfe1444592053"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="animation_8c.html#a02019ad4265cc54a504cfe1444592053">stopAnimation</a> (<a class="el" href="structt__animation.html">t_animation</a> *animation)</td></tr>
 <tr class="memdesc:a02019ad4265cc54a504cfe1444592053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arrête une animation.  <a href="animation_8c.html#a02019ad4265cc54a504cfe1444592053">More...</a><br /></td></tr>
 <tr class="separator:a02019ad4265cc54a504cfe1444592053"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6819740180def325e96797c282287a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="animation_8c.html#ae6819740180def325e96797c282287a6">freeAnimation</a> (void *object)</td></tr>
+<tr class="separator:ae6819740180def325e96797c282287a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a898f3e487ffd9a824e2fa2a11c03a093"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structt__animation_controller.html">t_animationController</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093">initAnimationController</a> ()</td></tr>
 <tr class="memdesc:a898f3e487ffd9a824e2fa2a11c03a093"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise un contrôleur d'animations.  <a href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093">More...</a><br /></td></tr>
 <tr class="separator:a898f3e487ffd9a824e2fa2a11c03a093"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,6 +125,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a7a4a59eeb481bdda4aea72f49acbb153"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="animation_8c.html#a7a4a59eeb481bdda4aea72f49acbb153">updateController</a> (<a class="el" href="structt__animation_controller.html">t_animationController</a> *controller)</td></tr>
 <tr class="memdesc:a7a4a59eeb481bdda4aea72f49acbb153"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met à jour l'animation active.  <a href="animation_8c.html#a7a4a59eeb481bdda4aea72f49acbb153">More...</a><br /></td></tr>
 <tr class="separator:a7a4a59eeb481bdda4aea72f49acbb153"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d9d79f7c88ff57d79aa88a7193f00f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="animation_8c.html#a6d9d79f7c88ff57d79aa88a7193f00f2">freeAnimationController</a> (<a class="el" href="structt__animation_controller.html">t_animationController</a> *controller)</td></tr>
+<tr class="separator:a6d9d79f7c88ff57d79aa88a7193f00f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a86e4f6cbeb644344e22ddf9c6f0cf3fa"></a>
@@ -144,7 +164,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="animation_8c_source.html#l00060">60</a> of file <a class="el" href="animation_8c_source.html">animation.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="animation_8c_source.html#l00078">78</a> of file <a class="el" href="animation_8c_source.html">animation.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -160,25 +180,29 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="animation_8c_a86e4f6cbeb644344e22ddf9c6f0cf3fa_icgraph.png" border="0" usemap="#aanimation_8c_a86e4f6cbeb644344e22ddf9c6f0cf3fa_icgraph" alt=""/></div>
 <map name="aanimation_8c_a86e4f6cbeb644344e22ddf9c6f0cf3fa_icgraph" id="aanimation_8c_a86e4f6cbeb644344e22ddf9c6f0cf3fa_icgraph">
-<area shape="rect" title="Ajoute une animation au contrôleur." alt="" coords="1441,195,1555,221"/>
-<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1219,195,1393,221"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1030,296,1161,323"/>
-<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1237,245,1375,272"/>
-<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1045,68,1146,95"/>
-<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1225,296,1387,323"/>
-<area shape="rect" href="player_8c.html#a25a5b9b1991ba50388e6c3b0eab41d6c" title="Crée un nouveau joueur." alt="" coords="1043,381,1147,408"/>
-<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1045,5,1145,32"/>
-<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1238,93,1374,120"/>
-<area shape="rect" href="wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1233,144,1379,171"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1020,195,1171,221"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,245,957,272"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,93,960,120"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,195,972,221"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,220,772,247"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,227,612,253"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,239,453,265"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,264,239,291"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,340,60,367"/>
+<area shape="rect" title="Ajoute une animation au contrôleur." alt="" coords="1515,220,1628,247"/>
+<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1292,195,1467,221"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1103,283,1234,309"/>
+<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1310,245,1449,272"/>
+<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1118,68,1219,95"/>
+<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1298,296,1461,323"/>
+<area shape="rect" href="player_8c.html#a81ad3e4fcd0e3686c7076cb022b61129" title="Crée un nouveau joueur." alt="" coords="1117,372,1221,399"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1119,5,1219,32"/>
+<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1311,93,1447,120"/>
+<area shape="rect" href="tiles_entity_2wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1306,144,1453,171"/>
+<area shape="rect" href="player_8c.html#a3adff23aec4ff9cdf14e365c8ef60eb4" title=" " alt="" coords="507,448,685,475"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1093,195,1244,221"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="908,245,1031,272"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="905,93,1033,120"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="893,195,1045,221"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="733,220,845,247"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="541,245,651,272"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="289,257,456,284"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="123,271,223,297"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,372,60,399"/>
+<area shape="rect" href="main_menu_8c.html#a662a60d31691d89025bc498c6bffaab0" title=" " alt="" coords="287,397,459,424"/>
+<area shape="rect" href="main_menu_8c.html#ade3e30a23c5edf2f0d3f239d1c010b43" title=" " alt="" coords="289,448,457,475"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,397,239,424"/>
 </map>
 </div>
 
@@ -264,26 +288,128 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="animation_8c_aa7621b37ce4e22d8f57f39c38970a052_icgraph.png" border="0" usemap="#aanimation_8c_aa7621b37ce4e22d8f57f39c38970a052_icgraph" alt=""/></div>
 <map name="aanimation_8c_aa7621b37ce4e22d8f57f39c38970a052_icgraph" id="aanimation_8c_aa7621b37ce4e22d8f57f39c38970a052_icgraph">
-<area shape="rect" title="Crée une nouvelle animation." alt="" coords="1441,217,1572,244"/>
-<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1219,293,1393,320"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1030,305,1161,332"/>
-<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1237,344,1375,371"/>
-<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1045,5,1146,32"/>
-<area shape="rect" href="hud_8c.html#ab5c94b35150b778d85c8033a513e5ace" title="Crée une nouvelle instance du HUD." alt="" coords="1049,153,1142,180"/>
-<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1225,141,1387,168"/>
-<area shape="rect" href="player_8c.html#a25a5b9b1991ba50388e6c3b0eab41d6c" title="Crée un nouveau joueur." alt="" coords="664,391,768,417"/>
-<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1045,72,1145,99"/>
-<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1238,192,1374,219"/>
-<area shape="rect" href="wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1233,243,1379,269"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1020,217,1171,244"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,243,957,269"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,141,960,168"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,192,972,219"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,217,772,244"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,221,612,248"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,229,453,256"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,245,239,272"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,303,60,329"/>
+<area shape="rect" title="Crée une nouvelle animation." alt="" coords="1515,241,1645,268"/>
+<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1292,241,1467,268"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1103,77,1234,104"/>
+<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1310,38,1449,65"/>
+<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1118,342,1219,369"/>
+<area shape="rect" href="hud_8c.html#ab5c94b35150b778d85c8033a513e5ace" title="Crée une nouvelle instance du HUD." alt="" coords="1122,266,1215,293"/>
+<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1298,89,1461,116"/>
+<area shape="rect" href="player_8c.html#a81ad3e4fcd0e3686c7076cb022b61129" title="Crée un nouveau joueur." alt="" coords="737,418,841,445"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1119,393,1219,420"/>
+<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1311,140,1447,166"/>
+<area shape="rect" href="tiles_entity_2wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1306,190,1453,217"/>
+<area shape="rect" href="player_8c.html#a3adff23aec4ff9cdf14e365c8ef60eb4" title=" " alt="" coords="507,494,685,521"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1093,216,1244,242"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="908,216,1031,242"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="905,317,1033,344"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="893,266,1045,293"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="733,292,845,318"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="541,304,651,330"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="289,310,456,337"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="123,342,223,369"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,418,60,445"/>
+<area shape="rect" href="main_menu_8c.html#a662a60d31691d89025bc498c6bffaab0" title=" " alt="" coords="287,494,459,521"/>
+<area shape="rect" href="main_menu_8c.html#ade3e30a23c5edf2f0d3f239d1c010b43" title=" " alt="" coords="289,444,457,470"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,444,239,470"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae6819740180def325e96797c282287a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6819740180def325e96797c282287a6">&#9670;&nbsp;</a></span>freeAnimation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void freeAnimation </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>object</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="animation_8c_source.html#l00047">47</a> of file <a class="el" href="animation_8c_source.html">animation.c</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="animation_8c_ae6819740180def325e96797c282287a6_icgraph.png" border="0" usemap="#aanimation_8c_ae6819740180def325e96797c282287a6_icgraph" alt=""/></div>
+<map name="aanimation_8c_ae6819740180def325e96797c282287a6_icgraph" id="aanimation_8c_ae6819740180def325e96797c282287a6_icgraph">
+<area shape="rect" title=" " alt="" coords="1923,347,2037,373"/>
+<area shape="rect" href="animation_8c.html#a898f3e487ffd9a824e2fa2a11c03a093" title="Initialise un contrôleur d&#39;animations." alt="" coords="1700,347,1875,373"/>
+<area shape="rect" href="player_8c.html#a81ad3e4fcd0e3686c7076cb022b61129" title="Crée un nouveau joueur." alt="" coords="737,107,841,133"/>
+<area shape="rect" href="enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="1319,397,1439,424"/>
+<area shape="rect" href="tiles_entity_8c.html#aab887fa625ebafb48717f3a50359f61a" title="Initialise les propriétés de base d&#39;une entité de tuile." alt="" coords="1515,195,1652,221"/>
+<area shape="rect" href="tiles_8c.html#a3db0e74a557bf693010a787414fb2c84" title="Charge une carte depuis un fichier." alt="" coords="1129,245,1208,272"/>
+<area shape="rect" href="player_8c.html#a3adff23aec4ff9cdf14e365c8ef60eb4" title=" " alt="" coords="507,397,685,424"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,296,60,323"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1103,296,1234,323"/>
+<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1118,397,1219,424"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1119,448,1219,475"/>
+<area shape="rect" href="mobs_2wizard_8c.html#a9cf3a13d8474f8728fd4aaf80458a51b" title="Crée et initialise un sorcier." alt="" coords="1115,347,1223,373"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="908,271,1031,297"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="733,271,845,297"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="541,271,651,297"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="289,271,456,297"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="123,271,223,297"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="905,333,1033,360"/>
+<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1309,296,1449,323"/>
+<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1292,43,1467,69"/>
+<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1310,93,1449,120"/>
+<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1298,144,1461,171"/>
+<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1311,195,1447,221"/>
+<area shape="rect" href="tiles_entity_2wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1306,245,1453,272"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1093,195,1244,221"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="893,220,1045,247"/>
+<area shape="rect" href="main_menu_8c.html#a662a60d31691d89025bc498c6bffaab0" title=" " alt="" coords="287,372,459,399"/>
+<area shape="rect" href="main_menu_8c.html#ade3e30a23c5edf2f0d3f239d1c010b43" title=" " alt="" coords="289,321,457,348"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,321,239,348"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6d9d79f7c88ff57d79aa88a7193f00f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d9d79f7c88ff57d79aa88a7193f00f2">&#9670;&nbsp;</a></span>freeAnimationController()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void freeAnimationController </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structt__animation_controller.html">t_animationController</a> *&#160;</td>
+          <td class="paramname"><em>controller</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="animation_8c_source.html#l00117">117</a> of file <a class="el" href="animation_8c_source.html">animation.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="animation_8c_a6d9d79f7c88ff57d79aa88a7193f00f2_cgraph.png" border="0" usemap="#aanimation_8c_a6d9d79f7c88ff57d79aa88a7193f00f2_cgraph" alt=""/></div>
+<map name="aanimation_8c_a6d9d79f7c88ff57d79aa88a7193f00f2_cgraph" id="aanimation_8c_a6d9d79f7c88ff57d79aa88a7193f00f2_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,184,32"/>
+<area shape="rect" href="object_manager_8c.html#aa17aa9d46c431f4b91114108468b73f3" title="Libere toute la memoire du gestionnaire et ses objets." alt="" coords="232,5,379,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="animation_8c_a6d9d79f7c88ff57d79aa88a7193f00f2_icgraph.png" border="0" usemap="#aanimation_8c_a6d9d79f7c88ff57d79aa88a7193f00f2_icgraph" alt=""/></div>
+<map name="aanimation_8c_a6d9d79f7c88ff57d79aa88a7193f00f2_icgraph" id="aanimation_8c_a6d9d79f7c88ff57d79aa88a7193f00f2_icgraph">
+<area shape="rect" title=" " alt="" coords="733,56,912,83"/>
+<area shape="rect" href="player_8c.html#a3adff23aec4ff9cdf14e365c8ef60eb4" title=" " alt="" coords="507,56,685,83"/>
+<area shape="rect" href="main_menu_8c.html#a662a60d31691d89025bc498c6bffaab0" title=" " alt="" coords="287,5,459,32"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,81,60,108"/>
+<area shape="rect" href="main_menu_8c.html#ade3e30a23c5edf2f0d3f239d1c010b43" title=" " alt="" coords="289,56,457,83"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,56,239,83"/>
 </map>
 </div>
 
@@ -314,7 +440,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointeur vers l'animation active ou NULL </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="animation_8c_source.html#l00089">89</a> of file <a class="el" href="animation_8c_source.html">animation.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="animation_8c_source.html#l00107">107</a> of file <a class="el" href="animation_8c_source.html">animation.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -329,42 +455,43 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="animation_8c_a369848a8494a151c4d5d75f6f60e61e6_icgraph.png" border="0" usemap="#aanimation_8c_a369848a8494a151c4d5d75f6f60e61e6_icgraph" alt=""/></div>
 <map name="aanimation_8c_a369848a8494a151c4d5d75f6f60e61e6_icgraph" id="aanimation_8c_a369848a8494a151c4d5d75f6f60e61e6_icgraph">
-<area shape="rect" title="Récupère l&#39;animation active." alt="" coords="1819,311,1977,337"/>
-<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="1654,285,1757,312"/>
-<area shape="rect" href="animation_8c.html#a7a4a59eeb481bdda4aea72f49acbb153" title="Met à jour l&#39;animation active." alt="" coords="1640,336,1771,363"/>
-<area shape="rect" href="barrel_8c.html#a14b30fc367591d33581261cf7a4f7a1d" title="Affiche le baril et ses effets de particules." alt="" coords="1472,209,1575,236"/>
-<area shape="rect" href="blacksmith_8c.html#afab43d4f6e89f6e6520be193bd0cf725" title="Affiche le forgeron et son interface." alt="" coords="1455,260,1592,287"/>
-<area shape="rect" href="boss__slime_8c.html#a29432ff6afd8bf8895d14675c4f822c3" title=" " alt="" coords="1457,412,1589,439"/>
-<area shape="rect" href="chest_8c.html#a3604f35f8ea76d7d2e23225a8302ea10" title="Affiche le coffre et son interface." alt="" coords="1473,311,1574,337"/>
-<area shape="rect" href="enemy_8c.html#a3152517f6464ffba178ae9c2ba7be98b" title="Affiche un ennemi à l&#39;écran." alt="" coords="1469,463,1578,489"/>
-<area shape="rect" href="ghost_8c.html#a025653a8fad002e720cff4348a09567f" title=" " alt="" coords="1472,564,1575,591"/>
-<area shape="rect" href="tiles_8c.html#a5a47b36ec2d30e30479aea0d4fd0698a" title="Affiche une grille de tuiles." alt="" coords="1274,7,1365,33"/>
-<area shape="rect" href="merchant_8c.html#ae41f37048288f6c61f3e29874c4b18a6" title="Affiche le marchand et son interface." alt="" coords="1461,57,1586,84"/>
-<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1471,361,1576,388"/>
-<area shape="rect" href="slime_8c.html#a5b55d202d77ccbbf84941a31d49d8e1a" title=" " alt="" coords="1473,513,1574,540"/>
-<area shape="rect" href="spike_8c.html#a6198e9c03fa7efac06bf0dee490f1993" title="Affiche le piège à pointes." alt="" coords="1474,108,1573,135"/>
-<area shape="rect" href="wizard_8c.html#a6d17b4d5016ebdb7a44e44396403fc89" title="Affiche le sorcier et son interface." alt="" coords="1469,159,1578,185"/>
-<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1249,209,1389,236"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1027,285,1177,312"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,336,957,363"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,387,960,413"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,285,972,312"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,336,772,363"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,336,612,363"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,336,453,363"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,336,239,363"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,336,60,363"/>
-<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1232,260,1407,287"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1037,387,1167,413"/>
-<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1250,311,1389,337"/>
-<area shape="rect" href="enemy_8c.html#ae8b9c9cabe6fb5d0fb9eee9f92d1e1a9" title="Wrapper pour le rendu d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="1020,437,1184,464"/>
-<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1051,564,1153,591"/>
-<area shape="rect" href="commun_8c.html#aa3de3a6f246b611ffa81f4f52cb12ff7" title="Wrapper pour le rendu de la grille de debug." alt="" coords="1029,235,1175,261"/>
-<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1238,57,1401,84"/>
-<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="1022,336,1182,363"/>
-<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1052,513,1152,540"/>
-<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1251,108,1387,135"/>
-<area shape="rect" href="wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1246,159,1393,185"/>
+<area shape="rect" title="Récupère l&#39;animation active." alt="" coords="1788,309,1947,336"/>
+<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="1623,284,1726,311"/>
+<area shape="rect" href="animation_8c.html#a7a4a59eeb481bdda4aea72f49acbb153" title="Met à jour l&#39;animation active." alt="" coords="1609,335,1740,361"/>
+<area shape="rect" href="barrel_8c.html#a14b30fc367591d33581261cf7a4f7a1d" title="Affiche le baril et ses effets de particules." alt="" coords="1441,309,1544,336"/>
+<area shape="rect" href="blacksmith_8c.html#afab43d4f6e89f6e6520be193bd0cf725" title="Affiche le forgeron et son interface." alt="" coords="1424,360,1561,387"/>
+<area shape="rect" href="boss__slime_8c.html#a29432ff6afd8bf8895d14675c4f822c3" title=" " alt="" coords="1427,5,1559,32"/>
+<area shape="rect" href="chest_8c.html#a3604f35f8ea76d7d2e23225a8302ea10" title="Affiche le coffre et son interface." alt="" coords="1442,411,1543,437"/>
+<area shape="rect" href="enemy_8c.html#a3152517f6464ffba178ae9c2ba7be98b" title="Affiche un ennemi à l&#39;écran." alt="" coords="1438,107,1547,133"/>
+<area shape="rect" href="ghost_8c.html#a025653a8fad002e720cff4348a09567f" title=" " alt="" coords="1441,601,1544,628"/>
+<area shape="rect" href="tiles_8c.html#a5a47b36ec2d30e30479aea0d4fd0698a" title="Affiche une grille de tuiles." alt="" coords="1243,157,1334,184"/>
+<area shape="rect" href="merchant_8c.html#ae41f37048288f6c61f3e29874c4b18a6" title="Affiche le marchand et son interface." alt="" coords="1430,208,1555,235"/>
+<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1440,56,1545,83"/>
+<area shape="rect" href="slime_8c.html#a5b55d202d77ccbbf84941a31d49d8e1a" title=" " alt="" coords="1442,525,1543,552"/>
+<area shape="rect" href="spike_8c.html#a6198e9c03fa7efac06bf0dee490f1993" title="Affiche le piège à pointes." alt="" coords="1443,259,1542,285"/>
+<area shape="rect" href="tiles_entity_2wizard_8c.html#a6d17b4d5016ebdb7a44e44396403fc89" title="Affiche le sorcier et son interface." alt="" coords="1438,461,1547,488"/>
+<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1219,309,1359,336"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="996,309,1147,336"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,208,927,235"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,309,929,336"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,259,941,285"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,259,741,285"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,259,581,285"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,259,423,285"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,259,208,285"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,259,60,285"/>
+<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1201,360,1376,387"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1006,56,1137,83"/>
+<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1219,411,1358,437"/>
+<area shape="rect" href="enemy_8c.html#ae8b9c9cabe6fb5d0fb9eee9f92d1e1a9" title="Wrapper pour le rendu d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="989,208,1153,235"/>
+<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1021,593,1122,620"/>
+<area shape="rect" href="commun_8c.html#aa3de3a6f246b611ffa81f4f52cb12ff7" title="Wrapper pour le rendu de la grille de debug." alt="" coords="998,259,1145,285"/>
+<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1207,208,1370,235"/>
+<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="991,157,1151,184"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1021,467,1121,493"/>
+<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1221,259,1357,285"/>
+<area shape="rect" href="mobs_2wizard_8c.html#a9cf3a13d8474f8728fd4aaf80458a51b" title="Crée et initialise un sorcier." alt="" coords="1017,379,1125,405"/>
+<area shape="rect" href="tiles_entity_2wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1215,461,1362,488"/>
 </map>
 </div>
 
@@ -388,16 +515,17 @@ Here is the caller graph for this function:</div>
 <p>Initialise un contrôleur d'animations. </p>
 <dl class="section return"><dt>Returns</dt><dd>Pointeur vers le contrôleur créé </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="animation_8c_source.html#l00047">47</a> of file <a class="el" href="animation_8c_source.html">animation.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="animation_8c_source.html#l00065">65</a> of file <a class="el" href="animation_8c_source.html">animation.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="animation_8c_a898f3e487ffd9a824e2fa2a11c03a093_cgraph.png" border="0" usemap="#aanimation_8c_a898f3e487ffd9a824e2fa2a11c03a093_cgraph" alt=""/></div>
 <map name="aanimation_8c_a898f3e487ffd9a824e2fa2a11c03a093_cgraph" id="aanimation_8c_a898f3e487ffd9a824e2fa2a11c03a093_cgraph">
-<area shape="rect" title="Initialise un contrôleur d&#39;animations." alt="" coords="5,56,180,83"/>
+<area shape="rect" title="Initialise un contrôleur d&#39;animations." alt="" coords="5,81,180,108"/>
 <area shape="rect" href="object_manager_8c.html#acc0212baea8ea823c7a51b9722c53a8b" title="Initialise un registre de types." alt="" coords="228,5,375,32"/>
-<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="230,56,373,83"/>
-<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="250,107,353,133"/>
+<area shape="rect" href="animation_8c.html#ae6819740180def325e96797c282287a6" title=" " alt="" coords="244,56,359,83"/>
+<area shape="rect" href="object_manager_8c.html#a23e66daef97e93e6873108dd50e97f83" title="Initialise un nouveau gestionnaire de memoire." alt="" coords="230,107,373,133"/>
+<area shape="rect" href="object_manager_8c.html#a2aa55325cfca978689146f3fc4479062" title="Enregistre un nouveau type dans le registre." alt="" coords="250,157,353,184"/>
 </map>
 </div>
 <div class="dynheader">
@@ -405,29 +533,34 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="animation_8c_a898f3e487ffd9a824e2fa2a11c03a093_icgraph.png" border="0" usemap="#aanimation_8c_a898f3e487ffd9a824e2fa2a11c03a093_icgraph" alt=""/></div>
 <map name="aanimation_8c_a898f3e487ffd9a824e2fa2a11c03a093_icgraph" id="aanimation_8c_a898f3e487ffd9a824e2fa2a11c03a093_icgraph">
-<area shape="rect" title="Initialise un contrôleur d&#39;animations." alt="" coords="1627,280,1801,307"/>
-<area shape="rect" href="player_8c.html#a25a5b9b1991ba50388e6c3b0eab41d6c" title="Crée un nouveau joueur." alt="" coords="664,5,768,32"/>
-<area shape="rect" href="enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="1246,407,1366,433"/>
-<area shape="rect" href="tiles_entity_8c.html#aab887fa625ebafb48717f3a50359f61a" title="Initialise les propriétés de base d&#39;une entité de tuile." alt="" coords="1441,204,1579,231"/>
-<area shape="rect" href="tiles_8c.html#a3db0e74a557bf693010a787414fb2c84" title="Charge une carte depuis un fichier." alt="" coords="1056,255,1135,281"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,49,60,76"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1030,305,1161,332"/>
-<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1045,356,1146,383"/>
-<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1045,407,1145,433"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,255,957,281"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,252,772,279"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,151,612,177"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,100,453,127"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,75,239,101"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,305,960,332"/>
-<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1236,305,1376,332"/>
-<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1219,52,1393,79"/>
-<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1237,103,1375,129"/>
-<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1225,153,1387,180"/>
-<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1238,204,1374,231"/>
-<area shape="rect" href="wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1233,255,1379,281"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1020,204,1171,231"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,204,972,231"/>
+<area shape="rect" title="Initialise un contrôleur d&#39;animations." alt="" coords="1700,347,1875,373"/>
+<area shape="rect" href="player_8c.html#a81ad3e4fcd0e3686c7076cb022b61129" title="Crée un nouveau joueur." alt="" coords="737,107,841,133"/>
+<area shape="rect" href="enemy_8c.html#ae9a6941e9e9f049928d9eaa130a8305a" title="Initialise les propriétés de base d&#39;un ennemi." alt="" coords="1319,397,1439,424"/>
+<area shape="rect" href="tiles_entity_8c.html#aab887fa625ebafb48717f3a50359f61a" title="Initialise les propriétés de base d&#39;une entité de tuile." alt="" coords="1515,195,1652,221"/>
+<area shape="rect" href="tiles_8c.html#a3db0e74a557bf693010a787414fb2c84" title="Charge une carte depuis un fichier." alt="" coords="1129,245,1208,272"/>
+<area shape="rect" href="player_8c.html#a3adff23aec4ff9cdf14e365c8ef60eb4" title=" " alt="" coords="507,397,685,424"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,296,60,323"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1103,296,1234,323"/>
+<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1118,397,1219,424"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1119,448,1219,475"/>
+<area shape="rect" href="mobs_2wizard_8c.html#a9cf3a13d8474f8728fd4aaf80458a51b" title="Crée et initialise un sorcier." alt="" coords="1115,347,1223,373"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="908,271,1031,297"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="733,271,845,297"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="541,271,651,297"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="289,271,456,297"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="123,271,223,297"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="905,333,1033,360"/>
+<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1309,296,1449,323"/>
+<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1292,43,1467,69"/>
+<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1310,93,1449,120"/>
+<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1298,144,1461,171"/>
+<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1311,195,1447,221"/>
+<area shape="rect" href="tiles_entity_2wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1306,245,1453,272"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1093,195,1244,221"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="893,220,1045,247"/>
+<area shape="rect" href="main_menu_8c.html#a662a60d31691d89025bc498c6bffaab0" title=" " alt="" coords="287,372,459,399"/>
+<area shape="rect" href="main_menu_8c.html#ade3e30a23c5edf2f0d3f239d1c010b43" title=" " alt="" coords="289,321,457,348"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,321,239,348"/>
 </map>
 </div>
 
@@ -468,7 +601,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="animation_8c_source.html#l00065">65</a> of file <a class="el" href="animation_8c_source.html">animation.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="animation_8c_source.html#l00083">83</a> of file <a class="el" href="animation_8c_source.html">animation.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -486,39 +619,45 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="animation_8c_a558f44850e43c0e5f4673279e0e58611_icgraph.png" border="0" usemap="#aanimation_8c_a558f44850e43c0e5f4673279e0e58611_icgraph" alt=""/></div>
 <map name="aanimation_8c_a558f44850e43c0e5f4673279e0e58611_icgraph" id="aanimation_8c_a558f44850e43c0e5f4673279e0e58611_icgraph">
-<area shape="rect" title="Change l&#39;animation active." alt="" coords="1745,496,1855,523"/>
-<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1263,395,1437,422"/>
-<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1281,446,1419,472"/>
-<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1067,59,1168,86"/>
-<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1269,236,1431,263"/>
-<area shape="rect" href="player_8c.html#a25a5b9b1991ba50388e6c3b0eab41d6c" title="Crée un nouveau joueur." alt="" coords="664,928,768,955"/>
-<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1282,294,1418,320"/>
-<area shape="rect" href="wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1277,344,1423,371"/>
-<area shape="rect" href="boss__slime_8c.html#a69ec37228f33716636b841a2e0b801e6" title=" " alt="" coords="1487,750,1695,792"/>
-<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1283,699,1417,726"/>
-<area shape="rect" href="boss__slime_8c.html#a34934ad2cfefc6f7727719ddaffa6d5a" title=" " alt="" coords="1485,816,1697,843"/>
-<area shape="rect" href="boss__slime_8c.html#a54688fe2dfac8aaa4a5d2b4164cde160" title=" " alt="" coords="1514,867,1669,894"/>
-<area shape="rect" href="boss__slime_8c.html#ab62e052c9f0b507029ffc0ddde6e8410" title=" " alt="" coords="1508,918,1675,944"/>
-<area shape="rect" href="boss__slime_8c.html#a40b528cc711a2722b90ac87337648161" title=" " alt="" coords="1515,547,1668,574"/>
-<area shape="rect" href="slime_8c.html#a9dba0db999d3dd30de3b4c5e1bfa72ad" title=" " alt="" coords="1529,91,1653,118"/>
-<area shape="rect" href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f" title="Traite les entrées utilisateur pour le joueur." alt="" coords="1280,160,1420,187"/>
-<area shape="rect" href="boss__slime_8c.html#ae5041c65c23c41b5bfe6fdcb6cb735b9" title=" " alt="" coords="1510,598,1673,624"/>
-<area shape="rect" href="boss__slime_8c.html#ab5e6e01341858afe461d30b51e710eb8" title=" " alt="" coords="1511,648,1672,675"/>
-<area shape="rect" href="chest_8c.html#a1a123992315c67f40cd6b50322b319fd" title="Met à jour l&#39;état et le comportement du coffre." alt="" coords="1539,446,1643,472"/>
-<area shape="rect" href="spike_8c.html#a797af6559aa4443cd399e4fa810613c4" title="Met à jour l&#39;état et le comportement du piège à pointes." alt="" coords="1540,294,1643,320"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1042,326,1193,352"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,363,957,390"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,262,960,288"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,312,972,339"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,338,772,364"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,422,612,448"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,464,453,491"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,486,239,512"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,642,60,668"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1052,388,1183,415"/>
-<area shape="rect" href="slime_8c.html#acba619e9a41f0f5d6a3e728db9aea2c3" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="1298,98,1402,124"/>
-<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1067,146,1167,172"/>
-<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="1020,268,1215,295"/>
+<area shape="rect" title="Change l&#39;animation active." alt="" coords="1819,520,1928,546"/>
+<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1336,418,1511,445"/>
+<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1354,469,1493,496"/>
+<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1140,69,1241,96"/>
+<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1342,317,1505,344"/>
+<area shape="rect" href="player_8c.html#a81ad3e4fcd0e3686c7076cb022b61129" title="Crée un nouveau joueur." alt="" coords="737,149,841,176"/>
+<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1355,266,1491,293"/>
+<area shape="rect" href="tiles_entity_2wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1350,368,1497,394"/>
+<area shape="rect" href="boss__slime_8c.html#a69ec37228f33716636b841a2e0b801e6" title=" " alt="" coords="1561,672,1769,714"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1356,789,1491,816"/>
+<area shape="rect" href="boss__slime_8c.html#a34934ad2cfefc6f7727719ddaffa6d5a" title=" " alt="" coords="1559,789,1771,816"/>
+<area shape="rect" href="boss__slime_8c.html#a54688fe2dfac8aaa4a5d2b4164cde160" title=" " alt="" coords="1587,840,1742,866"/>
+<area shape="rect" href="boss__slime_8c.html#ab62e052c9f0b507029ffc0ddde6e8410" title=" " alt="" coords="1581,890,1748,917"/>
+<area shape="rect" href="boss__slime_8c.html#a40b528cc711a2722b90ac87337648161" title=" " alt="" coords="1588,941,1741,968"/>
+<area shape="rect" href="slime_8c.html#a9dba0db999d3dd30de3b4c5e1bfa72ad" title=" " alt="" coords="1603,165,1727,192"/>
+<area shape="rect" href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f" title="Traite les entrées utilisateur pour le joueur." alt="" coords="1353,545,1493,572"/>
+<area shape="rect" href="boss__slime_8c.html#ae5041c65c23c41b5bfe6fdcb6cb735b9" title=" " alt="" coords="1583,992,1746,1018"/>
+<area shape="rect" href="boss__slime_8c.html#ab5e6e01341858afe461d30b51e710eb8" title=" " alt="" coords="1584,621,1745,648"/>
+<area shape="rect" href="player_8c.html#a3adff23aec4ff9cdf14e365c8ef60eb4" title=" " alt="" coords="507,478,685,505"/>
+<area shape="rect" href="chest_8c.html#a1a123992315c67f40cd6b50322b319fd" title="Met à jour l&#39;état et le comportement du coffre." alt="" coords="1613,520,1717,546"/>
+<area shape="rect" href="spike_8c.html#a797af6559aa4443cd399e4fa810613c4" title="Met à jour l&#39;état et le comportement du piège à pointes." alt="" coords="1613,266,1716,293"/>
+<area shape="rect" href="mobs_2wizard_8c.html#adae3f134659eb198ec882f031084dacf" title=" " alt="" coords="1590,114,1739,141"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1115,352,1266,378"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="908,402,1031,429"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="905,238,1033,265"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="893,352,1045,378"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="733,352,845,378"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="541,352,651,378"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="289,352,456,378"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="123,352,223,378"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,377,60,404"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1125,613,1256,640"/>
+<area shape="rect" href="slime_8c.html#acba619e9a41f0f5d6a3e728db9aea2c3" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="1371,190,1475,217"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1141,222,1241,249"/>
+<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="1093,402,1288,429"/>
+<area shape="rect" href="main_menu_8c.html#a662a60d31691d89025bc498c6bffaab0" title=" " alt="" coords="287,453,459,480"/>
+<area shape="rect" href="main_menu_8c.html#ade3e30a23c5edf2f0d3f239d1c010b43" title=" " alt="" coords="289,402,457,429"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,402,239,429"/>
+<area shape="rect" href="mobs_2wizard_8c.html#a9cf3a13d8474f8728fd4aaf80458a51b" title="Crée et initialise un sorcier." alt="" coords="1137,149,1245,176"/>
 </map>
 </div>
 
@@ -563,41 +702,47 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="animation_8c_af2676318d90db45ea3dc16410c517cbd_icgraph.png" border="0" usemap="#aanimation_8c_af2676318d90db45ea3dc16410c517cbd_icgraph" alt=""/></div>
 <map name="aanimation_8c_af2676318d90db45ea3dc16410c517cbd_icgraph" id="aanimation_8c_af2676318d90db45ea3dc16410c517cbd_icgraph">
-<area shape="rect" title="Démarre une animation." alt="" coords="1903,762,2021,789"/>
-<area shape="rect" href="hud_8c.html#ab5c94b35150b778d85c8033a513e5ace" title="Crée une nouvelle instance du HUD." alt="" coords="1071,443,1164,470"/>
-<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="1745,501,1855,527"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,443,957,470"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,342,960,369"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,393,972,419"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,383,772,410"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,231,612,258"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,155,453,182"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,118,239,145"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,93,60,119"/>
-<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1263,473,1437,499"/>
-<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1281,222,1419,249"/>
-<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1067,234,1168,261"/>
-<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1269,279,1431,306"/>
-<area shape="rect" href="player_8c.html#a25a5b9b1991ba50388e6c3b0eab41d6c" title="Crée un nouveau joueur." alt="" coords="664,34,768,61"/>
-<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1282,342,1418,369"/>
-<area shape="rect" href="wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1277,418,1423,445"/>
-<area shape="rect" href="boss__slime_8c.html#a69ec37228f33716636b841a2e0b801e6" title=" " alt="" coords="1487,729,1695,771"/>
-<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1283,737,1417,763"/>
-<area shape="rect" href="boss__slime_8c.html#a34934ad2cfefc6f7727719ddaffa6d5a" title=" " alt="" coords="1485,795,1697,822"/>
-<area shape="rect" href="boss__slime_8c.html#a54688fe2dfac8aaa4a5d2b4164cde160" title=" " alt="" coords="1514,846,1669,873"/>
-<area shape="rect" href="boss__slime_8c.html#ab62e052c9f0b507029ffc0ddde6e8410" title=" " alt="" coords="1508,897,1675,923"/>
-<area shape="rect" href="boss__slime_8c.html#a40b528cc711a2722b90ac87337648161" title=" " alt="" coords="1515,947,1668,974"/>
-<area shape="rect" href="slime_8c.html#a9dba0db999d3dd30de3b4c5e1bfa72ad" title=" " alt="" coords="1529,70,1653,97"/>
-<area shape="rect" href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f" title="Traite les entrées utilisateur pour le joueur." alt="" coords="1280,525,1420,551"/>
-<area shape="rect" href="boss__slime_8c.html#ae5041c65c23c41b5bfe6fdcb6cb735b9" title=" " alt="" coords="1510,577,1673,603"/>
-<area shape="rect" href="boss__slime_8c.html#ab5e6e01341858afe461d30b51e710eb8" title=" " alt="" coords="1511,627,1672,654"/>
-<area shape="rect" href="chest_8c.html#a1a123992315c67f40cd6b50322b319fd" title="Met à jour l&#39;état et le comportement du coffre." alt="" coords="1539,222,1643,249"/>
-<area shape="rect" href="spike_8c.html#a797af6559aa4443cd399e4fa810613c4" title="Met à jour l&#39;état et le comportement du piège à pointes." alt="" coords="1540,374,1643,401"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1042,342,1193,369"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1052,625,1183,651"/>
-<area shape="rect" href="slime_8c.html#acba619e9a41f0f5d6a3e728db9aea2c3" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="1298,70,1402,97"/>
-<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1067,107,1167,134"/>
-<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="1020,393,1215,419"/>
+<area shape="rect" title="Démarre une animation." alt="" coords="1976,792,2095,819"/>
+<area shape="rect" href="hud_8c.html#ab5c94b35150b778d85c8033a513e5ace" title="Crée une nouvelle instance du HUD." alt="" coords="1144,871,1237,898"/>
+<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="1819,564,1928,591"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="908,770,1031,796"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="905,871,1033,898"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="893,820,1045,847"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="733,795,845,822"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="541,664,651,691"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="289,403,456,430"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="123,286,223,312"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,92,60,119"/>
+<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1336,742,1511,768"/>
+<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1354,792,1493,819"/>
+<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1140,1076,1241,1103"/>
+<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1342,564,1505,591"/>
+<area shape="rect" href="player_8c.html#a81ad3e4fcd0e3686c7076cb022b61129" title="Crée un nouveau joueur." alt="" coords="737,16,841,43"/>
+<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1355,640,1491,667"/>
+<area shape="rect" href="tiles_entity_2wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1350,691,1497,718"/>
+<area shape="rect" href="boss__slime_8c.html#a69ec37228f33716636b841a2e0b801e6" title=" " alt="" coords="1561,372,1769,413"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="1356,320,1491,347"/>
+<area shape="rect" href="boss__slime_8c.html#a34934ad2cfefc6f7727719ddaffa6d5a" title=" " alt="" coords="1559,438,1771,464"/>
+<area shape="rect" href="boss__slime_8c.html#a54688fe2dfac8aaa4a5d2b4164cde160" title=" " alt="" coords="1587,488,1742,515"/>
+<area shape="rect" href="boss__slime_8c.html#ab62e052c9f0b507029ffc0ddde6e8410" title=" " alt="" coords="1581,118,1748,144"/>
+<area shape="rect" href="boss__slime_8c.html#a40b528cc711a2722b90ac87337648161" title=" " alt="" coords="1588,168,1741,195"/>
+<area shape="rect" href="slime_8c.html#a9dba0db999d3dd30de3b4c5e1bfa72ad" title=" " alt="" coords="1603,944,1727,971"/>
+<area shape="rect" href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f" title="Traite les entrées utilisateur pour le joueur." alt="" coords="1353,855,1493,882"/>
+<area shape="rect" href="boss__slime_8c.html#ae5041c65c23c41b5bfe6fdcb6cb735b9" title=" " alt="" coords="1583,219,1746,246"/>
+<area shape="rect" href="boss__slime_8c.html#ab5e6e01341858afe461d30b51e710eb8" title=" " alt="" coords="1584,270,1745,296"/>
+<area shape="rect" href="player_8c.html#a3adff23aec4ff9cdf14e365c8ef60eb4" title=" " alt="" coords="507,92,685,119"/>
+<area shape="rect" href="chest_8c.html#a1a123992315c67f40cd6b50322b319fd" title="Met à jour l&#39;état et le comportement du coffre." alt="" coords="1613,843,1717,870"/>
+<area shape="rect" href="spike_8c.html#a797af6559aa4443cd399e4fa810613c4" title="Met à jour l&#39;état et le comportement du piège à pointes." alt="" coords="1613,640,1716,667"/>
+<area shape="rect" href="mobs_2wizard_8c.html#adae3f134659eb198ec882f031084dacf" title=" " alt="" coords="1590,1046,1739,1072"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1115,760,1266,787"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1125,515,1256,542"/>
+<area shape="rect" href="slime_8c.html#acba619e9a41f0f5d6a3e728db9aea2c3" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="1371,931,1475,958"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1141,927,1241,954"/>
+<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="1093,820,1288,847"/>
+<area shape="rect" href="main_menu_8c.html#a662a60d31691d89025bc498c6bffaab0" title=" " alt="" coords="287,118,459,144"/>
+<area shape="rect" href="main_menu_8c.html#ade3e30a23c5edf2f0d3f239d1c010b43" title=" " alt="" coords="289,168,457,195"/>
+<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,118,239,144"/>
+<area shape="rect" href="mobs_2wizard_8c.html#a9cf3a13d8474f8728fd4aaf80458a51b" title="Crée et initialise un sorcier." alt="" coords="1137,994,1245,1020"/>
 </map>
 </div>
 
@@ -633,56 +778,56 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="animation_8c_a02019ad4265cc54a504cfe1444592053_icgraph.png" border="0" usemap="#aanimation_8c_a02019ad4265cc54a504cfe1444592053_icgraph" alt=""/></div>
 <map name="aanimation_8c_a02019ad4265cc54a504cfe1444592053_icgraph" id="aanimation_8c_a02019ad4265cc54a504cfe1444592053_icgraph">
-<area shape="rect" title="Arrête une animation." alt="" coords="1452,1161,1569,1188"/>
-<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="1101,528,1211,555"/>
-<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="1269,1187,1404,1213"/>
-<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="608,908,783,935"/>
-<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="626,680,765,707"/>
-<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="645,1491,746,1517"/>
-<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="614,1009,777,1036"/>
-<area shape="rect" href="player_8c.html#a25a5b9b1991ba50388e6c3b0eab41d6c" title="Crée un nouveau joueur." alt="" coords="885,477,989,504"/>
-<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="627,781,763,808"/>
-<area shape="rect" href="wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="622,959,769,985"/>
-<area shape="rect" href="boss__slime_8c.html#a69ec37228f33716636b841a2e0b801e6" title=" " alt="" coords="833,310,1041,351"/>
-<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="628,208,763,235"/>
-<area shape="rect" href="boss__slime_8c.html#a34934ad2cfefc6f7727719ddaffa6d5a" title=" " alt="" coords="831,5,1043,32"/>
-<area shape="rect" href="boss__slime_8c.html#a54688fe2dfac8aaa4a5d2b4164cde160" title=" " alt="" coords="859,56,1014,83"/>
-<area shape="rect" href="boss__slime_8c.html#ab62e052c9f0b507029ffc0ddde6e8410" title=" " alt="" coords="853,107,1020,133"/>
-<area shape="rect" href="boss__slime_8c.html#a40b528cc711a2722b90ac87337648161" title=" " alt="" coords="860,157,1013,184"/>
-<area shape="rect" href="slime_8c.html#a9dba0db999d3dd30de3b4c5e1bfa72ad" title=" " alt="" coords="875,1085,999,1112"/>
-<area shape="rect" href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f" title="Traite les entrées utilisateur pour le joueur." alt="" coords="625,427,765,453"/>
-<area shape="rect" href="boss__slime_8c.html#ae5041c65c23c41b5bfe6fdcb6cb735b9" title=" " alt="" coords="855,208,1018,235"/>
-<area shape="rect" href="boss__slime_8c.html#ab5e6e01341858afe461d30b51e710eb8" title=" " alt="" coords="856,259,1017,285"/>
-<area shape="rect" href="chest_8c.html#a1a123992315c67f40cd6b50322b319fd" title="Met à jour l&#39;état et le comportement du coffre." alt="" coords="885,629,989,656"/>
-<area shape="rect" href="spike_8c.html#a797af6559aa4443cd399e4fa810613c4" title="Met à jour l&#39;état et le comportement du piège à pointes." alt="" coords="885,680,988,707"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="387,1009,538,1036"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="180,1009,303,1036"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="177,1111,305,1137"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="165,1060,317,1087"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="5,1060,117,1087"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="668,477,723,504"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="397,528,528,555"/>
-<area shape="rect" href="slime_8c.html#acba619e9a41f0f5d6a3e728db9aea2c3" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="643,1161,747,1188"/>
-<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="413,1136,513,1163"/>
-<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="365,959,560,985"/>
-<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="1105,1212,1207,1239"/>
-<area shape="rect" href="animation_8c.html#a7a4a59eeb481bdda4aea72f49acbb153" title="Met à jour l&#39;animation active." alt="" coords="1091,1161,1221,1188"/>
-<area shape="rect" href="hud_8c.html#a4d7fc060909e74a660fe1171b257f406" title="Met à jour les informations du HUD." alt="" coords="1107,1415,1205,1441"/>
-<area shape="rect" href="barrel_8c.html#a14b30fc367591d33581261cf7a4f7a1d" title="Affiche le baril et ses effets de particules." alt="" coords="885,1339,988,1365"/>
-<area shape="rect" href="blacksmith_8c.html#afab43d4f6e89f6e6520be193bd0cf725" title="Affiche le forgeron et son interface." alt="" coords="868,1035,1005,1061"/>
-<area shape="rect" href="boss__slime_8c.html#a29432ff6afd8bf8895d14675c4f822c3" title=" " alt="" coords="629,528,761,555"/>
-<area shape="rect" href="chest_8c.html#a3604f35f8ea76d7d2e23225a8302ea10" title="Affiche le coffre et son interface." alt="" coords="886,731,987,757"/>
-<area shape="rect" href="enemy_8c.html#a3152517f6464ffba178ae9c2ba7be98b" title="Affiche un ennemi à l&#39;écran." alt="" coords="641,1111,750,1137"/>
-<area shape="rect" href="ghost_8c.html#a025653a8fad002e720cff4348a09567f" title=" " alt="" coords="885,1541,988,1568"/>
-<area shape="rect" href="tiles_8c.html#a5a47b36ec2d30e30479aea0d4fd0698a" title="Affiche une grille de tuiles." alt="" coords="891,1136,982,1163"/>
-<area shape="rect" href="merchant_8c.html#ae41f37048288f6c61f3e29874c4b18a6" title="Affiche le marchand et son interface." alt="" coords="874,1288,999,1315"/>
-<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="884,1187,989,1213"/>
-<area shape="rect" href="slime_8c.html#a5b55d202d77ccbbf84941a31d49d8e1a" title=" " alt="" coords="645,1364,746,1391"/>
-<area shape="rect" href="spike_8c.html#a6198e9c03fa7efac06bf0dee490f1993" title="Affiche le piège à pointes." alt="" coords="887,984,986,1011"/>
-<area shape="rect" href="wizard_8c.html#a6d17b4d5016ebdb7a44e44396403fc89" title="Affiche le sorcier et son interface." alt="" coords="882,1237,991,1264"/>
-<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="625,1060,765,1087"/>
-<area shape="rect" href="enemy_8c.html#ae8b9c9cabe6fb5d0fb9eee9f92d1e1a9" title="Wrapper pour le rendu d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="381,1085,545,1112"/>
-<area shape="rect" href="hud_8c.html#a18e3dbaca14748eb34c6b4249c3570b3" title="Wrapper pour mettre à jour le HUD (compatible avec fonctionManager)" alt="" coords="387,1187,539,1213"/>
+<area shape="rect" title="Arrête une animation." alt="" coords="1268,1288,1385,1315"/>
+<area shape="rect" href="animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="917,554,1027,580"/>
+<area shape="rect" href="animation_8c.html#a3ee5636cb3b7f475322966e14f97e27e" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="1085,1314,1220,1340"/>
+<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="424,1028,599,1055"/>
+<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="442,839,581,866"/>
+<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="461,1339,562,1366"/>
+<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="430,978,593,1004"/>
+<area shape="rect" href="player_8c.html#a81ad3e4fcd0e3686c7076cb022b61129" title="Crée un nouveau joueur." alt="" coords="701,427,805,454"/>
+<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="443,915,579,942"/>
+<area shape="rect" href="tiles_entity_2wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="438,1136,585,1163"/>
+<area shape="rect" href="boss__slime_8c.html#a69ec37228f33716636b841a2e0b801e6" title=" " alt="" coords="649,57,857,98"/>
+<area shape="rect" href="boss__slime_8c.html#aeba34d9ac36546820051b77f67ca7606" title="Met à jour l&#39;état et le comportement du boss slime." alt="" coords="444,224,579,251"/>
+<area shape="rect" href="boss__slime_8c.html#a34934ad2cfefc6f7727719ddaffa6d5a" title=" " alt="" coords="647,123,859,150"/>
+<area shape="rect" href="boss__slime_8c.html#a54688fe2dfac8aaa4a5d2b4164cde160" title=" " alt="" coords="675,174,830,200"/>
+<area shape="rect" href="boss__slime_8c.html#ab62e052c9f0b507029ffc0ddde6e8410" title=" " alt="" coords="669,224,836,251"/>
+<area shape="rect" href="boss__slime_8c.html#a40b528cc711a2722b90ac87337648161" title=" " alt="" coords="676,275,829,302"/>
+<area shape="rect" href="slime_8c.html#a9dba0db999d3dd30de3b4c5e1bfa72ad" title=" " alt="" coords="691,528,815,555"/>
+<area shape="rect" href="player_8c.html#ad58c8df82ef4cd3b925aa17cd808b28f" title="Traite les entrées utilisateur pour le joueur." alt="" coords="441,604,581,631"/>
+<area shape="rect" href="boss__slime_8c.html#ae5041c65c23c41b5bfe6fdcb6cb735b9" title=" " alt="" coords="671,326,834,352"/>
+<area shape="rect" href="boss__slime_8c.html#ab5e6e01341858afe461d30b51e710eb8" title=" " alt="" coords="672,376,833,403"/>
+<area shape="rect" href="player_8c.html#a3adff23aec4ff9cdf14e365c8ef60eb4" title=" " alt="" coords="663,478,842,504"/>
+<area shape="rect" href="chest_8c.html#a1a123992315c67f40cd6b50322b319fd" title="Met à jour l&#39;état et le comportement du coffre." alt="" coords="701,731,805,758"/>
+<area shape="rect" href="spike_8c.html#a797af6559aa4443cd399e4fa810613c4" title="Met à jour l&#39;état et le comportement du piège à pointes." alt="" coords="701,782,804,808"/>
+<area shape="rect" href="mobs_2wizard_8c.html#adae3f134659eb198ec882f031084dacf" title=" " alt="" coords="678,1187,827,1214"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="203,1003,354,1030"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="8,1000,131,1027"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="5,1058,133,1084"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="484,402,539,428"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="213,655,344,682"/>
+<area shape="rect" href="slime_8c.html#acba619e9a41f0f5d6a3e728db9aea2c3" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="459,554,563,580"/>
+<area shape="rect" href="commun_8c.html#a292ed0e58e991bb313bde8ec68676f7b" title="Wrapper pour la gestion des entrées joueur." alt="" coords="181,952,376,979"/>
+<area shape="rect" href="main_menu_8c.html#a662a60d31691d89025bc498c6bffaab0" title=" " alt="" coords="425,503,597,530"/>
+<area shape="rect" href="main_menu_8c.html#ade3e30a23c5edf2f0d3f239d1c010b43" title=" " alt="" coords="427,452,595,479"/>
+<area shape="rect" href="mobs_2wizard_8c.html#a9cf3a13d8474f8728fd4aaf80458a51b" title="Crée et initialise un sorcier." alt="" coords="457,1187,565,1214"/>
+<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="921,1339,1023,1366"/>
+<area shape="rect" href="animation_8c.html#a7a4a59eeb481bdda4aea72f49acbb153" title="Met à jour l&#39;animation active." alt="" coords="907,1288,1037,1315"/>
+<area shape="rect" href="hud_8c.html#a4d7fc060909e74a660fe1171b257f406" title="Met à jour les informations du HUD." alt="" coords="923,1516,1021,1543"/>
+<area shape="rect" href="barrel_8c.html#a14b30fc367591d33581261cf7a4f7a1d" title="Affiche le baril et ses effets de particules." alt="" coords="701,1491,804,1518"/>
+<area shape="rect" href="blacksmith_8c.html#afab43d4f6e89f6e6520be193bd0cf725" title="Affiche le forgeron et son interface." alt="" coords="684,1238,821,1264"/>
+<area shape="rect" href="boss__slime_8c.html#a29432ff6afd8bf8895d14675c4f822c3" title=" " alt="" coords="445,655,577,682"/>
+<area shape="rect" href="chest_8c.html#a3604f35f8ea76d7d2e23225a8302ea10" title="Affiche le coffre et son interface." alt="" coords="702,883,803,910"/>
+<area shape="rect" href="enemy_8c.html#a3152517f6464ffba178ae9c2ba7be98b" title="Affiche un ennemi à l&#39;écran." alt="" coords="698,1542,807,1568"/>
+<area shape="rect" href="ghost_8c.html#a025653a8fad002e720cff4348a09567f" title=" " alt="" coords="701,1643,804,1670"/>
+<area shape="rect" href="tiles_8c.html#a5a47b36ec2d30e30479aea0d4fd0698a" title="Affiche une grille de tuiles." alt="" coords="707,1390,798,1416"/>
+<area shape="rect" href="merchant_8c.html#ae41f37048288f6c61f3e29874c4b18a6" title="Affiche le marchand et son interface." alt="" coords="690,1086,815,1112"/>
+<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="700,1440,805,1467"/>
+<area shape="rect" href="slime_8c.html#a5b55d202d77ccbbf84941a31d49d8e1a" title=" " alt="" coords="702,1592,803,1619"/>
+<area shape="rect" href="spike_8c.html#a6198e9c03fa7efac06bf0dee490f1993" title="Affiche le piège à pointes." alt="" coords="703,1035,802,1062"/>
+<area shape="rect" href="tiles_entity_2wizard_8c.html#a6d17b4d5016ebdb7a44e44396403fc89" title="Affiche le sorcier et son interface." alt="" coords="698,1288,807,1315"/>
+<area shape="rect" href="hud_8c.html#a18e3dbaca14748eb34c6b4249c3570b3" title="Wrapper pour mettre à jour le HUD (compatible avec fonctionManager)" alt="" coords="203,1058,355,1084"/>
 </map>
 </div>
 
@@ -729,44 +874,45 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="animation_8c_a3ee5636cb3b7f475322966e14f97e27e_icgraph.png" border="0" usemap="#aanimation_8c_a3ee5636cb3b7f475322966e14f97e27e_icgraph" alt=""/></div>
 <map name="aanimation_8c_a3ee5636cb3b7f475322966e14f97e27e_icgraph" id="aanimation_8c_a3ee5636cb3b7f475322966e14f97e27e_icgraph">
-<area shape="rect" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="1819,487,1953,513"/>
-<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="1654,309,1757,336"/>
-<area shape="rect" href="animation_8c.html#a7a4a59eeb481bdda4aea72f49acbb153" title="Met à jour l&#39;animation active." alt="" coords="1640,537,1771,564"/>
-<area shape="rect" href="hud_8c.html#a4d7fc060909e74a660fe1171b257f406" title="Met à jour les informations du HUD." alt="" coords="1657,487,1754,513"/>
-<area shape="rect" href="barrel_8c.html#a14b30fc367591d33581261cf7a4f7a1d" title="Affiche le baril et ses effets de particules." alt="" coords="1472,461,1575,488"/>
-<area shape="rect" href="blacksmith_8c.html#afab43d4f6e89f6e6520be193bd0cf725" title="Affiche le forgeron et son interface." alt="" coords="1455,208,1592,235"/>
-<area shape="rect" href="boss__slime_8c.html#a29432ff6afd8bf8895d14675c4f822c3" title=" " alt="" coords="1457,157,1589,184"/>
-<area shape="rect" href="chest_8c.html#a3604f35f8ea76d7d2e23225a8302ea10" title="Affiche le coffre et son interface." alt="" coords="1473,259,1574,285"/>
-<area shape="rect" href="enemy_8c.html#a3152517f6464ffba178ae9c2ba7be98b" title="Affiche un ennemi à l&#39;écran." alt="" coords="1469,107,1578,133"/>
-<area shape="rect" href="ghost_8c.html#a025653a8fad002e720cff4348a09567f" title=" " alt="" coords="1472,56,1575,83"/>
-<area shape="rect" href="tiles_8c.html#a5a47b36ec2d30e30479aea0d4fd0698a" title="Affiche une grille de tuiles." alt="" coords="1274,512,1365,539"/>
-<area shape="rect" href="merchant_8c.html#ae41f37048288f6c61f3e29874c4b18a6" title="Affiche le marchand et son interface." alt="" coords="1461,309,1586,336"/>
-<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1471,563,1576,589"/>
-<area shape="rect" href="slime_8c.html#a5b55d202d77ccbbf84941a31d49d8e1a" title=" " alt="" coords="1473,5,1574,32"/>
-<area shape="rect" href="spike_8c.html#a6198e9c03fa7efac06bf0dee490f1993" title="Affiche le piège à pointes." alt="" coords="1474,360,1573,387"/>
-<area shape="rect" href="wizard_8c.html#a6d17b4d5016ebdb7a44e44396403fc89" title="Affiche le sorcier et son interface." alt="" coords="1469,411,1578,437"/>
-<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1249,461,1389,488"/>
-<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="1027,309,1177,336"/>
-<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="835,360,957,387"/>
-<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="832,309,960,336"/>
-<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="820,411,972,437"/>
-<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="660,360,772,387"/>
-<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="501,360,612,387"/>
-<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="287,360,453,387"/>
-<area shape="rect" href="main_menu_8c.html#ab061a1172135786f5c980328c2128e75" title="Crée et initialise le menu principal." alt="" coords="108,360,239,387"/>
-<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,360,60,387"/>
-<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1232,208,1407,235"/>
-<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1037,259,1167,285"/>
-<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1250,259,1389,285"/>
-<area shape="rect" href="enemy_8c.html#ae8b9c9cabe6fb5d0fb9eee9f92d1e1a9" title="Wrapper pour le rendu d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="1020,208,1184,235"/>
-<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1051,107,1153,133"/>
-<area shape="rect" href="commun_8c.html#aa3de3a6f246b611ffa81f4f52cb12ff7" title="Wrapper pour le rendu de la grille de debug." alt="" coords="1029,360,1175,387"/>
-<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1238,309,1401,336"/>
-<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="1022,411,1182,437"/>
-<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1052,31,1152,57"/>
-<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1251,360,1387,387"/>
-<area shape="rect" href="wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1246,411,1393,437"/>
-<area shape="rect" href="hud_8c.html#a18e3dbaca14748eb34c6b4249c3570b3" title="Wrapper pour mettre à jour le HUD (compatible avec fonctionManager)" alt="" coords="1026,461,1178,488"/>
+<area shape="rect" title="Met à jour l&#39;état d&#39;une animation (passe à la frame suivante si nécessaire)" alt="" coords="1788,455,1923,481"/>
+<area shape="rect" href="entity_8c.html#a064827d9879b14f9b529edd8612ffdc8" title="Affiche une entité à l&#39;écran." alt="" coords="1623,353,1726,380"/>
+<area shape="rect" href="animation_8c.html#a7a4a59eeb481bdda4aea72f49acbb153" title="Met à jour l&#39;animation active." alt="" coords="1609,455,1740,481"/>
+<area shape="rect" href="hud_8c.html#a4d7fc060909e74a660fe1171b257f406" title="Met à jour les informations du HUD." alt="" coords="1626,607,1723,633"/>
+<area shape="rect" href="barrel_8c.html#a14b30fc367591d33581261cf7a4f7a1d" title="Affiche le baril et ses effets de particules." alt="" coords="1441,404,1544,431"/>
+<area shape="rect" href="blacksmith_8c.html#afab43d4f6e89f6e6520be193bd0cf725" title="Affiche le forgeron et son interface." alt="" coords="1424,455,1561,481"/>
+<area shape="rect" href="boss__slime_8c.html#a29432ff6afd8bf8895d14675c4f822c3" title=" " alt="" coords="1427,201,1559,228"/>
+<area shape="rect" href="chest_8c.html#a3604f35f8ea76d7d2e23225a8302ea10" title="Affiche le coffre et son interface." alt="" coords="1442,303,1543,329"/>
+<area shape="rect" href="enemy_8c.html#a3152517f6464ffba178ae9c2ba7be98b" title="Affiche un ennemi à l&#39;écran." alt="" coords="1438,125,1547,152"/>
+<area shape="rect" href="ghost_8c.html#a025653a8fad002e720cff4348a09567f" title=" " alt="" coords="1441,63,1544,89"/>
+<area shape="rect" href="tiles_8c.html#a5a47b36ec2d30e30479aea0d4fd0698a" title="Affiche une grille de tuiles." alt="" coords="1243,556,1334,583"/>
+<area shape="rect" href="merchant_8c.html#ae41f37048288f6c61f3e29874c4b18a6" title="Affiche le marchand et son interface." alt="" coords="1430,505,1555,532"/>
+<area shape="rect" href="player_8c.html#a62de1cb2bc9e363cfa8a9ace8c9c612a" title="Affiche le joueur à l&#39;écran." alt="" coords="1440,607,1545,633"/>
+<area shape="rect" href="slime_8c.html#a5b55d202d77ccbbf84941a31d49d8e1a" title=" " alt="" coords="1442,5,1543,32"/>
+<area shape="rect" href="spike_8c.html#a6198e9c03fa7efac06bf0dee490f1993" title="Affiche le piège à pointes." alt="" coords="1443,353,1542,380"/>
+<area shape="rect" href="tiles_entity_2wizard_8c.html#a6d17b4d5016ebdb7a44e44396403fc89" title="Affiche le sorcier et son interface." alt="" coords="1438,252,1547,279"/>
+<area shape="rect" href="barrel_8c.html#ab869ddb8a5343a5384f21b6c1004b55a" title="Crée une nouvelle entité baril." alt="" coords="1219,404,1359,431"/>
+<area shape="rect" href="tiles_entity_8c.html#a61fcc618f7f4d06801b6145f5e19ecb7" title="Traite les tuiles spéciales d&#39;une grille." alt="" coords="996,328,1147,355"/>
+<area shape="rect" href="main_world_8c.html#a5af69ec6bbe844df7067691ce04d8605" title="Crée une carte de boss." alt="" coords="804,353,927,380"/>
+<area shape="rect" href="main_world_8c.html#aaa26b897de5b502695ac80372c7c102f" title="Crée le monde principal du jeu." alt="" coords="801,303,929,329"/>
+<area shape="rect" href="main_world_8c.html#a4ee501030b3411bfd8216ce665b34520" title="Crée une carte de marchand." alt="" coords="789,404,941,431"/>
+<area shape="rect" href="main_world_8c.html#a2627330ed1bd5b9f63512f6e77812f20" title=" " alt="" coords="629,353,741,380"/>
+<area shape="rect" href="main_world_8c.html#ac7fc26c7f4cf2c13c3ab508715993ec6" title="Crée un niveau complet." alt="" coords="471,353,581,380"/>
+<area shape="rect" href="main_world_8c.html#ab2a044b94ae940beca7966898071cc03" title="Wrapper pour la création de niveau (utilisation avec fonctionManager)" alt="" coords="256,353,423,380"/>
+<area shape="rect" href="main_menu_8c.html#a363c8e9903129c82f287c7dc477651e8" title=" " alt="" coords="108,353,208,380"/>
+<area shape="rect" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,353,60,380"/>
+<area shape="rect" href="blacksmith_8c.html#abacc1529332b556609060ccd2b26abe3" title="Crée une nouvelle entité forgeron." alt="" coords="1201,455,1376,481"/>
+<area shape="rect" href="boss__slime_8c.html#afa7fc5b4ed8d914bfb5622f23692946e" title="Crée un nouveau boss slime." alt="" coords="1223,201,1354,228"/>
+<area shape="rect" href="chest_8c.html#a63b515e342c2143027712fae41d94ade" title="Crée une nouvelle entité coffre." alt="" coords="1219,303,1358,329"/>
+<area shape="rect" href="enemy_8c.html#ae8b9c9cabe6fb5d0fb9eee9f92d1e1a9" title="Wrapper pour le rendu d&#39;ennemi (compatible avec fonctionManager)" alt="" coords="989,176,1153,203"/>
+<area shape="rect" href="ghost_8c.html#a3afebc41b56af20344e2113e2a2bc744" title="Crée un nouvel ennemi de type fantôme." alt="" coords="1021,88,1122,115"/>
+<area shape="rect" href="commun_8c.html#aa3de3a6f246b611ffa81f4f52cb12ff7" title="Wrapper pour le rendu de la grille de debug." alt="" coords="998,379,1145,405"/>
+<area shape="rect" href="merchant_8c.html#a53f83d4680e665775b78a9669092279a" title="Crée une nouvelle entité marchand." alt="" coords="1207,505,1370,532"/>
+<area shape="rect" href="commun_8c.html#aeeaad6c85aeeabd9a1aadb8b74670ba0" title="Wrapper pour le rendu du joueur." alt="" coords="991,429,1151,456"/>
+<area shape="rect" href="slime_8c.html#a914090229f0e8ffc9c36340e28ba0ba3" title="Crée un nouvel ennemi de type slime." alt="" coords="1021,19,1121,45"/>
+<area shape="rect" href="spike_8c.html#aabf75a7fe1fdc366920cbd7f87556464" title="Crée une nouvelle entité piège à pointes." alt="" coords="1221,353,1357,380"/>
+<area shape="rect" href="mobs_2wizard_8c.html#a9cf3a13d8474f8728fd4aaf80458a51b" title="Crée et initialise un sorcier." alt="" coords="1017,227,1125,253"/>
+<area shape="rect" href="tiles_entity_2wizard_8c.html#a90c244d8ccc91c4e369d4d755daad131" title="Crée une nouvelle entité sorcier." alt="" coords="1215,252,1362,279"/>
+<area shape="rect" href="hud_8c.html#a18e3dbaca14748eb34c6b4249c3570b3" title="Wrapper pour mettre à jour le HUD (compatible avec fonctionManager)" alt="" coords="995,480,1147,507"/>
 </map>
 </div>
 
@@ -796,7 +942,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="animation_8c_source.html#l00095">95</a> of file <a class="el" href="animation_8c_source.html">animation.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="animation_8c_source.html#l00113">113</a> of file <a class="el" href="animation_8c_source.html">animation.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -815,9 +961,13 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2052808828190f934b76e979ee65af8a.html">engine</a></li><li class="navelem"><a class="el" href="dir_76f303675696e9020041db9c1af5c4ff.html">entities</a></li><li class="navelem"><a class="el" href="dir_ba98abd8171b4a3dbca90a24706ac331.html">components</a></li><li class="navelem"><a class="el" href="dir_4cb84d1b63024f1abd9c85761b5454b4.html">animation</a></li><li class="navelem"><a class="el" href="animation_8c.html">animation.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

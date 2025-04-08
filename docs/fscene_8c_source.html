@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('fscene_8c_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">fscene.c</div>  </div>
@@ -191,211 +207,210 @@ $(function() {
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            }</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <span class="keywordflow">if</span> (salleDep &amp;&amp; strcmp(salleDep-&gt;<a class="code" href="structt__scene.html#a5ac083a645d964373f022d03df4849c8">name</a>, <span class="stringliteral">&quot;main&quot;</span>)) {</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                controller-&gt;<a class="code" href="structt__scene_controller.html#ad1a879e6185d787fb08d2b986219e9a2">lastMenu</a>-&gt;<a class="code" href="structt__history.html#aa6bf9e3fd5635c3c01c0bce0970ef8f8">historique</a>[++controller-&gt;<a class="code" href="structt__scene_controller.html#ad1a879e6185d787fb08d2b986219e9a2">lastMenu</a>-&gt;<a class="code" href="structt__history.html#a90fee7147e70e7a7f1356996b467899f">nb_Menu</a>] = (<a class="code" href="structt__scene.html">t_scene</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>, controller-&gt;<a class="code" href="structt__scene_controller.html#ab5d749becb5ee7c3493c35c1dbe4e9d5">currentScene</a>);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                printf(<span class="stringliteral">&quot;ajouter\n&quot;</span>);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            }</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keywordflow">if</span> (!strcmp(scene-&gt;<a class="code" href="structt__scene.html#a5ac083a645d964373f022d03df4849c8">name</a>, <span class="stringliteral">&quot;main&quot;</span>)) {</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                controller-&gt;<a class="code" href="structt__scene_controller.html#ad1a879e6185d787fb08d2b986219e9a2">lastMenu</a>-&gt;<a class="code" href="structt__history.html#a90fee7147e70e7a7f1356996b467899f">nb_Menu</a> = -1;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            }</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            controller-&gt;<a class="code" href="structt__scene_controller.html#ab5d749becb5ee7c3493c35c1dbe4e9d5">currentScene</a> = i;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <a class="code" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1">executeSceneFunctions</a>(scene, <a class="code" href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3ba6f9ee413ea25df3552ec467cf2f7e852">HANDLE_RESIZE</a>);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        }</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    }</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;}</div>
-<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="fscene_8c.html#a17f4d95603320ee5e898ff0f67f25e3a">  132</a></span>&#160;<a class="code" href="structt__scene.html">t_scene</a>* <a class="code" href="fscene_8c.html#a17f4d95603320ee5e898ff0f67f25e3a">GetSceneByName</a>(<a class="code" href="structt__scene_controller.html">t_sceneController</a>* controller, <span class="keywordtype">char</span>* name) {</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>-&gt;count; i++) {</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <a class="code" href="structt__scene.html">t_scene</a>* scene = (<a class="code" href="structt__scene.html">t_scene</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>, i);</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordflow">if</span> (strcmp(scene-&gt;<a class="code" href="structt__scene.html#a5ac083a645d964373f022d03df4849c8">name</a>, name) == 0) {</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keywordflow">return</span> scene;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    }</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordflow">return</span> NULL;  <span class="comment">// sinon ya un warning</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="fscene_8c.html#a203dc7420436877b66bbcc6e559483af">  142</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="fscene_8c.html#a203dc7420436877b66bbcc6e559483af">indiceByscene</a>(<a class="code" href="structt__scene_controller.html">t_sceneController</a>* controller, <a class="code" href="structt__scene.html">t_scene</a>* scene) {</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>-&gt;count; i++) {</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>, i) == scene) {</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <span class="keywordflow">return</span> i;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        }</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    }</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;}</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="fscene_8c.html#a8d96eeeaa02433587861a66a7cc8b24f">  151</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="fscene_8c.html#a8d96eeeaa02433587861a66a7cc8b24f">getPrevuisScene</a>(<a class="code" href="structt__scene_controller.html">t_sceneController</a>* controller) {</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    controller-&gt;<a class="code" href="structt__scene_controller.html#ab5d749becb5ee7c3493c35c1dbe4e9d5">currentScene</a> = <a class="code" href="fscene_8c.html#a203dc7420436877b66bbcc6e559483af">indiceByscene</a>(controller, controller-&gt;<a class="code" href="structt__scene_controller.html#a82732129fbf528166c02577c695a58aa">lastMap</a>);</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <a class="code" href="structt__scene.html">t_scene</a>* scene = (<a class="code" href="structt__scene.html">t_scene</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>, controller-&gt;<a class="code" href="structt__scene_controller.html#ab5d749becb5ee7c3493c35c1dbe4e9d5">currentScene</a>);</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <a class="code" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1">executeSceneFunctions</a>(scene, <a class="code" href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3ba6f9ee413ea25df3552ec467cf2f7e852">HANDLE_RESIZE</a>);</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;}</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00157"></a><span class="lineno"><a class="line" href="fscene_8c.html#a5a7ba8ae4552319c04444654620c392e">  157</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="fscene_8c.html#a5a7ba8ae4552319c04444654620c392e">getPrevuisMenu</a>(<a class="code" href="structt__scene_controller.html">t_sceneController</a>* controller) {</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    printf(<span class="stringliteral">&quot;retour en arrière&quot;</span>);</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordflow">if</span> (controller-&gt;<a class="code" href="structt__scene_controller.html#ad1a879e6185d787fb08d2b986219e9a2">lastMenu</a>-&gt;<a class="code" href="structt__history.html#a90fee7147e70e7a7f1356996b467899f">nb_Menu</a> &gt;= 0) {</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        controller-&gt;<a class="code" href="structt__scene_controller.html#ab5d749becb5ee7c3493c35c1dbe4e9d5">currentScene</a> = <a class="code" href="fscene_8c.html#a203dc7420436877b66bbcc6e559483af">indiceByscene</a>(controller, controller-&gt;<a class="code" href="structt__scene_controller.html#ad1a879e6185d787fb08d2b986219e9a2">lastMenu</a>-&gt;<a class="code" href="structt__history.html#aa6bf9e3fd5635c3c01c0bce0970ef8f8">historique</a>[controller-&gt;<a class="code" href="structt__scene_controller.html#ad1a879e6185d787fb08d2b986219e9a2">lastMenu</a>-&gt;<a class="code" href="structt__history.html#a90fee7147e70e7a7f1356996b467899f">nb_Menu</a>]);</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        controller-&gt;<a class="code" href="structt__scene_controller.html#ad1a879e6185d787fb08d2b986219e9a2">lastMenu</a>-&gt;<a class="code" href="structt__history.html#a90fee7147e70e7a7f1356996b467899f">nb_Menu</a>--;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    }</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <a class="code" href="structt__scene.html">t_scene</a>* scene = (<a class="code" href="structt__scene.html">t_scene</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>, controller-&gt;<a class="code" href="structt__scene_controller.html#ab5d749becb5ee7c3493c35c1dbe4e9d5">currentScene</a>);</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <a class="code" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1">executeSceneFunctions</a>(scene, <a class="code" href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3ba6f9ee413ea25df3552ec467cf2f7e852">HANDLE_RESIZE</a>);</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;}</div>
-<div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="fscene_8c.html#a30e466cad04c05ed83227c9f7f99bb29">  166</a></span>&#160;<a class="code" href="structt__scene.html">t_scene</a>* <a class="code" href="fscene_8c.html#a30e466cad04c05ed83227c9f7f99bb29">getCurrentScene</a>(<a class="code" href="structt__scene_controller.html">t_sceneController</a>* controller) {</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <a class="code" href="structt__scene.html">t_scene</a>* scene = (<a class="code" href="structt__scene.html">t_scene</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>, controller-&gt;<a class="code" href="structt__scene_controller.html#ab5d749becb5ee7c3493c35c1dbe4e9d5">currentScene</a>);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <a class="code" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1">executeSceneFunctions</a>(scene, <a class="code" href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3ba6f9ee413ea25df3552ec467cf2f7e852">HANDLE_RESIZE</a>);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordflow">return</span> scene;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;}</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="fscene_8c.html#aaf87e3d204392bd39aa8e399744406eb">  172</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="fscene_8c.html#aaf87e3d204392bd39aa8e399744406eb">freeSceneByName</a>(<a class="code" href="structt__scene_controller.html">t_sceneController</a>** controller, <span class="keywordtype">char</span>* name) {</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">if</span> (controller == NULL || (*controller) == NULL) {</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        printf(<span class="stringliteral">&quot;errur&quot;</span>);</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        exit(EXIT_FAILURE);</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    }</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (*controller)-&gt;scene-&gt;count; i++) {</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <a class="code" href="structt__scene.html">t_scene</a>* scene = (<a class="code" href="structt__scene.html">t_scene</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>((*controller)-&gt;scene, i);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="keywordflow">if</span> (scene &amp;&amp; strcmp(scene-&gt;<a class="code" href="structt__scene.html#a5ac083a645d964373f022d03df4849c8">name</a>, name) == 0) {</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            <span class="comment">// Supprime proprement la scène</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            printf(<span class="stringliteral">&quot;supprimer\n&quot;</span>);</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;            <a class="code" href="object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9">deleteObject</a>((*controller)-&gt;scene, i);</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            <span class="comment">// Réajuste l&#39;index courant si nécessaire</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            <span class="keywordflow">if</span> ((*controller)-&gt;currentScene &gt;= i) {</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                (*controller)-&gt;currentScene--;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            }</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        }</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    }</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;}</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="fscene_8c.html#ad44392d8a60c751117238d056dafa456">  193</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="fscene_8c.html#ad44392d8a60c751117238d056dafa456">freeSceneController</a>(<a class="code" href="structt__scene_controller.html">t_sceneController</a>** controller) {</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keywordflow">if</span> (!controller || !*controller) <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="comment">// Parcours récursif pour libérer toutes les ressources</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <a class="code" href="object_manager_8c.html#aa17aa9d46c431f4b91114108468b73f3">freeObjectManager</a>((*controller)-&gt;scene);</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordflow">if</span> ((*controller)-&gt;lastMenu) {</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        free((*controller)-&gt;lastMenu-&gt;historique);</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        free((*controller)-&gt;lastMenu);</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    }</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    *controller = NULL;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;}</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
-<div class="line"><a name="l00205"></a><span class="lineno"><a class="line" href="fscene_8c.html#a8be677f8994885ab5fa62328e5e580da">  205</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="fscene_8c.html#a8be677f8994885ab5fa62328e5e580da">findObjectIndex</a>(<a class="code" href="structt__object_manager.html">t_objectManager</a>* manager, <span class="keywordtype">void</span>* <span class="keywordtype">object</span>) {</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; manager-&gt;count; i++) {</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(manager, i) == <span class="keywordtype">object</span>) {</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            <span class="keywordflow">return</span> i;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        }</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    }</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keywordflow">return</span> -1;  <span class="comment">// Objet non trouvé</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;}</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
-<div class="line"><a name="l00214"></a><span class="lineno"><a class="line" href="fscene_8c.html#a9f300e274afec9ccfe738afd10f7e01d">  214</a></span>&#160;<span class="keywordtype">void</span>* <a class="code" href="fscene_8c.html#a9f300e274afec9ccfe738afd10f7e01d">sceneAddObject</a>(<a class="code" href="structt__scene.html">t_scene</a>* scene, <span class="keywordtype">void</span>* <span class="keywordtype">object</span>, uint8_t typeId) {</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keywordflow">if</span> (!scene || !<span class="keywordtype">object</span>) <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="comment">// Ajouter l&#39;objet au gestionnaire d&#39;objets</span></div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <a class="code" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86">addObject</a>(scene-&gt;<a class="code" href="structt__scene.html#ab23b2dc587711bef90e8bcdca4bfbb0c">objectManager</a>, <span class="keywordtype">object</span>, typeId);</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keywordflow">return</span> object;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;}</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
-<div class="line"><a name="l00223"></a><span class="lineno"><a class="line" href="fscene_8c.html#a7656ed7499653162fa7c9f48d67f4034">  223</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="fscene_8c.html#a7656ed7499653162fa7c9f48d67f4034">registerFunctionForObject</a>(<a class="code" href="structt__scene.html">t_scene</a>* scene, <span class="keywordtype">void</span>* <span class="keywordtype">object</span>, uint8_t typeId,</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                               <a class="code" href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3b">t_fonctionType</a> funcType, <span class="keywordtype">void</span> (*fonct)(<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>*),</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                               <span class="keywordtype">int</span> indexObj, ...) {</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keywordflow">if</span> (!scene || !<span class="keywordtype">object</span>) <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    va_list args;</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    va_start(args, indexObj);</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    va_list count_args;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    va_copy(count_args, args);</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keywordtype">int</span> param_count = 0;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keywordflow">while</span> (va_arg(count_args, <span class="keywordtype">void</span>*) != NULL) param_count++;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    va_end(count_args);</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keywordtype">void</span>** params = malloc(param_count * <span class="keyword">sizeof</span>(<span class="keywordtype">void</span>*));</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; param_count; i++) {</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        params[i] = va_arg(args, <span class="keywordtype">void</span>*);</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    }</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    va_end(args);</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordtype">void</span>** final_params;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="comment">// Construire le tableau de paramètres finaux</span></div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    final_params = malloc((param_count + 1) * <span class="keyword">sizeof</span>(<span class="keywordtype">void</span>*));</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; indexObj; j++) {</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        final_params[j] = params[j];</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    }</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    final_params[indexObj] = object;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = indexObj; j &lt; param_count; j++) {</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        final_params[j + 1] = params[j];</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    }</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="comment">// Créer et ajouter la fonction</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <a class="code" href="structt__fonction_param.html">t_fonctionParam</a>* sf = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>));</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    sf-&gt;fonction = fonct;</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    sf-&gt;param = final_params;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    sf-&gt;nb_param = param_count + 1;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    scene-&gt;<a class="code" href="structt__scene.html#a46b4105d6febb20b4a15849dabd10427">fonctions</a>[funcType] = realloc(scene-&gt;<a class="code" href="structt__scene.html#a46b4105d6febb20b4a15849dabd10427">fonctions</a>[funcType],</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                                         (scene-&gt;<a class="code" href="structt__scene.html#ad5351c002d4c73225bb9e12fb53a99da">nbFonctions</a>[funcType] + 1) * <span class="keyword">sizeof</span>(<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>*));</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    scene-&gt;<a class="code" href="structt__scene.html#a46b4105d6febb20b4a15849dabd10427">fonctions</a>[funcType][scene-&gt;<a class="code" href="structt__scene.html#ad5351c002d4c73225bb9e12fb53a99da">nbFonctions</a>[funcType]++] = sf;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    free(params);</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;}</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
-<div class="line"><a name="l00267"></a><span class="lineno"><a class="line" href="fscene_8c.html#afd15beab139da97e2891821e59f2bb02">  267</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="fscene_8c.html#afd15beab139da97e2891821e59f2bb02">sceneRemoveObject</a>(<a class="code" href="structt__scene.html">t_scene</a>* scene, <span class="keywordtype">void</span>* <span class="keywordtype">object</span>) {</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordflow">if</span> (!scene || !<span class="keywordtype">object</span>) <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="comment">// Trouver l&#39;index de l&#39;objet</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="keywordtype">int</span> objectIndex = <a class="code" href="fscene_8c.html#a8be677f8994885ab5fa62328e5e580da">findObjectIndex</a>(scene-&gt;<a class="code" href="structt__scene.html#ab23b2dc587711bef90e8bcdca4bfbb0c">objectManager</a>, <span class="keywordtype">object</span>);</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keywordflow">if</span> (objectIndex &lt; 0) <span class="keywordflow">return</span>;  <span class="comment">// Objet non trouvé</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="comment">// Parcourir tous les types de fonctions pour supprimer celles liées à cet objet</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> funcType = 0; funcType &lt; <a class="code" href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3bad98976969ba364eb51f1ded025ed85e7">NUM_FONCTION</a>; funcType++) {</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; scene-&gt;<a class="code" href="structt__scene.html#ad5351c002d4c73225bb9e12fb53a99da">nbFonctions</a>[funcType]; i++) {</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            <a class="code" href="structt__fonction_param.html">t_fonctionParam</a>* func = scene-&gt;<a class="code" href="structt__scene.html#a46b4105d6febb20b4a15849dabd10427">fonctions</a>[funcType][i];</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <span class="comment">// Vérifier si cette fonction utilise l&#39;objet</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            SDL_bool containsObject = SDL_FALSE;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; func-&gt;nb_param; j++) {</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                <span class="keywordflow">if</span> (func-&gt;param[j] == <span class="keywordtype">object</span>) {</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                    containsObject = SDL_TRUE;</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                }</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;            }</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            <span class="keywordflow">if</span> (containsObject) {</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                <span class="comment">// Libérer cette fonction</span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                <a class="code" href="fonction_manager_8c.html#aa61a39c82b2044678dea685d75cdd8a9">freeFonction</a>(&amp;func);</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; </div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                <span class="comment">// Déplacer les fonctions restantes pour combler le trou</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = i; j &lt; scene-&gt;<a class="code" href="structt__scene.html#ad5351c002d4c73225bb9e12fb53a99da">nbFonctions</a>[funcType] - 1; j++) {</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                    scene-&gt;<a class="code" href="structt__scene.html#a46b4105d6febb20b4a15849dabd10427">fonctions</a>[funcType][j] = scene-&gt;<a class="code" href="structt__scene.html#a46b4105d6febb20b4a15849dabd10427">fonctions</a>[funcType][j + 1];</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                }</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                scene-&gt;<a class="code" href="structt__scene.html#ad5351c002d4c73225bb9e12fb53a99da">nbFonctions</a>[funcType]--;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                i--;  <span class="comment">// Ajuster l&#39;index pour ne pas sauter d&#39;élément</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            }</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        }</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    }</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="comment">// Supprimer l&#39;objet du gestionnaire d&#39;objets</span></div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <a class="code" href="object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9">deleteObject</a>(scene-&gt;<a class="code" href="structt__scene.html#ab23b2dc587711bef90e8bcdca4bfbb0c">objectManager</a>, objectIndex);</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;}</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            }</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            <span class="keywordflow">if</span> (!strcmp(scene-&gt;<a class="code" href="structt__scene.html#a5ac083a645d964373f022d03df4849c8">name</a>, <span class="stringliteral">&quot;main&quot;</span>)) {</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                controller-&gt;<a class="code" href="structt__scene_controller.html#ad1a879e6185d787fb08d2b986219e9a2">lastMenu</a>-&gt;<a class="code" href="structt__history.html#a90fee7147e70e7a7f1356996b467899f">nb_Menu</a> = -1;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            controller-&gt;<a class="code" href="structt__scene_controller.html#ab5d749becb5ee7c3493c35c1dbe4e9d5">currentScene</a> = i;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            <a class="code" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1">executeSceneFunctions</a>(scene, <a class="code" href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3ba6f9ee413ea25df3552ec467cf2f7e852">HANDLE_RESIZE</a>);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        }</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    }</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
+<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="fscene_8c.html#a17f4d95603320ee5e898ff0f67f25e3a">  131</a></span>&#160;<a class="code" href="structt__scene.html">t_scene</a>* <a class="code" href="fscene_8c.html#a17f4d95603320ee5e898ff0f67f25e3a">GetSceneByName</a>(<a class="code" href="structt__scene_controller.html">t_sceneController</a>* controller, <span class="keywordtype">char</span>* name) {</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>-&gt;count; i++) {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <a class="code" href="structt__scene.html">t_scene</a>* scene = (<a class="code" href="structt__scene.html">t_scene</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>, i);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordflow">if</span> (strcmp(scene-&gt;<a class="code" href="structt__scene.html#a5ac083a645d964373f022d03df4849c8">name</a>, name) == 0) {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            <span class="keywordflow">return</span> scene;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        }</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    }</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">return</span> NULL;  <span class="comment">// sinon ya un warning</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;}</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="fscene_8c.html#a203dc7420436877b66bbcc6e559483af">  141</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="fscene_8c.html#a203dc7420436877b66bbcc6e559483af">indiceByscene</a>(<a class="code" href="structt__scene_controller.html">t_sceneController</a>* controller, <a class="code" href="structt__scene.html">t_scene</a>* scene) {</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>-&gt;count; i++) {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>, i) == scene) {</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            <span class="keywordflow">return</span> i;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        }</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    }</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;}</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="fscene_8c.html#a8d96eeeaa02433587861a66a7cc8b24f">  150</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="fscene_8c.html#a8d96eeeaa02433587861a66a7cc8b24f">getPrevuisScene</a>(<a class="code" href="structt__scene_controller.html">t_sceneController</a>* controller) {</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    controller-&gt;<a class="code" href="structt__scene_controller.html#ab5d749becb5ee7c3493c35c1dbe4e9d5">currentScene</a> = <a class="code" href="fscene_8c.html#a203dc7420436877b66bbcc6e559483af">indiceByscene</a>(controller, controller-&gt;<a class="code" href="structt__scene_controller.html#a82732129fbf528166c02577c695a58aa">lastMap</a>);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <a class="code" href="structt__scene.html">t_scene</a>* scene = (<a class="code" href="structt__scene.html">t_scene</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>, controller-&gt;<a class="code" href="structt__scene_controller.html#ab5d749becb5ee7c3493c35c1dbe4e9d5">currentScene</a>);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <a class="code" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1">executeSceneFunctions</a>(scene, <a class="code" href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3ba6f9ee413ea25df3552ec467cf2f7e852">HANDLE_RESIZE</a>);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;}</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="fscene_8c.html#a5a7ba8ae4552319c04444654620c392e">  156</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="fscene_8c.html#a5a7ba8ae4552319c04444654620c392e">getPrevuisMenu</a>(<a class="code" href="structt__scene_controller.html">t_sceneController</a>* controller) {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    printf(<span class="stringliteral">&quot;retour en arrière&quot;</span>);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordflow">if</span> (controller-&gt;<a class="code" href="structt__scene_controller.html#ad1a879e6185d787fb08d2b986219e9a2">lastMenu</a>-&gt;<a class="code" href="structt__history.html#a90fee7147e70e7a7f1356996b467899f">nb_Menu</a> &gt;= 0) {</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        controller-&gt;<a class="code" href="structt__scene_controller.html#ab5d749becb5ee7c3493c35c1dbe4e9d5">currentScene</a> = <a class="code" href="fscene_8c.html#a203dc7420436877b66bbcc6e559483af">indiceByscene</a>(controller, controller-&gt;<a class="code" href="structt__scene_controller.html#ad1a879e6185d787fb08d2b986219e9a2">lastMenu</a>-&gt;<a class="code" href="structt__history.html#aa6bf9e3fd5635c3c01c0bce0970ef8f8">historique</a>[controller-&gt;<a class="code" href="structt__scene_controller.html#ad1a879e6185d787fb08d2b986219e9a2">lastMenu</a>-&gt;<a class="code" href="structt__history.html#a90fee7147e70e7a7f1356996b467899f">nb_Menu</a>]);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        controller-&gt;<a class="code" href="structt__scene_controller.html#ad1a879e6185d787fb08d2b986219e9a2">lastMenu</a>-&gt;<a class="code" href="structt__history.html#a90fee7147e70e7a7f1356996b467899f">nb_Menu</a>--;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    }</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <a class="code" href="structt__scene.html">t_scene</a>* scene = (<a class="code" href="structt__scene.html">t_scene</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>, controller-&gt;<a class="code" href="structt__scene_controller.html#ab5d749becb5ee7c3493c35c1dbe4e9d5">currentScene</a>);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <a class="code" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1">executeSceneFunctions</a>(scene, <a class="code" href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3ba6f9ee413ea25df3552ec467cf2f7e852">HANDLE_RESIZE</a>);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="fscene_8c.html#a30e466cad04c05ed83227c9f7f99bb29">  165</a></span>&#160;<a class="code" href="structt__scene.html">t_scene</a>* <a class="code" href="fscene_8c.html#a30e466cad04c05ed83227c9f7f99bb29">getCurrentScene</a>(<a class="code" href="structt__scene_controller.html">t_sceneController</a>* controller) {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <a class="code" href="structt__scene.html">t_scene</a>* scene = (<a class="code" href="structt__scene.html">t_scene</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(controller-&gt;<a class="code" href="structt__scene_controller.html#a22005c9db504a7ad994bde4761133d70">scene</a>, controller-&gt;<a class="code" href="structt__scene_controller.html#ab5d749becb5ee7c3493c35c1dbe4e9d5">currentScene</a>);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <a class="code" href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1">executeSceneFunctions</a>(scene, <a class="code" href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3ba6f9ee413ea25df3552ec467cf2f7e852">HANDLE_RESIZE</a>);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keywordflow">return</span> scene;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;}</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="fscene_8c.html#aaf87e3d204392bd39aa8e399744406eb">  171</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="fscene_8c.html#aaf87e3d204392bd39aa8e399744406eb">freeSceneByName</a>(<a class="code" href="structt__scene_controller.html">t_sceneController</a>** controller, <span class="keywordtype">char</span>* name) {</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordflow">if</span> (controller == NULL || (*controller) == NULL) {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        printf(<span class="stringliteral">&quot;errur&quot;</span>);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        exit(EXIT_FAILURE);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    }</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (*controller)-&gt;scene-&gt;count; i++) {</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <a class="code" href="structt__scene.html">t_scene</a>* scene = (<a class="code" href="structt__scene.html">t_scene</a>*)<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>((*controller)-&gt;scene, i);</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="keywordflow">if</span> (scene &amp;&amp; strcmp(scene-&gt;<a class="code" href="structt__scene.html#a5ac083a645d964373f022d03df4849c8">name</a>, name) == 0) {</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            <span class="comment">// Supprime proprement la scène</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            printf(<span class="stringliteral">&quot;supprimer\n&quot;</span>);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            <a class="code" href="object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9">deleteObject</a>((*controller)-&gt;scene, i);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            <span class="comment">// Réajuste l&#39;index courant si nécessaire</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            <span class="keywordflow">if</span> ((*controller)-&gt;currentScene &gt;= i) {</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                (*controller)-&gt;currentScene--;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            }</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        }</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    }</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;}</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno"><a class="line" href="fscene_8c.html#ad44392d8a60c751117238d056dafa456">  192</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="fscene_8c.html#ad44392d8a60c751117238d056dafa456">freeSceneController</a>(<a class="code" href="structt__scene_controller.html">t_sceneController</a>** controller) {</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordflow">if</span> (!controller || !*controller) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="comment">// Parcours récursif pour libérer toutes les ressources</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <a class="code" href="object_manager_8c.html#aa17aa9d46c431f4b91114108468b73f3">freeObjectManager</a>((*controller)-&gt;scene);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordflow">if</span> ((*controller)-&gt;lastMenu) {</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        free((*controller)-&gt;lastMenu-&gt;historique);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        free((*controller)-&gt;lastMenu);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    }</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    *controller = NULL;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;}</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno"><a class="line" href="fscene_8c.html#a8be677f8994885ab5fa62328e5e580da">  204</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="fscene_8c.html#a8be677f8994885ab5fa62328e5e580da">findObjectIndex</a>(<a class="code" href="structt__object_manager.html">t_objectManager</a>* manager, <span class="keywordtype">void</span>* <span class="keywordtype">object</span>) {</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; manager-&gt;count; i++) {</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115">getObject</a>(manager, i) == <span class="keywordtype">object</span>) {</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            <span class="keywordflow">return</span> i;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        }</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    }</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordflow">return</span> -1;  <span class="comment">// Objet non trouvé</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;}</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
+<div class="line"><a name="l00213"></a><span class="lineno"><a class="line" href="fscene_8c.html#a9f300e274afec9ccfe738afd10f7e01d">  213</a></span>&#160;<span class="keywordtype">void</span>* <a class="code" href="fscene_8c.html#a9f300e274afec9ccfe738afd10f7e01d">sceneAddObject</a>(<a class="code" href="structt__scene.html">t_scene</a>* scene, <span class="keywordtype">void</span>* <span class="keywordtype">object</span>, uint8_t typeId) {</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keywordflow">if</span> (!scene || !<span class="keywordtype">object</span>) <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="comment">// Ajouter l&#39;objet au gestionnaire d&#39;objets</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <a class="code" href="object_manager_8c.html#aa270514a28f6e518cde770b1ec098d86">addObject</a>(scene-&gt;<a class="code" href="structt__scene.html#ab23b2dc587711bef90e8bcdca4bfbb0c">objectManager</a>, <span class="keywordtype">object</span>, typeId);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keywordflow">return</span> object;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;}</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
+<div class="line"><a name="l00222"></a><span class="lineno"><a class="line" href="fscene_8c.html#a7656ed7499653162fa7c9f48d67f4034">  222</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="fscene_8c.html#a7656ed7499653162fa7c9f48d67f4034">registerFunctionForObject</a>(<a class="code" href="structt__scene.html">t_scene</a>* scene, <span class="keywordtype">void</span>* <span class="keywordtype">object</span>, uint8_t typeId,</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                               <a class="code" href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3b">t_fonctionType</a> funcType, <span class="keywordtype">void</span> (*fonct)(<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>*),</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                               <span class="keywordtype">int</span> indexObj, ...) {</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keywordflow">if</span> (!scene || !<span class="keywordtype">object</span>) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    va_list args;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    va_start(args, indexObj);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    va_list count_args;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    va_copy(count_args, args);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keywordtype">int</span> param_count = 0;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keywordflow">while</span> (va_arg(count_args, <span class="keywordtype">void</span>*) != NULL) param_count++;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    va_end(count_args);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordtype">void</span>** params = malloc(param_count * <span class="keyword">sizeof</span>(<span class="keywordtype">void</span>*));</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; param_count; i++) {</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        params[i] = va_arg(args, <span class="keywordtype">void</span>*);</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    }</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    va_end(args);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keywordtype">void</span>** final_params;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="comment">// Construire le tableau de paramètres finaux</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    final_params = malloc((param_count + 1) * <span class="keyword">sizeof</span>(<span class="keywordtype">void</span>*));</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; indexObj; j++) {</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        final_params[j] = params[j];</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    }</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    final_params[indexObj] = object;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = indexObj; j &lt; param_count; j++) {</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        final_params[j + 1] = params[j];</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    }</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="comment">// Créer et ajouter la fonction</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <a class="code" href="structt__fonction_param.html">t_fonctionParam</a>* sf = malloc(<span class="keyword">sizeof</span>(<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>));</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    sf-&gt;fonction = fonct;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    sf-&gt;param = final_params;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    sf-&gt;nb_param = param_count + 1;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    scene-&gt;<a class="code" href="structt__scene.html#a46b4105d6febb20b4a15849dabd10427">fonctions</a>[funcType] = realloc(scene-&gt;<a class="code" href="structt__scene.html#a46b4105d6febb20b4a15849dabd10427">fonctions</a>[funcType],</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                                         (scene-&gt;<a class="code" href="structt__scene.html#ad5351c002d4c73225bb9e12fb53a99da">nbFonctions</a>[funcType] + 1) * <span class="keyword">sizeof</span>(<a class="code" href="structt__fonction_param.html">t_fonctionParam</a>*));</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    scene-&gt;<a class="code" href="structt__scene.html#a46b4105d6febb20b4a15849dabd10427">fonctions</a>[funcType][scene-&gt;<a class="code" href="structt__scene.html#ad5351c002d4c73225bb9e12fb53a99da">nbFonctions</a>[funcType]++] = sf;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    free(params);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;}</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
+<div class="line"><a name="l00266"></a><span class="lineno"><a class="line" href="fscene_8c.html#afd15beab139da97e2891821e59f2bb02">  266</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="fscene_8c.html#afd15beab139da97e2891821e59f2bb02">sceneRemoveObject</a>(<a class="code" href="structt__scene.html">t_scene</a>* scene, <span class="keywordtype">void</span>* <span class="keywordtype">object</span>) {</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keywordflow">if</span> (!scene || !<span class="keywordtype">object</span>) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="comment">// Trouver l&#39;index de l&#39;objet</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keywordtype">int</span> objectIndex = <a class="code" href="fscene_8c.html#a8be677f8994885ab5fa62328e5e580da">findObjectIndex</a>(scene-&gt;<a class="code" href="structt__scene.html#ab23b2dc587711bef90e8bcdca4bfbb0c">objectManager</a>, <span class="keywordtype">object</span>);</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="keywordflow">if</span> (objectIndex &lt; 0) <span class="keywordflow">return</span>;  <span class="comment">// Objet non trouvé</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="comment">// Parcourir tous les types de fonctions pour supprimer celles liées à cet objet</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> funcType = 0; funcType &lt; <a class="code" href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3bad98976969ba364eb51f1ded025ed85e7">NUM_FONCTION</a>; funcType++) {</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; scene-&gt;<a class="code" href="structt__scene.html#ad5351c002d4c73225bb9e12fb53a99da">nbFonctions</a>[funcType]; i++) {</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;            <a class="code" href="structt__fonction_param.html">t_fonctionParam</a>* func = scene-&gt;<a class="code" href="structt__scene.html#a46b4105d6febb20b4a15849dabd10427">fonctions</a>[funcType][i];</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            <span class="comment">// Vérifier si cette fonction utilise l&#39;objet</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            SDL_bool containsObject = SDL_FALSE;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; func-&gt;nb_param; j++) {</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                <span class="keywordflow">if</span> (func-&gt;param[j] == <span class="keywordtype">object</span>) {</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                    containsObject = SDL_TRUE;</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;                }</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;            }</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            <span class="keywordflow">if</span> (containsObject) {</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                <span class="comment">// Libérer cette fonction</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                <a class="code" href="fonction_manager_8c.html#aa61a39c82b2044678dea685d75cdd8a9">freeFonction</a>(&amp;func);</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                <span class="comment">// Déplacer les fonctions restantes pour combler le trou</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = i; j &lt; scene-&gt;<a class="code" href="structt__scene.html#ad5351c002d4c73225bb9e12fb53a99da">nbFonctions</a>[funcType] - 1; j++) {</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                    scene-&gt;<a class="code" href="structt__scene.html#a46b4105d6febb20b4a15849dabd10427">fonctions</a>[funcType][j] = scene-&gt;<a class="code" href="structt__scene.html#a46b4105d6febb20b4a15849dabd10427">fonctions</a>[funcType][j + 1];</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                }</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                scene-&gt;<a class="code" href="structt__scene.html#ad5351c002d4c73225bb9e12fb53a99da">nbFonctions</a>[funcType]--;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                i--;  <span class="comment">// Ajuster l&#39;index pour ne pas sauter d&#39;élément</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            }</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        }</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    }</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="comment">// Supprimer l&#39;objet du gestionnaire d&#39;objets</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <a class="code" href="object_manager_8c.html#a4d5bf4f0d7276c3548a4a135ebda92e9">deleteObject</a>(scene-&gt;<a class="code" href="structt__scene.html#ab23b2dc587711bef90e8bcdca4bfbb0c">objectManager</a>, objectIndex);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;}</div>
 <div class="ttc" id="afonction_manager_8c_html_aa61a39c82b2044678dea685d75cdd8a9"><div class="ttname"><a href="fonction_manager_8c.html#aa61a39c82b2044678dea685d75cdd8a9">freeFonction</a></div><div class="ttdeci">void freeFonction(t_fonctionParam **fonctParam)</div><div class="ttdoc">Libere la mémoire d'une fonctionParametrable.</div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8c_source.html#l00037">fonctionManager.c:37</a></div></div>
 <div class="ttc" id="afonction_manager_8c_html_ad131d3cb840ae8a9c198b38a7e1abf6e"><div class="ttname"><a href="fonction_manager_8c.html#ad131d3cb840ae8a9c198b38a7e1abf6e">callFonction</a></div><div class="ttdeci">void callFonction(t_fonctionParam *funct)</div><div class="ttdoc">Execute la fonctionParam.</div><div class="ttdef"><b>Definition:</b> <a href="fonction_manager_8c_source.html#l00033">fonctionManager.c:33</a></div></div>
 <div class="ttc" id="afscene_8c_html_a11d7d5a9fbddf09cdc522707e4815ed1"><div class="ttname"><a href="fscene_8c.html#a11d7d5a9fbddf09cdc522707e4815ed1">executeSceneFunctions</a></div><div class="ttdeci">void executeSceneFunctions(t_scene *scene, t_fonctionType ftype)</div><div class="ttdoc">Exécute toutes les fonctions d'un type donné</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00068">fscene.c:68</a></div></div>
-<div class="ttc" id="afscene_8c_html_a17f4d95603320ee5e898ff0f67f25e3a"><div class="ttname"><a href="fscene_8c.html#a17f4d95603320ee5e898ff0f67f25e3a">GetSceneByName</a></div><div class="ttdeci">t_scene * GetSceneByName(t_sceneController *controller, char *name)</div><div class="ttdoc">Récupère une scène par son nom.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00132">fscene.c:132</a></div></div>
-<div class="ttc" id="afscene_8c_html_a203dc7420436877b66bbcc6e559483af"><div class="ttname"><a href="fscene_8c.html#a203dc7420436877b66bbcc6e559483af">indiceByscene</a></div><div class="ttdeci">int indiceByscene(t_sceneController *controller, t_scene *scene)</div><div class="ttdoc">Récupère l'index d'une scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00142">fscene.c:142</a></div></div>
-<div class="ttc" id="afscene_8c_html_a30e466cad04c05ed83227c9f7f99bb29"><div class="ttname"><a href="fscene_8c.html#a30e466cad04c05ed83227c9f7f99bb29">getCurrentScene</a></div><div class="ttdeci">t_scene * getCurrentScene(t_sceneController *controller)</div><div class="ttdoc">Récupère la scène courante.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00166">fscene.c:166</a></div></div>
+<div class="ttc" id="afscene_8c_html_a17f4d95603320ee5e898ff0f67f25e3a"><div class="ttname"><a href="fscene_8c.html#a17f4d95603320ee5e898ff0f67f25e3a">GetSceneByName</a></div><div class="ttdeci">t_scene * GetSceneByName(t_sceneController *controller, char *name)</div><div class="ttdoc">Récupère une scène par son nom.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00131">fscene.c:131</a></div></div>
+<div class="ttc" id="afscene_8c_html_a203dc7420436877b66bbcc6e559483af"><div class="ttname"><a href="fscene_8c.html#a203dc7420436877b66bbcc6e559483af">indiceByscene</a></div><div class="ttdeci">int indiceByscene(t_sceneController *controller, t_scene *scene)</div><div class="ttdoc">Récupère l'index d'une scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00141">fscene.c:141</a></div></div>
+<div class="ttc" id="afscene_8c_html_a30e466cad04c05ed83227c9f7f99bb29"><div class="ttname"><a href="fscene_8c.html#a30e466cad04c05ed83227c9f7f99bb29">getCurrentScene</a></div><div class="ttdeci">t_scene * getCurrentScene(t_sceneController *controller)</div><div class="ttdoc">Récupère la scène courante.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00165">fscene.c:165</a></div></div>
 <div class="ttc" id="afscene_8c_html_a39d0e7fbc78f3ff2fbd207962ff6ab42"><div class="ttname"><a href="fscene_8c.html#a39d0e7fbc78f3ff2fbd207962ff6ab42">addScene</a></div><div class="ttdeci">void addScene(t_sceneController *controller, t_scene *scene)</div><div class="ttdoc">Ajoute une scène au contrôleur.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00102">fscene.c:102</a></div></div>
 <div class="ttc" id="afscene_8c_html_a41cb33c742203a83f3b38ad344168917"><div class="ttname"><a href="fscene_8c.html#a41cb33c742203a83f3b38ad344168917">setScene</a></div><div class="ttdeci">void setScene(t_sceneController *controller, char *name)</div><div class="ttdoc">Change la scène courante.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00106">fscene.c:106</a></div></div>
 <div class="ttc" id="afscene_8c_html_a4b143d78504ee5f7584a44fb6479e3f0"><div class="ttname"><a href="fscene_8c.html#a4b143d78504ee5f7584a44fb6479e3f0">createScene</a></div><div class="ttdeci">t_scene * createScene(t_objectManager *manager, char *name)</div><div class="ttdoc">Crée une nouvelle scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00005">fscene.c:5</a></div></div>
-<div class="ttc" id="afscene_8c_html_a5a7ba8ae4552319c04444654620c392e"><div class="ttname"><a href="fscene_8c.html#a5a7ba8ae4552319c04444654620c392e">getPrevuisMenu</a></div><div class="ttdeci">void getPrevuisMenu(t_sceneController *controller)</div><div class="ttdoc">Revient au menu précédent.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00157">fscene.c:157</a></div></div>
+<div class="ttc" id="afscene_8c_html_a5a7ba8ae4552319c04444654620c392e"><div class="ttname"><a href="fscene_8c.html#a5a7ba8ae4552319c04444654620c392e">getPrevuisMenu</a></div><div class="ttdeci">void getPrevuisMenu(t_sceneController *controller)</div><div class="ttdoc">Revient au menu précédent.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00156">fscene.c:156</a></div></div>
 <div class="ttc" id="afscene_8c_html_a69ac741c95a278f52722cfe8213661e8"><div class="ttname"><a href="fscene_8c.html#a69ac741c95a278f52722cfe8213661e8">freeScene</a></div><div class="ttdeci">void freeScene(void *object)</div><div class="ttdoc">Libère une scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00074">fscene.c:74</a></div></div>
-<div class="ttc" id="afscene_8c_html_a7656ed7499653162fa7c9f48d67f4034"><div class="ttname"><a href="fscene_8c.html#a7656ed7499653162fa7c9f48d67f4034">registerFunctionForObject</a></div><div class="ttdeci">void registerFunctionForObject(t_scene *scene, void *object, uint8_t typeId, t_fonctionType funcType, void(*fonct)(t_fonctionParam *), int indexObj,...)</div><div class="ttdoc">Enregistre une fonction pour un objet spécifique.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00223">fscene.c:223</a></div></div>
-<div class="ttc" id="afscene_8c_html_a8be677f8994885ab5fa62328e5e580da"><div class="ttname"><a href="fscene_8c.html#a8be677f8994885ab5fa62328e5e580da">findObjectIndex</a></div><div class="ttdeci">int findObjectIndex(t_objectManager *manager, void *object)</div><div class="ttdoc">Trouve l'index d'un objet dans son gestionnaire.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00205">fscene.c:205</a></div></div>
-<div class="ttc" id="afscene_8c_html_a8d96eeeaa02433587861a66a7cc8b24f"><div class="ttname"><a href="fscene_8c.html#a8d96eeeaa02433587861a66a7cc8b24f">getPrevuisScene</a></div><div class="ttdeci">void getPrevuisScene(t_sceneController *controller)</div><div class="ttdoc">Revient à la scène précédente.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00151">fscene.c:151</a></div></div>
-<div class="ttc" id="afscene_8c_html_a9f300e274afec9ccfe738afd10f7e01d"><div class="ttname"><a href="fscene_8c.html#a9f300e274afec9ccfe738afd10f7e01d">sceneAddObject</a></div><div class="ttdeci">void * sceneAddObject(t_scene *scene, void *object, uint8_t typeId)</div><div class="ttdoc">Ajoute un objet à une scène avec enregistrement automatique.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00214">fscene.c:214</a></div></div>
-<div class="ttc" id="afscene_8c_html_aaf87e3d204392bd39aa8e399744406eb"><div class="ttname"><a href="fscene_8c.html#aaf87e3d204392bd39aa8e399744406eb">freeSceneByName</a></div><div class="ttdeci">void freeSceneByName(t_sceneController **controller, char *name)</div><div class="ttdoc">Libère une scène par son nom.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00172">fscene.c:172</a></div></div>
+<div class="ttc" id="afscene_8c_html_a7656ed7499653162fa7c9f48d67f4034"><div class="ttname"><a href="fscene_8c.html#a7656ed7499653162fa7c9f48d67f4034">registerFunctionForObject</a></div><div class="ttdeci">void registerFunctionForObject(t_scene *scene, void *object, uint8_t typeId, t_fonctionType funcType, void(*fonct)(t_fonctionParam *), int indexObj,...)</div><div class="ttdoc">Enregistre une fonction pour un objet spécifique.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00222">fscene.c:222</a></div></div>
+<div class="ttc" id="afscene_8c_html_a8be677f8994885ab5fa62328e5e580da"><div class="ttname"><a href="fscene_8c.html#a8be677f8994885ab5fa62328e5e580da">findObjectIndex</a></div><div class="ttdeci">int findObjectIndex(t_objectManager *manager, void *object)</div><div class="ttdoc">Trouve l'index d'un objet dans son gestionnaire.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00204">fscene.c:204</a></div></div>
+<div class="ttc" id="afscene_8c_html_a8d96eeeaa02433587861a66a7cc8b24f"><div class="ttname"><a href="fscene_8c.html#a8d96eeeaa02433587861a66a7cc8b24f">getPrevuisScene</a></div><div class="ttdeci">void getPrevuisScene(t_sceneController *controller)</div><div class="ttdoc">Revient à la scène précédente.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00150">fscene.c:150</a></div></div>
+<div class="ttc" id="afscene_8c_html_a9f300e274afec9ccfe738afd10f7e01d"><div class="ttname"><a href="fscene_8c.html#a9f300e274afec9ccfe738afd10f7e01d">sceneAddObject</a></div><div class="ttdeci">void * sceneAddObject(t_scene *scene, void *object, uint8_t typeId)</div><div class="ttdoc">Ajoute un objet à une scène avec enregistrement automatique.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00213">fscene.c:213</a></div></div>
+<div class="ttc" id="afscene_8c_html_aaf87e3d204392bd39aa8e399744406eb"><div class="ttname"><a href="fscene_8c.html#aaf87e3d204392bd39aa8e399744406eb">freeSceneByName</a></div><div class="ttdeci">void freeSceneByName(t_sceneController **controller, char *name)</div><div class="ttdoc">Libère une scène par son nom.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00171">fscene.c:171</a></div></div>
 <div class="ttc" id="afscene_8c_html_accbd14eb8c93d348b61a8cb09bbbf489"><div class="ttname"><a href="fscene_8c.html#accbd14eb8c93d348b61a8cb09bbbf489">sceneRegisterFunction</a></div><div class="ttdeci">void sceneRegisterFunction(t_scene *scene, uint8_t typeObject, t_fonctionType typeFunction, void(*fonct)(t_fonctionParam *), int indexObj,...)</div><div class="ttdoc">Enregistre une fonction pour une scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00017">fscene.c:17</a></div></div>
-<div class="ttc" id="afscene_8c_html_ad44392d8a60c751117238d056dafa456"><div class="ttname"><a href="fscene_8c.html#ad44392d8a60c751117238d056dafa456">freeSceneController</a></div><div class="ttdeci">void freeSceneController(t_sceneController **controller)</div><div class="ttdoc">Libère un contrôleur de scènes.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00193">fscene.c:193</a></div></div>
+<div class="ttc" id="afscene_8c_html_ad44392d8a60c751117238d056dafa456"><div class="ttname"><a href="fscene_8c.html#ad44392d8a60c751117238d056dafa456">freeSceneController</a></div><div class="ttdeci">void freeSceneController(t_sceneController **controller)</div><div class="ttdoc">Libère un contrôleur de scènes.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00192">fscene.c:192</a></div></div>
 <div class="ttc" id="afscene_8c_html_ae4a7b0eb8dc4ab3d4461975955cba83d"><div class="ttname"><a href="fscene_8c.html#ae4a7b0eb8dc4ab3d4461975955cba83d">initSceneController</a></div><div class="ttdeci">t_sceneController * initSceneController()</div><div class="ttdoc">Initialise un nouveau contrôleur de scènes.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00087">fscene.c:87</a></div></div>
-<div class="ttc" id="afscene_8c_html_afd15beab139da97e2891821e59f2bb02"><div class="ttname"><a href="fscene_8c.html#afd15beab139da97e2891821e59f2bb02">sceneRemoveObject</a></div><div class="ttdeci">void sceneRemoveObject(t_scene *scene, void *object)</div><div class="ttdoc">Supprime un objet d'une scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00267">fscene.c:267</a></div></div>
+<div class="ttc" id="afscene_8c_html_afd15beab139da97e2891821e59f2bb02"><div class="ttname"><a href="fscene_8c.html#afd15beab139da97e2891821e59f2bb02">sceneRemoveObject</a></div><div class="ttdeci">void sceneRemoveObject(t_scene *scene, void *object)</div><div class="ttdoc">Supprime un objet d'une scène.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8c_source.html#l00266">fscene.c:266</a></div></div>
 <div class="ttc" id="afscene_8h_html"><div class="ttname"><a href="fscene_8h.html">fscene.h</a></div></div>
 <div class="ttc" id="afscene_8h_html_a1cfdf75da162e74b369a77b939b85f3b"><div class="ttname"><a href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3b">t_fonctionType</a></div><div class="ttdeci">t_fonctionType</div><div class="ttdoc">Types de fonctions gérées par le système de scènes.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8h_source.html#l00044">fscene.h:44</a></div></div>
 <div class="ttc" id="afscene_8h_html_a1cfdf75da162e74b369a77b939b85f3ba6f9ee413ea25df3552ec467cf2f7e852"><div class="ttname"><a href="fscene_8h.html#a1cfdf75da162e74b369a77b939b85f3ba6f9ee413ea25df3552ec467cf2f7e852">HANDLE_RESIZE</a></div><div class="ttdeci">@ HANDLE_RESIZE</div><div class="ttdoc">Gestion du redimensionnement.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8h_source.html#l00048">fscene.h:48</a></div></div>
@@ -426,9 +441,13 @@ $(function() {
 <div class="ttc" id="astructt__scene_html_ad5351c002d4c73225bb9e12fb53a99da"><div class="ttname"><a href="structt__scene.html#ad5351c002d4c73225bb9e12fb53a99da">t_scene::nbFonctions</a></div><div class="ttdeci">int nbFonctions[NUM_FONCTION]</div><div class="ttdoc">Nombre de fonctions par type.</div><div class="ttdef"><b>Definition:</b> <a href="fscene_8h_source.html#l00065">fscene.h:65</a></div></div>
 <div class="ttc" id="astructt__type_registry_html"><div class="ttname"><a href="structt__type_registry.html">t_typeRegistry</a></div><div class="ttdoc">Registre central des types.</div><div class="ttdef"><b>Definition:</b> <a href="object_manager_8h_source.html#l00049">objectManager.h:49</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_313caf1132e152dd9b58bea13a4052ca.html">utils</a></li><li class="navelem"><a class="el" href="fscene_8c.html">fscene.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

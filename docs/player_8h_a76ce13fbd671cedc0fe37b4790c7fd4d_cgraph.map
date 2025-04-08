@@ -1,0 +1,7 @@
+<map id="checkAndProcessLevelUp" name="checkAndProcessLevelUp">
+<area shape="rect" id="node1" title="Vérifie si le joueur peut monter de niveau et applique les améliorations." alt="" coords="5,56,193,83"/>
+<area shape="rect" id="node2" href="$particules_8c.html#aea0223a544ee988ed39eafc6faed78ce" title="Émet des particules de soin pour le sorcier." alt="" coords="273,31,411,57"/>
+<area shape="rect" id="node5" href="$equipements_manager_8c.html#a8c2af2e271f9da3ba156de14441b6e3a" title="Recalcule les statistiques après changement d&#39;équipement." alt="" coords="241,81,443,108"/>
+<area shape="rect" id="node3" href="$particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="491,5,641,32"/>
+<area shape="rect" id="node4" href="$particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="505,56,627,83"/>
+</map>

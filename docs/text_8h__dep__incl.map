@@ -5,7 +5,7 @@
 <area shape="rect" id="node25" href="$blacksmith_8h.html" title="Définition et comportement du forgeron." alt="" coords="2180,80,2360,121"/>
 <area shape="rect" id="node28" href="$chest_8h.html" title="Définition et comportement du coffre à trésor." alt="" coords="2384,80,2527,121"/>
 <area shape="rect" id="node30" href="$merchant_8h.html" title="Définition et comportement du marchand." alt="" coords="2551,80,2722,121"/>
-<area shape="rect" id="node32" href="$wizard_8h.html" title="Définition et comportement du sorcier." alt="" coords="2747,80,2897,121"/>
+<area shape="rect" id="node32" href="$tiles_entity_2wizard_8h.html" title="Définition et comportement du sorcier." alt="" coords="2747,80,2897,121"/>
 <area shape="rect" id="node34" href="$affichage_8h.html" title="Gestionnaire de l&#39;interface d&#39;inventaire et d&#39;équipement." alt="" coords="983,355,1117,382"/>
 <area shape="rect" id="node36" href="$button_8h.html" title="Système de gestion des boutons pour l&#39;interface utilisateur." alt="" coords="1274,266,1389,293"/>
 <area shape="rect" id="node40" href="$touche_8h.html" title="Gestion des touches affichées et interactives." alt="" coords="842,355,959,382"/>
@@ -37,7 +37,7 @@
 <area shape="rect" id="node27" href="$tiles_entity_8c.html" title=" " alt="" coords="2551,169,2693,211"/>
 <area shape="rect" id="node29" href="$chest_8c.html" title=" " alt="" coords="2384,169,2527,211"/>
 <area shape="rect" id="node31" href="$merchant_8c.html" title=" " alt="" coords="2717,169,2887,211"/>
-<area shape="rect" id="node33" href="$wizard_8c.html" title=" " alt="" coords="2911,169,3061,211"/>
+<area shape="rect" id="node33" href="$tiles_entity_2wizard_8c.html" title=" " alt="" coords="2911,169,3061,211"/>
 <area shape="rect" id="node35" href="$affichage_8c.html" title=" " alt="" coords="975,437,1107,464"/>
 <area shape="rect" id="node37" href="$button_8c.html" title=" " alt="" coords="1274,355,1389,382"/>
 <area shape="rect" id="node38" href="$slider_8h.html" title="Gestion des curseurs glissants pour réglages de valeurs." alt="" coords="1141,355,1249,382"/>

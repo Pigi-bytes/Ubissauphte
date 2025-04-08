@@ -1,35 +1,36 @@
 <map id="updateSlime" name="updateSlime">
-<area shape="rect" id="node1" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="5,338,109,364"/>
-<area shape="rect" id="node2" href="$physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="839,34,1030,60"/>
-<area shape="rect" id="node3" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="892,287,977,314"/>
-<area shape="rect" id="node4" href="$slime_8c.html#a5649e17000637f8d7f2ad5c9e1f2f5a5" title=" " alt="" coords="157,388,368,415"/>
-<area shape="rect" id="node11" href="$slime_8c.html#a96ec4eb4d94312660c0d2b3dc7e850ac" title=" " alt="" coords="172,439,353,466"/>
-<area shape="rect" id="node12" href="$slime_8c.html#a9dba0db999d3dd30de3b4c5e1bfa72ad" title=" " alt="" coords="201,287,325,314"/>
-<area shape="rect" id="node17" href="$timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="422,388,562,415"/>
-<area shape="rect" id="node18" href="$slime_8c.html#aacee71da27c3b5353779dcda60d72458" title=" " alt="" coords="194,490,331,516"/>
-<area shape="rect" id="node19" href="$slime_8c.html#a0a5435c58ff0fbbb7936ba38d9b2b0a2" title="Inflige des dégâts au joueur lors d&#39;une collision." alt="" coords="163,540,362,567"/>
-<area shape="rect" id="node23" href="$particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="183,591,343,618"/>
-<area shape="rect" id="node24" href="$physics_8c.html#a63880ca4246528d2b4a1e1fec0d9c661" title=" " alt="" coords="189,186,336,212"/>
-<area shape="rect" id="node32" href="$slime_8c.html#a6d35a0cce47f4616e91d377513559b89" title=" " alt="" coords="198,135,327,162"/>
-<area shape="rect" id="node5" href="$timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="434,439,550,466"/>
-<area shape="rect" id="node6" href="$slime_8c.html#a12bab3fae6c9885a2cb3db522d6fc110" title=" " alt="" coords="423,490,561,516"/>
-<area shape="rect" id="node7" href="$particules_8c.html#a2f7d707376daa108a99efec11236f2c2" title="Émet des particules d&#39;atterrissage." alt="" coords="622,464,781,491"/>
-<area shape="rect" id="node10" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="637,515,765,542"/>
-<area shape="rect" id="node8" href="$particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="859,490,1010,516"/>
-<area shape="rect" id="node9" href="$particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="874,566,995,592"/>
-<area shape="rect" id="node13" href="$animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="437,287,547,314"/>
-<area shape="rect" id="node14" href="$animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="642,338,761,364"/>
-<area shape="rect" id="node16" href="$animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="643,388,760,415"/>
-<area shape="rect" id="node15" href="$timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="889,338,980,364"/>
-<area shape="rect" id="node20" href="$health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="435,540,549,567"/>
-<area shape="rect" id="node21" href="$particules_8c.html#a5daf89ca83b59eabf3cd8d2d5195f529" title="Émet des particules d&#39;impact." alt="" coords="416,591,568,618"/>
-<area shape="rect" id="node22" href="$particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="648,566,755,592"/>
-<area shape="rect" id="node25" href="$physics_8c.html#a762abc05fd3932fd770b6669536c6a39" title=" " alt="" coords="429,186,555,212"/>
-<area shape="rect" id="node26" href="$physics_8c.html#a49535bbd051fba95b354c0b799aeaecd" title=" " alt="" coords="616,135,787,162"/>
-<area shape="rect" id="node28" href="$physics_8c.html#aa4c391b6039023d72360858573598931" title=" " alt="" coords="621,186,781,212"/>
-<area shape="rect" id="node27" href="$physics_8c.html#a939ce6d2a8a36cf8aa70ca659cca1cb5" title=" " alt="" coords="835,84,1035,111"/>
-<area shape="rect" id="node29" href="$physics_8c.html#aea0d92f868946fd053a28534a3f7cbf4" title="Détecte collision entre un cercle et un rectangle." alt="" coords="843,135,1026,162"/>
-<area shape="rect" id="node30" href="$tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="901,186,968,212"/>
-<area shape="rect" id="node31" href="$physics_8c.html#a3b50b7ed91abcb9306aaa9fd47b98e8a" title=" " alt="" coords="839,236,1031,263"/>
-<area shape="rect" id="node33" href="$physics_8c.html#a1948cf93821271dece76ca4022f7b25d" title="Lance un rayon à travers la grille et détecte la première obstruction." alt="" coords="443,135,541,162"/>
+<area shape="rect" id="node1" title="Met à jour l&#39;état et le comportement du slime." alt="" coords="5,487,109,513"/>
+<area shape="rect" id="node2" href="$physics_8c.html#abcc381b9c63f813d5c6fa189f4f9dd2a" title="Détecte collision entre deux cercles." alt="" coords="834,208,1025,235"/>
+<area shape="rect" id="node3" href="$object_manager_8c.html#ad54381aaf28c8563e5faafa52728a115" title="Récupère un objet à partir de son index dans le gestionnaire d&#39;objets." alt="" coords="887,309,972,336"/>
+<area shape="rect" id="node4" href="$slime_8c.html#a5649e17000637f8d7f2ad5c9e1f2f5a5" title=" " alt="" coords="157,639,368,665"/>
+<area shape="rect" id="node11" href="$slime_8c.html#a96ec4eb4d94312660c0d2b3dc7e850ac" title=" " alt="" coords="172,689,353,716"/>
+<area shape="rect" id="node12" href="$slime_8c.html#a9dba0db999d3dd30de3b4c5e1bfa72ad" title=" " alt="" coords="201,487,325,513"/>
+<area shape="rect" id="node17" href="$timer_8c.html#a843689d2e39a105402abe78bfaf565d1" title="Met à jour le temps accumulé du timer delta." alt="" coords="419,588,559,615"/>
+<area shape="rect" id="node18" href="$slime_8c.html#aacee71da27c3b5353779dcda60d72458" title=" " alt="" coords="194,588,331,615"/>
+<area shape="rect" id="node19" href="$slime_8c.html#a0a5435c58ff0fbbb7936ba38d9b2b0a2" title="Inflige des dégâts au joueur lors d&#39;une collision." alt="" coords="163,429,362,456"/>
+<area shape="rect" id="node24" href="$particules_8c.html#a731d5988acb255457e0deb3233f1e4e7" title="Met à jour toutes les particules actives." alt="" coords="183,740,343,767"/>
+<area shape="rect" id="node25" href="$physics_8c.html#a63880ca4246528d2b4a1e1fec0d9c661" title=" " alt="" coords="189,208,336,235"/>
+<area shape="rect" id="node33" href="$slime_8c.html#a6d35a0cce47f4616e91d377513559b89" title=" " alt="" coords="198,157,327,184"/>
+<area shape="rect" id="node5" href="$timer_8c.html#aa6a4620337b2d374bffb66ac27b96efe" title="Récupère le temps accumulé par le timer delta." alt="" coords="431,639,547,665"/>
+<area shape="rect" id="node6" href="$slime_8c.html#a12bab3fae6c9885a2cb3db522d6fc110" title=" " alt="" coords="420,689,559,716"/>
+<area shape="rect" id="node7" href="$particules_8c.html#a2f7d707376daa108a99efec11236f2c2" title="Émet des particules d&#39;atterrissage." alt="" coords="850,639,1009,665"/>
+<area shape="rect" id="node10" href="$timer_8c.html#ac77efb9529c844ee148d54f1bacbdcfe" title="Réinitialise le temps accumulé du timer delta." alt="" coords="865,588,993,615"/>
+<area shape="rect" id="node8" href="$particules_8c.html#a6fb205305b8df39e9fa9c99114458158" title="Obtient la prochaine particule libre de l&#39;émetteur." alt="" coords="1077,551,1228,577"/>
+<area shape="rect" id="node9" href="$particules_8c.html#a3e493e35de3bbae2d3c79d5c8471b360" title="Génère un nombre aléatoire dans une plage." alt="" coords="1092,449,1213,476"/>
+<area shape="rect" id="node13" href="$animation_8c.html#a558f44850e43c0e5f4673279e0e58611" title="Change l&#39;animation active." alt="" coords="435,487,544,513"/>
+<area shape="rect" id="node14" href="$animation_8c.html#af2676318d90db45ea3dc16410c517cbd" title="Démarre une animation." alt="" coords="637,512,755,539"/>
+<area shape="rect" id="node16" href="$animation_8c.html#a02019ad4265cc54a504cfe1444592053" title="Arrête une animation." alt="" coords="637,563,755,589"/>
+<area shape="rect" id="node15" href="$timer_8c.html#a7d157e28b7dc56888e25fb39a8da9776" title="Démarre le timer." alt="" coords="884,512,975,539"/>
+<area shape="rect" id="node20" href="$particules_8c.html#a5daf89ca83b59eabf3cd8d2d5195f529" title="Émet des particules d&#39;impact." alt="" coords="620,360,772,387"/>
+<area shape="rect" id="node22" href="$player_8c.html#a8e7629b549bd463358aee9ef316f412c" title=" " alt="" coords="416,429,563,456"/>
+<area shape="rect" id="node21" href="$particules_8c.html#a8b1ce0efa2525e17be9f8a83af5085ac" title="Émet des particules génériques." alt="" coords="876,449,983,476"/>
+<area shape="rect" id="node23" href="$health_8c.html#a99890adcfd69b9d90a178d967a70f347" title="Applique des dégâts à une entité" alt="" coords="639,461,753,488"/>
+<area shape="rect" id="node26" href="$physics_8c.html#a762abc05fd3932fd770b6669536c6a39" title=" " alt="" coords="426,208,553,235"/>
+<area shape="rect" id="node27" href="$physics_8c.html#a49535bbd051fba95b354c0b799aeaecd" title=" " alt="" coords="611,259,781,285"/>
+<area shape="rect" id="node29" href="$physics_8c.html#aa4c391b6039023d72360858573598931" title=" " alt="" coords="616,56,776,83"/>
+<area shape="rect" id="node28" href="$physics_8c.html#a939ce6d2a8a36cf8aa70ca659cca1cb5" title=" " alt="" coords="829,259,1029,285"/>
+<area shape="rect" id="node30" href="$physics_8c.html#aea0d92f868946fd053a28534a3f7cbf4" title="Détecte collision entre un cercle et un rectangle." alt="" coords="838,107,1021,133"/>
+<area shape="rect" id="node31" href="$tiles_8c.html#a9ac46e039a03cdb3e4be596b50d7f4b3" title="Récupère une tuile à des coordonnées spécifiques." alt="" coords="896,5,963,32"/>
+<area shape="rect" id="node32" href="$physics_8c.html#a3b50b7ed91abcb9306aaa9fd47b98e8a" title=" " alt="" coords="833,56,1025,83"/>
+<area shape="rect" id="node34" href="$physics_8c.html#a1948cf93821271dece76ca4022f7b25d" title="Lance un rayon à travers la grille et détecte la première obstruction." alt="" coords="440,157,539,184"/>
 </map>

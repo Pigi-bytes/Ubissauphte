@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -48,6 +52,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('affichage_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,11 +83,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_da5c6b39c0a2f54e57df6799511cd3ab.html">ui</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">affichage.h</div>  </div>
@@ -190,25 +206,25 @@ $(function() {
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="keywordtype">void</span> <a class="code" href="affichage_8h.html#a97b3d1c61a1bb1026211fb94191e5485">handleInputInventaire</a>(<a class="code" href="structt__input.html">t_input</a>* input, <a class="code" href="structs__joueur.html">t_joueur</a>* player, <a class="code" href="structt__scene_controller.html">t_sceneController</a>* sceneController);</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// AFFICHAGE_H</span></div>
-<div class="ttc" id="aaffichage_8h_html_a1cc7f7d5a20ca4ebd7951b5ec93330dc"><div class="ttname"><a href="affichage_8h.html#a1cc7f7d5a20ca4ebd7951b5ec93330dc">afficherText</a></div><div class="ttdeci">void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *input)</div><div class="ttdoc">Affiche un texte.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00172">affichage.c:172</a></div></div>
+<div class="ttc" id="aaffichage_8h_html_a1cc7f7d5a20ca4ebd7951b5ec93330dc"><div class="ttname"><a href="affichage_8h.html#a1cc7f7d5a20ca4ebd7951b5ec93330dc">afficherText</a></div><div class="ttdeci">void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *input)</div><div class="ttdoc">Affiche un texte.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00178">affichage.c:178</a></div></div>
 <div class="ttc" id="aaffichage_8h_html_a1e1e4198c4d748bc7d7e32fae74f501e"><div class="ttname"><a href="affichage_8h.html#a1e1e4198c4d748bc7d7e32fae74f501e">calculerItem</a></div><div class="ttdeci">void calculerItem(SDL_Rect *item, SDL_Rect inv, SDL_Rect *comp, int nb, int ind, t_input *input)</div><div class="ttdoc">Calcule la position d'un slot d'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00157">affichage.c:157</a></div></div>
 <div class="ttc" id="aaffichage_8h_html_a2066dcaf9ebb545d26aea7e391b0a997"><div class="ttname"><a href="affichage_8h.html#a2066dcaf9ebb545d26aea7e391b0a997">createStackCountText</a></div><div class="ttdeci">t_text * createStackCountText(SDL_Renderer *renderer, TTF_Font *font, int count)</div><div class="ttdoc">Crée le texte pour afficher un nombre d'items.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00003">affichage.c:3</a></div></div>
-<div class="ttc" id="aaffichage_8h_html_a245e80fc97a36c9a0db23250ffaa23f4"><div class="ttname"><a href="affichage_8h.html#a245e80fc97a36c9a0db23250ffaa23f4">update</a></div><div class="ttdeci">void update(t_input *input, InventoryUI *ui)</div><div class="ttdoc">Met à jour l'interface après redimensionnement.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00600">affichage.c:600</a></div></div>
-<div class="ttc" id="aaffichage_8h_html_a37a0b209c2ead72efaf0ae0c98c4af2c"><div class="ttname"><a href="affichage_8h.html#a37a0b209c2ead72efaf0ae0c98c4af2c">inventoryUI_Render</a></div><div class="ttdeci">void inventoryUI_Render(InventoryUI *ui, t_context *context)</div><div class="ttdoc">Effectue le rendu de l'interface.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00461">affichage.c:461</a></div></div>
+<div class="ttc" id="aaffichage_8h_html_a245e80fc97a36c9a0db23250ffaa23f4"><div class="ttname"><a href="affichage_8h.html#a245e80fc97a36c9a0db23250ffaa23f4">update</a></div><div class="ttdeci">void update(t_input *input, InventoryUI *ui)</div><div class="ttdoc">Met à jour l'interface après redimensionnement.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00597">affichage.c:597</a></div></div>
+<div class="ttc" id="aaffichage_8h_html_a37a0b209c2ead72efaf0ae0c98c4af2c"><div class="ttname"><a href="affichage_8h.html#a37a0b209c2ead72efaf0ae0c98c4af2c">inventoryUI_Render</a></div><div class="ttdeci">void inventoryUI_Render(InventoryUI *ui, t_context *context)</div><div class="ttdoc">Effectue le rendu de l'interface.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00460">affichage.c:460</a></div></div>
 <div class="ttc" id="aaffichage_8h_html_a3fd6316e2996455f044cc30c206daba5"><div class="ttname"><a href="affichage_8h.html#a3fd6316e2996455f044cc30c206daba5">renderStackCount</a></div><div class="ttdeci">void renderStackCount(SDL_Renderer *renderer, TTF_Font *font, int count, SDL_Rect itemRect)</div><div class="ttdoc">Affiche le nombre d'items dans une pile.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00009">affichage.c:9</a></div></div>
 <div class="ttc" id="aaffichage_8h_html_a5d7a5ce089f6d501efec53503d616e87"><div class="ttname"><a href="affichage_8h.html#a5d7a5ce089f6d501efec53503d616e87">calculCasePlayer</a></div><div class="ttdeci">void calculCasePlayer(SDL_Rect *casePlayer, t_input *input, char *nom)</div><div class="ttdoc">Calcule la position du portrait du joueur.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00036">affichage.c:36</a></div></div>
 <div class="ttc" id="aaffichage_8h_html_a80b31e46e79fcf54e2ef3f7830a4c80b"><div class="ttname"><a href="affichage_8h.html#a80b31e46e79fcf54e2ef3f7830a4c80b">calculInventaire</a></div><div class="ttdeci">void calculInventaire(SDL_Rect *inv, SDL_Rect *statsPlayer, t_input *input)</div><div class="ttdoc">Calcule la position du panneau d'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00080">affichage.c:80</a></div></div>
 <div class="ttc" id="aaffichage_8h_html_a89792fe0f90bf5107fe4dc53a0d72260"><div class="ttname"><a href="affichage_8h.html#a89792fe0f90bf5107fe4dc53a0d72260">createStatLine</a></div><div class="ttdeci">char * createStatLine(const char *statLabel, float additive, float multiplicative)</div><div class="ttdoc">Crée une ligne de texte pour une statistique.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00122">affichage.c:122</a></div></div>
-<div class="ttc" id="aaffichage_8h_html_a96c4589074dbafb252edc8af036d2e43"><div class="ttname"><a href="affichage_8h.html#a96c4589074dbafb252edc8af036d2e43">freeInv</a></div><div class="ttdeci">void freeInv(void *elt)</div><div class="ttdoc">Libère la mémoire de l'interface.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00605">affichage.c:605</a></div></div>
-<div class="ttc" id="aaffichage_8h_html_a97b3d1c61a1bb1026211fb94191e5485"><div class="ttname"><a href="affichage_8h.html#a97b3d1c61a1bb1026211fb94191e5485">handleInputInventaire</a></div><div class="ttdeci">void handleInputInventaire(t_input *input, t_joueur *player, t_sceneController *sceneController)</div><div class="ttdoc">Gère les entrées de l'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00655">affichage.c:655</a></div></div>
-<div class="ttc" id="aaffichage_8h_html_ab52cfc1609e782c407e667fde05707e3"><div class="ttname"><a href="affichage_8h.html#ab52cfc1609e782c407e667fde05707e3">inventoryUI_Init</a></div><div class="ttdeci">InventoryUI * inventoryUI_Init(InventoryUI *ui2, t_joueur *c, t_context *context)</div><div class="ttdoc">Initialise ou met à jour l'interface d'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00230">affichage.c:230</a></div></div>
-<div class="ttc" id="aaffichage_8h_html_abafb2a3f1b187fe764aeeeb43b65a0bb"><div class="ttname"><a href="affichage_8h.html#abafb2a3f1b187fe764aeeeb43b65a0bb">updateScroll</a></div><div class="ttdeci">void updateScroll(InventoryUI *ui, t_input *input)</div><div class="ttdoc">Met à jour le défilement de l'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00587">affichage.c:587</a></div></div>
+<div class="ttc" id="aaffichage_8h_html_a96c4589074dbafb252edc8af036d2e43"><div class="ttname"><a href="affichage_8h.html#a96c4589074dbafb252edc8af036d2e43">freeInv</a></div><div class="ttdeci">void freeInv(void *elt)</div><div class="ttdoc">Libère la mémoire de l'interface.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00602">affichage.c:602</a></div></div>
+<div class="ttc" id="aaffichage_8h_html_a97b3d1c61a1bb1026211fb94191e5485"><div class="ttname"><a href="affichage_8h.html#a97b3d1c61a1bb1026211fb94191e5485">handleInputInventaire</a></div><div class="ttdeci">void handleInputInventaire(t_input *input, t_joueur *player, t_sceneController *sceneController)</div><div class="ttdoc">Gère les entrées de l'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00652">affichage.c:652</a></div></div>
+<div class="ttc" id="aaffichage_8h_html_ab52cfc1609e782c407e667fde05707e3"><div class="ttname"><a href="affichage_8h.html#ab52cfc1609e782c407e667fde05707e3">inventoryUI_Init</a></div><div class="ttdeci">InventoryUI * inventoryUI_Init(InventoryUI *ui2, t_joueur *c, t_context *context)</div><div class="ttdoc">Initialise ou met à jour l'interface d'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00229">affichage.c:229</a></div></div>
+<div class="ttc" id="aaffichage_8h_html_abafb2a3f1b187fe764aeeeb43b65a0bb"><div class="ttname"><a href="affichage_8h.html#abafb2a3f1b187fe764aeeeb43b65a0bb">updateScroll</a></div><div class="ttdeci">void updateScroll(InventoryUI *ui, t_input *input)</div><div class="ttdoc">Met à jour le défilement de l'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00584">affichage.c:584</a></div></div>
 <div class="ttc" id="aaffichage_8h_html_ac368e7e8c70988bfb63fc7d724c4fd88"><div class="ttname"><a href="affichage_8h.html#ac368e7e8c70988bfb63fc7d724c4fd88">calculDescrStatsPlayer</a></div><div class="ttdeci">void calculDescrStatsPlayer(SDL_Rect *slotDroit, SDL_Rect *slotBas, SDL_Rect *casePlayer, SDL_Rect *caseStatsPlayer, t_input *input)</div><div class="ttdoc">Calcule la position du panneau de stats.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00073">affichage.c:73</a></div></div>
 <div class="ttc" id="aaffichage_8h_html_ac47100a1ad849aec295538c4b4a01d3d"><div class="ttname"><a href="affichage_8h.html#ac47100a1ad849aec295538c4b4a01d3d">calculStatsItem</a></div><div class="ttdeci">void calculStatsItem(SDL_Rect *inv, SDL_Rect *statsItem, t_input *input)</div><div class="ttdoc">Calcule la position du panneau de stats d'item.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00087">affichage.c:87</a></div></div>
 <div class="ttc" id="aaffichage_8h_html_ac8736b885279af679963075b084ee519"><div class="ttname"><a href="affichage_8h.html#ac8736b885279af679963075b084ee519">caculDescrItem</a></div><div class="ttdeci">void caculDescrItem(SDL_Rect *statsItem, SDL_Rect *descrItem, t_input *input)</div><div class="ttdoc">Calcule la position de la description d'item.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00094">affichage.c:94</a></div></div>
-<div class="ttc" id="aaffichage_8h_html_acac6e41a22a08962af5736bb23e8026e"><div class="ttname"><a href="affichage_8h.html#acac6e41a22a08962af5736bb23e8026e">inventoryUI_Update</a></div><div class="ttdeci">void inventoryUI_Update(InventoryUI *ui, t_context *context)</div><div class="ttdoc">Met à jour la logique de l'interface.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00517">affichage.c:517</a></div></div>
+<div class="ttc" id="aaffichage_8h_html_acac6e41a22a08962af5736bb23e8026e"><div class="ttname"><a href="affichage_8h.html#acac6e41a22a08962af5736bb23e8026e">inventoryUI_Update</a></div><div class="ttdeci">void inventoryUI_Update(InventoryUI *ui, t_context *context)</div><div class="ttdoc">Met à jour la logique de l'interface.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00516">affichage.c:516</a></div></div>
 <div class="ttc" id="aaffichage_8h_html_ae0087ef916fa7be3f58112c0f67f5b29"><div class="ttname"><a href="affichage_8h.html#ae0087ef916fa7be3f58112c0f67f5b29">calculCaseSlots</a></div><div class="ttdeci">void calculCaseSlots(SDL_Rect *comp, SDL_Rect *slot, t_input *input, char *nom1, char *nom2)</div><div class="ttdoc">Calcule la position des slots d'équipement.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00044">affichage.c:44</a></div></div>
-<div class="ttc" id="aaffichage_8h_html_af97eaceefbe2a5d829756cc09f74a94d"><div class="ttname"><a href="affichage_8h.html#af97eaceefbe2a5d829756cc09f74a94d">creerDescrWrapper</a></div><div class="ttdeci">void creerDescrWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour la création de description.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00584">affichage.c:584</a></div></div>
+<div class="ttc" id="aaffichage_8h_html_af97eaceefbe2a5d829756cc09f74a94d"><div class="ttname"><a href="affichage_8h.html#af97eaceefbe2a5d829756cc09f74a94d">creerDescrWrapper</a></div><div class="ttdeci">void creerDescrWrapper(t_fonctionParam *f)</div><div class="ttdoc">Wrapper pour la création de description.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8c_source.html#l00581">affichage.c:581</a></div></div>
 <div class="ttc" id="abutton_8h_html"><div class="ttname"><a href="button_8h.html">button.h</a></div><div class="ttdoc">Système de gestion des boutons pour l'interface utilisateur.</div></div>
 <div class="ttc" id="astruct_inventory_u_i_html"><div class="ttname"><a href="struct_inventory_u_i.html">InventoryUI</a></div><div class="ttdoc">Structure principale de l'interface d'inventaire.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8h_source.html#l00117">affichage.h:117</a></div></div>
 <div class="ttc" id="astruct_inventory_u_i_html_a0607694a162c0ee989445c0007831114"><div class="ttname"><a href="struct_inventory_u_i.html#a0607694a162c0ee989445c0007831114">InventoryUI::scrollY</a></div><div class="ttdeci">int scrollY</div><div class="ttdoc">Position de défilement vertical.</div><div class="ttdef"><b>Definition:</b> <a href="affichage_8h_source.html#l00123">affichage.h:123</a></div></div>
@@ -262,9 +278,13 @@ $(function() {
 <div class="ttc" id="astructt__text_html"><div class="ttname"><a href="structt__text.html">t_text</a></div><div class="ttdoc">Structure représentant un élément textuel dans l'interface.</div><div class="ttdef"><b>Definition:</b> <a href="text_8h_source.html#l00024">text.h:24</a></div></div>
 <div class="ttc" id="atext_8h_html"><div class="ttname"><a href="text_8h.html">text.h</a></div><div class="ttdoc">Gestion du rendu de texte avec SDL2_ttf.</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_da5c6b39c0a2f54e57df6799511cd3ab.html">ui</a></li><li class="navelem"><a class="el" href="affichage_8h.html">affichage.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>
