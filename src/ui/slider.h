@@ -20,6 +20,7 @@
 #include "../io/input.h"
 #include "../utils/fonctionManager.h"
 #include "button.h"
+#include "../io/audioManager.h"
 
 /**
  * @struct t_barreVolumme
@@ -61,8 +62,9 @@ void renderBarreVolumme(SDL_Renderer* renderer, t_barreVolumme* barre);
  * @brief Gère les entrées pour un curseur de volume
  * @param input Gestionnaire d'entrées
  * @param barre Curseur à manipuler
+ * @param context Contexte pour gérer le volume
  */
-void handleInputButtonVolumme(t_input* input, t_barreVolumme* barre);
+void handleInputButtonVolumme(t_input* input, t_barreVolumme* barre, t_context* context);
 
 /**
  * @brief Libère la mémoire utilisée par un curseur

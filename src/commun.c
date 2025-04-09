@@ -69,7 +69,7 @@ void renderBarreVolummeWrapper(t_fonctionParam* f) {
 }
 
 void handleInputButtonVolummeWrapper(t_fonctionParam* f) {
-    handleInputButtonVolumme(((t_input*)(f)->param[0]), ((t_barreVolumme*)(f)->param[1]));
+    handleInputButtonVolumme(((t_input*)(f)->param[0]), ((t_barreVolumme*)(f)->param[1]), GET_PTR(f, 2, t_context*));
 }
 
 void updatePlayerWrapper(t_fonctionParam* f) {

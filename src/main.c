@@ -104,6 +104,11 @@ int main(int argc, char* argv[]) {
 
     player->indexCurrentRoom = 0;
 
+    float globalVolume = 64.0f;
+    context.volume = &globalVolume;
+    jouerMusique("assets/music/fieldofmemories2.mp3", globalVolume, -1, context.audioManager);
+
+
     t_scene* scene = createMainMenu(&context, &player);
     t_scene* scene0 = createOptionMenu(&context);
     t_scene* scene2 = createCommandeMenu(&context);

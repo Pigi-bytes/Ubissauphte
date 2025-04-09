@@ -88,7 +88,7 @@ typedef struct {
     int nbItem;                          ///< Nombre d'objets dans la liste
     t_tileset* playerSkin;               ///< Tileset des skin
     t_tileset* tileSet;                  ///< Tileset du jeux
-
+    float* volume;                       ///< Pointeur vers le volume global pour les SFX
 } t_context;
 
 /**

@@ -26,12 +26,14 @@ void renderBarreVolumme(SDL_Renderer* renderer, t_barreVolumme* barre) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
 
-void handleInputButtonVolumme(t_input* input, t_barreVolumme* barre) {
+void handleInputButtonVolumme(t_input* input, t_barreVolumme* barre, t_context* context) {
     if (barre->isClicked) {
         if (((input->mouseX - (barre->curseur.w / 2)) >= (barre->barre.x)) && (input->mouseX + (barre->curseur.w / 2)) <= (barre->barre.x + barre->barre.w)) {
             barre->curseur.x = input->mouseX - (barre->curseur.w / 2);
             barre->volumme = ((float)(barre->curseur.x - barre->barre.x) * 100.0f) / ((float)(barre->barre.w - barre->curseur.w));
-            printf("%f\n", barre->volumme);
+            printf("%f\n", barre->volumme*1.28);
+            Mix_VolumeMusic(barre->volumme*1.28);
+            *context->volume = barre->volumme;
         }
     }
 
