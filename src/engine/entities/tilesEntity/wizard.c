@@ -100,7 +100,24 @@ t_tileEntity* createWizardEntity(t_tileset* tileset, t_scene* scene, t_context* 
     wizard->randomItem = getItemByRarity(context->itemListe, context->nbItem, RARITY_EPIC);
 
     wizard->interactText = NULL;
-    wizard->prix = 1000;
+
+    switch (context->difficulty) {
+        case EASY:
+            wizard->prix = 100;
+            break;
+        case NORMAL:
+            wizard->prix = 500;
+            break;
+        case HARD:
+            wizard->prix = 750;
+            break;
+        case DEMONIC:
+            wizard->prix = 1000;
+            break;
+        case LEGEND:
+            wizard->prix = 1500;
+            break;
+    }
 
     wizard->base.update = updateWizard;
     wizard->base.render = renderWizard;
