@@ -112,7 +112,7 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: common
+rarity: uncommon
 description: \nUn bouclier en métal \n simple mais robuste
 
 id Item: 5
@@ -135,7 +135,7 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: uncommon
+rarity: rare
 description: \nUn bouclier en métal renforcé\n pour une meilleure protection
 
 id Item: 6
@@ -319,7 +319,7 @@ angleAttack: 1.570796327
 attackDuration: 0.6
 attackCooldown: 1.8
 onEquipe: 1
-rarity: common
+rarity: uncommon
 description: \nUne claymore simple mais\n puissante, ideale pour les\n combats lourds
 
 id Item: 14
@@ -342,7 +342,7 @@ angleAttack: 2.094395102
 attackDuration: 0.7
 attackCooldown: 2.0
 onEquipe: 1
-rarity: uncommon
+rarity: rare
 description: \nUne claymore robuste avec\n une lame renforcee pour\n infliger des degats massifs
 
 id Item: 15
@@ -365,7 +365,7 @@ angleAttack: 2.617993878
 attackDuration: 0.8
 attackCooldown: 2.5
 onEquipe: 1
-rarity: rare
+rarity: epique
 description: \nUne claymore forgee par les\n meilleurs artisans, parfaite\n pour les guerriers legendaires
 
 id Item: 16
@@ -440,10 +440,7 @@ description: \nUne epee en bronze forgee\n par des maitres artisans,\n parfaite 
 id Item: 19
 Name: Marteau Basique
 speed Add Modifier: 0.0
-speed Mult Modifier: 0.8
-attack Add Modifier: 5.0
-attack Mult Modifier: 1.5
-defense Add Modifier: 1.0
+speed Mult Modificommonier: 1.0
 defense Mult Modifier: 1.0
 healthMax Add Modifier: 0.0
 healthMax Mult Modifier: 1.0
@@ -522,11 +519,11 @@ texture: 119
 mass: 8
 damage: 30
 range: 35
-angleAttack: 1.570796327
+angleAttack: 6.28
 attackDuration: 0.5
 attackCooldown: 1.8
 onEquipe: 1
-rarity: common
+rarity: rare
 description: \nUne hache a deux cotes\n simple mais puissante,\n ideale pour les combats
 
 id Item: 23
@@ -545,11 +542,11 @@ texture: 119
 mass: 10
 damage: 45
 range: 40
-angleAttack: 2.094395102
+angleAttack: 6.28
 attackDuration: 0.6
 attackCooldown: 2.0
 onEquipe: 1
-rarity: uncommon
+rarity: epique
 description: \nUne hache a deux cotes\n robuste, parfaite pour\n infliger des degats massifs
 
 id Item: 24
@@ -568,11 +565,11 @@ texture: 119
 mass: 12
 damage: 60
 range: 45
-angleAttack: 2.617993878
+angleAttack: 6.28
 attackDuration: 0.7
 attackCooldown: 2.5
 onEquipe: 1
-rarity: rare
+rarity: legendary
 description: \nUne hache a deux cotes\n forgee par les meilleurs\n artisans, parfaite pour les heros
 
 id Item: 25
@@ -664,7 +661,7 @@ angleAttack: 1.047197551
 attackDuration: 0.5
 attackCooldown: 1.5
 onEquipe: 1
-rarity: common
+rarity: rare
 description: \nUn baton rose simple mais\n imprégné d'une faible magie,\n idéal pour les apprentis mages
 
 id Item: 29
@@ -687,7 +684,7 @@ angleAttack: 1.570796327
 attackDuration: 0.45
 attackCooldown: 1.8
 onEquipe: 1
-rarity: uncommon
+rarity: epique
 description: \nUn baton rose robuste avec\n une magie renforcée, parfait\n pour les mages confirmés
 
 id Item: 30
@@ -710,7 +707,7 @@ angleAttack: 2.094395102
 attackDuration: 0.4
 attackCooldown: 2.0
 onEquipe: 1
-rarity: rare
+rarity: legendary
 description: \nUn baton rose légendaire,\n imprégné d'une magie puissante,\n parfait pour les archimages
 
 id Item: 31
@@ -733,7 +730,7 @@ angleAttack: 1.047197551
 attackDuration: 0.5
 attackCooldown: 1.5
 onEquipe: 1
-rarity: common
+rarity: rare
 description: \nUn baton bleu simple mais\n imprégné d'une faible magie,\n idéal pour les apprentis mages
 
 id Item: 32
@@ -756,7 +753,7 @@ angleAttack: 1.570796327
 attackDuration: 0.45
 attackCooldown: 1.8
 onEquipe: 1
-rarity: uncommon
+rarity: epique
 description: \nUn baton bleu robuste avec\n une magie renforcée, parfait\n pour les mages confirmés
 
 id Item: 33
@@ -779,7 +776,7 @@ angleAttack: 2.094395102
 attackDuration: 0.4
 attackCooldown: 2.0
 onEquipe: 1
-rarity: rare
+rarity: legendary
 description: \nUn baton bleu légendaire,\n imprégné d'une magie puissante,\n parfait pour les archimages
 
 id Item: 34
@@ -917,7 +914,7 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: common
+rarity: rare
 description: \nUne tablette ancienne qui\n augmente légèrement la\n puissance d'attaque
 
 id Item: 44
@@ -940,7 +937,7 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: uncommon
+rarity: epique
 description: \nUne tablette mystique qui\n renforce considérablement\n l'attaque
 
 id Item: 45
@@ -986,7 +983,7 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: uncommon
+rarity: legendary
 description: \nUn cristal d'amethyste rare\n qui augmente fortement la\n santé et la défense
 
 id Item: 47
@@ -1032,7 +1029,7 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: uncommon
+rarity: epique
 description: \nUn livre mystérieux qui\n renforce considérablement\n l'attaque
 
 id Item: 49
@@ -1055,7 +1052,7 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: common
+rarity: epique
 description: \nUn parchemin ancien qui\n améliore légèrement la\n défense
 
 id Item: 50
@@ -1078,5 +1075,5 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: uncommon
+rarity: legendary
 description: \nUn parchemin mystique qui\n augmente fortement la défense\n et la santé
