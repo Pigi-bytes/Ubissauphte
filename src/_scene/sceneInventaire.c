@@ -4,9 +4,7 @@ t_scene *createMainInv(t_context *context, t_joueur *player) {
     t_typeRegistry *registre = createTypeRegistry();
     t_tileset *tileset = initTileset(context->renderer, 192, 240, 16, "./assets/imgs/tileMapDungeon.bmp");
 
-    // for (int i = 0; i < fichier->blockManager->count; i++) {
-    //     inventaireAjoutObjet(player->inventaire, itemListe[i], 1);
-    // }
+   
 
     inventaireAjoutObjet(player->inventaire, context->itemListe[2], 1);
     equiperEquipement(&player, 0, SLOT_ARME);

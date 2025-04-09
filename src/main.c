@@ -92,6 +92,10 @@ int main(int argc, char* argv[]) {
     t_fichier* fichier = chargerFichier("src/test.txt");
 
     context.itemListe = item_load(fichier, context.tileSet, player);
+
+     for (int i = 0; i < fichier->blockManager->count; i++) {
+        inventaireAjoutObjet(player->inventaire, context.itemListe[i], 1);
+    }
     context.nbItem = fichier->blockManager->count;
 
     equipementRecalculerStats(&player);
