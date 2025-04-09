@@ -33,8 +33,6 @@ void bossSlimeDealDamageToPlayer(t_boss_slime* bossSlime, t_joueur* player, t_co
     if (bossSlime->currentPhase >= 2) damage += 5;
     if (bossSlime->currentPhase >= 3) damage += 5;
 
-    applyDamage(&player->health, damage, &player->entity, context);
-
     SDL_FPoint position = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
     emitImpactParticles(bossSlime->particles, position, (SDL_FPoint){0, 0}, player->entity.collisionCircle.radius, bossSlime->particleColor);
     playerTakeDamage(player, damage, context, position);
