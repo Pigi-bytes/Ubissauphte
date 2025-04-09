@@ -105,8 +105,6 @@ int main(int argc, char *argv[])
     context.itemListe = item_load(fichier, context.tileSet, player);
     context.nbItem = fichier->blockManager->count;
 
- 
-
     equipementRecalculerStats(&player);
 
     player->indexCurrentRoom = 0;
@@ -114,18 +112,7 @@ int main(int argc, char *argv[])
     float globalVolume = 64.0f;
     context.volume = &globalVolume;
     int musique = -1;
-    jouerMusique("assets/music/fieldofmemories2.mp3", context.volume, &musique, context.audioManager);
-
-    t_scene* scene = createMainMenu(&context, &player);
-    t_scene* scene0 = createOptionMenu(&context);
-    t_scene* scene2 = createCommandeMenu(&context);
-    t_scene* scene3 = createFpsMenu(&context);
-    t_scene* scene4 = createMainInv(&context, player);
-    t_scene* scene5 = createOption2Menu(&context);
-    t_scene* scene6 = CreateWin(&context);
-    t_scene* scene7 = CreateGameOver(&context);
-    t_scene* scene8 = chargement(&context, &player);
-    jouerMusique("assets/music/fieldofmemories2.mp3", globalVolume, -1, context.audioManager);
+    jouerMusique("assets/music/fieldofmemories2.mp3", (int *)context.volume, &musique, context.audioManager);
 
     t_scene *scene = createMainMenu(&context, &player);
     t_scene *scene0 = createOptionMenu(&context);
