@@ -440,7 +440,7 @@ description: \nUne epee en bronze forgee\n par des maitres artisans,\n parfaite 
 id Item: 19
 Name: Marteau Basique
 speed Add Modifier: 0.0
-speed Mult Modificommonier: 1.0
+speed Mult Modifier: 1.0
 defense Mult Modifier: 1.0
 healthMax Add Modifier: 0.0
 healthMax Mult Modifier: 1.0
@@ -519,7 +519,7 @@ texture: 119
 mass: 8
 damage: 30
 range: 35
-angleAttack: 6.28
+angleAttack: 6.27
 attackDuration: 0.5
 attackCooldown: 1.8
 onEquipe: 1
@@ -542,7 +542,7 @@ texture: 119
 mass: 10
 damage: 45
 range: 40
-angleAttack: 6.28
+angleAttack: 6.28318530718
 attackDuration: 0.6
 attackCooldown: 2.0
 onEquipe: 1
@@ -565,7 +565,7 @@ texture: 119
 mass: 12
 damage: 60
 range: 45
-angleAttack: 6.28
+angleAttack: 6.28318530718
 attackDuration: 0.7
 attackCooldown: 2.5
 onEquipe: 1
