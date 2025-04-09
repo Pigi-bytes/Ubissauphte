@@ -115,6 +115,6 @@ void handleInputButton(t_context* ctx, t_button* button) {
 void freeButton(void* object) {
     t_button* button = (t_button*)object;
     freeText(&(button->label));
-    free(button);
     freeFonction(&(button->OnClick));
+    free(button);
 }
