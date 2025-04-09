@@ -619,12 +619,7 @@ SDL_bool checkAndProcessLevelUp(t_joueur* player) {
     player->level += 1;
     player->xp = player->xp - player->xpToNextLevel;
 
-    player->xpToNextLevel = (int)(player->xpToNextLevel * 1.2f);
-
-    player->baseStats.attack.additive += 5;
-    player->baseStats.defense.additive += 5;
-    player->baseStats.healthMax.additive += 5;
-    player->baseStats.speed.additive += 5;
+    player->xpToNextLevel = (int)(player->xpToNextLevel * 1.5f);
 
     equipementRecalculerStats(&player);
     emitHealParticles(player->particleEmitter, (SDL_FPoint){player->entity.collisionCircle.x, player->entity.collisionCircle.y}, player->entity.collisionCircle.radius, (SDL_Color){64, 255, 128, 200});
