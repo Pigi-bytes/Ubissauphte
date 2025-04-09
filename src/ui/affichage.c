@@ -153,26 +153,23 @@ char *createStatLine(const char *statLabel, float additive, float multiplicative
 
     return strdup(buffer);
 }
-
 void calculerItem(SDL_Rect *item, SDL_Rect inv, SDL_Rect *comp, int nb, int ind, t_input *input) {
-    item->h = inv.h / 6;
-    item->w = item->h;
+    item->h = inv.h / 6;  // Hauteur de l'item
+    item->w = item->h;    // Largeur égale à la hauteur (carré)
 
     // Calcul de la ligne et de la colonne
-    int ligne = ind / 4;    // Division entière pour obtenir la ligne
-    int colonne = ind % 4;  // Modulo pour obtenir la colonne
+    int ligne = ind / 4;    // 4 items par ligne
+    int colonne = ind % 4;  // Position dans la ligne courante
 
-    // Position X
-    if (colonne == 0)
-        item->x = inv.x + input->windowWidth * 0.02;
-    else
-        item->x = comp->x + comp->w + input->windowWidth * 0.02;
+    // Espacement entre les items
+    float spacingX = input->windowWidth * 0.02;
+    float spacingY = input->windowHeight * 0.02;
 
-    // Position Y
-    if (ligne == 0)
-        item->y = inv.y + input->windowHeight * 0.016;
-    else
-        item->y = inv.y + input->windowHeight * 0.016 + ligne * (item->h + input->windowHeight * 0.02);
+    // Position X : position initiale + (largeur + espacement) * colonne
+    item->x = inv.x + spacingX + colonne * (item->w + spacingX);
+
+    // Position Y : position initiale + (hauteur + espacement) * ligne
+    item->y = inv.y + spacingY + ligne * (item->h + spacingY);
 }
 
 void afficherText(SDL_Renderer *renderer, t_text *txt1, t_text *txt2, t_input *input) {
@@ -303,8 +300,8 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, t_joueur *c, t_context *context)
         ui->elems->inventory_slots[0].button = ui2->elems->inventory_slots[0].button;
         ui->elems->inventory_slots[0].button->rect = ui->elems->inventory_slots[0].rect;
     }
-    int i, j;
-    for (i = 1, j = 1; i < ui->nbItems; j++, i++) {
+    int i, j=0;
+    for (i = 1; i < ui->nbItems; j++, i++) {
         calculerItem(&ui->elems->inventory_slots[i].rect, ui->elems->inventory_panel.rect, &ui->elems->inventory_slots[i - 1].rect, i, j, context->input);
         if (ui2 == NULL) {
             ui->elems->inventory_slots[i].button = createButton(createText(context->renderer, " ", ui->ext->item_font, (SDL_Color){255, 255, 255}), (SDL_Color){255, 128, 0}, (SDL_Color){255, 69, 0}, ui->elems->inventory_slots[i].rect, creerFonction(creerDescrWrapper, FONCTION_PARAMS(ui, items[i]->definition, context->renderer, context->input)));
@@ -313,8 +310,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, t_joueur *c, t_context *context)
             ui->elems->inventory_slots[i].button = ui2->elems->inventory_slots[i].button;
             ui->elems->inventory_slots[i].button->rect = ui->elems->inventory_slots[i].rect;
         }
-        if (j == 4)
-            j = 0;
+   
     }
     ui->j = j;
     ui->elems->caseArme.texture = c->currentWeapon->texture;

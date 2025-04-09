@@ -1,18 +1,17 @@
 id Item: 0
-Name: Bouclier du Chêne
-speed Modifier: 0.8
+Name: Bouclier en Bois Simple
 speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
+speed Mult Modifier: 0.9
 attack Add Modifier: 0.0
 attack Mult Modifier: 1.0
-defense Add Modifier: 1.8
-defense Mult Modifier: 2.0
-healthMax Add Modifier: 25.0
+defense Add Modifier: 1.2
+defense Mult Modifier: 1.5
+healthMax Add Modifier: 15.0
 healthMax Mult Modifier: 1.0
 flags: 4
 type: armure
 texture: 102
-mass: 4
+mass: 2
 damage: 0
 range: 0
 angleAttack: 0
@@ -20,42 +19,42 @@ attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
 rarity: common
-description: \nUn bouclier rustique taillé\n dans du chêne centenaire
+description: \nUn bouclier rudimentaire \n fabriqué à partir de planches de bois
 
 id Item: 1
-Name: Hache de Guerre
-speed Modifier: 0.9
+Name: Bouclier en Bois Renforcé
+speed Modifier: 0.85
 speed Add Modifier: 0.0
 speed Mult Modifier: 1.0
-attack Add Modifier: 2.1
-attack Mult Modifier: 1.8
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
+attack Add Modifier: 0.0
+attack Mult Modifier: 1.0
+defense Add Modifier: 1.8
+defense Mult Modifier: 1.8
+healthMax Add Modifier: 25.0
 healthMax Mult Modifier: 1.0
-flags: 12
-type: arme
-texture: 119
-mass: 15
-damage: 50000
-range: 28
-angleAttack: 6.28318530718
-attackDuration: 0.45
-attackCooldown: 1.2
+flags: 4
+type: armure
+texture: 102
+mass: 3
+damage: 0
+range: 0
+angleAttack: 0
+attackDuration: 0.0
+attackCooldown: 0.0
 onEquipe: 1
-rarity: legendary
-description: \nUne hache lourde imprégnée\n d'une puissance primitive
+rarity: uncommon
+description: \nUn bouclier en bois renforcé \n avec des bandes de métal
 
 id Item: 2
 Name: Dague Fantôme
 speed Modifier: 1.0
-speed Add Modifier: 6.0
-speed Mult Modifier: 1.4
-attack Add Modifier: 1.9
-attack Mult Modifier: 1.7
-defense Add Modifier: 0.95
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 0.0
+attack Mult Modifier: 1.0
+defense Add Modifier: 0.0
 defense Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
+healthMax Add Modifier: 00.0
 healthMax Mult Modifier: 1.0
 flags: 4
 type: arme
@@ -68,199 +67,1016 @@ attackDuration: 0.45
 attackCooldown: 1.2
 onEquipe: 1
 rarity: common
-description: \nLame furtive qui traverse\n les défenses comme un spectre
+description: \nLame furtive qui traverse \n les défenses comme un spectre
 
 id Item: 3
-Name: Épée Nice
-speed Modifier: 1.1
+Name: Bouclier en Bois Ancestral
 speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 2.2
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
-healthMax Mult Modifier: 1.3
-flags: 4
-type: arme
-texture: 105
-mass: 3
-damage: 20
-range: 30
-angleAttack: 1.57079632679
-attackDuration: 0.28
-attackCooldown: 0.7
-onEquipe: 1
-rarity: uncommon
-description: \nUne lame brillante imprégnée\n de la lumière des étoiles
-
-id Item: 4
-Name: Potion de Vitalité
-speed Modifier: 1.0
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
+speed Mult Modifier: 0.8
 attack Add Modifier: 0.0
 attack Mult Modifier: 1.0
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
-healthMax Mult Modifier: 1.0
-flags: 3
-type: activable
-texture: 116
-mass: 0
-
+defense Add Modifier: 2.5
+defense Mult Modifier: 2.0
+healthMax Add Modifier: 40.0
+healthMax Mult Modifier: 1.1
+flags: 4
+type: armure
+texture: 102
+mass: 4
 damage: 0
 range: 0
 angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
-onEquipe: 0
-rarity: common
-description: \nUn breuvage rougeoyant qui\n pulse d'énergie vitale
+onEquipe: 1
+rarity: rare
+description: \nUn bouclier en bois ancien \n imprégné d'une aura protectrice
 
+id Item: 4
+Name: Bouclier en Métal Basique
+speed Add Modifier: 0.8
+speed Mult Modifier: 1.0
+attack Add Modifier: 0.0
+attack Mult Modifier: 1.0
+defense Add Modifier: 2.0
+defense Mult Modifier: 2.0
+healthMax Add Modifier: 30.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: armure
+texture: 103
+mass: 5
+damage: 0
+range: 0
+angleAttack: 0
+attackDuration: 0.0
+attackCooldown: 0.0
+onEquipe: 1
+rarity: common
+description: \nUn bouclier en métal \n simple mais robuste
 
 id Item: 5
-Name: Marteau de Forge
-speed Modifier: 0.6
+Name: Bouclier en Métal Renforcé
 speed Add Modifier: 0.0
-speed Mult Modifier: 0.5
-attack Add Modifier: 3.5
+speed Mult Modifier: 0.75
+attack Add Modifier: 0.0
 attack Mult Modifier: 1.0
-defense Add Modifier: 0.0
+defense Add Modifier: 3.0
+defense Mult Modifier: 2.5
+healthMax Add Modifier: 50.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: armure
+texture: 103
+mass: 7
+damage: 0
+range: 0
+angleAttack: 0
+attackDuration: 0.0
+attackCooldown: 0.0
+onEquipe: 1
+rarity: uncommon
+description: \nUn bouclier en métal renforcé\n pour une meilleure protection
+
+id Item: 6
+Name: Bouclier en Métal Légendaire
+speed Add Modifier: 0.0
+speed Mult Modifier: 0.7
+attack Add Modifier: 0.0
+attack Mult Modifier: 1.0
+defense Add Modifier: 4.5
+defense Mult Modifier: 3.0
+healthMax Add Modifier: 75.0
+healthMax Mult Modifier: 1.2
+flags: 4
+type: armure
+texture: 103
+mass: 9
+damage: 0
+range: 0
+angleAttack: 0
+attackDuraqtion: 0.0
+attackCooldown: 0.0
+onEquipe: 1
+rarity: legendary
+description: \nUn bouclier forgé par les anciens\n dieux offrant une protection inégalée
+
+id Item: 7
+Name: Dague de l'Ombre
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.2
+attack Add Modifier: 2.0
+attack Mult Modifier: 1.5
+defense Add Modifier: 0.5
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 104
+mass: 1.0
+damage: 15
+range: 15
+angleAttack: 0.785398163
+attackDuration: 0.4
+attackCooldown: 1.0
+onEquipe: 1
+rarity: common
+description: \nUne dague légère et rapide\n idéale pour les attaques\n furtives et précises
+
+id Item: 8
+Name: Dague du Spectre
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.1
+attack Add Modifier: 3.0
+attack Mult Modifier: 1.7
+defense Add Modifier: 0.8
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 104
+mass: 1.2
+damage: 20
+range: 18
+angleAttack: 1.047197551
+attackDuration: 0.35
+attackCooldown: 1.2
+onEquipe: 1
+rarity: uncommon
+description: \nUne lame éthérée qui frappe\n avec une précision mortelle\n et traverse \nles defense
+
+id Item: 9
+Name: Dague des Ténèbres
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.4
+attack Add Modifier: 4.0
+attack Mult Modifier: 2.0
+defense Add Modifier: 1.0
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 104
+mass: 1.5
+damage: 25
+range: 20
+angleAttack: 1.570796327
+attackDuration: 0.25
+attackCooldown: 0.8
+onEquipe: 1
+rarity: rare
+description: \nUne dague forgée dans les\n ombres, parfaite pour les\n bon assassins
+
+id Item: 10
+Name: Epee de Fer Simple
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 3.0
+attack Mult Modifier: 1.5
+defense Add Modifier: 0.5
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 105
+mass: 4
+damage: 18
+range: 25
+angleAttack: 1.047197551
+attackDuration: 0.4
+attackCooldown: 1.0
+onEquipe: 1
+rarity: common
+description: \nUne epee basique forgee\n en fer, ideale pour les\n combats rapproches
+
+id Item: 11
+Name: Epee de Fer Renforcee
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.1
+attack Add Modifier: 5.0
+attack Mult Modifier: 1.8
+defense Add Modifier: 1.0
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 105
+mass: 5
+damage: 25
+range: 30
+angleAttack: 1.570796327
+attackDuration: 0.35
+attackCooldown: 1.2
+onEquipe: 1
+rarity: uncommon
+description: \nUne epee solide avec une\n lame renforcee pour infliger\n des degats importants
+
+id Item: 12
+Name: Epee de Fer Legendaire
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.2
+attack Add Modifier: 8.0
+attack Mult Modifier: 2.0
+defense Add Modifier: 1.5
+defense Mult Modifier: 1.2
+healthMax Add Modifier: 10.0
+healthMax Mult Modifier: 1.1
+flags: 4
+type: arme
+texture: 105
+mass: 6
+damage: 35
+range: 35
+angleAttack: 2.094395102
+attackDuration: 0.3
+attackCooldown: 1.5
+onEquipe: 1
+rarity: rare
+description: \nUne epee forgee par les\n meilleurs artisans, parfaite\n pour les heros legendaires
+
+id Item: 13
+Name: Claymore Basique
+speed Add Modifier: 0.0
+speed Mult Modifier: 0.9
+attack Add Modifier: 6.0
+attack Mult Modifier: 1.6
+defense Add Modifier: 1.0
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 107
+mass: 8
+damage: 30
+range: 40
+angleAttack: 1.570796327
+attackDuration: 0.6
+attackCooldown: 1.8
+onEquipe: 1
+rarity: common
+description: \nUne claymore simple mais\n puissante, ideale pour les\n combats lourds
+
+id Item: 14
+Name: Claymore Renforcee
+speed Add Modifier: 0.0
+speed Mult Modifier: 0.85
+attack Add Modifier: 10.0
+attack Mult Modifier: 1.8
+defense Add Modifier: 1.5
+defense Mult Modifier: 1.1
+healthMax Add Modifier: 5.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 107
+mass: 10
+damage: 45
+range: 45
+angleAttack: 2.094395102
+attackDuration: 0.7
+attackCooldown: 2.0
+onEquipe: 1
+rarity: uncommon
+description: \nUne claymore robuste avec\n une lame renforcee pour\n infliger des degats massifs
+
+id Item: 15
+Name: Claymore Legendaire
+speed Add Modifier: 0.0
+speed Mult Modifier: 0.8
+attack Add Modifier: 15.0
+attack Mult Modifier: 2.0
+defense Add Modifier: 2.0
+defense Mult Modifier: 1.2
+healthMax Add Modifier: 10.0
+healthMax Mult Modifier: 1.1
+flags: 4
+type: arme
+texture: 107
+mass: 12
+damage: 60
+range: 50
+angleAttack: 2.617993878
+attackDuration: 0.8
+attackCooldown: 2.5
+onEquipe: 1
+rarity: rare
+description: \nUne claymore forgee par les\n meilleurs artisans, parfaite\n pour les guerriers legendaires
+
+id Item: 16
+Name: Epee en Bronze Simple
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 2.0
+attack Mult Modifier: 1.4
+defense Add Modifier: 0.5
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 108
+mass: 3
+damage: 15
+range: 20
+angleAttack: 1.047197551
+attackDuration: 0.4
+attackCooldown: 1.0
+onEquipe: 1
+rarity: common
+description: \nUne epee en bronze legere\n et facile a manier, ideale\n pour les debutants
+
+id Item: 17
+Name: Epee en Bronze Renforcee
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.1
+attack Add Modifier: 4.0
+attack Mult Modifier: 1.6
+defense Add Modifier: 1.0
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 108
+mass: 4
+damage: 22
+range: 25
+angleAttack: 1.570796327
+attackDuration: 0.35
+attackCooldown: 1.2
+onEquipe: 1
+rarity: uncommon
+description: \nUne epee en bronze robuste\n avec une lame renforcee\n pour infliger des degats
+
+id Item: 18
+Name: Epee en Bronze Legendaire
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.2
+attack Add Modifier: 6.0
+attack Mult Modifier: 1.9
+defense Add Modifier: 1.5
+defense Mult Modifier: 1.1
+healthMax Add Modifier: 5.0
+healthMax Mult Modifier: 1.1
+flags: 4
+type: arme
+texture: 108
+mass: 5
+damage: 30
+range: 30
+angleAttack: 2.094395102
+attackDuration: 0.3
+attackCooldown: 1.5
+onEquipe: 1
+rarity: rare
+description: \nUne epee en bronze forgee\n par des maitres artisans,\n parfaite pour les heros
+
+id Item: 19
+Name: Marteau Basique
+speed Add Modifier: 0.0
+speed Mult Modifier: 0.8
+attack Add Modifier: 5.0
+attack Mult Modifier: 1.5
+defense Add Modifier: 1.0
 defense Mult Modifier: 1.0
 healthMax Add Modifier: 0.0
 healthMax Mult Modifier: 1.0
 flags: 4
 type: arme
 texture: 118
-mass: 8
+mass: 7
+damage: 25
+range: 30
+angleAttack: 1.570796327
+attackDuration: 0.5
+attackCooldown: 1.8
+onEquipe: 1
+rarity: common
+description: \nUn marteau simple mais\n efficace, ideal pour les\n combats lourds
+
+id Item: 20
+Name: Marteau Renforce
+speed Add Modifier: 0.0
+speed Mult Modifier: 0.75
+attack Add Modifier: 8.0
+attack Mult Modifier: 1.8
+defense Add Modifier: 1.5
+defense Mult Modifier: 1.1
+healthMax Add Modifier: 5.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 118
+mass: 9
 damage: 40
+range: 35
+angleAttack: 2.094395102
+attackDuration: 0.6
+attackCooldown: 2.0
+onEquipe: 1
+rarity: uncommon
+description: \nUn marteau robuste avec une\n tete renforcee pour infliger\n des degats massifs
+
+id Item: 21
+Name: Marteau Legendaire
+speed Add Modifier: 0.0
+speed Mult Modifier: 0.7
+attack Add Modifier: 12.0
+attack Mult Modifier: 2.0
+defense Add Modifier: 2.0
+defense Mult Modifier: 1.2
+healthMax Add Modifier: 10.0
+healthMax Mult Modifier: 1.1
+flags: 4
+type: arme
+texture: 118
+mass: 12
+damage: 55
 range: 40
-angleAttack: 2.09439510239
-attackDuration: 0.3
-attackCooldown: 1.5
+angleAttack: 2.617993878
+attackDuration: 0.7
+attackCooldown: 2.5
 onEquipe: 1
 rarity: rare
-description: \nUn outil de forge transformé\n en arme dévastatrice
+description: \nUn marteau forgee par les\n dieux, capable de briser\n n'importe quelle defense
 
-id Item: 6
-Name: Lance Perçante
-speed Modifier: 1.0
-speed Add Modifier: 5.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 2.4
-defense Add Modifier: 0.9
+id Item: 22
+Name: Hache Double Basique
+speed Add Modifier: 0.0
+speed Mult Modifier: 0.85
+attack Add Modifier: 6.0
+attack Mult Modifier: 1.6
+defense Add Modifier: 1.0
 defense Mult Modifier: 1.0
 healthMax Add Modifier: 0.0
 healthMax Mult Modifier: 1.0
 flags: 4
 type: arme
-texture: 132
-mass: 5
-damage: 10000
-range: 40
-angleAttack: 0.62831853071
-attackDuration: 0.3
-attackCooldown: 0.65
+texture: 119
+mass: 8
+damage: 30
+range: 35
+angleAttack: 1.570796327
+attackDuration: 0.5
+attackCooldown: 1.8
 onEquipe: 1
-rarity: epic
-description: \nArme d'estoc redoutable\n avec une portée impressionnante
-
-id Item: 7
-Name: Potion de mort
-speed Modifier: 1.0
-speed Add Modifier: 400.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 5000.0
-attack Mult Modifier: 1.0
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-healthMax Add Modifier: 500.0
-healthMax Mult Modifier: 1.0
-flags: 3
-type: talisment
-texture: 127
-mass: 0
-damage: 0
-range: 0
-angleAttack: 0
-attackDuration: 0.0
-attackCooldown: 0.0
-onEquipe: 0
 rarity: common
-onUse: 0
-description: \nUn breuvage rougeoyant qui\n pulse d'énergie vitale
+description: \nUne hache a deux cotes\n simple mais puissante,\n ideale pour les combats
 
-id Item: 8
-Name: Potion de Vitalité
-speed Modifier: 1.0
+id Item: 23
+Name: Hache Double Renforcee
 speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 1.0
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-healthMax Add Modifier: 50.0
-healthMax Mult Modifier: 1.2
-flags: 3
-type: activable
-texture: 116
-mass: 0.5
-damage: 0
-range: 0
-angleAttack: 0
-attackDuration: 0.0
-attackCooldown: 0.0
-onEquipe: 0
-rarity: common
-description: \nUne potion qui restaure\n instantanément la santé
-
-id Item: 9
-Name: Potion de Téléportation
-speed Modifier: 1.0
-speed Add Modifier: 0.0
-speed Mult Modifier: 1.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 1.0
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
+speed Mult Modifier: 0.8
+attack Add Modifier: 10.0
+attack Mult Modifier: 1.8
+defense Add Modifier: 1.5
+defense Mult Modifier: 1.1
+healthMax Add Modifier: 5.0
 healthMax Mult Modifier: 1.0
-flags: 3
-type: activable
-texture: 117
-mass: 0.5
-damage: 0
-range: 100
-angleAttack: 0
-attackDuration: 0.0
-attackCooldown: 5.0
-onEquipe: 0
-rarity: rare
-description: \nUne potion qui permet de se\n téléporter instantanément
-
-id Item: 10
-Name: Potion de Vitesse
-speed Modifier: 1.5
-speed Add Modifier: 10.0
-speed Mult Modifier: 2.0
-attack Add Modifier: 0.0
-attack Mult Modifier: 1.0
-defense Add Modifier: 0.0
-defense Mult Modifier: 1.0
-healthMax Add Modifier: 0.0
-healthMax Mult Modifier: 1.0
-flags: 3
-type: activable
-texture: 114
-mass: 0.5
-damage: 0
-range: 0
-angleAttack: 0
-attackDuration: 0.0
-attackCooldown: 3.0
-onEquipe: 0
+flags: 4
+type: arme
+texture: 119
+mass: 10
+damage: 45
+range: 40
+angleAttack: 2.094395102
+attackDuration: 0.6
+attackCooldown: 2.0
+onEquipe: 1
 rarity: uncommon
-description: \nUne potion qui augmente\n temporairement la vitesse
+description: \nUne hache a deux cotes\n robuste, parfaite pour\n infliger des degats massifs
+
+id Item: 24
+Name: Hache Double Legendaire
+speed Add Modifier: 0.0
+speed Mult Modifier: 0.75
+attack Add Modifier: 15.0
+attack Mult Modifier: 2.0
+defense Add Modifier: 2.0
+defense Mult Modifier: 1.2
+healthMax Add Modifier: 10.0
+healthMax Mult Modifier: 1.1
+flags: 4
+type: arme
+texture: 119
+mass: 12
+damage: 60
+range: 45
+angleAttack: 2.617993878
+attackDuration: 0.7
+attackCooldown: 2.5
+onEquipe: 1
+rarity: rare
+description: \nUne hache a deux cotes\n forgee par les meilleurs\n artisans, parfaite pour les heros
+
+id Item: 25
+Name: Hache Simple
+speed Add Modifier: 0.0
+speed Mult Modifier: 0.9
+attack Add Modifier: 5.0
+attack Mult Modifier: 1.5
+defense Add Modifier: 1.0
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 120
+mass: 6
+damage: 25
+range: 30
+angleAttack: 1.570796327
+attackDuration: 0.4
+attackCooldown: 1.5
+onEquipe: 1
+rarity: common
+description: \nUne hache simple mais\n efficace, ideale pour les\n combats rapproches
+
+id Item: 26
+Name: Hache Renforcee
+speed Add Modifier: 0.0
+speed Mult Modifier: 0.85
+attack Add Modifier: 8.0
+attack Mult Modifier: 1.7
+defense Add Modifier: 1.5
+defense Mult Modifier: 1.1
+healthMax Add Modifier: 5.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 120
+mass: 8
+damage: 40
+range: 35
+angleAttack: 2.094395102
+attackDuration: 0.5
+attackCooldown: 1.8
+onEquipe: 1
+rarity: uncommon
+description: \nUne hache robuste avec une\n lame renforcee, parfaite\n pour infliger des degats
+
+id Item: 27
+Name: Hache Legendaire
+speed Add Modifier: 0.0
+speed Mult Modifier: 0.8
+attack Add Modifier: 12.0
+attack Mult Modifier: 2.0
+defense Add Modifier: 2.0
+defense Mult Modifier: 1.2
+healthMax Add Modifier: 10.0
+healthMax Mult Modifier: 1.1
+flags: 4
+type: arme
+texture: 120
+mass: 10
+damage: 55
+range: 40
+angleAttack: 2.617993878
+attackDuration: 0.6
+attackCooldown: 2.2
+onEquipe: 1
+rarity: rare
+description: \nUne hache forgee par les\n meilleurs artisans, parfaite\n pour les guerriers legendaires
+
+id Item: 28
+Name: Baton de Mage Rose Simple
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 3.0
+attack Mult Modifier: 1.5
+defense Add Modifier: 0.5
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 10.0
+healthMax Mult Modifier: 1.1
+flags: 4
+type: arme
+texture: 129
+mass: 4
+damage: 20
+range: 50
+angleAttack: 1.047197551
+attackDuration: 0.5
+attackCooldown: 1.5
+onEquipe: 1
+rarity: common
+description: \nUn baton rose simple mais\n imprégné d'une faible magie,\n idéal pour les apprentis mages
+
+id Item: 29
+Name: Baton de Mage Rose Renforce
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.1
+attack Add Modifier: 5.0
+attack Mult Modifier: 1.7
+defense Add Modifier: 1.0
+defense Mult Modifier: 1.1
+healthMax Add Modifier: 15.0
+healthMax Mult Modifier: 1.2
+flags: 4
+type: arme
+texture: 129
+mass: 5
+damage: 30
+range: 60
+angleAttack: 1.570796327
+attackDuration: 0.45
+attackCooldown: 1.8
+onEquipe: 1
+rarity: uncommon
+description: \nUn baton rose robuste avec\n une magie renforcée, parfait\n pour les mages confirmés
+
+id Item: 30
+Name: Baton de Mage Rose Legendaire
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.2
+attack Add Modifier: 8.0
+attack Mult Modifier: 2.0
+defense Add Modifier: 1.5
+defense Mult Modifier: 1.2
+healthMax Add Modifier: 20.0
+healthMax Mult Modifier: 1.3
+flags: 4
+type: arme
+texture: 129
+mass: 6
+damage: 40
+range: 70
+angleAttack: 2.094395102
+attackDuration: 0.4
+attackCooldown: 2.0
+onEquipe: 1
+rarity: rare
+description: \nUn baton rose légendaire,\n imprégné d'une magie puissante,\n parfait pour les archimages
+
+id Item: 31
+Name: Baton de Mage Bleu Simple
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 2.0
+attack Mult Modifier: 1.4
+defense Add Modifier: 0.5
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 10.0
+healthMax Mult Modifier: 1.1
+flags: 4
+type: arme
+texture: 130
+mass: 4
+damage: 18
+range: 50
+angleAttack: 1.047197551
+attackDuration: 0.5
+attackCooldown: 1.5
+onEquipe: 1
+rarity: common
+description: \nUn baton bleu simple mais\n imprégné d'une faible magie,\n idéal pour les apprentis mages
+
+id Item: 32
+Name: Baton de Mage Bleu Renforce
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.1
+attack Add Modifier: 4.0
+attack Mult Modifier: 1.6
+defense Add Modifier: 1.0
+defense Mult Modifier: 1.1
+healthMax Add Modifier: 15.0
+healthMax Mult Modifier: 1.2
+flags: 4
+type: arme
+texture: 130
+mass: 5
+damage: 28
+range: 60
+angleAttack: 1.570796327
+attackDuration: 0.45
+attackCooldown: 1.8
+onEquipe: 1
+rarity: uncommon
+description: \nUn baton bleu robuste avec\n une magie renforcée, parfait\n pour les mages confirmés
+
+id Item: 33
+Name: Baton de Mage Bleu Legendaire
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.2
+attack Add Modifier: 7.0
+attack Mult Modifier: 1.9
+defense Add Modifier: 1.5
+defense Mult Modifier: 1.2
+healthMax Add Modifier: 20.0
+healthMax Mult Modifier: 1.3
+flags: 4
+type: arme
+texture: 130
+mass: 6
+damage: 38
+range: 70
+angleAttack: 2.094395102
+attackDuration: 0.4
+attackCooldown: 2.0
+onEquipe: 1
+rarity: rare
+description: \nUn baton bleu légendaire,\n imprégné d'une magie puissante,\n parfait pour les archimages
+
+id Item: 34
+Name: Lance Basique
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 4.0
+attack Mult Modifier: 1.5
+defense Add Modifier: 0.5
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 131
+mass: 5
+damage: 25
+range: 60
+angleAttack: 0.785398163
+attackDuration: 0.4
+attackCooldown: 1.2
+onEquipe: 1
+rarity: common
+description: \nUne lance simple mais efficace,\n idéale pour les attaques à\n distance moyenne
+
+id Item: 35
+Name: Lance Renforcee
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.1
+attack Add Modifier: 6.0
+attack Mult Modifier: 1.7
+defense Add Modifier: 1.0
+defense Mult Modifier: 1.1
+healthMax Add Modifier: 5.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: arme
+texture: 131
+mass: 6
+damage: 35
+range: 70
+angleAttack: 1.047197551
+attackDuration: 0.35
+attackCooldown: 1.5
+onEquipe: 1
+rarity: uncommon
+description: \nUne lance robuste avec une\n pointe renforcée, parfaite\n pour infliger des dégâts
+
+id Item: 36
+Name: Lance Legendaire
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.2
+attack Add Modifier: 10.0
+attack Mult Modifier: 2.0
+defense Add Modifier: 1.5
+defense Mult Modifier: 1.2
+healthMax Add Modifier: 10.0
+healthMax Mult Modifier: 1.1
+flags: 4
+type: arme
+texture: 131
+mass: 7
+damage: 45
+range: 80
+angleAttack: 1.570796327
+attackDuration: 0.3
+attackCooldown: 1.8
+onEquipe: 1
+rarity: rare
+description: \nUne lance légendaire forgée\n par des maîtres artisans,\n parfaite pour les héros
+
+id Item: 37
+Name: Anneau Bleu Simple
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.1
+attack Add Modifier: 0.0
+attack Mult Modifier: 1.0
+defense Add Modifier: 1.0
+defense Mult Modifier: 1.1
+healthMax Add Modifier: 10.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: talisment
+texture: 144
+mass: 0.5
+damage: 0
+range: 0
+angleAttack: 0
+attackDuration: 0.0
+attackCooldown: 0.0
+onEquipe: 1
+rarity: common
+description: \nUn anneau bleu qui augmente\n légèrement la défense et la\n santé maximale
+
+id Item: 38
+Name: Anneau Bleu Puissant
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.2
+attack Add Modifier: 0.0
+attack Mult Modifier: 1.0
+defense Add Modifier: 2.0
+defense Mult Modifier: 1.2
+healthMax Add Modifier: 20.0
+healthMax Mult Modifier: 1.1
+flags: 4
+type: talisment
+texture: 144
+mass: 0.5
+damage: 0
+range: 0
+angleAttack: 0
+attackDuration: 0.0
+attackCooldown: 0.0
+onEquipe: 1
+rarity: uncommon
+description: \nUn anneau bleu imprégné de\n magie, augmentant fortement\n la défense et la santé
+
+id Item: 43
+Name: Tablette Ancienne
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 2.0
+attack Mult Modifier: 1.1
+defense Add Modifier: 0.0
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: talisment
+texture: 149
+mass: 1.0
+damage: 0
+range: 0
+angleAttack: 0
+attackDuration: 0.0
+attackCooldown: 0.0
+onEquipe: 1
+rarity: common
+description: \nUne tablette ancienne qui\n augmente légèrement la\n puissance d'attaque
+
+id Item: 44
+Name: Tablette Mystique
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 4.0
+attack Mult Modifier: 1.2
+defense Add Modifier: 0.0
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: talisment
+texture: 149
+mass: 1.0
+damage: 0
+range: 0
+angleAttack: 0
+attackDuration: 0.0
+attackCooldown: 0.0
+onEquipe: 1
+rarity: uncommon
+description: \nUne tablette mystique qui\n renforce considérablement\n l'attaque
+
+id Item: 45
+Name: Cristal d'Amethyste Simple
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 0.0
+attack Mult Modifier: 1.0
+defense Add Modifier: 1.0
+defense Mult Modifier: 1.1
+healthMax Add Modifier: 5.0
+healthMax Mult Modifier: 1.1
+flags: 4
+type: talisment
+texture: 150
+mass: 0.8
+damage: 0
+range: 0
+angleAttack: 0
+attackDuration: 0.0
+attackCooldown: 0.0
+onEquipe: 1
+rarity: common
+description: \nUn cristal d'amethyste qui\n améliore légèrement la santé\n et la défense
+
+id Item: 46
+Name: Cristal d'Amethyste Puissant
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 0.0
+attack Mult Modifier: 1.0
+defense Add Modifier: 2.0
+defense Mult Modifier: 1.2
+healthMax Add Modifier: 10.0
+healthMax Mult Modifier: 1.2
+flags: 4
+type: talisment
+texture: 150
+mass: 0.8
+damage: 0
+range: 0
+angleAttack: 0
+attackDuration: 0.0
+attackCooldown: 0.0
+onEquipe: 1
+rarity: uncommon
+description: \nUn cristal d'amethyste rare\n qui augmente fortement la\n santé et la défense
+
+id Item: 47
+Name: Livre de Connaissance
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 1.0
+attack Mult Modifier: 1.1
+defense Add Modifier: 0.0
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: talisment
+texture: 151
+mass: 1.2
+damage: 0
+range: 0
+angleAttack: 0
+attackDuration: 0.0
+attackCooldown: 0.0
+onEquipe: 1
+rarity: common
+description: \nUn livre ancien qui augmente\n légèrement la puissance\n d'attaque
+
+id Item: 48
+Name: Livre des Secrets
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 3.0
+attack Mult Modifier: 1.2
+defense Add Modifier: 0.0
+defense Mult Modifier: 1.0
+healthMax Add Modifier: 0.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: talisment
+texture: 151
+mass: 1.2
+damage: 0
+range: 0
+angleAttack: 0
+attackDuration: 0.0
+attackCooldown: 0.0
+onEquipe: 1
+rarity: uncommon
+description: \nUn livre mystérieux qui\n renforce considérablement\n l'attaque
+
+id Item: 49
+Name: Parchemin de Sagesse
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 0.0
+attack Mult Modifier: 1.0
+defense Add Modifier: 1.0
+defense Mult Modifier: 1.1
+healthMax Add Modifier: 5.0
+healthMax Mult Modifier: 1.0
+flags: 4
+type: talisment
+texture: 152
+mass: 0.5
+damage: 0
+range: 0
+angleAttack: 0
+attackDuration: 0.0
+attackCooldown: 0.0
+onEquipe: 1
+rarity: common
+description: \nUn parchemin ancien qui\n améliore légèrement la\n défense
+
+id Item: 50
+Name: Parchemin Mystique
+speed Add Modifier: 0.0
+speed Mult Modifier: 1.0
+attack Add Modifier: 0.0
+attack Mult Modifier: 1.0
+defense Add Modifier: 2.0
+defense Mult Modifier: 1.2
+healthMax Add Modifier: 10.0
+healthMax Mult Modifier: 1.1
+flags: 4
+type: talisment
+texture: 152
+mass: 0.5
+damage: 0
+range: 0
+angleAttack: 0
+attackDuration: 0.0
+attackCooldown: 0.0
+onEquipe: 1
+rarity: uncommon
+description: \nUn parchemin mystique qui\n augmente fortement la défense\n et la santé
