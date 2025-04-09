@@ -86,16 +86,16 @@ t_scene* createMainWord(t_context* context, t_salle* salle, t_joueur** player, t
     int nbEnemis;
     switch (context->difficulty) {
         case EASY:
-            nbEnemis = 7;
+            nbEnemis = 12;
             break;
         case NORMAL:
-            nbEnemis = 10;
-            break;
-        case HARD:
             nbEnemis = 20;
             break;
+        case HARD:
+            nbEnemis = 27;
+            break;
         case DEMONIC:
-            nbEnemis = 35;
+            nbEnemis = 40;
             break;
         case LEGEND:
             nbEnemis = 55;
