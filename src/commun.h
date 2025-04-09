@@ -261,4 +261,6 @@ void inventoryUI_RenderWrapper(t_fonctionParam* f);
  */
 void inventoryUI_UpdateWrapper(t_fonctionParam* f);
 
+void jouerMusiqueWrapper(t_fonctionParam* fonction);
+
 #endif

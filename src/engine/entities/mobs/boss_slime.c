@@ -10,7 +10,7 @@
 #define BOSS_TIME_UNTIL_MOVE 3.0f
 #define BOSS_DETECTION_RADIUS 250.0f
 #define BOSS_PATROL_MOVES 8
-#define BOSS_HEALTH 100000
+#define BOSS_HEALTH 5000
 #define BOSS_GROUND_POUND_FORCE 350.0f
 #define BOSS_CHARGE_FORCE 400.0f
 #define BOSS_SPECIAL_ATTACK_COOLDOWN 5.0f
@@ -29,7 +29,7 @@ float randomWithPercentageVariationBoss(float x, float percentage) {
 }
 
 void bossSlimeDealDamageToPlayer(t_boss_slime* bossSlime, t_joueur* player, t_context* context) {
-    int damage = 15;
+    int damage = 20;
     if (bossSlime->currentPhase >= 2) damage += 5;
     if (bossSlime->currentPhase >= 3) damage += 5;
 
@@ -37,7 +37,7 @@ void bossSlimeDealDamageToPlayer(t_boss_slime* bossSlime, t_joueur* player, t_co
 
     SDL_FPoint position = {player->entity.collisionCircle.x, player->entity.collisionCircle.y};
     emitImpactParticles(bossSlime->particles, position, (SDL_FPoint){0, 0}, player->entity.collisionCircle.radius, bossSlime->particleColor);
-
+    playerTakeDamage(player, damage, context, position);
 }
 
 void renderBossSlime(SDL_Renderer* renderer, t_enemy* enemy, t_camera* camera) {
@@ -498,7 +498,6 @@ void performGroundPound(t_boss_slime* bossSlime, t_entity* player, t_grid* grid)
         // Animation de retour à l'état normal
         setAnimation(bossSlime->base.entity.animationController, "idle");
 
-
         // Effet de rebond léger après l'attaque
         float recoveryTime = elapsedTime - GROUND_POUND_SHOCKWAVE_TIME;
         float recoveryDuration = GROUND_POUND_RECOVERY_TIME - GROUND_POUND_SHOCKWAVE_TIME;
@@ -628,8 +627,6 @@ void performChargeAttack(t_boss_slime* bossSlime, t_entity* player, t_grid* grid
         // Animation en l'air: étirement (frame 3) pour se préparer à la charge
         setAnimation(bossSlime->base.entity.animationController, "midAire");
 
-
-
         // Donner un effet de saut en l'air avant la charge
         if (elapsedTime < (CHARGE_PREP_TIME + 0.15f)) {
             // Petit bond pour s'étirer avant de charger
@@ -679,7 +676,6 @@ void performChargeAttack(t_boss_slime* bossSlime, t_entity* player, t_grid* grid
         // Animation landing - montre le boss qui s'aplatit à l'impact puis se reforme
         setAnimation(bossSlime->base.entity.animationController, "landing");
 
-
         // Ralentissement prononcé via la vélocité
         bossSlime->base.entity.physics.velocity.x *= 0.7f;
         bossSlime->base.entity.physics.velocity.y *= 0.7f;
@@ -689,7 +685,6 @@ void performChargeAttack(t_boss_slime* bossSlime, t_entity* player, t_grid* grid
     }
     // Fin de l'attaque
     else if (elapsedTime >= CHARGE_RECOVERY_TIME) {
-
         // Retour à l'état approprié selon la phase
         if (bossSlime->currentPhase == 2)
             bossSlime->state = BOSS_SLIME_ENRAGED;
