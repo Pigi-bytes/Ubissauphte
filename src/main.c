@@ -96,6 +96,8 @@ int main(int argc, char* argv[]) {
      for (int i = 0; i < fichier->blockManager->count; i++) {
         inventaireAjoutObjet(player->inventaire, context.itemListe[i], 1);
     }
+    equiperEquipement(&player, 2, SLOT_ARME);
+
     context.nbItem = fichier->blockManager->count;
 
     equipementRecalculerStats(&player);
