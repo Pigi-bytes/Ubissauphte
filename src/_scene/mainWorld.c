@@ -273,6 +273,7 @@ t_scene* createBossMap(t_context* context, t_salle* salle, t_joueur** player, t_
     const uint8_t HUD_TYPE = registerType(registre, freeHUD, "hud");
     const uint8_t ENEMY_TYPE = registerType(registre, freeEnemy, "enemy");
     const uint8_t BOSS_HUD_TYPE = registerType(registre, freeBossHealthBar, "boss_hud");
+    const uint8_t MUSIQUE = registerType(registre, NULL, "musique");
 
     t_scene* scene = createScene(initObjectManager(registre), "main");
     t_tileset* slimeTileSet = initTileset(context->renderer, 48, 16, 16, "assets/imgs/slimeidle12run1213.bmp");
@@ -320,6 +321,7 @@ t_scene* createBossMap(t_context* context, t_salle* salle, t_joueur** player, t_
     ADD_OBJECT_TO_SCENE(scene, viewport, VIEWPORT_TYPE);
     ADD_OBJECT_TO_SCENE(scene, minimap, MINIMAP_TYPE);
     ADD_OBJECT_TO_SCENE(scene, NULL, FRAME_DISPLAY_TYPE);
+    ADD_OBJECT_TO_SCENE(scene, NULL, MUSIQUE);
 
     processSpecialTiles(*level, context->tileSet, salle->entities, TILE_ENTITY, scene, context);
 
@@ -352,6 +354,7 @@ t_scene* createBossMap(t_context* context, t_salle* salle, t_joueur** player, t_
 
     sceneRegisterFunction(scene, HUD_TYPE, RENDER_UI, renderHUDWrapper, 1, FONCTION_PARAMS(context->renderer));
     sceneRegisterFunction(scene, MINIMAP_TYPE, RENDER_UI, renderMinimapWrapper, 1, FONCTION_PARAMS(context->renderer));
+    sceneRegisterFunction(scene, MUSIQUE, RENDER_UI, jouerMusiqueWrapper, -1, FONCTION_PARAMS("assets/music/fieldofmemories.mp3", context->window, -1, context->audioManager));
 
     return scene;
 }

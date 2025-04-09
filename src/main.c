@@ -69,7 +69,7 @@ int main(int argc, char* argv[]) {
     context.audioManager = initAudioManager();
     context.fpsDisplay = initFPSDisplay(context.renderer, context.font);
     context.currentLevel = NULL;
-    context.nbLevel = 7;
+    context.nbLevel = 3;
     context.difficulty = EASY;
 
     context.control = malloc(sizeof(t_control));
@@ -93,7 +93,7 @@ int main(int argc, char* argv[]) {
 
     context.itemListe = item_load(fichier, context.tileSet, player);
 
-     for (int i = 0; i < fichier->blockManager->count; i++) {
+    for (int i = 0; i < fichier->blockManager->count; i++) {
         inventaireAjoutObjet(player->inventaire, context.itemListe[i], 1);
     }
     equiperEquipement(&player, 2, SLOT_ARME);
@@ -106,8 +106,8 @@ int main(int argc, char* argv[]) {
 
     float globalVolume = 64.0f;
     context.volume = &globalVolume;
-    jouerMusique("assets/music/fieldofmemories2.mp3", globalVolume, -1, context.audioManager);
-
+    int musique = -1;
+    jouerMusique("assets/music/fieldofmemories2.mp3", context.volume, &musique, context.audioManager);
 
     t_scene* scene = createMainMenu(&context, &player);
     t_scene* scene0 = createOptionMenu(&context);

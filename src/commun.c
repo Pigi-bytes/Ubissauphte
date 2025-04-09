@@ -131,6 +131,9 @@ void bouttonClickQuit(t_fonctionParam* fonction) {
     t_input* input = GET_PTR(fonction, 0, t_input*);
     input->quit = SDL_TRUE;
 }
+void jouerMusiqueWrapper(t_fonctionParam* fonction) {
+    jouerMusique((char*)fonction->param[0], (int*)fonction->param[1], (int*)fonction->param[2], (t_audiomanager*)fonction->param[3]);
+}
 
 void changementAffichage(t_fonctionParam* fonction) {
     SDL_Window* window = GET_PTR(fonction, 0, SDL_Window*);
