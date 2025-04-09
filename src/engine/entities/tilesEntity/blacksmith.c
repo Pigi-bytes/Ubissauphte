@@ -106,7 +106,24 @@ t_tileEntity* createBlacksmithEntity(t_tileset* tileset, t_scene* scene, t_conte
     blacksmith->randomItem = getItemByRarity(context->itemListe, context->nbItem, RARITY_RARE);
 
     blacksmith->interactText = NULL;
-    blacksmith->prix = 500;
+    
+    switch (context->difficulty) {
+        case EASY:
+            blacksmith->prix = 50;
+            break;
+        case NORMAL:
+            blacksmith->prix = 100;
+            break;
+        case HARD:
+            blacksmith->prix = 200;
+            break;
+        case DEMONIC:
+            blacksmith->prix = 300;
+            break;
+        case LEGEND:
+            blacksmith->prix = 500;
+            break;
+    }
 
     blacksmith->base.update = updateBlacksmith;
     blacksmith->base.render = renderBlacksmith;

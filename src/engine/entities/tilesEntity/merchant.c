@@ -100,7 +100,24 @@ t_tileEntity* createMerchantEntity(t_tileset* tileset, t_scene* scene, t_context
     merchant->randomItem = getItemByRarity(context->itemListe, context->nbItem, RARITY_LEGENDARY);
 
     merchant->interactText = NULL;
-    merchant->prix = 2000;
+
+    switch (context->difficulty) {
+        case EASY:
+            merchant->prix = 200;
+            break;
+        case NORMAL:
+            merchant->prix = 1000;
+            break;
+        case HARD:
+            merchant->prix = 1500;
+            break;
+        case DEMONIC:
+            merchant->prix = 2000;
+            break;
+        case LEGEND:
+            merchant->prix = 3000;
+            break;
+    }
 
     merchant->base.update = updateMerchant;
     merchant->base.render = renderMerchant;
