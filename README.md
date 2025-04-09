@@ -79,6 +79,11 @@ Dans **Lo Poti Donjon**, vous utilisez les touches suivantes par default pour vo
 - **Tileset** :
   - [Tiny Dungeon by Kenney](https://kenney-assets.itch.io/tiny-dungeon)
 
+- **Musiques** :
+  - [Waterflame](https://www.youtube.com/@WaterflameMusic) :
+    - [Field of memories](https://youtu.be/rVTzv9qLyko?si=NbDb3IJQC-m9wbWO)
+    - [Field of memories 2](https://youtu.be/yolbGaJD4AY?si=Bzbz0czA9FRo_Toc)
+
 ## Installation du jeu :
 Avant de compiler le projet, assurez-vous que les dépendances suivantes sont installées sur votre système :  
 
