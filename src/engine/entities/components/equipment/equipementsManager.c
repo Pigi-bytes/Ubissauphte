@@ -400,10 +400,10 @@ void inventaireAjoutObjet(t_inventaire* inv, t_item* item, int quantite) {
     if (itemStack != NULL) {
         if ((hasFlag(itemStack->definition->flags, ITEM_FLAG_STACKABLE)))
             itemStack->quantite += quantite;
-
     } else {
         t_itemsStack* itemStackNew = (t_itemsStack*)malloc(sizeof(t_itemsStack));
-        itemStackNew->definition = item;
+        itemStackNew->definition = (t_item*)malloc(sizeof(t_item));
+        memcpy(itemStackNew->definition, item, sizeof(t_item)); // Crée une copie indépendante
         if (hasFlag(item->flags, ITEM_FLAG_STACKABLE))
             itemStackNew->quantite = quantite;
         else
@@ -412,15 +412,16 @@ void inventaireAjoutObjet(t_inventaire* inv, t_item* item, int quantite) {
     }
 }
 
-t_itemsStack* inventaireFindStack(t_inventaire* inv, t_item* item) {
-    for (int i = 0; i < inv->itemsStack->count; i++) {
-        t_itemsStack* itemStack = (t_itemsStack*)getObject(inv->itemsStack, i);
-        if (strcmp(itemStack->definition->name, item->name) == 0)
+t_itemsStack *inventaireFindStack(t_inventaire *inv, t_item *item)
+{
+    for (int i = 0; i < inv->itemsStack->count; i++)
+    {
+        t_itemsStack *itemStack = (t_itemsStack *)getObject(inv->itemsStack, i);
+        if (itemStack->definition->id == item->id) // Compare l'ID unique
             return itemStack;
     }
     return NULL;
 }
-
 void equipementRecalculerStats(t_joueur** c) {
     // Initialisation des valeurs finales
     t_stats finalStats = {{0, 1}, {0, 1}, {0, 1}, {0, 1}};

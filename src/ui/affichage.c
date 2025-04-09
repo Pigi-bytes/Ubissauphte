@@ -300,7 +300,7 @@ InventoryUI *inventoryUI_Init(InventoryUI *ui2, t_joueur *c, t_context *context)
         ui->elems->inventory_slots[0].button = ui2->elems->inventory_slots[0].button;
         ui->elems->inventory_slots[0].button->rect = ui->elems->inventory_slots[0].rect;
     }
-    int i, j=0;
+    int i, j=1;
     for (i = 1; i < ui->nbItems; j++, i++) {
         calculerItem(&ui->elems->inventory_slots[i].rect, ui->elems->inventory_panel.rect, &ui->elems->inventory_slots[i - 1].rect, i, j, context->input);
         if (ui2 == NULL) {

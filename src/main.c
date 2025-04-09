@@ -10,42 +10,53 @@
 #include "context.h"
 
 #ifdef _WIN32
-#include <direct.h>  // Windows : _mkdir()
+#include <direct.h> // Windows : _mkdir()
 #define CREATE_DIR(path) _mkdir(path)
 #else
-#include <sys/stat.h>  // Linux/macOS : mkdir()
+#include <sys/stat.h> // Linux/macOS : mkdir()
 #include <sys/types.h>
 #define CREATE_DIR(path) mkdir(path, 0777)
 #endif
 
-void supprimerAllfichier() {
-    DIR* d;
-    struct dirent* dir;
+void supprimerAllfichier()
+{
+    DIR *d;
+    struct dirent *dir;
     char path[1024];
 
     d = opendir("./assets/map/");
-    if (d) {
-        while ((dir = readdir(d)) != NULL) {
-            if (strstr(dir->d_name, ".txt") != NULL) {
+    if (d)
+    {
+        while ((dir = readdir(d)) != NULL)
+        {
+            if (strstr(dir->d_name, ".txt") != NULL)
+            {
                 snprintf(path, sizeof(path), "./assets/map/%s", dir->d_name);
 
-                if (remove(path) == 0) {
+                if (remove(path) == 0)
+                {
                     printf("Fichier supprimé: %s\n", path);
-                } else {
+                }
+                else
+                {
                     perror("Erreur lors de la suppression du fichier");
                 }
             }
         }
         closedir(d);
-    } else {
+    }
+    else
+    {
         CREATE_DIR("./assets/map/");
         perror("création du répertoire map");
     }
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[])
+{
     supprimerAllfichier();
-    if (initAudioSystem() != 0) {
+    if (initAudioSystem() != 0)
+    {
         return 1;
     }
 
@@ -86,19 +97,15 @@ int main(int argc, char* argv[]) {
 
     context.tileSet = initTileset(context.renderer, 192, 240, 16, "assets/imgs/tileMapDungeon.bmp");
     context.playerSkin = initTileset(context.renderer, 1088, 16, 16, "assets/imgs/16skins_idle12_run34.bmp");
-    t_joueur* player = createPlayer(context.control, (SDL_Texture*)getObject(context.tileSet->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, context.playerSkin, 0);
+    t_joueur *player = createPlayer(context.control, (SDL_Texture *)getObject(context.tileSet->textureTiles, 98), (SDL_Rect){60, 60, 16, 16}, context.playerSkin, 0);
     reloadPlayerAnimations(player, context.playerSkin, 0);
 
-    t_fichier* fichier = chargerFichier("src/test.txt");
+    t_fichier *fichier = chargerFichier("src/test.txt");
 
     context.itemListe = item_load(fichier, context.tileSet, player);
-
-     for (int i = 0; i < fichier->blockManager->count; i++) {
-        inventaireAjoutObjet(player->inventaire, context.itemListe[i], 1);
-    }
-    equiperEquipement(&player, 2, SLOT_ARME);
-
     context.nbItem = fichier->blockManager->count;
+
+ 
 
     equipementRecalculerStats(&player);
 
@@ -108,16 +115,15 @@ int main(int argc, char* argv[]) {
     context.volume = &globalVolume;
     jouerMusique("assets/music/fieldofmemories2.mp3", globalVolume, -1, context.audioManager);
 
-
-    t_scene* scene = createMainMenu(&context, &player);
-    t_scene* scene0 = createOptionMenu(&context);
-    t_scene* scene2 = createCommandeMenu(&context);
-    t_scene* scene3 = createFpsMenu(&context);
-    t_scene* scene4 = createMainInv(&context, player);
-    t_scene* scene5 = createOption2Menu(&context);
-    t_scene* scene6 = CreateWin(&context);
-    t_scene* scene7 = CreateGameOver(&context);
-    t_scene* scene8 = chargement(&context, &player);
+    t_scene *scene = createMainMenu(&context, &player);
+    t_scene *scene0 = createOptionMenu(&context);
+    t_scene *scene2 = createCommandeMenu(&context);
+    t_scene *scene3 = createFpsMenu(&context);
+    t_scene *scene4 = createMainInv(&context, player);
+    t_scene *scene5 = createOption2Menu(&context);
+    t_scene *scene6 = CreateWin(&context);
+    t_scene *scene7 = CreateGameOver(&context);
+    t_scene *scene8 = chargement(&context, &player);
 
     addScene(context.sceneController, scene);
     addScene(context.sceneController, scene0);
@@ -131,9 +137,10 @@ int main(int argc, char* argv[]) {
 
     setScene(context.sceneController, "menuPrincipal");
 
-    while (!context.input->quit) {
+    while (!context.input->quit)
+    {
         startFrame(context.frameData);
-        t_scene* currentScene = getCurrentScene(context.sceneController);
+        t_scene *currentScene = getCurrentScene(context.sceneController);
 
         executeSceneFunctions(currentScene, HANDLE_INPUT);
         updateInput(context.input);
@@ -142,7 +149,8 @@ int main(int argc, char* argv[]) {
 
         updateFPS(context.frameData);
 
-        if (context.input->resized) {
+        if (context.input->resized)
+        {
             executeSceneFunctions(currentScene, HANDLE_RESIZE);
         }
 
