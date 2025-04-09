@@ -659,5 +659,5 @@ void playerTakeDamage(t_joueur* player, int damage, t_context* context, SDL_FPoi
     SDL_Color bloodColor = {200, 20, 20, 200};
     emitImpactParticles(player->particleEmitter, position, hitDirection, radius, bloodColor);
 
-    applyDamage(&player->health, fmax(0, damage - player->calculatedStats.defense.additive), &player->entity, context);
+    applyDamage(&player->health, fmax(3, damage - player->calculatedStats.defense.additive), &player->entity, context);
 }
