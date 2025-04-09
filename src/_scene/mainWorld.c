@@ -354,7 +354,7 @@ t_scene* createBossMap(t_context* context, t_salle* salle, t_joueur** player, t_
 
     sceneRegisterFunction(scene, HUD_TYPE, RENDER_UI, renderHUDWrapper, 1, FONCTION_PARAMS(context->renderer));
     sceneRegisterFunction(scene, MINIMAP_TYPE, RENDER_UI, renderMinimapWrapper, 1, FONCTION_PARAMS(context->renderer));
-    sceneRegisterFunction(scene, MUSIQUE, RENDER_UI, jouerMusiqueWrapper, -1, FONCTION_PARAMS("assets/music/fieldofmemories.mp3", context->window, -1, context->audioManager));
+    sceneRegisterFunction(scene, MUSIQUE, RENDER_UI, jouerMusiqueWrapper, -1, FONCTION_PARAMS("assets/music/fieldofmemories.mp3", context->window, context->boucle, context->audioManager));
 
     return scene;
 }

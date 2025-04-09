@@ -89,6 +89,7 @@ typedef struct {
     t_tileset* playerSkin;               ///< Tileset des skin
     t_tileset* tileSet;                  ///< Tileset du jeux
     float* volume;                       ///< Pointeur vers le volume global pour les SFX
+    int* boucle;
 } t_context;
 
 /**

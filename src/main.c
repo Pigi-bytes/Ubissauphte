@@ -10,53 +10,42 @@
 #include "context.h"
 
 #ifdef _WIN32
-#include <direct.h> // Windows : _mkdir()
+#include <direct.h>  // Windows : _mkdir()
 #define CREATE_DIR(path) _mkdir(path)
 #else
-#include <sys/stat.h> // Linux/macOS : mkdir()
+#include <sys/stat.h>  // Linux/macOS : mkdir()
 #include <sys/types.h>
 #define CREATE_DIR(path) mkdir(path, 0777)
 #endif
 
-void supprimerAllfichier()
-{
+void supprimerAllfichier() {
     DIR *d;
     struct dirent *dir;
     char path[1024];
 
     d = opendir("./assets/map/");
-    if (d)
-    {
-        while ((dir = readdir(d)) != NULL)
-        {
-            if (strstr(dir->d_name, ".txt") != NULL)
-            {
+    if (d) {
+        while ((dir = readdir(d)) != NULL) {
+            if (strstr(dir->d_name, ".txt") != NULL) {
                 snprintf(path, sizeof(path), "./assets/map/%s", dir->d_name);
 
-                if (remove(path) == 0)
-                {
+                if (remove(path) == 0) {
                     printf("Fichier supprimé: %s\n", path);
-                }
-                else
-                {
+                } else {
                     perror("Erreur lors de la suppression du fichier");
                 }
             }
         }
         closedir(d);
-    }
-    else
-    {
+    } else {
         CREATE_DIR("./assets/map/");
         perror("création du répertoire map");
     }
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     supprimerAllfichier();
-    if (initAudioSystem() != 0)
-    {
+    if (initAudioSystem() != 0) {
         return 1;
     }
 
@@ -112,6 +101,7 @@ int main(int argc, char *argv[])
     float globalVolume = 64.0f;
     context.volume = &globalVolume;
     int musique = -1;
+    context.boucle = &musique;
     jouerMusique("assets/music/fieldofmemories2.mp3", (int *)context.volume, &musique, context.audioManager);
 
     t_scene *scene = createMainMenu(&context, &player);
@@ -136,8 +126,7 @@ int main(int argc, char *argv[])
 
     setScene(context.sceneController, "menuPrincipal");
 
-    while (!context.input->quit)
-    {
+    while (!context.input->quit) {
         startFrame(context.frameData);
         t_scene *currentScene = getCurrentScene(context.sceneController);
 
@@ -148,8 +137,7 @@ int main(int argc, char *argv[])
 
         updateFPS(context.frameData);
 
-        if (context.input->resized)
-        {
+        if (context.input->resized) {
             executeSceneFunctions(currentScene, HANDLE_RESIZE);
         }
 
