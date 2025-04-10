@@ -365,7 +365,7 @@ angleAttack: 2.617993878
 attackDuration: 0.8
 attackCooldown: 2.5
 onEquipe: 1
-rarity: epique
+rarity: epic
 description: \nUne claymore forgee par les\n meilleurs artisans, parfaite\n pour les guerriers legendaires
 
 id Item: 16
@@ -546,7 +546,7 @@ angleAttack: 6.28318530718
 attackDuration: 0.6
 attackCooldown: 2.0
 onEquipe: 1
-rarity: epique
+rarity: epic
 description: \nUne hache a deux cotes\n robuste, parfaite pour\n infliger des degats massifs
 
 id Item: 24
@@ -684,7 +684,7 @@ angleAttack: 1.570796327
 attackDuration: 0.45
 attackCooldown: 1.8
 onEquipe: 1
-rarity: epique
+rarity: epic
 description: \nUn baton rose robuste avec\n une magie renforcée, parfait\n pour les mages confirmés
 
 id Item: 30
@@ -753,7 +753,7 @@ angleAttack: 1.570796327
 attackDuration: 0.45
 attackCooldown: 1.8
 onEquipe: 1
-rarity: epique
+rarity: epic
 description: \nUn baton bleu robuste avec\n une magie renforcée, parfait\n pour les mages confirmés
 
 id Item: 33
@@ -937,7 +937,7 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: epique
+rarity: epic
 description: \nUn anneau rouge imprégné de\n magie, augmentant fortement\n la santé.
 
 id Item: 41
@@ -960,7 +960,7 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: epique
+rarity: epic
 description: \nUn anneau vert qui améliore\n légèrement la défense.
 
 id Item: 42
@@ -1029,7 +1029,7 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: epique
+rarity: epic
 description: \nUn anneau violet imprégné de\n magie, augmentant fortement\n l'attaque.
 
 id Item: 45
@@ -1052,7 +1052,7 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: epique
+rarity: epic
 description: \nUn anneau jaune qui améliore\n légèrement la défense et la\n santé.
 
 id Item: 46
@@ -1121,7 +1121,7 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: epique
+rarity: epic
 description: \nUne tablette mystique qui\n renforce considérablement\n l'attaque
 
 id Item: 49
@@ -1213,7 +1213,7 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: epique
+rarity: epic
 description: \nUn livre mystérieux qui\n renforce considérablement\n l'attaque
 
 id Item: 53
@@ -1236,7 +1236,7 @@ angleAttack: 0
 attackDuration: 0.0
 attackCooldown: 0.0
 onEquipe: 1
-rarity: epique
+rarity: epic
 description: \nUn parchemin ancien qui\n améliore légèrement la\n défense
 
 id Item: 54
