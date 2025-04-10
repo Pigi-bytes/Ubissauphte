@@ -300,8 +300,6 @@ t_scene* createBossMap(t_context* context, t_salle* salle, t_joueur** player, t_
 
     t_enemy* enemy = createBossSlime((SDL_Texture*)getObject(context->tileSet->textureTiles, 109), (SDL_Rect){100, 100, 128, 128}, slimeTileSet, scene);
     enemy->entity.physics.mass = 200;
-    enemy->health.currentHealth = 100000;
-    enemy->health.maxHealth = 100000;
 
     t_bossHealthBar* bossHealthBar = createBossHealthBar(loadFont("assets/fonts/PressStart2P-vaV7.ttf", 25), enemy);
 

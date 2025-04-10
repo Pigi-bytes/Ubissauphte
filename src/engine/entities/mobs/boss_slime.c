@@ -86,7 +86,7 @@ t_enemy* createBossSlime(SDL_Texture* texture, SDL_Rect rect, t_tileset* tileset
     bossSlime->base.health.invincibilityDuration = 0.7f;
     bossSlime->base.health.onDeathCallback = onBossSlimeDeath;
     bossSlime->base.health.healthBareRender = NULL;
-    bossSlime->base.xpReward = 100;
+    bossSlime->base.xpReward = 500;
     bossSlime->base.entity.physics = (t_physics){.velocity = {0, 0}, .mass = 200.0f, .friction = 0.01f, .restitution = 0.8f};
 
     addAnimation(bossSlime->base.entity.animationController, createAnimation(tileset, (int[]){1, 2, 1, 2}, 4, 800, SDL_TRUE, "idle"));
