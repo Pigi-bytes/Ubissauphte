@@ -120,9 +120,9 @@ make all
 ./bin/Ubissauphte 
 ```
 
-## Exemple de debegage
+## Exemple de débogage
 
-Voir le rapport : rapportDebugAvecGDB.pdf
+Voir le rapport : [rapport débogage](/rapportDebugAvecGDB.pdf)
 
 ## Image du jeu
 
