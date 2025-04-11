@@ -120,6 +120,10 @@ make all
 ./bin/Ubissauphte 
 ```
 
+## Exemple de debegage
+
+Voir le rapport : rapportDebugAvecGDB.pdf
+
 ## Image du jeu
 
 ![MenuPrincipal](assets/imgReadme/menuPrincipal.png)
