@@ -1,4 +1,4 @@
-# Ubissauphte ![logo Claude Chappe](assets/imgReadme/Claude.png)
+# Ubissauphte 
 
 Bienvenue sur le projet **Lo Poti Donjon**, créé par **Ubissauphte**, un projet de fin d'année 2024-2025 pour la L2 informatique.
 
@@ -16,10 +16,10 @@ Bienvenue sur le projet **Lo Poti Donjon**, créé par **Ubissauphte**, un proje
 
 Voici les membres de l'équipe ayant contribué au projet :
 
-- **Souleymane Barry** *(souley-b)*
-- **Barthélémy Derouault** *(Pigi-bytes)*
-- **Victor Fombertasse** *(Michele530)*
-- **Baptiste Carfantan** *(Baptcarf)*
+- *(souley-b)*
+- *(Pigi-bytes)*
+- *(Michele530)*
+- *(Baptcarf)*
 
 
 ## Principe du jeu :
